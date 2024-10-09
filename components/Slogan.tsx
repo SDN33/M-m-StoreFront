@@ -34,7 +34,7 @@ const Slogan: React.FC = () => {
             <div className="bg-white text-gray-800 rounded-full p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
               <h3 className="font-bold text-lg">Élan Éco-Responsable</h3>
               <p className="text-sm">
-                Nous nous engageons à respecter l'environnement en choisissant des pratiques durables.
+                Nous nous engageons à respecter l&apos;environnement en choisissant des pratiques durables.
               </p>
             </div>
             <div className="absolute -bottom-4 -right-4 w-10 h-10 bg-black rounded-full"></div>

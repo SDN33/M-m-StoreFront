@@ -19,7 +19,6 @@ interface Product {
 
 // Exemple de produits fictifs
 const productsData: Product[] = [
-
   {
     id: 1,
     title: 'Château La Rose du Pin',
@@ -121,7 +120,7 @@ const ProductsCards: React.FC = () => {
     const value = e.target.value;
     setSortBy(value);
 
-    let sortedProducts = [...products];
+    const sortedProducts = [...products]; // Utiliser 'const' ici
 
     if (value === 'price-asc') {
       sortedProducts.sort((a, b) => a.price - b.price);
@@ -181,7 +180,7 @@ const ProductsCards: React.FC = () => {
             <option value="price-asc">Prix croissant</option>
             <option value="price-desc">Prix décroissant</option>
             <option value="rating">Note</option>
-            <option value="date-added">Date d'ajout</option>
+            <option value="date-added">Date d&apos;ajout</option>
           </select>
         </div>
         <br />
@@ -206,25 +205,11 @@ const ProductsCards: React.FC = () => {
                 <div className="p-4">
                   <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
                   <p className="text-gray-600 mb-2">{product.description}</p>
-                  <p className="text-gray-800 font-semibold mb-2">{product.price} €</p>
-                  <p className="text-gray-500 text-sm mb-4">Millésime : {product.vintage}</p>
-                  <p className="text-gray-500 text-sm mb-4">Région : {product.region}</p>
-                  <p className="text-gray-500 text-sm mb-4">Note : {product.rating} ⭐</p>
-
-                  <div className="flex items-center mb-4">
-                    <label htmlFor={`quantity-${product.id}`} className="mr-2">Quantité :</label>
-                    <input
-                      type="number"
-                      id={`quantity-${product.id}`}
-                      value={1}
-                      min={1}
-                      className="border px-2 py-1 rounded w-16"
-                    />
+                  <p className="text-gray-800 font-semibold mb-2">{product.price.toFixed(2)} €</p>
+                  <div className="flex justify-between">
+                    <span className="text-gray-500">{product.region}</span>
+                    <span className="text-gray-500">{product.vintage}</span>
                   </div>
-
-                  <button className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-500">
-                    Ajouter au panier
-                  </button>
                 </div>
               </div>
             );
