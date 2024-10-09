@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Heart } from 'lucide-react';
 import ProductFilter from '@/components/ProductFilters';
 
 // Définir le type pour un produit
@@ -20,89 +19,90 @@ interface Product {
 
 // Exemple de produits fictifs
 const productsData: Product[] = [
+
   {
     id: 1,
-    title: 'Vin Blanc Bio',
-    description: "Un vin blanc frais et fruité, idéal pour l'été. À déguster en terrasse.",
-    price: 15.99,
-    imageUrl: '/path/to/image1.jpg',
-    supplier: 'Château Lamartine',
-    vintage: '2022',
-    color: 'Blanc',
+    title: 'Château La Rose du Pin',
+    description: 'Un vin rouge fruité et équilibré, idéal pour accompagner vos plats de viande.',
+    price: 12.5,
+    imageUrl: '/app/assets/images/products/1.jpg',
+    supplier: 'Château La Rose',
+    vintage: '2019',
+    color: 'Rouge',
     region: 'Bordeaux',
-    certification: 'Bio',
     rating: 4.5,
-    dateAdded: new Date(2023, 9, 15),
+    certification: 'Bio',
+    dateAdded: new Date('2021-09-01'),
   },
   {
     id: 2,
-    title: 'Vin Rouge Bio',
-    description: 'Un vin rouge riche et complexe, parfait avec un repas.',
-    price: 20.99,
-    imageUrl: '/path/to/image2.jpg',
-    supplier: 'Château de la Rivière',
-    vintage: '2021',
-    color: 'Rouge',
-    region: 'Côtes du Rhône',
-    certification: 'Demeter',
-    rating: 4.7,
-    dateAdded: new Date(2023, 8, 1),
+    title: 'Domaine de la Vallée',
+    description: 'Un vin blanc sec et minéral, parfait pour vos apéritifs et poissons.',
+    price: 9.75,
+    imageUrl: '/app/assets/images/products/2.jpg',
+    supplier: 'Domaine de la Vallée',
+    vintage: '2020',
+    color: 'Blanc',
+    region: 'Loire',
+    rating: 4.2,
+    certification: 'Bio',
+    dateAdded: new Date('2021-09-05'),
   },
   {
     id: 3,
-    title: 'Vin Rosé Bio',
-    description: "Un vin rosé léger et rafraîchissant, parfait pour l'apéro.",
-    price: 12.99,
-    imageUrl: '', // Exemple d'image manquante
-    supplier: 'Château Maison Blanche',
-    vintage: '2020',
+    title: 'Château de la Rivière',
+    description: 'Un vin rosé frais et fruité, à déguster en terrasse ou en bord de mer.',
+    price: 8.99,
+    imageUrl: '/app/assets/images/products/3.jpg',
+    supplier: 'Château de la Rivière',
+    vintage: '2021',
     color: 'Rosé',
     region: 'Provence',
+    rating: 4.8,
     certification: 'Bio',
-    rating: 4.0,
-    dateAdded: new Date(2022, 11, 22),
+    dateAdded: new Date('2021-09-10'),
   },
   {
     id: 4,
-    title: 'Vin Rouge Demeter',
-    description: 'Un vin rouge corsé et épicé, idéal pour les amateurs de vin rouge.',
-    price: 24.99,
-    imageUrl: '/path/to/image4.jpg',
-    supplier: 'Domaine de la Vallée',
-    vintage: '2021',
+    title: 'Domaine de la Montagne',
+    description: 'Un vin rouge corsé et épicé, pour les amateurs de vins puissants.',
+    price: 15.25,
+    imageUrl: '/app/assets/images/products/4.jpg',
+    supplier: 'Domaine de la Montagne',
+    vintage: '2018',
     color: 'Rouge',
-    region: 'Bordeaux',
+    region: 'Côtes du Rhône',
+    rating: 4.6,
     certification: 'Demeter',
-    rating: 4.8,
-    dateAdded: new Date(2023, 7, 5),
+    dateAdded: new Date('2021-09-15'),
   },
   {
     id: 5,
-    title: 'Vin Blanc Bio',
-    description: 'Un vin blanc sec et minéral, parfait pour accompagner les fruits de mer.',
-    price: 18.99,
-    imageUrl: '/path/to/image5.jpg',
-    supplier: 'Château de la Mer',
-    vintage: '2022',
+    title: 'Château de la Vallée',
+    description: 'Un vin blanc sec et minéral, parfait pour vos apéritifs et poissons.',
+    price: 9.75,
+    imageUrl: '/app/assets/images/products/2.jpg',
+    supplier: 'Domaine de la Vallée',
+    vintage: '2020',
     color: 'Blanc',
-    region: 'Provence',
-    certification: 'Bio',
+    region: 'Loire',
     rating: 4.2,
-    dateAdded: new Date(2023, 6, 12),
+    certification: 'Bio',
+    dateAdded: new Date('2021-09-05'),
   },
   {
     id: 6,
-    title: 'Vin Rosé Bio',
-    description: 'Un vin rosé fruité et gourmand, à déguster en terrasse.',
-    price: 14.99,
-    imageUrl: '/path/to/image6.jpg',
-    supplier: 'Domaine de la Vallée',
-    vintage: '2021',
-    color: 'Rosé',
-    region: 'Côtes du Rhône',
+    title: 'Château La Rose du Pin',
+    description: 'Un vin rouge fruité et équilibré, idéal pour accompagner vos plats de viande.',
+    price: 12.5,
+    imageUrl: '/app/assets/images/products/1.jpg',
+    supplier: 'Château La Rose',
+    vintage: '2019',
+    color: 'Rouge',
+    region: 'Bordeaux',
+    rating: 4.5,
     certification: 'Bio',
-    rating: 4.6,
-    dateAdded: new Date(2023, 5, 28),
+    dateAdded: new Date('2021-09-08'),
   },
 ];
 
@@ -124,13 +124,13 @@ const ProductsCards: React.FC = () => {
     let sortedProducts = [...products];
 
     if (value === 'price-asc') {
-      sortedProducts = sortedProducts.sort((a, b) => a.price - b.price);
+      sortedProducts.sort((a, b) => a.price - b.price);
     } else if (value === 'price-desc') {
-      sortedProducts = sortedProducts.sort((a, b) => b.price - a.price);
+      sortedProducts.sort((a, b) => b.price - a.price);
     } else if (value === 'rating') {
-      sortedProducts = sortedProducts.sort((a, b) => b.rating - a.rating);
+      sortedProducts.sort((a, b) => b.rating - a.rating);
     } else if (value === 'date-added') {
-      sortedProducts = sortedProducts.sort((a, b) => b.dateAdded.getTime() - a.dateAdded.getTime());
+      sortedProducts.sort((a, b) => b.dateAdded.getTime() - a.dateAdded.getTime());
     }
 
     setProducts(sortedProducts); // Mettre à jour l'état des produits triés
@@ -138,7 +138,7 @@ const ProductsCards: React.FC = () => {
 
   // Gestion des filtres de case à cocher
   const handleCheckboxChange = (filterType: keyof typeof selectedFilters, value: string) => {
-    const currentFilters = selectedFilters[filterType];
+    const currentFilters = selectedFilters[filterType] || []; // Assurez-vous que currentFilters est toujours un tableau
 
     // Ajouter ou retirer la valeur de la liste des filtres sélectionnés
     if (currentFilters.includes(value)) {
@@ -189,21 +189,14 @@ const ProductsCards: React.FC = () => {
         {/* Affichage des produits filtrés */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredProducts.map((product) => {
-            const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-              const newQuantity = Math.max(1, Number(e.target.value));
-              // Logique pour gérer la quantité (si nécessaire)
-            };
-
             return (
               <div key={product.id} className="relative bg-white rounded-lg shadow-md overflow-hidden productcard">
-                {/* Ajouter un badge si le produit est bio */}
                 {product.certification && (
                   <span className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded-md">
                     {product.certification}
                   </span>
                 )}
                 <div className="relative">
-                  {/* Utiliser une image de placeholder si l'image du produit n'est pas disponible */}
                   <img
                     src={product.imageUrl || '/app/assets/images/noimage/large.png'}
                     alt={product.title}
@@ -218,20 +211,17 @@ const ProductsCards: React.FC = () => {
                   <p className="text-gray-500 text-sm mb-4">Région : {product.region}</p>
                   <p className="text-gray-500 text-sm mb-4">Note : {product.rating} ⭐</p>
 
-                  {/* Sélecteur de quantité */}
                   <div className="flex items-center mb-4">
                     <label htmlFor={`quantity-${product.id}`} className="mr-2">Quantité :</label>
                     <input
                       type="number"
                       id={`quantity-${product.id}`}
-                      value={1} // Valeur par défaut pour le champ quantité
-                      onChange={handleQuantityChange}
+                      value={1}
                       min={1}
                       className="border px-2 py-1 rounded w-16"
                     />
                   </div>
 
-                  {/* Ajouter au panier */}
                   <button className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-500">
                     Ajouter au panier
                   </button>

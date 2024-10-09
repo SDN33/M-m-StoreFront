@@ -12,9 +12,9 @@ interface ProductFilterProps {
 
 const ProductFilter: React.FC<ProductFilterProps> = ({ selectedFilters, onFilterChange }) => {
   const filterOptions = {
-    couleur: ['Rouge', 'Blanc', 'Rosé'],
-    région: ['Bordeaux', 'Côtes du Rhône', 'Provence'],
-    millésime: ['2020', '2021', '2022'],
+    color: ['Rouge', 'Blanc', 'Rosé'],
+    region: ['Bordeaux', 'Côtes du Rhône', 'Provence', 'Loire'],
+    vintage: ['2018', '2019', '2020', '2021', '2022'],
     certification: ['Bio', 'Demeter'],
   };
 
@@ -22,13 +22,13 @@ const ProductFilter: React.FC<ProductFilterProps> = ({ selectedFilters, onFilter
     <div className="bg-orange-500 p-12 rounded-lg shadow-lg">
       {Object.entries(filterOptions).map(([filterType, options]) => (
         <div key={filterType} className="mb-4">
-          <h3 className="text-white font-bold text-lg mb-2">{filterType.charAt(0).toUpperCase() + filterType.slice(1)}</h3>
+          <h3 className="text-white font-bold text-lg mb-2">{filterType === 'color' ? 'Couleur' : filterType === 'region' ? 'Région' : filterType === 'vintage' ? 'Millésime' : 'Certification'}</h3>
           {options.map((option) => (
             <label key={option} className="flex items-center text-gray-800 mb-1 sloganhero">
               <input
                 type="checkbox"
                 id={`${filterType}-${option}`}
-                checked={selectedFilters[filterType as keyof typeof selectedFilters]?.includes(option) || false}
+                checked={selectedFilters[filterType as keyof typeof selectedFilters].includes(option)}
                 onChange={() => onFilterChange(filterType as keyof typeof selectedFilters, option)}
                 className="mr-2"
               />

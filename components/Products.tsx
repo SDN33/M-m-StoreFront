@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import ProductsIntro from './ProductIntro'; // Importer le composant ProductsIntro
 import ProductsCards from './ProductsCards'; // Importer le composant ProductsCards
 

@@ -5,7 +5,7 @@ const Slogan: React.FC = () => {
     <div className="bg-orange-500 py-10">
       <div className="max-w-4xl mx-auto text-center text-white">
         <h2 className="text-3xl font-bold mb-4">
-          Avec Mémé Georgette, c'est simple... <br />
+          Avec Mémé Georgette, c&apos;est simple... <br />
           <span className='sloganhero font-light'>Du vin bio directement chez vous, et pour pas plus cher ! *</span>
         </h2>
 
