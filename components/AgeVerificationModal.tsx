@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image'; // Importer le composant Image
 
 const AgeVerificationModal = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -27,10 +28,12 @@ const AgeVerificationModal = () => {
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl text-center">
-        <img
-          src="/images/logo2.png"
+        <Image
+          src="/images/logo2.png" // Utiliser le composant Image
           alt="Logo Mémé Georgette"
-          className="mx-auto mb-6 w-40 h-auto"
+          className="mx-auto mb-6"
+          width={160} // Définir la largeur de l'image
+          height={200} // Définir la hauteur de l'image
         />
         <h2 className="text-2xl font-bold text-gray-900 mb-4">
           Vérification de l'âge
