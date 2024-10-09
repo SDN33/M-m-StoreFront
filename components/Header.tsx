@@ -2,6 +2,7 @@
 
 import { Search, ShoppingCart, User, Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -13,14 +14,13 @@ const Header = () => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
       if (currentScroll > 0) {
-        setBgColor('bg-black bg-opacity-60'); // Change la couleur de fond ici
+        setBgColor('bg-black bg-opacity-60');
       } else {
-        setBgColor('bg-transparent'); // Revenir à transparent
+        setBgColor('bg-transparent');
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} transition-colors duration-600 z-20`}>
-    {/* Left Navigation */}
+      {/* Left Navigation */}
       <nav className="hidden md:flex items-center space-x-8 ml-10 font-semibold">
         <a href="/" className="relative text-white hover:text-orange-500 font-semibold">
           Accueil
@@ -39,7 +39,7 @@ const Header = () => {
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
         </a>
         <a href="/about" className="relative text-white hover:text-orange-500 font-semibold">
-          Mémé Georgette se présente
+          M&eacute;m&eacute; Georgette se pr&eacute;sente
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
         </a>
         <a href="/contact" className="relative text-white hover:text-orange-500 font-semibold">
@@ -48,14 +48,14 @@ const Header = () => {
         </a>
       </nav>
 
-
       {/* Center Logo */}
       <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center">
         <a href="/" className="flex items-center">
-          <img
-            src="../images/logo3.png" // Assurez-vous que le chemin est correct
+          <Image
+            src="/images/logo3.png"
             alt="Logo Mémé Georgette"
-            className="w-40 h-auto"
+            width={160}
+            height={40}
           />
         </a>
       </div>
@@ -87,7 +87,7 @@ const Header = () => {
               {isLoggedIn ? (
                 <>
                   <a href="/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mon Dashboard</a>
-                  <button onClick={() => setIsLoggedIn(false)} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Se Déconnecter</button>
+                  <button onClick={() => setIsLoggedIn(false)} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Se D&eacute;connecter</button>
                 </>
               ) : (
                 <>
@@ -101,36 +101,25 @@ const Header = () => {
 
         {/* Shopping Cart */}
         <a href="/cart" className="relative">
-          <ShoppingCart className="w-6 h-6 text-white hover:text-gray-700" />
+          <ShoppingCart className="w-6 h-6 text-white" />
         </a>
       </div>
 
-      {/* Hamburger Menu for Mobile */}
-      <div className="md:hidden flex items-center">
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
+      {/* Mobile Menu Button */}
+      <button
+        className="md:hidden"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        {isMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
+      </button>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="absolute top-16 left-0 right-0 bg-white shadow-lg z-20">
-          <nav className="flex flex-col items-center py-4">
-            <a href="/home" className="py-2 text-black hover:text-gray-700">Accueil</a>
-            <a href="/products" className="py-2 text-black hover:text-gray-700">Nos Vins</a>
-            <a href="/about" className="py-2 text-black hover:text-gray-700">À propos de Mémé Georgette</a>
-            <a href="/contact" className="py-2 text-black hover:text-gray-700">Contact</a>
-
-            {/* Conditional Links for User Authentication */}
-            {isLoggedIn ? (
-              <a href="/dashboard" className="py-2 text-black hover:text-gray-700">Mon Dashboard</a>
-            ) : (
-              <>
-                <a href="/login" className="py-2 text-black hover:text-gray-700">Se Connecter</a>
-                <a href="/register" className="py-2 text-black hover:text-gray-700">S'inscrire</a>
-              </>
-            )}
-          </nav>
+        <div className="absolute top-full left-0 right-0 bg-white p-4 rounded-md shadow-lg z-30">
+          <a href="/" className="block py-2 text-gray-800">Accueil</a>
+          <a href="/products" className="block py-2 text-gray-800">Nos Vins</a>
+          <a href="/about" className="block py-2 text-gray-800">M&eacute;m&eacute; Georgette se pr&eacute;sente</a>
+          <a href="/contact" className="block py-2 text-gray-800">Contact</a>
         </div>
       )}
     </header>
