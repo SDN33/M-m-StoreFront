@@ -1,11 +1,10 @@
-// ProductsIntro.tsx
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image'; // Import the Image component
 
 const ProductsIntro: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isTextVisible, setIsTextVisible] = useState(false);
   const introRef = useRef<HTMLDivElement | null>(null);
   const textRef = useRef<HTMLDivElement | null>(null);
 
@@ -20,13 +19,15 @@ const ProductsIntro: React.FC = () => {
       { threshold: 0.1 } // Quand 10% du composant est visible
     );
 
-    if (introRef.current) {
-      observer.observe(introRef.current);
+    const currentIntroRef = introRef.current; // Copy ref value
+
+    if (currentIntroRef) {
+      observer.observe(currentIntroRef);
     }
 
     return () => {
-      if (introRef.current) {
-        observer.unobserve(introRef.current);
+      if (currentIntroRef) {
+        observer.unobserve(currentIntroRef);
       }
     };
   }, []);
@@ -35,20 +36,21 @@ const ProductsIntro: React.FC = () => {
     const textObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsTextVisible(true);
           textObserver.disconnect(); // Arrête l'observation une fois visible
         }
       },
-      { threshold: 0.3 } // Quand 10% du texte est visible
+      { threshold: 0.3 } // Quand 30% du texte est visible
     );
 
-    if (textRef.current) {
-      textObserver.observe(textRef.current);
+    const currentTextRef = textRef.current; // Copy ref value
+
+    if (currentTextRef) {
+      textObserver.observe(currentTextRef);
     }
 
     return () => {
-      if (textRef.current) {
-        textObserver.unobserve(textRef.current);
+      if (currentTextRef) {
+        textObserver.unobserve(currentTextRef);
       }
     };
   }, []);
@@ -59,14 +61,16 @@ const ProductsIntro: React.FC = () => {
       className={`flex justify-between items-center mb-2 transition-opacity duration-700 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
       {/* Image de Mémé à gauche */}
-      <img
+      <Image
         src="/images/mémé-georgette1.png"
         alt="Mémé Georgette personnage"
         className="w-28 h-auto border-lg"
+        width={112} // Set the width based on the className
+        height={120} // Set the height appropriately
       />
 
       {/* Texte au centre */}
-      <div className="text-center">
+      <div className="text-center" ref={textRef}>
         <h3 className="text-3xl font-extrabold text-orange-500 mt-4 tracking-tight">
           Découvrez notre sélection de vins Bio et Démeter
         </h3>
@@ -76,10 +80,12 @@ const ProductsIntro: React.FC = () => {
       </div>
 
       {/* Logo Bio à droite */}
-      <img
+      <Image
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Agriculture-biologique.svg/langfr-195px-Agriculture-biologique.svg.png"
         alt="Logo Bio"
         className="w-14 h-auto border-lg"
+        width={56} // Set the width based on the className
+        height={60} // Set the height appropriately
       />
     </div>
   );
