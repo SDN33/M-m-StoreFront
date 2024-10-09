@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff; /* Fond blanc par défaut */
+  --foreground: #171717; /* Couleur de texte par défaut */
+  --font-plus-jakarta: 'Plus Jakarta Sans', sans-serif; /* Police de base */
+  --font-oswald: 'Oswald', sans-serif; /* Police alternative */
+}
+
+body {
+  color: var(--foreground); /* Couleur du texte */
+  background: var(--background); /* Fond */
+  font-family: var(--font-plus-jakarta), sans-serif; /* Utiliser Plus Jakarta Sans comme police de base */
+  margin: 0; /* Évite les marges par défaut */
+  padding: 0; /* Évite les paddings par défaut */
+  box-sizing: border-box; /* Inclus les paddings et les bordures dans la largeur totale */
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance; /* Utilisation de la propriété text-wrap pour le texte équilibré */
+  }
+}
+
+.sloganhero {
+  font-family: var(--font-oswald), sans-serif; /* Utiliser Oswald comme police alternative */
+  font-weight: 400; /* Gras */
+  line-height: 1.2; /* Hauteur de ligne */
+  margin: 0; /* Évite les marges par défaut */
+  padding: 0; /* Évite les paddings par défaut */
+}
+
+.productscontainer {
+  margin-left: auto; /* Marge à gauche automatique */
+  margin-right: auto; /* Marge à droite automatique */
+  max-width: 1200px; /* Largeur maximale */
+  padding-left: 4rem; /* Padding à gauche */
+  padding-right: 4rem; /* Padding à droite */
+}
