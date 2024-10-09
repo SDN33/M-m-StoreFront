@@ -1,5 +1,6 @@
 import React from "react";
 import { Facebook, Instagram } from "lucide-react"; // Assurez-vous d'importer les icônes nécessaires
+import Image from "next/image"; // Importer le composant Image de Next.js
 
 const Footer = () => {
   return (
@@ -7,11 +8,17 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-6 md:mb-0">
-            <img src="/images/logo2.png" alt="Logo Mémé Georgette" className="w-40 h-auto mb-1" />
+            <Image
+              src="/images/logo2.png"
+              alt="Logo Mémé Georgette"
+              className="w-40 h-auto mb-1"
+              width={160} // Spécifiez la largeur de l'image
+              height={40} // Spécifiez la hauteur de l'image
+            />
             <p className="mt-2 sloganhero">
               Savourez les meilleurs vins bio à la Cave Coopérative Les Vins de
               Mémé Georgette.<br /> Explorez notre catalogue de vins certifiés Demeter
-              et découvrez l'authenticité du terroir français.
+              et découvrez l&apos;authenticité du terroir français. {/* Apostrophe échappée */}
             </p>
           </div>
 
