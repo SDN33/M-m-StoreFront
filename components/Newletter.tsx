@@ -17,7 +17,9 @@ const Newsletter = () => {
 
   return (
     <div className="bg-gray-100 p-6 rounded-md w-[60rem] mx-auto text-center mt-4">
-      <h2 className="text-xl font-bold mb-8 sloganhero">Restez informé des offres de Mémé Georgette ! <span className="font-light">Promis on ne spamme pas.</span></h2>
+      <h2 className="text-xl font-bold mb-8 sloganhero">
+        Restez informé des offres de Mémé Georgette ! <span className="font-light">Promis on ne spamme pas.</span>
+      </h2>
       <br />
       {isSubscribed ? (
         <p className="text-green-600">Merci pour votre inscription !</p>
@@ -35,7 +37,7 @@ const Newsletter = () => {
             type="submit"
             className="bg-orange-500 text-white p-2 rounded-md hover:bg-orange-800 transition duration-200"
           >
-            S'inscrire
+            S&apos;inscrire
           </button>
         </form>
       )}
