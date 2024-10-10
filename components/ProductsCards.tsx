@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ProductFilter from '@/components/ProductFilters';
+import Image from 'next/image';
 
 // Définir le type pour un produit
 interface Product {
@@ -183,10 +184,10 @@ const ProductsCards: React.FC = () => {
           <span className="mr-6 font-bold text-orange-500">|</span>
           <label className="mr-6 font-bold text-gray-600">+ de 1000 vins</label>
           <span className="mr-6 font-bold text-orange-500">|</span>
-        
+
           {/* Label pour accessibilité */}
           <label htmlFor="sortBySelect" className="mr-6 font-bold text-gray-600">Trier par :</label>
-        
+
           {/* Sélecteur avec id lié au label */}
           <select
             id="sortBySelect"
@@ -201,7 +202,7 @@ const ProductsCards: React.FC = () => {
             <option value="date-added">Date d&apos;ajout</option>
           </select>
         </div>
-        
+
 
         {/* Affichage des produits filtrés */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -213,7 +214,7 @@ const ProductsCards: React.FC = () => {
                     {product.certification}
                   </span>
                 )}
-                <img src={product.imageUrl} alt={product.title} className="w-20 h-auto object-fill flex items-center justify-center mx-auto my-4" />
+                <Image src={product.imageUrl} alt={product.title} className="w-20 h-auto object-fill flex items-center justify-center mx-auto my-4" />
                 <div className="p-4">
                   <h2 className="text-lg font-semibold">{product.title}</h2>
                   <p className="text-sm text-gray-500 mt-2">{product.supplier}</p>

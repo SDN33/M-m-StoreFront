@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, Wine, Grape } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 interface ProductFilterProps {
   selectedFilters?: {
