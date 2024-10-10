@@ -4,7 +4,7 @@ import Image from "next/image"; // Importer le composant Image de Next.js
 
 const Footer = () => {
   return (
-    <footer className="bg-white text-primary py-8 px-4">
+    <footer className="bg-white text-gray-800 py-8 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-6 md:mb-0">
