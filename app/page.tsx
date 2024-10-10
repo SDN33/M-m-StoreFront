@@ -12,9 +12,10 @@ export default function Home() {
         <HeroBanner />
         <Products />
         <br />
-        <Newsletter />
-        <br /><br />
         <Slogan />
+        <br /><br />
+        <Newsletter />
+
 
 
       </div>
