@@ -214,7 +214,16 @@ const ProductsCards: React.FC = () => {
                     {product.certification}
                   </span>
                 )}
-                <Image src={product.imageUrl} alt={product.title} className="w-20 h-auto object-fill flex items-center justify-center mx-auto my-4" />
+                <Image
+                  src={product.imageUrl}
+                  alt={product.title}
+                  width={300}
+                  height={200}
+                  className="w-20 h-auto object-fill flex items-center justify-center mx-auto my-4"
+
+
+
+                />
                 <div className="p-4">
                   <h2 className="text-lg font-semibold">{product.title}</h2>
                   <p className="text-sm text-gray-500 mt-2">{product.supplier}</p>

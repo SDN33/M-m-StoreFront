@@ -75,7 +75,7 @@ const Header = () => {
         {/* User Account */}
         <div className="relative">
           <button
-            className="text-white hover:text-gray-700 focus:outline-none"
+            className="text-white hover:text-gray-800 focus:outline-none"
             onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
           >
             <User className="w-6 h-6" />
@@ -86,13 +86,13 @@ const Header = () => {
             <div className=" right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30">
               {isLoggedIn ? (
                 <>
-                  <a href="/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mon Dashboard</a>
-                  <button onClick={() => setIsLoggedIn(false)} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Se D&eacute;connecter</button>
+                  <a href="/dashboard" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Mon Dashboard</a>
+                  <button onClick={() => setIsLoggedIn(false)} className="block w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se D&eacute;connecter</button>
                 </>
               ) : (
                 <>
-                  <a href="/login" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Se Connecter</a>
-                  <a href="/register" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">S&apos;inscrire</a>
+                  <a href="/login" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Connecter</a>
+                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S&apos;inscrire</a>
                 </>
               )}
             </div>

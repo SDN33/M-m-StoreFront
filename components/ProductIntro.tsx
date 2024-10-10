@@ -74,7 +74,7 @@ const ProductsIntro: React.FC = () => {
         <h3 className="text-2xl md:text-3xl font-extrabold text-orange-500 mt-4 tracking-tight">
           Découvrez nos vins Bio et Démeter
         </h3>
-        <h4 className="text-lg md:text-xl text-gray-700 mt-2 leading-snug font-semibold sloganhero">
+        <h4 className="text-lg md:text-xl text-gray-800 mt-2 leading-snug font-semibold sloganhero">
           Nous travaillons avec des producteurs locaux et des vignerons engagés pour la qualité de nos vins.
         </h4>
       </div>
