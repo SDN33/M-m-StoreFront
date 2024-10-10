@@ -71,7 +71,7 @@ const productsData: Product[] = [
     vintage: '2018',
     color: 'Rouge',
     region: 'Côtes du Rhône',
-    rating: 4.6,
+    rating: 3.6,
     certification: 'Demeter',
     dateAdded: new Date('2021-09-15'),
   },
@@ -85,7 +85,7 @@ const productsData: Product[] = [
     vintage: '2020',
     color: 'Blanc',
     region: 'Loire',
-    rating: 4.2,
+    rating: 3.2,
     certification: 'Bio',
     dateAdded: new Date('2021-09-05'),
   },
@@ -99,7 +99,7 @@ const productsData: Product[] = [
     vintage: '2019',
     color: 'Rouge',
     region: 'Bordeaux',
-    rating: 4.5,
+    rating: 2.5,
     certification: 'Bio',
     dateAdded: new Date('2021-09-08'),
   },
@@ -164,35 +164,44 @@ const ProductsCards: React.FC = () => {
   });
 
   return (
-    <div className="flex">
-      <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
-      {/* Contenu principal - cartes des produits */}
-      <div className="flex-grow ml-4">
-              {/* Onglet de tri en haut à droite */}
-              <div className="flex justify-end mb-4 mr-[6rem]">
-        <label className="mr-6 font-bold text-gray-600">+ de 120 vignerons</label>
-        <span className="mr-6 font-bold text-orange-400">|</span>
-        <label className="mr-6 font-bold text-gray-600">+ de 1000 vins</label>
-        <span className="mr-6 font-bold text-orange-400">|</span>
-
-        {/* Label pour accessibilité */}
-        <label htmlFor="sortBySelect" className="mr-6 font-bold text-gray-600">Trier par :</label>
-
-        {/* Sélecteur avec id lié au label */}
-        <select
-          id="sortBySelect"
-          value={sortBy}
-          onChange={handleSortChange}
-          className="border rounded px-2 py-1"
-        >
-          <option value="">Choisir une option</option>
-          <option value="price-asc">Prix croissant</option>
-          <option value="price-desc">Prix décroissant</option>
-          <option value="rating">Note</option>
-          <option value="date-added">Date d&apos;ajout</option>
-        </select>
+    <div className="flex flex-col md:flex-row">
+      {/* Afficher le filtre sur mobile */}
+      <div className="block md:hidden mb-4">
+        <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
       </div>
 
+      {/* Masquer le filtre sur mobile */}
+      <div className="hidden md:block">
+        <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
+      </div>
+
+      {/* Contenu principal - cartes des produits */}
+      <div className="flex-grow">
+        {/* Onglet de tri pour version mobile */}
+        <div className="flex flex-col items-center mb-4 sm:flex-row sm:justify-center md:justify-end mr-4">
+          <label className="mr-6 font-bold text-gray-600">+ de 120 vignerons</label>
+          <span className="mr-6 font-bold text-orange-500">|</span>
+          <label className="mr-6 font-bold text-gray-600">+ de 1000 vins</label>
+          <span className="mr-6 font-bold text-orange-500">|</span>
+        
+          {/* Label pour accessibilité */}
+          <label htmlFor="sortBySelect" className="mr-6 font-bold text-gray-600">Trier par :</label>
+        
+          {/* Sélecteur avec id lié au label */}
+          <select
+            id="sortBySelect"
+            value={sortBy}
+            onChange={handleSortChange}
+            className="border rounded px-2 py-1"
+          >
+            <option value="">Choisir une option</option>
+            <option value="price-asc">Prix croissant</option>
+            <option value="price-desc">Prix décroissant</option>
+            <option value="rating">Note</option>
+            <option value="date-added">Date d&apos;ajout</option>
+          </select>
+        </div>
+        
 
         {/* Affichage des produits filtrés */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -204,20 +213,15 @@ const ProductsCards: React.FC = () => {
                     {product.certification}
                   </span>
                 )}
-                <div className="relative">
-                  <img
-                    src={product.imageUrl || '/app/assets/images/noimage/large.png'}
-                    alt={product.title}
-                    className="w-20 h-auto object-fill flex items-center justify-center mx-auto"
-                  />
-                </div>
+                <img src={product.imageUrl} alt={product.title} className="w-20 h-auto object-fill flex items-center justify-center mx-auto my-4" />
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
-                  <p className="text-gray-600 mb-2">{product.description}</p>
-                  <p className="text-gray-800 font-semibold mb-2">{product.price.toFixed(2)} €</p>
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">{product.region}</span>
-                    <span className="text-gray-500">{product.vintage}</span>
+                  <h2 className="text-lg font-semibold">{product.title}</h2>
+                  <p className="text-sm text-gray-500 mt-2">{product.supplier}</p>
+                  <p className="text-gray-600">{product.vintage}</p>
+                  <p className="text-gray-600">{product.description}</p>
+                  <div className="mt-2 flex justify-between items-center">
+                    <span className="font-bold text-lg">{product.price.toFixed(2)} €</span>
+                    <span className="text-yellow-500">{'⭐'.repeat(Math.round(product.rating))}</span>
                   </div>
                 </div>
               </div>

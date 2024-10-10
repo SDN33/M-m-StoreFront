@@ -7,8 +7,7 @@ const Newsletter = () => {
   const handleSubscribe = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Vous pouvez ajouter ici la logique pour gérer l'abonnement,
-    // comme un appel API pour sauvegarder l'email
+    // Logique pour gérer l'abonnement
 
     // Affiche un message de succès
     setIsSubscribed(true);
@@ -16,11 +15,11 @@ const Newsletter = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-6 rounded-md w-[60rem] mx-auto text-center mt-4">
-      <h2 className="text-xl font-bold mb-8 sloganhero">
-        Restez informé des offres de Mémé Georgette ! <span className="font-light">Promis on ne spamme pas.</span>
+    <div className="bg-gray-100 p-4 rounded-md w-[60rem] max-w-full mx-auto text-center ">
+      <h2 className="text-xl font-bold mb-8">
+        Restez informé des offres de Mémé Georgette !{" "}
+        <span className="font-light sloganhero">Promis on ne spamme pas.</span>
       </h2>
-      <br />
       {isSubscribed ? (
         <p className="text-green-600">Merci pour votre inscription !</p>
       ) : (
@@ -31,11 +30,11 @@ const Newsletter = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="flex-grow p-2 border border-gray-300 rounded-md mr-2"
+            className="flex-grow p-2 mb-4 md:mb-0 border border-gray-300 rounded-md md:mr-2 w-full md:w-auto"
           />
           <button
             type="submit"
-            className="bg-orange-400 text-white p-2 rounded-md hover:bg-orange-800 transition duration-200"
+            className="bg-orange-500 text-white p-2 rounded-md w-full md:w-auto hover:bg-orange-800 transition duration-200"
           >
             S&apos;inscrire
           </button>

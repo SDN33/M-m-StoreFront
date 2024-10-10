@@ -9,7 +9,6 @@ const Products: React.FC = () => {
       <br />
       <ProductsIntro />
       <br />
-      <br />
       <ProductsCards />
 
 

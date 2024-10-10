@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Slogan: React.FC = () => {
   return (
-    <div className="relative bg-orange-400 py-10">
+    <div className="relative bg-orange-500 py-10 md:py-20 min-h-[700px] md:min-h-[400px]">
       {/* Image positionnée en bas à droite */}
       <div className="absolute right-0 bottom-0">
         <Image src="/images/mémé-georgette2.png" alt="Mémé Newsletter" width={300} height={300} />
@@ -12,38 +12,40 @@ const Slogan: React.FC = () => {
       <div className="max-w-4xl mx-auto text-center text-white">
         <h2 className="text-3xl font-bold mb-4">
           Avec Mémé Georgette, c&apos;est simple... <br />
-          <span className='sloganhero font-light'>Du vin bio directement chez vous, et pour pas plus cher ! *</span>
+          <span className='sloganhero font-light text-sm md:text-lg'>
+            Du vin bio directement chez vous, pour pas plus cher ! *
+          </span>
         </h2>
 
         <div className="flex flex-col md:flex-row justify-around items-center mt-10">
           <div className="relative mb-6 md:mb-0">
-            <div className="bg-white text-gray-800 rounded-full p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
-              <h3 className="font-bold text-lg">Notre Engagement</h3>
-              <p className="text-sm">
+            <div className="bg-white text-gray-800 rounded-full p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
+              <h3 className="font-bold text-md md:text-lg">Notre Engagement</h3>
+              <p className="text-xs md:text-sm">
                 Nous travaillons main dans la main avec des producteurs locaux pour offrir des vins de qualité.
               </p>
             </div>
-            <div className="absolute -top-4 -right-4 w-10 h-10 bg-black rounded-full"></div>
+            <div className="absolute -top-3 -right-3 w-8 h-8 md:w-10 md:h-10 bg-black rounded-full"></div>
           </div>
 
           <div className="relative mb-6 md:mb-0">
-            <div className="bg-white text-gray-800 rounded-full p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
-              <h3 className="font-bold text-lg">Circuit Court</h3>
-              <p className="text-sm">
+            <div className="bg-white text-gray-800 rounded-full p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
+              <h3 className="font-bold text-md md:text-lg">Circuit Court</h3>
+              <p className="text-xs md:text-sm">
                 Nos vins sont livrés directement du producteur à votre table, sans intermédiaire.
               </p>
             </div>
-            <div className="absolute -top-4 -left-4 w-10 h-10 bg-white rounded-full"></div>
+            <div className="absolute -top-3 -left-3 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full"></div>
           </div>
 
           <div className="relative mb-6 md:mb-0">
-            <div className="bg-white text-gray-800 rounded-full p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
-              <h3 className="font-bold text-lg">Élan Éco-Responsable</h3>
-              <p className="text-sm">
+            <div className="bg-white text-gray-800 rounded-full p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
+              <h3 className="font-bold text-md md:text-lg">Élan Éco-Responsable</h3>
+              <p className="text-xs md:text-sm">
                 Nous nous engageons à respecter l&apos;environnement en choisissant des pratiques durables.
               </p>
             </div>
-            <div className="absolute -bottom-4 -right-4 w-10 h-10 bg-black rounded-full"></div>
+            <div className="absolute -bottom-3 -right-3 w-8 h-8 md:w-10 md:h-10 bg-black rounded-full"></div>
           </div>
         </div>
         <span className='absolute text-white text-xs block mt-2 right-[28rem]'>* en comparaison avec les vins non bio</span>

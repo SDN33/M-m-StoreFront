@@ -31,7 +31,7 @@ const PromotionSection = () => {
     <div
       className={`bg-white opacity-80 text-center py-4 fixed shadow-sm mt-6 top-20 left-0 w-full z-10 ${isVisible ? 'block' : 'hidden'}`}
     >
-      <p className="font-extrabold text-sm text-orange-400">
+      <p className="font-extrabold text-sm text-orange-500">
         🍇🚚 Livraison gratuite dès 100€ d&apos;achat en France métropolitaine 🚚🍇
       </p>
     </div>
