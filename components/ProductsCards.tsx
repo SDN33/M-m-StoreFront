@@ -168,22 +168,31 @@ const ProductsCards: React.FC = () => {
       <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
       {/* Contenu principal - cartes des produits */}
       <div className="flex-grow ml-4">
-        {/* Onglet de tri en haut à droite */}
-        <div className="flex justify-end mb-4 mr-[6rem]">
-          <label className="mr-6 font-bold text-gray-600">+ de 120 vignerons</label>
-          <label className="mr-6 font-bold text-orange-400">|</label>
-          <label className="mr-6 font-bold text-gray-600">+ de 1000 vins</label>
-          <label className="mr-6 font-bold text-orange-400">|</label>
-          <label className="mr-6 font-bold text-gray-600">Trier par :</label>
-          <select value={sortBy} onChange={handleSortChange} className="border rounded px-2 py-1">
-            <option value="">Sélectionner</option>
-            <option value="price-asc">Prix croissant</option>
-            <option value="price-desc">Prix décroissant</option>
-            <option value="rating">Note</option>
-            <option value="date-added">Date d&apos;ajout</option>
-          </select>
-        </div>
-        <br />
+              {/* Onglet de tri en haut à droite */}
+              <div className="flex justify-end mb-4 mr-[6rem]">
+        <label className="mr-6 font-bold text-gray-600">+ de 120 vignerons</label>
+        <span className="mr-6 font-bold text-orange-400">|</span>
+        <label className="mr-6 font-bold text-gray-600">+ de 1000 vins</label>
+        <span className="mr-6 font-bold text-orange-400">|</span>      
+
+        {/* Label pour accessibilité */}
+        <label htmlFor="sortBySelect" className="mr-6 font-bold text-gray-600">Trier par :</label>      
+
+        {/* Sélecteur avec id lié au label */}
+        <select
+          id="sortBySelect"
+          value={sortBy}
+          onChange={handleSortChange}
+          className="border rounded px-2 py-1"
+        >
+          <option value="">Choisir une option</option>
+          <option value="price-asc">Prix croissant</option>
+          <option value="price-desc">Prix décroissant</option>
+          <option value="rating">Note</option>
+          <option value="date-added">Date d'ajout</option>
+        </select>
+      </div>
+
 
         {/* Affichage des produits filtrés */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
