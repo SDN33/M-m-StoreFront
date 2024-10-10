@@ -71,7 +71,7 @@ const ProductsIntro: React.FC = () => {
 
       {/* Texte au centre */}
       <div className="text-center" ref={textRef}>
-        <h3 className="text-3xl font-extrabold text-orange-500 mt-4 tracking-tight">
+        <h3 className="text-3xl font-extrabold text-orange-400 mt-4 tracking-tight">
           Découvrez notre sélection de vins Bio et Démeter
         </h3>
         <h4 className="text-xl text-gray-700 mt-2 leading-snug font-semibold sloganhero">

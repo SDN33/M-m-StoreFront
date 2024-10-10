@@ -19,7 +19,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({ selectedFilters, onFilter
   };
 
   return (
-    <div className="bg-orange-500 p-12 rounded-lg shadow-lg">
+    <div className="bg-orange-400 p-12 rounded-lg shadow-lg">
       {Object.entries(filterOptions).map(([filterType, options]) => (
         <div key={filterType} className="mb-4">
           <h3 className="text-white font-bold text-lg mb-2">{filterType === 'color' ? 'Couleur' : filterType === 'region' ? 'Région' : filterType === 'vintage' ? 'Millésime' : 'Certification'}</h3>

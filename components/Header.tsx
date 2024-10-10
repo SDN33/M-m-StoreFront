@@ -30,19 +30,19 @@ const Header = () => {
     <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} transition-colors duration-600 z-20`}>
       {/* Left Navigation */}
       <nav className="hidden md:flex items-center space-x-8 ml-10 font-semibold">
-        <a href="/" className="relative text-white hover:text-orange-500 font-semibold">
+        <a href="/" className="relative text-white hover:text-orange-400 font-semibold">
           Accueil
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
         </a>
-        <a href="/products" className="relative text-white hover:text-orange-500 font-semibold">
+        <a href="/products" className="relative text-white hover:text-orange-400 font-semibold">
           Nos Vins
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
         </a>
-        <a href="/about" className="relative text-white hover:text-orange-500 font-semibold">
+        <a href="/about" className="relative text-white hover:text-orange-400 font-semibold">
           M&eacute;m&eacute; Georgette se pr&eacute;sente
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
         </a>
-        <a href="/contact" className="relative text-white hover:text-orange-500 font-semibold">
+        <a href="/contact" className="relative text-white hover:text-orange-400 font-semibold">
           Contact
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
         </a>

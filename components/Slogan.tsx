@@ -2,7 +2,7 @@ import React from 'react';
 
 const Slogan: React.FC = () => {
   return (
-    <div className="bg-orange-500 py-10">
+    <div className="bg-orange-400 py-10">
       <div className="max-w-4xl mx-auto text-center text-white">
         <h2 className="text-3xl font-bold mb-4">
           Avec Mémé Georgette, c&apos;est simple... <br />

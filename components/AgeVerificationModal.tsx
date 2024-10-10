@@ -44,7 +44,7 @@ const AgeVerificationModal = () => {
         <div className="space-y-3">
           <button
             onClick={handleAccept}
-            className="w-full bg-orange-500 text-white px-6 py-3 rounded-full font-medium hover:bg-orange-700 transition-colors"
+            className="w-full bg-orange-400 text-white px-6 py-3 rounded-full font-medium hover:bg-orange-700 transition-colors"
           >
             Je certifie avoir plus de 18 ans
           </button>

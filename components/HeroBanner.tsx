@@ -27,7 +27,7 @@ const HeroBanner = () => {
         </div>
         <br /><br />
         <div className="flex items-center gap-3 md:gap-4 justify-center mt-8 md:mt-14"> {/* Réduction de l'espacement pour mobile */}
-          <button className="shadow-lg bg-orange-500 text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-medium flex items-center hover:bg-orange-800 hover:text-white transition-colors text-sm md:text-base"> {/* Bouton plus petit avec plus de padding sur mobile */}
+          <button className="shadow-lg bg-orange-400 text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-medium flex items-center hover:bg-orange-800 hover:text-white transition-colors text-sm md:text-base"> {/* Bouton plus petit avec plus de padding sur mobile */}
             Notre Cave
             <span className="ml-2">➜</span>
           </button>

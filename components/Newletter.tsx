@@ -35,7 +35,7 @@ const Newsletter = () => {
           />
           <button
             type="submit"
-            className="bg-orange-500 text-white p-2 rounded-md hover:bg-orange-800 transition duration-200"
+            className="bg-orange-400 text-white p-2 rounded-md hover:bg-orange-800 transition duration-200"
           >
             S&apos;inscrire
           </button>
