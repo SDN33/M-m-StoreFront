@@ -24,7 +24,7 @@ const productsData: Product[] = [
     title: 'Château La Rose du Pin',
     description: 'Un vin rouge fruité et équilibré, idéal pour accompagner vos plats de viande.',
     price: 12.5,
-    imageUrl: '/app/assets/images/products/1.jpg',
+    imageUrl: '/images/vin.webp',
     supplier: 'Château La Rose',
     vintage: '2019',
     color: 'Rouge',
@@ -38,7 +38,7 @@ const productsData: Product[] = [
     title: 'Domaine de la Vallée',
     description: 'Un vin blanc sec et minéral, parfait pour vos apéritifs et poissons.',
     price: 9.75,
-    imageUrl: '/app/assets/images/products/2.jpg',
+    imageUrl: '/images/vin.webp',
     supplier: 'Domaine de la Vallée',
     vintage: '2020',
     color: 'Blanc',
@@ -52,7 +52,7 @@ const productsData: Product[] = [
     title: 'Château de la Rivière',
     description: 'Un vin rosé frais et fruité, à déguster en terrasse ou en bord de mer.',
     price: 8.99,
-    imageUrl: '/app/assets/images/products/3.jpg',
+    imageUrl: '/images/vin.webp',
     supplier: 'Château de la Rivière',
     vintage: '2021',
     color: 'Rosé',
@@ -66,7 +66,7 @@ const productsData: Product[] = [
     title: 'Domaine de la Montagne',
     description: 'Un vin rouge corsé et épicé, pour les amateurs de vins puissants.',
     price: 15.25,
-    imageUrl: '/app/assets/images/products/4.jpg',
+    imageUrl: '/images/vin.webp',
     supplier: 'Domaine de la Montagne',
     vintage: '2018',
     color: 'Rouge',
@@ -80,7 +80,7 @@ const productsData: Product[] = [
     title: 'Château de la Vallée',
     description: 'Un vin blanc sec et minéral, parfait pour vos apéritifs et poissons.',
     price: 9.75,
-    imageUrl: '/app/assets/images/products/2.jpg',
+    imageUrl: '/images/vin.webp',
     supplier: 'Domaine de la Vallée',
     vintage: '2020',
     color: 'Blanc',
@@ -94,7 +94,7 @@ const productsData: Product[] = [
     title: 'Château La Rose du Pin',
     description: 'Un vin rouge fruité et équilibré, idéal pour accompagner vos plats de viande.',
     price: 12.5,
-    imageUrl: '/app/assets/images/products/1.jpg',
+    imageUrl: '/images/vin.webp',
     supplier: 'Château La Rose',
     vintage: '2019',
     color: 'Rouge',
@@ -208,7 +208,7 @@ const ProductsCards: React.FC = () => {
                   <img
                     src={product.imageUrl || '/app/assets/images/noimage/large.png'}
                     alt={product.title}
-                    className="w-full h-48 object-cover"
+                    className="w-20 h-auto object-fill flex items-center justify-center mx-auto"
                   />
                 </div>
                 <div className="p-4">

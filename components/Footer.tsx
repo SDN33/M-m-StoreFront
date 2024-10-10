@@ -56,7 +56,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 text-center font-semibold">
+        <div className="mt-8 text-center">
           <p>© 2024 Les Vins de Mémé Georgette. Tous droits réservés.</p>
           <p>Design par Still-inov Agency</p>
         </div>
