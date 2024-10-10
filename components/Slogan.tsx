@@ -1,8 +1,14 @@
 import React from 'react';
+import Image from "next/image";
 
 const Slogan: React.FC = () => {
   return (
-    <div className="bg-orange-400 py-10">
+    <div className="relative bg-orange-400 py-10">
+      {/* Image positionnée en bas à droite */}
+      <div className="absolute right-0 bottom-0">
+        <Image src="/images/mémé-georgette2.png" alt="Mémé Newsletter" width={300} height={300} />
+      </div>
+
       <div className="max-w-4xl mx-auto text-center text-white">
         <h2 className="text-3xl font-bold mb-4">
           Avec Mémé Georgette, c&apos;est simple... <br />
@@ -39,12 +45,9 @@ const Slogan: React.FC = () => {
             </div>
             <div className="absolute -bottom-4 -right-4 w-10 h-10 bg-black rounded-full"></div>
           </div>
-          <br />
         </div>
+        <span className='absolute text-white text-xs block mt-2 right-[28rem]'>* en comparaison avec les vins non bio</span>
       </div>
-      <br />
-      <span className='absolute text-white text-xs block mt-2 right-[28rem]'>* en comparaison avec les vins non bio</span>
-
     </div>
   );
 };
