@@ -173,10 +173,10 @@ const ProductsCards: React.FC = () => {
         <label className="mr-6 font-bold text-gray-600">+ de 120 vignerons</label>
         <span className="mr-6 font-bold text-orange-400">|</span>
         <label className="mr-6 font-bold text-gray-600">+ de 1000 vins</label>
-        <span className="mr-6 font-bold text-orange-400">|</span>      
+        <span className="mr-6 font-bold text-orange-400">|</span>
 
         {/* Label pour accessibilité */}
-        <label htmlFor="sortBySelect" className="mr-6 font-bold text-gray-600">Trier par :</label>      
+        <label htmlFor="sortBySelect" className="mr-6 font-bold text-gray-600">Trier par :</label>
 
         {/* Sélecteur avec id lié au label */}
         <select
@@ -189,7 +189,7 @@ const ProductsCards: React.FC = () => {
           <option value="price-asc">Prix croissant</option>
           <option value="price-desc">Prix décroissant</option>
           <option value="rating">Note</option>
-          <option value="date-added">Date d'ajout</option>
+          <option value="date-added">Date d&apos;ajout</option>
         </select>
       </div>
 
