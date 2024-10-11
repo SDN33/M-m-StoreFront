@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from "next/image";
-import { Instagram, Facebook  } from "lucide-react";
 
 
 const Slogan: React.FC = () => {
