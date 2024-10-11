@@ -19,7 +19,7 @@ const Footer = () => {
           />
           <Newsletter />
           <br />
-          <p className="max-w-xl text-gray-800 font-semibold text-sm leading-relaxed mx-auto">
+          <p className="text-lg font-light mb-8">
             Nous avons à cœur de partager notre passion pour les vins bio et biodynamiques.
             Notre cave coopérative s&apos;engage à proposer des vins authentiques,
             en privilégiant les circuits courts et le respect de la nature.
@@ -40,9 +40,9 @@ const Footer = () => {
           <div>
             <h3 className="text-orange-600 font-semibold mb-4">Découvrez nos vins</h3>
             <ul className="space-y-2">
-              <li><a href="/vins" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Tous nos vins</a></li>
-              <li><a href="/vignerons" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Nos vignerons</a></li>
-              <li><a href="https://www.memegeorgette.com/" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Mémé Georgette</a></li>
+              <li><a href="/" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Les rouges</a></li>
+              <li><a href="/" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Les blancs</a></li>
+              <li><a href="/" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Les rosés</a></li>
             </ul>
           </div>
 
@@ -58,7 +58,7 @@ const Footer = () => {
         </div>
 
         {/* Réseaux sociaux */}
-        <div className="flex justify-center space-x-4 mb-8">
+        <div className="flex justify-center space-x-4 mb-4">
           <a href="https://instagram.com/memegeorgette" className="text-gray-800 hover:text-orange-600 transition-colors">
             <Instagram className="h-5 w-5" />
           </a>
@@ -68,14 +68,14 @@ const Footer = () => {
         </div>
 
         {/* Mentions légales et copyright */}
-        <div className="border-t border-gray-200 pt-8">
+        <div className="border-t border-gray-200 pt-4">
           <p className="text-xs text-gray-800 mb-4 font-light">
             L&apos;abus d&apos;alcool est dangereux pour la santé, sachez consommer avec modération.
             Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.
           </p>
           <p className="text-xs text-gray-800 font-light">
             © 2024 Les Vins de Mémé Georgette, tous droits réservés
-            <br />Création de Still-inov Agency
+            <br />Création de <a className="font-bold" href="https://stillinov.com">Still-inov Agency</a>
           </p>
         </div>
       </div>
