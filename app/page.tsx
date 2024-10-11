@@ -1,7 +1,6 @@
 'use client';
 
 import HeroBanner from '@/components/HeroBanner';
-import Newsletter from '@/components/Newletter';
 import Products from '@/components/Products';
 import Slogan from '@/components/Slogan';
 
@@ -14,7 +13,6 @@ export default function Home() {
         <br />
         <Slogan />
         <br /><br />
-        <Newsletter />
 
 
 
