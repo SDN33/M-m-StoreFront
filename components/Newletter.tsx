@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Image from "next/image";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
@@ -21,13 +20,6 @@ const Newsletter = () => {
         Restez informé des offres de Mémé Georgette !{" "}
         <span className="font-light sloganhero">Promis on ne spamme pas.</span>
       </h2>
-      <Image
-            src="/images/logo.png"
-            alt="Logo Mémé Georgette"
-            className="mb-6 mx-auto"
-            width={160}
-            height={120}
-          />
       {isSubscribed ? (
         <p className="text-green-600">Merci pour votre inscription !</p>
       ) : (

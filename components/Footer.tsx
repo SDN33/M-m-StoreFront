@@ -1,18 +1,26 @@
 "use client";
 import React from "react";
 import { Instagram, Facebook } from "lucide-react";
+import Image from "next/image";
 import Newsletter from "./Newletter";
 
 const Footer = () => {
   return (
-    <footer className="bg-white text-gray-800 py-12 text-center">
+    <footer className="bg-white text-gray-800 py-2 text-center">
       <div className="max-w-7xl mx-auto px-4">
         {/* Section principale */}
         <div className="mb-12">
+          <Image
+            src="/images/logo.png"
+            alt="Logo Mémé Georgette"
+            className="mb-6 mx-auto"
+            width={160}
+            height={120}
+          />
           <Newsletter />
           <br />
           <p className="text-lg font-light mb-8">
-            Nous avons à cœur de partager notre passion pour les vins bio et biodynamiques.
+            Nous avons à cœur de partager notre passion pour les vins bio et biodynamiques. <br />
             Notre cave coopérative s&apos;engage à proposer des vins authentiques,
             en privilégiant les circuits courts et le respect de la nature.
           </p>
