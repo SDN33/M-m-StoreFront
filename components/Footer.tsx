@@ -1,8 +1,9 @@
 "use client";
 import React from "react";
-import { Instagram, Facebook } from "lucide-react";
-import Image from "next/image";
+import { CreditCard } from "lucide-react";
 import Newsletter from "./Newletter";
+import Image from "next/image";
+
 
 const Footer = () => {
   return (
@@ -10,7 +11,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4">
         {/* Section principale */}
         <div className="mb-12">
-          <Image
+          <img
             src="/images/logo.png"
             alt="Logo Mémé Georgette"
             className="mb-6 mx-auto"
@@ -19,6 +20,7 @@ const Footer = () => {
           />
           <Newsletter />
           <br />
+
           <p className="text-lg font-light mb-8">
             Nous avons à cœur de partager notre passion pour les vins bio et biodynamiques. <br />
             Notre cave coopérative s&apos;engage à proposer des vins authentiques,
@@ -57,14 +59,15 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Réseaux sociaux */}
-        <div className="flex justify-center space-x-4 mb-4">
-          <a href="https://instagram.com/memegeorgette" className="text-gray-800 hover:text-orange-600 transition-colors">
-            <Instagram className="h-5 w-5" />
-          </a>
-          <a href="https://facebook.com/memegeorgette" className="text-gray-800 hover:text-orange-600 transition-colors">
-            <Facebook className="h-5 w-5" />
-          </a>
+        {/* Logos de paiement */}
+        <div className="flex justify-center items-center space-x-4">
+          <Image src="/images/visa.png" alt="Visa" width={30} height={30} />
+          <Image src="/images/mastercard.png" alt="Mastercard" width={30} height={30} />
+          <Image src="/images/paypal.png" alt="PayPal" width={50} height={50}  />
+          <div className="flex items-center text-gray-600">
+            <CreditCard className="h-4 w-4 mr-1 text-black" />
+            <span className="text-xs text-black">Paiement sécurisé</span>
+          </div>
         </div>
 
         {/* Mentions légales et copyright */}

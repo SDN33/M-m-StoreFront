@@ -1,12 +1,16 @@
 import React from 'react';
 import Image from "next/image";
+import { Instagram, Facebook  } from "lucide-react";
+
 
 const Slogan: React.FC = () => {
   return (
     <div className="relative bg-orange-500 py-10 md:py-20 min-h-[700px] md:min-h-[400px]">
-      {/* Image positionnée en bas à droite */}
+      {/* Decorative image */}
+      <div className="absolute bottom-0 right-0 w-[200px] h-[200px] bg-gray-200 opacity-10 rounded-tl-full"></div>
+       {/* Image positionnée en bas à droite */}
       <div className="absolute right-0 bottom-0">
-        <Image src="/images/mémé-georgette2.png" alt="Mémé Newsletter" width={300} height={300} />
+       <Image src="/images/mémé-georgette2.png" alt="Mémé Newsletter" width={300} height={300} />
       </div>
 
       <div className="max-w-4xl mx-auto text-center text-white">
@@ -48,6 +52,7 @@ const Slogan: React.FC = () => {
             <div className="absolute -bottom-3 -right-3 w-8 h-8 md:w-10 md:h-10 bg-black rounded-full"></div>
           </div>
         </div>
+        <br />
         <span className='absolute text-white text-xs block mt-2 right-[28rem]'>* en comparaison avec les vins non bio</span>
       </div>
     </div>
