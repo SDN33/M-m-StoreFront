@@ -14,8 +14,8 @@ const Footer = () => {
             src="/images/logo.png"
             alt="Logo Mémé Georgette"
             className="mb-6 mx-auto"
-            width={260}
-            height={220}
+            width={160}
+            height={120}
           />
           <Newsletter />
           <br />
