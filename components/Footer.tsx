@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { Instagram, Facebook } from "lucide-react";
-import Image from "next/image";
 import Newsletter from "./Newletter";
 
 const Footer = () => {
@@ -10,13 +9,6 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4">
         {/* Section principale */}
         <div className="mb-12">
-          <Image
-            src="/images/logo.png"
-            alt="Logo Mémé Georgette"
-            className="mb-6 mx-auto"
-            width={160}
-            height={120}
-          />
           <Newsletter />
           <br />
           <p className="text-lg font-light mb-8">
