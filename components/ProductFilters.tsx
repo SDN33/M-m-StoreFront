@@ -7,27 +7,51 @@ interface ProductFilterProps {
     region: string[];
     vintage: string[];
     certification: string[];
+    style: string[];
+    price: string[];
   };
-  onFilterChange?: (filterType: keyof ProductFilterProps['selectedFilters'], value: string) => void;
+  onFilterChange?: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
 }
+
+const getFilterTitle = (filterType: string) => {
+  const titles: { [key: string]: string } = {
+    color: 'Couleur',
+    region: 'Région',
+    vintage: 'Millésime',
+    certification: 'Certification',
+    style: 'Style',
+    price: 'Prix'
+  };
+  return titles[filterType] || filterType;
+};
 
 const ProductFilter: React.FC<ProductFilterProps> = ({
   selectedFilters = {
     color: [],
     region: [],
     vintage: [],
-    certification: []
+    certification: [],
+    style: [],
+    price: []
   },
   onFilterChange = () => {}
 }) => {
   const [openSections, setOpenSections] = useState<string[]>(['color']);
 
   const filterOptions = {
-    color: ['Rouge', 'Blanc', 'Rosé'],
-    region: ['Bordeaux', 'Côtes du Rhône', 'Provence', 'Loire'],
+    color: ['Rouge', 'Blanc', 'Rosé', 'Pétillant', 'Liquoreux', 'Autres'],
+    region: [
+      'Alsace', 'Beaujolais', 'Bourgogne', 'Bordeaux',
+      'Champagne', 'Jura', 'Languedoc', 'Loire',
+      'Provence Alpes Côte d’Azur', 'Roussillon',
+      'Savoie', 'Sud Ouest', 'Vallée du Rhône',
+      'France', 'Italie', 'Espagne', 'Portugal', 'Allemagne'
+    ],
     vintage: ['2018', '2019', '2020', '2021', '2022'],
-    certification: ['Bio', 'Demeter'],
-  };
+    certification: ['Bio', 'Biodynamie', 'En conversion'],
+    style: ['Charpenté', 'Fruité', 'Moelleux', 'Corsé', 'Sec'],
+    price: ['0-10 €', '10-20 €', '20-30 €', '30-40 €', '40-50 €', '50-60 €', '60-70 €', '70-80 €', '80-90 €', '90 et +']
+  }; // Missing closing brace was added here
 
   const toggleSection = (section: string) => {
     setOpenSections(prev =>
@@ -37,39 +61,17 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     );
   };
 
-  const getFilterIcon = (filterType: string) => {
-    switch (filterType) {
-      case 'color':
-        return <span className="text-2xl">🍷</span>;
-      case 'region':
-        return <span className="text-2xl">📍</span>;
-      case 'vintage':
-        return <span className="text-2xl">🗓️ </span>;
-      case 'certification':
-        return <span className="text-2xl">🌿</span>;
-      default:
-        return null;
-    }
-  };
+  const handleCheckboxChange = (filterType: keyof ProductFilterProps['selectedFilters'], option: string) => {
+    const currentOptions: string[] = selectedFilters[filterType] || [];
+    const updatedOptions = currentOptions.includes(option)
+      ? currentOptions.filter(item => item !== option)
+      : [...currentOptions, option];
 
-  const getFilterTitle = (filterType: string) => {
-    switch (filterType) {
-      case 'color':
-        return 'Couleur';
-      case 'region':
-        return 'Région';
-      case 'vintage':
-        return 'Millésime';
-      case 'certification':
-        return 'Certification';
-      default:
-        return filterType;
-    }
+    onFilterChange(filterType, updatedOptions);
   };
 
   return (
     <div className="relative max-w-sm w-80 rounded-lg shadow-lg overflow-hidden hidden md:block">
-      {/* Fond orange avec motifs légers */}
       <div className="absolute inset-0 bg-orange-500"
            style={{
              backgroundImage: `
@@ -80,7 +82,6 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
            }}>
       </div>
 
-      {/* Contenu */}
       <div className="relative">
         <p className='mt-4 px-4 text-sm font-medium text-white'>Trier nos vins: </p>
         <br />
@@ -91,7 +92,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
               className="w-full px-4 py-3 flex items-center justify-between hover:bg-white/5 transition-colors"
             >
               <div className="flex items-center gap-2">
-                {getFilterIcon(filterType)}
+                <span className="text-2xl"> {/* Add your icon here */} </span>
                 <span className="font-semibold text-white">{getFilterTitle(filterType)}</span>
               </div>
               {openSections.includes(filterType) ? (
@@ -110,14 +111,13 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                   >
                     <input
                       type="checkbox"
-                      checked={(selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']] as string[])?.includes(option) ?? false}
-                      onChange={() => onFilterChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
+                      checked={((selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']] as string[] || []).includes(option))}
+                      onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
                       className="w-4 h-4 rounded border-white/20 text-orange-600 focus:ring-orange-500"
                     />
                     <span className="text-sm text-white">{option}</span>
                   </label>
                 ))}
-
               </div>
             )}
           </div>

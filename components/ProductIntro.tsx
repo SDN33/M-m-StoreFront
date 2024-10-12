@@ -77,8 +77,10 @@ const ProductsIntro: React.FC = () => {
         <h4 className="text-lg md:text-xl text-gray-800 mt-2 leading-snug font-semibold sloganhero">
           Nous travaillons avec des producteurs locaux et des vignerons engagés pour la qualité de nos vins.
         </h4>
-      </div>
+        {/*séparateur */}
+        <div className="border-2 border-primary w-180  my-2 md:my-4"></div>
 
+      </div>
     </div>
   );
 };
