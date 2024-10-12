@@ -39,3 +39,18 @@ body {
   padding-left: 4rem; /* Padding à gauche */
   padding-right: 4rem; /* Padding à droite */
 }
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-right {
+  animation: slideInFromRight 1s ease-out forwards;
+}
