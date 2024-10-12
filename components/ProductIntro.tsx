@@ -78,8 +78,8 @@ const ProductsIntro: React.FC = () => {
         <Image src="/images/demeter-logo.png" alt="Logo Demeter" width={30} height={30} />
       </div>
       <br />
-      <h4 className="text-sm md:text-sm text-gray-600 mt-2 leading-snug font-semibold">
-        En France, la vigne couvre 4% de la surface agricole nationale, mais à elle seule c&apos;est 20% des pesticides.
+      <h4 className="text-sm md:text-sm text-gray-600 mt-2 leading-snug font-semibold sloganhero">
+        En France, la vigne couvre 4% de la surface agricole nationale, mais à elle seule c&apos;est 20% des pesticides. Luttons contre cela !
       </h4>
     </div>
 
