@@ -71,14 +71,13 @@ const ProductsIntro: React.FC = () => {
 
       {/* Texte au centre avec espacement */}
       <div className="flex items-center space-x-2 text-center md:text-left md:pr-80" ref={textRef}>
-        <h3 className="text-2xl md:text-3xl font-extrabold text-orange-500 tracking-tight ml-20">
-          Découvrez nos vins Bio et Biodynamie
+        <h3 className="text-2xl md:text-3xl font-extrabold text-orange-500 tracking-tight ml-26">
+          Découvrez nos vins Bio et Biodynamie <br /><div className="text-gray-800 flex items-center space-x-2 text-center md:text-left md:pr-20 text-sm">* Livraison offerte dès 100€ d'achat</div>
+
         </h3>
+
       </div>
       <br />
-      <h4 className="text-sm md:text-sm text-gray-600 mt-2 leading-snug sloganhero font-extrabold">
-        En France, la vigne couvre 4% de la surface agricole nationale, mais à elle seule c&apos;est 20% des pesticides. <span className='text-primary'>Luttons contre cela !</span>
-      </h4>
     </div>
 
   );

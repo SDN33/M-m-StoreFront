@@ -8,7 +8,7 @@ const Products: React.FC = () => {
       <br />
       <br />
       <ProductsIntro />
-      <div className="border-b-4 border-orange-500 w-[50rem] my-2 md:my-4 slide-in-right"></div>
+      <div className="border-b-2 border-orange-500 w-[70rem] my-2 md:my-4 slide-in-right"></div>
       <br />
       <ProductsCards />
 
