@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 const Slogan: React.FC = () => {
   const h2Ref = useRef<HTMLHeadingElement | null>(null);
@@ -62,7 +63,13 @@ const Slogan: React.FC = () => {
       {/* Decorative elements and content */}
       <div className="absolute bottom-0 right-0 w-[100px] md:w-[200px] h-[100px] md:h-[200px] bg-gray-200 opacity-10 rounded-tl-full"></div>
       <div className="absolute right-0 bottom-0 w-[150px] md:w-[300px]">
-        <img src="/images/mémé-georgette2.png" alt="Mémé Newsletter" className="w-full h-auto object-cover" />
+        <Image
+          src="/images/mémé-georgette2.png"
+          alt="Mémé Newsletter"
+          className="w-full h-auto object-cover"
+          width={500} // Remplacez 500 par la largeur en pixels souhaitée
+          height={300} // Remplacez 300 par la hauteur en pixels souhaitée
+        />
       </div>
 
       <div className="relative max-w-4xl mx-auto text-center text-white z-10 px-4">
@@ -109,7 +116,7 @@ const Slogan: React.FC = () => {
         </div>
         <br />
         <span className="text-white text-xs block mt-4">* en comparaison avec les vins non bio</span>
-        <span className="text-white text-xs block">L'abus d'alcool est dangereux pour la santé, sachez consommer avec modération. Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.
+        <span className="text-white text-xs block">L&apos;abus d'alcool est dangereux pour la santé, sachez consommer avec modération. Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.
 
 </span>
 

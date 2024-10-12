@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Mail, Video } from "lucide-react";
-import Image from "next/image";
+import { Mail } from "lucide-react";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
