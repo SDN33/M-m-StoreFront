@@ -10,12 +10,6 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4">
         {/* Section principale */}
         <div className="mb-12 h-auto w-auto">
-          <p className="text-sm font-light mb-8">
-            Nous avons à cœur de partager notre passion pour les vins bio et biodynamiques. <br />
-            Notre cave coopérative s&apos;engage à proposer des vins authentiques,
-            en privilégiant les circuits courts et le respect de la nature.
-          </p>
-          <br />
           <Image
             src="/images/logo.png"
             alt="Logo Mémé Georgette"

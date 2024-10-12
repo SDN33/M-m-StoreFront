@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import PromotionSection from "@/components/PromotionSection";
 import AgeVerificationModal from "@/components/AgeVerificationModal";
 
 export const metadata: Metadata = {
@@ -23,7 +22,6 @@ export default function RootLayout({
     <html lang="fr">
       <body>
         <AgeVerificationModal />
-        <PromotionSection />
         <Header />
         <main className="flex-grow ">{children}</main>
         <Footer />

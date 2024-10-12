@@ -1,7 +1,8 @@
 'use client';
 
-import { Search, ShoppingCart, User, Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation'; // Utilisation correcte de usePathname pour le dossier /app
+import { Search, ShoppingCart, User, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
 const Header = () => {
@@ -9,6 +10,11 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [bgColor, setBgColor] = useState('bg-transparent');
+
+  const pathname = usePathname(); // Utilisation de usePathname pour obtenir l'URL actuelle
+
+  // Vérifie si l'utilisateur est sur la page d'accueil
+  const isHomePage = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,11 +26,20 @@ const Header = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // Appliquer le comportement de scroll seulement sur la page d'accueil
+    if (isHomePage) {
+      window.addEventListener('scroll', handleScroll);
+    } else {
+      setBgColor('bg-black bg-opacity-60'); // Couleur de fond par défaut sur les autres pages
+    }
+
+    // Nettoyage de l'événement de scroll lorsqu'on quitte la page d'accueil
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      if (isHomePage) {
+        window.removeEventListener('scroll', handleScroll);
+      }
     };
-  }, []);
+  }, [isHomePage]); // Re-exécuter quand la route change
 
   return (
     <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} transition-colors duration-600 z-20`}>
@@ -39,7 +54,7 @@ const Header = () => {
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
         </a>
         <a href="/about" className="relative text-white hover:text-orange-500 font-semibold">
-          M&eacute;m&eacute; Georgette se pr&eacute;sente
+          Mémé Georgette se présente
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
         </a>
         <a href="/contact" className="relative text-white hover:text-orange-500 font-semibold">
@@ -87,12 +102,12 @@ const Header = () => {
               {isLoggedIn ? (
                 <>
                   <a href="/dashboard" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Mon Dashboard</a>
-                  <button onClick={() => setIsLoggedIn(false)} className="block w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se D&eacute;connecter</button>
+                  <button onClick={() => setIsLoggedIn(false)} className="block w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Déconnecter</button>
                 </>
               ) : (
                 <>
                   <a href="/login" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Connecter</a>
-                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S&apos;inscrire</a>
+                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S'inscrire</a>
                 </>
               )}
             </div>
@@ -118,7 +133,7 @@ const Header = () => {
         <div className="absolute top-full left-0 right-0 bg-white p-4 rounded-md shadow-lg z-30">
           <a href="/" className="block py-2 text-gray-800">Accueil</a>
           <a href="/products" className="block py-2 text-gray-800">Nos Vins</a>
-          <a href="/about" className="block py-2 text-gray-800">M&eacute;m&eacute; Georgette se pr&eacute;sente</a>
+          <a href="/about" className="block py-2 text-gray-800">Mémé Georgette se présente</a>
           <a href="/contact" className="block py-2 text-gray-800">Contact</a>
         </div>
       )}
