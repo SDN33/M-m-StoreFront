@@ -15,24 +15,27 @@ const HeroBanner = () => {
       ></div>
 
       {/* Conteneur avec z-10 pour rester au-dessus de l'image de fond */}
-      <div className="md:mt-20 mt-40 space-y-4 md:space-y-1  flex flex-col items-center text-center z-10 text-white relative">
-        <p className="text-white text-lg md:text-3xl font-semibold sloganhero">
+      <div className="md:mt-20 mt-40 space-y-4 md:space-y-0  flex flex-col items-center text-center z-10 text-white relative">
+        <p className="text-white text-xl md:text-3xl font-semibold sloganhero">
           CAVE COOPÉRATIVE ENGAGÉE
         </p>
 
-        <div className="flex items-center justify-center gap-4">
-          <Image src="/images/logobio.webp" alt="Logo Bio" width={40} height={40} />
-          <Image src="/images/demeter-logo.png" alt="Logo Bio" width={70} height={100} />
+        <div className="hidden sm:flex items-center justify-center gap-4">
+          <Image src="/images/logobio.webp" alt="Logo Bio" width={38} height={38} />
+          <Image src="/images/demeter-logo.png" alt="Logo Demeter" width={68} height={98} />
         </div>
 
         <div>
-          <h1 className="text-4xl md:text-4xl leading-tight font-black">
+          {/* Titre pour web */}
+          <h1 className="text-4xl md:text-4xl leading-tight font-black hidden md:block">
             <br />&quot;A une époque de supercherie alimentaire,<br />boire un vin bio est un acte revolutionnaire !&quot; <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
           </h1>
-
+          {/* Titre pour mobile */}
+          <h1 className="text-2xl md:text-4xl leading-tight font-black block md:hidden">
+            <br />&quot;A une époque de supercherie alimentaire,<br />boire un vin bio est un acte revolutionnaire !&quot; <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
+          </h1>
         </div>
       </div>
-
       {/* Boutons alignés en bas uniquement pour mobile */}
       <div className="flex flex-col items-center gap-3 justify-center mb-4 z-10 md:hidden pt-10"> {/* affiché uniquement sur mobile */}
         <button className="shadow-lg bg-orange-500 text-white px-6 py-3 rounded-full font-medium flex items-center hover:bg-orange-800 hover:text-white transition-colors text-sm">

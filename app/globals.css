@@ -18,6 +18,12 @@ body {
   box-sizing: border-box; /* Inclus les paddings et les bordures dans la largeur totale */
 }
 
+html,
+body {
+  overflow-x: hidden; /* Empêche le défilement horizontal */
+}
+
+
 @layer utilities {
   .text-balance {
     text-wrap: balance; /* Utilisation de la propriété text-wrap pour le texte équilibré */
