@@ -6,8 +6,21 @@ import Image from 'next/image';
 const HeroBanner = () => {
   return (
     <div className="relative container mx-auto px-4 py-12 flex flex-col justify-center items-center min-h-screen">
+      {/* Vidéo pour mobile */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover md:hidden"
+        autoPlay
+        loop
+        muted
+        playsInline // Ajout de l'attribut playsInline pour iPhone
+      >
+        <source src="/videos/herobanner-mobile.mp4" type="video/mp4" />
+        Votre navigateur ne supporte pas la vidéo.
+      </video>
+
+      {/* Image de fond pour écrans plus grands */}
       <div
-        className="absolute inset-0 bg-cover md:bg-left z-0"
+        className="absolute inset-0 bg-cover hidden md:block z-0"
         style={{
           backgroundImage: "url('/images/banner.svg'), radial-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4))",
           backgroundBlendMode: 'multiply',
@@ -15,7 +28,7 @@ const HeroBanner = () => {
       ></div>
 
       {/* Conteneur avec z-10 pour rester au-dessus de l'image de fond */}
-      <div className="md:mt-20 mt-40 space-y-4 md:space-y-0  flex flex-col items-center text-center z-10 text-white relative">
+      <div className="md:mt-20 mt-40 space-y-4 md:space-y-0 flex flex-col items-center text-center z-10 text-white relative">
         <p className="text-white text-xl md:text-3xl font-semibold sloganhero">
           CAVE COOPÉRATIVE ENGAGÉE
         </p>
@@ -28,16 +41,17 @@ const HeroBanner = () => {
         <div>
           {/* Titre pour web */}
           <h1 className="text-4xl md:text-4xl leading-tight font-black hidden md:block">
-            <br />&quot;A une époque de supercherie alimentaire,<br />boire un vin bio est un acte revolutionnaire !&quot; <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
+            <br />&quot;À une époque de supercherie alimentaire,<br />boire un vin bio est un acte révolutionnaire !&quot; <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
           </h1>
           {/* Titre pour mobile */}
           <h1 className="text-2xl md:text-4xl leading-tight font-black block md:hidden">
-            <br />&quot;A une époque de supercherie alimentaire,<br />boire un vin bio est un acte revolutionnaire !&quot; <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
+            <br />&quot;À une époque de supercherie alimentaire,<br />boire un vin bio est un acte révolutionnaire !&quot; <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
           </h1>
         </div>
       </div>
+
       {/* Boutons alignés en bas uniquement pour mobile */}
-      <div className="flex flex-col items-center gap-3 justify-center mb-4 z-10 md:hidden pt-10"> {/* affiché uniquement sur mobile */}
+      <div className="flex flex-col items-center gap-3 justify-center mb-4 z-10 md:hidden pt-10">
         <button className="shadow-lg bg-orange-500 text-white px-6 py-3 rounded-full font-medium flex items-center hover:bg-orange-800 hover:text-white transition-colors text-sm">
           Notre Cave
           <span className="ml-2">➜</span>
@@ -57,7 +71,7 @@ const HeroBanner = () => {
       </div>
 
       {/* Les boutons pour la version ordinateur */}
-      <div className="hidden md:flex items-center gap-3 justify-center mt-12 z-10"> {/* caché sur mobile */}
+      <div className="hidden md:flex items-center gap-3 justify-center mt-12 z-10">
         <button className="shadow-lg bg-orange-500 text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-medium flex items-center hover:bg-orange-800 hover:text-white transition-colors text-sm md:text-base">
           Notre Cave
           <span className="ml-2">➜</span>

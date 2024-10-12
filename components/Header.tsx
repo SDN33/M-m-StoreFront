@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation'; // Utilisation correcte de usePathname pour le dossier /app
+import { usePathname } from 'next/navigation';
 import { Search, ShoppingCart, User, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
@@ -9,37 +9,40 @@ const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [bgColor, setBgColor] = useState('bg-transparent');
+  const [bgColor, setBgColor] = useState('bg-black bg-opacity-60'); // Fond noir transparent par défaut pour mobile
 
-  const pathname = usePathname(); // Utilisation de usePathname pour obtenir l'URL actuelle
-
-  // Vérifie si l'utilisateur est sur la page d'accueil
+  const pathname = usePathname();
   const isHomePage = pathname === '/';
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
-      if (currentScroll > 0) {
+
+      if (isMobile) {
+        // Sur mobile, garder le fond noir transparent
         setBgColor('bg-black bg-opacity-60');
       } else {
-        setBgColor('bg-transparent');
+        // Sur desktop, changer la couleur en fonction du défilement
+        if (currentScroll > 0) {
+          setBgColor('bg-black bg-opacity-60'); // Couleur sombre au défilement
+        } else {
+          setBgColor('bg-transparent'); // Couleur claire en haut de page
+        }
       }
     };
 
     // Appliquer le comportement de scroll seulement sur la page d'accueil
     if (isHomePage) {
       window.addEventListener('scroll', handleScroll);
-    } else {
-      setBgColor('bg-black bg-opacity-60'); // Couleur de fond par défaut sur les autres pages
     }
 
-    // Nettoyage de l'événement de scroll lorsqu'on quitte la page d'accueil
     return () => {
       if (isHomePage) {
         window.removeEventListener('scroll', handleScroll);
       }
     };
-  }, [isHomePage]); // Re-exécuter quand la route change
+  }, [isHomePage, isMobile]);
 
   return (
     <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} transition-colors duration-600 z-20`}>

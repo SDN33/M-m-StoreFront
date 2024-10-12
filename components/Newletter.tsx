@@ -17,11 +17,12 @@ const Newsletter = () => {
         {/* Image des verres de vin */}
         <div className="md:w-1/3 h-64 relative">
           <video
-            src="/images/newsletter.mp4"
+            src="/videos/newsletter.mp4"
             className="w-full h-full object-cover border-r-2 border-b-2 border-gray-200"
             autoPlay
             loop
             muted
+            playsInline
           />
         </div>
 
