@@ -5,6 +5,7 @@ import Products from '@/components/Products';
 import Slogan from '@/components/Slogan';
 import Newletter from '@/components/Newletter';
 import PromotionSection from '@/components/PromotionSection';
+import Livraison from '@/components/Livraison';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <Products />
         <br />
         <Slogan />
+        <Livraison />
         <br /><br />
         <Newletter />
         <br />
