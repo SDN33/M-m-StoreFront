@@ -20,7 +20,7 @@ interface Product {
 
 const ProductsCards: React.FC = () => {
   const [sortBy, setSortBy] = useState<string>(''); // État pour gérer le tri
-  const [products, setProducts] = useState<Product[]>([]); // État pour les produits
+  const [products] = useState<Product[]>([]); // État pour les produits
   const [selectedFilters, setSelectedFilters] = useState({
     color: [] as string[],
     region: [] as string[],
@@ -29,10 +29,10 @@ const ProductsCards: React.FC = () => {
     style: [] as string[],
     price: [] as string[],
   });
-  const [loading, setLoading] = useState(true); // État de chargement
-  const [error, setError] = useState<string | null>(null); // État d'erreur
+  const [loading] = useState(true); // État de chargement
+  const [error] = useState<string | null>(null); // État d'erreur
 
-  
+
 
   // Filtrage des produits
   const filterProducts = (product: Product) => {
