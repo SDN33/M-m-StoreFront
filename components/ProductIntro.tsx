@@ -70,18 +70,19 @@ const ProductsIntro: React.FC = () => {
       />
 
       {/* Texte au centre avec espacement */}
-      <div className="text-center md:text-left md:pr-40" ref={textRef}>
-        <h3 className="text-2xl md:text-3xl font-extrabold text-orange-500 mt-4 tracking-tight">
-          Découvrez nos vins Bio et Démeter
+      <div className="flex items-center space-x-2 text-center md:text-left md:pr-80" ref={textRef}>
+        <h3 className="text-2xl md:text-3xl font-extrabold text-orange-500 tracking-tight">
+          Découvrez nos vins Bio et Biodynamie
         </h3>
-        <h4 className="text-lg md:text-xl text-gray-800 mt-2 leading-snug font-semibold sloganhero">
-          Nous travaillons avec des producteurs locaux et des vignerons engagés pour la qualité de nos vins.
-        </h4>
-        {/*séparateur */}
-        <div className="border-2 border-primary w-180  my-2 md:my-4"></div>
-
+        <Image src="/images/logobio.webp" alt="Logo Bio" width={20} height={20} className='ml-4' />
+        <Image src="/images/demeter-logo.png" alt="Logo Demeter" width={30} height={30} />
       </div>
+      <br />
+      <h4 className="text-sm md:text-sm text-gray-600 mt-2 leading-snug font-semibold">
+        En France, la vigne couvre 4% de la surface agricole nationale, mais à elle seule c&apos;est 20% des pesticides.
+      </h4>
     </div>
+
   );
 };
 
