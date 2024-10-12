@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ProductFilter from '@/components/ProductFilters';
 import Image from 'next/image';
 
