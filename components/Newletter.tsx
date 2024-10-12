@@ -15,7 +15,7 @@ const Newsletter = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-4 rounded-md w-[60rem] max-w-full mx-auto text-center ">
+    <div className="bg-gray-100  rounded-md w-[60rem] max-w-full mx-auto text-center ">
       <h2 className="text-xl font-bold mb-8">
         Restez informé des offres de Mémé Georgette !{" "}
         <span className="font-light sloganhero">Promis on ne spamme pas.</span>
