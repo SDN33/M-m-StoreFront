@@ -45,6 +45,7 @@ const Footer = () => {
               <li><a href="/" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Les rouges</a></li>
               <li><a href="/" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Les blancs</a></li>
               <li><a href="/" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Les rosés</a></li>
+              <li><a href="/" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Les pétillants</a></li>
             </ul>
           </div>
 
