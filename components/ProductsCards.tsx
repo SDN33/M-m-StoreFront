@@ -16,6 +16,7 @@ interface Product {
   rating: number; // Note du produit
   certification: string; // Certification du vin
   date_added: string; // Date d'ajout du produit
+  volume: string; // Volume du vin
 }
 
 const ProductsCards: React.FC = () => {
@@ -28,6 +29,7 @@ const ProductsCards: React.FC = () => {
     certification: [] as string[],
     style: [] as string[],
     price: [] as string[],
+    volume: [] as string[], // Ajout
   });
   const [loading] = useState(true); // État de chargement
   const [error] = useState<string | null>(null); // État d'erreur
@@ -84,6 +86,7 @@ const ProductsCards: React.FC = () => {
       certification: [],
       style: [],
       price: [],
+      volume: [], // Ajout
     });
     setSortBy('');
   };

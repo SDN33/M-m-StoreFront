@@ -9,6 +9,7 @@ interface ProductFilterProps {
     certification: string[];
     style: string[];
     price: string[];
+    volume: string[]; // Ajout du champ volume
   };
   onFilterChange?: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
 }
@@ -20,7 +21,8 @@ const getFilterTitle = (filterType: string) => {
     vintage: 'Millésime',
     certification: 'Certification',
     style: 'Style',
-    price: 'Prix'
+    price: 'Prix',
+    volume: 'Volume', // Titre pour le volume
   };
   return titles[filterType] || filterType;
 };
@@ -32,9 +34,10 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     vintage: [],
     certification: [],
     style: [],
-    price: []
+    price: [],
+    volume: [], // Initialisation du volume
   },
-  onFilterChange = () => {}
+  onFilterChange = () => {},
 }) => {
   const [openSections, setOpenSections] = useState<string[]>(['color']);
 
@@ -45,26 +48,25 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       'Champagne', 'Jura', 'Languedoc', 'Loire',
       'Provence Alpes Côte d’Azur', 'Roussillon',
       'Savoie', 'Sud Ouest', 'Vallée du Rhône',
-      'France', 'Italie', 'Espagne', 'Portugal', 'Allemagne'
+      'France', 'Italie', 'Espagne', 'Portugal', 'Allemagne',
     ],
     vintage: ['2018', '2019', '2020', '2021', '2022'],
     certification: ['Bio', 'Biodynamie', 'En conversion'],
     style: ['Charpenté', 'Fruité', 'Moelleux', 'Corsé', 'Sec'],
-    price: ['0-10 €', '10-20 €', '20-30 €', '30-40 €', '40-50 €', '50-60 €', '60-70 €', '70-80 €', '80-90 €', '90 et +']
-  }; // Missing closing brace was added here
+    price: ['0-10 €', '10-20 €', '20-30 €', '30-40 €', '40-50 €', '50-60 €', '60-70 €', '70-80 €', '80-90 €', '90 et +'],
+    volume: ['75cl', '1L', 'Autres'], // Ajout des options de volume
+  };
 
   const toggleSection = (section: string) => {
-    setOpenSections(prev =>
-      prev.includes(section)
-        ? prev.filter(s => s !== section)
-        : [...prev, section]
+    setOpenSections((prev) =>
+      prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]
     );
   };
 
   const handleCheckboxChange = (filterType: keyof ProductFilterProps['selectedFilters'], option: string) => {
     const currentOptions: string[] = selectedFilters[filterType] || [];
     const updatedOptions = currentOptions.includes(option)
-      ? currentOptions.filter(item => item !== option)
+      ? currentOptions.filter((item) => item !== option)
       : [...currentOptions, option];
 
     onFilterChange(filterType, updatedOptions);
@@ -72,18 +74,19 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
   return (
     <div className="relative max-w-sm w-80 rounded-lg shadow-lg overflow-hidden hidden md:block">
-      <div className="absolute inset-0 bg-orange-500"
-           style={{
-             backgroundImage: `
+      <div
+        className="absolute inset-0 bg-orange-500"
+        style={{
+          backgroundImage: `
                radial-gradient(circle at 20px 20px, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 2px, transparent 2px),
                radial-gradient(circle at 40px 70px, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 4px, transparent 4px)
              `,
-             backgroundSize: '100px 100px'
-           }}>
-      </div>
+          backgroundSize: '100px 100px',
+        }}
+      ></div>
 
       <div className="relative">
-        <p className='mt-4 px-4 text-sm font-medium text-white'>Trier nos vins: </p>
+        <p className="mt-4 px-4 text-sm font-medium text-white">Trier nos vins: </p>
         <br />
         {Object.entries(filterOptions).map(([filterType, options]) => (
           <div key={filterType} className="border-b border-white/10 last:border-b-0">
@@ -111,7 +114,9 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                   >
                     <input
                       type="checkbox"
-                      checked={((selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']] as string[] || []).includes(option))}
+                      checked={(
+                        (selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']] as string[] || []).includes(option)
+                      )}
                       onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
                       className="w-4 h-4 rounded border-white/20 text-orange-600 focus:ring-orange-500"
                     />
