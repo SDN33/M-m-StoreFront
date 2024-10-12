@@ -3,6 +3,7 @@
 import HeroBanner from '@/components/HeroBanner';
 import Products from '@/components/Products';
 import Slogan from '@/components/Slogan';
+import Newletter from '@/components/Newletter';
 
 export default function Home() {
   return (
@@ -13,6 +14,8 @@ export default function Home() {
         <br />
         <Slogan />
         <br /><br />
+        <Newletter />
+        <br />
 
 
 
