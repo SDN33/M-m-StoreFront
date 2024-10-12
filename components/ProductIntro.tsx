@@ -71,11 +71,9 @@ const ProductsIntro: React.FC = () => {
 
       {/* Texte au centre avec espacement */}
       <div className="flex items-center space-x-2 text-center md:text-left md:pr-80" ref={textRef}>
-        <h3 className="text-2xl md:text-3xl font-extrabold text-orange-500 tracking-tight">
+        <h3 className="text-2xl md:text-3xl font-extrabold text-orange-500 tracking-tight ml-20">
           Découvrez nos vins Bio et Biodynamie
         </h3>
-        <Image src="/images/logobio.webp" alt="Logo Bio" width={20} height={20} className='ml-4' />
-        <Image src="/images/demeter-logo.png" alt="Logo Demeter" width={30} height={30} />
       </div>
       <br />
       <h4 className="text-sm md:text-sm text-gray-600 mt-2 leading-snug sloganhero font-extrabold">

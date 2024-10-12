@@ -1,6 +1,7 @@
 'use client';
 
 import { Play } from 'lucide-react';
+import Image from 'next/image';
 
 const HeroBanner = () => {
   return (
@@ -18,6 +19,11 @@ const HeroBanner = () => {
         <p className="text-white text-lg md:text-3xl font-semibold sloganhero">
           CAVE COOPÉRATIVE ENGAGÉE
         </p>
+
+        <div className="flex items-center justify-center gap-4">
+          <Image src="/images/logobio.webp" alt="Logo Bio" width={40} height={40} />
+          <Image src="/images/demeter-logo.png" alt="Logo Bio" width={70} height={100} />
+        </div>
 
         <div>
           <h1 className="text-4xl md:text-4xl leading-tight font-black">
