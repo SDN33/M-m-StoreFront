@@ -46,6 +46,10 @@ const Slogan: React.FC = () => {
           <span className="sloganhero font-light text-sm md:text-xl">
             Du vin bio directement chez vous, pour pas plus cher ! *
           </span>
+          <div className="flex justify-center items-center mt-2">
+            <Image src="/images/logobio.webp" className="w-auto h-auto" alt="Logo BIO" width={20} height={10} />
+            <Image src="/images/demeter-logo.png" className="pl-4 w-auto h-auto" alt="Logo DEMETER" width={50} height={70} />
+          </div>
         </h2>
 
         <div className="flex flex-col md:flex-row justify-around items-center mt-10">
