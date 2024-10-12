@@ -4,10 +4,30 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 const AgeVerificationModal = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
-  // Empêcher le défilement du body quand le modal est ouvert
   useEffect(() => {
+    // Récupérer l'heure de validation dans localStorage
+    const ageVerifiedTime = localStorage.getItem('ageVerifiedTime');
+
+    if (ageVerifiedTime) {
+      const currentTime = new Date().getTime();
+      const verificationTime = parseInt(ageVerifiedTime);
+
+      // Vérifier si moins de 6 heures se sont écoulées
+      if (currentTime - verificationTime < 6 * 60 * 60 * 1000) {
+        setIsOpen(false); // Moins de 6 heures, ne pas afficher le modal
+      } else {
+        setIsOpen(true); // Plus de 6 heures, réafficher le modal
+        localStorage.removeItem('ageVerifiedTime'); // Supprimer la validation expirée
+      }
+    } else {
+      setIsOpen(true); // Pas de validation, afficher le modal
+    }
+  }, []);
+
+  useEffect(() => {
+    // Empêcher le défilement quand le modal est ouvert
     document.body.style.overflow = isOpen ? 'hidden' : 'unset';
     return () => {
       document.body.style.overflow = 'unset';
@@ -16,7 +36,8 @@ const AgeVerificationModal = () => {
 
   const handleAccept = () => {
     setIsOpen(false);
-    localStorage.setItem('ageVerified', 'true');
+    // Stocker l'heure actuelle en tant que "timestamp"
+    localStorage.setItem('ageVerifiedTime', new Date().getTime().toString());
   };
 
   const handleReject = () => {
@@ -36,7 +57,7 @@ const AgeVerificationModal = () => {
           height={200}
         />
         <h2 className="text-2xl font-bold text-gray-900 mb-4">
-          Vérification de l&apos;âge {/* Apostrophe échappée */}
+          Vérification de l&apos;âge
         </h2>
         <p className="text-gray-600 mb-6">
           Ce site est réservé aux personnes majeures. En entrant sur ce site, vous certifiez avoir 18 ans ou plus.
@@ -52,11 +73,11 @@ const AgeVerificationModal = () => {
             onClick={handleReject}
             className="w-full bg-gray-200 text-gray-800 px-6 py-3 rounded-full font-medium hover:bg-gray-300 transition-colors"
           >
-            J&apos;ai moins de 18 ans {/* Apostrophe échappée */}
+            J&apos;ai moins de 18 ans
           </button>
         </div>
         <p className="mt-4 text-sm text-gray-500">
-          L&apos;abus d&apos;alcool est dangereux pour la santé. À consommer avec modération. {/* Apostrophes échappées */}
+          L&apos;abus d&apos;alcool est dangereux pour la santé. À consommer avec modération.
         </p>
       </div>
     </div>
