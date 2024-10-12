@@ -67,7 +67,6 @@ const Footer = () => {
             <span className="text-xs text-black">Paiement sécurisé</span>
           </div>
         </div>
-
         {/* Mentions légales et copyright */}
         <div className="border-t border-gray-200 pt-4">
           <p className="text-xs text-gray-800 mb-4 font-light">
