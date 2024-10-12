@@ -34,8 +34,6 @@ const ProductsCards: React.FC = () => {
   const [loading] = useState(true); // État de chargement
   const [error] = useState<string | null>(null); // État d'erreur
 
-
-
   // Filtrage des produits
   const filterProducts = (product: Product) => {
     return (
@@ -103,11 +101,13 @@ const ProductsCards: React.FC = () => {
 
       <div className="flex-grow">
         <div className="flex flex-col items-center mb-4 sm:flex-row sm:justify-center md:justify-end mr-4">
-          <label className="mr-6 font-bold text-gray-600">+ de 120 vignerons</label>
-          <span className="mr-6 font-bold text-orange-500">|</span>
-          <label className="mr-6 font-bold text-gray-600">+ de 1000 vins</label>
-          <span className="mr-6 font-bold text-orange-500">|</span>
-          <label htmlFor="sortBySelect" className="mr-6 font-bold text-gray-600">Trier par :</label>
+          <div className="flex items-center justify-center mb-2 sm:mb-0">
+            <label className="mr-2 font-bold text-gray-600">+ de 120 vignerons</label>
+            <span className="mx-2 font-bold text-orange-500">| </span>
+            <label className="mr-2 font-bold text-gray-600">+ de 1000 vins</label>
+          </div>
+          <span className="mx-2 font-bold text-orange-500 hidden sm:inline">|</span>
+          <label htmlFor="sortBySelect" className="mr-2 font-bold text-gray-600 hidden sm:inline">Trier par :</label>
 
           <select
             id="sortBySelect"
