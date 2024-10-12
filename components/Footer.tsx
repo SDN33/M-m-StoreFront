@@ -21,7 +21,7 @@ const Footer = () => {
           <Newsletter />
           <br />
 
-          <p className="text-lg font-light mb-8">
+          <p className="text-sm font-light mb-8">
             Nous avons à cœur de partager notre passion pour les vins bio et biodynamiques. <br />
             Notre cave coopérative s&apos;engage à proposer des vins authentiques,
             en privilégiant les circuits courts et le respect de la nature.
