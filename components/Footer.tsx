@@ -53,9 +53,15 @@ const Footer = () => {
 
         {/* Logos de paiement */}
         <div className="flex justify-center items-center space-x-4">
-          <Image src="/images/visa.png" alt="Visa" width={30} height={30} />
-          <Image src="/images/mastercard.png" alt="Mastercard" width={30} height={30} />
-          <Image src="/images/paypal.png" alt="PayPal" width={50} height={50}  />
+          <a href="https://www.visa.fr">
+            <Image src="/images/visa.png" alt="Visa" width={30} height={30} />
+          </a>
+          <a href="https://www.mastercard.fr">
+            <Image src="/images/mastercard.png" alt="Mastercard" width={30} height={30} />
+          </a>
+          <a href="https://www.paypal.com">
+            <Image src="/images/paypal.png" alt="PayPal" width={50} height={50} />
+          </a>
           <div className="flex items-center text-gray-600">
             <CreditCard className="h-4 w-4 mr-1 text-black" />
             <span className="text-xs text-black">Paiement sécurisé</span>
