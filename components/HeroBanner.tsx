@@ -28,14 +28,14 @@ const HeroBanner = () => {
       ></div>
 
       {/* Conteneur avec z-10 pour rester au-dessus de l'image de fond */}
-      <div className="md:mt-20 mt-40 space-y-4 md:space-y-0 flex flex-col items-center text-center z-10 text-white relative">
+      <div className="md:mt-20 mt-40 space-y-3 md:space-y-0 flex flex-col items-center text-center z-10 text-white relative">
         <p className="text-white text-xl md:text-3xl font-semibold sloganhero">
           CAVE COOPÉRATIVE ENGAGÉE
         </p>
 
         <div className="hidden sm:flex items-center justify-center gap-4">
-          <Image src="/images/logobio.webp" alt="Logo Bio" width={38} height={38} />
-          <Image src="/images/demeter-logo.png" alt="Logo Demeter" width={68} height={98} />
+          <Image src="/images/logobio.webp" alt="Logo Bio" width={25} height={25} />
+          <Image src="/images/demeter-logo.png" alt="Logo Demeter" width={65} height={95} />
         </div>
 
         <div>
