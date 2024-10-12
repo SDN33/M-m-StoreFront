@@ -16,13 +16,15 @@ const Slogan: React.FC = () => {
       { threshold: 0.3 } // 30% de visibilité
     );
 
-    if (h2Ref.current) {
-      observer.observe(h2Ref.current);
+    const currentH2Ref = h2Ref.current; // Copier la valeur dans une variable locale
+
+    if (currentH2Ref) {
+      observer.observe(currentH2Ref);
     }
 
     return () => {
-      if (h2Ref.current) {
-        observer.unobserve(h2Ref.current);
+      if (currentH2Ref) {
+        observer.unobserve(currentH2Ref); // Utiliser la variable locale ici
       }
     };
   }, []);

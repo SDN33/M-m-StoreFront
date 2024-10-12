@@ -21,7 +21,7 @@ const HeroBanner = () => {
 
         <div>
           <h1 className="text-4xl md:text-4xl leading-tight font-black">
-            <br />"A une époque de supercherie alimentaire,<br />boire un vin bio est un acte revolutionnaire !" <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
+            <br />&quot;A une époque de supercherie alimentaire,<br />boire un vin bio est un acte revolutionnaire !&quot; <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
           </h1>
 
         </div>
