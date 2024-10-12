@@ -40,15 +40,15 @@ const Slogan: React.FC = () => {
         {/* Ajout de la classe d'animation lorsque le H2 devient visible */}
         <h2
           ref={h2Ref}
-          className={`text-4xl font-bold mb-4 ${isVisible ? 'slide-in-right' : ''}`}
+          className={`text-4xl md:text-4xl leading-tight font-black mb-2 ${isVisible ? 'slide-in-right' : ''}`}
         >
           Avec Mémé Georgette, c&apos;est simple... <br />
           <span className="sloganhero font-light text-sm md:text-xl">
             Du vin bio directement chez vous, pour pas plus cher ! *
           </span>
           <div className="flex justify-center items-center mt-2">
-            <Image src="/images/logobio.webp" className="w-auto h-auto" alt="Logo BIO" width={20} height={10} />
-            <Image src="/images/demeter-logo.png" className="pl-4 w-auto h-auto" alt="Logo DEMETER" width={50} height={70} />
+            <Image src="/images/logobio.webp" alt="Logo BIO" width={20} height={10} />
+            <Image src="/images/demeter-logo.png" className="pl-4" alt="Logo DEMETER" width={50} height={70} />
           </div>
         </h2>
 
