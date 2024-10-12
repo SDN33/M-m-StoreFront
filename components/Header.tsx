@@ -69,7 +69,6 @@ const Header = () => {
           <Image
             src="/images/logo3.png"
             alt="Logo Mémé Georgette"
-            className='h-auto w-auto'
             width={180}
             height={60}
           />
