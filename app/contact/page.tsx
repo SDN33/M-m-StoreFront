@@ -26,7 +26,7 @@ const ContactPage: React.FC = () => {
           Contactez-nous
         </h1>
         <h2 className="text-gray-600 text-center mb-6">
-          Vous avez une question ou une suggestion ? Nous serions ravis de vous aider !
+          Vous avez une question ou une suggestion ?<br /> Nous serions ravis de vous aider !
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
