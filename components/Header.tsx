@@ -98,7 +98,7 @@ const Header = () => {
 
           {/* Dropdown Menu */}
           {isUserMenuOpen && (
-            <div className=" right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30">
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30">
               {isLoggedIn ? (
                 <>
                   <a href="/dashboard" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Mon Dashboard</a>
@@ -107,7 +107,7 @@ const Header = () => {
               ) : (
                 <>
                   <a href="/login" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Connecter</a>
-                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S'inscrire</a>
+                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S&apos;inscrire</a>
                 </>
               )}
             </div>
