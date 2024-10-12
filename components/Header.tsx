@@ -67,10 +67,10 @@ const Header = () => {
       <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center">
         <a href="/" className="flex items-center">
           <Image
-            src="/images/logo3.svg"
+            src="/images/logo3.png"
             alt="Logo Mémé Georgette"
-            width={160}
-            height={40}
+            width={180}
+            height={60}
           />
         </a>
       </div>
