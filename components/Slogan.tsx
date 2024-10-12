@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Image from "next/image";
 
 const Slogan: React.FC = () => {
   const h2Ref = useRef<HTMLHeadingElement | null>(null);
@@ -13,10 +12,10 @@ const Slogan: React.FC = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.3 } // 30% de visibilité
+      { threshold: 0.3 }
     );
 
-    const currentH2Ref = h2Ref.current; // Copier la valeur dans une variable locale
+    const currentH2Ref = h2Ref.current;
 
     if (currentH2Ref) {
       observer.observe(currentH2Ref);
@@ -24,25 +23,52 @@ const Slogan: React.FC = () => {
 
     return () => {
       if (currentH2Ref) {
-        observer.unobserve(currentH2Ref); // Utiliser la variable locale ici
+        observer.unobserve(currentH2Ref);
       }
     };
   }, []);
 
   return (
-    <div className="relative bg-orange-500 py-10 md:py-20 min-h-[700px] md:min-h-[400px]">
-      {/* Decorative image */}
-      <div className="absolute bottom-0 right-0 w-[200px] h-[200px] bg-gray-200 opacity-10 rounded-tl-full"></div>
-      {/* Image positionnée en bas à droite */}
-      <div className="absolute right-0 bottom-0">
-        <Image src="/images/mémé-georgette2.png" alt="Mémé Newsletter" width={300} height={300} />
+    <div className="relative bg-orange-500 py-10 md:py-20 min-h-[700px] md:min-h-[400px] overflow-hidden">
+      {/* SVG Background */}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute inset-0 w-full h-full"
+        preserveAspectRatio="none"
+        viewBox="0 0 1300 550"
+      >
+        <defs>
+          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style={{ stopColor: '#c2410c', stopOpacity: 0.6 }} />
+            <stop offset="100%" style={{ stopColor: '#fb923c', stopOpacity: 0.6 }} />
+          </linearGradient>
+        </defs>
+        <path fill="url(#grad)">
+          <animate
+            attributeName="d"
+            dur="10s"
+            repeatCount="indefinite"
+            values="
+              M0 250C600 450 650 100 1300 250V550H0V250Z;
+              M0 250C600 100 650 450 1300 250V550H0V250Z;
+              M0 250C950 350 950 150 1300 250V550H0V250Z;
+              M0 250C350 150 350 350 1300 250V550H0V250Z;
+              M0 250C600 450 650 100 1300 250V550H0V250Z
+            "
+          />
+        </path>
+      </svg>
+
+      {/* Decorative elements and content */}
+      <div className="absolute bottom-0 right-0 w-[100px] md:w-[200px] h-[100px] md:h-[200px] bg-gray-200 opacity-10 rounded-tl-full"></div>
+      <div className="absolute right-0 bottom-0 w-[150px] md:w-[300px]">
+        <img src="/images/mémé-georgette2.png" alt="Mémé Newsletter" className="w-full h-auto object-cover" />
       </div>
 
-      <div className="max-w-4xl mx-auto text-center text-white">
-        {/* Ajout de la classe d'animation lorsque le H2 devient visible */}
+      <div className="relative max-w-4xl mx-auto text-center text-white z-10 px-4">
         <h2
           ref={h2Ref}
-          className={`text-4xl md:text-4xl leading-tight font-black mb-2 ${isVisible ? 'slide-in-right' : ''}`}
+          className={`text-3xl md:text-4xl leading-tight font-black mb-2 ${isVisible ? 'slide-in-right' : ''}`}
         >
           Avec Mémé Georgette, c&apos;est simple... <br />
           <span className="sloganhero font-light text-sm md:text-xl">
@@ -50,39 +76,44 @@ const Slogan: React.FC = () => {
           </span>
         </h2>
 
-        <div className="flex flex-col md:flex-row justify-around items-center mt-10">
-          <div className="relative mb-6 md:mb-0">
-            <div className="bg-white text-gray-800 rounded-full p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
+        <div className="flex flex-col md:flex-row justify-around items-center mt-10 space-y-6 md:space-y-0 md:space-x-4">
+          <div className="relative w-full md:w-1/3">
+            <div className="bg-white text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
               <h3 className="font-bold text-md md:text-lg">Notre Engagement</h3>
               <p className="text-xs md:text-sm">
                 Nous travaillons main dans la main avec des producteurs locaux pour offrir des vins de qualité.
               </p>
             </div>
-            <div className="absolute -top-3 -right-3 w-8 h-8 md:w-10 md:h-10 bg-black rounded-full"></div>
+            <div className="absolute -top-3 -right-3 w-8 h-8 md:w-10 md:h-10 bg-orange-700 rounded-full"></div>
           </div>
 
-          <div className="relative mb-6 md:mb-0">
-            <div className="bg-white text-gray-800 rounded-full p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
+          <div className="relative w-full md:w-1/3">
+            <div className="bg-white text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
               <h3 className="font-bold text-md md:text-lg">Circuit Court</h3>
               <p className="text-xs md:text-sm">
                 Nos vins sont livrés directement du producteur à votre table, sans intermédiaire.
               </p>
             </div>
-            <div className="absolute -top-3 -left-3 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full"></div>
+            <div className="absolute -top-3 -left-3 w-8 h-8 md:w-10 md:h-10 bg-orange-300 rounded-full"></div>
           </div>
 
-          <div className="relative mb-6 md:mb-0">
-            <div className="bg-white text-gray-800 rounded-full p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
+          <div className="relative w-full md:w-1/3">
+            <div className="bg-white text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
               <h3 className="font-bold text-md md:text-lg">Élan Éco-Responsable</h3>
               <p className="text-xs md:text-sm">
                 Nous nous engageons à respecter l&apos;environnement en choisissant des pratiques durables.
               </p>
             </div>
-            <div className="absolute -bottom-3 -right-3 w-8 h-8 md:w-10 md:h-10 bg-black rounded-full"></div>
+            <div className="absolute -bottom-3 -right-3 w-8 h-8 md:w-10 md:h-10 bg-orange-700 rounded-full"></div>
           </div>
         </div>
         <br />
-        <span className="absolute text-white text-xs block mt-2 right-[28rem]">* en comparaison avec les vins non bio</span>
+        <span className="text-white text-xs block mt-4">* en comparaison avec les vins non bio</span>
+        <span className="text-white text-xs block">L'abus d'alcool est dangereux pour la santé, sachez consommer avec modération. Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.
+
+</span>
+
+
       </div>
     </div>
   );
