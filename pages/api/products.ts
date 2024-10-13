@@ -1,9 +1,18 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios, { AxiosError } from 'axios';
 
+interface Product {
+  id: number;
+  name: string;
+  price: string;
+  // Ajoutez d'autres propriétés selon vos besoins
+}
+
 interface AxiosErrorResponse {
   response?: {
-    data: any; // Remplacez 'any' par un type spécifique si possible
+    data: {
+      message: string; // ou les champs que vous attendez
+    };
   };
   message: string;
 }
@@ -18,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const url = `https://vinsmemegeorgette.wpcomstaging.com/wp-json/wc/v3/products?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`;
 
     try {
-      const response = await axios.get(url);
+      const response = await axios.get<Product[]>(url); // Spécifiez que la réponse est un tableau de produits
       return res.status(200).json(response.data);
     } catch (error) {
       const err = error as AxiosError<AxiosErrorResponse>;
