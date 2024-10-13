@@ -56,7 +56,7 @@ const Header = () => {
           Nos Vins
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
         </a>
-        <a href="/about" className="relative text-white hover:text-orange-500 font-semibold">
+        <a href="https://www.memegeorgette.com/" className="relative text-white hover:text-orange-500 font-semibold">
           Découvrir Mémé Georgette
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
         </a>
