@@ -1,6 +1,12 @@
-// pages/api/products.js
 import { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+
+interface AxiosErrorResponse {
+  response?: {
+    data: any; // Remplacez 'any' par un type spécifique si possible
+  };
+  message: string;
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
@@ -15,10 +21,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const response = await axios.get(url);
       return res.status(200).json(response.data);
     } catch (error) {
-      // Enregistre l'erreur détaillée
-      const err = error as unknown as { response?: { data: any }; message: string };
+      const err = error as AxiosError<AxiosErrorResponse>;
       console.error('Erreur lors de la récupération des produits:', err.response ? err.response.data : err.message);
-      return res.status(500).json({ error: (error as Error).message });
+      return res.status(500).json({ error: err.message });
     }
   } else {
     res.setHeader('Allow', ['GET']);
