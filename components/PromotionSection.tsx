@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useEffect } from 'react';
 
 const PromotionSection = () => {
@@ -30,6 +28,7 @@ const PromotionSection = () => {
   return (
     <div
       className={`bg-white opacity-80 text-center py-4 fixed shadow-sm mt-6 top-20 left-0 w-full z-10 ${isVisible ? 'block' : 'hidden'}`}
+      style={{ overflowX: 'hidden' }} // Empêche le défilement horizontal
     >
       <p className="font-extrabold text-xs text-orange-500 sm:text-xs">
         🍇🚚 Livraison offerte dès 100€ d&apos;achat en France métropolitaine 🚚🍇

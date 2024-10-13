@@ -16,6 +16,8 @@ body {
   margin: 0; /* Évite les marges par défaut */
   padding: 0; /* Évite les paddings par défaut */
   box-sizing: border-box; /* Inclus les paddings et les bordures dans la largeur totale */
+  overflow-x: hidden;
+
 }
 
 html,

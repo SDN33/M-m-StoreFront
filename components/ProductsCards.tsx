@@ -4,7 +4,6 @@ import Image from 'next/image';
 import ProductFilter from '@/components/ProductFilters';
 import FilterTop from './Filtertop';
 
-// Définir une interface pour le produit (ajustez les types selon votre API)
 interface Product {
   id: number;
   name: string;
@@ -37,12 +36,10 @@ const ProductsCards: React.FC = () => {
       try {
         setLoading(true);
         const response = await axios.get('/api/products');
-        console.log(response.data); // Vérifiez la réponse
-        // Assurez-vous que la réponse est un tableau
         if (Array.isArray(response.data)) {
           setProducts(response.data);
         } else {
-          console.error('La réponse de l\'API n\'est pas un tableau', response.data);
+          console.error("La réponse de l'API n'est pas un tableau", response.data);
         }
       } catch (err) {
         console.error('Erreur lors de la récupération des produits', err);
@@ -119,15 +116,22 @@ const ProductsCards: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6">
             {sortedProducts.map(product => (
-              <div key={product.id} className="border p-4 rounded-md shadow-lg">
-                <Image
-                  src={product.images.length > 0 ? product.images[0].src : '/noimage.png'}
-                  alt={product.name}
-                  width={300}
-                  height={200}
-                  className="w-full h-auto object-cover flex items-center justify-center mx-auto my-4"
-                />
-                <h3 className="text-lg font-semibold">{product.name}</h3>
+              <div
+                key={product.id}
+                className="border p-4 rounded-md shadow-lg flex flex-col items-center"
+                style={{ height: '400px', width: '100%' }} // Taille fixe de la carte
+              >
+                <div className="relative w-full h-64 flex items-center justify-center">
+                  <Image
+                    src={product.images.length > 0 ? product.images[0].src : '/noimage.png'}
+                    alt={product.name}
+                    width={100}
+                    height={300}
+                    className="object-contain"
+                    style={{ maxHeight: '100%', maxWidth: '100%' }} // Taille des images
+                  />
+                </div>
+                <h3 className="text-lg font-semibold mt-4">{product.name}</h3>
                 <p className="text-gray-500">{product.category}</p>
                 <p className="text-xl font-bold">{product.price} €</p>
                 <br />
