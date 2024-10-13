@@ -4,24 +4,18 @@ import Image from 'next/image';
 import ProductFilter from '@/components/ProductFilters';
 import FilterTop from './Filtertop';
 
+// Définir une interface pour le produit (ajustez les types selon votre API)
 interface Product {
   id: number;
   name: string;
-  description: string;
-  price: number;
-  images: { src: string }[];
-  vendor: string;
-  millésime: string;
   category: string;
-  region: string;
+  price: number;
   rating: number;
-  certification: string;
   date_added: string;
-  volume: string;
-  grape_varieties: string[];
-  food_pairing: string;
-  conservation: string;
-  comments: string;
+  images: { src: string }[];
+  millésime?: string;
+  certification?: string;
+  region?: string;
 }
 
 const ProductsCards: React.FC = () => {
@@ -43,7 +37,13 @@ const ProductsCards: React.FC = () => {
       try {
         setLoading(true);
         const response = await axios.get('/api/products');
-        setProducts(response.data);
+        console.log(response.data); // Vérifiez la réponse
+        // Assurez-vous que la réponse est un tableau
+        if (Array.isArray(response.data)) {
+          setProducts(response.data);
+        } else {
+          console.error('La réponse de l\'API n\'est pas un tableau', response.data);
+        }
       } catch (err) {
         console.error('Erreur lors de la récupération des produits', err);
       } finally {
@@ -57,9 +57,9 @@ const ProductsCards: React.FC = () => {
   const filterProducts = (product: Product) => {
     return (
       (selectedFilters.color.length === 0 || selectedFilters.color.includes(product.category)) &&
-      (selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region)) &&
-      (selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millésime)) &&
-      (selectedFilters.certification.length === 0 || selectedFilters.certification.includes(product.certification))
+      (selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region || '')) &&
+      (selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millésime || '')) &&
+      (selectedFilters.certification.length === 0 || selectedFilters.certification.includes(product.certification || ''))
     );
   };
 
@@ -115,6 +115,7 @@ const ProductsCards: React.FC = () => {
 
         <div className="flex-grow">
           {loading && <p className="text-orange-500 font-light sloganhero"><br /><br />Chargement des produits...</p>}
+          {sortedProducts.length === 0 && !loading && <p>Aucun produit trouvé.</p>}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6">
             {sortedProducts.map(product => (
