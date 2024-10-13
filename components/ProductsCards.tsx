@@ -7,7 +7,7 @@ import FilterTop from './Filtertop';
 interface Product {
   id: number;
   name: string;
-  category: string;
+  categories: { id: number; name: string }[]; // Catégories du produit
   price: number;
   rating: number;
   date_added: string;
@@ -53,7 +53,7 @@ const ProductsCards: React.FC = () => {
 
   const filterProducts = (product: Product) => {
     return (
-      (selectedFilters.color.length === 0 || selectedFilters.color.includes(product.category)) &&
+      (selectedFilters.color.length === 0 || selectedFilters.color.includes(product.categories[0]?.name || '')) &&
       (selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region || '')) &&
       (selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millésime || '')) &&
       (selectedFilters.certification.length === 0 || selectedFilters.certification.includes(product.certification || ''))
@@ -131,11 +131,21 @@ const ProductsCards: React.FC = () => {
                     style={{ maxHeight: '100%', maxWidth: '100%' }} // Taille des images
                   />
                 </div>
-                <h3 className="text-lg font-semibold mt-4">{product.name}</h3>
-                <p className="text-gray-500">{product.category}</p>
+
+                {/* Titre et catégorie sur la même ligne avec un séparateur */}
+                <h3 className="text-lg font-semibold mt-4 flex justify-center items-center">
+                  {product.name}
+                  {product.categories.length > 0 && (
+                    <>
+                      <span className="mx-2 text-orange-500">|</span> {/* Séparateur stylisé */}
+                      <span className="font-light text-lg">{product.categories[0].name}</span>
+                    </>
+                  )}
+                </h3>
+
                 <p className="text-xl font-bold">{product.price} €</p>
                 <br />
-                <button className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors w-full">
+                <button className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors w-fit font-bold">
                   Commander
                 </button>
               </div>

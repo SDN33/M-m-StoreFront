@@ -8,30 +8,42 @@ interface Product {
   // Ajoutez d'autres propriétés selon vos besoins
 }
 
+interface Category {
+  id: number;
+  name: string;
+  slug: string;
+  // Ajoutez d'autres propriétés selon vos besoins
+}
+
 interface AxiosErrorResponse {
   response?: {
     data: {
-      message: string; // ou les champs que vous attendez
+      message: string;
     };
   };
   message: string;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { method } = req;
+  const { method, query } = req;
 
   if (method === 'GET') {
     const consumerKey = process.env.WC_CONSUMER_KEY;
     const consumerSecret = process.env.WC_CONSUMER_SECRET;
 
-    const url = `https://vinsmemegeorgette.wpcomstaging.com/wp-json/wc/v3/products?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`;
+    // Vérifie si la requête concerne les produits ou les catégories
+    const isCategories = query.type === 'categories';
+
+    const url = isCategories
+      ? `https://vinsmemegeorgette.wpcomstaging.com/wp-json/wc/v3/products/categories?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`
+      : `https://vinsmemegeorgette.wpcomstaging.com/wp-json/wc/v3/products?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`;
 
     try {
-      const response = await axios.get<Product[]>(url); // Spécifiez que la réponse est un tableau de produits
+      const response = await axios.get<Product[] | Category[]>(url);
       return res.status(200).json(response.data);
     } catch (error) {
       const err = error as AxiosError<AxiosErrorResponse>;
-      console.error('Erreur lors de la récupération des produits:', err.response ? err.response.data : err.message);
+      console.error('Erreur lors de la récupération des données:', err.response ? err.response.data.message : err.message);
       return res.status(500).json({ error: err.message });
     }
   } else {
