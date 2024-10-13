@@ -44,7 +44,7 @@ const Footer = () => {
             <h3 className="text-orange-600 font-semibold mb-4">Besoin d&apos;aide ?</h3>
             <ul className="space-y-2">
               <li><a href="/contact" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Nous contacter</a></li>
-              <li><a href="/faq" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Questions fréquentes</a></li>
+              <li><a href="/faq" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">FAQ (Foire aux questions)</a></li>
               <li><a href="/mentions-legales" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Mentions légales</a></li>
               <li><a href="/cgv" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">CGV</a></li>
             </ul>
