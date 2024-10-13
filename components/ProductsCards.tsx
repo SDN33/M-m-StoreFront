@@ -122,9 +122,9 @@ const ProductsCards: React.FC = () => {
                 <Image
                   src={product.images.length > 0 ? product.images[0].src : '/noimage.png'}
                   alt={product.name}
-                  width={100}
+                  width={300}
                   height={200}
-                  className="w-[100px] h-[200px] object-cover flex items-center justify-center mx-auto my-4"
+                  className="w-full h-auto object-cover flex items-center justify-center mx-auto my-4"
                 />
                 <h3 className="text-lg font-semibold">{product.name}</h3>
                 <p className="text-gray-500">{product.category}</p>
