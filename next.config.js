@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['upload.wikimedia.org'], // Ajouter le domaine pour les images
+    domains: ['upload.wikimedia.org', 'i0.wp.com'], // Ajouter "i0.wp.com" pour permettre le chargement des images
   },
   async rewrites() {
     return [

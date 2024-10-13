@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // Importer axios
 import ProductFilter from '@/components/ProductFilters';
 import Image from 'next/image';
 
@@ -21,7 +22,9 @@ interface Product {
 
 const ProductsCards: React.FC = () => {
   const [sortBy, setSortBy] = useState<string>(''); // État pour gérer le tri
-  const [products] = useState<Product[]>([]); // État pour les produits
+  const [products, setProducts] = useState<Product[]>([]); // État pour les produits
+  const [loading, setLoading] = useState(true); // État de chargement
+  const [error, setError] = useState<string | null>(null); // État d'erreur
   const [selectedFilters, setSelectedFilters] = useState({
     color: [] as string[],
     region: [] as string[],
@@ -31,8 +34,23 @@ const ProductsCards: React.FC = () => {
     price: [] as string[],
     volume: [] as string[], // Ajout
   });
-  const [loading] = useState(true); // État de chargement
-  const [error] = useState<string | null>(null); // État d'erreur
+
+  // Récupérer les produits via l'API WooCommerce avec axios
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('/api/products'); // Appel à l'API interne
+        setProducts(response.data); // Mettre à jour l'état des produits
+        setLoading(false);
+      } catch (error) {
+        setError('Erreur lors de la récupération des produits');
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   // Filtrage des produits
   const filterProducts = (product: Product) => {
@@ -128,7 +146,7 @@ const ProductsCards: React.FC = () => {
           </button>
         </div>
 
-        {loading && <p className="text-blue-500">Chargement des produits...</p>}
+        {loading && <p className="text-orange-500 font-light sloganhero"><br /><br />Chargement des produits...</p>}
         {error && <p className="text-red-500">{error}</p>}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -144,8 +162,6 @@ const ProductsCards: React.FC = () => {
               <h3 className="text-lg font-semibold">{product.title}</h3>
               <p className="text-gray-500">{product.description}</p>
               <p className="text-xl font-bold">{product.price} €</p>
-              <p className="text-sm text-gray-400">Note : {product.rating}</p>
-              <p className="text-sm text-gray-400">Certifié : {product.certification}</p>
             </div>
           ))}
         </div>

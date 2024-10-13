@@ -29,7 +29,7 @@ const Newsletter = () => {
         {/* Contenu de la newsletter */}
         <div className="md:w-2/3 p-6 text-center md:text-left">
           <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800">
-            Restez informé des offres de Mémé Georgette !
+            Restez informé des offres <br />de Mémé Georgette !
           </h2>
           <p className="text-orange-500 mb-4">Parole de Mémé, on ne spamme pas.</p>
 
