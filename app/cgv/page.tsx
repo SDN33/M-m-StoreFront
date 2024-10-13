@@ -12,7 +12,7 @@ const CGV: React.FC = () => {
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-4">1. Introduction</h2>
         <p>
-          Les présentes conditions générales de vente régissent les relations contractuelles entre l'acheteur et notre société.
+          Les présentes conditions générales de vente régissent les relations contractuelles entre l&apos;acheteur et notre société.
         </p>
       </section>
 
@@ -33,7 +33,7 @@ const CGV: React.FC = () => {
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-4">4. Livraison</h2>
         <p>
-          La livraison est effectuée à l'adresse indiquée par l'acheteur lors de la commande.
+          La livraison est effectuée à l&apos;adresse indiquée par l&apos;acheteur lors de la commande.
         </p>
       </section>
       <br /><br />

@@ -23,7 +23,7 @@ const MentionsLegales: React.FC = () => {
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-4 text-white">2. Hébergement</h2>
         <p>
-          L'hébergement du site est assuré par Vercel, situé au 340 S Lemon Ave #4133 Walnut, CA 91789 USA.
+          L&apos;hébergement du site est assuré par Vercel, situé au 340 S Lemon Ave #4133 Walnut, CA 91789 USA.
         </p>
       </section>
 
