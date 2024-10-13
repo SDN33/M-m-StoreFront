@@ -4,7 +4,6 @@ import Image from 'next/image';
 import ProductFilter from '@/components/ProductFilters';
 import FilterTop from './Filtertop';
 
-// Définir le type pour un produit
 interface Product {
   id: number;
   name: string;
@@ -26,10 +25,9 @@ interface Product {
 }
 
 const ProductsCards: React.FC = () => {
-  const [sortBy, setSortBy] = useState<string>(''); // État pour gérer le tri
-  const [products, setProducts] = useState<Product[]>([]); // État pour les produits
-  const [loading, setLoading] = useState(true); // État de chargement
-  const [error, setError] = useState<string | null>(null); // État d'erreur
+  const [sortBy, setSortBy] = useState<string>('');
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedFilters, setSelectedFilters] = useState({
     color: [] as string[],
     region: [] as string[],
@@ -40,16 +38,15 @@ const ProductsCards: React.FC = () => {
     volume: [] as string[],
   });
 
-  // Fonction pour récupérer les produits via l'API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('/api/products'); // Appel à l'API interne
+        const response = await axios.get('/api/products');
         setProducts(response.data);
-        setLoading(false);
-      } catch (error) {
-        setError('Erreur lors de la récupération des produits');
+      } catch (err) {
+        console.error('Erreur lors de la récupération des produits', err);
+      } finally {
         setLoading(false);
       }
     };
@@ -57,7 +54,6 @@ const ProductsCards: React.FC = () => {
     fetchProducts();
   }, []);
 
-  // Filtrage des produits en fonction des filtres sélectionnés
   const filterProducts = (product: Product) => {
     return (
       (selectedFilters.color.length === 0 || selectedFilters.color.includes(product.category)) &&
@@ -69,7 +65,6 @@ const ProductsCards: React.FC = () => {
 
   const filteredProducts = products.filter(filterProducts);
 
-  // Tri des produits
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     switch (sortBy) {
       case 'price-asc':
@@ -85,12 +80,10 @@ const ProductsCards: React.FC = () => {
     }
   });
 
-  // Gérer le tri
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy(event.target.value);
   };
 
-  // Gérer les changements de filtre
   const handleCheckboxChange = (filterType: string, selectedOptions: string[]) => {
     setSelectedFilters(prevFilters => ({
       ...prevFilters,
@@ -98,7 +91,6 @@ const ProductsCards: React.FC = () => {
     }));
   };
 
-  // Réinitialiser les filtres
   const resetFilters = () => {
     setSelectedFilters({
       color: [],
@@ -114,19 +106,15 @@ const ProductsCards: React.FC = () => {
 
   return (
     <div className="flex flex-col mr-4 lg:mr-10 md:-mt-8">
-      {/* Composant FilterTop pour le tri et réinitialisation des filtres */}
       <FilterTop sortBy={sortBy} handleSortChange={handleSortChange} resetFilters={resetFilters} />
 
       <div className="flex flex-col md:flex-row mt-4">
-        {/* Composant ProductFilter pour appliquer les filtres */}
         <div className="hidden md:block md:w-1/4">
           <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
         </div>
 
-        {/* Affichage des produits */}
         <div className="flex-grow">
           {loading && <p className="text-orange-500 font-light sloganhero"><br /><br />Chargement des produits...</p>}
-          {error && <p className="text-red-500">{error}</p>}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6">
             {sortedProducts.map(product => (
@@ -134,9 +122,9 @@ const ProductsCards: React.FC = () => {
                 <Image
                   src={product.images.length > 0 ? product.images[0].src : '/noimage.png'}
                   alt={product.name}
-                  width={200}
-                  height={100}
-                  className="w-[100px] h-[200px] object-contain flex items-center justify-center mx-auto my-4"
+                  width={100}
+                  height={200}
+                  className="w-[100px] h-[200px] object-cover flex items-center justify-center mx-auto my-4"
                 />
                 <h3 className="text-lg font-semibold">{product.name}</h3>
                 <p className="text-gray-500">{product.category}</p>
