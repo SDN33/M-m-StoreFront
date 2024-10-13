@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Importer axios
-import ProductFilter from '@/components/ProductFilters';
+import axios from 'axios';
 import Image from 'next/image';
+import ProductFilter from '@/components/ProductFilters';
+import FilterTop from './Filtertop';
 
 // Définir le type pour un produit
 interface Product {
   id: number;
-  title: string;
+  name: string;
   description: string;
   price: number;
   images: { src: string }[];
-  supplier: string; // Nom du fournisseur
-  vintage: string; // Millésime
-  color: string; // Couleur du vin
-  region: string; // Région du vin
-  rating: number; // Note du produit
-  certification: string; // Certification du vin
-  date_added: string; // Date d'ajout du produit
-  volume: string; // Volume du vin
+  vendor: string;
+  millésime: string;
+  category: string;
+  region: string;
+  rating: number;
+  certification: string;
+  date_added: string;
+  volume: string;
+  grape_varieties: string[];
+  food_pairing: string;
+  conservation: string;
+  comments: string;
 }
 
 const ProductsCards: React.FC = () => {
@@ -32,16 +37,16 @@ const ProductsCards: React.FC = () => {
     certification: [] as string[],
     style: [] as string[],
     price: [] as string[],
-    volume: [] as string[], // Ajout
+    volume: [] as string[],
   });
 
-  // Récupérer les produits via l'API WooCommerce avec axios
+  // Fonction pour récupérer les produits via l'API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
         const response = await axios.get('/api/products'); // Appel à l'API interne
-        setProducts(response.data); // Mettre à jour l'état des produits
+        setProducts(response.data);
         setLoading(false);
       } catch (error) {
         setError('Erreur lors de la récupération des produits');
@@ -52,12 +57,12 @@ const ProductsCards: React.FC = () => {
     fetchProducts();
   }, []);
 
-  // Filtrage des produits
+  // Filtrage des produits en fonction des filtres sélectionnés
   const filterProducts = (product: Product) => {
     return (
-      (selectedFilters.color.length === 0 || selectedFilters.color.includes(product.color)) &&
+      (selectedFilters.color.length === 0 || selectedFilters.color.includes(product.category)) &&
       (selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region)) &&
-      (selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.vintage)) &&
+      (selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millésime)) &&
       (selectedFilters.certification.length === 0 || selectedFilters.certification.includes(product.certification))
     );
   };
@@ -102,68 +107,47 @@ const ProductsCards: React.FC = () => {
       certification: [],
       style: [],
       price: [],
-      volume: [], // Ajout
+      volume: [],
     });
     setSortBy('');
   };
 
   return (
-    <div className="flex flex-col md:flex-row">
-      <div className="block md:hidden mb-4">
-        <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
-      </div>
+    <div className="flex flex-col mr-4 lg:mr-10 md:-mt-8">
+      {/* Composant FilterTop pour le tri et réinitialisation des filtres */}
+      <FilterTop sortBy={sortBy} handleSortChange={handleSortChange} resetFilters={resetFilters} />
 
-      <div className="hidden md:block">
-        <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
-      </div>
-
-      <div className="flex-grow">
-        <div className="flex flex-col items-center mb-4 sm:flex-row sm:justify-center md:justify-end mr-4">
-          <div className="flex items-center justify-center mb-2 sm:mb-0">
-            <label className="mr-2 font-bold text-gray-600">+ de 120 vignerons</label>
-            <span className="mx-2 font-bold text-orange-500">| </span>
-            <label className="mr-2 font-bold text-gray-600">+ de 1000 vins</label>
-          </div>
-          <span className="mx-2 font-bold text-orange-500 hidden sm:inline">|</span>
-          <label htmlFor="sortBySelect" className="mr-2 font-bold text-gray-600 hidden sm:inline">Trier par :</label>
-
-          <select
-            id="sortBySelect"
-            value={sortBy}
-            onChange={handleSortChange}
-            className="border rounded px-2 py-1"
-            aria-label="Trier les produits par"
-          >
-            <option value="">Choisir une option</option>
-            <option value="price-asc">Prix croissant</option>
-            <option value="price-desc">Prix décroissant</option>
-            <option value="rating">Note</option>
-            <option value="date-added">Date d&apos;ajout</option>
-          </select>
-
-          <button onClick={resetFilters} className="ml-4 bg-primary hover:bg-orange-700 text-white px-4 py-2 rounded transition duration-300">
-            Réinitialiser les filtres
-          </button>
+      <div className="flex flex-col md:flex-row mt-4">
+        {/* Composant ProductFilter pour appliquer les filtres */}
+        <div className="hidden md:block md:w-1/4">
+          <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
         </div>
 
-        {loading && <p className="text-orange-500 font-light sloganhero"><br /><br />Chargement des produits...</p>}
-        {error && <p className="text-red-500">{error}</p>}
+        {/* Affichage des produits */}
+        <div className="flex-grow">
+          {loading && <p className="text-orange-500 font-light sloganhero"><br /><br />Chargement des produits...</p>}
+          {error && <p className="text-red-500">{error}</p>}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {sortedProducts.map(product => (
-            <div key={product.id} className="border p-4 rounded-md shadow-lg">
-              <Image
-                src={product.images.length > 0 ? product.images[0].src : '/noimage.png'}
-                alt={product.title}
-                width={300}
-                height={200}
-                className="w-20 h-auto object-fill flex items-center justify-center mx-auto my-4"
-              />
-              <h3 className="text-lg font-semibold">{product.title}</h3>
-              <p className="text-gray-500">{product.description}</p>
-              <p className="text-xl font-bold">{product.price} €</p>
-            </div>
-          ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6">
+            {sortedProducts.map(product => (
+              <div key={product.id} className="border p-4 rounded-md shadow-lg">
+                <Image
+                  src={product.images.length > 0 ? product.images[0].src : '/noimage.png'}
+                  alt={product.name}
+                  width={200}
+                  height={100}
+                  className="w-[100px] h-[200px] object-contain flex items-center justify-center mx-auto my-4"
+                />
+                <h3 className="text-lg font-semibold">{product.name}</h3>
+                <p className="text-gray-500">{product.category}</p>
+                <p className="text-xl font-bold">{product.price} €</p>
+                <br />
+                <button className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors w-full">
+                  Commander
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
