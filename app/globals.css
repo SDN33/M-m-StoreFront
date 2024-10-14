@@ -62,3 +62,18 @@ body {
 .slide-in-right {
   animation: slideInFromRight 1s ease-out forwards;
 }
+
+.loader {
+  border: 8px solid #f3f3f3; /* Couleur de fond */
+  border-top: 8px solid #ff5722; /* Couleur de l'animation */
+  border-radius: 50%;
+  width: 40px; /* Taille du loader */
+  height: 40px; /* Taille du loader */
+  animation: spin 1s linear infinite; /* Animation */
+  margin: 20px auto; /* Centre le loader */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

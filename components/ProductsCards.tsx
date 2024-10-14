@@ -145,8 +145,15 @@ const ProductsCards: React.FC = () => {
           <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
         </div>
 
-        <div className="flex-grow">
-          {loading && <p className="text-orange-600 font-light sloganhero"><br /><br />Chargement des vins de Mémé...</p>}
+        <div className="flex-grow mt-10">
+          {loading && (
+            <div className="flex flex-col items-center">
+              <div className="loader"></div> {/* Animation de chargement */}
+              <p className="text-orange-600 font-bold text-lg">
+                Chargement des vins de Mémé...
+              </p>
+            </div>
+          )}
           {sortedProducts.length === 0 && !loading && <p>Aucun produit trouvé.</p>}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6">
