@@ -139,6 +139,7 @@ const ProductsCards: React.FC = () => {
                     <>
                       <span className="mx-2 text-orange-600">|</span> {/* Séparateur stylisé */}
                       <span className="font-light text-lg">{product.categories[0].name}</span>
+                      <span className="mx-2 text-orange-600">|</span> {/* Séparateur stylisé */}
                     </>
                   )}
                 </h3>
