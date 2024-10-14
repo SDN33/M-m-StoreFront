@@ -6,7 +6,7 @@ interface Product {
   name: string;
   price: string; // Assurez-vous que c'est un nombre, sinon convertissez-le
   meta: { [key: string]: string }; // Ajoutez un champ meta pour les métadonnées
-  sellerName?: string; // Ajoutez un champ pour le nom du vendeur
+  brandname?: string; // Remplacez sellerName par brandname
   meta_data: { key: string; value: string }[]; // Ajoutez la propriété meta_data
 }
 
@@ -28,21 +28,21 @@ interface AxiosErrorResponse {
 
 const transformMetaData = (metaData: any[]): { [key: string]: string } => {
   const productData: { [key: string]: string } = {};
-  let sellerName = '';
+  let brandname = ''; // Remplacer sellerName par brandname
 
   metaData.forEach(item => {
     const { key, value } = item;
 
-    // Vérifier si l'élément est le nom du vendeur
+    // Vérifier si l'élément est le nom de la marque
     if (key === 'nom') {
-      sellerName = value; // Récupérer le nom du vendeur
+      brandname = value; // Récupérer le nom de la marque
     }
 
     const cleanKey = key.startsWith('_') ? key.slice(1) : key; // Enlève le préfixe "_" si présent
     productData[cleanKey] = value; // Ajoute les métadonnées au produit
   });
 
-  return { ...productData, sellerName }; // Retourner les données et le nom du vendeur
+  return { ...productData, brandname }; // Retourner les données et le nom de la marque
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -80,11 +80,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (!isCategories) {
         productsOrCategories = (productsOrCategories as Product[]).map(product => {
           const { meta_data } = product; // Supposons que meta_data est une propriété de chaque produit
-          const { sellerName, ...meta } = transformMetaData(meta_data); // Transformer les métadonnées
+          const { brandname, ...meta } = transformMetaData(meta_data); // Transformer les métadonnées
           return {
             ...product,
             meta, // Ajouter les métadonnées au produit
-            sellerName, // Ajouter le nom du vendeur
+            brandname, // Ajouter le nom de la marque
           };
         });
       }

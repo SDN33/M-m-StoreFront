@@ -16,7 +16,8 @@ interface Product {
   millésime?: string;
   certification?: string;
   region?: string;
-  meta_data?: { id: number; key: string; value: string }[]; // Ajoutez cela pour inclure les meta_data
+  brandname?: string; // Assurez-vous que cette propriété existe
+  meta_data?: { id: number; key: string; value: string }[];
 }
 
 const ProductsCards: React.FC = () => {
@@ -75,7 +76,7 @@ const ProductsCards: React.FC = () => {
     return isPriceMatch && isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch;
   };
 
-  const filteredProducts = useMemo(() => products.filter(filterProducts), [products, selectedFilters]);
+  const filteredProducts = useMemo(() => products.filter(filterProducts), [products, selectedFilters, filterProducts]);
 
   const sortProducts = (products: Product[], sortBy: string) => {
     switch (sortBy) {
@@ -116,13 +117,6 @@ const ProductsCards: React.FC = () => {
       volume: [],
     });
     setSortBy('');
-  };
-
-  // Fonction pour récupérer le nom du vendeur à partir de meta_data
-  const getSellerName = (product: Product) => {
-    // Cherchez dans meta_data pour la clé "nom" sans se soucier de l'ID
-    const sellerMeta = product.meta_data?.find(meta => meta.key === "nom");
-    return sellerMeta ? sellerMeta.value : "Vendeur inconnu"; // Retourne "Vendeur inconnu" si pas trouvé
   };
 
   return (
@@ -179,7 +173,7 @@ const ProductsCards: React.FC = () => {
                   </div>
                 </div>
                 {product.categories.length > 0 && (
-                  <p className="text-sm">{getSellerName(product)} | {product.categories[0].name}</p>
+                  <p className="text-sm">{product.brandname || "Marque inconnue"} | {product.categories[0].name}</p>
                 )}
                 <h3 className="text-lg font-semibold mb-1">{product.name}</h3>
 
