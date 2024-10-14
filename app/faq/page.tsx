@@ -71,7 +71,7 @@ export default function Faq() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-orange-600 px-4">
       <div className="max-w-md w-full bg-white p-6 sm:p-8 shadow-lg rounded-lg mt-12">
-        <h1 className="text-3xl font-bold text-orange-600 mb-6">Foire Aux Questions (FAQ)</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-6 text-orange-600">Foire Aux Questions (FAQ)</h1>
 
         {/* Input de recherche */}
         <input

@@ -22,7 +22,7 @@ const ContactPage: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-orange-600 px-4">
       <div className="max-w-md w-full bg-white p-6 sm:p-8 shadow-lg rounded-lg mt-12">
-        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-6 text-orange-600">
           Contactez-nous
         </h1>
         <h2 className="text-gray-600 text-center mb-6">
