@@ -26,11 +26,11 @@ interface AxiosErrorResponse {
   message: string;
 }
 
-const transformMetaData = (metaData: any[]): { [key: string]: string } => {
+const transformMetaData = (metaData: { key: string; value: string }[]): { [key: string]: string } => {
   const productData: { [key: string]: string } = {};
   let brandname = ''; // Remplacer sellerName par brandname
 
-  metaData.forEach(item => {
+  metaData.forEach((item: { key: string; value: string }) => {
     const { key, value } = item;
 
     // Vérifier si l'élément est le nom de la marque
