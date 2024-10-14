@@ -32,7 +32,6 @@ const Filtertop: React.FC<FiltertopProps> = ({ sortBy, handleSortChange, resetFi
         <option value="price-asc">Prix croissant</option>
         <option value="price-desc">Prix décroissant</option>
         <option value="rating">Note</option>
-        <option value="date-added">Date d&apos;ajout</option>
       </select>
 
       <button

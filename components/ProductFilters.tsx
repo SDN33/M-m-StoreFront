@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 interface ProductFilterProps {
-  selectedFilters?: {
+  selectedFilters: {
     color: string[];
     region: string[];
     vintage: string[];
     certification: string[];
     style: string[];
-    price: string[]; // Gestion des prix
     volume: string[];
   };
-  onFilterChange?: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
+  onFilterChange: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
 }
 
 const getFilterTitle = (filterType: string) => {
@@ -21,23 +20,14 @@ const getFilterTitle = (filterType: string) => {
     vintage: 'Millésime',
     certification: 'Certification',
     style: 'Style',
-    price: 'Prix', // Titre pour le filtre de prix
     volume: 'Volume',
   };
   return titles[filterType] || filterType;
 };
 
 const ProductFilter: React.FC<ProductFilterProps> = ({
-  selectedFilters = {
-    color: [],
-    region: [],
-    vintage: [],
-    certification: [],
-    style: [],
-    price: [], // Initialisation du filtre de prix
-    volume: [],
-  },
-  onFilterChange = () => {},
+  selectedFilters,
+  onFilterChange,
 }) => {
   const [openSections, setOpenSections] = useState<string[]>(['color']);
 
@@ -53,7 +43,6 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     vintage: ['2018', '2019', '2020', '2021', '2022'],
     certification: ['Bio', 'Biodynamie', 'En conversion'],
     style: ['Charpenté', 'Fruité', 'Moelleux', 'Corsé', 'Sec'],
-    price: ['0-10 €', '10-20 €', '20-30 €', '30-40 €', '40-50 €', '50-60 €', '60-70 €', '70-80 €', '80-90 €', '90 et +'], // Options pour le filtre de prix
     volume: ['75cl', '1L', 'Autres'],
   };
 
@@ -102,12 +91,12 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                 {options.map((option) => (
                   <label
                     key={option}
-                    className=" text-white flex items-center space-x-2 py-2 cursor-pointer hover:bg-white/5 px-2 rounded transition-colors"
+                    className="text-white flex items-center space-x-2 py-2 cursor-pointer hover:bg-white/5 px-2 rounded transition-colors"
                   >
                     <input
                       type="checkbox"
                       checked={(
-                        (selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']] as string[] || []).includes(option)
+                        (selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']] || []).includes(option)
                       )}
                       onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
                       className="w-4 h-4 rounded border-white/20 text-orange-600 focus:ring-orange-600"

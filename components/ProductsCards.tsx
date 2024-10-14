@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
 import ProductFilter from '@/components/ProductFilters';
 import FilterTop from './Filtertop';
-import ProductsIntro from './ProductIntro';
 
 interface Product {
   id: number;
@@ -23,14 +22,22 @@ const ProductsCards: React.FC = () => {
   const [sortBy, setSortBy] = useState<string>('');
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedFilters, setSelectedFilters] = useState({
-    color: [] as string[],
-    region: [] as string[],
-    vintage: [] as string[],
-    certification: [] as string[],
-    style: [] as string[],
-    price: [] as string[],
-    volume: [] as string[],
+  const [selectedFilters, setSelectedFilters] = useState<{
+    color: string[];
+    region: string[];
+    vintage: string[];
+    certification: string[];
+    style: string[];
+    price: string[];
+    volume: string[];
+  }>({
+    color: [],
+    region: [],
+    vintage: [],
+    certification: [],
+    style: [],
+    price: [],
+    volume: [],
   });
 
   useEffect(() => {
@@ -54,30 +61,37 @@ const ProductsCards: React.FC = () => {
   }, []);
 
   const filterProducts = (product: Product) => {
-    return (
-      (selectedFilters.color.length === 0 || selectedFilters.color.includes(product.categories[0]?.name || '')) &&
-      (selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region || '')) &&
-      (selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millésime || '')) &&
-      (selectedFilters.certification.length === 0 || selectedFilters.certification.includes(product.certification || ''))
-    );
+    const isPriceMatch = (selectedFilters.price.length === 0 || selectedFilters.price.some(range => {
+      const [min, max] = range.split('-').map(Number);
+      return product.price >= min && product.price <= max;
+    }));
+
+    const isColorMatch = selectedFilters.color.length === 0 || selectedFilters.color.includes(product.categories[0]?.name || '');
+    const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region || '');
+    const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millésime || '');
+    const isCertificationMatch = selectedFilters.certification.length === 0 || selectedFilters.certification.includes(product.certification || '');
+
+    return isPriceMatch && isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch;
   };
 
-  const filteredProducts = products.filter(filterProducts);
+  const filteredProducts = useMemo(() => products.filter(filterProducts), [products, selectedFilters]);
 
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
+  const sortProducts = (products: Product[], sortBy: string) => {
     switch (sortBy) {
       case 'price-asc':
-        return a.price - b.price;
+        return products.sort((a, b) => a.price - b.price);
       case 'price-desc':
-        return b.price - a.price;
+        return products.sort((a, b) => b.price - a.price);
       case 'rating':
-        return b.rating - a.rating;
+        return products.sort((a, b) => b.rating - a.rating);
       case 'date-added':
-        return new Date(b.date_added).getTime() - new Date(a.date_added).getTime();
+        return products.sort((a, b) => new Date(b.date_added).getTime() - new Date(a.date_added).getTime());
       default:
-        return 0;
+        return products;
     }
-  });
+  };
+
+  const sortedProducts = sortProducts(filteredProducts, sortBy);
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy(event.target.value);
@@ -160,7 +174,6 @@ const ProductsCards: React.FC = () => {
                   <p className="text-sm"> | {product.categories[0].name}</p>
                 )}
                 <h3 className="text-lg font-semibold mb-1">{product.name}</h3>
-
 
                 <div className="flex items-center mb-2 mx-auto">
                   {[...Array(5)].map((_, i) => (
