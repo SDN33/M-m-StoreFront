@@ -8,8 +8,8 @@ interface ProductFilterProps {
     vintage: string[];
     certification: string[];
     style: string[];
-    price: string[];
-    volume: string[]; // Ajout du champ volume
+    price: string[]; // Gestion des prix
+    volume: string[];
   };
   onFilterChange?: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
 }
@@ -21,8 +21,8 @@ const getFilterTitle = (filterType: string) => {
     vintage: 'Millésime',
     certification: 'Certification',
     style: 'Style',
-    price: 'Prix',
-    volume: 'Volume', // Titre pour le volume
+    price: 'Prix', // Titre pour le filtre de prix
+    volume: 'Volume',
   };
   return titles[filterType] || filterType;
 };
@@ -34,8 +34,8 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     vintage: [],
     certification: [],
     style: [],
-    price: [],
-    volume: [], // Initialisation du volume
+    price: [], // Initialisation du filtre de prix
+    volume: [],
   },
   onFilterChange = () => {},
 }) => {
@@ -53,8 +53,8 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     vintage: ['2018', '2019', '2020', '2021', '2022'],
     certification: ['Bio', 'Biodynamie', 'En conversion'],
     style: ['Charpenté', 'Fruité', 'Moelleux', 'Corsé', 'Sec'],
-    price: ['0-10 €', '10-20 €', '20-30 €', '30-40 €', '40-50 €', '50-60 €', '60-70 €', '70-80 €', '80-90 €', '90 et +'],
-    volume: ['75cl', '1L', 'Autres'], // Ajout des options de volume
+    price: ['0-10 €', '10-20 €', '20-30 €', '30-40 €', '40-50 €', '50-60 €', '60-70 €', '70-80 €', '80-90 €', '90 et +'], // Options pour le filtre de prix
+    volume: ['75cl', '1L', 'Autres'],
   };
 
   const toggleSection = (section: string) => {
@@ -74,18 +74,12 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
   return (
     <div className="relative max-w-sm w-60 rounded-lg shadow-lg overflow-hidden hidden md:block">
-      <div
-        className="absolute inset-0 bg-white/20"
-        style={{
-          backgroundImage: `
-
-             `,
-          backgroundSize: '100px 100px',
-        }}
-      ></div>
+      <div className="absolute inset-0 bg-orange-600"></div>
 
       <div className="relative">
-        <p className="mt-4 px-4 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white h-[1.5rem]">Trier nos vins: </p>
+        <p className="mt-4 px-4  text-white h-[1.5rem]">
+          Trier nos vins:
+        </p>
         <br />
         {Object.entries(filterOptions).map(([filterType, options]) => (
           <div key={filterType} className="border-b border-white/10 last:border-b-0">
@@ -94,11 +88,10 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
               className="w-full px-4 py-3 flex items-center justify-between hover:bg-white/10 transition-colors"
             >
               <div className="flex items-center gap-2">
-                <span className="text-2xl"> {/* Add your icon here */} </span>
-                <span className="font-semibold">{getFilterTitle(filterType)}</span>
+                <span className="font-semibold text-white">{getFilterTitle(filterType)}</span>
               </div>
               {openSections.includes(filterType) ? (
-                <ChevronUp className="w-4 h-4 text-" />
+                <ChevronUp className="w-4 h-4" />
               ) : (
                 <ChevronDown className="w-4 h-4" />
               )}
@@ -109,7 +102,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                 {options.map((option) => (
                   <label
                     key={option}
-                    className="flex items-center space-x-2 py-2 cursor-pointer hover:bg-white/5 px-2 rounded transition-colors"
+                    className="text-white flex items-center space-x-2 py-2 cursor-pointer hover:bg-white/5 px-2 rounded transition-colors"
                   >
                     <input
                       type="checkbox"

@@ -115,7 +115,7 @@ const Header = () => {
             placeholder="Rechercher un vin..."
             className="pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-gray-800"
           />
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white w-6 h-6 bg-orange-600 border border-spacing-4 border-orange-600 rounded-full" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800 w-6 h-6" />
         </div>
 
         {/* User Account */}
