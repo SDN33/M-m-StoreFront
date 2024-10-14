@@ -75,18 +75,17 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   return (
     <div className="relative max-w-sm w-80 rounded-lg shadow-lg overflow-hidden hidden md:block">
       <div
-        className="absolute inset-0 bg-orange-500"
+        className="absolute inset-0 bg-orange-600"
         style={{
           backgroundImage: `
-               radial-gradient(circle at 20px 20px, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 2px, transparent 2px),
-               radial-gradient(circle at 40px 70px, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 4px, transparent 4px)
+
              `,
           backgroundSize: '100px 100px',
         }}
       ></div>
 
       <div className="relative">
-        <p className="mt-4 px-4 text-sm font-medium text-white">Trier nos vins: </p>
+        <p className="mt-4 px-4 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white h-[1.5rem]">Trier nos vins: </p>
         <br />
         {Object.entries(filterOptions).map(([filterType, options]) => (
           <div key={filterType} className="border-b border-white/10 last:border-b-0">
@@ -118,7 +117,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                         (selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']] as string[] || []).includes(option)
                       )}
                       onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
-                      className="w-4 h-4 rounded border-white/20 text-orange-600 focus:ring-orange-500"
+                      className="w-4 h-4 rounded border-white/20 text-orange-600 focus:ring-orange-600"
                     />
                     <span className="text-sm text-white">{option}</span>
                   </label>

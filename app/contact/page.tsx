@@ -20,7 +20,7 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-orange-500 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-orange-600 px-4">
       <div className="max-w-md w-full bg-white p-6 sm:p-8 shadow-lg rounded-lg mt-12">
         <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-6">
           Contactez-nous
@@ -36,7 +36,7 @@ const ContactPage: React.FC = () => {
             <input
               type="text"
               id="name"
-              className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:border-orange-500"
+              className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:border-orange-600"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -50,7 +50,7 @@ const ContactPage: React.FC = () => {
             <input
               type="email"
               id="email"
-              className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:border-orange-500"
+              className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:border-orange-600"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -63,7 +63,7 @@ const ContactPage: React.FC = () => {
             </label>
             <textarea
               id="message"
-              className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:border-orange-500"
+              className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:border-orange-600"
               rows={4}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
@@ -73,7 +73,7 @@ const ContactPage: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition-colors"
+            className="w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-600 transition-colors"
           >
             Envoyer
           </button>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const CGV: React.FC = () => {
   return (
-    <div className="container text-center mx-auto px-4 min-h-[200vh] mt-16 bg-orange-500 text-white"> {/* Ajout de mt-16 pour l'espacement */}
+    <div className="container text-center mx-auto px-4 min-h-[200vh] mt-16 bg-orange-600 text-white"> {/* Ajout de mt-16 pour l'espacement */}
       <br /><br />
       <br /><br />
       <br /><br />

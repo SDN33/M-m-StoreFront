@@ -30,7 +30,7 @@ const Slogan: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative bg-orange-500 py-10 md:py-20 min-h-[750px] md:min-h-[400px] overflow-hidden">
+    <div className="relative bg-orange-600 py-10 md:py-20 min-h-[750px] md:min-h-[400px] overflow-hidden">
       {/* SVG Background */}
       <svg
         xmlns="http://www.w3.org/2000/svg"

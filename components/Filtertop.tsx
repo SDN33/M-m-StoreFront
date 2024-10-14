@@ -10,14 +10,14 @@ const Filtertop: React.FC<FiltertopProps> = ({ sortBy, handleSortChange, resetFi
   return (
     <div className="flex flex-col items-center mb-4 sm:flex-row sm:justify-center md:justify-end mr-4">
       <div className="flex items-center justify-center mb-2 sm:mb-0">
-        <label className="mr-2 font-bold text-gray-600">+ de 120 vignerons</label>
-        <span className="mx-2 font-bold text-orange-500">| </span>
-        <label className="mr-2 font-bold text-gray-600">+ de 1000 vins</label>
+        <label className="mr-2 font-bold text-gray-800">+ de 120 vignerons</label>
+        <span className="mx-2 font-bold text-orange-600">| </span>
+        <label className="mr-2 font-bold text-gray-800">+ de 1000 vins</label>
       </div>
 
-      <span className="mx-2 font-bold text-orange-500 hidden sm:inline">|</span>
+      <span className="mx-2 font-bold text-orange-600 hidden sm:inline">|</span>
 
-      <label htmlFor="sortBySelect" className="mr-2 font-bold text-gray-600 hidden sm:inline">
+      <label htmlFor="sortBySelect" className="mr-2 font-bold text-gray-800 hidden sm:inline">
         Trier par :
       </label>
 
@@ -37,7 +37,7 @@ const Filtertop: React.FC<FiltertopProps> = ({ sortBy, handleSortChange, resetFi
 
       <button
         onClick={resetFilters}
-        className="ml-4 bg-primary hover:bg-orange-700 text-white px-4 py-2 rounded transition duration-300"
+        className="ml-4 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white  px-4 py-2 rounded transition duration-300"
       >
         Réinitialiser les filtres
       </button>

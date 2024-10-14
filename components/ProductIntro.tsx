@@ -71,7 +71,7 @@ const ProductsIntro: React.FC = () => {
 
       {/* Texte au centre avec espacement */}
       <div className="flex items-center space-x-2 text-center md:text-left md:pr-80" ref={textRef}>
-        <h3 className="text-2xl md:text-3xl font-extrabold text-orange-500 tracking-tight ml-26">
+        <h3 className="text-2xl md:text-3xl font-extrabold text-orange-600 tracking-tight ml-26">
           Découvrez nos vins Bio et Biodynamie <br /><div className="text-gray-800 flex items-center space-x-2 text-center md:text-left md:pr-20 text-sm">* Livraison offerte dès 100€ d&apos;achat</div>
 
         </h3>

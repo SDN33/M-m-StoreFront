@@ -69,9 +69,9 @@ export default function Faq() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-orange-500 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-orange-600 px-4">
       <div className="max-w-md w-full bg-white p-6 sm:p-8 shadow-lg rounded-lg mt-12">
-        <h1 className="text-3xl font-bold text-orange-500 mb-6">Foire Aux Questions (FAQ)</h1>
+        <h1 className="text-3xl font-bold text-orange-600 mb-6">Foire Aux Questions (FAQ)</h1>
 
         {/* Input de recherche */}
         <input
@@ -79,7 +79,7 @@ export default function Faq() {
           value={searchTerm}
           onChange={handleSearch}
           placeholder="Entrez votre question..."
-          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-600"
         />
 
         {/* Affichage de la réponse filtrée */}

@@ -52,7 +52,7 @@ const HeroBanner = () => {
 
       {/* Boutons alignés en bas uniquement pour mobile */}
       <div className="flex flex-col items-center gap-3 justify-center mb-4 z-10 md:hidden pt-10">
-        <button className="shadow-lg bg-orange-500 text-white px-6 py-3 rounded-full font-medium flex items-center hover:bg-orange-800 hover:text-white transition-colors text-sm">
+        <button className="shadow-lg bg-orange-600 text-white px-6 py-3 rounded-full font-medium flex items-center hover:bg-orange-800 hover:text-white transition-colors text-sm">
           Notre Cave
           <span className="ml-2">➜</span>
         </button>
@@ -72,7 +72,7 @@ const HeroBanner = () => {
 
       {/* Les boutons pour la version ordinateur */}
       <div className="hidden md:flex items-center gap-3 justify-center mt-12 z-10">
-        <button className="shadow-lg bg-orange-500 text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-medium flex items-center hover:bg-orange-800 hover:text-white transition-colors text-sm md:text-base">
+        <button className="shadow-lg bg-orange-600 text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-medium flex items-center hover:bg-orange-800 hover:text-white transition-colors text-sm md:text-base">
           Notre Cave
           <span className="ml-2">➜</span>
         </button>

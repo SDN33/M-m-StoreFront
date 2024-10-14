@@ -31,7 +31,7 @@ const Newsletter = () => {
           <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800">
             Restez informé des offres <br />de Mémé Georgette !
           </h2>
-          <p className="text-orange-500 mb-4">Parole de Mémé, on ne spamme pas.</p>
+          <p className="text-orange-600 mb-4">Parole de Mémé, on ne spamme pas.</p>
 
           <form onSubmit={handleSubscribe} className="mb-4">
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
@@ -43,12 +43,12 @@ const Newsletter = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full p-3 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  className="w-full p-3 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-600"
                 />
               </div>
               <button
                 type="submit"
-                className="bg-orange-500 text-white py-3 px-6 rounded-md hover:bg-orange-600 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50"
+                className="bg-orange-600 text-white py-3 px-6 rounded-md hover:bg-orange-600 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-opacity-50"
               >
                 S&apos;inscrire
               </button>

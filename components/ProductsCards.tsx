@@ -111,7 +111,7 @@ const ProductsCards: React.FC = () => {
         </div>
 
         <div className="flex-grow">
-          {loading && <p className="text-orange-500 font-light sloganhero"><br /><br />Chargement des produits...</p>}
+          {loading && <p className="text-orange-600 font-light sloganhero"><br /><br />Chargement des produits...</p>}
           {sortedProducts.length === 0 && !loading && <p>Aucun produit trouvé.</p>}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6">
@@ -137,7 +137,7 @@ const ProductsCards: React.FC = () => {
                   {product.name}
                   {product.categories.length > 0 && (
                     <>
-                      <span className="mx-2 text-orange-500">|</span> {/* Séparateur stylisé */}
+                      <span className="mx-2 text-orange-600">|</span> {/* Séparateur stylisé */}
                       <span className="font-light text-lg">{product.categories[0].name}</span>
                     </>
                   )}
@@ -145,7 +145,7 @@ const ProductsCards: React.FC = () => {
 
                 <p className="text-xl font-bold">{product.price} €</p>
                 <br />
-                <button className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors w-fit font-bold">
+                <button className="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors w-fit font-bold">
                   Commander
                 </button>
               </div>
