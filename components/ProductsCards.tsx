@@ -8,7 +8,7 @@ import FilterTop from './Filtertop';
 interface Product {
   id: number;
   name: string;
-  categories: { id: number; name: string }[]; // Catégories du produit
+  categories: { id: number; name: string }[];
   price: number;
   rating: number;
   date_added: string;
@@ -16,6 +16,7 @@ interface Product {
   millésime?: string;
   certification?: string;
   region?: string;
+  meta_data?: { id: number; key: string; value: string }[]; // Ajoutez cela pour inclure les meta_data
 }
 
 const ProductsCards: React.FC = () => {
@@ -117,6 +118,13 @@ const ProductsCards: React.FC = () => {
     setSortBy('');
   };
 
+  // Fonction pour récupérer le nom du vendeur à partir de meta_data
+  const getSellerName = (product: Product) => {
+    // Cherchez dans meta_data pour la clé "nom" sans se soucier de l'ID
+    const sellerMeta = product.meta_data?.find(meta => meta.key === "nom");
+    return sellerMeta ? sellerMeta.value : "Vendeur inconnu"; // Retourne "Vendeur inconnu" si pas trouvé
+  };
+
   return (
     <div className="flex flex-col mr-4 lg:mr-16 md:-mt-8">
       <FilterTop sortBy={sortBy} handleSortChange={handleSortChange} resetFilters={resetFilters} />
@@ -171,7 +179,7 @@ const ProductsCards: React.FC = () => {
                   </div>
                 </div>
                 {product.categories.length > 0 && (
-                  <p className="text-sm"> | {product.categories[0].name}</p>
+                  <p className="text-sm">{getSellerName(product)} | {product.categories[0].name}</p>
                 )}
                 <h3 className="text-lg font-semibold mb-1">{product.name}</h3>
 
@@ -185,8 +193,8 @@ const ProductsCards: React.FC = () => {
                 <p className="text-sm mb-2">{product.region}</p>
                 <p className="text-sm mb-4">{product.millésime}</p>
 
-                <button className="mt-auto bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors w-fit font-bold mx-auto">
-                  Commander
+                <button className="mt-auto bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700">
+                  Ajouter au panier
                 </button>
               </div>
             ))}

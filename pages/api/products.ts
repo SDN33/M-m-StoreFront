@@ -5,7 +5,9 @@ interface Product {
   id: number;
   name: string;
   price: string; // Assurez-vous que c'est un nombre, sinon convertissez-le
-  // Ajoutez d'autres propriétés selon vos besoins
+  meta: { [key: string]: string }; // Ajoutez un champ meta pour les métadonnées
+  sellerName?: string; // Ajoutez un champ pour le nom du vendeur
+  meta_data: { key: string; value: string }[]; // Ajoutez la propriété meta_data
 }
 
 interface Category {
@@ -23,6 +25,25 @@ interface AxiosErrorResponse {
   };
   message: string;
 }
+
+const transformMetaData = (metaData: any[]): { [key: string]: string } => {
+  const productData: { [key: string]: string } = {};
+  let sellerName = '';
+
+  metaData.forEach(item => {
+    const { key, value } = item;
+
+    // Vérifier si l'élément est le nom du vendeur
+    if (key === 'nom') {
+      sellerName = value; // Récupérer le nom du vendeur
+    }
+
+    const cleanKey = key.startsWith('_') ? key.slice(1) : key; // Enlève le préfixe "_" si présent
+    productData[cleanKey] = value; // Ajoute les métadonnées au produit
+  });
+
+  return { ...productData, sellerName }; // Retourner les données et le nom du vendeur
+};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, query } = req;
@@ -53,6 +74,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return productPrice >= min && (max === Infinity || productPrice < max);
           });
         }
+      }
+
+      // Si ce n'est pas une catégorie, transformer les métadonnées
+      if (!isCategories) {
+        productsOrCategories = (productsOrCategories as Product[]).map(product => {
+          const { meta_data } = product; // Supposons que meta_data est une propriété de chaque produit
+          const { sellerName, ...meta } = transformMetaData(meta_data); // Transformer les métadonnées
+          return {
+            ...product,
+            meta, // Ajouter les métadonnées au produit
+            sellerName, // Ajouter le nom du vendeur
+          };
+        });
       }
 
       res.status(200).json(productsOrCategories);
