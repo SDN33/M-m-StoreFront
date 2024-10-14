@@ -20,6 +20,23 @@ interface Product {
   meta_data?: { id: number; key: string; value: string }[];
 }
 
+const getCategoryColor = (categoryName: string) => {
+  switch (categoryName.toLowerCase()) {
+    case 'rouge':
+      return 'bg-red-600'; // Rouge
+    case 'blanc':
+      return 'bg-yellow-300'; // Blanc
+    case 'rosé':
+      return 'bg-pink-400'; // Rosé
+    case 'pétillant':
+      return 'bg-blue-400'; // Pétillant
+    case 'liquoreux':
+      return 'bg-purple-400'; // Liquoreux
+    default:
+      return 'bg-orange-500'; // Couleur par défaut
+  }
+};
+
 const ProductsCards: React.FC = () => {
   const [sortBy, setSortBy] = useState<string>('');
   const [products, setProducts] = useState<Product[]>([]);
@@ -76,7 +93,7 @@ const ProductsCards: React.FC = () => {
     return isPriceMatch && isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch;
   };
 
-  const filteredProducts = useMemo(() => products.filter(filterProducts), [products, selectedFilters, filterProducts]);
+  const filteredProducts = useMemo(() => products.filter(filterProducts), [products, selectedFilters]);
 
   const sortProducts = (products: Product[], sortBy: string) => {
     switch (sortBy) {
@@ -129,7 +146,7 @@ const ProductsCards: React.FC = () => {
         </div>
 
         <div className="flex-grow">
-          {loading && <p className="text-orange-600 font-light sloganhero"><br /><br />Chargement des produits...</p>}
+          {loading && <p className="text-orange-600 font-light sloganhero"><br /><br />Chargement des vins de Mémé...</p>}
           {sortedProducts.length === 0 && !loading && <p>Aucun produit trouvé.</p>}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6">
@@ -147,12 +164,14 @@ const ProductsCards: React.FC = () => {
                       </div>
                     )}
                     {product.categories.map(category => (
-                      <div key={category.id} className="w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center">
+                      <div key={category.id} className={`w-6 h-6 rounded-full ${getCategoryColor(category.name)} flex items-center justify-center`}>
                         <span className="text-white text-xs">{category.name.substring(0, 3)}</span>
                       </div>
                     ))}
                   </div>
-                  <span className="text-3xl font-bold">{product.price} €</span>
+                  <span className="flex flex-col">
+                    <span className="text-3xl font-bold">{Math.floor(product.price)}<span className="text-sm">{(product.price % 1).toFixed(2).substring(2)} €</span></span>
+                  </span>
                 </div>
 
                 <div className="relative w-full h-48 mb-4">
