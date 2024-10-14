@@ -7,6 +7,7 @@ interface Product {
   price: string; // Assurez-vous que c'est un nombre, sinon convertissez-le
   meta: { [key: string]: string }; // Ajoutez un champ meta pour les métadonnées
   brandname?: string; // Remplacez sellerName par brandname
+  millesime?: string; // Ajoutez la propriété millésime
   meta_data: { key: string; value: string }[]; // Ajoutez la propriété meta_data
 }
 
@@ -29,6 +30,7 @@ interface AxiosErrorResponse {
 const transformMetaData = (metaData: { key: string; value: string }[]): { [key: string]: string } => {
   const productData: { [key: string]: string } = {};
   let brandname = ''; // Remplacer sellerName par brandname
+  let millesime = ''; // Nouvelle variable pour le millésime
 
   metaData.forEach((item: { key: string; value: string }) => {
     const { key, value } = item;
@@ -38,11 +40,16 @@ const transformMetaData = (metaData: { key: string; value: string }[]): { [key: 
       brandname = value; // Récupérer le nom de la marque
     }
 
+    // Vérifier si l'élément est le millésime
+    if (key === 'millesime') {
+      millesime = value; // Récupérer le millésime
+    }
+
     const cleanKey = key.startsWith('_') ? key.slice(1) : key; // Enlève le préfixe "_" si présent
     productData[cleanKey] = value; // Ajoute les métadonnées au produit
   });
 
-  return { ...productData, brandname }; // Retourner les données et le nom de la marque
+  return { ...productData, brandname, millesime }; // Retourner les données, le nom de la marque et le millésime
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -80,11 +87,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (!isCategories) {
         productsOrCategories = (productsOrCategories as Product[]).map(product => {
           const { meta_data } = product; // Supposons que meta_data est une propriété de chaque produit
-          const { brandname, ...meta } = transformMetaData(meta_data); // Transformer les métadonnées
+          const { brandname, millesime, ...meta } = transformMetaData(meta_data); // Transformer les métadonnées
           return {
             ...product,
             meta, // Ajouter les métadonnées au produit
             brandname, // Ajouter le nom de la marque
+            millesime, // Ajouter le millésime
           };
         });
       }

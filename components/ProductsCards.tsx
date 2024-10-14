@@ -13,7 +13,7 @@ interface Product {
   rating: number;
   date_added: string;
   images: { src: string }[];
-  millésime?: string;
+  millesime?: string;
   certification?: string;
   region?: string;
   brandname?: string; // Assurez-vous que cette propriété existe
@@ -87,7 +87,7 @@ const ProductsCards: React.FC = () => {
 
     const isColorMatch = selectedFilters.color.length === 0 || selectedFilters.color.includes(product.categories[0]?.name || '');
     const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region || '');
-    const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millésime || '');
+    const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millesime || '');
     const isCertificationMatch = selectedFilters.certification.length === 0 || selectedFilters.certification.includes(product.certification || '');
 
     return isPriceMatch && isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch;
@@ -199,7 +199,7 @@ const ProductsCards: React.FC = () => {
                   </div>
                 </div>
                 {product.categories.length > 0 && (
-                  <p className="text-sm">{product.brandname || "Château inconnu"} | {product.categories[0].name}</p>
+                  <p className="text-sm">{product.brandname || "Château inconnu"}  |  {product.categories[0].name}  |  {product.millesime} </p>
                 )}
                 <h3 className="text-lg font-bold mb-1 text-black">{product.name}</h3>
 
@@ -211,7 +211,6 @@ const ProductsCards: React.FC = () => {
                 </div>
 
                 <p className="text-sm mb-2">{product.region}</p>
-                <p className="text-sm mb-4">{product.millésime}</p>
 
                 <button className="mt-auto bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700">
                   Ajouter au panier
