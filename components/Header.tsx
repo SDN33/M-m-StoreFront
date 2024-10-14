@@ -2,14 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { Search, ShoppingCart, User, Menu, X } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu, X, ChevronDown } from 'lucide-react'; // Importer ChevronDown
 import Image from 'next/image';
 
 const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [bgColor, setBgColor] = useState('bg-black bg-opacity-60'); // Fond noir transparent par défaut pour mobile
+  const [isVinsMenuOpen, setIsVinsMenuOpen] = useState(false); // Gérer l'ouverture du menu des vins
+  const [bgColor, setBgColor] = useState('bg-black bg-opacity-80'); // Fond noir transparent par défaut pour mobile
 
   const pathname = usePathname();
   const isHomePage = pathname === '/';
@@ -20,19 +21,16 @@ const Header = () => {
       const currentScroll = window.scrollY;
 
       if (isMobile) {
-        // Sur mobile, garder le fond noir transparent
-        setBgColor('bg-black bg-opacity-60');
+        setBgColor('bg-black bg-opacity-80');
       } else {
-        // Sur desktop, changer la couleur en fonction du défilement
         if (currentScroll > 0) {
-          setBgColor('bg-black bg-opacity-60'); // Couleur sombre au défilement
+          setBgColor('bg-black bg-opacity-80');
         } else {
-          setBgColor('bg-transparent'); // Couleur claire en haut de page
+          setBgColor('bg-transparent');
         }
       }
     };
 
-    // Appliquer le comportement de scroll seulement sur la page d'accueil
     if (isHomePage) {
       window.addEventListener('scroll', handleScroll);
     }
@@ -52,10 +50,40 @@ const Header = () => {
           Accueil
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
         </a>
-        <a href="/products" className="relative text-white hover:text-orange-600 font-semibold">
-          Nos Vins
-          <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
-        </a>
+
+        {/* Dropdown for 'Nos Vins' */}
+        <div className="relative">
+          <button
+            className="relative text-white hover:text-orange-600 font-semibold flex items-center"
+            onClick={() => setIsVinsMenuOpen(!isVinsMenuOpen)}
+          >
+            Nos Vins
+            <ChevronDown className="ml-2 w-4 h-4" /> {/* Ajouter ChevronDown */}
+            <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
+          </button>
+
+          {/* Dropdown Menu */}
+          {isVinsMenuOpen && (
+            <ul className="absolute mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30">
+              <li>
+                <a href="/products/category:rouge" className="block px-4 py-2 text-sm text-gray-800 hover:bg-orange-600">Nos vins rouges</a>
+              </li>
+              <li>
+                <a href="/products/category:blanc" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins blancs</a>
+              </li>
+              <li>
+                <a href="/products/category:rose" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins rosés</a>
+              </li>
+              <li>
+                <a href="/products/category:petillant" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins pétillants</a>
+              </li>
+              <li>
+                <a href="/products/category:liquoreux" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins liquoreux</a>
+              </li>
+            </ul>
+          )}
+        </div>
+
         <a href="https://www.memegeorgette.com/" className="relative text-white hover:text-orange-600 font-semibold">
           Découvrir Mémé Georgette
           <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
@@ -135,8 +163,8 @@ const Header = () => {
       {isMenuOpen && (
         <div className="absolute top-full left-0 right-0 bg-white p-4 rounded-md shadow-lg z-30">
           <a href="/" className="block py-2 text-gray-800">Accueil</a>
+          <a href="https://www.memegeorgette.com/" className="block py-2 text-gray-800">Découvrir Mémé Georgette</a>
           <a href="/products" className="block py-2 text-gray-800">Nos Vins</a>
-          <a href="/about" className="block py-2 text-gray-800">Mémé Georgette se présente</a>
           <a href="/contact" className="block py-2 text-gray-800">Contact</a>
         </div>
       )}

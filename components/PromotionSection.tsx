@@ -31,7 +31,7 @@ const PromotionSection = () => {
       style={{ overflowX: 'hidden' }} // Empêche le défilement horizontal
     >
       <p className="font-extrabold text-xs text-orange-600 sm:text-xs">
-        🍇🚚 Livraison offerte dès 100€ d&apos;achat en France métropolitaine 🚚🍇
+        🍇🚚 Livraison offerte dès 6 bouteilles achetées sur un même Domaine 🚚🍇
       </p>
     </div>
   );

@@ -73,9 +73,9 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div className="relative max-w-sm w-80 rounded-lg shadow-lg overflow-hidden hidden md:block">
+    <div className="relative max-w-sm w-60 rounded-lg shadow-lg overflow-hidden hidden md:block">
       <div
-        className="absolute inset-0 bg-orange-600"
+        className="absolute inset-0 bg-white/20"
         style={{
           backgroundImage: `
 
@@ -95,12 +95,12 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
             >
               <div className="flex items-center gap-2">
                 <span className="text-2xl"> {/* Add your icon here */} </span>
-                <span className="font-semibold text-white">{getFilterTitle(filterType)}</span>
+                <span className="font-semibold">{getFilterTitle(filterType)}</span>
               </div>
               {openSections.includes(filterType) ? (
-                <ChevronUp className="w-4 h-4 text-white" />
+                <ChevronUp className="w-4 h-4 text-" />
               ) : (
-                <ChevronDown className="w-4 h-4 text-white" />
+                <ChevronDown className="w-4 h-4" />
               )}
             </button>
 
@@ -119,7 +119,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                       onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
                       className="w-4 h-4 rounded border-white/20 text-orange-600 focus:ring-orange-600"
                     />
-                    <span className="text-sm text-white">{option}</span>
+                    <span className="text-sm">{option}</span>
                   </label>
                 ))}
               </div>

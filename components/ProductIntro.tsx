@@ -65,14 +65,14 @@ const ProductsIntro: React.FC = () => {
         src="/images/mémé-georgette1.png"
         alt="Mémé Georgette personnage"
         className="w-30 h-auto border-lg mb-4 md:mb-0 sm:ml-0 md:ml-24 sm:mt-0 md:mt-0"
-        width={112} // Set the width based on the className
+        width={116} // Set the width based on the className
         height={120} // Set the height appropriately
       />
 
       {/* Texte au centre avec espacement */}
       <div className="flex items-center space-x-2 text-center md:text-left md:pr-80" ref={textRef}>
         <h3 className="text-2xl md:text-3xl font-extrabold text-orange-600 tracking-tight ml-26">
-          Découvrez nos vins Bio et Biodynamie <br /><div className="text-gray-800 flex items-center space-x-2 text-center md:text-left md:pr-20 text-sm">* Livraison offerte dès 100€ d&apos;achat</div>
+          Découvrez nos vins Bio et Biodynamie <br /><div className="text-gray-800 flex items-center space-x-2 text-center md:text-left md:pr-20 text-sm">* Livraison offerte dès 6 bouteilles achetées sur le même domaine</div>
 
         </h3>
 

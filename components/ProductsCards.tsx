@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import { Star } from 'lucide-react';
 import ProductFilter from '@/components/ProductFilters';
 import FilterTop from './Filtertop';
+import ProductsIntro from './ProductIntro';
 
 interface Product {
   id: number;
@@ -102,7 +104,7 @@ const ProductsCards: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col mr-4 lg:mr-10 md:-mt-8">
+    <div className="flex flex-col mr-4 lg:mr-16 md:-mt-8">
       <FilterTop sortBy={sortBy} handleSortChange={handleSortChange} resetFilters={resetFilters} />
 
       <div className="flex flex-col md:flex-row mt-4">
@@ -118,35 +120,59 @@ const ProductsCards: React.FC = () => {
             {sortedProducts.map(product => (
               <div
                 key={product.id}
-                className="border p-4 rounded-md shadow-lg flex flex-col items-center"
-                style={{ height: '400px', width: '100%' }} // Taille fixe de la carte
+                className="border rounded-lg shadow-md p-4 flex flex-col"
+                style={{ height: '400px', width: '100%' }}
               >
-                <div className="relative w-full h-64 flex items-center justify-center">
+                <div className="flex justify-between items-start mb-2">
+                  <div className="flex space-x-1">
+                    {product.certification && (
+                      <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
+                        <span className="text-white text-xs">{product.certification}</span>
+                      </div>
+                    )}
+                    {product.categories.map(category => (
+                      <div key={category.id} className="w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center">
+                        <span className="text-white text-xs">{category.name.substring(0, 3)}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <span className="text-3xl font-bold">{product.price} €</span>
+                </div>
+
+                <div className="relative w-full h-48 mb-4">
                   <Image
                     src={product.images.length > 0 ? product.images[0].src : '/noimage.png'}
                     alt={product.name}
-                    width={100}
-                    height={300}
-                    className="object-contain"
-                    style={{ maxHeight: '100%', maxWidth: '100%' }} // Taille des images
+                    layout="fill"
+                    objectFit="contain"
                   />
+                  <div className="absolute top-0 right-0">
+                    <Image
+                      src="/api/placeholder/40/40"
+                      alt="Winemaker"
+                      width={40}
+                      height={40}
+                      className="rounded-full"
+                    />
+                  </div>
+                </div>
+                {product.categories.length > 0 && (
+                  <p className="text-sm"> | {product.categories[0].name}</p>
+                )}
+                <h3 className="text-lg font-semibold mb-1">{product.name}</h3>
+
+
+                <div className="flex items-center mb-2 mx-auto">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className={`w-4 h-4 ${i < product.rating ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" />
+                  ))}
+                  <span className="ml-1 text-sm text-gray-600">12 avis</span>
                 </div>
 
-                {/* Titre et catégorie sur la même ligne avec un séparateur */}
-                <h3 className="text-lg font-semibold mt-4 flex justify-center items-center">
-                  {product.name}
-                  {product.categories.length > 0 && (
-                    <>
-                      <span className="mx-2 text-orange-600">|</span> {/* Séparateur stylisé */}
-                      <span className="font-light text-lg">{product.categories[0].name}</span>
-                      <span className="mx-2 text-orange-600">|</span> {/* Séparateur stylisé */}
-                    </>
-                  )}
-                </h3>
+                <p className="text-sm mb-2">{product.region}</p>
+                <p className="text-sm mb-4">{product.millésime}</p>
 
-                <p className="text-xl font-bold">{product.price} €</p>
-                <br />
-                <button className="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors w-fit font-bold">
+                <button className="mt-auto bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors w-fit font-bold mx-auto">
                   Commander
                 </button>
               </div>
