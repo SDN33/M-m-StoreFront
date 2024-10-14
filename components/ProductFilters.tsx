@@ -77,7 +77,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       <div className="absolute inset-0 bg-orange-600"></div>
 
       <div className="relative">
-        <p className="mt-4 px-4  text-white h-[1.5rem]">
+        <p className="mt-4 px-4 text-white h-[1.5rem]">
           Trier nos vins:
         </p>
         <br />
@@ -102,7 +102,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                 {options.map((option) => (
                   <label
                     key={option}
-                    className="text-white flex items-center space-x-2 py-2 cursor-pointer hover:bg-white/5 px-2 rounded transition-colors"
+                    className=" text-white flex items-center space-x-2 py-2 cursor-pointer hover:bg-white/5 px-2 rounded transition-colors"
                   >
                     <input
                       type="checkbox"
