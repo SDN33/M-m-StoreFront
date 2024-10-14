@@ -23,9 +23,9 @@ interface Product {
 const getCategoryColor = (categoryName: string) => {
   switch (categoryName.toLowerCase()) {
     case 'rouge':
-      return 'bg-red-600'; // Rouge
+      return 'bg-red-800'; // Rouge
     case 'blanc':
-      return 'bg-yellow-300'; // Blanc
+      return 'bg-yellow-500'; // Blanc
     case 'rosé':
       return 'bg-pink-400'; // Rosé
     case 'pétillant':
@@ -165,7 +165,7 @@ const ProductsCards: React.FC = () => {
                     )}
                     {product.categories.map(category => (
                       <div key={category.id} className={`w-6 h-6 rounded-full ${getCategoryColor(category.name)} flex items-center justify-center`}>
-                        <span className="text-white text-xs">{category.name.substring(0, 3)}</span>
+                        <span className="text-white border-black font-semibold sloganhero text-xs">{category.name.substring(0, 3)}</span>
                       </div>
                     ))}
                   </div>
@@ -194,7 +194,7 @@ const ProductsCards: React.FC = () => {
                 {product.categories.length > 0 && (
                   <p className="text-sm">{product.brandname || "Château inconnu"} | {product.categories[0].name}</p>
                 )}
-                <h3 className="text-lg font-semibold mb-1">{product.name}</h3>
+                <h3 className="text-lg font-bold mb-1 text-black">{product.name}</h3>
 
                 <div className="flex items-center mb-2 mx-auto">
                   {[...Array(5)].map((_, i) => (
