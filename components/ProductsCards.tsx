@@ -192,7 +192,7 @@ const ProductsCards: React.FC = () => {
                   </div>
                 </div>
                 {product.categories.length > 0 && (
-                  <p className="text-sm">{product.brandname || "Marque inconnue"} | {product.categories[0].name}</p>
+                  <p className="text-sm">{product.brandname || "Château inconnu"} | {product.categories[0].name}</p>
                 )}
                 <h3 className="text-lg font-semibold mb-1">{product.name}</h3>
 
