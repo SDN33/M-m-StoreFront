@@ -2,6 +2,7 @@
 const nextConfig = {
   images: {
     domains: ['upload.wikimedia.org', 'i0.wp.com'], // Ajouter "i0.wp.com" pour permettre le chargement des images
+    domains: ['vinsmemegeorgette.wpcomstaging.com'], // Ajouter le domaine de l'API WooCommerce
   },
   async rewrites() {
     return [

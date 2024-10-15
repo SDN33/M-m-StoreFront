@@ -36,7 +36,7 @@ const transformMetaData = (metaData: { key: string; value: string }[]): { [key: 
     const { key, value } = item;
 
     // Vérifier si l'élément est le nom de la marque
-    if (key === 'nom') {
+    if (key === 'nom_chateau') {
       brandname = value; // Récupérer le nom de la marque
     }
 
