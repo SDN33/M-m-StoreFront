@@ -177,7 +177,7 @@ const ProductsCards: React.FC = () => {
                     ))}
                   </div>
                   <span className="flex flex-col">
-                    <span className="text-3xl font-bold">{Math.floor(product.price)}<span className="text-sm">{(product.price % 1).toFixed(2).substring(2)} €</span></span>
+                    <span className="text-3xl font-bold">{Math.floor(product.price)}<span className="text-sm">,{(product.price % 1).toFixed(2).substring(2)} €</span></span>
                   </span>
                 </div>
 
