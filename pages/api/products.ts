@@ -61,8 +61,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const isCategories = query.type === 'categories';
     const url = isCategories
-      ? `https://vinsmemegeorgette.wpcomstaging.com/wp-json/wc/v3/products/categories?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`
-      : `https://vinsmemegeorgette.wpcomstaging.com/wp-json/wc/v3/products?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}&acf=true`;
+      ? `https://portailpro-memegeorgette.com/wp-json/wc/v3/products/categories?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`
+      : `https://portailpro-memegeorgette.com/wp-json/wc/v3/products?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}&acf=true`;
 
     try {
       const response = await axios.get<Product[] | Category[]>(url);

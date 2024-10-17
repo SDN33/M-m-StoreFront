@@ -187,6 +187,8 @@ const ProductsCards: React.FC = () => {
                     alt={product.name}
                     layout="fill"
                     objectFit="contain"
+                    priority // Ajout de l'attribut priority
+                    className="rounded" // Ajout d'une classe pour arrondir les coins si nécessaire
                   />
                   <div className="absolute top-0 right-0">
                     <Image
@@ -198,6 +200,7 @@ const ProductsCards: React.FC = () => {
                     />
                   </div>
                 </div>
+
                 {product.categories.length > 0 && (
                   <p className="text-sm">{product.brandname || "Château inconnu"}  |  {product.categories[0].name}  |  {product.millesime} </p>
                 )}
