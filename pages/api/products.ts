@@ -122,20 +122,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const response = await axios.get<Product[] | Category[]>(url);
       let productsOrCategories = response.data;
 
-      if (!isCategories && query.price) {
-        const priceFilters = Array.isArray(query.price) ? query.price : [query.price];
+      if (!isCategories) {
+        // Filtrer par prix
+        if (query.price) {
+          const priceFilters = Array.isArray(query.price) ? query.price : [query.price];
 
-        for (const priceFilter of priceFilters) {
-          const [min, max] = priceFilter.split('_').map(Number);
+          for (const priceFilter of priceFilters) {
+            const [min, max] = priceFilter.split('_').map(Number);
 
+            productsOrCategories = (productsOrCategories as Product[]).filter(product => {
+              const productPrice = parseFloat(product.price);
+              return productPrice >= min && (max === Infinity || productPrice < max);
+            });
+          }
+        }
+
+        // Filtrer par région
+        if (query.region) {
+          const regionFilter = Array.isArray(query.region) ? query.region : [query.region];
           productsOrCategories = (productsOrCategories as Product[]).filter(product => {
-            const productPrice = parseFloat(product.price);
-            return productPrice >= min && (max === Infinity || productPrice < max);
+            return regionFilter.includes(product.region__pays || '');
           });
         }
-      }
 
-      if (!isCategories) {
         const transformedProducts = await Promise.all((productsOrCategories as Product[]).map(async product => {
           const { meta_data, id, status, is_validated } = product;
           const { brandname, millesime, certification, region__pays, appelation, average_rating, rating_count, ...meta } = transformMetaData(meta_data);
