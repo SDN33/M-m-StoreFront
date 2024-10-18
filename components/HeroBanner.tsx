@@ -2,21 +2,53 @@
 
 import { Play } from 'lucide-react';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+
+const slogans = [
+  "À une époque de supercherie alimentaire,<br />boire un vin bio est un acte révolutionnaire !",
+  "Le vin bio, un choix pour la terre.",
+  "Biodynamie = un respect profond de la nature.",
+  "Soutenir les vignerons, c'est préserver notre avenir.",
+  "Des vignes cultivées sans chimie,<br />pour un goût authentique.",
+];
 
 const HeroBanner = () => {
+  const [videoError, setVideoError] = useState(false);
+  const [currentSlogan, setCurrentSlogan] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlogan(prev => (prev + 1) % slogans.length);
+    }, 5000); // Change de slogan toutes les 5 secondes
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="relative container mx-auto px-4 py-12 flex flex-col justify-center items-center min-h-screen">
       {/* Vidéo pour mobile */}
       <video
-        className="absolute inset-0 w-full h-full object-cover md:hidden"
+        className={`absolute inset-0 w-full h-full object-cover md:hidden ${videoError ? 'hidden' : ''}`}
         autoPlay
         loop
         muted
         playsInline // Ajout de l'attribut playsInline pour iPhone
+        onError={() => setVideoError(true)} // Affiche l'image de fond si la vidéo ne se charge pas
       >
         <source src="/videos/herobanner-mobile.mp4" type="video/mp4" />
         Votre navigateur ne supporte pas la vidéo.
       </video>
+
+      {/* Image de fond pour mobile si la vidéo ne se charge pas */}
+      {videoError && (
+        <div
+          className="absolute inset-0 bg-cover z-0"
+          style={{
+            backgroundImage: "url('/images/banner.svg'), radial-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4))",
+            backgroundBlendMode: 'multiply',
+          }}
+        ></div>
+      )}
 
       {/* Image de fond pour écrans plus grands */}
       <div
@@ -31,21 +63,27 @@ const HeroBanner = () => {
       <div className="md:mt-20 mt-40 space-y-3 md:space-y-0 flex flex-col items-center text-center z-10 text-white relative">
         <p className="text-white text-xl md:text-3xl font-semibold sloganhero">
           CAVE COOPÉRATIVE ENGAGÉE
+          <br /><span className='text-xl md:text-3xl font-semibold sloganhero text-primary'>En direct des vignerons(nes)</span>
         </p>
-
+        <br />
+        {/* Logos pour web */}
         <div className="hidden sm:flex items-center justify-center gap-4">
           <Image src="/images/logobio.webp" alt="Logo Bio" width={25} height={25} />
           <Image src="/images/demeter-logo.png" alt="Logo Demeter" width={65} height={95} />
         </div>
 
         <div>
-          {/* Titre pour web */}
+          {/* Titre avec slogans */}
           <h1 className="text-4xl md:text-4xl leading-tight font-black hidden md:block">
-            <br />&quot;À une époque de supercherie alimentaire,<br />boire un vin bio est un acte révolutionnaire !&quot; <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
+            <br />
+            <span className="block fade-in" dangerouslySetInnerHTML={{ __html: slogans[currentSlogan] }} />
+            <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
           </h1>
           {/* Titre pour mobile */}
           <h1 className="text-2xl md:text-4xl leading-tight font-black block md:hidden">
-            <br />&quot;À une époque de supercherie alimentaire,<br />boire un vin bio est un acte révolutionnaire !&quot; <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
+            <br />
+            <span className="block fade-in" dangerouslySetInnerHTML={{ __html: slogans[currentSlogan] }} />
+            <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
           </h1>
         </div>
       </div>

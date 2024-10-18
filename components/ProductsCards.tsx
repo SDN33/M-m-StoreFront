@@ -16,8 +16,10 @@ interface Product {
   millesime?: string;
   certification?: string;
   region?: string;
-  brandname?: string; // Assurez-vous que cette propriété existe
-  meta_data?: { id: number; key: string; value: string }[];
+  vendor?: {
+    display_name: string; // Ajout de la propriété display_name
+    vendorPhotoUrl?: string; // Ajout de la propriété vendorPhotoUrl
+  };
 }
 
 const getCategoryColor = (categoryName: string) => {
@@ -166,12 +168,12 @@ const ProductsCards: React.FC = () => {
                 <div className="flex justify-between items-start mb-2">
                   <div className="flex space-x-1">
                     {product.certification && (
-                      <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
+                      <div className="w-7 h-7 rounded-full bg-green-500 flex items-center justify-center">
                         <span className="text-white text-xs">{product.certification}</span>
                       </div>
                     )}
                     {product.categories.map(category => (
-                      <div key={category.id} className={`w-6 h-6 rounded-full ${getCategoryColor(category.name)} flex items-center justify-center`}>
+                      <div key={category.id} className={`w-7 h-7 rounded-full ${getCategoryColor(category.name)} flex items-center justify-center`}>
                         <span className="text-white border-black font-semibold sloganhero text-xs">{category.name.substring(0, 3)}</span>
                       </div>
                     ))}
@@ -183,7 +185,7 @@ const ProductsCards: React.FC = () => {
 
                 <div className="relative w-full h-48 mb-4">
                   <Image
-                    src={product.images.length > 0 ? product.images[0].src : '/noimage.png'}
+                    src={product.images.length > 0 ? product.images[0].src : '/images/noimage.jpg'} // Image par défaut si pas d'image produit
                     alt={product.name}
                     layout="fill"
                     objectFit="contain"
@@ -192,8 +194,8 @@ const ProductsCards: React.FC = () => {
                   />
                   <div className="absolute top-0 right-0">
                     <Image
-                      src="/api/placeholder/40/40"
-                      alt="Winemaker"
+                      src={product.vendor?.vendorPhotoUrl || '/images/noimage.jpg'} // Image par défaut si pas de photo du vendeur
+                      alt="Vigneron"
                       width={40}
                       height={40}
                       className="rounded-full"
@@ -202,7 +204,7 @@ const ProductsCards: React.FC = () => {
                 </div>
 
                 {product.categories.length > 0 && (
-                  <p className="text-sm">{product.brandname || "Château inconnu"}  |  {product.categories[0].name}  |  {product.millesime} </p>
+                  <p className="text-sm">{product.vendor?.display_name || "Château inconnu"}  |  {product.categories[0].name}  |  {product.millesime} </p>
                 )}
                 <h3 className="text-lg font-bold mb-1 text-black">{product.name}</h3>
 
@@ -216,7 +218,7 @@ const ProductsCards: React.FC = () => {
                 <p className="text-sm mb-2">{product.region}</p>
 
                 <button className="mt-auto bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 max-w-fit mx-auto">
-                  Ajouter au panier
+                  Commander 
                 </button>
               </div>
             ))}

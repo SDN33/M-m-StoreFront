@@ -62,10 +62,10 @@ const ProductsIntro: React.FC = () => {
     >
       {/* Image de Mémé à gauche */}
       <Image
-        src="/images/mémé-georgette1.png"
-        alt="Mémé Georgette personnage"
+        src="/images/vinentete.svg"
+        alt="Vin Mémé Georgette"
         className="w-30 h-auto border-lg mb-4 md:mb-0 sm:ml-0 md:ml-24 sm:mt-0 md:mt-0"
-        width={116} // Set the width based on the className
+        width={118} // Set the width based on the className
         height={120} // Set the height appropriately
       />
 
@@ -73,9 +73,8 @@ const ProductsIntro: React.FC = () => {
       <div className="flex items-center space-x-2 text-center md:text-left md:pr-80" ref={textRef}>
         <h3 className="text-2xl md:text-3xl font-extrabold text-orange-600 tracking-tight ml-26">
           Découvrez nos vins Bio et Biodynamie <br /><div className="text-gray-800 flex items-center space-x-2 text-center md:text-left md:pr-20 text-sm">* Livraison offerte dès 6 bouteilles achetées sur le même domaine</div>
-
         </h3>
-
+        <Image src="/images/biodemeter.png" alt="Logo Bio Demeter" className='pl-10' width={200} height={200} />
       </div>
       <br />
     </div>
