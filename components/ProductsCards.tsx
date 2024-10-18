@@ -204,7 +204,7 @@ const ProductsCards: React.FC = () => {
                 </div>
 
                 {product.categories.length > 0 && (
-                  <p className="text-sm">{product.vendor?.display_name || "Château inconnu"}  |  {product.categories[0].name}  |  {product.millesime} </p>
+                  <p className="text-sm">{product.name || "Château inconnu"}  |  {product.categories[0].name}  |  {product.millesime} </p>
                 )}
                 <h3 className="text-lg font-bold mb-1 text-black">{product.name}</h3>
 
@@ -218,7 +218,7 @@ const ProductsCards: React.FC = () => {
                 <p className="text-sm mb-2">{product.region}</p>
 
                 <button className="mt-auto bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 max-w-fit mx-auto">
-                  Commander 
+                  Commander
                 </button>
               </div>
             ))}

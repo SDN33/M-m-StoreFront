@@ -133,7 +133,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               region_pays, // Ajouter la région/pays
               appelation, // Ajouter l'appellation
               vendor_display_name: vendorDetails?.display_name || '', // Ajouter le nom d'affichage du vendeur
-              vendor_image: vendorDetails?.shop?.image || '', // Ajouter l'image du vendeur
+              vendor_image: vendorDetails?.image || '', // Ajouter l'image du vendeur
             };
           }
           return null;
