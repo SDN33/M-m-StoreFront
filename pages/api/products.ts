@@ -13,9 +13,11 @@ interface Product {
   meta_data: { key: string; value: string }[]; // Propriété meta_data
   status: string; // Statut du produit (e.g., 'publish')
   is_validated?: boolean; // Champ pour vérifier la validation (optionnel)
-  region_pays?: string; // Région/pays
+  region__pays?: string; // Région/pays
   vendor_display_name?: string; // Nom d'affichage du vendeur
   vendor_image?: string; // Image du vendeur
+  average_rating?: string; // Évaluation moyenne
+  rating_count?: number; // Nombre d'évaluations
 }
 
 interface Category {
@@ -38,8 +40,10 @@ const transformMetaData = (metaData: { key: string; value: string }[]): { [key: 
   let brandname = ''; // Nom du vendeur
   let millesime = ''; // Millésime
   let certification = ''; // Certification
-  let region_pays = ''; // Région/pays
+  let region__pays = ''; // Région/pays
   let appelation = ''; // Appellation
+  let average_rating = '0.00'; // Ajout de l'évaluation moyenne
+  let rating_count = '0'; // Ajout du nombre de votes
 
   metaData.forEach((item: { key: string; value: string }) => {
     const { key, value } = item;
@@ -57,18 +61,35 @@ const transformMetaData = (metaData: { key: string; value: string }[]): { [key: 
     }
 
     if (key === 'region__pays') {
-      region_pays = value; // Récupérer la région/pays
+      region__pays = value; // Récupérer la région/pays
     }
 
     if (key === 'appellation') {
       appelation = value; // Récupérer l'appellation
     }
 
+    if (key === 'average_rating') {
+      average_rating = value; // Récupérer l'évaluation moyenne
+    }
+
+    if (key === 'rating_count') {
+      rating_count = value; // Récupérer le nombre d'avis
+    }
+
     const cleanKey = key.startsWith('_') ? key.slice(1) : key;
     productData[cleanKey] = value;
   });
 
-  return { ...productData, brandname, millesime, certification, region_pays, appelation }; // Inclure toutes les nouvelles propriétés
+  return {
+    ...productData,
+    brandname,
+    millesime,
+    certification,
+    region__pays,
+    appelation,
+    average_rating,
+    rating_count
+  }; // Inclure les nouvelles propriétés
 };
 
 const getVendorDetails = async (vendorId: number) => {
@@ -117,7 +138,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (!isCategories) {
         const transformedProducts = await Promise.all((productsOrCategories as Product[]).map(async product => {
           const { meta_data, id, status, is_validated } = product;
-          const { brandname, millesime, certification, region_pays, appelation, ...meta } = transformMetaData(meta_data);
+          const { brandname, millesime, certification, region__pays, appelation, average_rating, rating_count, ...meta } = transformMetaData(meta_data);
 
           // Récupérer les détails du vendeur
           const vendorDetails = await getVendorDetails(id); // Supposons que l'ID du vendeur est le même que celui du produit
@@ -130,10 +151,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               brandname, // Ajouter le nom du château
               millesime, // Ajouter le millésime
               certification, // Ajouter la certification
-              region_pays, // Ajouter la région/pays
+              region__pays, // Ajouter la région/pays
               appelation, // Ajouter l'appellation
+              average_rating, // Ajouter l'évaluation moyenne
+              rating_count, // Ajouter le nombre d'avis
               vendor_display_name: vendorDetails?.display_name || '', // Ajouter le nom d'affichage du vendeur
               vendor_image: vendorDetails?.image || '', // Ajouter l'image du vendeur
+              rating: `${average_rating} (${rating_count} avis)` // Ajout de l'évaluation formatée
             };
           }
           return null;

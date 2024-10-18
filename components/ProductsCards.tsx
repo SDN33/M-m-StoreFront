@@ -10,16 +10,18 @@ interface Product {
   name: string;
   categories: { id: number; name: string }[];
   price: number;
-  rating: number;
   date_added: string;
   images: { src: string }[];
   millesime?: string;
   certification?: string;
-  region?: string;
+  region__pays?: string; // Changement à 'region__pays'
   vendor?: {
     display_name: string; // Ajout de la propriété display_name
     vendorPhotoUrl?: string; // Ajout de la propriété vendorPhotoUrl
   };
+  appelation?: string; // Ajout de la propriété appelation
+  rating?: number; // Ajout de la propriété rating
+  rating_count?: number; // Ajout de la propriété rating_count
 }
 
 const getCategoryColor = (categoryName: string) => {
@@ -82,17 +84,12 @@ const ProductsCards: React.FC = () => {
   }, []);
 
   const filterProducts = (product: Product) => {
-    const isPriceMatch = (selectedFilters.price.length === 0 || selectedFilters.price.some(range => {
-      const [min, max] = range.split('-').map(Number);
-      return product.price >= min && product.price <= max;
-    }));
-
     const isColorMatch = selectedFilters.color.length === 0 || selectedFilters.color.includes(product.categories[0]?.name || '');
-    const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region || '');
+    const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region__pays || ''); // Utiliser region__pays
     const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millesime || '');
     const isCertificationMatch = selectedFilters.certification.length === 0 || selectedFilters.certification.includes(product.certification || '');
 
-    return isPriceMatch && isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch;
+    return isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch;
   };
 
   const filteredProducts = useMemo(() => products.filter(filterProducts), [products, selectedFilters]);
@@ -100,13 +97,11 @@ const ProductsCards: React.FC = () => {
   const sortProducts = (products: Product[], sortBy: string) => {
     switch (sortBy) {
       case 'price-asc':
-        return products.sort((a, b) => a.price - b.price);
+        return [...products].sort((a, b) => a.price - b.price);
       case 'price-desc':
-        return products.sort((a, b) => b.price - a.price);
-      case 'rating':
-        return products.sort((a, b) => b.rating - a.rating);
+        return [...products].sort((a, b) => b.price - a.price);
       case 'date-added':
-        return products.sort((a, b) => new Date(b.date_added).getTime() - new Date(a.date_added).getTime());
+        return [...products].sort((a, b) => new Date(b.date_added).getTime() - new Date(a.date_added).getTime());
       default:
         return products;
     }
@@ -138,6 +133,22 @@ const ProductsCards: React.FC = () => {
     setSortBy('');
   };
 
+  const getCertificationLogo = (certification: string) => {
+    switch (certification.toLowerCase()) {
+      case 'bio':
+        return "/images/logobio.webp"; // Image pour certification bio
+      case 'demeter':
+        return "/images/demeter-logo.png"; // Image pour certification Demeter
+      case 'biodynamie':
+        return "/images/demeter-logo.png"; // Optionnel : si biodynamie est géré comme Demeter
+      case 'en conversion':
+        return '/images/enconv.png'; // Image pour certification en conversion
+      default:
+        return ''; // Pas d'image pour les autres certifications
+    }
+  };
+
+
   return (
     <div className="flex flex-col mr-4 lg:mr-16 md:-mt-8">
       <FilterTop sortBy={sortBy} handleSortChange={handleSortChange} resetFilters={resetFilters} />
@@ -168,8 +179,14 @@ const ProductsCards: React.FC = () => {
                 <div className="flex justify-between items-start mb-2">
                   <div className="flex space-x-1">
                     {product.certification && (
-                      <div className="w-7 h-7 rounded-full bg-green-500 flex items-center justify-center">
-                        <span className="text-white text-xs">{product.certification}</span>
+                      <div className="w-7 h-7 rounded-full flex items-center justify-center">
+                        <Image
+                          src={getCertificationLogo(product.certification)}
+                          alt={product.certification}
+                          width={28}
+                          height={28}
+                          
+                        />
                       </div>
                     )}
                     {product.categories.map(category => (
@@ -177,6 +194,7 @@ const ProductsCards: React.FC = () => {
                         <span className="text-white border-black font-semibold sloganhero text-xs">{category.name.substring(0, 3)}</span>
                       </div>
                     ))}
+                    <div className='text-sm ml-1 font-semibold'> {product.region__pays?.toUpperCase() || 'Région inconnue'} </div>
                   </div>
                   <span className="flex flex-col">
                     <span className="text-3xl font-bold">{Math.floor(product.price)}<span className="text-sm">,{(product.price % 1).toFixed(2).substring(2)} €</span></span>
@@ -203,25 +221,26 @@ const ProductsCards: React.FC = () => {
                   </div>
                 </div>
 
-                {product.categories.length > 0 && (
-                  <p className="text-sm">{product.name || "Château inconnu"}  |  {product.categories[0].name}  |  {product.millesime} </p>
-                )}
+                <p className="text-sm mb-1 font-extralight">
+                  <strong>{product.name || "Château inconnu"}</strong>
+                </p>
                 <h3 className="text-lg font-bold mb-1 text-black">{product.name}</h3>
+                <p className="text-sm mb-1">
+                  <strong>{product.appelation?.toUpperCase() || 'Vigneron inconnu'}</strong>
+                </p>
+                <p className="text-sm mb-2">{product.millesime}</p>
 
                 <div className="flex items-center mb-2 mx-auto">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className={`w-4 h-4 ${i < product.rating ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" />
+                    <Star key={i} className={`w-4 h-4 ${i < Math.floor(product.rating || 0) ? 'text-yellow-500' : 'text-gray-300'}`} />
                   ))}
-                  <span className="ml-1 text-sm text-gray-600">12 avis</span>
+                  <span className="text-xs text-gray-600 ml-1">({product.rating_count || 0} avis)</span> {/* Affichage du nombre d'avis */}
                 </div>
 
-                <p className="text-sm mb-2">{product.region}</p>
 
-                <button className="mt-auto bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 max-w-fit mx-auto">
-                  Commander
-                </button>
               </div>
             ))}
+
           </div>
         </div>
       </div>
