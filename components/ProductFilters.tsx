@@ -46,7 +46,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     volume: ['75cl', '1L', 'Autres'],
   };
 
-  const toggleSection = (section: string) => {
+  const toggleSection = (section: keyof typeof filterOptions) => {
     setOpenSections((prev) =>
       prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]
     );
@@ -73,8 +73,10 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
         {Object.entries(filterOptions).map(([filterType, options]) => (
           <div key={filterType} className="border-b border-white/10 last:border-b-0">
             <button
-              onClick={() => toggleSection(filterType)}
+              onClick={() => toggleSection(filterType as keyof typeof filterOptions)}
               className="w-full px-4 py-3 flex items-center justify-between hover:bg-white/10 transition-colors"
+              aria-expanded={openSections.includes(filterType)}
+              aria-controls={filterType}
             >
               <div className="flex items-center gap-2">
                 <span className="font-semibold text-white">{getFilterTitle(filterType)}</span>
@@ -87,7 +89,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
             </button>
 
             {openSections.includes(filterType) && (
-              <div className="px-4 py-2 max-h-48 overflow-y-auto bg-white/10">
+              <div className="px-4 py-2 max-h-48 overflow-y-auto bg-white/10" id={filterType}>
                 {options.map((option) => (
                   <label
                     key={option}

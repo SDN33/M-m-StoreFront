@@ -185,7 +185,7 @@ const ProductsCards: React.FC = () => {
                           alt={product.certification}
                           width={28}
                           height={28}
-                          
+
                         />
                       </div>
                     )}
@@ -201,14 +201,13 @@ const ProductsCards: React.FC = () => {
                   </span>
                 </div>
 
-                <div className="relative w-full h-48 mb-4">
+                <div className="relative w-full h-72 mb-4"> {/* Augmenter la hauteur de l'image */}
                   <Image
-                    src={product.images.length > 0 ? product.images[0].src : '/images/noimage.jpg'} // Image par défaut si pas d'image produit
+                    src={product.images.length > 0 ? product.images[0].src : '/images/vinmémé.png'} // Image par défaut si pas d'image produit
                     alt={product.name}
                     layout="fill"
                     objectFit="contain"
                     priority // Ajout de l'attribut priority
-                    className="rounded" // Ajout d'une classe pour arrondir les coins si nécessaire
                   />
                   <div className="absolute top-0 right-0">
                     <Image
@@ -220,6 +219,7 @@ const ProductsCards: React.FC = () => {
                     />
                   </div>
                 </div>
+
 
                 <p className="text-sm mb-1 font-extralight">
                   <strong>{product.name || "Château inconnu"}</strong>
