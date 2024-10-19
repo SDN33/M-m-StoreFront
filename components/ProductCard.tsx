@@ -1,6 +1,6 @@
 "use client"; // Ajoutez cette ligne en haut du fichier
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Star } from 'lucide-react';
@@ -13,7 +13,7 @@ interface Product {
   categories: { id: number; name: string }[];
   certification?: string;
   images: { src: string }[];
-  vendor?: { vendorPhotoUrl?: string; name?: string }; // Ajout du nom du vendeur
+  vendor?: { vendorPhotoUrl?: string; name?: string };
   store_name?: string;
   nom_chateau?: string;
   appelation?: string;
@@ -30,6 +30,33 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const router = useRouter();
+  const [quantity, setQuantity] = useState<number>(1);
+
+  // Fonction de gestion du cache des produits
+  const cacheProductData = (product: Product) => {
+    const cachedProducts = JSON.parse(localStorage.getItem('cachedProducts') || '{}');
+    cachedProducts[product.id] = product;
+    localStorage.setItem('cachedProducts', JSON.stringify(cachedProducts));
+  };
+
+  // Vérifie si les données du produit sont en cache
+  const getCachedProductData = (productId: number): Product | null => {
+    const cachedProducts = JSON.parse(localStorage.getItem('cachedProducts') || '{}');
+    return cachedProducts[productId] || null;
+  };
+
+  const handleRedirect = () => {
+    // Si le produit est déjà en cache, utilise les données en cache
+    const cachedProduct = getCachedProductData(product.id);
+    if (!cachedProduct) {
+      cacheProductData(product); // Ajoute le produit au cache
+    }
+    router.push(`/product/${product.id}`);
+  };
+
+  const handleAddToCart = () => {
+    console.log(`Added ${quantity} of ${product.name} to the cart.`);
+  };
 
   const getCategoryColor = (categoryName: string) => {
     switch (categoryName.toLowerCase()) {
@@ -62,27 +89,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }
   };
 
-  // Fonction pour formater le nom du vendeur
   const formatVendorName = (storeName?: string) => {
-    if (!storeName) return '@M.Georgette'; // Si le nom du vendeur est manquant
-
+    if (!storeName) return '@M.Georgette';
     const words = storeName.split(' ');
     if (words.length > 1) {
       const firstNameInitial = words[0].charAt(0).toUpperCase();
       const lastName = words[1].charAt(0).toUpperCase() + words[1].slice(1);
       return `${firstNameInitial}. ${lastName}`;
     }
-    return storeName; // Si le vendeur a un seul mot pour son nom
-  };
-
-  const [quantity, setQuantity] = useState<number>(1);
-
-  const handleAddToCart = () => {
-    console.log(`Added ${quantity} of ${product.name} to the cart.`);
-  };
-
-  const handleRedirect = () => {
-    router.push(`/product/${product.id}`);
+    return storeName;
   };
 
   const certificationLogo = getCertificationLogo(product.certification);
@@ -122,19 +137,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       <div className="relative w-full h-72 mb-4">
         <Image
-          className="hover:scale-110 transition-transform"
           src={product.images.length > 0 ? product.images[0].src : '/images/vinmémé.png'}
           alt={product.name}
           layout="fill"
           objectFit="contain"
           priority
+          onClick={handleRedirect}
+          className="hover:scale-110 transition-transform cursor-pointer"
         />
 
-        {/* Afficher l'image du vendeur et son nom en bas à droite de l'image */}
         <div className="absolute bottom-6 right-2 md:right-6 flex flex-col items-center">
           <div className="relative w-12 h-12 mb-1 hover:scale-110 transition-transform">
             <Image
-              src={product.vendor?.vendorPhotoUrl || '/images/mémé-georgette1.png'} // Utilisez l'image par défaut
+              src={product.vendor?.vendorPhotoUrl || '/images/mémé-georgette1.png'}
               alt={formatVendorName(product.store_name)}
               layout="fill"
               objectFit="contain"
@@ -188,13 +203,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </select>
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
             <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+              <path d="M5.293 9.293a1 1 0 011.414 0L10 12.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
             </svg>
           </div>
         </div>
         <button
           onClick={handleAddToCart}
-          className="bg-orange-600 text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:bg-orange-700 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
+          className="bg-orange-500 text-white font-semibold px-4 py-2 rounded-md"
         >
           Commander
         </button>

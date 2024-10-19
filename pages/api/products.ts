@@ -21,6 +21,7 @@ interface Product {
   rating_count?: number;
   volume?: string;
   nom_chateau?: string;
+  accords_mets?: string;
 }
 
 interface Category {
@@ -48,6 +49,7 @@ const transformMetaData = (metaData: { key: string; value: string }[]): { [key: 
   let rating_count = '0';
   let volume = '';
   let nom_chateau = '';
+  let accords_mets = '';
 
   metaData.forEach(({ key, value }) => {
     switch (key) {
@@ -75,6 +77,9 @@ const transformMetaData = (metaData: { key: string; value: string }[]): { [key: 
       case 'volume':
         volume = value;
         break;
+      case 'accords_mets':
+        accords_mets = value;
+        break;
     }
     const cleanKey = key.startsWith('_') ? key.slice(1) : key;
     productData[cleanKey] = value;
@@ -89,7 +94,8 @@ const transformMetaData = (metaData: { key: string; value: string }[]): { [key: 
     average_rating,
     rating_count,
     volume,
-    nom_chateau, // Assurez-vous que nom_chateau est renvoyé ici
+    nom_chateau,
+    accords_mets,
   };
 };
 
@@ -163,7 +169,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const transformedProducts = await Promise.all((productsOrCategories as Product[]).map(async product => {
           const { meta_data, id, status, is_validated } = product;
-          const { brandname, millesime, certification, region__pays, appelation, average_rating, rating_count, volume, nom_chateau, ...meta } = transformMetaData(meta_data);
+          const { brandname, millesime, certification, region__pays, appelation, average_rating, rating_count, volume, nom_chateau, accords_mets, ...meta } = transformMetaData(meta_data);
           const vendorDetails = await getVendorDetails(id);
           const store_name = product?.store_name || '';
 
@@ -184,6 +190,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               volume, // Ajout du volume ici
               vendor_image: vendorDetails?.vendorPhotoUrl || '', // Utilisez vendorPhotoUrl
               rating: `${average_rating} (${rating_count} avis)`,
+              accords_mets,
             };
           }
           return null;

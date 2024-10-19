@@ -6,9 +6,10 @@ import { useEffect, useState } from 'react';
 
 const slogans = [
   "À une époque de supercherie alimentaire,<br />boire un vin bio est un acte révolutionnaire !",
-  "Le vin bio, un choix pour la terre,<br />un plaisir pour les papilles",
-  "Biodynamie,<br />un respect profond de la nature",
-  "Soutenir les vignerons,<br />c'est préserver notre avenir",
+  "En France, la vigne couvre<br />4% de la surface agricole nationale,<br />mais à elle seule c'est 20% des pesticides",
+  "Le vin bio est un choix pour la terre,<br />un plaisir pour les papilles",
+  "La biodynamie,<br />un respect profond de la nature",
+  "Soutenir les vignerons,<br />c'est préserver notre avenir à tous !",
   "Des vignes cultivées sans chimie,<br />pour un goût authentique",
 ];
 
