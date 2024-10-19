@@ -14,30 +14,32 @@ interface Product {
   images: { src: string }[];
   millesime?: string;
   certification?: string;
-  region__pays?: string; // Changement à 'region__pays'
+  region__pays?: string;
+  store_name?: string;
+  volume: string;
   vendor?: {
-    display_name: string; // Ajout de la propriété display_name
-    vendorPhotoUrl?: string; // Ajout de la propriété vendorPhotoUrl
+    vendorPhotoUrl?: string;
   };
-  appelation?: string; // Ajout de la propriété appelation
-  rating?: number; // Ajout de la propriété rating
-  rating_count?: number; // Ajout de la propriété rating_count
+  appelation?: string;
+  nom_chateau?: string;
+  rating?: number;
+  rating_count?: number;
 }
 
 const getCategoryColor = (categoryName: string) => {
   switch (categoryName.toLowerCase()) {
     case 'rouge':
-      return 'bg-red-800'; // Rouge
+      return 'bg-red-800';
     case 'blanc':
-      return 'bg-yellow-500'; // Blanc
+      return 'bg-yellow-500';
     case 'rosé':
-      return 'bg-pink-400'; // Rosé
+      return 'bg-pink-400';
     case 'pétillant':
-      return 'bg-blue-400'; // Pétillant
+      return 'bg-blue-400';
     case 'liquoreux':
-      return 'bg-purple-400'; // Liquoreux
+      return 'bg-purple-400';
     default:
-      return 'bg-orange-500'; // Couleur par défaut
+      return 'bg-orange-500';
   }
 };
 
@@ -85,7 +87,7 @@ const ProductsCards: React.FC = () => {
 
   const filterProducts = (product: Product) => {
     const isColorMatch = selectedFilters.color.length === 0 || selectedFilters.color.includes(product.categories[0]?.name || '');
-    const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region__pays || ''); // Utiliser region__pays
+    const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region__pays || '');
     const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millesime || '');
     const isCertificationMatch = selectedFilters.certification.length === 0 || selectedFilters.certification.includes(product.certification || '');
 
@@ -136,23 +138,21 @@ const ProductsCards: React.FC = () => {
   const getCertificationLogo = (certification: string) => {
     switch (certification.toLowerCase()) {
       case 'bio':
-        return "/images/logobio.webp"; // Image pour certification bio
+        return "/images/logobio.webp";
       case 'demeter':
-        return "/images/demeter-logo.png"; // Image pour certification Demeter
+        return "/images/biodemeter.png";
       case 'biodynamie':
-        return "/images/demeter-logo.png"; // Optionnel : si biodynamie est géré comme Demeter
+        return "/images/biodemeter.png";
       case 'en conversion':
-        return '/images/enconv.png'; // Image pour certification en conversion
+        return '/images/enconv.png';
       default:
-        return ''; // Pas d'image pour les autres certifications
+        return '';
     }
   };
-
 
   return (
     <div className="flex flex-col mr-4 lg:mr-16 md:-mt-8">
       <FilterTop sortBy={sortBy} handleSortChange={handleSortChange} resetFilters={resetFilters} />
-
       <div className="flex flex-col md:flex-row mt-4">
         <div className="hidden md:block md:w-1/4">
           <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
@@ -161,7 +161,7 @@ const ProductsCards: React.FC = () => {
         <div className="flex-grow mt-10">
           {loading && (
             <div className="flex flex-col items-center">
-              <div className="loader"></div> {/* Animation de chargement */}
+              <div className="loader"></div>
               <p className="text-orange-600 font-bold text-lg">
                 Chargement des vins de Mémé...
               </p>
@@ -174,73 +174,89 @@ const ProductsCards: React.FC = () => {
               <div
                 key={product.id}
                 className="border rounded-lg shadow-md p-4 flex flex-col"
-                style={{ height: '400px', width: '100%' }}
+                style={{ height: '400px', width: '100%' }} // Taille de la carte
               >
+                {/* Bande de couleur ajoutée */}
+                <div className={`h-2 ${getCategoryColor(product.categories[0]?.name || 'default')} mb-4`}></div>
+
                 <div className="flex justify-between items-start mb-2">
                   <div className="flex space-x-1">
-                    {product.certification && (
-                      <div className="w-7 h-7 rounded-full flex items-center justify-center">
-                        <Image
-                          src={getCertificationLogo(product.certification)}
-                          alt={product.certification}
-                          width={28}
-                          height={28}
-
-                        />
-                      </div>
-                    )}
                     {product.categories.map(category => (
                       <div key={category.id} className={`w-7 h-7 rounded-full ${getCategoryColor(category.name)} flex items-center justify-center`}>
                         <span className="text-white border-black font-semibold sloganhero text-xs">{category.name.substring(0, 3)}</span>
                       </div>
                     ))}
-                    <div className='text-sm ml-1 font-semibold'> {product.region__pays?.toUpperCase() || 'Région inconnue'} </div>
+
+                    {product.certification && (
+                      <div className="flex items-center justify-center">
+                        <Image
+                          src={getCertificationLogo(product.certification)}
+                          alt={product.certification}
+                          width={28} // Taille de l'image pour la certification
+                          height={28} // Taille de l'image pour la certification
+                        />
+                      </div>
+                    )}
                   </div>
-                  <span className="flex flex-col">
-                    <span className="text-3xl font-bold">{Math.floor(product.price)}<span className="text-sm">,{(product.price % 1).toFixed(2).substring(2)} €</span></span>
+                  <span className="flex items-start">
+                    <span className="text-4xl font-bold">{Math.floor(product.price)}</span>
+                    <span className="text-xl font-bold align-top mt-1">
+                      <sup>€{(product.price % 1).toFixed(2).substring(2)}</sup>
+                    </span>
                   </span>
                 </div>
 
-                <div className="relative w-full h-72 mb-4"> {/* Augmenter la hauteur de l'image */}
+                <div className="relative w-full h-72 mb-4"> {/* Hauteur de l'image */}
                   <Image
-                    src={product.images.length > 0 ? product.images[0].src : '/images/vinmémé.png'} // Image par défaut si pas d'image produit
+                    src={product.images.length > 0 ? product.images[0].src : '/images/vinmémé.png'}
                     alt={product.name}
                     layout="fill"
                     objectFit="contain"
-                    priority // Ajout de l'attribut priority
+                    priority
                   />
-                  <div className="absolute top-0 right-0">
+                  <div className="absolute top-14 right-3">
                     <Image
-                      src={product.vendor?.vendorPhotoUrl || '/images/noimage.jpg'} // Image par défaut si pas de photo du vendeur
+                      src={product.vendor?.vendorPhotoUrl || '/images/mémé-georgette1.png'}
                       alt="Vigneron"
                       width={40}
                       height={40}
                       className="rounded-full"
                     />
+                    <div className="text-sm !font-bold sloganhero flex items-end">
+                      {product.store_name && (
+                        <>
+                          {product.store_name.split(' ')[0]} <br />
+                          {product.store_name.split(' ').slice(1).join(' ')}
+                        </>
+                      )}
+                    </div>
                   </div>
                 </div>
 
-
-                <p className="text-sm mb-1 font-extralight">
-                  <strong>{product.name || "Château inconnu"}</strong>
+                <p className="text-sm font-extralight">
+                  <strong>{product.nom_chateau || "Château inconnu"}</strong>
                 </p>
                 <h3 className="text-lg font-bold mb-1 text-black">{product.name}</h3>
                 <p className="text-sm mb-1">
                   <strong>{product.appelation?.toUpperCase() || 'Vigneron inconnu'}</strong>
                 </p>
-                <p className="text-sm mb-2">{product.millesime}</p>
-
-                <div className="flex items-center mb-2 mx-auto">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className={`w-4 h-4 ${i < Math.floor(product.rating || 0) ? 'text-yellow-500' : 'text-gray-300'}`} />
-                  ))}
-                  <span className="text-xs text-gray-600 ml-1">({product.rating_count || 0} avis)</span> {/* Affichage du nombre d'avis */}
+                <p className="text-sm mb-1">
+                  {product.millesime} | {product.region__pays?.toUpperCase()} | {product.volume}
+                </p>
+                <div className="flex items-center">
+                  {product.rating != null && typeof product.rating === 'number' && (
+                    <>
+                      <Star className="w-4 h-4 text-yellow-500" />
+                      <span className="text-sm font-bold">{product.rating.toFixed(1)}</span>
+                      <span className="text-sm font-light">({product.rating_count} avis)</span>
+                    </>
+                  )}
                 </div>
-
-
+                <button className="mt-2 bg-orange-600 text-white !px-4 !py-2 rounded-lg hover:bg-orange-800 transition-colors !w-fit !mx-auto !font-medium text-sm sloganhero">
+                  COMMANDER
+                </button>
               </div>
             ))}
-
           </div>
         </div>
       </div>

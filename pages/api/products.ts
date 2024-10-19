@@ -5,19 +5,21 @@ interface Product {
   id: number;
   name: string;
   price: string; // Assurez-vous que c'est un nombre, sinon convertissez-le
-  meta: { [key: string]: string }; // Champ meta pour les métadonnées
-  brandname?: string; // Nom du vendeur
-  millesime?: string; // Millésime
-  certification?: string; // Certification
-  appelation?: string; // Ajout de l'appellation
-  meta_data: { key: string; value: string }[]; // Propriété meta_data
-  status: string; // Statut du produit (e.g., 'publish')
-  is_validated?: boolean; // Champ pour vérifier la validation (optionnel)
-  region__pays?: string; // Région/pays
-  vendor_display_name?: string; // Nom d'affichage du vendeur
-  vendor_image?: string; // Image du vendeur
-  average_rating?: string; // Évaluation moyenne
-  rating_count?: number; // Nombre d'évaluations
+  meta: { [key: string]: string };
+  brandname?: string;
+  store_name?: string;
+  millesime?: string;
+  certification?: string;
+  appelation?: string;
+  meta_data: { key: string; value: string }[];
+  status: string;
+  is_validated?: boolean;
+  region__pays?: string;
+  vendor_image?: string; // URL de l'avatar du vendeur
+  average_rating?: string;
+  rating_count?: number;
+  volume?: string;
+  nom_chateau?: string;
 }
 
 interface Category {
@@ -37,45 +39,43 @@ interface AxiosErrorResponse {
 
 const transformMetaData = (metaData: { key: string; value: string }[]): { [key: string]: string } => {
   const productData: { [key: string]: string } = {};
-  let brandname = ''; // Nom du vendeur
-  let millesime = ''; // Millésime
-  let certification = ''; // Certification
-  let region__pays = ''; // Région/pays
-  let appelation = ''; // Appellation
-  let average_rating = '0.00'; // Ajout de l'évaluation moyenne
-  let rating_count = '0'; // Ajout du nombre de votes
+  let brandname = '';
+  let millesime = '';
+  let certification = '';
+  let region__pays = '';
+  let appelation = '';
+  let average_rating = '0.00';
+  let rating_count = '0';
+  let volume = '';
+  let nom_chateau = '';
 
-  metaData.forEach((item: { key: string; value: string }) => {
-    const { key, value } = item;
-
-    if (key === 'nom_chateau') {
-      brandname = value;
+  metaData.forEach(({ key, value }) => {
+    switch (key) {
+      case 'nom_chateau':
+        nom_chateau = value; // Corrigé ici pour stocker nom_chateau
+        break;
+      case 'millesime':
+        millesime = value;
+        break;
+      case 'certification':
+        certification = value;
+        break;
+      case 'region__pays':
+        region__pays = value;
+        break;
+      case 'appellation':
+        appelation = value;
+        break;
+      case 'average_rating':
+        average_rating = value;
+        break;
+      case 'rating_count':
+        rating_count = value;
+        break;
+      case 'volume':
+        volume = value;
+        break;
     }
-
-    if (key === 'millesime') {
-      millesime = value;
-    }
-
-    if (key === 'certification') {
-      certification = value; // Récupérer la certification
-    }
-
-    if (key === 'region__pays') {
-      region__pays = value; // Récupérer la région/pays
-    }
-
-    if (key === 'appellation') {
-      appelation = value; // Récupérer l'appellation
-    }
-
-    if (key === 'average_rating') {
-      average_rating = value; // Récupérer l'évaluation moyenne
-    }
-
-    if (key === 'rating_count') {
-      rating_count = value; // Récupérer le nombre d'avis
-    }
-
     const cleanKey = key.startsWith('_') ? key.slice(1) : key;
     productData[cleanKey] = value;
   });
@@ -88,22 +88,39 @@ const transformMetaData = (metaData: { key: string; value: string }[]): { [key: 
     region__pays,
     appelation,
     average_rating,
-    rating_count
-  }; // Inclure les nouvelles propriétés
+    rating_count,
+    volume,
+    nom_chateau, // Assurez-vous que nom_chateau est renvoyé ici
+  };
 };
 
 const getVendorDetails = async (vendorId: number) => {
-  const consumerKey = process.env.WC_CONSUMER_KEY;
-  const consumerSecret = process.env.WC_CONSUMER_SECRET;
-  const vendorUrl = `https://portailpro-memegeorgette.com/wp-json/mvx/v1/vendors/${vendorId}?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`;
+  const consumerKey = process.env.WC_CONSUMER_KEY!;
+  const consumerSecret = process.env.WC_CONSUMER_SECRET!;
+  const vendorUrl = `https://portailpro-memegeorgette.com/wp-json/mvx/v1/vendors/${vendorId}`;
 
   try {
-    const response = await axios.get(vendorUrl);
+    const response = await axios.get(vendorUrl, {
+      auth: {
+        username: consumerKey,
+        password: consumerSecret,
+      },
+    });
     return response.data; // Retourne les détails du vendeur
   } catch (error) {
     console.error('Erreur lors de la récupération des détails du vendeur:', error);
     return null;
   }
+};
+
+// Fonction pour convertir les volumes dans un format numérique pour le tri
+const convertVolumeToLiters = (volume: string) => {
+  if (volume.endsWith('cl')) {
+    return parseFloat(volume.replace('cl', '')) / 100; // Convertir cl en litres
+  } else if (volume.endsWith('L')) {
+    return parseFloat(volume.replace('L', '')); // Garder les litres
+  }
+  return NaN; // Si ce n'est pas un volume reconnu, retourner NaN
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -147,40 +164,50 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const transformedProducts = await Promise.all((productsOrCategories as Product[]).map(async product => {
           const { meta_data, id, status, is_validated } = product;
-          const { brandname, millesime, certification, region__pays, appelation, average_rating, rating_count, ...meta } = transformMetaData(meta_data);
+          const { brandname, millesime, certification, region__pays, appelation, average_rating, rating_count, volume, nom_chateau, ...meta } = transformMetaData(meta_data);
+          const vendorDetails = await getVendorDetails(id);
+          const store_name = product?.store_name || '';
 
-          // Récupérer les détails du vendeur
-          const vendorDetails = await getVendorDetails(id); // Supposons que l'ID du vendeur est le même que celui du produit
-
-          // Filtrer pour ne garder que les produits validés (par exemple, statut 'publish' ou 'is_validated' à true)
+          // Filtrer pour ne garder que les produits validés
           if (status === 'publish' || is_validated) {
             return {
               ...product,
-              meta, // Ajouter les métadonnées au produit
-              brandname, // Ajouter le nom du château
-              millesime, // Ajouter le millésime
-              certification, // Ajouter la certification
-              region__pays, // Ajouter la région/pays
-              appelation, // Ajouter l'appellation
-              average_rating, // Ajouter l'évaluation moyenne
-              rating_count, // Ajouter le nombre d'avis
-              vendor_display_name: vendorDetails?.display_name || '', // Ajouter le nom d'affichage du vendeur
-              vendor_image: vendorDetails?.image || '', // Ajouter l'image du vendeur
-              rating: `${average_rating} (${rating_count} avis)` // Ajout de l'évaluation formatée
+              meta,
+              brandname,
+              store_name,
+              millesime,
+              certification,
+              region__pays,
+              appelation,
+              average_rating,
+              rating_count,
+              nom_chateau,
+              volume, // Ajout du volume ici
+              vendor_image: vendorDetails?.vendorPhotoUrl || '', // Utilisez vendorPhotoUrl
+              rating: `${average_rating} (${rating_count} avis)`,
             };
           }
           return null;
         }));
 
-        // Supprimer les produits non validés (ceux qui sont `null`)
+        // Supprimer les produits non validés
         productsOrCategories = (transformedProducts as (Product | null)[]).filter((product): product is Product => product !== null);
+
+        // Tri par volume
+        if (query.sortBy === 'volume') {
+          productsOrCategories = (productsOrCategories as Product[]).sort((a, b) => {
+            const volumeA = convertVolumeToLiters(a.volume || '');
+            const volumeB = convertVolumeToLiters(b.volume || '');
+            return volumeA - volumeB;
+          });
+        }
       }
 
       res.status(200).json(productsOrCategories);
     } catch (error) {
       const axiosError = error as AxiosError<AxiosErrorResponse>;
       const status = axiosError.response?.status || 500;
-      const message = axiosError.response?.data.message || 'Erreur de récupération des données.';
+      const message = axiosError.response?.data?.message || 'Erreur de récupération des données.';
       res.status(status).json({ message });
     }
   } else {
