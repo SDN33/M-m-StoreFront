@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import ProductFilter from '@/components/ProductFilters';
 import FilterTop from './Filtertop';
@@ -74,16 +74,16 @@ const ProductsCards: React.FC<ProductsCardsProps> = () => {
     fetchProducts();
   }, []);
 
-  const filterProducts = (product: Product) => {
+  const filterProducts = useCallback((product: Product) => {
     const isColorMatch = selectedFilters.color.length === 0 || selectedFilters.color.includes(product.categories[0]?.name || '');
     const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region__pays || '');
     const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millesime || '');
     const isCertificationMatch = selectedFilters.certification.length === 0 || selectedFilters.certification.includes(product.certification || '');
 
     return isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch;
-  };
+  }, [selectedFilters]);
 
-  const filteredProducts = useMemo(() => products.filter(filterProducts), [products, selectedFilters]);
+  const filteredProducts = useMemo(() => products.filter(filterProducts), [products, filterProducts]);
 
   const sortProducts = (products: Product[], sortBy: string) => {
     switch (sortBy) {
