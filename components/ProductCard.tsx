@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation'; // Utiliser le hook useRouter de next/navigation
+import { useRouter } from 'next/navigation';
 import { Star } from 'lucide-react';
 
 // Définition des interfaces pour le produit et les props
@@ -29,7 +29,7 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const router = useRouter(); // Utilisation du routeur pour redirection
+  const router = useRouter();
 
   const getCategoryColor = (categoryName: string) => {
     switch (categoryName.toLowerCase()) {
@@ -54,9 +54,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         return { src: "/images/logobio.webp", width: 24, height: 24 };
       case 'demeter':
       case 'biodynamie':
-        return { src: "/images/biodemeter.png", width: 80, height: 80 }; // Augmentez la hauteur ici
+        return { src: "/images/biodemeter.png", width: 80, height: 80 };
       case 'en conversion':
-        return { src: '/images/enconv.png', width: 28, height: 28  };
+        return { src: '/images/enconv.png', width: 28, height: 28 };
       default:
         return { src: '', width: 0, height: 0 };
     }
@@ -69,13 +69,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   const handleRedirect = () => {
-    router.push(`/product/${product.id}`); // Redirection vers la page produit
+    router.push(`/product/${product.id}`);
   };
 
   const certificationLogo = getCertificationLogo(product.certification);
 
   return (
-    <div className="border rounded-lg shadow-md p-4 flex flex-col" style={{ height: '490px', width: '100%' }}>
+    <div
+      className="border rounded-lg shadow-md p-4 flex flex-col"
+      style={{ height: '490px', width: '100%' }}
+    >
       <div className={`h-2 ${getCategoryColor(product.categories[0]?.name || 'default')} mb-4`}></div>
 
       <div className="flex justify-between items-start mb-2">
@@ -91,11 +94,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 src={certificationLogo.src}
                 alt={product.certification}
                 width={certificationLogo.width}
-                height={certificationLogo.height} // Utilisez la hauteur conditionnelle
+                height={certificationLogo.height}
               />
             </div>
           )}
-          <div>
+          {/* Afficher le millésime seulement sur les écrans md et plus */}
+          <div className="hidden md:block">
             <div className="text-xs text-orange-600">Millésime</div>
             {product.millesime}
           </div>
@@ -110,32 +114,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       <div className="relative w-full h-72 mb-4">
         <Image
+          className="zoom"
           src={product.images.length > 0 ? product.images[0].src : '/images/vinmémé.png'}
           alt={product.name}
           layout="fill"
           objectFit="contain"
           priority
         />
-        <div className="absolute top-14 right-3">
-          <Image
-            src={product.vendor?.vendorPhotoUrl || '/images/mémé-georgette1.png'}
-            alt="Vigneron"
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
-          <div className="text-sm !font-bold sloganhero flex items-end text-gray-600">
-            {product.store_name && (
-              <>
-                {product.store_name.split(' ')[0]} <br />
-                {product.store_name.split(' ').slice(1).join(' ')}
-              </>
-            )}
-          </div>
-        </div>
       </div>
 
-      {/* Nom du produit avec surlignement et redirection */}
       <h3
         className="text-lg font-bold text-black hover:underline cursor-pointer"
         onClick={handleRedirect}
@@ -143,7 +130,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {product.name}
       </h3>
 
-      {/* Nom du château avec surlignement et redirection */}
       <p
         className="text-sm font-bold hover:underline cursor-pointer"
         onClick={handleRedirect}
@@ -153,6 +139,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       <p className="text-sm mb-1 font-bold">
         {product.appelation?.toUpperCase() || 'Vigneron inconnu'}
+        {/* Afficher le millésime uniquement sur mobile */}
+        <span className="block md:hidden">{`${product.millesime}`}</span>
       </p>
       <p className="text-sm mb-2">
         {product.region__pays?.toUpperCase()} | {product.volume}
