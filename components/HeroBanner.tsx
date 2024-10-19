@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 const slogans = [
   "À une époque de supercherie alimentaire,<br />boire un vin bio est un acte révolutionnaire !",
   "Le vin bio, un choix pour la terre,<br />un plaisir pour les papilles",
-  "Biodynamie = un respect profond de la nature",
-  "Soutenir les vignerons, c'est préserver notre avenir",
+  "Biodynamie,<br />un respect profond de la nature",
+  "Soutenir les vignerons,<br />c'est préserver notre avenir",
   "Des vignes cultivées sans chimie,<br />pour un goût authentique",
 ];
 
@@ -63,9 +63,9 @@ const HeroBanner = () => {
 
       {/* Conteneur avec z-10 pour rester au-dessus de l'image de fond */}
       <div className="md:mt-20 mt-40 space-y-3 md:space-y-0 flex flex-col items-center text-center z-10 text-white relative">
-        <p className="text-white text-2xl md:text-4xl font-semibold sloganhero sm:font-black">
+        <p className="text-white text-2xl md:text-4xl !font-black sloganhero sm:font-black">
           CAVE COOPÉRATIVE ENGAGÉE
-          <br /><span className='text-xl md:text-3xl font-semibold sloganhero text-primary border-black'>En direct des vignerons(nes)</span>
+          <br /><span className='text-xl md:text-3xl font-semibold sloganhero text-primary'>En direct des vignerons(nes)</span>
         </p>
         <br />
         {/* Logos pour web */}
@@ -80,7 +80,7 @@ const HeroBanner = () => {
 
         <div>
           {/* Titre avec slogans */}
-          <h1 className="text-4xl md:text-4xl leading-tight font-black hidden md:block">
+          <h1 className="text-4xl md:text-4xl leading-tight md:font-black !font-semibold hidden md:block">
             <br />
             <span className="block fade-in" dangerouslySetInnerHTML={{ __html: slogans[currentSlogan] }} />
             <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
@@ -88,7 +88,7 @@ const HeroBanner = () => {
           {/* Titre pour mobile */}
           <h1 className="text-xl md:text-4xl leading-tight font-black block md:hidden">
             <br />
-            <span className="block fade-in" dangerouslySetInnerHTML={{ __html: slogans[currentSlogan] }} />
+            <span className="block fade-in" dangerouslySetInnerHTML={{ __html: slogans[currentSlogan] }}  />
             <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
           </h1>
         </div>

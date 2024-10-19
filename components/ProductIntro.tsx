@@ -58,7 +58,7 @@ const ProductsIntro: React.FC = () => {
   return (
     <div
       ref={introRef}
-      className={`flex flex-col md:flex-row justify-between items-center mb-4 transition-opacity duration-700 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+      className={`flex flex-col md:flex-row justify-between items-center mb-4 slide-in ${isVisible ? 'slide-in-visible' : ''}`}
     >
       {/* Image de Vin à gauche */}
       <Image
