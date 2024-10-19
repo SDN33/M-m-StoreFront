@@ -63,15 +63,19 @@ const HeroBanner = () => {
 
       {/* Conteneur avec z-10 pour rester au-dessus de l'image de fond */}
       <div className="md:mt-20 mt-40 space-y-3 md:space-y-0 flex flex-col items-center text-center z-10 text-white relative">
-        <p className="text-white text-xl md:text-4xl font-semibold sloganhero">
+        <p className="text-white text-2xl md:text-4xl font-semibold sloganhero sm:font-black">
           CAVE COOPÉRATIVE ENGAGÉE
-          <br /><span className='text-xl md:text-3xl font-semibold sloganhero text-primary'>En direct des vignerons(nes)</span>
+          <br /><span className='text-xl md:text-3xl font-semibold sloganhero text-primary border-black'>En direct des vignerons(nes)</span>
         </p>
         <br />
         {/* Logos pour web */}
         <div className="hidden sm:flex items-center justify-center gap-4 -mt-4">
           <Image src="/images/logobio.webp" alt="Logo Bio" width={25} height={25} />
           <Image src="/images/demeter-logo.png" alt="Logo Demeter" width={65} height={95} />
+        </div>
+        {/* Logos pour mobile */}
+        <div className="flex sm:hidden items-center justify-center !-mt-6">
+          <Image src="/images/biodemeter.png" alt="Logo bio Demeter" width={85} height={115} />
         </div>
 
         <div>
@@ -82,7 +86,7 @@ const HeroBanner = () => {
             <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
           </h1>
           {/* Titre pour mobile */}
-          <h1 className="text-2xl md:text-4xl leading-tight font-black block md:hidden">
+          <h1 className="text-xl md:text-4xl leading-tight font-black block md:hidden">
             <br />
             <span className="block fade-in" dangerouslySetInnerHTML={{ __html: slogans[currentSlogan] }} />
             <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
