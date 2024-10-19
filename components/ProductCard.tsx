@@ -133,15 +133,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <p className="text-sm mb-2">
         {product.millesime} | {product.region__pays?.toUpperCase()} | {product.volume}
       </p>
-      <div className="flex items-center">
-        {product.average_rating != null && typeof product.average_rating === 'number' && (
-          <div className="flex items-center">
-            <Star className="w-4 h-4 text-yellow-500" />
-            <span className="text-sm font-bold ml-1">{product.average_rating.toFixed(1)}</span>
-            <span className="text-sm font-light ml-1">({product.rating_count} avis)</span>
-          </div>
-        )}
+      <div className="flex items-center mb-2 mx-auto">
+        {[...Array(5)].map((_, i) => (
+          <Star key={i} className={`w-4 h-4 ${i < Math.floor(product.average_rating || 0) ? 'text-yellow-500' : 'text-gray-300'}`} />
+        ))}
+        <span className="text-xs text-gray-600 ml-1">({product.rating_count || 0} avis)</span> {/* Affichage du nombre d'avis */}
       </div>
+
 
       <div className="flex-grow"></div>
       <div className="flex items-center mx-auto">
