@@ -66,7 +66,7 @@ const Header = () => {
           {isVinsMenuOpen && (
             <ul className="absolute mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30">
               <li>
-                <a href="/products/category:rouge" className="block px-4 py-2 text-sm text-gray-800 hover:bg-orange-600">Nos vins rouges</a>
+                <a href="/products/category/rouge" className="block px-4 py-2 text-sm text-gray-800 hover:bg-orange-600">Nos vins rouges</a>
               </li>
               <li>
                 <a href="/products/category:blanc" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins blancs</a>
