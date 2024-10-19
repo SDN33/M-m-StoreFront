@@ -235,6 +235,14 @@ const ProductPage: React.FC = () => {
 
       <br /><br />
       <Livraison />
+      <Image
+        src="/images/bannereco2.png"
+        alt="Livraison"
+        width={1920}
+        height={1080}
+        layout="responsive"
+        loading='lazy'
+      />
     </div>
   );
 };
