@@ -83,7 +83,7 @@ const ProductPage: React.FC = () => {
         <p className="text-xl text-orange-600 mb-2"><span className="font-bold">{product.price} € |  <em className='font-extralight text-sm'>{product.volume}</em></span></p>
         <p className="text-gray-600 mb-2">Vendu par: <span className='font-bold text-black'>{product.store_name}</span></p>
         <p className="text-gray-600 mb-2">Millesime: <span className='font-bold text-black'>{product.millesime}</span></p>
-        <p className="text-gray-600 mb-2">Certification: {product.certification}</p>
+        <p className="text-gray-600 mb-2">Certification: <span className='font-bold text-black'>{product.certification?.toUpperCase()}</span></p>
         <p className="text-gray-600 mb-2">Region: {product.region__pays}</p>
         <p className="text-gray-600 mb-2">Appellation: {product.appelation}</p>
         <p className="text-gray-600 mb-2">Château: {product.nom_chateau}</p>

@@ -26,7 +26,7 @@ const PromotionSection = () => {
       <p className="font-extrabold text-orange-600 text-xs sm:text-xs lg:text-sm">
         {/* Affichage sur mobile avec emojis */}
         <span className="sm:hidden">
-          🍇🚚 Livraison offerte 🚚🍇<br /> dès 6 bouteilles achetées sur un même Domaine
+          🍇🚚 Livraison offerte 🚚🍇<br /> Dès 6 bouteilles achetées sur un même Domaine
         </span>
 
         {/* Affichage sur plus grand écran sans saut de ligne */}
