@@ -1,11 +1,10 @@
-"use client"; // Ajoutez cette ligne en haut du fichier
-
+// path: components/ProductCard.tsx
+"use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Star } from 'lucide-react';
 
-// Définition des interfaces pour le produit et les props
 interface Product {
   id: number;
   name: string;
@@ -32,24 +31,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const router = useRouter();
   const [quantity, setQuantity] = useState<number>(1);
 
-  // Fonction de gestion du cache des produits
   const cacheProductData = (product: Product) => {
     const cachedProducts = JSON.parse(localStorage.getItem('cachedProducts') || '{}');
     cachedProducts[product.id] = product;
     localStorage.setItem('cachedProducts', JSON.stringify(cachedProducts));
   };
 
-  // Vérifie si les données du produit sont en cache
   const getCachedProductData = (productId: number): Product | null => {
     const cachedProducts = JSON.parse(localStorage.getItem('cachedProducts') || '{}');
     return cachedProducts[productId] || null;
   };
 
   const handleRedirect = () => {
-    // Si le produit est déjà en cache, utilise les données en cache
     const cachedProduct = getCachedProductData(product.id);
     if (!cachedProduct) {
-      cacheProductData(product); // Ajoute le produit au cache
+      cacheProductData(product);
     }
     router.push(`/product/${product.id}`);
   };
@@ -103,10 +99,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const certificationLogo = getCertificationLogo(product.certification);
 
   return (
-    <div
-      className="border rounded-lg shadow-md p-4 flex flex-col"
-      style={{ height: '490px', width: '100%' }}
-    >
+    <div className="border rounded-lg shadow-md p-4 flex flex-col" style={{ height: '490px', width: '100%' }}>
+      {/* Affichage des couleurs de catégories */}
       <div className={`h-2 ${getCategoryColor(product.categories[0]?.name || 'default')} mb-4`}></div>
 
       <div className="flex justify-between items-start z-10">
@@ -162,17 +156,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
       </div>
 
-      <h3
-        className="text-lg font-bold text-black hover:underline cursor-pointer"
-        onClick={handleRedirect}
-      >
+      <h3 className="text-lg font-bold text-black hover:underline cursor-pointer" onClick={handleRedirect}>
         {product.name}
       </h3>
 
-      <p
-        className="text-sm font-bold hover:underline cursor-pointer"
-        onClick={handleRedirect}
-      >
+      <p className="text-sm font-bold hover:underline cursor-pointer" onClick={handleRedirect}>
         {product.nom_chateau || "Château inconnu"}
       </p>
 
@@ -209,9 +197,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
         <button
           onClick={handleAddToCart}
-          className="bg-orange-500 text-white font-semibold px-4 py-2 rounded-md"
+          className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition duration-300"
         >
-          Commander
+          Ajouter au panier
         </button>
       </div>
     </div>

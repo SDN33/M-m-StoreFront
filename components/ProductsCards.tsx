@@ -1,3 +1,4 @@
+// path: components/ProductsCards.tsx
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import ProductFilter from '@/components/ProductFilters';

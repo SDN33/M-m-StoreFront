@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import { Star, Truck, Package } from 'lucide-react';
+import { Star, Truck, Package, Video } from 'lucide-react';
+import Livraison from '@/components/Livraison';
 
 interface Product {
   id: number;
@@ -117,7 +118,7 @@ const ProductPage: React.FC = () => {
   if (!product) return null;
 
   return (
-    <div className="max-w-6xl mx-auto px-6 sm:px-6 lg:px-8 py-8 min-h-screen" style={{ marginTop: '5rem' }}>
+    <div className="max-w-6xl mx-auto px-6 sm:px-6 lg:px-8 py-8 min-h-screen" style={{ marginTop: '4rem' }}>
       <nav aria-label="Breadcrumb" className="text-sm mb-4">
         <ol className="list-none p-0 inline-flex">
           <li className="flex items-center">
@@ -222,7 +223,7 @@ const ProductPage: React.FC = () => {
             <div className="flex justify-between">
               <p className="text-sm font-semibold">Accords mets</p>
               <p className="text-sm text-primary">
-                {product.accord_mets ? product.accord_mets : 'Non renseigné'}
+               {Array.isArray(product.accord_mets) ? product.accord_mets.join(', ') : 'Non renseignés'}
               </p>
             </div>
 
@@ -235,6 +236,9 @@ const ProductPage: React.FC = () => {
           </div>
         </div>
       </div>
+      <br /><br />
+      <Livraison />
+      <Image src="/images/bannereco2.png" alt="Bannière" width={1920} height={200} loading="lazy"/>
     </div>
   );
 };

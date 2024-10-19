@@ -1,3 +1,4 @@
+// path: pages/api/products.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios, { AxiosError } from 'axios';
 
@@ -209,7 +210,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               accord_mets,
               cepages,
               conservation,
-              style, 
+              style,
             };
           }
           return null;
