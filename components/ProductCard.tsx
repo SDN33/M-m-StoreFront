@@ -132,7 +132,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         {/* Afficher l'image du vendeur et son nom en bas à droite de l'image */}
         <div className="absolute bottom-6 right-2 flex flex-col items-center">
-          <div className="relative w-10 h-10 mb-1">
+          <div className="relative w-12 h-12 mb-1">
             <Image
               src={product.vendor?.vendorPhotoUrl || '/images/mémé-georgette1.png'} // Utilisez l'image par défaut
               alt={formatVendorName(product.store_name)}
