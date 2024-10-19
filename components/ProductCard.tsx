@@ -102,7 +102,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </div>
           ))}
           {product.certification && (
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center z-10">
               <Image
                 src={certificationLogo.src}
                 alt={product.certification}
@@ -112,7 +112,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </div>
           )}
         </div>
-        <span className="flex items-start">
+        <span className="flex items-start z-10">
           <span className="text-4xl font-bold">{Math.floor(product.price)}</span>
           <span className="text-xl font-bold align-top mt-1">
             <sup>€{(product.price % 1).toFixed(2).substring(2)}</sup>
@@ -122,7 +122,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       <div className="relative w-full h-72 mb-4">
         <Image
-          className="zoom"
+          className="hover:scale-110 transition-transform"
           src={product.images.length > 0 ? product.images[0].src : '/images/vinmémé.png'}
           alt={product.name}
           layout="fill"
@@ -132,7 +132,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         {/* Afficher l'image du vendeur et son nom en bas à droite de l'image */}
         <div className="absolute bottom-6 right-2 flex flex-col items-center">
-          <div className="relative w-12 h-12 mb-1">
+          <div className="relative w-12 h-12 mb-1 hover:scale-110 transition-transform">
             <Image
               src={product.vendor?.vendorPhotoUrl || '/images/mémé-georgette1.png'} // Utilisez l'image par défaut
               alt={formatVendorName(product.store_name)}
