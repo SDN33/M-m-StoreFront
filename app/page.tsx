@@ -6,6 +6,7 @@ import Slogan from '@/components/Slogan';
 import Newletter from '@/components/Newletter';
 import PromotionSection from '@/components/PromotionSection';
 import Livraison from '@/components/Livraison';
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -14,7 +15,6 @@ export default function Home() {
         <PromotionSection />
         <HeroBanner />
         <Products />
-        <br />
         <Livraison />
         <Slogan />
         <br /><br />
