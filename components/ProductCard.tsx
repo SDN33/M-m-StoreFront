@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Image from 'next/image'; // Assure-toi d'importer le composant Image de Next.js
-import { Star } from 'lucide-react'; // Assure-toi d'avoir installé lucide-react pour les icônes
+import Image from 'next/image';
+import { Star } from 'lucide-react';
 
 interface Product {
   id: number;
@@ -57,17 +57,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }
   };
 
-  // ... autres états
   const [quantity, setQuantity] = useState<number>(1);
 
   const handleAddToCart = () => {
-    // Add your logic to handle adding the product to the cart
     console.log(`Added ${quantity} of ${product.name} to the cart.`);
   };
 
   return (
-    <div className="border rounded-lg shadow-md p-4 flex flex-col" style={{ height: '480px', width: '100%' }}>
-      {/* Bande de couleur ajoutée */}
+    <div className="border rounded-lg shadow-md p-4 flex flex-col" style={{ height: '490px', width: '100%' }}>
       <div className={`h-2 ${getCategoryColor(product.categories[0]?.name || 'default')} mb-4`}></div>
 
       <div className="flex justify-between items-start mb-2">
@@ -77,7 +74,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               <span className="text-white border-black font-semibold sloganhero text-xs">{category.name.substring(0, 3)}</span>
             </div>
           ))}
-
           {product.certification && (
             <div className="flex items-center justify-center">
               <Image
@@ -123,6 +119,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
         </div>
       </div>
+
       <h3 className="text-lg font-bold text-black">{product.name}</h3>
       <p className="text-sm font-bold">
         {product.nom_chateau || "Château inconnu"}
@@ -137,9 +134,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {[...Array(5)].map((_, i) => (
           <Star key={i} className={`w-4 h-4 ${i < Math.floor(product.average_rating || 0) ? 'text-yellow-500' : 'text-gray-300'}`} />
         ))}
-        <span className="text-xs text-gray-600 ml-1">({product.rating_count || 0} avis)</span> {/* Affichage du nombre d'avis */}
+        <span className="text-xs text-gray-600 ml-1">({product.rating_count || 0} avis)</span>
       </div>
-
 
       <div className="flex-grow"></div>
       <div className="flex items-center mx-auto">
