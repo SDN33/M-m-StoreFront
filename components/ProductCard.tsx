@@ -64,7 +64,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   // Fonction pour formater le nom du vendeur
   const formatVendorName = (storeName?: string) => {
-    if (!storeName) return 'Vendeur inconnu';
+    if (!storeName) return '@M.Georgette'; // Si le nom du vendeur est manquant
 
     const words = storeName.split(' ');
     if (words.length > 1) {
@@ -94,7 +94,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     >
       <div className={`h-2 ${getCategoryColor(product.categories[0]?.name || 'default')} mb-4`}></div>
 
-      <div className="flex justify-between items-start">
+      <div className="flex justify-between items-start z-10">
         <div className="flex space-x-1">
           {product.categories.map(category => (
             <div key={category.id} className={`w-10 h-10 rounded-full ${getCategoryColor(category.name)} flex items-center justify-center`}>
@@ -131,7 +131,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         />
 
         {/* Afficher l'image du vendeur et son nom en bas à droite de l'image */}
-        <div className="absolute bottom-6 right-2 flex flex-col items-center">
+        <div className="absolute bottom-6 right-2 md:right-6 flex flex-col items-center">
           <div className="relative w-12 h-12 mb-1 hover:scale-110 transition-transform">
             <Image
               src={product.vendor?.vendorPhotoUrl || '/images/mémé-georgette1.png'} // Utilisez l'image par défaut
@@ -141,7 +141,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               className="rounded-full"
             />
           </div>
-          <span className="text-xs font-bold text-center text-green-600">
+          <span className="text-[0.5rem] font-bold text-center text-green-600">
             {formatVendorName(product.store_name)}
           </span>
         </div>
