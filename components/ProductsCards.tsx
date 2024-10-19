@@ -25,7 +25,8 @@ interface Product {
   rating_count?: number;
 }
 
-interface ProductsCardsProps {}
+// Choisissez l'option qui convient à votre cas d'utilisation
+interface ProductsCardsProps extends Record<string, unknown> {}
 
 const ProductsCards: React.FC<ProductsCardsProps> = () => {
   const [sortBy, setSortBy] = useState<string>('');
@@ -50,7 +51,6 @@ const ProductsCards: React.FC<ProductsCardsProps> = () => {
     volume: [],
   });
 
-  // État pour le nombre de produits affichés
   const [visibleCount, setVisibleCount] = useState<number>(12);
 
   useEffect(() => {
@@ -122,10 +122,9 @@ const ProductsCards: React.FC<ProductsCardsProps> = () => {
       volume: [],
     });
     setSortBy('');
-    setVisibleCount(12); // Réinitialiser le compteur de produits visibles
+    setVisibleCount(12);
   };
 
-  // Fonction pour charger plus de produits
   const loadMoreProducts = () => {
     setVisibleCount(prevCount => prevCount + 12);
   };
