@@ -118,7 +118,7 @@ const ProductPage: React.FC = () => {
   if (!product) return null;
 
   return (
-    <div className="max-w-6xl mx-auto px-6 sm:px-6 lg:px-8 py-8 min-h-screen" style={{ marginTop: '4rem' }}>
+    <div className="max-w-6xl mx-auto px-6 sm:px-6 lg:px-8 py-8 min-h-screen" style={{ marginTop: '5rem' }}>
       <nav aria-label="Breadcrumb" className="text-sm mb-4">
         <ol className="list-none p-0 inline-flex">
           <li className="flex items-center">
@@ -238,7 +238,7 @@ const ProductPage: React.FC = () => {
       </div>
       <br /><br />
       <Livraison />
-      <Image src="/images/bannereco2.png" alt="Bannière" width={1920} height={200} loading="lazy"/>
+      <Image src="/images/bannereco2.png" alt="Bannière" width={1920} height={200} loading="lazy" className='w-full'/>
     </div>
   );
 };
