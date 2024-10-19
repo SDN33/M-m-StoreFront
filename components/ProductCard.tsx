@@ -97,8 +97,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <div className="flex justify-between items-start">
         <div className="flex space-x-1">
           {product.categories.map(category => (
-            <div key={category.id} className={`w-7 h-7 rounded-full ${getCategoryColor(category.name)} flex items-center justify-center`}>
-              <span className="text-white border-black font-semibold sloganhero text-xs">{category.name.substring(0, 3)}</span>
+            <div key={category.id} className={`w-10 h-10 rounded-full ${getCategoryColor(category.name)} flex items-center justify-center`}>
+              <span className="text-white border-black font-semibold sloganhero text-sm">{category.name.substring(0, 3)}</span>
             </div>
           ))}
           {product.certification && (
