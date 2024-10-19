@@ -1,3 +1,5 @@
+// pages/api/products.ts
+
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios, { AxiosError } from 'axios';
 

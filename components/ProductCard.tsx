@@ -1,7 +1,11 @@
+"use client"; // Ajoutez cette ligne en haut du fichier
+
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation'; // Utiliser le hook useRouter de next/navigation
 import { Star } from 'lucide-react';
 
+// Définition des interfaces pour le produit et les props
 interface Product {
   id: number;
   name: string;
@@ -25,6 +29,8 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const router = useRouter(); // Utilisation du routeur pour redirection
+
   const getCategoryColor = (categoryName: string) => {
     switch (categoryName.toLowerCase()) {
       case 'rouge':
@@ -42,12 +48,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }
   };
 
-  const getCertificationLogo = (certification: string) => {
-    switch (certification.toLowerCase()) {
+  const getCertificationLogo = (certification?: string) => {
+    switch (certification?.toLowerCase()) {
       case 'bio':
         return "/images/logobio.webp";
       case 'demeter':
-        return "/images/biodemeter.png";
       case 'biodynamie':
         return "/images/biodemeter.png";
       case 'en conversion':
@@ -61,6 +66,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const handleAddToCart = () => {
     console.log(`Added ${quantity} of ${product.name} to the cart.`);
+  };
+
+  const handleRedirect = () => {
+    router.push(`/product/${product.id}`); // Redirection vers la page produit
   };
 
   return (
@@ -81,9 +90,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 alt={product.certification}
                 width={28}
                 height={28}
+                loading="lazy" // Amélioration de la performance
               />
             </div>
           )}
+          <div>
+            <div className="text-xs text-orange-600">Millésime</div>
+            {product.millesime}
+          </div>
         </div>
         <span className="flex items-start">
           <span className="text-4xl font-bold">{Math.floor(product.price)}</span>
@@ -120,15 +134,27 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
       </div>
 
-      <h3 className="text-lg font-bold text-black">{product.name}</h3>
-      <p className="text-sm font-bold">
+      {/* Nom du produit avec surlignement et redirection */}
+      <h3
+        className="text-lg font-bold text-black hover:underline cursor-pointer"
+        onClick={handleRedirect}
+      >
+        {product.name}
+      </h3>
+
+      {/* Nom du château avec surlignement et redirection */}
+      <p
+        className="text-sm font-bold hover:underline cursor-pointer"
+        onClick={handleRedirect}
+      >
         {product.nom_chateau || "Château inconnu"}
       </p>
+
       <p className="text-sm mb-1 font-bold">
         {product.appelation?.toUpperCase() || 'Vigneron inconnu'}
       </p>
       <p className="text-sm mb-2">
-        {product.millesime} | {product.region__pays?.toUpperCase()} | {product.volume}
+        {product.region__pays?.toUpperCase()} | {product.volume}
       </p>
       <div className="flex items-center mb-2 mx-auto">
         {[...Array(5)].map((_, i) => (
@@ -145,7 +171,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             onChange={(e) => setQuantity(Number(e.target.value))}
             className="appearance-none bg-white border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
           >
-            {[1, 2, 3, 4, 5].map(num => (
+            {[1, 2, 3, 4, 5, 6].map(num => (
               <option key={num} value={num}>{num}</option>
             ))}
           </select>
