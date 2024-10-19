@@ -1,5 +1,3 @@
-// pages/api/products.ts
-
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios, { AxiosError } from 'axios';
 
@@ -21,7 +19,10 @@ interface Product {
   rating_count?: number;
   volume?: string;
   nom_chateau?: string;
-  accords_mets?: string;
+  accord_mets?: Array<string>;
+  cepages?: Array<string>;
+  conservation?: string;
+  style?: string;
 }
 
 interface Category {
@@ -49,7 +50,10 @@ const transformMetaData = (metaData: { key: string; value: string }[]): { [key: 
   let rating_count = '0';
   let volume = '';
   let nom_chateau = '';
-  let accords_mets = '';
+  let accord_mets = '';
+  let cepages = '';
+  let conservation = '';
+  let style = '';
 
   metaData.forEach(({ key, value }) => {
     switch (key) {
@@ -77,8 +81,17 @@ const transformMetaData = (metaData: { key: string; value: string }[]): { [key: 
       case 'volume':
         volume = value;
         break;
-      case 'accords_mets':
-        accords_mets = value;
+      case 'accord_mets':
+        accord_mets = value;
+        break;
+      case 'cepages':
+        cepages = value;
+        break;
+      case 'conservation':
+        conservation = value;
+        break;
+      case 'style':
+        style = value;
         break;
     }
     const cleanKey = key.startsWith('_') ? key.slice(1) : key;
@@ -95,7 +108,10 @@ const transformMetaData = (metaData: { key: string; value: string }[]): { [key: 
     rating_count,
     volume,
     nom_chateau,
-    accords_mets,
+    accord_mets,
+    cepages,
+    conservation,
+    style,
   };
 };
 
@@ -169,7 +185,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const transformedProducts = await Promise.all((productsOrCategories as Product[]).map(async product => {
           const { meta_data, id, status, is_validated } = product;
-          const { brandname, millesime, certification, region__pays, appelation, average_rating, rating_count, volume, nom_chateau, accords_mets, ...meta } = transformMetaData(meta_data);
+          const { brandname, millesime, certification, region__pays, appelation, average_rating, rating_count, volume, nom_chateau, accord_mets, cepages, conservation, style, ...meta } = transformMetaData(meta_data);
           const vendorDetails = await getVendorDetails(id);
           const store_name = product?.store_name || '';
 
@@ -190,7 +206,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               volume, // Ajout du volume ici
               vendor_image: vendorDetails?.vendorPhotoUrl || '', // Utilisez vendorPhotoUrl
               rating: `${average_rating} (${rating_count} avis)`,
-              accords_mets,
+              accord_mets,
+              cepages,
+              conservation,
+              style, 
             };
           }
           return null;
