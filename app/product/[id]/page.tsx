@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import { Star, Truck, Package, Video } from 'lucide-react';
+import { Star, Truck, Package } from 'lucide-react';
 import Livraison from '@/components/Livraison';
 
 interface Product {
