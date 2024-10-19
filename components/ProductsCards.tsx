@@ -25,11 +25,13 @@ interface Product {
   rating_count?: number;
 }
 
+interface ProductsCardsProps {}
 
-const ProductsCards: React.FC = () => {
+const ProductsCards: React.FC<ProductsCardsProps> = () => {
   const [sortBy, setSortBy] = useState<string>('');
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [selectedFilters, setSelectedFilters] = useState<{
     color: string[];
     region: string[];
@@ -48,6 +50,9 @@ const ProductsCards: React.FC = () => {
     volume: [],
   });
 
+  // État pour le nombre de produits affichés
+  const [visibleCount, setVisibleCount] = useState<number>(12);
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -60,6 +65,7 @@ const ProductsCards: React.FC = () => {
         }
       } catch (err) {
         console.error('Erreur lors de la récupération des produits', err);
+        setError('Erreur lors de la récupération des produits. Veuillez réessayer.');
       } finally {
         setLoading(false);
       }
@@ -116,6 +122,12 @@ const ProductsCards: React.FC = () => {
       volume: [],
     });
     setSortBy('');
+    setVisibleCount(12); // Réinitialiser le compteur de produits visibles
+  };
+
+  // Fonction pour charger plus de produits
+  const loadMoreProducts = () => {
+    setVisibleCount(prevCount => prevCount + 12);
   };
 
   return (
@@ -130,17 +142,26 @@ const ProductsCards: React.FC = () => {
           {loading && (
             <div className="flex flex-col items-center">
               <div className="loader"></div>
-              <p className="text-orange-600 font-bold text-lg">
-                Chargement des vins de Mémé...
-              </p>
+              <p className="text-orange-600 font-bold text-lg">Chargement des vins de Mémé...</p>
             </div>
           )}
+          {error && <p className="text-red-600">{error}</p>}
           {sortedProducts.length === 0 && !loading && <p>Aucun produit trouvé.</p>}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6 -mt-10">
-          {sortedProducts.map(product => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6 -mt-10">
+            {sortedProducts.slice(0, visibleCount).map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
+          {sortedProducts.length > visibleCount && (
+            <div className="flex justify-center mt-4">
+              <button
+                onClick={loadMoreProducts}
+                className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600"
+              >
+                Voir notre cave
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
