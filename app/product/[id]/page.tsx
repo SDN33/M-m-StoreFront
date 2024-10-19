@@ -30,6 +30,31 @@ interface Product {
   certification?: string;
 }
 
+const formatDescription = (description: string, maxChars = 90) => {
+  // Retirer les balises HTML
+  const plainText = description.replace(/<\/?[^>]+(>|$)/g, '');
+  const words = plainText.split(' ');
+  let formattedDescription = '';
+  let line = '';
+
+  words.forEach(word => {
+    if (line.length + word.length + 1 > maxChars) {
+      formattedDescription += line.trim() + '\n'; // Ajoute la ligne et un saut de ligne
+      line = word + ' '; // Commence une nouvelle ligne avec le mot actuel
+    } else {
+      line += word + ' '; // Ajoute le mot à la ligne actuelle
+    }
+  });
+
+  // Ajoute la dernière ligne si elle n'est pas vide
+  if (line.trim()) {
+    formattedDescription += line.trim();
+  }
+
+  return formattedDescription;
+};
+
+
 const getCertificationLogo = (certification?: string) => {
   switch (certification?.toLowerCase()) {
     case 'bio':
@@ -149,9 +174,15 @@ const ProductPage: React.FC = () => {
         </div>
 
         <div className="md:w-1/2">
-          <p className="text-sm font-bold">{product.nom_chateau || 'Château inconnu'}</p>
-          <h1 className="text-3xl font-bold !-mt-1">{product.name}</h1>
+          <p className="text-sm font-bold !-mb-2">{product.nom_chateau || 'Château inconnu'}</p>
+          <h1 className="text-3xl font-bold ">{product.name}</h1>
           <p className="text-sm font-bold">{product.appelation?.toUpperCase()} | {product.region__pays?.toUpperCase()}</p>
+          {product.categories.map(category => (
+            <div key={category.id} className={`${getCategoryColor(category.name)} p-2 rounded-md inline-block mb-2`}>
+              <span className="font-semibold text-black">Vin {category.name}</span>
+            </div>
+          ))}
+
           <p className="text-sm mb-2">
             {product.certification ? <Image {...getCertificationLogo(product.certification)} alt="Certification logo" /> : 'Non renseignée'}
           </p>
@@ -189,56 +220,21 @@ const ProductPage: React.FC = () => {
               <Truck className="h-4 w-4 text-orange-600" />
               <span>Livraison rapide</span>
               <Package className="h-4 w-4 text-orange-600" />
-              <span>Emballage soigneux</span>
-            </div>
-          </div>
-
-          {product.categories.map(category => (
-            <div key={category.id} className={`${getCategoryColor(category.name)} p-2 rounded-md inline-block mb-2`}>
-              <span className="font-semibold">Vin {category.name}</span>
-            </div>
-          ))}
-
-          {product.description && (
-            <p>
-              {product.description.replace(/<\/?[^>]+(>|$)/g, '')}
-            </p>
-          )}
-
-          <div className="flex flex-col gap-2 mt-8">
-            <div className="flex justify-between">
-              <p className="text-sm font-semibold">Type</p>
-              <p className="text-sm text-primary">
-                {product.style ? product.style.toUpperCase() : 'Non renseignée'}
-              </p>
-            </div>
-
-            <div className="flex justify-between">
-              <p className="text-sm font-semibold">Conservation</p>
-              <p className="text-sm text-primary">
-                {product.conservation ? product.conservation : 'Non renseignée'}
-              </p>
-            </div>
-
-            <div className="flex justify-between">
-              <p className="text-sm font-semibold">Accords mets</p>
-              <p className="text-sm text-primary">
-               {Array.isArray(product.accord_mets) ? product.accord_mets.join(', ') : 'Non renseignés'}
-              </p>
-            </div>
-
-            <div className="flex justify-between">
-              <p className="text-sm font-semibold">Cépages</p>
-              <p className="text-sm text-primary">
-                {Array.isArray(product.cepages) ? product.cepages.join(', ') : 'Non renseignés'}
-              </p>
+              <span>Emballage soigné</span>
             </div>
           </div>
         </div>
       </div>
+
+      <div className="mt-10 px-8">
+        <h2 className="text-2xl font-bold">Description</h2>
+        <hr className="my-2 border-gray-200" />
+        <p className="mt-2 text-gray-700 whitespace-pre-line text-center">{product.description ? formatDescription(product.description) : 'Aucune description disponible.'}</p>
+      </div>
+
+
       <br /><br />
       <Livraison />
-      <Image src="/images/bannereco2.png" alt="Bannière" width={1920} height={200} loading="lazy" className='w-full'/>
     </div>
   );
 };
