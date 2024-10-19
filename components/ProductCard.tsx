@@ -51,14 +51,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const getCertificationLogo = (certification?: string) => {
     switch (certification?.toLowerCase()) {
       case 'bio':
-        return "/images/logobio.webp";
+        return { src: "/images/logobio.webp", width: 24, height: 24 };
       case 'demeter':
       case 'biodynamie':
-        return "/images/biodemeter.png";
+        return { src: "/images/biodemeter.png", width: 80, height: 80 }; // Augmentez la hauteur ici
       case 'en conversion':
-        return '/images/enconv.png';
+        return { src: '/images/enconv.png', width: 28, height: 28  };
       default:
-        return '';
+        return { src: '', width: 0, height: 0 };
     }
   };
 
@@ -71,6 +71,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const handleRedirect = () => {
     router.push(`/product/${product.id}`); // Redirection vers la page produit
   };
+
+  const certificationLogo = getCertificationLogo(product.certification);
 
   return (
     <div className="border rounded-lg shadow-md p-4 flex flex-col" style={{ height: '490px', width: '100%' }}>
@@ -86,11 +88,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {product.certification && (
             <div className="flex items-center justify-center">
               <Image
-                src={getCertificationLogo(product.certification)}
+                src={certificationLogo.src}
                 alt={product.certification}
-                width={28}
-                height={28}
-                loading="lazy" // Amélioration de la performance
+                width={certificationLogo.width}
+                height={certificationLogo.height} // Utilisez la hauteur conditionnelle
               />
             </div>
           )}
