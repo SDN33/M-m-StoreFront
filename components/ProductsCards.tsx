@@ -118,23 +118,7 @@ const ProductsCards: React.FC = () => {
     setSortBy('');
   };
 
-  const getCertificationLogo = (certification: string) => {
-    switch (certification.toLowerCase()) {
-      case 'bio':
-        return "/images/logobio.webp";
-      case 'demeter':
-        return "/images/biodemeter.png";
-      case 'biodynamie':
-        return "/images/biodemeter.png";
-      case 'en conversion':
-        return '/images/enconv.png';
-      default:
-        return '';
-    }
-  };
-
-  // ... autres états
-  const [quantity, setQuantity] = useState<number>(1);
+  
 
   return (
     <div className="flex flex-col mr-4 lg:mr-16 md:-mt-8">

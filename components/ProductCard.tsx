@@ -1,5 +1,4 @@
-// components/ProductCard.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image'; // Assure-toi d'importer le composant Image de Next.js
 import { Star } from 'lucide-react'; // Assure-toi d'avoir installé lucide-react pour les icônes
 
@@ -17,14 +16,13 @@ interface Product {
   millesime?: string;
   region__pays?: string;
   volume?: string;
-  rating?: number;
   rating_count?: number;
+  average_rating?: number;
 }
 
 interface ProductCardProps {
   product: Product;
 }
-
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const getCategoryColor = (categoryName: string) => {
@@ -44,19 +42,31 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }
   };
 
-
   const getCertificationLogo = (certification: string) => {
-    // Remplace par ta logique pour obtenir le logo de certification
-    const logos: { [key: string]: string } = {
-      bio: '/images/logobio.webp',
-      demeter: '/images/biodemeter.png',
-      // Ajoute d'autres certifications si nécessaire
-    };
-    return logos[certification] || '/logos/default.png';
+    switch (certification.toLowerCase()) {
+      case 'bio':
+        return "/images/logobio.webp";
+      case 'demeter':
+        return "/images/biodemeter.png";
+      case 'biodynamie':
+        return "/images/biodemeter.png";
+      case 'en conversion':
+        return '/images/enconv.png';
+      default:
+        return '';
+    }
+  };
+
+  // ... autres états
+  const [quantity, setQuantity] = useState<number>(1);
+
+  const handleAddToCart = () => {
+    // Add your logic to handle adding the product to the cart
+    console.log(`Added ${quantity} of ${product.name} to the cart.`);
   };
 
   return (
-    <div className="border rounded-lg shadow-md p-4 flex flex-col" style={{ height: '460px', width: '100%' }}>
+    <div className="border rounded-lg shadow-md p-4 flex flex-col" style={{ height: '480px', width: '100%' }}>
       {/* Bande de couleur ajoutée */}
       <div className={`h-2 ${getCategoryColor(product.categories[0]?.name || 'default')} mb-4`}></div>
 
@@ -124,21 +134,40 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {product.millesime} | {product.region__pays?.toUpperCase()} | {product.volume}
       </p>
       <div className="flex items-center">
-        {product.rating != null && typeof product.rating === 'number' && (
-          <>
+        {product.average_rating != null && typeof product.average_rating === 'number' && (
+          <div className="flex items-center">
             <Star className="w-4 h-4 text-yellow-500" />
-            <span className="text-sm font-bold">{product.rating.toFixed(1)}</span>
-            <span className="text-sm font-light">({product.rating_count} avis)</span>
-          </>
+            <span className="text-sm font-bold ml-1">{product.average_rating.toFixed(1)}</span>
+            <span className="text-sm font-light ml-1">({product.rating_count} avis)</span>
+          </div>
         )}
       </div>
+
       <div className="flex-grow"></div>
-      <button
-        className="bg-orange-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-orange-800 transition-colors w-fit mx-auto"
-        onClick={() => alert('Ajouté au panier')}
-      >
-        Commander
-      </button>
+      <div className="flex items-center mx-auto">
+        <div className="relative mr-2">
+          <select
+            value={quantity}
+            onChange={(e) => setQuantity(Number(e.target.value))}
+            className="appearance-none bg-white border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          >
+            {[1, 2, 3, 4, 5].map(num => (
+              <option key={num} value={num}>{num}</option>
+            ))}
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </div>
+        </div>
+        <button
+          onClick={handleAddToCart}
+          className="bg-orange-600 text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:bg-orange-700 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
+        >
+          Commander
+        </button>
+      </div>
     </div>
   );
 };

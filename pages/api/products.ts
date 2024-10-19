@@ -6,7 +6,6 @@ interface Product {
   name: string;
   price: string; // Assurez-vous que c'est un nombre, sinon convertissez-le
   meta: { [key: string]: string };
-  brandname?: string;
   store_name?: string;
   millesime?: string;
   certification?: string;
@@ -39,7 +38,6 @@ interface AxiosErrorResponse {
 
 const transformMetaData = (metaData: { key: string; value: string }[]): { [key: string]: string } => {
   const productData: { [key: string]: string } = {};
-  let brandname = '';
   let millesime = '';
   let certification = '';
   let region__pays = '';
@@ -82,7 +80,6 @@ const transformMetaData = (metaData: { key: string; value: string }[]): { [key: 
 
   return {
     ...productData,
-    brandname,
     millesime,
     certification,
     region__pays,
