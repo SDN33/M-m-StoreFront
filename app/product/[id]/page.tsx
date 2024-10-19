@@ -38,7 +38,6 @@ const getCategoryColor = (categoryName: string): string => {
 };
 
 const ProductPage: React.FC = () => {
-  const router = useRouter();
   const params = useParams();
   const id = params ? params.id : null;
 
