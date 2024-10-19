@@ -118,8 +118,6 @@ const ProductsCards: React.FC = () => {
     setSortBy('');
   };
 
-  
-
   return (
     <div className="flex flex-col mr-4 lg:mr-16 md:-mt-8">
       <FilterTop sortBy={sortBy} handleSortChange={handleSortChange} resetFilters={resetFilters} />
@@ -138,7 +136,7 @@ const ProductsCards: React.FC = () => {
             </div>
           )}
           {sortedProducts.length === 0 && !loading && <p>Aucun produit trouvé.</p>}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6 -mt-10">
           {sortedProducts.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}

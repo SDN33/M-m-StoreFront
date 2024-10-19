@@ -8,11 +8,11 @@ interface FiltertopProps {
 
 const Filtertop: React.FC<FiltertopProps> = ({ sortBy, handleSortChange, resetFilters }) => {
   return (
-    <div className="flex flex-col items-center mb-4 sm:flex-row sm:justify-center md:justify-end mr-4">
-      <div className="flex items-center justify-center mb-2 sm:mb-0">
-        <label className="mr-2 font-bold text-gray-800">+ de 120 vignerons</label>
+    <div className="flex flex-col items-center sm:flex-row sm:justify-center md:justify-end mr-4">
+      <div className="text-lg flex items-center justify-center mb-2 sm:mb-0">
+        <label className="mr-2 font-bold text-gray-600">+ de 120 vignerons</label>
         <span className="mx-2 font-bold text-orange-600">| </span>
-        <label className="mr-2 font-bold text-gray-800">+ de 1000 vins</label>
+        <label className="mr-2 font-bold text-gray-600">+ de 1000 vins</label>
       </div>
 
       <span className="mx-2 font-bold text-orange-600 hidden sm:inline">|</span>
