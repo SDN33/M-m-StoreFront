@@ -141,7 +141,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               className="rounded-full"
             />
           </div>
-          <span className="text-xs font-bold text-center">
+          <span className="text-xs font-bold text-center text-green-600">
             {formatVendorName(product.store_name)}
           </span>
         </div>
