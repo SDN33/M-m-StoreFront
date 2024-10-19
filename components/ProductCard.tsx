@@ -13,7 +13,7 @@ interface Product {
   categories: { id: number; name: string }[];
   certification?: string;
   images: { src: string }[];
-  vendor?: { vendorPhotoUrl?: string };
+  vendor?: { vendorPhotoUrl?: string; name?: string }; // Ajout du nom du vendeur
   store_name?: string;
   nom_chateau?: string;
   appelation?: string;
@@ -62,6 +62,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }
   };
 
+  // Fonction pour formater le nom du vendeur
+  const formatVendorName = (storeName?: string) => {
+    if (!storeName) return 'Vendeur inconnu';
+
+    const words = storeName.split(' ');
+    if (words.length > 1) {
+      const firstNameInitial = words[0].charAt(0).toUpperCase();
+      const lastName = words[1].charAt(0).toUpperCase() + words[1].slice(1);
+      return `${firstNameInitial}. ${lastName}`;
+    }
+    return storeName; // Si le vendeur a un seul mot pour son nom
+  };
+
   const [quantity, setQuantity] = useState<number>(1);
 
   const handleAddToCart = () => {
@@ -81,7 +94,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     >
       <div className={`h-2 ${getCategoryColor(product.categories[0]?.name || 'default')} mb-4`}></div>
 
-      <div className="flex justify-between items-start mb-2">
+      <div className="flex justify-between items-start">
         <div className="flex space-x-1">
           {product.categories.map(category => (
             <div key={category.id} className={`w-7 h-7 rounded-full ${getCategoryColor(category.name)} flex items-center justify-center`}>
@@ -98,11 +111,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               />
             </div>
           )}
-          {/* Afficher le millésime seulement sur les écrans md et plus */}
-          <div className="hidden md:block">
-            <div className="text-xs text-orange-600">Millésime</div>
-            {product.millesime}
-          </div>
         </div>
         <span className="flex items-start">
           <span className="text-4xl font-bold">{Math.floor(product.price)}</span>
@@ -121,6 +129,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           objectFit="contain"
           priority
         />
+
+        {/* Afficher l'image du vendeur et son nom en bas à droite de l'image */}
+        <div className="absolute bottom-6 right-2 flex flex-col items-center">
+          <div className="relative w-10 h-10 mb-1">
+            <Image
+              src={product.vendor?.vendorPhotoUrl || '/images/mémé-georgette1.png'} // Utilisez l'image par défaut
+              alt={formatVendorName(product.store_name)}
+              layout="fill"
+              objectFit="contain"
+              className="rounded-full"
+            />
+          </div>
+          <span className="text-xs font-bold text-center">
+            {formatVendorName(product.store_name)}
+          </span>
+        </div>
       </div>
 
       <h3
@@ -139,11 +163,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       <p className="text-sm mb-1 font-bold">
         {product.appelation?.toUpperCase() || 'Vigneron inconnu'}
-        {/* Afficher le millésime uniquement sur mobile */}
-        <span className="block md:hidden">{`${product.millesime}`}</span>
       </p>
       <p className="text-sm mb-2">
-        {product.region__pays?.toUpperCase()} | {product.volume}
+        {product.region__pays?.toUpperCase()} | {product.millesime} | {product.volume}
       </p>
       <div className="flex items-center mb-2 mx-auto">
         {[...Array(5)].map((_, i) => (
