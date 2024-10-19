@@ -36,14 +36,14 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     region: [
       'Alsace', 'Beaujolais', 'Bourgogne', 'Bordeaux',
       'Champagne', 'Jura', 'Languedoc', 'Loire',
-      'Provence Alpes Côte d’Azur', 'Roussillon',
+      'PACA', 'Roussillon',
       'Savoie', 'Sud Ouest', 'Vallée du Rhône',
       'Italie', 'Espagne', 'Portugal', 'Allemagne',
     ],
     vintage: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
     certification: ['Bio', 'Biodynamie', 'En conversion'],
     style: ['Charpenté', 'Fruité', 'Moelleux', 'Corsé', 'Sec'],
-    volume: ['75cl', '1L', 'Autres'], // Options de volume
+    volume: ['75 cl', '1L', 'Autres'], // Options de volume
   };
 
   const toggleSection = (section: keyof typeof filterOptions) => {
