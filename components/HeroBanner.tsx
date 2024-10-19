@@ -39,6 +39,8 @@ const HeroBanner = () => {
         Votre navigateur ne supporte pas la vidéo.
       </video>
 
+      <div className="absolute inset-0 bg-black opacity-50 md:hidden z-1"></div>
+
       {/* Image de fond pour mobile si la vidéo ne se charge pas */}
       {videoError && (
         <div
