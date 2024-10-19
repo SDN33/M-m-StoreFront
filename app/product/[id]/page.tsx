@@ -117,7 +117,7 @@ const ProductPage: React.FC = () => {
   if (!product) return null;
 
   return (
-    <div className="max-w-6xl mx-auto px-6 sm:px-6 lg:px-8 py-8 min-h-screen" style={{ marginTop: '6rem' }}>
+    <div className="max-w-6xl mx-auto px-6 sm:px-6 lg:px-8 py-8 min-h-screen" style={{ marginTop: '5rem' }}>
       <nav aria-label="Breadcrumb" className="text-sm mb-4">
         <ol className="list-none p-0 inline-flex">
           <li className="flex items-center">
