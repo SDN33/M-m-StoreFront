@@ -25,10 +25,7 @@ interface Product {
   rating_count?: number;
 }
 
-// Choisissez l'option qui convient à votre cas d'utilisation
-interface ProductsCardsProps extends Record<string, unknown> {}
-
-const ProductsCards: React.FC<ProductsCardsProps> = () => {
+const ProductsCards: React.FC = () => {
   const [sortBy, setSortBy] = useState<string>('');
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -157,7 +154,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = () => {
                 onClick={loadMoreProducts}
                 className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600"
               >
-                Voir notre cave
+                Voir Plus de Vins
               </button>
             </div>
           )}
