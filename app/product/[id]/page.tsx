@@ -152,8 +152,8 @@ const ProductPage: React.FC = () => {
           <h1 className="text-3xl font-bold !-mt-1">{product.name}</h1>
           <p className="text-sm font-bold">{product.appelation?.toUpperCase()} | {product.region__pays?.toUpperCase()}</p>
           <p className="text-sm mb-2">
-                  {product.certification ? <Image {...getCertificationLogo(product.certification)} alt="Certification logo" /> : 'Non renseignée'}
-                </p>
+            {product.certification ? <Image {...getCertificationLogo(product.certification)} alt="Certification logo" /> : 'Non renseignée'}
+          </p>
           <p className="text-sm font-normal">Vendu par <span className='text-green-600'>{product.store_name ? product.store_name : 'Mémé Georgette'}</span></p>
           <div className="flex items-center mb-4">
             {product.rating && renderStars(product.rating)}
@@ -181,6 +181,17 @@ const ProductPage: React.FC = () => {
               Ajouter au panier
             </button>
           </div>
+
+          {/* Saut de ligne ajouté ici */}
+          <div className="mt-4">
+            <div className="flex items-center gap-2">
+              <Truck className="h-4 w-4 text-orange-600" />
+              <span>Livraison rapide</span>
+              <Package className="h-4 w-4 text-orange-600" />
+              <span>Emballage soigneux</span>
+            </div>
+          </div>
+
           {product.categories.map(category => (
             <div key={category.id} className={`${getCategoryColor(category.name)} p-2 rounded-md inline-block mb-2`}>
               <span className="font-semibold">Vin {category.name}</span>
@@ -195,31 +206,9 @@ const ProductPage: React.FC = () => {
 
           <div className="flex flex-col gap-2 mt-8">
             <div className="flex justify-between">
-                <p className="text-sm font-semibold">Type</p>
-                <p className="text-sm text-primary">
-                  {product.style ? product.style.toUpperCase() : 'Non renseignée'}
-                </p>
-            </div>
-
-            <div className="flex justify-between">
-              <p className="text-sm font-semibold">Accords Mets & Vin</p>
+              <p className="text-sm font-semibold">Type</p>
               <p className="text-sm text-primary">
-                {product.accord_mets
-                  ? String(product.accord_mets)
-                      .replace(/([a-z])([A-Z])/g, '$1, $2 ')
-                      .replace(/,([^ ])/g, ', $1')
-                  : 'Accords non renseignés'}
-              </p>
-            </div>
-
-            <div className="flex justify-between">
-              <p className="text-sm font-semibold">Cépages</p>
-              <p className="text-sm text-primary">
-                {product.cepages
-                  ? String(product.cepages)
-                      .replace(/([a-z])([A-Z])/g, '$1, $2 ')
-                      .replace(/,([^ ])/g, ', $1')
-                  : 'Cépages non renseignés'}
+                {product.style ? product.style.toUpperCase() : 'Non renseignée'}
               </p>
             </div>
 
@@ -229,17 +218,19 @@ const ProductPage: React.FC = () => {
                 {product.conservation ? product.conservation : 'Non renseignée'}
               </p>
             </div>
-          </div>
 
-          <div className="space-y-2 text-sm mt-6">
-            <div className="flex items-center gap-2">
-              <Truck className="h-4 w-4 text-orange-600" />
-              <span>Livraison rapide</span>
-              <Package className="h-4 w-4 text-orange-600" />
-              <span>Emballage soigneux</span>
+            <div className="flex justify-between">
+              <p className="text-sm font-semibold">Accords mets</p>
+              <p className="text-sm text-primary">
+                {product.accord_mets ? product.accord_mets : 'Non renseigné'}
+              </p>
             </div>
-            <div className="flex items-center gap-2">
 
+            <div className="flex justify-between">
+              <p className="text-sm font-semibold">Cépages</p>
+              <p className="text-sm text-primary">
+                {Array.isArray(product.cepages) ? product.cepages.join(', ') : 'Non renseignés'}
+              </p>
             </div>
           </div>
         </div>
