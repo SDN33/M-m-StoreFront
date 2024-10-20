@@ -159,26 +159,16 @@ const ProductPage: React.FC = () => {
 
   if (!product) return null;
 
+  const isMobile = window.innerWidth <= 768;
+
+
   return (
     <div className={`mt-0 :mt-[5rem]`}>
-      <div className="relative top-0 left-0 w-full">
-        <video
-          src="/videos/minibanner.mp4"
-          width={1920}
-          height={400}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="hidden md:block w-full"
-        >
-          Your browser does not support the video tag.
-        </video>
-      </div>
-      <div className='md:hidden lg:hidden xl:hidden 2xl:hidden'>
-      <br /><br /><br /><br />
 
+      <div className="relative top-0 left-0 w-full">
       </div>
+      <br /><br />
+      <br /><br />
       <div className="max-w-6xl mx-auto px-8 sm:px-6 lg:px-8 py-8 min-h-screen">
         <nav aria-label="Breadcrumb" className="text-sm mb-4">
           <ol className="list-none p-0 inline-flex">
@@ -317,7 +307,7 @@ const ProductPage: React.FC = () => {
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-bold text-orange-600 text-left">Accords mets</h3>
                 <p className="text-sm text-right">
-                  {product.accord_mets?.join(', ') ?? 'Pas d\'accords mets et vins renseignés'}
+                  {product.accord_mets? joinIfArray(product.accord_mets) : 'Pas d\'accords mets renseignés'}
                 </p>
               </div>
             </div>
@@ -335,7 +325,19 @@ const ProductPage: React.FC = () => {
         </div>
         <br />
         <br />
-        <Livraison />
+        <video
+          src="/videos/minibanner.mp4"
+          width={1920}
+          height={400}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className={`hidden md:block w-full h-[${isMobile ? '400px' : '500px'}] object-cover`}
+
+        >
+          Your browser does not support the video tag.
+        </video>
         <Image
           src="/images/bannereco2.png"
           alt="Bannière écologique"
@@ -344,6 +346,7 @@ const ProductPage: React.FC = () => {
           objectFit="cover"
 
         />
+        <Livraison />
       </div>
     </div>
   );

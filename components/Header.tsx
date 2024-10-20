@@ -11,6 +11,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVinsMenuOpen, setIsVinsMenuOpen] = useState(false);
   const [bgColor, setBgColor] = useState('bg-black bg-opacity-80'); // Fond noir par défaut pour toutes les pages
+  const [isMobileVinsMenuOpen, setIsMobileVinsMenuOpen] = useState(false);
 
   const pathname = usePathname();
   const isHomePage = pathname === '/';
@@ -27,7 +28,7 @@ const Header = () => {
           if (currentScroll > 0) {
             setBgColor('bg-black bg-opacity-80');
           } else {
-            setBgColor('bg-transparent');
+            setBgColor('bg-black bg-opacity-80');
           }
         }
       };
@@ -154,11 +155,39 @@ const Header = () => {
         {isMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
       </button>
 
+      {/* Menu mobile */}
       {isMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white p-4 rounded-md shadow-lg z-30">
+        <div className="absolute top-full left-0 right-0 bg-white p-4 rounded-md shadow-lg z-30 transition-all duration-300 ease-in-out">
           <a href="/" className="block py-2 text-gray-800">Accueil</a>
           <a href="https://www.memegeorgette.com/" className="block py-2 text-gray-800">Découvrir Mémé Georgette</a>
-          <a href="/products" className="block py-2 text-gray-800">Nos Vins</a>
+
+          {/* Nos Vins avec sous-menu mobile */}
+          <button
+            className="block w-full text-left py-2 text-gray-800"
+            onClick={() => setIsMobileVinsMenuOpen(!isMobileVinsMenuOpen)}
+          >
+            Nos Vins
+          </button>
+          {isMobileVinsMenuOpen && (
+            <ul className="pl-4">
+              <li>
+                <a href="/products/category/rouge" className="block py-2 text-sm text-gray-800 hover:bg-gray-100">Vins Rouges</a>
+              </li>
+              <li>
+                <a href="/products/category/blanc" className="block py-2 text-sm text-gray-800 hover:bg-gray-100">Vins Blancs</a>
+              </li>
+              <li>
+                <a href="/products/category/rose" className="block py-2 text-sm text-gray-800 hover:bg-gray-100">Vins Rosés</a>
+              </li>
+              <li>
+                <a href="/products/category/petillant" className="block py-2 text-sm text-gray-800 hover:bg-gray-100">Vins Pétillants</a>
+              </li>
+              <li>
+                <a href="/products/category/liquoreux" className="block py-2 text-sm text-gray-800 hover:bg-gray-100">Vins Liquoreux</a>
+              </li>
+            </ul>
+          )}
+
           <a href="/contact" className="block py-2 text-gray-800">Contact</a>
         </div>
       )}
