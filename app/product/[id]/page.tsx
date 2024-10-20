@@ -288,48 +288,48 @@ const ProductPage: React.FC = () => {
             {product.description ? formatDescription(product.description) : 'Pas de description disponible.'}
           </p>
           <br />
-        </div>
-        {/* Grille de 2 colonnes plus compact */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-2 w-full md:w-[35rem] p-2">
-          {/* Cépages */}
-          <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-            <div className="flex justify-between">
-              <h3 className="text-lg font-bold text-orange-600">Cépages</h3>
-              <p className="text-sm text-start">
-                {product.cepages ? joinIfArray(product.cepages) : 'Pas de cépages renseignés'}
-              </p>
+          {/* Grille de 2 colonnes plus compact */}
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2  md:w-[20rem] px-10">
+            {/* Cépages */}
+            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+              <div className="flex justify-between items-center px-10">
+                <h3 className="text-lg font-bold text-orange-600 text-left">Cépages</h3>
+                <p className="text-sm text-right">
+                  {product.cepages ? joinIfArray(product.cepages) : 'Pas de cépages renseignés'}
+                </p>
+              </div>
             </div>
-          </div>
 
-          {/* Style */}
-          <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-            <div className="flex justify-between">
-              <h3 className="text-lg font-bold text-orange-600">Style</h3>
-              <p className="text-sm text-start">
-                {typeof product.style === 'string'
-                  ? product.style.charAt(0).toUpperCase() + product.style.slice(1).toLowerCase()
-                  : 'Pas de style renseigné'}
-              </p>
+            {/* Style */}
+            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-bold text-orange-600 text-left">Style</h3>
+                <p className="text-sm text-right">
+                  {typeof product.style === 'string'
+                    ? product.style.charAt(0).toUpperCase() + product.style.slice(1).toLowerCase()
+                    : 'Pas de style renseigné'}
+                </p>
+              </div>
             </div>
-          </div>
 
-          {/* Accords mets et vins */}
-          <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-            <div className="flex justify-between">
-              <h3 className="text-lg font-bold text-orange-600">Accords mets et vins</h3>
-              <p className="text-sm text-start">
-                {product.accord_mets?.join(', ') ?? 'Pas d\'accords mets et vins renseignés'}
-              </p>
+            {/* Accords mets et vins */}
+            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-bold text-orange-600 text-left">Accords mets</h3>
+                <p className="text-sm text-right">
+                  {product.accord_mets?.join(', ') ?? 'Pas d\'accords mets et vins renseignés'}
+                </p>
+              </div>
             </div>
-          </div>
 
-          {/* Conservation */}
-          <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-            <div className="flex justify-between">
-              <h3 className="text-lg font-bold text-orange-600">Conservation</h3>
-              <p className="text-sm text-start">
-                {product.conservation ? product.conservation : 'Pas d\'informations de conservation'}
-              </p>
+            {/* Conservation */}
+            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-bold text-orange-600 text-left">Conservation</h3>
+                <p className="text-sm text-right">
+                  {product.conservation ? product.conservation : 'Pas d\'informations de conservation'}
+                </p>
+              </div>
             </div>
           </div>
         </div>
