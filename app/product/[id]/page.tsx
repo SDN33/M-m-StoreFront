@@ -275,28 +275,54 @@ const ProductPage: React.FC = () => {
 
         <div className="mt-8">
           <h2 className="text-2xl font-bold !-mb-2">Description du produit</h2>
-          <div className="border-b-4 border-orange-600 w-full md:w-[70rem] my-2 md:my-2 slide-in-right"></div>
-          <p className='font-bold'>{product.description ? formatDescription(product.description) : 'Pas de description disponible.'}</p>
+          <div className="border-b-4 border-orange-600 w-[20rem] md:w-[50rem] my-2 md:my-2 slide-in-right"></div>
+          <p className='font-bold'>
+            {product.description ? formatDescription(product.description) : 'Pas de description disponible.'}
+          </p>
           <br />
-          <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold mb-4">Cépages</h3>
-              <p>{product.cepages || 'Pas de cépages renseignés'}</p>
+
+          {/* Grille de 2 colonnes plus compact */}
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-2 w-full md:w-[35rem] p-2">
+            {/* Cépages */}
+            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+              <div className="flex justify-between">
+                <h3 className="text-lg font-bold text-orange-600">Cépages</h3>
+                <p className="text-sm">{product.cepages?.join(', ') ?? 'Pas de cépages renseignés'}</p>
+              </div>
             </div>
-          <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold mb-4">Style</h3>
-              <p>{typeof product.style === 'string' ? product.style.toUpperCase() : 'Pas de style renseigné'}</p>
-          </div>
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold mb-4">Accords mets et vins</h3>
-              <p>{product.accord_mets || 'Pas d\'accords renseignés'}</p>
+
+            {/* Style */}
+            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+              <div className="flex justify-between">
+                <h3 className="text-lg font-bold text-orange-600">Style</h3>
+                <p className="text-sm">
+                  {typeof product.style === 'string'
+                    ? product.style.charAt(0).toUpperCase() + product.style.slice(1).toLowerCase()
+                    : 'Pas de style renseigné'}
+                </p>
+              </div>
             </div>
-            <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold mb-4">Conservation</h3>
-              <p>{product.conservation ? product.conservation : 'Pas d\'informations de conservation'}</p>
+
+            {/* Accords mets et vins */}
+            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+              <div className="flex justify-between">
+                <h3 className="text-lg font-bold text-orange-600">Accords mets et vins</h3>
+                <p className="text-sm text-end">{product.accord_mets?.join(', ') ?? 'Pas d\'accords mets et vins renseignés'}</p>
+              </div>
             </div>
+
+            {/* Conservation */}
+            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+              <div className="flex justify-between">
+                <h3 className="text-lg font-bold text-orange-600">Conservation</h3>
+                <p className="text-sm">{product.conservation ? product.conservation : 'Pas d\'informations de conservation'}</p>
+              </div>
+            </div>
+
           </div>
         </div>
+
+
         <br />
         <br />
         <Livraison />
