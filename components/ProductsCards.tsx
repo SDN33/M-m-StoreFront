@@ -25,6 +25,8 @@ interface Product {
   rating?: number;
   rating_count?: number;
   style?: string;
+  cepages?: string[];
+  accord_mets?: string[];
 }
 
 const ProductsCards: React.FC = () => {
@@ -90,37 +92,29 @@ const ProductsCards: React.FC = () => {
     const isColorMatch = selectedFilters.color.length === 0 || selectedFilters.color.includes(product.categories[0]?.name || '');
     const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millesime || '');
 
-    // Filtrage pour la région avec gestion de la casse et des espaces
     const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.some(region =>
         region.toLowerCase().trim() === (product.region__pays || '').toLowerCase().trim()
     );
 
-    // Filtrage pour la certification
     const isCertificationMatch = selectedFilters.certification.length === 0 || selectedFilters.certification.some(certification =>
         certification.toLowerCase().trim() === (product.certification || '').toLowerCase().trim()
     );
 
-    // Filtrage pour le style
     const isStyleMatch = selectedFilters.style.length === 0 || selectedFilters.style.some(style =>
         style.toLowerCase().trim() === (product.style || '').toLowerCase().trim()
     );
 
-    // Filtrage pour le volume
     const isVolumeMatch = selectedFilters.volume.length === 0 || selectedFilters.volume.some(volume =>
         volume.toLowerCase().trim() === (product.volume || '').toLowerCase().trim()
     );
 
-    logDebug(`Produit ${product.name}:`, {
-        isColorMatch,
-        isRegionMatch,
-        isVintageMatch,
-        isCertificationMatch,
-        isStyleMatch,
-        isVolumeMatch,
-    });
+    const isAccordMetsMatch = selectedFilters.accord_mets.length === 0 || selectedFilters.accord_mets.some(accordMets =>
+        (product.accord_mets || []).some(met => met.toLowerCase().trim() === accordMets.toLowerCase().trim())
+    );
 
-    return isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch && isStyleMatch && isVolumeMatch;
+    return isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch && isStyleMatch && isVolumeMatch && isAccordMetsMatch;
   }, [selectedFilters]);
+
 
 
   const filteredProducts = useMemo(() => products.filter(filterProducts), [products, filterProducts]);
