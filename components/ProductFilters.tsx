@@ -9,6 +9,9 @@ interface ProductFilterProps {
     certification: string[];
     style: string[];
     volume: string[];
+    accord_mets: string[];
+    region__pays: string[];
+
   };
   onFilterChange: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
 }
@@ -21,6 +24,7 @@ const getFilterTitle = (filterType: string) => {
     certification: 'Certification',
     style: 'Style',
     volume: 'Volume',
+    accord_mets: 'Accord Mets',
   };
   return titles[filterType] || filterType;
 };
@@ -44,6 +48,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     certification: ['Bio', 'Biodynamie', 'En conversion'],
     style: ['Charpenté', 'Fruité', 'Moelleux', 'Corsé', 'Sec'],
     volume: ['75 cl', '1L', 'Autres'], // Options de volume
+    accord_mets: ['Viande rouge', 'Viande blanche', 'Poisson', 'Dessert', 'Fromage', 'Sucré', 'Plats végétariens'],
   };
 
   const toggleSection = (section: keyof typeof filterOptions) => {
@@ -53,7 +58,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   const handleCheckboxChange = (filterType: keyof ProductFilterProps['selectedFilters'], option: string) => {
-    const currentOptions = selectedFilters[filterType] || [];
+    const currentOptions = selectedFilters[filterType] ?? [];
     const updatedOptions = currentOptions.includes(option)
       ? currentOptions.filter((item) => item !== option)
       : [...currentOptions, option];

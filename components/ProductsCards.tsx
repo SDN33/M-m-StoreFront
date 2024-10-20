@@ -37,6 +37,8 @@ const ProductsCards: React.FC = () => {
     vintage: string[];
     certification: string[];
     style: string[];
+    accord_mets: string[];
+    region__pays: string[];
     price: string[];
     volume: string[];
   }>({
@@ -45,6 +47,8 @@ const ProductsCards: React.FC = () => {
     vintage: [],
     certification: [],
     style: [],
+    accord_mets: [],
+    region__pays: [],
     price: [],
     volume: [],
   });
@@ -116,6 +120,8 @@ const ProductsCards: React.FC = () => {
       vintage: [],
       certification: [],
       style: [],
+      accord_mets: [],
+      region__pays: [],
       price: [],
       volume: [],
     });

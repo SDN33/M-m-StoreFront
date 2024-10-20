@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import { Star, Truck, Package } from 'lucide-react';
+import { Star, Package } from 'lucide-react';
 import Livraison from '@/components/Livraison';
 
 interface Product {
@@ -31,22 +31,20 @@ interface Product {
 }
 
 const formatDescription = (description: string, maxChars = 90) => {
-  // Retirer les balises HTML
   const plainText = description.replace(/<\/?[^>]+(>|$)/g, '');
   const words = plainText.split(' ');
   let formattedDescription = '';
   let line = '';
 
-  words.forEach(word => {
+  words.forEach((word) => {
     if (line.length + word.length + 1 > maxChars) {
-      formattedDescription += line.trim() + '\n'; // Ajoute la ligne et un saut de ligne
-      line = word + ' '; // Commence une nouvelle ligne avec le mot actuel
+      formattedDescription += line.trim() + '\n';
+      line = word + ' ';
     } else {
-      line += word + ' '; // Ajoute le mot à la ligne actuelle
+      line += word + ' ';
     }
   });
 
-  // Ajoute la dernière ligne si elle n'est pas vide
   if (line.trim()) {
     formattedDescription += line.trim();
   }
@@ -54,14 +52,13 @@ const formatDescription = (description: string, maxChars = 90) => {
   return formattedDescription;
 };
 
-
 const getCertificationLogo = (certification?: string) => {
   switch (certification?.toLowerCase()) {
     case 'bio':
-      return { src: "/images/logobio.webp", width: 24, height: 24 };
+      return { src: '/images/logobio.webp', width: 24, height: 24 };
     case 'demeter':
     case 'biodynamie':
-      return { src: "/images/biodemeter.png", width: 80, height: 80 };
+      return { src: '/images/biodemeter.png', width: 80, height: 80 };
     case 'en conversion':
       return { src: '/images/enconv.png', width: 28, height: 28 };
     default:
@@ -69,12 +66,20 @@ const getCertificationLogo = (certification?: string) => {
   }
 };
 
-const getCategoryColor = (categoryName: string): string => {
+const getCategoryColor = (categoryName: string) => {
   switch (categoryName.toLowerCase()) {
-    case 'red': return 'bg-red-500 text-white';
-    case 'white': return 'bg-yellow-500 text-black';
-    case 'rose': return 'bg-pink-500 text-white';
-    default: return 'bg-gray-500 text-white';
+    case 'rouge':
+      return 'bg-red-800';
+    case 'blanc':
+      return 'bg-yellow-500';
+    case 'rosé':
+      return 'bg-pink-400';
+    case 'pétillant':
+      return 'bg-blue-400';
+    case 'liquoreux':
+      return 'bg-purple-400';
+    default:
+      return 'bg-orange-500';
   }
 };
 
@@ -116,6 +121,7 @@ const ProductPage: React.FC = () => {
         <Star
           key={star}
           className={`h-4 w-4 ${star <= rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
+          aria-hidden="true"
         />
       ))}
     </div>
@@ -135,7 +141,10 @@ const ProductPage: React.FC = () => {
   if (error) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <p className="text-red-600 font-bold text-lg">Error: {error}</p>
+        <p className="text-red-600 font-bold text-lg">Erreur : {error}</p>
+        <button onClick={() => location.reload()} className="mt-4 bg-orange-600 text-white px-4 py-2 rounded">
+          Réessayer
+        </button>
       </div>
     );
   }
@@ -143,106 +152,139 @@ const ProductPage: React.FC = () => {
   if (!product) return null;
 
   return (
-    <div className="max-w-6xl mx-auto px-6 sm:px-6 lg:px-8 py-8 min-h-screen" style={{ marginTop: '5rem' }}>
-      <nav aria-label="Breadcrumb" className="text-sm mb-4">
-        <ol className="list-none p-0 inline-flex">
-          <li className="flex items-center">
-            <a href="/" className="text-gray-500 hover:text-gray-700">Accueil</a>
-            <span className="mx-2 text-gray-500">&gt;</span>
-          </li>
-          <li className="flex items-center">
-            <a href="#" className="text-green-600 hover:text-gray-700">{product.store_name}</a>
-            <span className="mx-2 text-gray-500">&gt;</span>
-          </li>
-          <li className="flex items-center">
-            <span className="text-orange-600" aria-current="page">{product.name}</span>
-          </li>
-        </ol>
-      </nav>
+    <div>
+      <div className="relative top-0 left-0 w-full">
+        <video
+          src="/videos/minibanner.mp4"
+          width={1920}
+          height={400}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full"
+        >
+          Your browser does not support the video tag.
+        </video>
+      </div>
 
-      <div className="flex flex-col md:flex-row gap-8 justify-center items-center mx-auto">
-        <div className="md:w-1/2">
-          <Image
-            src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmémé.png'}
-            alt={product.name}
-            width={300}
-            height={500}
-            objectFit="cover"
-            className="rounded-lg"
-            loading="lazy"
-          />
-        </div>
+      <div className="max-w-6xl mx-auto px-8 sm:px-6 lg:px-8 py-8 min-h-screen">
+        <nav aria-label="Breadcrumb" className="text-sm mb-4">
+          <ol className="list-none p-0 inline-flex">
+            <li className="flex items-center">
+              <a href="/" className="text-gray-500 hover:text-gray-700">Accueil</a>
+              <span className="mx-2 text-gray-500">&gt;</span>
+            </li>
+            <li className="flex items-center">
+              <a href="#" className="text-green-600 hover:text-gray-700">{product.store_name}</a>
+              <span className="mx-2 text-gray-500">&gt;</span>
+            </li>
+            <li className="flex items-center">
+              <span className="text-orange-600" aria-current="page">{product.name}</span>
+            </li>
+          </ol>
+        </nav>
 
-        <div className="md:w-1/2">
-          <p className="text-sm font-bold !-mb-2">{product.nom_chateau || 'Château inconnu'}</p>
-          <h1 className="text-3xl font-bold ">{product.name}</h1>
-          <p className="text-sm font-bold">{product.appelation?.toUpperCase()} | {product.region__pays?.toUpperCase()}</p>
-          {product.categories.map(category => (
-            <div key={category.id} className={`${getCategoryColor(category.name)} p-2 rounded-md inline-block mb-2`}>
-              <span className="font-semibold text-black">Vin {category.name}</span>
-            </div>
-          ))}
-
-          <p className="text-sm mb-4">
-            {product.certification ? <Image {...getCertificationLogo(product.certification)} alt="Certification logo" /> : 'Non renseignée'}
-          </p>
-          <p className="text-sm font-normal">Vendu par <span className='text-green-600'>{product.store_name ? product.store_name : 'Mémé Georgette'}</span></p>
-          <div className="flex items-center mb-4">
-            {product.rating && renderStars(product.rating)}
-            <span className="ml-2 text-sm text-gray-500">
-              ({product.rating_count} avis)
-            </span>
-          </div>
-
-          <p className="text-3xl font-bold mb-1">
-            {product.price}€
-            <span className="text-xs font-normal ml-2">Bouteille de {product.volume}</span>
-          </p>
-          <div className="flex items-center">
-            <select
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
-              className="mr-4 p-2 border rounded bg-white"
-              aria-label="Sélectionner la quantité"
-            >
-              {[1, 2, 3, 4, 5, 6].map(num => (
-                <option key={num} value={num}>{num}</option>
+        <div className="flex flex-col md:flex-row gap-8 justify-center items-center mx-auto">
+          <div className="md:w-1/2">
+            <div className="flex items-start z-10">
+              {product.categories.map((category) => (
+                <div
+                  key={category.id}
+                  className={`w-10 h-10 rounded-full flex items-center justify-center ${getCategoryColor(category.name)}`}
+                  title={category.name} // Affiche le nom de la catégorie au survol
+                >
+                  <span className="text-white font-semibold text-sm">{category.name.substring(0, 3)}</span>
+                </div>
               ))}
-            </select>
-            <button className="bg-orange-600 text-white px-6 py-2 rounded-full hover:bg-orange-800 transition focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">
-              Ajouter au panier
-            </button>
+              <p className="ml-4 text-sm mb-4">
+                {product.certification ? (
+                  <Image
+                    {...getCertificationLogo(product.certification)}
+                    alt="Certification logo"
+                    width={30}
+                    height={30}
+                  />
+                ) : (
+                  'Non renseignée'
+                )}
+              </p>
+            </div>
+            <Image
+              src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmémé.png'}
+              alt={product.name}
+              width={300}
+              height={500}
+              objectFit="cover"
+              className="rounded-lg"
+              loading="lazy"
+            />
           </div>
 
-          {/* Saut de ligne ajouté ici */}
-          <div className="mt-4">
-            <div className="flex items-center gap-2">
-              <Truck className="h-4 w-4 text-orange-600" />
-              <span>Livraison rapide</span>
-              <Package className="h-4 w-4 text-orange-600" />
-              <span>Emballage soigné</span>
+          <div className="md:w-1/2">
+            <p className="text-sm font-bold">{product.nom_chateau || 'Château inconnu'}</p>
+            <h1 className="text-3xl font-bold">{product.name}</h1>
+            <div className="flex items-center mb-2">
+              {product.rating && renderStars(product.rating)}
+              <span className="ml-2 text-sm text-gray-500">
+                ({product.rating_count} avis)
+              </span>
+            </div>
+            <br />
+            <p className="text-4xl font-bold !mb-6">
+              <span className="flex items-start z-10">
+                <span className="text-4xl font-bold">{Math.floor(product.price)}</span>
+                <span className="text-xl font-bold align-top mt-1">
+                  <sup>€{(product.price % 1).toFixed(2).substring(2)}</sup>
+                </span>
+              </span>
+            </p>
+            <span className="text-xs font-normal">Bouteille de {product.volume}</span>
+            <p>
+              {product.appelation?.toUpperCase()} | {product.region__pays?.toUpperCase()}
+            </p>
+            <p className="text-sm font-normal">Vendu par <span className="text-green-600">{product.store_name || 'Mémé Georgette'}</span></p>
+
+            <br />
+            <div className="items-center mt-6 flex gap-2">
+              <Package className="h-6 w-6" />
+              <span className="font-bold text-xs">Livraison offerte dès 6 bouteilles achetées sur un domaine</span>
+            </div>
+            <div className="flex items-center mt-1">
+              <select
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+                className="mr-4 p-2 border rounded bg-white border-gray-300"
+              >
+                {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
+                  <option key={num} value={num}>{num}</option>
+                ))}
+              </select>
+              <button
+                onClick={() => console.log(`Ajouté ${quantity} ${product.name} au panier`)}
+                className="bg-orange-600 hover:bg-orange-500 text-white py-2 px-4 rounded"
+              >
+                Ajouter au panier
+              </button>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="mt-10 px-8">
-        <h2 className="text-2xl font-bold sm:text-center ml-8">Description du vin</h2>
-        <p>par <span className="text-green-600">{product.store_name ? product.store_name : 'Mémé Georgette'}</span></p>
-        <div className="border-b-4 border-orange-600 w-full md:w-[70rem] my-2 md:my-4 slide-in-right"></div>
-        <p className="mt-4 text-base font-bold text-gray-700 whitespace-pre-line text-center">{product.description ? formatDescription(product.description) : 'Aucune description disponible.'}</p>
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold !-mb-2">Description du produit</h2>
+          <div className="border-b-4 border-orange-600 w-full md:w-[70rem] my-2 md:my-2 slide-in-right"></div>
+          <p className='font-bold'>{product.description ? formatDescription(product.description) : 'Pas de description disponible.'}</p>
+          <h3 className="text-xl font-bold mt-6 mb-2">Accords mets et vins</h3>
+          <p>{product.accord_mets || 'Pas d accords renseignés'}</p>
+          <h3 className="text-xl font-bold mt-6 mb-2">Cépages</h3>
+          <p>{product.cepages || 'Pas de cépages renseignés'}</p>
+          <h3 className="text-xl font-bold mt-6 mb-2">Conservation</h3>
+          <p>{product.conservation || 'Pas d informations de conservation'}</p>
+          <h3 className="text-xl font-bold mt-6 mb-2">Style</h3>
+          <p>{product.style || 'Pas de style renseigné'}</p>
+        </div>
+        <Livraison />
       </div>
-      <br /><br />
-      <br /><br />
-      <Livraison />
-      <Image
-        src="/images/bannereco2.png"
-        alt="Livraison"
-        width={1920}
-        height={1080}
-        layout="responsive"
-        loading='lazy'
-      />
     </div>
   );
 };
