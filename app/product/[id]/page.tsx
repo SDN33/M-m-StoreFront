@@ -229,7 +229,7 @@ const ProductPage: React.FC = () => {
       <div className="mt-10 px-8">
         <h2 className="text-2xl font-bold sm:text-center ml-8">Description du vin</h2>
         <p>par <span className="text-green-600">{product.store_name ? product.store_name : 'Mémé Georgette'}</span></p>
-        <hr className="my-2 border-gray-200" />
+        <div className="border-b-4 border-orange-600 w-full md:w-[70rem] my-2 md:my-4 slide-in-right"></div>
         <p className="mt-4 text-base font-bold text-gray-700 whitespace-pre-line text-center">{product.description ? formatDescription(product.description) : 'Aucune description disponible.'}</p>
       </div>
       <br /><br />
