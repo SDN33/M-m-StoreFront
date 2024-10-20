@@ -5,6 +5,8 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { Star, Package } from 'lucide-react';
 import Livraison from '@/components/Livraison';
+import classNames from 'classnames';
+
 
 interface Product {
   id: number;
@@ -128,7 +130,10 @@ const ProductPage: React.FC = () => {
       {[1, 2, 3, 4, 5].map((star) => (
         <Star
           key={star}
-          className={`h-4 w-4 ${star <= rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
+          className={classNames('h-4 w-4', {
+            'text-yellow-400 fill-current': star <= rating,
+            'text-gray-300': star > rating,
+          })}
           aria-hidden="true"
         />
       ))}
