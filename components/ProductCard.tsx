@@ -167,16 +167,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <p className="text-sm mb-1 font-bold">
         {product.appelation?.toUpperCase() || 'Vigneron inconnu'}
       </p>
-      <p className="text-sm mb-2">
-        {product.region__pays?.toUpperCase()} | {product.millesime} | {product.volume}
-      </p>
       <div className="flex items-center mb-2 mx-auto">
         {[...Array(5)].map((_, i) => (
           <Star key={i} className={`w-4 h-4 ${i < Math.floor(product.average_rating || 0) ? 'text-yellow-500' : 'text-gray-300'}`} />
         ))}
         <span className="text-xs text-gray-600 ml-1">({product.rating_count || 0} avis)</span>
       </div>
-
+      <p className="text-sm mb-2">
+        {product.region__pays?.toUpperCase()} | {product.millesime} | {product.volume}
+      </p>
       <div className="flex-grow"></div>
       <div className="flex items-center mx-auto">
         <div className="relative mr-2">
