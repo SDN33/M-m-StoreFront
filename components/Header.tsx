@@ -1,42 +1,53 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { Search, ShoppingCart, User, Menu, X, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
+
+// Hook personnalisé pour détecter la taille d'écran
+const useMediaQuery = (query: string) => {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+    const listener = () => setMatches(media.matches);
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, [matches, query]);
+
+  return matches;
+};
 
 const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVinsMenuOpen, setIsVinsMenuOpen] = useState(false);
-  const [bgColor, setBgColor] = useState('bg-black bg-opacity-80'); // Fond noir par défaut pour toutes les pages
-
+  const [bgColor, setBgColor] = useState('bg-black bg-opacity-80'); // Fond noir par défaut
   const pathname = usePathname();
   const isHomePage = pathname === '/';
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+  // Utilisation du hook pour détecter si l'écran est mobile
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   useEffect(() => {
     if (isHomePage) {
       const handleScroll = () => {
         const currentScroll = window.scrollY;
 
-        if (isMobile) {
+        // Gérer le fond du header selon la taille d'écran et la position du scroll
+        if (isMobile || currentScroll > 0) {
           setBgColor('bg-black bg-opacity-80');
         } else {
-          if (currentScroll > 0) {
-            setBgColor('bg-black bg-opacity-80');
-          } else {
-            setBgColor('bg-black bg-opacity-80');
-          }
+          setBgColor('bg-transparent');
         }
       };
 
       window.addEventListener('scroll', handleScroll);
-
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
+      return () => window.removeEventListener('scroll', handleScroll);
     } else {
       setBgColor('bg-black bg-opacity-80'); // Toujours noir sur les autres pages
     }
@@ -46,10 +57,7 @@ const Header = () => {
     <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} transition-colors duration-600 z-20`}>
       {/* Left Navigation */}
       <nav className="hidden md:flex items-center space-x-8 ml-10 font-semibold">
-        <a href="/" className="relative text-white hover:text-orange-600 font-semibold">
-          Accueil
-          <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
-        </a>
+        <a href="/" className="relative text-white hover:text-orange-600 font-semibold">Accueil</a>
 
         {/* Dropdown for 'Nos Vins' */}
         <div className="relative">
@@ -59,39 +67,21 @@ const Header = () => {
           >
             Nos Vins
             <ChevronDown className="ml-2 w-4 h-4" />
-            <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
           </button>
 
-          {/* Dropdown Menu */}
           {isVinsMenuOpen && (
             <ul className="absolute mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30">
-              <li>
-                <a href="/products/category/rouge" className="block px-4 py-2 text-sm text-gray-800 hover:bg-orange-600">Nos vins rouges</a>
-              </li>
-              <li>
-                <a href="/products/category:blanc" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins blancs</a>
-              </li>
-              <li>
-                <a href="/products/category:rose" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins rosés</a>
-              </li>
-              <li>
-                <a href="/products/category:petillant" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins pétillants</a>
-              </li>
-              <li>
-                <a href="/products/category:liquoreux" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins liquoreux</a>
-              </li>
+              <li><a href="/products/category/rouge" className="block px-4 py-2 text-sm text-gray-800 hover:bg-orange-600">Nos vins rouges</a></li>
+              <li><a href="/products/category/blanc" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins blancs</a></li>
+              <li><a href="/products/category/rose" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins rosés</a></li>
+              <li><a href="/products/category/petillant" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins pétillants</a></li>
+              <li><a href="/products/category/liquoreux" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins liquoreux</a></li>
             </ul>
           )}
         </div>
 
-        <a href="https://www.memegeorgette.com/" className="relative text-white hover:text-orange-600 font-semibold">
-          Découvrir Mémé Georgette
-          <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
-        </a>
-        <a href="/contact" className="relative text-white hover:text-orange-600 font-semibold">
-          Contact
-          <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out hover:w-full"></span>
-        </a>
+        <a href="https://www.memegeorgette.com/" className="relative text-white hover:text-orange-600 font-semibold">Découvrir Mémé Georgette</a>
+        <a href="/contact" className="relative text-white hover:text-orange-600 font-semibold">Contact</a>
       </nav>
 
       {/* Center Logo */}
@@ -147,6 +137,7 @@ const Header = () => {
         </a>
       </div>
 
+      {/* Mobile Menu */}
       <button
         className="md:hidden"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -162,7 +153,6 @@ const Header = () => {
           <a href="/contact" className="block py-2 text-gray-800">Contact</a>
         </div>
       )}
-
     </header>
   );
 };
