@@ -1,19 +1,27 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Search, ShoppingCart, User, Menu, X, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
+import axios from 'axios';
 
 const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVinsMenuOpen, setIsVinsMenuOpen] = useState(false);
-  const [bgColor, setBgColor] = useState('bg-transparent'); // Fond transparent par défaut
-  const [headerHeight, setHeaderHeight] = useState('h-24'); // Hauteur initiale du header
-  const [logoSize, setLogoSize] = useState('w-44 h-auto'); // Taille initiale du logo
+  const [bgColor, setBgColor] = useState('bg-transparent');
+  const [headerHeight, setHeaderHeight] = useState('h-24');
+  const [logoSize, setLogoSize] = useState('w-44 h-auto');
+  const [searchTerm, setSearchTerm] = useState('');
+  interface Product {
+    id: string;
+    name: string;
+  }
 
+  const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const router = useRouter();
   const pathname = usePathname();
   const isHomePage = pathname === '/';
 
@@ -21,37 +29,58 @@ const Header = () => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
 
-      // Gérer le fond du header et la hauteur selon la position du scroll
       if (isHomePage) {
         if (currentScroll > 0) {
           setBgColor('bg-black bg-opacity-80');
-          setHeaderHeight('h-16'); // Réduire la hauteur sur scroll
-          setLogoSize('w-32 h-auto'); // Réduire la taille du logo sur scroll
+          setHeaderHeight('h-16');
+          setLogoSize('w-32 h-auto');
         } else {
-          setBgColor('bg-transparent'); // Fond transparent quand on est en haut
-          setHeaderHeight('h-24'); // Réinitialiser à la hauteur initiale
-          setLogoSize('w-44 h-auto'); // Réinitialiser à la taille initiale du logo
+          setBgColor('bg-transparent');
+          setHeaderHeight('h-24');
+          setLogoSize('w-44 h-auto');
         }
       } else {
-        setBgColor('bg-black bg-opacity-80'); // Toujours noir sur les autres pages
-        setHeaderHeight('h-24'); // Hauteur par défaut
-        setLogoSize('w-44 h-auto'); // Taille du logo par défaut
+        setBgColor('bg-black bg-opacity-80');
+        setHeaderHeight('h-24');
+        setLogoSize('w-44 h-auto');
       }
     };
 
-    // Appliquer la logique initiale au chargement
     handleScroll();
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHomePage]);
 
+  const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+
+    if (term) {
+      try {
+        const response = await axios.get(`/api/products?search=${term}`);
+        setSearchResults(response.data);
+      } catch (error) {
+        console.error('Erreur lors de la recherche:', error);
+        setSearchResults([]);
+      }
+    } else {
+      setSearchResults([]);
+    }
+  };
+
+  const handleResultClick = (id: string) => {
+    // Redirige vers la page produit
+    router.push(`/product/${id}`);
+    setSearchTerm('');
+    setSearchResults([]);
+  };
+
   return (
     <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} ${headerHeight} z-20 transition-all duration-300 ease-in-out`}>
       {/* Left Navigation */}
       <nav className="hidden md:flex items-center space-x-8 ml-10 font-semibold">
         <a href="/" className="relative text-white hover:text-orange-600 font-semibold">Accueil</a>
-
         {/* Dropdown for 'Nos Vins' */}
         <div className="relative">
           <button
@@ -61,7 +90,6 @@ const Header = () => {
             Nos Vins
             <ChevronDown className="ml-2 w-4 h-4" />
           </button>
-
           {isVinsMenuOpen && (
             <ul className="absolute mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30">
               <li><a href="/products/category/rouge" className="block px-4 py-2 text-sm text-gray-800 hover:bg-orange-600">Nos vins rouges</a></li>
@@ -72,7 +100,6 @@ const Header = () => {
             </ul>
           )}
         </div>
-
         <a href="https://www.memegeorgette.com/" className="relative text-white hover:text-orange-600 font-semibold">Nous Découvrir</a>
         <a href="/contact" className="relative text-white hover:text-orange-600 font-semibold">Contact</a>
       </nav>
@@ -83,9 +110,9 @@ const Header = () => {
           <Image
             src="/images/logo3.svg"
             alt="Logo Mémé Georgette"
-            width={logoSize === 'w-44 h-auto' ? 180 : 120} // Ajuste la largeur en fonction de la taille
+            width={logoSize === 'w-44 h-auto' ? 180 : 120}
             height={30}
-            className={`${logoSize} transition-all duration-300 ease-in-out`} // Applique la classe pour ajuster la taille
+            className={`${logoSize} transition-all duration-300 ease-in-out`}
           />
         </a>
       </div>
@@ -95,10 +122,22 @@ const Header = () => {
         <div className="relative">
           <input
             type="text"
+            value={searchTerm}
+            onChange={handleSearch}
             placeholder="Rechercher un vin..."
             className="pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-gray-800"
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800 w-6 h-6" />
+          {/* Suggestions Dropdown */}
+          {searchResults.length > 0 && (
+            <ul className="absolute mt-2 w-full bg-white rounded-md shadow-lg z-30">
+              {searchResults.map(product => (
+                <li key={product.id} onClick={() => handleResultClick(product.id)} className="cursor-pointer px-4 py-2 text-sm text-gray-800 hover:bg-orange-600 hover:text-white">
+                  {product.name}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <div className="relative">
@@ -119,7 +158,7 @@ const Header = () => {
               ) : (
                 <>
                   <a href="/login" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Connecter</a>
-                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Si&pas;nscrire</a>
+                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S'inscrire</a>
                 </>
               )}
             </div>
@@ -142,8 +181,7 @@ const Header = () => {
       {isMenuOpen && (
         <div className="absolute top-full left-0 right-0 bg-white p-4 rounded-md shadow-lg z-30">
           <a href="/" className="block py-2 text-gray-800">Accueil</a>
-          <a href="https://www.memegeorgette.com/" className="block py-2 text-gray-800">Découvrir Mémé Georgette</a>
-          <a href="/products" className="block py-2 text-gray-800">Nos Vins</a>
+          <a href="https://www.memegeorgette.com/" className="block py-2 text-gray-800">Nous Découvrir</a>
           <a href="/contact" className="block py-2 text-gray-800">Contact</a>
         </div>
       )}
