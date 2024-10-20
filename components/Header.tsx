@@ -4,34 +4,33 @@ import { usePathname } from 'next/navigation';
 import { Search, ShoppingCart, User, Menu, X, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 
-// Hook personnalisé pour détecter la taille d'écran
-const useMediaQuery = (query: string) => {
-  const [matches, setMatches] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    if (media.matches !== matches) {
-      setMatches(media.matches);
-    }
-    const listener = () => setMatches(media.matches);
-    media.addEventListener('change', listener);
-    return () => media.removeEventListener('change', listener);
-  }, [matches, query]);
-
-  return matches;
-};
-
 const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVinsMenuOpen, setIsVinsMenuOpen] = useState(false);
   const [bgColor, setBgColor] = useState('bg-black bg-opacity-80'); // Fond noir par défaut
+  const [isMobile, setIsMobile] = useState(false); // État pour mobile
+
   const pathname = usePathname();
   const isHomePage = pathname === '/';
 
-  // Utilisation du hook pour détecter si l'écran est mobile
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  useEffect(() => {
+    // Détecter la taille de l'écran lors du premier rendu
+    const updateMedia = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Appel initial
+    updateMedia();
+
+    // Écouter les changements de taille de l'écran
+    window.addEventListener('resize', updateMedia);
+
+    return () => {
+      window.removeEventListener('resize', updateMedia);
+    };
+  }, []);
 
   useEffect(() => {
     if (isHomePage) {
