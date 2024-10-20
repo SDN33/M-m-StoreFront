@@ -5,11 +5,11 @@ import { useEffect, useState } from 'react';
 
 const slogans = [
   "À une époque de supercherie alimentaire,<br />boire un vin bio est un acte révolutionnaire !",
-  "En France, la vigne couvre<br />4% de la surface agricole nationale,<br />mais à elle seule c'est 20% des pesticides",
-  "Le vin bio est un choix pour la terre,<br />un plaisir pour les papilles",
+  "La vigne couvre 4% de la surface agricole nationale,<br />mais à elle seule c'est 20% des pesticides",
+  "Le vin bio est un choix pour la terre, un plaisir pour les papilles",
   "La biodynamie,<br />un respect profond de la nature",
   "Soutenir les vignerons,<br />c'est préserver notre avenir à tous !",
-  "Des vignes cultivées sans chimie,<br />pour un goût authentique",
+  "Des vignes cultivées sans chimie, pour un goût authentique",
 ];
 
 const HeroBanner = () => {
@@ -116,10 +116,19 @@ const HeroBanner = () => {
 
       {/* Les boutons pour la version ordinateur */}
       <div className="hidden md:flex items-center gap-3 justify-center mt-12 z-10">
-        <button className="shadow-lg bg-orange-600 text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-medium flex items-center hover:bg-orange-800 hover:text-white transition-colors text-sm md:text-base">
-          Notre Cave
-          <span className="ml-2">➜</span>
-        </button>
+      <button
+        className="shadow-lg bg-orange-600 text-white px-6 py-3 rounded-full font-medium flex items-center hover:bg-orange-800 hover:text-white transition-colors text-sm"
+        onClick={() => {
+          const productsSection = document.getElementById("products");
+          if (productsSection) {
+            productsSection.scrollIntoView({ behavior: "smooth" });
+          }
+        }}
+      >
+        Notre Cave
+        <span className="ml-2">➜</span>
+      </button>
+      
 
         <a
           href="https://www.memegeorgette.com/"
