@@ -198,7 +198,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           onClick={handleAddToCart}
           className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition duration-300"
         >
-          Ajouter au panier
+          Commander {quantity > 1 ? `x ${quantity}` : ''}
         </button>
       </div>
     </div>
