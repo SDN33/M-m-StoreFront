@@ -15,6 +15,7 @@ const Header = () => {
   const [headerHeight, setHeaderHeight] = useState('h-24');
   const [logoSize, setLogoSize] = useState('w-44 h-auto');
   const [searchTerm, setSearchTerm] = useState('');
+
   interface Product {
     id: string;
     name: string;
@@ -39,6 +40,10 @@ const Header = () => {
           setHeaderHeight('h-24');
           setLogoSize('w-44 h-auto');
         }
+      } else if (pathname && pathname.startsWith('/product/')) {
+        setBgColor('bg-black bg-opacity-80');
+        setHeaderHeight('h-24');
+        setLogoSize('w-44 h-auto');
       } else {
         setBgColor('bg-black bg-opacity-80');
         setHeaderHeight('h-24');
@@ -50,7 +55,7 @@ const Header = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isHomePage]);
+  }, [isHomePage, pathname]);
 
   const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
