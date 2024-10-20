@@ -152,7 +152,7 @@ const ProductPage: React.FC = () => {
   if (!product) return null;
 
   return (
-    <div>
+    <div className={`mt-0 md:mt-[5rem]`}>
       <div className="relative top-0 left-0 w-full">
         <video
           src="/videos/minibanner.mp4"
@@ -162,7 +162,7 @@ const ProductPage: React.FC = () => {
           loop
           muted
           playsInline
-          className="w-full"
+          className="hidden md:block w-full"
         >
           Your browser does not support the video tag.
         </video>
@@ -274,14 +274,25 @@ const ProductPage: React.FC = () => {
           <h2 className="text-2xl font-bold !-mb-2">Description du produit</h2>
           <div className="border-b-4 border-orange-600 w-full md:w-[70rem] my-2 md:my-2 slide-in-right"></div>
           <p className='font-bold'>{product.description ? formatDescription(product.description) : 'Pas de description disponible.'}</p>
-          <h3 className="text-xl font-bold mt-6 mb-2">Accords mets et vins</h3>
-          <p>{product.accord_mets || 'Pas d accords renseignés'}</p>
-          <h3 className="text-xl font-bold mt-6 mb-2">Cépages</h3>
-          <p>{product.cepages || 'Pas de cépages renseignés'}</p>
-          <h3 className="text-xl font-bold mt-6 mb-2">Conservation</h3>
-          <p>{product.conservation || 'Pas d informations de conservation'}</p>
-          <h3 className="text-xl font-bold mt-6 mb-2">Style</h3>
-          <p>{product.style || 'Pas de style renseigné'}</p>
+          <br />
+          <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-bold mb-4">Cépages</h3>
+              <p>{product.cepages || 'Pas de cépages renseignés'}</p>
+            </div>
+          <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-bold mb-4">Style</h3>
+              <p>{typeof product.style === 'string' ? product.style.toUpperCase() : 'Pas de style renseigné'}</p>
+          </div>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-bold mb-4">Accords mets et vins</h3>
+              <p>{product.accord_mets || 'Pas d\'accords renseignés'}</p>
+            </div>
+            <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-bold mb-4">Conservation</h3>
+              <p>{product.conservation ? product.conservation : 'Pas d\'informations de conservation'}</p>
+            </div>
+          </div>
         </div>
         <Livraison />
       </div>
