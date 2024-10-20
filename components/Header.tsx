@@ -10,7 +10,7 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVinsMenuOpen, setIsVinsMenuOpen] = useState(false);
-  const [bgColor, setBgColor] = useState('bg-black bg-opacity-80'); // Fond noir par défaut
+  const [bgColor, setBgColor] = useState('bg-transparent'); // Fond transparent par défaut
   const [headerHeight, setHeaderHeight] = useState('h-24'); // Hauteur initiale du header
   const [logoSize, setLogoSize] = useState('w-44 h-auto'); // Taille initiale du logo
 
@@ -28,7 +28,7 @@ const Header = () => {
           setHeaderHeight('h-16'); // Réduire la hauteur sur scroll
           setLogoSize('w-32 h-auto'); // Réduire la taille du logo sur scroll
         } else {
-          setBgColor('bg-transparent'); // Ici, on met une classe transparente si nécessaire
+          setBgColor('bg-transparent'); // Fond transparent quand on est en haut
           setHeaderHeight('h-24'); // Réinitialiser à la hauteur initiale
           setLogoSize('w-44 h-auto'); // Réinitialiser à la taille initiale du logo
         }
@@ -38,6 +38,9 @@ const Header = () => {
         setLogoSize('w-44 h-auto'); // Taille du logo par défaut
       }
     };
+
+    // Appliquer la logique initiale au chargement
+    handleScroll();
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -116,7 +119,7 @@ const Header = () => {
               ) : (
                 <>
                   <a href="/login" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Connecter</a>
-                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S&apos;inscrire</a>
+                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S'inscrire</a>
                 </>
               )}
             </div>

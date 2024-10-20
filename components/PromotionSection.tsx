@@ -1,19 +1,20 @@
 import { useState, useEffect } from 'react';
 
 const PromotionSection = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false); // Commence par être caché
 
   const handleScroll = () => {
-    if (window.scrollY > 0) {
-      setIsVisible(false);
-    } else {
+    // Affiche le banner uniquement si on est en haut de la page
+    if (window.scrollY === 0) {
       setIsVisible(true);
+    } else {
+      setIsVisible(false);
     }
   };
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    handleScroll();
+    handleScroll(); // Vérifie la position initiale lors du chargement
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -30,8 +31,8 @@ const PromotionSection = () => {
         </span>
 
         {/* Affichage sur plus grand écran sans saut de ligne */}
-        <span className="hidden sm:inline">
-        🍇🚚 Livraison offerte dès 6 bouteilles achetées sur un même Domaine 🚚🍇
+        <span className="hidden sm:inline text-lg">
+          🍇🚚 Livraison offerte dès 6 bouteilles achetées sur un même Domaine 🚚🍇
         </span>
       </p>
     </div>
