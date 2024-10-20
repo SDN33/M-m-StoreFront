@@ -1,4 +1,3 @@
-'use client';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { Search, ShoppingCart, User, Menu, X, ChevronDown } from 'lucide-react';
@@ -11,6 +10,7 @@ const Header = () => {
   const [isVinsMenuOpen, setIsVinsMenuOpen] = useState(false);
   const [bgColor, setBgColor] = useState('bg-black bg-opacity-80'); // Fond noir par défaut
   const [isMobile, setIsMobile] = useState(false); // État pour mobile
+  const [headerHeight, setHeaderHeight] = useState('h-24'); // Hauteur initiale du header
 
   const pathname = usePathname();
   const isHomePage = pathname === '/';
@@ -42,8 +42,10 @@ const Header = () => {
         // Gérer le fond du header selon la taille d'écran et la position du scroll
         if (isMobile || currentScroll > 0) {
           setBgColor('bg-black bg-opacity-80');
+          setHeaderHeight('h-16'); // Réduire la hauteur sur scroll
         } else {
           setBgColor('bg-transparent'); // Ici, on met une classe transparente si nécessaire
+          setHeaderHeight('h-24'); // Réinitialiser à la hauteur initiale
         }
       };
 
@@ -51,11 +53,12 @@ const Header = () => {
       return () => window.removeEventListener('scroll', handleScroll);
     } else {
       setBgColor('bg-black bg-opacity-80'); // Toujours noir sur les autres pages
+      setHeaderHeight('h-24'); // Hauteur par défaut
     }
   }, [isHomePage, isMobile]);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} z-20`}>
+    <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} ${headerHeight} z-20 transition-all duration-300`}>
       {/* Left Navigation */}
       <nav className="hidden md:flex items-center space-x-8 ml-10 font-semibold">
         <a href="/" className="relative text-white hover:text-orange-600 font-semibold">Accueil</a>
@@ -126,7 +129,7 @@ const Header = () => {
               ) : (
                 <>
                   <a href="/login" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Connecter</a>
-                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S&apos;inscrire</a>
+                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S&pos;inscrire</a>
                 </>
               )}
             </div>
