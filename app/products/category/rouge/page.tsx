@@ -20,6 +20,8 @@ const RougePage = () => {
         Your browser does not support the video tag.
       </video>
       <h1 className="text-3xl font-bold mt-10">Nos Vins Rouges</h1>
+      <div className="border-b-4 border-orange-600 w-full md:w-[70rem] my-2 md:my-2 slide-in-right"></div>
+
       <Filtertop
         sortBy="defaultSort"
         handleSortChange={() => {}}

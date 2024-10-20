@@ -152,7 +152,7 @@ const ProductPage: React.FC = () => {
   if (!product) return null;
 
   return (
-    <div className={`mt-0 md:mt-[5rem]`}>
+    <div className={`mt-0 :mt-[5rem]`}>
       <div className="relative top-0 left-0 w-full">
         <video
           src="/videos/minibanner.mp4"
@@ -167,7 +167,10 @@ const ProductPage: React.FC = () => {
           Your browser does not support the video tag.
         </video>
       </div>
+      <div className='md:hidden lg:hidden xl:hidden 2xl:hidden'>
+      <br /><br /><br /><br />
 
+      </div>
       <div className="max-w-6xl mx-auto px-8 sm:px-6 lg:px-8 py-8 min-h-screen">
         <nav aria-label="Breadcrumb" className="text-sm mb-4">
           <ol className="list-none p-0 inline-flex">
@@ -231,7 +234,7 @@ const ProductPage: React.FC = () => {
               </span>
             </div>
             <br />
-            <p className="text-4xl font-bold !mb-6">
+            <p className="text-4xl font-bold !mb-7">
               <span className="flex items-start z-10">
                 <span className="text-4xl font-bold">{Math.floor(product.price)}</span>
                 <span className="text-xl font-bold align-top mt-1">
@@ -303,7 +306,7 @@ const ProductPage: React.FC = () => {
           width={1920}
           height={400}
           objectFit="cover"
-          
+
         />
       </div>
     </div>
