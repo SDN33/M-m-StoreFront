@@ -163,7 +163,7 @@ const ProductPage: React.FC = () => {
 
 
   return (
-    <div className="mt-20 px-16">
+    <div className="mt-20 px-12">
 
       <div className="relative top-0 left-0 w-full">
       </div>
