@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Star, Package } from 'lucide-react';
 import Livraison from '@/components/Livraison';
 import classNames from 'classnames';
+import SocialShare from '@/components/Socialshare';
 
 
 interface Product {
@@ -252,6 +253,7 @@ const ProductPage: React.FC = () => {
             <p className="text-sm font-normal">Vendu par <span className="text-green-600">{product.store_name || 'Mémé Georgette'}</span></p>
 
             <br />
+            <SocialShare url={window.location.href} title={product.name} />
             <div className="items-center mt-6 flex gap-2">
               <Package className="h-6 w-6" />
               <span className="font-bold text-xs">Livraison offerte dès 6 bouteilles achetées sur un domaine</span>
@@ -277,14 +279,14 @@ const ProductPage: React.FC = () => {
         </div>
 
         <div className="mt-8">
-          <h2 className="text-2xl font-bold !-mb-2">Description du produit</h2>
+          <h2 className="text-2xl font-bold !-mb-2 text-center">Description du produit</h2>
           <div className="border-b-4 border-orange-600 w-[20rem] md:w-[50rem] my-2 md:my-2 slide-in-right"></div>
-          <p className='font-bold'>
+          <p className='font-bold text-center'>
             {product.description ? formatDescription(product.description) : 'Pas de description disponible.'}
           </p>
           <br />
           {/* Grille de 2 colonnes plus compact */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2  md:w-[20rem] px-10">
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 mx-auto px-10">
             {/* Cépages */}
             <div className="bg-gray-100 p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center px-10">
@@ -312,7 +314,7 @@ const ProductPage: React.FC = () => {
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-bold text-orange-600 text-left">Accords mets</h3>
                 <p className="text-sm text-right">
-                  {product.accord_mets? joinIfArray(product.accord_mets) : 'Pas d\'accords mets renseignés'}
+                  {product.accord_mets ? joinIfArray(product.accord_mets) : 'Pas d\'accords mets renseignés'}
                 </p>
               </div>
             </div>
@@ -327,31 +329,34 @@ const ProductPage: React.FC = () => {
               </div>
             </div>
           </div>
+
+          <br />
+          <br />
+
+          <video
+            src="/videos/minibanner.mp4"
+            width={1920}
+            height={400}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className={`hidden md:block w-full h-[400px] object-fit`} // Ajuste la hauteur si nécessaire
+          >
+            Your browser does not support the video tag.
+          </video>
+
+          <Image
+            src="/images/bannereco2.png"
+            alt="Bannière écologique"
+            width={1920}
+            height={400}
+            objectFit="cover"
+            className="w-fit h-[400px] object-cover" // Ajuste la hauteur si nécessaire
+          />
+
+          <Livraison />
         </div>
-        <br />
-        <br />
-        <video
-          src="/videos/minibanner.mp4"
-          width={1920}
-          height={400}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className={`hidden md:block w-full h-[${isMobile ? '400px' : '500px'}] object-cover`}
-
-        >
-          Your browser does not support the video tag.
-        </video>
-        <Image
-          src="/images/bannereco2.png"
-          alt="Bannière écologique"
-          width={1920}
-          height={400}
-          objectFit="cover"
-
-        />
-        <Livraison />
       </div>
     </div>
   );
