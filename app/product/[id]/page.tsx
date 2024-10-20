@@ -183,7 +183,7 @@ const ProductPage: React.FC = () => {
             </div>
           ))}
 
-          <p className="text-sm mb-2">
+          <p className="text-sm mb-4">
             {product.certification ? <Image {...getCertificationLogo(product.certification)} alt="Certification logo" /> : 'Non renseignée'}
           </p>
           <p className="text-sm font-normal">Vendu par <span className='text-green-600'>{product.store_name ? product.store_name : 'Mémé Georgette'}</span></p>
@@ -227,12 +227,12 @@ const ProductPage: React.FC = () => {
       </div>
 
       <div className="mt-10 px-8">
-        <h2 className="text-2xl font-bold">Description</h2>
+        <h2 className="text-2xl font-bold sm:text-center ml-8">Description du vin</h2>
+        <p>par <span className="text-green-600">{product.store_name ? product.store_name : 'Mémé Georgette'}</span></p>
         <hr className="my-2 border-gray-200" />
-        <p className="mt-2 text-gray-700 whitespace-pre-line text-center">{product.description ? formatDescription(product.description) : 'Aucune description disponible.'}</p>
+        <p className="mt-4 text-base font-bold text-gray-700 whitespace-pre-line text-center">{product.description ? formatDescription(product.description) : 'Aucune description disponible.'}</p>
       </div>
-
-
+      <br /><br />
       <br /><br />
       <Livraison />
       <Image
