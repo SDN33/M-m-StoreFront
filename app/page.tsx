@@ -6,10 +6,28 @@ import Slogan from '@/components/Slogan';
 import Newletter from '@/components/Newletter';
 import PromotionSection from '@/components/PromotionSection';
 import Livraison from '@/components/Livraison';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [isMobile, setIsMobile] = useState(false); // État pour vérifier si l'appareil est mobile
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    setIsMobile(mediaQuery.matches);
+
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleMediaChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleMediaChange);
+    };
+  }, []);
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className={`flex flex-col min-h-screen ${isMobile ? 'max-w-screen-sm mx-auto' : 'max-w-screen-lg mx-auto'}`}>
       <div className="flex-grow">
         <PromotionSection />
         <HeroBanner />
@@ -19,10 +37,8 @@ export default function Home() {
         <br /><br />
         <Newletter />
         <br />
-
-
-
       </div>
     </div>
   );
 }
+

@@ -11,56 +11,40 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVinsMenuOpen, setIsVinsMenuOpen] = useState(false);
   const [bgColor, setBgColor] = useState('bg-black bg-opacity-80'); // Fond noir par défaut
-  const [isMobile, setIsMobile] = useState(false); // État pour mobile
   const [headerHeight, setHeaderHeight] = useState('h-24'); // Hauteur initiale du header
+  const [logoSize, setLogoSize] = useState('w-44 h-auto'); // Taille initiale du logo
 
   const pathname = usePathname();
   const isHomePage = pathname === '/';
 
-  // Utilisation de matchMedia pour détecter la taille de l'écran
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    const handleScroll = () => {
+      const currentScroll = window.scrollY;
 
-    const handleMediaChange = (e: MediaQueryListEvent) => {
-      setIsMobile(e.matches);
-    };
-
-    // Initialiser l'état
-    setIsMobile(mediaQuery.matches);
-
-    // Écouter les changements
-    mediaQuery.addEventListener('change', handleMediaChange);
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleMediaChange);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isHomePage) {
-      const handleScroll = () => {
-        const currentScroll = window.scrollY;
-
-        // Gérer le fond du header selon la taille d'écran et la position du scroll
-        if (isMobile || currentScroll > 0) {
+      // Gérer le fond du header et la hauteur selon la position du scroll
+      if (isHomePage) {
+        if (currentScroll > 0) {
           setBgColor('bg-black bg-opacity-80');
           setHeaderHeight('h-16'); // Réduire la hauteur sur scroll
+          setLogoSize('w-32 h-auto'); // Réduire la taille du logo sur scroll
         } else {
           setBgColor('bg-transparent'); // Ici, on met une classe transparente si nécessaire
           setHeaderHeight('h-24'); // Réinitialiser à la hauteur initiale
+          setLogoSize('w-44 h-auto'); // Réinitialiser à la taille initiale du logo
         }
-      };
+      } else {
+        setBgColor('bg-black bg-opacity-80'); // Toujours noir sur les autres pages
+        setHeaderHeight('h-24'); // Hauteur par défaut
+        setLogoSize('w-44 h-auto'); // Taille du logo par défaut
+      }
+    };
 
-      window.addEventListener('scroll', handleScroll);
-      return () => window.removeEventListener('scroll', handleScroll);
-    } else {
-      setBgColor('bg-black bg-opacity-80'); // Toujours noir sur les autres pages
-      setHeaderHeight('h-24'); // Hauteur par défaut
-    }
-  }, [isHomePage, isMobile]);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isHomePage]);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} ${headerHeight} z-20 transition-all duration-300`}>
+    <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} ${headerHeight} z-20 transition-all duration-300 ease-in-out`}>
       {/* Left Navigation */}
       <nav className="hidden md:flex items-center space-x-8 ml-10 font-semibold">
         <a href="/" className="relative text-white hover:text-orange-600 font-semibold">Accueil</a>
@@ -86,18 +70,19 @@ const Header = () => {
           )}
         </div>
 
-        <a href="https://www.memegeorgette.com/" className="relative text-white hover:text-orange-600 font-semibold">Découvrir Mémé Georgette</a>
+        <a href="https://www.memegeorgette.com/" className="relative text-white hover:text-orange-600 font-semibold">Nous Découvrir</a>
         <a href="/contact" className="relative text-white hover:text-orange-600 font-semibold">Contact</a>
       </nav>
 
       {/* Center Logo */}
       <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center">
-        <a href="/" className="flex items-center">
+        <a href="/" className="flex items-center transition-all duration-300 ease-in-out">
           <Image
             src="/images/logo3.svg"
             alt="Logo Mémé Georgette"
-            width={180}
-            height={60}
+            width={logoSize === 'w-44 h-auto' ? 180 : 120} // Ajuste la largeur en fonction de la taille
+            height={30}
+            className={`${logoSize} transition-all duration-300 ease-in-out`} // Applique la classe pour ajuster la taille
           />
         </a>
       </div>
@@ -131,7 +116,7 @@ const Header = () => {
               ) : (
                 <>
                   <a href="/login" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Connecter</a>
-                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S&pos;inscrire</a>
+                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S'inscrire</a>
                 </>
               )}
             </div>
