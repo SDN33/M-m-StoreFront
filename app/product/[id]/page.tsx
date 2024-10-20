@@ -294,7 +294,17 @@ const ProductPage: React.FC = () => {
             </div>
           </div>
         </div>
+        <br />
+        <br />
         <Livraison />
+        <Image
+          src="/images/bannereco2.png"
+          alt="Bannière écologique"
+          width={1920}
+          height={400}
+          objectFit="cover"
+          
+        />
       </div>
     </div>
   );
