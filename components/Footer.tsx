@@ -33,7 +33,7 @@ const Footer = () => {
           <div>
             <h3 className="text-orange-600 font-semibold mb-4">Découvrez nos vins</h3>
             <ul className="space-y-2">
-              <li><a href="/" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Les rouges</a></li>
+              <li><a href="/products/category/rouge" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Les rouges</a></li>
               <li><a href="/" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Les blancs</a></li>
               <li><a href="/" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Les rosés</a></li>
               <li><a href="/" className="text-gray-800 hover:text-orange-600 transition-colors text-sm">Les pétillants</a></li>

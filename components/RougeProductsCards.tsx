@@ -3,6 +3,7 @@ import axios from 'axios';
 import ProductFilter from '@/components/ProductFilters';
 import FilterTop from './Filtertop';
 import ProductCard from './ProductCard';
+import ProductsIntro from './ProductIntro';
 
 interface Product {
   id: number;
@@ -31,7 +32,7 @@ const RougeProductsCards: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedFilters, setSelectedFilters] = useState<{
-    color: string[];
+    color: string[]; // Force la couleur à être 'rouge'
     region: string[];
     vintage: string[];
     certification: string[];
@@ -41,7 +42,7 @@ const RougeProductsCards: React.FC = () => {
     price: string[];
     volume: string[];
   }>({
-    color: ['rouge'], // Filtrer uniquement les vins rouges par défaut
+    color: ['rouge'], // Bloqué sur la couleur rouge
     region: [],
     vintage: [],
     certification: [],
@@ -59,11 +60,13 @@ const RougeProductsCards: React.FC = () => {
       try {
         setLoading(true);
         const response = await axios.get('/api/products');
-        if (Array.isArray(response.data)) {
-          setProducts(response.data);
-        } else {
-          console.error("La réponse de l'API n'est pas un tableau", response.data);
-        }
+
+        // Filtrer pour ne garder que les produits avec une catégorie "rouge"
+        const filteredProducts = response.data.filter((product: Product) =>
+          product.categories.some(category => category.name.toLowerCase() === 'rouge')
+        );
+
+        setProducts(filteredProducts);
       } catch (err) {
         console.error('Erreur lors de la récupération des produits', err);
         setError('Erreur lors de la récupération des produits. Veuillez réessayer.');
@@ -76,7 +79,7 @@ const RougeProductsCards: React.FC = () => {
   }, []);
 
   const filterProducts = useCallback((product: Product) => {
-    const isColorMatch = selectedFilters.color.includes('rouge'); // Filtrer uniquement les vins rouges
+    const isColorMatch = selectedFilters.color.includes('rouge'); // Vérifie que la couleur est rouge
     const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region__pays || '');
     const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millesime || '');
     const isCertificationMatch = selectedFilters.certification.length === 0 || selectedFilters.certification.includes(product.certification || '');
@@ -106,6 +109,8 @@ const RougeProductsCards: React.FC = () => {
   };
 
   const handleCheckboxChange = (filterType: string, selectedOptions: string[]) => {
+    // Empêche l'utilisateur de modifier le filtre couleur
+    if (filterType === 'color') return; // Ignore les changements sur la couleur
     setSelectedFilters(prevFilters => ({
       ...prevFilters,
       [filterType]: selectedOptions,
@@ -136,8 +141,12 @@ const RougeProductsCards: React.FC = () => {
     <div className="flex flex-col mr-4 lg:mr-16 md:-mt-8">
       <FilterTop sortBy={sortBy} handleSortChange={handleSortChange} resetFilters={resetFilters} />
       <div className="flex flex-col md:flex-row mt-4">
-        <div className="hidden md:block md:w-1/4">
-          <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
+        <div className="hidden md:block md:w-1/4 ml-16">
+          <ProductFilter
+            selectedFilters={selectedFilters}
+            onFilterChange={handleCheckboxChange}
+            hideColorFilter // Passe cette prop pour cacher le filtre de couleur
+          />
         </div>
 
         <div className="flex-grow mt-10">
