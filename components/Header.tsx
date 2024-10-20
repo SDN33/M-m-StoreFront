@@ -15,20 +15,22 @@ const Header = () => {
   const pathname = usePathname();
   const isHomePage = pathname === '/';
 
+  // Utilisation de matchMedia pour détecter la taille de l'écran
   useEffect(() => {
-    // Détecter la taille de l'écran lors du premier rendu
-    const updateMedia = () => {
-      setIsMobile(window.innerWidth < 768);
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
     };
 
-    // Appel initial
-    updateMedia();
+    // Initialiser l'état
+    setIsMobile(mediaQuery.matches);
 
-    // Écouter les changements de taille de l'écran
-    window.addEventListener('resize', updateMedia);
+    // Écouter les changements
+    mediaQuery.addEventListener('change', handleMediaChange);
 
     return () => {
-      window.removeEventListener('resize', updateMedia);
+      mediaQuery.removeEventListener('change', handleMediaChange);
     };
   }, []);
 
@@ -41,7 +43,7 @@ const Header = () => {
         if (isMobile || currentScroll > 0) {
           setBgColor('bg-black bg-opacity-80');
         } else {
-          setBgColor('bg-transparent');
+          setBgColor('bg-transparent'); // Ici, on met une classe transparente si nécessaire
         }
       };
 
@@ -53,7 +55,7 @@ const Header = () => {
   }, [isHomePage, isMobile]);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} transition-colors duration-600 z-20`}>
+    <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} z-20`}>
       {/* Left Navigation */}
       <nav className="hidden md:flex items-center space-x-8 ml-10 font-semibold">
         <a href="/" className="relative text-white hover:text-orange-600 font-semibold">Accueil</a>
@@ -124,7 +126,7 @@ const Header = () => {
               ) : (
                 <>
                   <a href="/login" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Connecter</a>
-                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S&apos;inscrire</a>
+                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S'inscrire</a>
                 </>
               )}
             </div>
@@ -145,7 +147,7 @@ const Header = () => {
       </button>
 
       {isMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white p-4 rounded-md shadow-lg z-30 transition-all duration-300 ease-in-out">
+        <div className="absolute top-full left-0 right-0 bg-white p-4 rounded-md shadow-lg z-30">
           <a href="/" className="block py-2 text-gray-800">Accueil</a>
           <a href="https://www.memegeorgette.com/" className="block py-2 text-gray-800">Découvrir Mémé Georgette</a>
           <a href="/products" className="block py-2 text-gray-800">Nos Vins</a>
@@ -157,3 +159,4 @@ const Header = () => {
 };
 
 export default Header;
+
