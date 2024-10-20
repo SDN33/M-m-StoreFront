@@ -1,5 +1,3 @@
-'use client';
-// path: components/ProductsCards.tsx
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import ProductFilter from '@/components/ProductFilters';
@@ -27,7 +25,7 @@ interface Product {
   rating_count?: number;
 }
 
-const ProductsCards: React.FC = () => {
+const RougeProductsCards: React.FC = () => {
   const [sortBy, setSortBy] = useState<string>('');
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -43,7 +41,7 @@ const ProductsCards: React.FC = () => {
     price: string[];
     volume: string[];
   }>({
-    color: [],
+    color: ['rouge'], // Filtrer uniquement les vins rouges par défaut
     region: [],
     vintage: [],
     certification: [],
@@ -78,7 +76,7 @@ const ProductsCards: React.FC = () => {
   }, []);
 
   const filterProducts = useCallback((product: Product) => {
-    const isColorMatch = selectedFilters.color.length === 0 || selectedFilters.color.includes(product.categories[0]?.name || '');
+    const isColorMatch = selectedFilters.color.includes('rouge'); // Filtrer uniquement les vins rouges
     const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region__pays || '');
     const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millesime || '');
     const isCertificationMatch = selectedFilters.certification.length === 0 || selectedFilters.certification.includes(product.certification || '');
@@ -116,7 +114,7 @@ const ProductsCards: React.FC = () => {
 
   const resetFilters = () => {
     setSelectedFilters({
-      color: [],
+      color: ['rouge'], // Réinitialise les filtres à uniquement rouge
       region: [],
       vintage: [],
       certification: [],
@@ -146,11 +144,11 @@ const ProductsCards: React.FC = () => {
           {loading && (
             <div className="flex flex-col items-center">
               <div className="loader"></div>
-              <p className="text-orange-600 font-bold text-lg">Chargement des vins de Mémé...</p>
+              <p className="text-orange-600 font-bold text-lg">Chargement des vins rouges...</p>
             </div>
           )}
           {error && <p className="text-red-600">{error}</p>}
-          {sortedProducts.length === 0 && !loading && <p>Aucun produit trouvé.</p>}
+          {sortedProducts.length === 0 && !loading && <p>Aucun vin rouge trouvé.</p>}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6 -mt-10">
             {sortedProducts.slice(0, visibleCount).map(product => (
               <ProductCard key={product.id} product={product} />
@@ -162,7 +160,7 @@ const ProductsCards: React.FC = () => {
                 onClick={loadMoreProducts}
                 className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600"
               >
-                Voir Plus de Vins
+                Voir Plus de Vins Rouges
               </button>
             </div>
           )}
@@ -172,4 +170,4 @@ const ProductsCards: React.FC = () => {
   );
 };
 
-export default ProductsCards;
+export default RougeProductsCards;

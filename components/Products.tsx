@@ -4,7 +4,7 @@ import ProductsCards from './ProductsCards'; // Importer le composant ProductsCa
 
 const Products: React.FC = () => {
   return (
-    <div className="text-center relative px-14">
+    <div className="text-center relative px-16">
       <br />
       <br />
       <ProductsIntro />
