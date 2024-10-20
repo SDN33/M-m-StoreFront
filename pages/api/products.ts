@@ -1,4 +1,3 @@
-// path: pages/api/products.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios, { AxiosError } from 'axios';
 
@@ -11,7 +10,7 @@ interface Product {
   millesime?: string;
   certification?: string;
   appelation?: string;
-  meta_data: { key: string; value: string }[];
+  meta_data: { key: string; value: any }[]; // Modifié pour inclure des tableaux
   status: string;
   is_validated?: boolean;
   region__pays?: string;
@@ -22,7 +21,7 @@ interface Product {
   nom_chateau?: string;
   accord_mets?: Array<string>;
   cepages?: Array<string>;
-  conservation?: string;
+  conservation?: string[];
   style?: string;
 }
 
@@ -41,8 +40,8 @@ interface AxiosErrorResponse {
   message: string;
 }
 
-const transformMetaData = (metaData: { key: string; value: string }[]): { [key: string]: string } => {
-  const productData: { [key: string]: string } = {};
+const transformMetaData = (metaData: { key: string; value: any }[]): { [key: string]: any } => {
+  const productData: { [key: string]: any } = {};
   let millesime = '';
   let certification = '';
   let region__pays = '';
@@ -51,15 +50,25 @@ const transformMetaData = (metaData: { key: string; value: string }[]): { [key: 
   let rating_count = '0';
   let volume = '';
   let nom_chateau = '';
-  let accord_mets = '';
-  let cepages = '';
-  let conservation = '';
+  let accord_mets: string[] = [];
+  let cepages: string[] = [];
+  let conservation: string[] = [];
   let style = '';
 
   metaData.forEach(({ key, value }) => {
+    const cleanKey = key.startsWith('_') ? key.slice(1) : key;
+
+    // Normalisation des valeurs pour les choix multiples
+    if (Array.isArray(value)) {
+      productData[cleanKey] = value; // Conserve comme tableau
+    } else {
+      productData[cleanKey] = value || ''; // Sinon, garde une chaîne vide
+    }
+
+    // Gestion des cas spécifiques
     switch (key) {
       case 'nom_chateau':
-        nom_chateau = value; // Corrigé ici pour stocker nom_chateau
+        nom_chateau = value;
         break;
       case 'millesime':
         millesime = value;
@@ -83,20 +92,18 @@ const transformMetaData = (metaData: { key: string; value: string }[]): { [key: 
         volume = value;
         break;
       case 'accord_mets':
-        accord_mets = value;
+        accord_mets = Array.isArray(value) ? value : [value]; // S'assurer que c'est un tableau
         break;
       case 'cepages':
-        cepages = value;
+        cepages = Array.isArray(value) ? value : [value]; // S'assurer que c'est un tableau
         break;
       case 'conservation':
-        conservation = value;
+        conservation = Array.isArray(value) ? value : [value]; // S'assurer que c'est un tableau
         break;
       case 'style':
         style = value;
         break;
     }
-    const cleanKey = key.startsWith('_') ? key.slice(1) : key;
-    productData[cleanKey] = value;
   });
 
   return {
@@ -176,11 +183,59 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           }
         }
 
+        // Filtrer par couleur
+        if (query.color) {
+          const colorFilter = Array.isArray(query.color) ? query.color : [query.color];
+          productsOrCategories = (productsOrCategories as Product[]).filter(product => {
+            return colorFilter.includes(product.meta.color || '');
+          });
+        }
+
         // Filtrer par région
         if (query.region) {
           const regionFilter = Array.isArray(query.region) ? query.region : [query.region];
           productsOrCategories = (productsOrCategories as Product[]).filter(product => {
             return regionFilter.includes(product.region__pays || '');
+          });
+        }
+
+        // Filtrer par millésime
+        if (query.vintage) {
+          const vintageFilter = Array.isArray(query.vintage) ? query.vintage : [query.vintage];
+          productsOrCategories = (productsOrCategories as Product[]).filter(product => {
+            return vintageFilter.includes(product.millesime || '');
+          });
+        }
+
+        // Filtrer par certification
+        if (query.certification) {
+          const certificationFilter = Array.isArray(query.certification) ? query.certification : [query.certification];
+          productsOrCategories = (productsOrCategories as Product[]).filter(product => {
+            return certificationFilter.includes(product.certification || '');
+          });
+        }
+
+        // Filtrer par style
+        if (query.style) {
+          const styleFilter = Array.isArray(query.style) ? query.style : [query.style];
+          productsOrCategories = (productsOrCategories as Product[]).filter(product => {
+            return styleFilter.includes(product.style || '');
+          });
+        }
+
+        // Filtrer par volume
+        if (query.volume) {
+          const volumeFilter = Array.isArray(query.volume) ? query.volume : [query.volume];
+          productsOrCategories = (productsOrCategories as Product[]).filter(product => {
+            return volumeFilter.includes(product.volume || '');
+          });
+        }
+
+        // Filtrer par accord_mets
+        if (query.accord_mets) {
+          const accordMetsFilter = Array.isArray(query.accord_mets) ? query.accord_mets : [query.accord_mets];
+          productsOrCategories = (productsOrCategories as Product[]).filter(product => {
+            return accordMetsFilter.some(accord => product.accord_mets?.includes(accord));
           });
         }
 
@@ -203,38 +258,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               appelation,
               average_rating,
               rating_count,
+              volume,
               nom_chateau,
-              volume, // Ajout du volume ici
-              vendor_image: vendorDetails?.vendorPhotoUrl || '', // Utilisez vendorPhotoUrl
-              rating: `${average_rating} (${rating_count} avis)`,
               accord_mets,
               cepages,
               conservation,
               style,
+              vendor_image: vendorDetails?.avatar_url,
             };
           }
-          return null;
+          return null; // Exclure les produits non validés
         }));
 
-        // Supprimer les produits non validés
-        productsOrCategories = (transformedProducts as (Product | null)[]).filter((product): product is Product => product !== null);
+        // Supprimer les produits non valides (null)
+        const filteredProducts = transformedProducts.filter(product => product !== null);
 
-        // Tri par volume
-        if (query.sortBy === 'volume') {
-          productsOrCategories = (productsOrCategories as Product[]).sort((a, b) => {
-            const volumeA = convertVolumeToLiters(a.volume || '');
-            const volumeB = convertVolumeToLiters(b.volume || '');
-            return volumeA - volumeB;
-          });
-        }
+        return res.status(200).json(filteredProducts);
+      } else {
+        return res.status(200).json(productsOrCategories);
       }
-
-      res.status(200).json(productsOrCategories);
     } catch (error) {
       const axiosError = error as AxiosError<AxiosErrorResponse>;
-      const status = axiosError.response?.status || 500;
-      const message = axiosError.response?.data?.message || 'Erreur de récupération des données.';
-      res.status(status).json({ message });
+      const errorMessage = axiosError.response?.data?.message || axiosError.message;
+      return res.status(500).json({ message: errorMessage });
     }
   } else {
     res.setHeader('Allow', ['GET']);

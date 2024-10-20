@@ -30,6 +30,8 @@ const getFilterTitle = (filterType: string) => {
   return titles[filterType] || filterType;
 };
 
+const normalizeString = (str: string) => str.toLowerCase().replace(/\s+/g, '');
+
 const ProductFilter: React.FC<ProductFilterProps> = ({
   selectedFilters,
   onFilterChange,
@@ -48,7 +50,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     vintage: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
     certification: ['Bio', 'Biodynamie', 'En conversion'],
     style: ['Charpenté', 'Fruité', 'Moelleux', 'Corsé', 'Sec'],
-    volume: ['75 cl', '1L', 'Autres'],
+    volume: ['75 cl', '1 Litre', 'Autres'],
     accord_mets: ['Viande rouge', 'Viande blanche', 'Poisson', 'Dessert', 'Fromage', 'Sucré', 'Plats végétariens'],
   };
 
@@ -107,7 +109,9 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                     >
                       <input
                         type="checkbox"
-                        checked={selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']].includes(option)}
+                        checked={selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']]
+                          .map(opt => normalizeString(opt))
+                          .includes(normalizeString(option))}
                         onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
                         className="w-4 h-4 rounded border-white/20 text-orange-600 focus:ring-orange-600"
                       />

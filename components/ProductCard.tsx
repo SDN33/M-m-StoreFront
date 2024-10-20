@@ -21,6 +21,8 @@ interface Product {
   volume?: string;
   rating_count?: number;
   average_rating?: number;
+  style?: string; // Ajout de cette ligne
+  cepages?: string[]; // Ajout de cette ligne
 }
 
 interface ProductCardProps {

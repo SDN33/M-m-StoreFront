@@ -1,5 +1,4 @@
 'use client';
-// path: components/ProductsCards.tsx
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import ProductFilter from '@/components/ProductFilters';
@@ -25,6 +24,7 @@ interface Product {
   nom_chateau?: string;
   rating?: number;
   rating_count?: number;
+  style?: string;
 }
 
 const ProductsCards: React.FC = () => {
@@ -37,24 +37,31 @@ const ProductsCards: React.FC = () => {
     region: string[];
     vintage: string[];
     certification: string[];
-    style: string[];
     accord_mets: string[];
     region__pays: string[];
     price: string[];
     volume: string[];
+    style: string[];
   }>({
     color: [],
     region: [],
     vintage: [],
     certification: [],
-    style: [],
     accord_mets: [],
     region__pays: [],
     price: [],
     volume: [],
+    style: [],
   });
 
   const [visibleCount, setVisibleCount] = useState<number>(12);
+  const debugMode = true; // Changez à false pour désactiver les logs
+
+  const logDebug = (...args: any[]) => {
+    if (debugMode) {
+      console.log(...args);
+    }
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -63,6 +70,7 @@ const ProductsCards: React.FC = () => {
         const response = await axios.get('/api/products');
         if (Array.isArray(response.data)) {
           setProducts(response.data);
+          logDebug('Produits récupérés:', response.data);
         } else {
           console.error("La réponse de l'API n'est pas un tableau", response.data);
         }
@@ -79,12 +87,40 @@ const ProductsCards: React.FC = () => {
 
   const filterProducts = useCallback((product: Product) => {
     const isColorMatch = selectedFilters.color.length === 0 || selectedFilters.color.includes(product.categories[0]?.name || '');
-    const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region__pays || '');
     const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millesime || '');
-    const isCertificationMatch = selectedFilters.certification.length === 0 || selectedFilters.certification.includes(product.certification || '');
 
-    return isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch;
+    // Filtrage pour la région avec gestion de la casse et des espaces
+    const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.some(region =>
+        region.toLowerCase().trim() === (product.region__pays || '').toLowerCase().trim()
+    );
+
+    // Filtrage pour la certification
+    const isCertificationMatch = selectedFilters.certification.length === 0 || selectedFilters.certification.some(certification =>
+        certification.toLowerCase().trim() === (product.certification || '').toLowerCase().trim()
+    );
+
+    // Filtrage pour le style
+    const isStyleMatch = selectedFilters.style.length === 0 || selectedFilters.style.some(style =>
+        style.toLowerCase().trim() === (product.style || '').toLowerCase().trim()
+    );
+
+    // Filtrage pour le volume
+    const isVolumeMatch = selectedFilters.volume.length === 0 || selectedFilters.volume.some(volume =>
+        volume.toLowerCase().trim() === (product.volume || '').toLowerCase().trim()
+    );
+
+    logDebug(`Produit ${product.name}:`, {
+        isColorMatch,
+        isRegionMatch,
+        isVintageMatch,
+        isCertificationMatch,
+        isStyleMatch,
+        isVolumeMatch,
+    });
+
+    return isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch && isStyleMatch && isVolumeMatch;
   }, [selectedFilters]);
+
 
   const filteredProducts = useMemo(() => products.filter(filterProducts), [products, filterProducts]);
 
@@ -101,13 +137,13 @@ const ProductsCards: React.FC = () => {
     }
   };
 
-  const sortedProducts = sortProducts(filteredProducts, sortBy);
+  const sortedProducts = useMemo(() => sortProducts(filteredProducts, sortBy), [filteredProducts, sortBy]);
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy(event.target.value);
   };
 
-  const handleCheckboxChange = (filterType: string, selectedOptions: string[]) => {
+  const handleCheckboxChange = (filterType: keyof typeof selectedFilters, selectedOptions: string[]) => {
     setSelectedFilters(prevFilters => ({
       ...prevFilters,
       [filterType]: selectedOptions,
@@ -133,6 +169,8 @@ const ProductsCards: React.FC = () => {
   const loadMoreProducts = () => {
     setVisibleCount(prevCount => prevCount + 12);
   };
+
+
 
   return (
     <div className="flex flex-col mr-4 lg:mr-16 md:-mt-8">
