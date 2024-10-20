@@ -51,10 +51,8 @@ const Header = () => {
       }
     };
 
-    // Appel de la fonction au chargement du composant
     handleScroll();
 
-    // Écoute de l'événement de défilement
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHomePage, pathname]);
@@ -186,13 +184,10 @@ const Header = () => {
       </button>
 
       {isMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-black text-white py-4">
-          <nav className="flex flex-col items-center">
-            <a href="/" className="my-2">Accueil</a>
-            <a href="/products" className="my-2">Nos Vins</a>
-            <a href="https://www.memegeorgette.com/" className="my-2">Nous Découvrir</a>
-            <a href="/contact" className="my-2">Contact</a>
-          </nav>
+        <div className="absolute top-full left-0 right-0 bg-white p-4 rounded-md shadow-lg z-30">
+          <a href="/" className="block py-2 text-gray-800">Accueil</a>
+          <a href="https://www.memegeorgette.com/" className="block py-2 text-gray-800">Nous Découvrir</a>
+          <a href="/contact" className="block py-2 text-gray-800">Contact</a>
         </div>
       )}
     </header>

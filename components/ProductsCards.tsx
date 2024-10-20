@@ -57,11 +57,12 @@ const ProductsCards: React.FC = () => {
   const [visibleCount, setVisibleCount] = useState<number>(12);
   const debugMode = true; // Changez à false pour désactiver les logs
 
-  const logDebug = (...args: any[]) => {
+  const logDebug = (...args: unknown[]) => {
     if (debugMode) {
       console.log(...args);
     }
   };
+
 
   useEffect(() => {
     const fetchProducts = async () => {

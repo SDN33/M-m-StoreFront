@@ -165,9 +165,6 @@ const ProductPage: React.FC = () => {
 
   if (!product) return null;
 
-  const isMobile = window.innerWidth <= 768;
-
-
   return (
     <div className="mt-20 px-12">
 

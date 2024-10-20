@@ -142,15 +142,6 @@ const getVendorDetails = async (vendorId: number) => {
   }
 };
 
-// Fonction pour convertir les volumes dans un format numérique pour le tri
-const convertVolumeToLiters = (volume: string) => {
-  if (volume.endsWith('cl')) {
-    return parseFloat(volume.replace('cl', '')) / 100; // Convertir cl en litres
-  } else if (volume.endsWith('L')) {
-    return parseFloat(volume.replace('L', '')); // Garder les litres
-  }
-  return NaN; // Si ce n'est pas un volume reconnu, retourner NaN
-};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, query } = req;
