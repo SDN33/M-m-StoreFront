@@ -57,20 +57,8 @@ const ProductsCards: React.FC = () => {
   });
 
   const [visibleCount, setVisibleCount] = useState<number>(12);
-  const debugMode = true; // Changez à false pour désactiver les logs
-
-  const logDebug = (...args: unknown[]) => {
-    if (debugMode) {
-      console.log(...args);
-    }
-  };
 
   useEffect(() => {
-    const logDebug = (...args: unknown[]) => {
-      if (debugMode) {
-        console.log(...args);
-      }
-    };
 
     const fetchProducts = async () => {
       try {
@@ -78,7 +66,6 @@ const ProductsCards: React.FC = () => {
         const response = await axios.get('/api/products');
         if (Array.isArray(response.data)) {
           setProducts(response.data);
-          logDebug('Produits récupérés:', response.data);
         } else {
           console.error("La réponse de l'API n'est pas un tableau", response.data);
         }
