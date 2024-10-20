@@ -59,7 +59,6 @@ const getCertificationLogo = (certification?: string) => {
   switch (certification?.toLowerCase()) {
     case 'bio':
       return { src: '/images/logobio.webp', width: 24, height: 24 };
-    case 'demeter':
     case 'biodynamie':
       return { src: '/images/biodemeter.png', width: 80, height: 80 };
     case 'en conversion':
@@ -206,13 +205,14 @@ const ProductPage: React.FC = () => {
                   <Image
                     {...getCertificationLogo(product.certification)}
                     alt="Certification logo"
-                    width={30}
-                    height={30}
+                    width={product.certification === 'biodynamie' ? 100 : 30} // Plus grand si biodynamie
+                    height={product.certification === 'biodynamie' ? 100 : 30} // Plus grand si biodynamie
                   />
                 ) : (
                   'Non renseignée'
                 )}
               </p>
+
             </div>
             <Image
               src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmémé.png'}
@@ -252,7 +252,7 @@ const ProductPage: React.FC = () => {
             <br />
             <SocialShare url={window.location.href} title={product.name} />
             <div className="items-center mt-6 flex gap-2">
-              <Package className="h-6 w-6" />
+              <Package className="h-6 w-6 text-yellow-500" />
               <span className="font-bold text-xs">Livraison offerte dès 6 bouteilles achetées sur un domaine</span>
             </div>
             <div className="flex items-center mt-1">
