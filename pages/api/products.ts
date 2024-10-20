@@ -10,7 +10,7 @@ interface Product {
   millesime?: string;
   certification?: string;
   appelation?: string;
-  meta_data: { key: string; value: any }[]; // Modifié pour inclure des tableaux
+  meta_data: { key: string; value: string | string[] }[]; // Modifié pour inclure des tableaux de chaînes
   status: string;
   is_validated?: boolean;
   region__pays?: string;
@@ -40,8 +40,8 @@ interface AxiosErrorResponse {
   message: string;
 }
 
-const transformMetaData = (metaData: { key: string; value: any }[]): { [key: string]: any } => {
-  const productData: { [key: string]: any } = {};
+const transformMetaData = (metaData: { key: string; value: string | string[] }[]): { [key: string]: unknown } => {
+  const productData: { [key: string]: unknown } = {};
   let millesime = '';
   let certification = '';
   let region__pays = '';
@@ -68,28 +68,28 @@ const transformMetaData = (metaData: { key: string; value: any }[]): { [key: str
     // Gestion des cas spécifiques
     switch (key) {
       case 'nom_chateau':
-        nom_chateau = value;
+        nom_chateau = Array.isArray(value) ? value.join(', ') : value;
         break;
       case 'millesime':
-        millesime = value;
+        millesime = Array.isArray(value) ? value.join(', ') : value;
         break;
       case 'certification':
-        certification = value;
+        certification = Array.isArray(value) ? value.join(', ') : value;
         break;
       case 'region__pays':
-        region__pays = value;
+        region__pays = Array.isArray(value) ? value.join(', ') : value;
         break;
       case 'appellation':
-        appelation = value;
+        appelation = Array.isArray(value) ? value.join(', ') : value;
         break;
       case 'average_rating':
-        average_rating = value;
+        average_rating = Array.isArray(value) ? value.join(', ') : value;
         break;
       case 'rating_count':
-        rating_count = value;
+        rating_count = Array.isArray(value) ? value.join(', ') : value;
         break;
       case 'volume':
-        volume = value;
+        volume = Array.isArray(value) ? value.join(', ') : value;
         break;
       case 'accord_mets':
         accord_mets = Array.isArray(value) ? value : [value]; // S'assurer que c'est un tableau
@@ -101,7 +101,7 @@ const transformMetaData = (metaData: { key: string; value: any }[]): { [key: str
         conservation = Array.isArray(value) ? value : [value]; // S'assurer que c'est un tableau
         break;
       case 'style':
-        style = value;
+        style = Array.isArray(value) ? value.join(', ') : value;
         break;
     }
   });
