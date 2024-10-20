@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { Search, ShoppingCart, User, Menu, X, ChevronDown } from 'lucide-react';
