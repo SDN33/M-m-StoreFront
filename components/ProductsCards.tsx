@@ -65,8 +65,13 @@ const ProductsCards: React.FC = () => {
     }
   };
 
-
   useEffect(() => {
+    const logDebug = (...args: unknown[]) => {
+      if (debugMode) {
+        console.log(...args);
+      }
+    };
+
     const fetchProducts = async () => {
       try {
         setLoading(true);
@@ -86,7 +91,8 @@ const ProductsCards: React.FC = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, []); // No need to add 'logDebug' as a dependency now
+
 
   const filterProducts = useCallback((product: Product) => {
     const isColorMatch = selectedFilters.color.length === 0 || selectedFilters.color.includes(product.categories[0]?.name || '');
