@@ -3,7 +3,6 @@ import axios from 'axios';
 import ProductFilter from '@/components/ProductFilters';
 import FilterTop from './Filtertop';
 import ProductCard from './ProductCard';
-import ProductsIntro from './ProductIntro';
 
 interface Product {
   id: number;
