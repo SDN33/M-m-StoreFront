@@ -83,6 +83,14 @@ const getCategoryColor = (categoryName: string) => {
   }
 };
 
+// Fonction joinIfArray
+const joinIfArray = (value: string | string[], separator: string = ', ') => {
+  if (Array.isArray(value)) {
+    return value.join(separator);
+  }
+  return value; // Retourne la chaîne telle quelle si ce n'est pas un tableau
+};
+
 const ProductPage: React.FC = () => {
   const { id } = useParams() as { id: string };
   const [product, setProduct] = useState<Product | null>(null);
@@ -280,49 +288,51 @@ const ProductPage: React.FC = () => {
             {product.description ? formatDescription(product.description) : 'Pas de description disponible.'}
           </p>
           <br />
-
-          {/* Grille de 2 colonnes plus compact */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-2 w-full md:w-[35rem] p-2">
-            {/* Cépages */}
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-              <div className="flex justify-between">
-                <h3 className="text-lg font-bold text-orange-600">Cépages</h3>
-                <p className="text-sm">{product.cepages?.join(', ') ?? 'Pas de cépages renseignés'}</p>
-              </div>
+        </div>
+        {/* Grille de 2 colonnes plus compact */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-2 w-full md:w-[35rem] p-2">
+          {/* Cépages */}
+          <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+            <div className="flex justify-between">
+              <h3 className="text-lg font-bold text-orange-600">Cépages</h3>
+              <p className="text-sm text-start">
+                {product.cepages ? joinIfArray(product.cepages) : 'Pas de cépages renseignés'}
+              </p>
             </div>
+          </div>
 
-            {/* Style */}
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-              <div className="flex justify-between">
-                <h3 className="text-lg font-bold text-orange-600">Style</h3>
-                <p className="text-sm">
-                  {typeof product.style === 'string'
-                    ? product.style.charAt(0).toUpperCase() + product.style.slice(1).toLowerCase()
-                    : 'Pas de style renseigné'}
-                </p>
-              </div>
+          {/* Style */}
+          <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+            <div className="flex justify-between">
+              <h3 className="text-lg font-bold text-orange-600">Style</h3>
+              <p className="text-sm text-start">
+                {typeof product.style === 'string'
+                  ? product.style.charAt(0).toUpperCase() + product.style.slice(1).toLowerCase()
+                  : 'Pas de style renseigné'}
+              </p>
             </div>
+          </div>
 
-            {/* Accords mets et vins */}
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-              <div className="flex justify-between">
-                <h3 className="text-lg font-bold text-orange-600">Accords mets et vins</h3>
-                <p className="text-sm text-end">{product.accord_mets?.join(', ') ?? 'Pas d\'accords mets et vins renseignés'}</p>
-              </div>
+          {/* Accords mets et vins */}
+          <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+            <div className="flex justify-between">
+              <h3 className="text-lg font-bold text-orange-600">Accords mets et vins</h3>
+              <p className="text-sm text-start">
+                {product.accord_mets?.join(', ') ?? 'Pas d\'accords mets et vins renseignés'}
+              </p>
             </div>
+          </div>
 
-            {/* Conservation */}
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-              <div className="flex justify-between">
-                <h3 className="text-lg font-bold text-orange-600">Conservation</h3>
-                <p className="text-sm">{product.conservation ? product.conservation : 'Pas d\'informations de conservation'}</p>
-              </div>
+          {/* Conservation */}
+          <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+            <div className="flex justify-between">
+              <h3 className="text-lg font-bold text-orange-600">Conservation</h3>
+              <p className="text-sm text-start">
+                {product.conservation ? product.conservation : 'Pas d\'informations de conservation'}
+              </p>
             </div>
-
           </div>
         </div>
-
-
         <br />
         <br />
         <Livraison />
