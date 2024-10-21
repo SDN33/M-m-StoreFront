@@ -162,7 +162,7 @@ const Header = () => {
               ) : (
                 <>
                   <a href="/login" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Connecter</a>
-                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S&apos;inscrire</a>
+                  <a href="/register" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">S'inscrire</a>
                 </>
               )}
             </div>
@@ -170,7 +170,7 @@ const Header = () => {
         </div>
 
         {/* Shopping Cart Icon */}
-        <a href="/cart" className="relative">
+        <a href="/cart" className="ml-4">
           <ShoppingCart className="w-6 h-6 text-white" />
         </a>
       </div>
@@ -184,26 +184,46 @@ const Header = () => {
       </button>
 
       {isMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white p-4 rounded-md shadow-lg z-30">
+        <div className="absolute top-full left-0 right-0 bg-white p-4 rounded-md shadow-lg z-20">
           <a href="/" className="block py-2 text-gray-800">Accueil</a>
-          <a href="https://www.memegeorgette.com/" className="block py-2 text-gray-800">Nous Découvrir</a>
+          <div className="relative">
+            <button
+              className="py-2 text-gray-800 flex items-center"
+              onClick={() => setIsVinsMenuOpen(!isVinsMenuOpen)}
+            >
+              Nos Vins
+              <ChevronDown className="ml-2 w-4 h-4" />
+            </button>
+            {isVinsMenuOpen && (
+              <ul className="mt-2">
+                <li><a href="/products/category/rouge" className="block py-2 text-gray-800">Nos vins rouges</a></li>
+                <li><a href="/products/category/blanc" className="block py-2 text-gray-800">Nos vins blancs</a></li>
+                <li><a href="/products/category/rose" className="block py-2 text-gray-800">Nos vins rosés</a></li>
+                <li><a href="/products/category/petillant" className="block py-2 text-gray-800">Nos vins pétillants</a></li>
+                <li><a href="/products/category/liquoreux" className="block py-2 text-gray-800">Nos vins liquoreux</a></li>
+              </ul>
+            )}
+          </div>
+          <a href="https://www.memegeorgette.com/" className="block py-2 text-gray-800">Découvrir Mémé Georgette</a>
           <a href="/contact" className="block py-2 text-gray-800">Contact</a>
-          <button onClick={() => setIsUserMenuOpen(!isUserMenuOpen)} className="block py-2 text-gray-800">Mon Compte</button>
-          {isUserMenuOpen && (
-            <div className="mt-2">
-              {isLoggedIn ? (
-                <>
-                  <a href="/dashboard" className="block py-2 text-gray-800">Mon Dashboard</a>
-                  <button onClick={() => setIsLoggedIn(false)} className="block py-2 text-gray-800">Se Déconnecter</button>
-                </>
-              ) : (
-                <>
-                  <a href="/login" className="block py-2 text-gray-800">Se Connecter</a>
-                  <a href="/register" className="block py-2 text-gray-800">S&apos;inscrire</a>
-                </>
-              )}
-            </div>
-          )}
+          <div className="mt-2">
+            {isLoggedIn ? (
+              <>
+                <a href="/dashboard" className="block py-2 text-gray-800">Mon Dashboard</a>
+                <button onClick={() => setIsLoggedIn(false)} className="block py-2 text-gray-800">Se Déconnecter</button>
+              </>
+            ) : (
+              <>
+                <a href="/login" className="block py-2 text-gray-800">Se Connecter/S&apos;inscrire</a>
+              </>
+            )}
+          </div>
+          {/* Icône du panier sur mobile */}
+          <div className="mt-4 flex justify-end">
+            <a href="/cart" className="text-gray-800">
+              <ShoppingCart className="w-6 h-6" />
+            </a>
+          </div>
         </div>
       )}
     </header>
