@@ -33,6 +33,7 @@ const HeroBanner = () => {
         loop
         muted
         playsInline // Ajout de l'attribut playsInline pour iPhone
+        preload="auto" // Ajout du préchargement pour éviter les décalages
         onError={() => setVideoError(true)} // Affiche l'image de fond si la vidéo ne se charge pas
       >
         <source src="/videos/herobanner-mobile.mp4" type="video/mp4" />
@@ -128,7 +129,7 @@ const HeroBanner = () => {
         Notre Cave
         <span className="ml-2">➜</span>
       </button>
-      
+
 
         <a
           href="https://www.memegeorgette.com/"
