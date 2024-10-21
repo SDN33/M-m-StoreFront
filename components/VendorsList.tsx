@@ -1,6 +1,7 @@
+'use client';
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface Product {
   id: number;
@@ -25,6 +26,7 @@ const VendorList: React.FC = () => {
   const [vendors, setVendors] = useState<Vendor[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
   const vendorContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -98,6 +100,10 @@ const VendorList: React.FC = () => {
     }
   };
 
+  const handleCardClick = (productId: number) => {
+    router.push(`/product/${productId}`);
+  };
+
   return (
     <div className="p-6 space-y-6">
       <h2 className="text-2xl md:text-3xl font-extrabold text-orange-600 tracking-tight mx-16 text-center">
@@ -110,9 +116,9 @@ const VendorList: React.FC = () => {
         </div>
       ) : (
         <div className="relative mx-auto max-w-2xl">
-          <button onClick={handleScrollLeft} className="absolute -left-5 top-1/2 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white px-4 py-2 rounded-full">←</button>
+          <button onClick={handleScrollLeft} className="absolute -left-5 top-1/2 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white px-4 py-2 rounded-full z-10">←</button>
 
-          <div ref={vendorContainerRef} className="flex overflow-x-auto space-x-6">
+          <div ref={vendorContainerRef} className="flex overflow-x-auto space-x-6 scrollbar-hide appearance-none">
             {vendors.map((vendor) => (
               <div key={vendor.store_name} className="bg-orange-600 border-black shadow rounded-lg w-80">
                 <div className="p-4 bg-gray-50 py-4">
@@ -130,7 +136,11 @@ const VendorList: React.FC = () => {
                   ) : (
                     <ul className="space-y-2">
                       {vendor.products.slice(0, 4).map((product) => (
-                        <li key={product.id} className="p-2 bg-gray-50 rounded-lg flex justify-between">
+                        <li
+                          key={product.id}
+                          className="p-2 bg-gray-50 rounded-lg flex justify-between transform transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer"
+                          onClick={() => handleCardClick(product.id)} // Utilisez handleCardClick ici
+                        >
                           <div className="flex items-center space-x-3">
                             {product.images?.[0] && (
                               <img src={product.images[0].src} alt={product.name} className="w-10 h-10 object-cover" />
@@ -138,10 +148,14 @@ const VendorList: React.FC = () => {
                             <div>
                               <h4 className="font-semibold">{product.name}</h4>
                               <p className="text-sm text-gray-600">{product.nom_du_chateau}</p>
+                              <img src={getCertificationLogo(product.certification).src} alt={product.certification} width={getCertificationLogo(product.certification).width} height={getCertificationLogo(product.certification).height} />
                             </div>
                           </div>
-                          <span className="text-xs font-semibold text-gray-700 bg-gray-200 px-2 py-1 rounded-full">
-                            {parseFloat(product.price).toFixed(2)} €
+                          <span className="text-base font-bold text-orange-600 px-8 py-8 w-26 h-26">
+                            <span className="px-2 py-1 text-xs font-semibold text-black bg-gray-200 rounded-full">
+                              {parseFloat(product.price).toFixed(2)}€
+                              {parseFloat(product.price) > 50 }
+                            </span>
                           </span>
                         </li>
                       ))}
@@ -154,6 +168,9 @@ const VendorList: React.FC = () => {
                       </button>
                     </div>
                   )}
+                </div>
+                <div className='mx-auto'>
+                  <p className='mx-auto w-fit mb-4 bg-white text-green-600 font-light border-orange-600 border-2 rounded-full p-2'>Voir plus</p>
                 </div>
               </div>
             ))}
