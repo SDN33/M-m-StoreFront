@@ -109,7 +109,10 @@ const VendorList: React.FC = () => {
     <div className="p-6 space-y-6">
       <h2 className="text-2xl md:text-3xl font-extrabold text-orange-600 tracking-tight mx-16 text-center">
         Nos Vignerons Partenaires
+        <br /><div className="text-gray-800 text-sm font-extrabold tracking-tight text-center">Découvrez les derniers vins ajoutés par nos vignerons partenaires.</div>
       </h2>
+
+
 
       {vendors.length === 0 ? (
         <div className="bg-white shadow rounded-lg p-6">
