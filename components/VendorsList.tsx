@@ -140,7 +140,7 @@ const VendorList: React.FC = () => {
                             clipRule="evenodd"
                           />
                         </svg>
-                      )}
+                      )
                     </div>
                     <h2 className="text-lg !font-bold sloganhero">
                       {vendor.store_name}
