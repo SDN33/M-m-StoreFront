@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 
 interface Product {
@@ -20,6 +20,7 @@ const VendorList: React.FC = () => {
   const [vendors, setVendors] = useState<Vendor[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const vendorContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchVendors = async () => {
@@ -29,7 +30,7 @@ const VendorList: React.FC = () => {
         const vendorMap: { [key: string]: Vendor } = {};
 
         products.forEach((product) => {
-          const storeName = product.store_name || 'Vendeur Anonyme';
+          const storeName = product.store_name || '@MéméGeorgette';
           if (!vendorMap[storeName]) {
             vendorMap[storeName] = {
               store_name: storeName,
@@ -50,6 +51,18 @@ const VendorList: React.FC = () => {
 
     fetchVendors();
   }, []);
+
+  const handleScrollLeft = () => {
+    if (vendorContainerRef.current) {
+      vendorContainerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+    }
+  };
+
+  const handleScrollRight = () => {
+    if (vendorContainerRef.current) {
+      vendorContainerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+    }
+  };
 
   if (loading) {
     return (
@@ -92,8 +105,19 @@ const VendorList: React.FC = () => {
           <p className="text-center text-gray-500">Aucun vendeur disponible.</p>
         </div>
       ) : (
-        <div className="mx-auto max-w-2xl overflow-hidden rounded-lg shadow-lg">
-          <div className="flex overflow-x-auto space-x-6 p-8">
+        <div className="relative mx-auto max-w-2xl">
+          <button
+            onClick={handleScrollLeft}
+            className="absolute -left-5 top-1/2 transform -translate-y-1/2 text-white bg-orange-600 hover:bg-gray-400 p-2 rounded-full"
+          >
+            ←
+          </button>
+
+          <div
+            ref={vendorContainerRef}
+            className="flex overflow-x-auto space-x-6 p-8"
+            style={{ scrollBehavior: 'smooth' }}
+          >
             {vendors.map((vendor) => (
               <div key={vendor.store_name} className="bg-white shadow rounded-lg flex-none w-80">
                 <div className="p-4 bg-gray-50">
@@ -119,11 +143,13 @@ const VendorList: React.FC = () => {
                         </svg>
                       )}
                     </div>
-                    <h2 className="text-xl font-semibold text-green-600">{vendor.store_name}</h2>
+                    <h2 className="text-lg !font-bold sloganhero">
+                      {vendor.store_name}
+                    </h2>
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="text-sm font-black mb-4  text-orange-600">Top Vins :</h3>
+                  <h3 className="text-sm font-black mb-4 text-orange-600">Top Vins :</h3>
                   {vendor.products.length === 0 ? (
                     <p className="text-gray-400">Aucuns vins disponibles.</p>
                   ) : (
@@ -154,6 +180,13 @@ const VendorList: React.FC = () => {
               </div>
             ))}
           </div>
+
+          <button
+            onClick={handleScrollRight}
+            className="absolute -right-5 top-1/2 transform -translate-y-1/2 text-white bg-orange-600 hover:bg-gray-400 p-2 rounded-full"
+          >
+            →
+          </button>
         </div>
       )}
       <video
