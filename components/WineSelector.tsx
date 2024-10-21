@@ -1,58 +1,39 @@
+'use client'; // Assure que le composant est côté client
 import React, { useState } from 'react';
-import { Wine } from 'lucide-react';
+import Link from 'next/link'; // Utilise le composant Link de Next.js pour les redirections
 
 const WineSelector = () => {
   const [hoveredWine, setHoveredWine] = useState<string | null>(null);
 
   const wines = [
-    { color: 'red', name: 'Rouge', bg: 'from-red-900 to-red-700' },
-    { color: 'white', name: 'Blanc', bg: 'from-yellow-200 to-yellow-100' },
-    { color: 'rose', name: 'Rosé', bg: 'from-pink-400 to-pink-300' },
-    { color: 'sparkling', name: 'Pétillant', bg: 'from-yellow-300 to-yellow-200' },
-    { color: 'dessert', name: 'Liquoreux', bg: 'from-amber-700 to-amber-600' }
+    { color: 'rouge', name: 'Rou', bg: 'bg-red-700', path: '/products/category/rouge' },
+    { color: 'blanc', name: 'Bla', bg: 'bg-yellow-500', path: '/products/category/blanc' },
+    { color: 'rose', name: 'Ros', bg: 'bg-pink-500', path: '/products/category/rose' },
+    { color: 'petillant', name: 'Pét', bg: 'bg-yellow-200', path: '/products/category/petillant' },
+    { color: 'liquoreux', name: 'Liq', bg: 'bg-amber-600', path: '/products/category/liquoreux' }
   ];
 
-  const handleWineClick = (color: string) => {
-    console.log(`Navigating to ${color} wine page`);
-    // Logique de navigation à implémenter ici
-  };
-
   return (
-    <div className="flex flex-wrap justify-center items-center gap-12 p-12 bg-gray-100 rounded-xl shadow-lg">
-      {wines.map((wine) => (
-        <div
-          key={wine.color}
-          className="flex flex-col items-center cursor-pointer group"
-          onClick={() => handleWineClick(wine.color)}
-          onMouseEnter={() => setHoveredWine(wine.color)}
-          onMouseLeave={() => setHoveredWine(null)}
-        >
-          <div className={`
-            w-24 h-40 rounded-full bg-gradient-to-b ${wine.bg}
-            flex items-center justify-center mb-4
-            shadow-lg transform transition-all duration-300 ease-in-out
-            ${hoveredWine === wine.color ? 'scale-110 rotate-6' : ''}
-            group-hover:shadow-xl
-          `}>
-            <Wine
-              size={48}
-              className={`
-                text-white transition-all duration-300
-                ${hoveredWine === wine.color ? 'scale-110' : ''}
-              `}
-            />
+    <div className="flex justify-center items-start gap-3 pt-8 p-4 bg-transparent -ml-14">
+      {wines.map((wine, index) => (
+        <Link href={wine.path} key={wine.color} passHref> {/* Utilisation du lien Next.js */}
+          <div
+            className={`flex flex-col items-center cursor-pointer transition-all duration-300 ease-in-out
+                      ${hoveredWine === wine.color ? 'translate-y-[-8px]' : ''}
+                      ${index === 0 ? '-ml-8' : '-ml-7'}`}
+            onMouseEnter={() => setHoveredWine(wine.color)}
+            onMouseLeave={() => setHoveredWine(null)}
+          >
+            <div className={`w-14 h-24 rounded-full ${wine.bg} flex items-center justify-center shadow-md relative overflow-hidden`}>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-black font-black text-xs transform rotate-[-90deg] whitespace-nowrap">
+                  {wine.name}
+                </span>
+              </div>
+              <div className="w-10 h-16 bg-white/20 absolute bottom-1 rounded-full"></div>
+            </div>
           </div>
-          <span className={`
-            text-xl font-semibold transition-all duration-300
-            ${hoveredWine === wine.color ? 'text-2xl text-indigo-600' : 'text-gray-800'}
-          `}>
-            {wine.name}
-          </span>
-          <div className={`
-            mt-2 h-1 bg-indigo-600 transition-all duration-300 ease-out
-            ${hoveredWine === wine.color ? 'w-full' : 'w-0'}
-          `}/>
-        </div>
+        </Link>
       ))}
     </div>
   );
