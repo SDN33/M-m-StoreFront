@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image'; // Import the Image component
 
-const RougeIntro: React.FC = () => {
+const BlancIntro: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const introRef = useRef<HTMLDivElement | null>(null);
 
@@ -38,7 +38,7 @@ const RougeIntro: React.FC = () => {
     >
       {/* Image de Vin à gauche */}
       <Image
-        src="/images/vinentete.svg"
+        src="/images/vinentete.svg" // Assure-toi que l'image correspond bien au vin blanc
         alt="Vin Mémé Georgette"
         className="w-30 h-auto border-lg mb-4 md:mb-0 md:ml-24 hidden sm:block md:mt-0"
         width={118} // Set the width based on the className
@@ -48,7 +48,7 @@ const RougeIntro: React.FC = () => {
       {/* Texte au centre avec espacement */}
       <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4 text-center sm:text-left md:pr-80">
         <h3 className="text-2xl md:text-3xl font-extrabold text-orange-600 tracking-tight ml-26">
-          Découvrez nos vins <span className='text-red-600'>rouges</span> <br />
+          Découvrez nos vins <span className='text-yellow-500'>blancs</span> <br /> {/* Change le texte à "blanc" */}
           <div className="text-gray-800 text-sm">* Livraison offerte dès 6 bouteilles achetées sur le même domaine</div>
         </h3>
 
@@ -65,4 +65,4 @@ const RougeIntro: React.FC = () => {
   );
 };
 
-export default RougeIntro;
+export default BlancIntro;
