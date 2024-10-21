@@ -45,6 +45,16 @@ export default function Home() {
           className="w-full h-full"
         ></video>
         <VendorList />
+        <video
+          src="/videos/minibanner.mp4"
+          title="Banner vignes"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="w-full h-full"
+        ></video>
         <Slogan />
         <br /><br />
         <Newletter />
