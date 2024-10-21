@@ -3,6 +3,7 @@ import axios from 'axios';
 import ProductFilter from '@/components/ProductFilters';
 import FilterTop from './Filtertop';
 import ProductCard from './ProductCard';
+import MobileProductFilter from './MobileProductFilter';
 
 interface Product {
   id: number;
@@ -168,6 +169,9 @@ const RougeProductsCards: React.FC = () => {
             onFilterChange={handleCheckboxChange}
             hideColorFilter // Passe cette prop pour cacher le filtre de couleur
           />
+        </div>
+        <div className="md:hidden">
+          <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
         </div>
 
         <div className="flex-grow mt-10">
