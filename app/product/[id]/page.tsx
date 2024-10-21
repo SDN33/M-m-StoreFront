@@ -320,7 +320,7 @@ const ProductPage: React.FC = () => {
             {/* Degré d'alcool */}
             <div className="bg-gray-100 p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-orange-600 text-left">Degré d'alcool</h3>
+                <h3 className="text-lg font-bold text-orange-600 text-left">Degré d&apos;alcool</h3>
                 <p className="text-sm text-right">
                   {product.degre ? product.degre : 'Pas d\'informations de conservation'}% alc. / vol.
                 </p>
