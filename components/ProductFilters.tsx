@@ -74,8 +74,8 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       <div className="absolute inset-0 bg-orange-600"></div>
 
       <div className="relative">
-        <h2 className="text-xl font-bold text-white">
-          Trier nos vins:
+        <h2 className="text-xl font-bold text-white pt-2 text-start ml-3">
+          Trier nos vins
         </h2>
         <br />
         {Object.entries(filterOptions).map(([filterType, options]) => {

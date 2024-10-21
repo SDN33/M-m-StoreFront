@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 interface Product {
   id: number;
@@ -124,7 +125,12 @@ const VendorList: React.FC = () => {
                 <div className="p-4 bg-gray-100 py-4 border-lg rounded-md">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gray-200 border-4 border-white rounded-full overflow-hidden">
-                      <img src={vendor.vendor_image || '/images/mémé-georgette1.png'} alt={vendor.store_name} />
+                      <Image
+                       src={vendor.vendor_image || '/images/mémé-georgette1.png'}
+                       alt={vendor.store_name}
+                        width={50}
+                        height={50}
+                      />
                     </div>
                     <h2 className="text-lg font-bold">{vendor.store_name}</h2>
                   </div>
