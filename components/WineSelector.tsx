@@ -14,23 +14,23 @@ const WineSelector = () => {
   ];
 
   return (
-    <div className="flex justify-center items-start gap-3 pt-8 p-4 bg-transparent -ml-14">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:justify-center items-start gap-3 pt-8 p-4 bg-transparent -ml-2 lg:-ml-14">
       {wines.map((wine, index) => (
         <Link href={wine.path} key={wine.color} passHref> {/* Utilisation du lien Next.js */}
           <div
             className={`flex flex-col items-center cursor-pointer transition-all duration-300 ease-in-out
                       ${hoveredWine === wine.color ? 'translate-y-[-8px]' : ''}
-                      ${index === 0 ? '-ml-8' : '-ml-7'}`}
+                      ${index === 0 ? 'sm:-ml-0' : 'sm:-ml-8'}`}
             onMouseEnter={() => setHoveredWine(wine.color)}
             onMouseLeave={() => setHoveredWine(null)}
           >
-            <div className={`w-14 h-24 rounded-full ${wine.bg} flex items-center justify-center shadow-md relative overflow-hidden`}>
+            <div className={`w-12 sm:w-14 h-20 sm:h-24 rounded-full ${wine.bg} flex items-center justify-center shadow-md relative overflow-hidden`}>
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-black font-black text-xs transform rotate-[-90deg] whitespace-nowrap">
+                <span className="text-white font-black text-xs sm:text-sm transform rotate-[-90deg] whitespace-nowrap">
                   {wine.name}
                 </span>
               </div>
-              <div className="w-10 h-16 bg-white/20 absolute bottom-1 rounded-full"></div>
+              <div className="w-8 sm:w-10 h-14 sm:h-16 bg-white/20 absolute bottom-1 rounded-full"></div>
             </div>
           </div>
         </Link>

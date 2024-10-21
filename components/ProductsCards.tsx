@@ -5,7 +5,6 @@ import ProductFilter from '@/components/ProductFilters';
 import FilterTop from './Filtertop';
 import ProductCard from './ProductCard';
 import MobileProductFilter from './MobileProductFilter';
-import WineSelector from '@/components/WineSelector';
 
 interface Product {
   id: number;
@@ -162,7 +161,6 @@ const ProductsCards: React.FC = () => {
       <div className="flex flex-col md:flex-row mt-4">
         <div className="hidden md:block md:w-1/4">
           <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
-          <WineSelector />
 
         </div>
         <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />

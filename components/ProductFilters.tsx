@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import WineSelector from './WineSelector';
 
 interface ProductFilterProps {
   selectedFilters: {
@@ -124,6 +125,11 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
           );
         })}
       </div>
+      <div className="hidden lg:flex justify-center items-center mt-4 ml-14">
+        <WineSelector />
+      </div>
+
+
     </div>
   );
 };
