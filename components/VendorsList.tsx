@@ -170,7 +170,7 @@ const VendorList: React.FC = () => {
                   )}
                 </div>
                 <div className='mx-auto'>
-                  <p className='mx-auto w-fit mb-4 bg-white text-green-600 font-light border-orange-600 border-2 rounded-full p-2'>Voir plus</p>
+                  <p className='mx-auto w-fit mb-4 bg-white text-gray-800 font-light border-orange-600 border-2 rounded-full p-2'>Voir plus</p>
                 </div>
               </div>
             ))}
