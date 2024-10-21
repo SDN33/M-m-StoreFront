@@ -1,4 +1,3 @@
-// path: /api/products
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios, { AxiosError } from 'axios';
 
@@ -26,6 +25,7 @@ interface Product {
   style?: string;
   stock_status?: string;
   degre?: number;
+
 }
 
 interface AxiosErrorResponse {
@@ -33,8 +33,8 @@ interface AxiosErrorResponse {
     data: {
       message: string;
     };
+    message: string;
   };
-  message: string;
 }
 
 // Cache pour les produits
@@ -174,6 +174,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       let productsOrCategories = await fetchProducts(url);
       if (!isCategories) {
+        // Filtrer uniquement les produits publiés et en stock
+        productsOrCategories = (productsOrCategories as Product[]).filter(product =>
+          product.status === 'publish' && product.stock_status === 'instock'
+        );
+
         // Filtrer par prix
         if (query.price) {
           const priceFilters = Array.isArray(query.price) ? query.price : [query.price];
@@ -239,35 +244,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (query.accord_mets) {
           const accordMetsFilter = Array.isArray(query.accord_mets) ? query.accord_mets : [query.accord_mets];
           productsOrCategories = (productsOrCategories as Product[]).filter(product => {
-            return accordMetsFilter.some(accord => product.accord_mets?.includes(accord));
+            return product.accord_mets && product.accord_mets.some((accordMets: string) => accordMetsFilter.includes(accordMets));
           });
         }
 
-        const transformedProducts = await Promise.all((productsOrCategories as Product[]).map(async (product) => {
-          const vendor = await getVendorDetails(product.id);
-          const transformedProduct: Product = {
+        // Récupérer les détails des vendeurs pour chaque produit
+        const productsWithVendorDetails = await Promise.all(productsOrCategories.map(async (product) => {
+          const vendorDetails = await getVendorDetails(product.id); // Remplacez par l'ID du vendeur approprié
+          return {
             ...product,
-            ...transformMetaData(product.meta_data),
-            store_name: product.store_name || '', // Utilisation du nom du vendeur
-            vendor_image: vendor?.avatar_url || '', // Utilisation de l'avatar du vendeur
+            vendor_image: vendorDetails?.vendor_image || '', // Ajoutez ici le champ pour l'image du vendeur
           };
-          return transformedProduct;
         }));
 
-        // Mise à jour du cache
-        productCache[url] = transformedProducts;
-        cacheTimestamp = Date.now();
-
-        return res.status(200).json(transformedProducts);
+        productCache[url] = productsWithVendorDetails;
+        cacheTimestamp = Date.now(); // Met à jour le timestamp du cache
+        return res.status(200).json(productsWithVendorDetails);
       } else {
+        // Retourner les catégories
         return res.status(200).json(productsOrCategories);
       }
     } catch (error) {
       const axiosError = error as AxiosError<AxiosErrorResponse>;
-      const errorMessage = axiosError?.response?.data.message || 'Erreur lors de la récupération des données';
+      const errorMessage = axiosError.response?.data || axiosError.message || 'Une erreur est survenue lors de la récupération des données.';
       return res.status(500).json({ message: errorMessage });
     }
+  } else {
+    res.setHeader('Allow', ['GET']);
+    return res.status(405).end(`Method ${method} Not Allowed`);
   }
-
-  return res.setHeader('Allow', ['GET']).status(405).end(`Method ${method} Not Allowed`);
 }

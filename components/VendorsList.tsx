@@ -12,7 +12,7 @@ interface Product {
   store_name?: string;
   vendor_image?: string;
   images?: { id: number; src: string; alt?: string }[];
-  meta_data: { key: string; value: string | string[] }[];
+  meta_data: { key: string; value: string | string[] }[]; // Gardez cette structure pour meta_data
 }
 
 interface Vendor {
@@ -33,12 +33,15 @@ const VendorList: React.FC = () => {
         const response = await axios.get('/api/products');
         const products: Product[] = response.data;
 
+        console.log(products); // Vérifiez les données
+
         const vendorMap: { [key: string]: Vendor } = {};
         products.forEach((product) => {
+          // Vérifiez que meta_data existe
           if (product.meta_data) {
-            const chateauMeta = product.meta_data.find(meta => meta.key === 'nom_chateau');
+            const chateauMeta = product.meta_data.find(meta => meta.key === 'nom_chateau'); // Changez ici
             if (chateauMeta) {
-              product.nom_du_chateau = chateauMeta.value as string;
+              product.nom_du_chateau = chateauMeta.value as string; // Assigner la valeur
             }
           }
 
@@ -50,7 +53,10 @@ const VendorList: React.FC = () => {
               vendor_image: product.vendor_image,
             };
           }
-          vendorMap[storeName].products.push(product);
+          // Limiter à 5 produits par vendeur
+          if (vendorMap[storeName].products.length < 5) {
+            vendorMap[storeName].products.push(product);
+          }
         });
 
         setVendors(Object.values(vendorMap));
@@ -77,11 +83,30 @@ const VendorList: React.FC = () => {
   };
 
   if (loading) {
-    return <div className="p-6">Chargement...</div>;
+    return (
+      <div className="p-6 space-y-4">
+        {[...Array(3)].map((_, i) => (
+          <div key={i} className="bg-white shadow rounded-lg p-4 animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-3/4 mb-4"></div>
+            <div className="space-y-2">
+              <div className="h-4 bg-gray-200 rounded w-full"></div>
+              <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+              <div className="h-4 bg-gray-200 rounded w-4/6"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="p-6">{error}</div>;
+    return (
+      <div className="p-6">
+        <div className="bg-white shadow rounded-lg p-6">
+          <p className="text-center text-red-500">{error}</p>
+        </div>
+      </div>
+    );
   }
 
   const getCertificationLogo = (certification?: string) => {
@@ -102,6 +127,9 @@ const VendorList: React.FC = () => {
     <div className="p-6 space-y-6">
       <h2 className="text-2xl md:text-3xl font-extrabold text-orange-600 tracking-tight mx-16 text-center">
         Nos Vignerons Partenaires
+        <div className="text-gray-800 text-sm">
+          Notre terroir est riche de vignerons passionnés qui produisent des vins de qualité
+        </div>
       </h2>
 
       {vendors.length === 0 ? (
@@ -110,15 +138,28 @@ const VendorList: React.FC = () => {
         </div>
       ) : (
         <div className="relative mx-auto max-w-2xl">
-          <button onClick={handleScrollLeft} className="absolute -left-5 top-1/2">←</button>
+          <button
+            onClick={handleScrollLeft}
+            className="absolute -left-5 top-1/2 transform -translate-y-1/2 text-white bg-gradient-to-r from-gray-900 via-gray-800 to-black hover:bg-gray-600 p-2 rounded-full"
+          >
+            ←
+          </button>
 
-          <div ref={vendorContainerRef} className="flex overflow-x-auto space-x-6">
+          <div
+            ref={vendorContainerRef}
+            className="flex overflow-x-auto space-x-6 scrollbar-hide appearance-none slideInFromRight"
+            style={{ scrollBehavior: 'smooth' }}
+          >
             {vendors.map((vendor) => (
-              <div key={vendor.store_name} className="bg-orange-600 border-black shadow rounded-lg w-80">
+              <div key={vendor.store_name} className="bg-orange-600 border-w-4 border-black box-border shadow rounded-lg flex-none w-80">
                 <div className="p-4 bg-gray-50 py-4">
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gray-200">
-                      <img src={vendor.vendor_image || '/images/mémé-georgette1.png'} alt={vendor.store_name} />
+                    <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                      <img
+                        src={vendor.vendor_image || '/images/mémé-georgette1.png'}
+                        alt={vendor.store_name}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <h2 className="text-lg font-bold">{vendor.store_name}</h2>
                   </div>
@@ -128,38 +169,53 @@ const VendorList: React.FC = () => {
                   {vendor.products.length === 0 ? (
                     <p className="text-gray-400">Aucuns vins disponibles.</p>
                   ) : (
-                    <ul className="space-y-2">
-                      {vendor.products.slice(0, 4).map((product) => (
-                        <li key={product.id} className="p-2 bg-gray-50 rounded-lg flex justify-between">
-                          <div className="flex items-center space-x-3">
-                            {product.images?.[0] && (
-                              <img src={product.images[0].src} alt={product.name} className="w-10 h-10 object-cover" />
-                            )}
-                            <div>
-                              <h4 className="font-semibold">{product.name}</h4>
-                              <p className="text-sm text-gray-600">{product.nom_du_chateau}</p>
+                    <ul className="space-y-4"> {/* Réduire l'espace entre les éléments */}
+                      {vendor.products.map((product) => (
+                        <Link key={product.id} href={`/product/${product.id}`} passHref>
+                          <li className="flex items-center justify-between p-2 bg-gray-50 rounded-lg cursor-pointer hover:scale-105 transition-transform duration-300 ease-in-out"> {/* Réduire l'effet de zoom */}
+                            <div className="flex items-center space-x-3">
+                              {product.images && product.images.length > 0 && (
+                                <img
+                                  src={product.images[0].src}
+                                  alt={product.name}
+                                  className="w-10 h-10 object-cover rounded-lg"
+                                />
+                              )}
+                              <div>
+                                <h4 className="font-semibold">{product.name}</h4>
+                                <p className="text-sm text-gray-600">{product.nom_du_chateau}</p>
+                                <div className="flex items-center space-x-2">
+                                  {product.certification && (
+                                    <img
+                                      src={getCertificationLogo(product.certification).src}
+                                      width={getCertificationLogo(product.certification).width}
+                                      height={getCertificationLogo(product.certification).height}
+                                      alt={product.certification}
+                                    />
+                                  )}
+                                  <p className="text-sm text-gray-600">{product.millesime}</p>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                          <span className="text-xs font-semibold text-gray-700 bg-gray-200 px-2 py-1 rounded-full">
-                            {parseFloat(product.price).toFixed(2)} €
-                          </span>
-                        </li>
+                            <span className="px-2 py-1 text-xs font-semibold text-gray-700 bg-gray-200 rounded-full">
+                              {parseFloat(product.price).toFixed(2)} €
+                            </span>
+                          </li>
+                        </Link>
                       ))}
                     </ul>
-                  )}
-                  {vendor.products.length > 4 && (
-                    <div className="mt-4 text-right">
-                      <button className="text-sm text-orange-600 font-semibold bg-white border border-orange-600 px-4 py-2 rounded-lg">
-                        Voir plus
-                      </button>
-                    </div>
                   )}
                 </div>
               </div>
             ))}
           </div>
 
-          <button onClick={handleScrollRight} className="absolute -right-5 top-1/2">→</button>
+          <button
+            onClick={handleScrollRight}
+            className="absolute -right-5 top-1/2 transform -translate-y-1/2 text-white bg-gradient-to-r from-gray-900 via-gray-800 to-black hover:bg-gray-600 p-2 rounded-full"
+          >
+            →
+          </button>
         </div>
       )}
     </div>
