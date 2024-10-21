@@ -74,9 +74,9 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       <div className="absolute inset-0 bg-orange-600"></div>
 
       <div className="relative">
-        <p className="mt-4 px-4 text-white h-[1.5rem]">
+        <h2 className="text-xl font-bold text-white">
           Trier nos vins:
-        </p>
+        </h2>
         <br />
         {Object.entries(filterOptions).map(([filterType, options]) => {
           // Ne pas afficher le filtre de couleur si hideColorFilter est vrai
