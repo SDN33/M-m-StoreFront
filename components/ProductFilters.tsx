@@ -70,7 +70,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div className="relative max-w-sm w-full md:w-40 lg:w-80 rounded-lg shadow-lg overflow-hidden hidden md:block">
+    <div className="relative max-w-sm w-full md:w-52 lg:w-60 rounded-lg shadow-lg overflow-hidden hidden md:block">
       <div className="absolute inset-0 bg-orange-600"></div>
 
       <div className="relative">
