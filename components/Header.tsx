@@ -168,10 +168,6 @@ const Header = () => {
             </div>
           )}
         </div>
-
-        <a href="/cart" className="relative">
-          <ShoppingCart className="w-6 h-6 text-white" />
-        </a>
       </div>
 
       {/* Mobile Menu */}
@@ -187,23 +183,22 @@ const Header = () => {
           <a href="/" className="block py-2 text-gray-800">Accueil</a>
           <a href="https://www.memegeorgette.com/" className="block py-2 text-gray-800">Nous Découvrir</a>
           <a href="/contact" className="block py-2 text-gray-800">Contact</a>
-          <div className="relative">
-            <button
-              className="block w-full text-left py-2 text-gray-800"
-              onClick={() => setIsVinsMenuOpen(!isVinsMenuOpen)}
-            >
-              Nos Vins <ChevronDown className="inline w-4 h-4" />
-            </button>
-            {isVinsMenuOpen && (
-              <ul className="pl-4">
-                <li><a href="/products/category/rouge" className="block py-1 text-gray-800">Nos vins rouges</a></li>
-                <li><a href="/products/category/blanc" className="block py-1 text-gray-800">Nos vins blancs</a></li>
-                <li><a href="/products/category/rose" className="block py-1 text-gray-800">Nos vins rosés</a></li>
-                <li><a href="/products/category/petillant" className="block py-1 text-gray-800">Nos vins pétillants</a></li>
-                <li><a href="/products/category/liquoreux" className="block py-1 text-gray-800">Nos vins liquoreux</a></li>
-              </ul>
-            )}
-          </div>
+          <button onClick={() => setIsUserMenuOpen(!isUserMenuOpen)} className="block py-2 text-gray-800">Mon Compte</button>
+          {isUserMenuOpen && (
+            <div className="mt-2">
+              {isLoggedIn ? (
+                <>
+                  <a href="/dashboard" className="block py-2 text-gray-800">Mon Dashboard</a>
+                  <button onClick={() => setIsLoggedIn(false)} className="block py-2 text-gray-800">Se Déconnecter</button>
+                </>
+              ) : (
+                <>
+                  <a href="/login" className="block py-2 text-gray-800">Se Connecter</a>
+                  <a href="/register" className="block py-2 text-gray-800">S&apos;inscrire</a>
+                </>
+              )}
+            </div>
+          )}
         </div>
       )}
     </header>

@@ -15,6 +15,7 @@ const RougePage = () => {
           loop
           muted
           playsInline
+          preload="auto"
           className={` w-full h-[400px] object-fit`} // Ajuste la hauteur si nécessaire
         >
           Your browser does not support the video tag.

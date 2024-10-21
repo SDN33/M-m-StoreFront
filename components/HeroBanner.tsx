@@ -32,8 +32,8 @@ const HeroBanner = () => {
         autoPlay
         loop
         muted
-        playsInline // Ajout de l'attribut playsInline pour iPhone
-        preload="auto" // Ajout du préchargement pour éviter les décalages
+        playsInline // Ajout de l'attribut playsInline pour iPhoney
+        preload="auto" 
         onError={() => setVideoError(true)} // Affiche l'image de fond si la vidéo ne se charge pas
       >
         <source src="/videos/herobanner-mobile.mp4" type="video/mp4" />

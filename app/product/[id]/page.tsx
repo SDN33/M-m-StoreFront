@@ -339,6 +339,7 @@ const ProductPage: React.FC = () => {
             loop
             muted
             playsInline
+            preload="auto" 
             className={`hidden md:block w-full h-[400px] object-fit`}
 
           >
