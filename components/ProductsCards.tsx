@@ -5,7 +5,6 @@ import ProductFilter from '@/components/ProductFilters';
 import FilterTop from './Filtertop';
 import ProductCard from './ProductCard';
 import MobileProductFilter from './MobileProductFilter';
-import useIsVisible from '../utils/useIsVisible';
 
 interface Product {
   id: number;
@@ -156,24 +155,14 @@ const ProductsCards: React.FC = () => {
     setVisibleCount(prevCount => prevCount + 12);
   };
 
-  const [ref, isVisible] = useIsVisible({
-    threshold: 0,
-    rootMargin: '-50px 0px -50px 0px' // Ajustez selon vos besoins
-  });
-
   return (
     <div className="flex flex-col mr-4 lg:mr-16 md:-mt-8">
       <FilterTop sortBy={sortBy} handleSortChange={handleSortChange} resetFilters={resetFilters} />
-      <div className="flex flex-col md:flex-row mt-4" ref={ref}>
+      <div className="flex flex-col md:flex-row mt-4">
         <div className="hidden md:block md:w-1/4">
           <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
         </div>
-        {isVisible && (
-          <div className="md:hidden z-50">
-            <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
-          </div>
-        )}
-
+        <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
 
         <div className="flex-grow mt-10">
           {loading && (
