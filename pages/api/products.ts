@@ -24,6 +24,8 @@ interface Product {
   cepages?: Array<string>;
   conservation?: string[];
   style?: string;
+  stock_status?: string;
+  degre?: number;
 }
 
 interface AxiosErrorResponse {
@@ -53,6 +55,7 @@ const transformMetaData = (metaData: { key: string; value: string | string[] }[]
   let cepages: string[] = [];
   let conservation: string[] = [];
   let style = '';
+  let degre = '0.0';
 
   metaData.forEach(({ key, value }) => {
     const cleanKey = key.startsWith('_') ? key.slice(1) : key;
@@ -102,6 +105,9 @@ const transformMetaData = (metaData: { key: string; value: string | string[] }[]
       case 'style':
         style = Array.isArray(value) ? value.join(', ') : value;
         break;
+      case 'degre':
+        degre = Array.isArray(value) ? value.join(', ') : value;
+        break;
     }
   });
 
@@ -119,6 +125,7 @@ const transformMetaData = (metaData: { key: string; value: string | string[] }[]
     cepages,
     conservation,
     style,
+    degre,
   };
 };
 
