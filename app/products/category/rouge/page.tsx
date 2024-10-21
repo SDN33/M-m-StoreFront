@@ -15,7 +15,7 @@ const RougePage = () => {
           loop
           muted
           playsInline
-          className={`hidden md:block w-full h-[400px] object-fit`} // Ajuste la hauteur si nécessaire
+          className={` w-full h-[400px] object-fit`} // Ajuste la hauteur si nécessaire
         >
           Your browser does not support the video tag.
       </video>

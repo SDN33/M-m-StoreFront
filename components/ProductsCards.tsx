@@ -22,7 +22,7 @@ interface Product {
   };
   appelation?: string;
   nom_chateau?: string;
-  rating?: number;
+  average_rating?: number;
   rating_count?: number;
   style?: string;
   cepages?: string[];

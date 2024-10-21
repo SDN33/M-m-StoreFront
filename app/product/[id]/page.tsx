@@ -5,7 +5,6 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { Star, Package } from 'lucide-react';
 import Livraison from '@/components/Livraison';
-import classNames from 'classnames';
 import SocialShare from '@/components/Socialshare';
 
 
@@ -108,6 +107,8 @@ const ProductPage: React.FC = () => {
         const data = await response.json();
         const fetchedProduct = data.find((p: Product) => p.id === Number(id));
         if (!fetchedProduct) throw new Error('Product not found');
+        // Assurez-vous que average_rating est un nombre
+        fetchedProduct.average_rating = parseFloat(fetchedProduct.average_rating) || 0;
         setProduct(fetchedProduct);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An unknown error occurred');
@@ -125,20 +126,23 @@ const ProductPage: React.FC = () => {
     }
   }, [loading]);
 
-  const renderStars = (rating: number) => (
-    <div className="flex" aria-label={`Rating: ${rating} out of 5 stars`}>
-      {[1, 2, 3, 4, 5].map((star) => (
-        <Star
-          key={star}
-          className={classNames('h-4 w-4', {
-            'text-yellow-400 fill-current': star <= rating,
-            'text-gray-300': star > rating,
-          })}
-          aria-hidden="true"
-        />
-      ))}
-    </div>
-  );
+  const renderStars = (rating: number) => {
+    const roundedRating = Math.round(rating * 2) / 2; // Arrondir à la demi-étoile la plus proche
+    return (
+      <div className="flex">
+        {[...Array(5)].map((_, index) => {
+          if (index < Math.floor(roundedRating)) {
+            return <Star key={index} className="h-4 w-4 text-yellow-400" />;
+          } else if (index < roundedRating) {
+            return <Star key={index} className="h-4 w-4 text-yellow-400" style={{ clipPath: 'inset(0 50% 0 0)' }} />;
+          } else {
+            return <Star key={index} className="h-4 w-4 text-gray-300" />;
+          }
+        })}
+      </div>
+    );
+  };
+
 
   if (loading) {
     return (

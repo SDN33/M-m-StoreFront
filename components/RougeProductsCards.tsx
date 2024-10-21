@@ -21,9 +21,13 @@ interface Product {
   };
   appelation?: string;
   nom_chateau?: string;
-  rating?: number;
+  average_rating?: number;
   rating_count?: number;
+  style?: string;
+  cepages?: string[];
+  accord_mets?: string[];
 }
+
 
 const RougeProductsCards: React.FC = () => {
   const [sortBy, setSortBy] = useState<string>('');
@@ -78,13 +82,31 @@ const RougeProductsCards: React.FC = () => {
   }, []);
 
   const filterProducts = useCallback((product: Product) => {
-    const isColorMatch = selectedFilters.color.includes('rouge'); // Vérifie que la couleur est rouge
-    const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.includes(product.region__pays || '');
     const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millesime || '');
-    const isCertificationMatch = selectedFilters.certification.length === 0 || selectedFilters.certification.includes(product.certification || '');
 
-    return isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch;
+    const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.some(region =>
+        region.toLowerCase().trim() === (product.region__pays || '').toLowerCase().trim()
+    );
+
+    const isCertificationMatch = selectedFilters.certification.length === 0 || selectedFilters.certification.some(certification =>
+        certification.toLowerCase().trim() === (product.certification || '').toLowerCase().trim()
+    );
+
+    const isStyleMatch = selectedFilters.style.length === 0 || selectedFilters.style.some(style =>
+        style.toLowerCase().trim() === (product.style || '').toLowerCase().trim()
+    );
+
+    const isVolumeMatch = selectedFilters.volume.length === 0 || selectedFilters.volume.some(volume =>
+        volume.toLowerCase().trim() === (product.volume || '').toLowerCase().trim()
+    );
+
+    const isAccordMetsMatch = selectedFilters.accord_mets.length === 0 || selectedFilters.accord_mets.some(accordMets =>
+        (product.accord_mets || []).some(met => met.toLowerCase().trim() === accordMets.toLowerCase().trim())
+    );
+
+    return isRegionMatch && isVintageMatch && isCertificationMatch && isStyleMatch && isVolumeMatch && isAccordMetsMatch;
   }, [selectedFilters]);
+
 
   const filteredProducts = useMemo(() => products.filter(filterProducts), [products, filterProducts]);
 

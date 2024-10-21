@@ -75,7 +75,6 @@ const Header = () => {
   };
 
   const handleResultClick = (id: string) => {
-    // Redirige vers la page produit
     router.push(`/product/${id}`);
     setSearchTerm('');
     setSearchResults([]);
@@ -188,6 +187,23 @@ const Header = () => {
           <a href="/" className="block py-2 text-gray-800">Accueil</a>
           <a href="https://www.memegeorgette.com/" className="block py-2 text-gray-800">Nous Découvrir</a>
           <a href="/contact" className="block py-2 text-gray-800">Contact</a>
+          <div className="relative">
+            <button
+              className="block w-full text-left py-2 text-gray-800"
+              onClick={() => setIsVinsMenuOpen(!isVinsMenuOpen)}
+            >
+              Nos Vins <ChevronDown className="inline w-4 h-4" />
+            </button>
+            {isVinsMenuOpen && (
+              <ul className="pl-4">
+                <li><a href="/products/category/rouge" className="block py-1 text-gray-800">Nos vins rouges</a></li>
+                <li><a href="/products/category/blanc" className="block py-1 text-gray-800">Nos vins blancs</a></li>
+                <li><a href="/products/category/rose" className="block py-1 text-gray-800">Nos vins rosés</a></li>
+                <li><a href="/products/category/petillant" className="block py-1 text-gray-800">Nos vins pétillants</a></li>
+                <li><a href="/products/category/liquoreux" className="block py-1 text-gray-800">Nos vins liquoreux</a></li>
+              </ul>
+            )}
+          </div>
         </div>
       )}
     </header>
