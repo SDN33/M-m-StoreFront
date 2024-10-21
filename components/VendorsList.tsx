@@ -123,12 +123,11 @@ const VendorList: React.FC = () => {
                 <div className="p-4 bg-gray-50">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
-                      {vendor.vendor_image ? (
-                        <img
-                          src={vendor.vendor_image}
-                          alt={vendor.store_name}
-                          className="w-full h-full object-cover"
-                        />
+                      <img
+                        src={vendor.vendor_image || '/images/mémé-georgette1.png'}
+                        alt={vendor.store_name}
+                        className="w-full h-full object-cover"
+                      />
                       ) : (
                         <svg
                           className="w-full h-full text-gray-400"
