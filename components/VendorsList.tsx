@@ -7,7 +7,7 @@ interface Product {
   price: string;
   store_name?: string;
   vendor_image?: string;
-  images?: string[]; // Modifié pour être un tableau de chaînes
+  images?: string; // Modifié pour être un tableau de chaînes
 }
 
 interface Vendor {
@@ -81,36 +81,51 @@ const VendorList: React.FC = () => {
   return (
     <div className="p-6 space-y-6">
       <h2 className="text-2xl md:text-3xl font-extrabold text-orange-600 tracking-tight mx-16 text-center">
-        Nos Vignerons partenaires
+        Nos Vignerons Partenaires
+        <div className="text-gray-800 text-sm">
+          Notre terroir est riche de vignerons passionnés qui produisent des vins de qualité
+        </div>
       </h2>
-   
+
       {vendors.length === 0 ? (
         <div className="bg-white shadow rounded-lg p-6">
           <p className="text-center text-gray-500">Aucun vendeur disponible.</p>
         </div>
       ) : (
         <div className="mx-auto max-w-2xl overflow-hidden rounded-lg shadow-lg">
-          <div className="flex overflow-x-auto space-x-4 p-4">
+          <div className="flex overflow-x-auto space-x-6 p-8">
             {vendors.map((vendor) => (
-              <div key={vendor.store_name} className="bg-white shadow rounded-lg flex-none w-60">
+              <div key={vendor.store_name} className="bg-white shadow rounded-lg flex-none w-80">
                 <div className="p-4 bg-gray-50">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
                       {vendor.vendor_image ? (
-                        <img src={vendor.vendor_image} alt={vendor.store_name} className="w-full h-full object-cover" />
+                        <img
+                          src={vendor.vendor_image}
+                          alt={vendor.store_name}
+                          className="w-full h-full object-cover"
+                        />
                       ) : (
-                        <svg className="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                        <svg
+                          className="w-full h-full text-gray-400"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                            clipRule="evenodd"
+                          />
                         </svg>
                       )}
                     </div>
-                    <h2 className="text-xl font-semibold">{vendor.store_name}</h2>
+                    <h2 className="text-xl font-semibold text-green-600">{vendor.store_name}</h2>
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="text-lg font-medium mb-4">Produits disponibles :</h3>
+                  <h3 className="text-sm font-black mb-4  text-orange-600">Top Vins :</h3>
                   {vendor.products.length === 0 ? (
-                    <p className="text-gray-400">Aucun produit disponible.</p>
+                    <p className="text-gray-400">Aucuns vins disponibles.</p>
                   ) : (
                     <ul className="space-y-4">
                       {vendor.products.map((product) => (
@@ -118,9 +133,9 @@ const VendorList: React.FC = () => {
                           <div className="flex items-center space-x-3">
                             {product.images && product.images.length > 0 && (
                               <img
-                                src={product.images[0]} // Affiche la première image du produit
+                                src={product.images}
                                 alt={product.name}
-                                className="w-16 h-16 rounded-md object-cover"
+                                className="w-10 h-10 object-cover rounded-lg"
                               />
                             )}
                             <div>
@@ -142,15 +157,15 @@ const VendorList: React.FC = () => {
         </div>
       )}
       <video
-          src="/videos/minibanner.mp4"
-          title="Banner vignes"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-
-          className="w-full h-full"></video>
+        src="/videos/minibanner.mp4"
+        title="Banner vignes"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        className="w-full h-full"
+      ></video>
     </div>
   );
 };

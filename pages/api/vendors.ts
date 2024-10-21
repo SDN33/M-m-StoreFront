@@ -30,6 +30,7 @@ interface Product {
   cepages?: Array<string>;
   conservation?: string[];
   style?: string;
+  images: { src: string }[];
 }
 
 interface AxiosErrorResponse {
