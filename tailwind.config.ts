@@ -3,6 +3,8 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
   ],
+
+
   theme: {
     extend: {
       colors: {
@@ -27,8 +29,11 @@ module.exports = {
         '7xl': ['4.5rem', { lineHeight: '1' }],
         '8xl': ['6rem', { lineHeight: '1' }],
       },
-      
+
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide'),
+
+  ],
 };

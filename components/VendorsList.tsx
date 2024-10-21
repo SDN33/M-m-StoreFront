@@ -115,11 +115,11 @@ const VendorList: React.FC = () => {
 
           <div
             ref={vendorContainerRef}
-            className="flex overflow-x-auto space-x-6 p-8"
+            className="flex overflow-x-auto space-x-6 p-8 scrollbar-hide appearance-none"
             style={{ scrollBehavior: 'smooth' }}
           >
             {vendors.map((vendor) => (
-              <div key={vendor.store_name} className="bg-white shadow rounded-lg flex-none w-80">
+              <div key={vendor.store_name} className="bg-white shadow rounded-lg flex-none w-80 ">
                 <div className="p-4 bg-gray-50">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
@@ -189,16 +189,6 @@ const VendorList: React.FC = () => {
           </button>
         </div>
       )}
-      <video
-        src="/videos/minibanner.mp4"
-        title="Banner vignes"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        className="w-full h-full"
-      ></video>
     </div>
   );
 };

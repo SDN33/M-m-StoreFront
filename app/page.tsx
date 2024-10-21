@@ -34,6 +34,16 @@ export default function Home() {
         <HeroBanner />
         <Products />
         <Livraison />
+        <video
+          src="/videos/minibanner.mp4"
+          title="Banner vignes"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="w-full h-full"
+        ></video>
         <VendorList />
         <Slogan />
         <br /><br />
