@@ -1,4 +1,3 @@
-// path: /api/vendors
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios, { AxiosError } from 'axios';
 
@@ -25,7 +24,7 @@ interface Product {
   average_rating?: string;
   rating_count?: number;
   volume?: string;
-  nom_chateau?: string;
+  nom_chateau?: string; // Ajouté pour le nom du château
   accord_mets?: Array<string>;
   cepages?: Array<string>;
   conservation?: string[];
@@ -171,7 +170,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
           if (store_name) {
             if (!vendorMap[store_name]) {
-              const vendorDetails = await getVendorDetails(id); // Assurez-vous d'utiliser un ID de vendeur ici
+              const vendorDetails = await getVendorDetails(id); // Assurez-vous d'utiliser l'ID du vendeur ici
               vendorMap[store_name] = {
                 products: [],
                 vendorImage: vendorDetails?.avatar_url,
