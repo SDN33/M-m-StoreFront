@@ -157,7 +157,12 @@ const VendorList: React.FC = () => {
                             <div>
                               <h4 className="font-semibold">{product.name}</h4>
                               <p className="text-sm text-gray-600">{product.nom_du_chateau}</p>
-                              <img src={getCertificationLogo(product.certification).src} alt={product.certification} width={getCertificationLogo(product.certification).width} height={getCertificationLogo(product.certification).height} />
+                              <Image
+                                src={getCertificationLogo(product.certification).src}
+                                alt={product.certification || 'certification logo'}
+                                width={getCertificationLogo(product.certification).width}
+                                height={getCertificationLogo(product.certification).height}
+                              />
                             </div>
                           </div>
                           <span className="text-base font-bold text-orange-600 px-8 py-8 w-26 h-26">
