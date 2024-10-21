@@ -168,6 +168,11 @@ const Header = () => {
             </div>
           )}
         </div>
+
+        {/* Shopping Cart Icon */}
+        <a href="/cart" className="relative">
+          <ShoppingCart className="w-6 h-6 text-white" />
+        </a>
       </div>
 
       {/* Mobile Menu */}
