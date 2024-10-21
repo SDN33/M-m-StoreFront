@@ -144,7 +144,7 @@ const getVendorDetails = async (vendorId: number) => {
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { method, query } = req;
+  const { method } = req;
 
   if (method === 'GET') {
     const consumerKey = process.env.WC_CONSUMER_KEY;

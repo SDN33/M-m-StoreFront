@@ -26,12 +26,6 @@ interface Product {
   style?: string;
 }
 
-interface Category {
-  id: number;
-  name: string;
-  slug: string;
-}
-
 interface AxiosErrorResponse {
   response?: {
     data: {
@@ -42,7 +36,7 @@ interface AxiosErrorResponse {
 }
 
 // Cache pour les produits
-let productCache: { [key: string]: Product[] } = {};
+const productCache: { [key: string]: Product[] } = {};
 let cacheTimestamp: number | null = null;
 
 const transformMetaData = (metaData: { key: string; value: string | string[] }[]): { [key: string]: unknown } => {
