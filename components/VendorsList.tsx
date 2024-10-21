@@ -144,7 +144,7 @@ const VendorList: React.FC = () => {
 
           <div
             ref={vendorContainerRef}
-            className="flex overflow-x-auto space-x-6 p-8 scrollbar-hide appearance-none"
+            className="flex overflow-x-auto space-x-6 scrollbar-hide appearance-none slideInFromRight"
             style={{ scrollBehavior: 'smooth' }}
           >
             {vendors.map((vendor) => (
