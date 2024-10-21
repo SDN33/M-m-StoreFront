@@ -59,7 +59,6 @@ const ProductsCards: React.FC = () => {
   const [visibleCount, setVisibleCount] = useState<number>(12);
 
   useEffect(() => {
-
     const fetchProducts = async () => {
       try {
         setLoading(true);
@@ -78,8 +77,7 @@ const ProductsCards: React.FC = () => {
     };
 
     fetchProducts();
-  }, []); // No need to add 'logDebug' as a dependency now
-
+  }, []);
 
   const filterProducts = useCallback((product: Product) => {
     const isColorMatch = selectedFilters.color.length === 0 || selectedFilters.color.includes(product.categories[0]?.name || '');
@@ -107,8 +105,6 @@ const ProductsCards: React.FC = () => {
 
     return isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch && isStyleMatch && isVolumeMatch && isAccordMetsMatch;
   }, [selectedFilters]);
-
-
 
   const filteredProducts = useMemo(() => products.filter(filterProducts), [products, filterProducts]);
 
@@ -157,8 +153,6 @@ const ProductsCards: React.FC = () => {
   const loadMoreProducts = () => {
     setVisibleCount(prevCount => prevCount + 12);
   };
-
-
 
   return (
     <div className="flex flex-col mr-4 lg:mr-16 md:-mt-8">

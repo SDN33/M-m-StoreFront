@@ -1,3 +1,4 @@
+// path: /api/products
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios, { AxiosError } from 'axios';
 
@@ -39,6 +40,10 @@ interface AxiosErrorResponse {
   };
   message: string;
 }
+
+// Cache pour les produits
+let productCache: { [key: string]: Product[] } = {};
+let cacheTimestamp: number | null = null;
 
 const transformMetaData = (metaData: { key: string; value: string | string[] }[]): { [key: string]: unknown } => {
   const productData: { [key: string]: unknown } = {};
@@ -142,6 +147,10 @@ const getVendorDetails = async (vendorId: number) => {
   }
 };
 
+const fetchProducts = async (url: string) => {
+  const response = await axios.get<Product[]>(url);
+  return response.data;
+};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, query } = req;
@@ -155,22 +164,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       ? `https://portailpro-memegeorgette.com/wp-json/wc/v3/products/categories?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`
       : `https://portailpro-memegeorgette.com/wp-json/wc/v3/products?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}&acf=true`;
 
-    try {
-      const response = await axios.get<Product[] | Category[]>(url);
-      let productsOrCategories = response.data;
+    // Vérification du cache
+    const currentTime = Date.now();
+    if (productCache[url] && (cacheTimestamp && currentTime - cacheTimestamp < 60000)) { // 1 minute de cache
+      return res.status(200).json(productCache[url]);
+    }
 
+    try {
+      let productsOrCategories = await fetchProducts(url);
       if (!isCategories) {
         // Filtrer par prix
         if (query.price) {
           const priceFilters = Array.isArray(query.price) ? query.price : [query.price];
-
           for (const priceFilter of priceFilters) {
             const [min, max] = priceFilter.split('_').map(Number);
-
-            productsOrCategories = (productsOrCategories as Product[]).filter(product => {
+            const filteredProductsByPrice = (productsOrCategories as Product[]).filter(product => {
               const productPrice = parseFloat(product.price);
               return productPrice >= min && (max === Infinity || productPrice < max);
             });
+            productsOrCategories = filteredProductsByPrice;
           }
         }
 
@@ -230,51 +242,31 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           });
         }
 
-        const transformedProducts = await Promise.all((productsOrCategories as Product[]).map(async product => {
-          const { meta_data, id, status, is_validated } = product;
-          const { brandname, millesime, certification, region__pays, appelation, average_rating, rating_count, volume, nom_chateau, accord_mets, cepages, conservation, style, ...meta } = transformMetaData(meta_data);
-          const vendorDetails = await getVendorDetails(id);
-          const store_name = product?.store_name || '';
-
-          // Filtrer pour ne garder que les produits validés
-          if (status === 'publish' || is_validated) {
-            return {
-              ...product,
-              meta,
-              brandname,
-              store_name,
-              millesime,
-              certification,
-              region__pays,
-              appelation,
-              average_rating,
-              rating_count,
-              volume,
-              nom_chateau,
-              accord_mets,
-              cepages,
-              conservation,
-              style,
-              vendor_image: vendorDetails?.avatar_url,
-            };
-          }
-          return null; // Exclure les produits non validés
+        const transformedProducts = await Promise.all((productsOrCategories as Product[]).map(async (product) => {
+          const vendor = await getVendorDetails(product.id);
+          const transformedProduct: Product = {
+            ...product,
+            ...transformMetaData(product.meta_data),
+            store_name: product.store_name || '', // Utilisation du nom du vendeur
+            vendor_image: vendor?.avatar_url || '', // Utilisation de l'avatar du vendeur
+          };
+          return transformedProduct;
         }));
 
-        // Supprimer les produits non valides (null)
-        const filteredProducts = transformedProducts.filter(product => product !== null);
+        // Mise à jour du cache
+        productCache[url] = transformedProducts;
+        cacheTimestamp = Date.now();
 
-        return res.status(200).json(filteredProducts);
+        return res.status(200).json(transformedProducts);
       } else {
         return res.status(200).json(productsOrCategories);
       }
     } catch (error) {
       const axiosError = error as AxiosError<AxiosErrorResponse>;
-      const errorMessage = axiosError.response?.data?.message || axiosError.message;
+      const errorMessage = axiosError?.response?.data.message || 'Erreur lors de la récupération des données';
       return res.status(500).json({ message: errorMessage });
     }
-  } else {
-    res.setHeader('Allow', ['GET']);
-    res.status(405).end(`Method ${method} Not Allowed`);
   }
+
+  return res.setHeader('Allow', ['GET']).status(405).end(`Method ${method} Not Allowed`);
 }

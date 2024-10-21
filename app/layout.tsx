@@ -1,8 +1,11 @@
+// app/layout.tsx
+
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AgeVerificationModal from "@/components/AgeVerificationModal";
+import ClientLayout from "./ClientLayout"; // Importez le nouveau composant client
 
 export const metadata: Metadata = {
   title: "Les vins de Mémé Georgette | Cave Coopérative Engagée | Vins Bio et Démeter",
@@ -23,7 +26,7 @@ export default function RootLayout({
       <body>
         <AgeVerificationModal />
         <Header />
-        <main className="flex-grow ">{children}</main>
+        <ClientLayout>{children}</ClientLayout> {/* Utilisez le nouveau composant ici */}
         <Footer />
       </body>
     </html>

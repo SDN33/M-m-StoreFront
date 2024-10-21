@@ -23,6 +23,7 @@ const Newsletter = () => {
             loop
             muted
             playsInline
+            preload="auto"
           />
         </div>
 

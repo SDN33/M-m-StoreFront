@@ -7,6 +7,7 @@ import Newletter from '@/components/Newletter';
 import PromotionSection from '@/components/PromotionSection';
 import Livraison from '@/components/Livraison';
 import { useEffect, useState } from 'react';
+import VendorList from '@/components/VendorsList';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false); // État pour vérifier si l'appareil est mobile
@@ -33,6 +34,7 @@ export default function Home() {
         <HeroBanner />
         <Products />
         <Livraison />
+        <VendorList />
         <Slogan />
         <br /><br />
         <Newletter />
@@ -41,4 +43,3 @@ export default function Home() {
     </div>
   );
 }
-

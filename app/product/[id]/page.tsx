@@ -18,6 +18,7 @@ interface Product {
   description?: string;
   images: { src: string }[];
   rating?: number;
+  average_rating?: number;
   rating_count?: number;
   vendor?: {
     vendorPhotoUrl?: string;
@@ -126,23 +127,6 @@ const ProductPage: React.FC = () => {
     }
   }, [loading]);
 
-  const renderStars = (rating: number) => {
-    const roundedRating = Math.round(rating * 2) / 2; // Arrondir à la demi-étoile la plus proche
-    return (
-      <div className="flex">
-        {[...Array(5)].map((_, index) => {
-          if (index < Math.floor(roundedRating)) {
-            return <Star key={index} className="h-4 w-4 text-yellow-400" />;
-          } else if (index < roundedRating) {
-            return <Star key={index} className="h-4 w-4 text-yellow-400" style={{ clipPath: 'inset(0 50% 0 0)' }} />;
-          } else {
-            return <Star key={index} className="h-4 w-4 text-gray-300" />;
-          }
-        })}
-      </div>
-    );
-  };
-
 
   if (loading) {
     return (
@@ -232,12 +216,14 @@ const ProductPage: React.FC = () => {
           <div className="md:w-1/2">
             <p className="text-sm font-bold">{product.nom_chateau || 'Château inconnu'}</p>
             <h1 className="text-3xl font-bold">{product.name}</h1>
-            <div className="flex items-center mb-2">
-              {product.rating && renderStars(product.rating)}
-              <span className="ml-2 text-sm text-gray-500">
-                ({product.rating_count} avis)
-              </span>
+            <div className="flex items-center mb-2 mx-auto">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className={`w-4 h-4 ${i < Math.floor(product.average_rating || 0) ? 'text-yellow-500' : 'text-gray-300'}`} />
+              ))}
+              <span className="text-xs text-gray-600 ml-1">({product.rating_count || 0} avis)</span>
             </div>
+
+
             <br />
             <p className="text-4xl font-bold !mb-7">
               <span className="flex items-start z-10">
@@ -312,12 +298,12 @@ const ProductPage: React.FC = () => {
 
             {/* Accords mets et vins */}
             <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-orange-600 text-left">Accords mets</h3>
-                <p className="text-sm text-right">
-                  {product.accord_mets ? joinIfArray(product.accord_mets) : 'Pas d\'accords mets renseignés'}
-                </p>
-              </div>
+                <div className="flex justify-between items-center">
+                    <h3 className="text-lg font-bold text-orange-600 text-left">Accords mets</h3>
+                    <p className="text-sm text-right">
+                        {product.accord_mets ? joinIfArray(product.accord_mets) : 'Pas d\'accords mets renseignés'}
+                    </p>
+                </div>
             </div>
 
             {/* Conservation */}
@@ -342,7 +328,8 @@ const ProductPage: React.FC = () => {
             loop
             muted
             playsInline
-            className={`hidden md:block w-full h-[400px] object-fit`} // Ajuste la hauteur si nécessaire
+            className={`hidden md:block w-full h-[400px] object-fit`}
+
           >
             Your browser does not support the video tag.
           </video>
