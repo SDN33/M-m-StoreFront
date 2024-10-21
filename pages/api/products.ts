@@ -174,6 +174,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       let productsOrCategories = await fetchProducts(url);
       if (!isCategories) {
+        // Filtrer uniquement les produits publiés et en stock
+        productsOrCategories = (productsOrCategories as Product[]).filter(product =>
+          product.status === 'publish' && product.stock_status === 'instock'
+        );
         // Filtrer par prix
         if (query.price) {
           const priceFilters = Array.isArray(query.price) ? query.price : [query.price];
