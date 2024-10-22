@@ -3,6 +3,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { FaMapMarkerAlt } from 'react-icons/fa'; // Importation de l'icône de localisation
+
 
 interface Product {
   id: number;
@@ -15,12 +17,14 @@ interface Product {
   vendor_image?: string;
   images?: { id: number; src: string; alt?: string }[];
   meta_data: { key: string; value: string | string[] }[];
+  region__pays?: string; // Ajout de la propriété pour la localisation
 }
 
 interface Vendor {
   store_name: string;
   products: Product[];
   vendor_image?: string;
+  region__pays?: string; // Ajout de la propriété pour la localisation
 }
 
 const VendorList: React.FC = () => {
@@ -51,6 +55,7 @@ const VendorList: React.FC = () => {
               store_name: storeName,
               products: [],
               vendor_image: product.vendor_image,
+              region__pays: product.region__pays // Assurez-vous d'extraire la localisation ici
             };
           }
           vendorMap[storeName].products.push(product);
@@ -111,6 +116,11 @@ const VendorList: React.FC = () => {
     router.push(`/vendor/${vendorName}`);
   }
 
+  const capitalizeFirstLetter = (string: string) => {
+    if (!string) return '';
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   return (
     <div className="p-6 space-y-6">
       <h2 className="text-2xl md:text-3xl font-extrabold text-orange-600 tracking-tight mx-16 text-center">
@@ -141,7 +151,15 @@ const VendorList: React.FC = () => {
                         className='cursor-pointer'
                       />
                     </div>
-                    <h2 className="text-lg font-bold">{vendor.store_name}</h2>
+                    <div>
+                      <h2 className="text-lg font-bold">{vendor.store_name}</h2>
+                      {vendor.region__pays && (
+                        <span className="ml-2 text-sm flex items-center">
+                          <FaMapMarkerAlt className="text-white" size={12} />
+                          <span className="ml-1">{capitalizeFirstLetter(vendor.region__pays)}</span>
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div className="p-4">
@@ -186,6 +204,7 @@ const VendorList: React.FC = () => {
                           </span>
                         </li>
                       ))}
+
                     </ul>
                   )}
                 </div>
