@@ -59,8 +59,8 @@ const AgeVerificationModal = () => {
         <h2 className="text-2xl font-bold text-gray-900 mb-4">
           Vérification de l&apos;âge
         </h2>
-        <p className="text-gray-600 mb-6">
-          Ce site est réservé aux personnes majeures. En entrant sur ce site, vous certifiez avoir 18 ans ou plus.
+        <p className="text-gray-600 mb-6 font-serif">
+          Ce site est réservé aux personnes majeures.<br />En entrant sur ce site, vous certifiez<br /><span className='font-serif font-bold text-orange-600'>avoir 18 ans ou plus</span>.
         </p>
         <div className="space-y-3">
           <button
@@ -76,8 +76,8 @@ const AgeVerificationModal = () => {
             J&apos;ai moins de 18 ans
           </button>
         </div>
-        <p className="mt-4 text-sm text-gray-500">
-          L&apos;abus d&apos;alcool est dangereux pour la santé. À consommer avec modération.
+        <p className="mt-4 text-sm text-gray-500 font-serif">
+          L&apos;abus d&apos;alcool est dangereux pour la santé.<br />À consommer avec modération.
         </p>
       </div>
     </div>

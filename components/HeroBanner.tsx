@@ -63,9 +63,9 @@ const HeroBanner = () => {
 
       {/* Conteneur avec z-10 pour rester au-dessus de l'image de fond */}
       <div className="md:mt-20 mt-40 space-y-3 md:space-y-0 flex flex-col items-center text-center z-10 text-white relative">
-        <p className="text-white text-3xl md:text-4xl !font-black sloganhero sm:font-black">
+        <p className="text-white text-3xl md:text-4xl !font-black sloganhero ">
           CAVE COOPÉRATIVE ENGAGÉE
-          <br /><span className='text-xl md:text-3xl font-semibold sloganhero text-primary'>En direct des vignerons(nes)</span>
+          <br /><span className='text-xl md:text-3xl font-semibold  md:font-black sloganhero text-primary'>En direct des vignerons(nes)</span>
         </p>
         <br />
         {/* Logos pour web */}
@@ -83,7 +83,7 @@ const HeroBanner = () => {
           <h1 className="text-4xl md:text-4xl leading-tight md:font-black !font-semibold hidden md:block">
             <br />
             <span className="block fade-in" dangerouslySetInnerHTML={{ __html: slogans[currentSlogan] }} />
-            <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
+            <p className="text-lg mt-4 md:text-xl font-black">- Mémé Georgette</p>
           </h1>
           {/* Titre pour mobile */}
           <h1 className="text-xl md:text-4xl leading-tight font-black block md:hidden">
@@ -107,7 +107,7 @@ const HeroBanner = () => {
           rel="noopener noreferrer"
           aria-label="Découvrir Mémé Georgette - Accédez à notre site pour explorer notre sélection de vins bio"
         >
-          <button className="flex items-center gap-2 px-4 py-3 bg-gray-100 border-b-2 border-black text-gray-800 rounded-full font-semibold hover:bg-gray-500 hover:text-white transition-colors text-sm">
+          <button className="flex items-center gap-2 px-4 py-3 bg-white border-b-2 border-black text-gray-800 rounded-full font-semibold hover:bg-gray-500 hover:text-white transition-colors text-sm">
             <Play className="w-3 h-3" />
             Découvrir Mémé Georgette
           </button>
@@ -136,7 +136,7 @@ const HeroBanner = () => {
           rel="noopener noreferrer"
           aria-label="Découvrir le site officiel de Mémé Georgette"
         >
-          <button className="flex items-center gap-2 px-4 md:px-6 py-3 md:py-4 bg-gray-100 border-b-2 border-black text-gray-900 rounded-full font-semibold hover:bg-gray-500 hover:text-white transition-colors text-sm md:text-base">
+          <button className="flex items-center gap-2 px-4 md:px-6 py-3 md:py-4 bg-white border-b-2 border-black text-gray-900 rounded-full font-semibold hover:bg-gray-500 hover:text-white transition-colors text-sm md:text-base">
             <Play className="w-3 h-3 md:w-4 md:h-4" />
             Découvrir Mémé Georgette
           </button>
