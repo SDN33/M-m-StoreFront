@@ -96,7 +96,15 @@ const HeroBanner = () => {
 
       {/* Boutons alignés en bas uniquement pour mobile */}
       <div className="flex flex-col items-center gap-3 justify-center mb-4 z-10 md:hidden pt-10">
-        <button className="shadow-lg bg-orange-600 text-white px-6 py-3 rounded-full font-medium flex items-center hover:bg-orange-800 hover:text-white transition-colors text-sm">
+        <button
+          className="shadow-lg bg-orange-600 text-white px-6 py-3 rounded-full font-medium flex items-center hover:bg-orange-800 hover:text-white transition-colors text-sm"
+          onClick={() => {
+            const productsSection = document.getElementById("products");
+            if (productsSection) {
+              productsSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+        >
           Notre Cave
           <span className="ml-2">➜</span>
         </button>
