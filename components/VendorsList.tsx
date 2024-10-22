@@ -139,13 +139,15 @@ const VendorList: React.FC = () => {
                         height={50}
                         onClick={() => handleVendorClick(vendor.store_name)}
                         className='cursor-pointer hover:scale-110'
-
                       />
                     </div>
                     <h2 className="text-lg font-bold">{vendor.store_name}</h2>
                   </div>
                 </div>
                 <div className="p-4">
+                  <div className="flex items-end">
+                    <span className="text-sm font-serif text-orange-600">{vendor.products.length} vins disponibles</span>
+                  </div>
                   <h3 className="text-sm font-black mb-4 text-black">Derniers vins ajoutés</h3>
                   {vendor.products.length === 0 ? (
                     <p className="text-gray-400">Aucuns vins disponibles.</p>
@@ -168,18 +170,19 @@ const VendorList: React.FC = () => {
                             <div>
                               <h4 className="font-semibold">{product.name}</h4>
                               <p className="text-sm text-gray-600">{product.nom_du_chateau}</p>
-                              <Image
-                                src={getCertificationLogo(product.certification).src}
-                                alt={product.certification || 'certification logo'}
-                                width={getCertificationLogo(product.certification).width}
-                                height={getCertificationLogo(product.certification).height}
-                              />
                             </div>
                           </div>
                           <span className="text-base font-bold text-orange-600 px-8 py-8 w-26 h-26">
                             <span className="px-2 py-1 text-xs font-semibold text-black bg-gray-200 rounded-full">
                               {parseFloat(product.price).toFixed(2)}€
                             </span>
+                            <Image
+                                src={getCertificationLogo(product.certification).src}
+                                alt={product.certification || 'certification logo'}
+                                width={getCertificationLogo(product.certification).width}
+                                height={getCertificationLogo(product.certification).height}
+                                className="py-1 ml-4"
+                              />
                           </span>
                         </li>
                       ))}
