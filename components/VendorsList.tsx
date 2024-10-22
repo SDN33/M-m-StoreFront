@@ -138,7 +138,7 @@ const VendorList: React.FC = () => {
                         width={50}
                         height={50}
                         onClick={() => handleVendorClick(vendor.store_name)}
-                        className='cursor-pointer hover:scale-110'
+                        className='cursor-pointer'
                       />
                     </div>
                     <h2 className="text-lg font-bold">{vendor.store_name}</h2>

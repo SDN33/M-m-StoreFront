@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Wine, MapPin, Star, Award, Leaf } from 'lucide-react';
+import { Wine, MapPin, Star, Award } from 'lucide-react';
 import Image from 'next/image';
 
 // Composants de base personnalisés
@@ -21,7 +21,6 @@ interface BadgeProps {
   children: React.ReactNode;
   variant?: 'default' | 'secondary' | 'success' | 'outline';
   className?: string;
-  // region_pays property removed as it does not exist on type 'Product'
 }
 
 const Badge: React.FC<BadgeProps> = ({ children, variant = 'default', className = '' }) => {
@@ -54,7 +53,7 @@ interface Product {
   certification?: string;
   nom_chateau?: string;
   description?: string;
-  region?: string;
+  region__pays?: string;
   rating?: number;
 }
 
@@ -67,9 +66,26 @@ const VendorPage = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      // Vérifier si les produits sont déjà en cache
+      const cachedProducts = localStorage.getItem('products');
+      if (cachedProducts) {
+        const allProducts: Product[] = JSON.parse(cachedProducts);
+        const filteredProducts = store_name
+          ? allProducts.filter(product => product.store_name === store_name)
+          : allProducts.filter(product => !product.store_name);
+        setProducts(filteredProducts);
+        setLoading(false); // On ne charge pas
+        return;
+      }
+
+      // Si pas en cache, faire l'appel API
       try {
         const response = await fetch('/api/products');
         const allProducts: Product[] = await response.json();
+
+        // Mettre en cache les produits
+        localStorage.setItem('products', JSON.stringify(allProducts));
+
         const filteredProducts = store_name
           ? allProducts.filter(product => product.store_name === store_name)
           : allProducts.filter(product => !product.store_name);
@@ -89,7 +105,7 @@ const VendorPage = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center space-y-4">
           <Wine className="w-12 h-12 text-orange-600 mx-auto" />
-          <p className="text-lg font-semibold animate-bounce text-gray-800">Le vigneron prépare sa sélection...</p>
+          <p className="text-lg font-semibold animate-bounce text-orange-600">Le vigneron prépare sa sélection...</p>
         </div>
       </div>
     );
@@ -120,6 +136,16 @@ const VendorPage = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <br /><br />
       <br /><br />
+      <video
+        src="/videos/minibanner.mp4"
+        title="Banner vignes"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        className="w-full h-full"
+      ></video>
       {/* En-tête du Vendeur */}
       <div className="bg-gradient-to-r from-orange-100 to-orange-50 rounded-xl p-8 mb-8">
         <div className="flex items-center justify-between flex-wrap gap-4">
@@ -129,14 +155,10 @@ const VendorPage = () => {
             </h1>
             <div className="flex items-center space-x-2 text-gray-600">
               <MapPin className="w-4 h-4" />
-              <span>Bordeaux, France</span>
-              <Badge variant="secondary" className="ml-2">
-                <Leaf className="w-4 h-4 mr-1" />
-                Certifié Bio
-              </Badge>
+              <span>{products[0]?.region__pays?.toUpperCase() || ''}</span>
             </div>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 mt-8">
             <div className="text-center">
               <div className="text-2xl font-bold text-orange-600">{products.length}</div>
               <div className="text-sm text-gray-600">Vins</div>
@@ -181,8 +203,8 @@ const VendorPage = () => {
                 <span className="text-2xl font-bold text-orange-600">
                   {parseFloat(product.price).toFixed(2)}€
                 </span>
-                <Badge variant="outline">
-                  {product.region || 'Bordeaux'}
+                <Badge variant="outline" className='p-2 b-2'>
+                  {product.region__pays || ''}
                 </Badge>
               </div>
             </CardContent>
