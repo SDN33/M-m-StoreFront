@@ -109,6 +109,6 @@ body {
   }
 }
 
-.mpf {
-  z-index: 1000; /* Positionnement */
+mpf {
+  z-index: 99; /* Positionnement */
 }
