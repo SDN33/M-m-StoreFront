@@ -32,6 +32,7 @@ interface Product {
   nom_chateau?: string;
   certification?: string;
   degre?: number;
+  millesime?: string;
 }
 
 const formatDescription = (description: string, maxChars = 90) => {
@@ -215,9 +216,9 @@ const ProductPage: React.FC = () => {
           </div>
 
           <div className="md:w-1/2">
-            <p className="text-sm font-bold">{product.nom_chateau || 'Château inconnu'}</p>
+            <p className="text-sm font-bold shadow-sm flex">Vin {product.categories.map(category => category.name).join(', ')} | {product.nom_chateau || 'Château inconnu'} | {product.millesime}</p>
             <h1 className="text-3xl font-bold">{product.name}</h1>
-            <div className="flex items-center -mb-2 mx-auto">
+            <div className="flex items-center -mb-6 mx-auto">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className={`w-4 h-4 ${i < Math.floor(product.average_rating || 0) ? 'text-yellow-500' : 'text-gray-300'}`} />
               ))}
