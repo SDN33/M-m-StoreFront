@@ -76,7 +76,7 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
     <>
       <button
         onClick={toggleSidebar}
-        className="fixed left-0 top-1/2 -translate-y-1/2 bg-orange-600 text-white p-3 rounded-r-md shadow-lg md:hidden sm:z-20"
+        className="fixed left-0 top-1/2 -translate-y-1/2 bg-orange-600 text-white p-3 rounded-r-md shadow-lg md:hidden sm:z-50"
         aria-label="Ouvrir les filtres"
       >
         <Filter className="w-6 h-6" />
