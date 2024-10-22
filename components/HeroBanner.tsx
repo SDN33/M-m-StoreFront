@@ -63,7 +63,7 @@ const HeroBanner = () => {
 
       {/* Conteneur avec z-10 pour rester au-dessus de l'image de fond */}
       <div className="md:mt-20 mt-40 space-y-3 md:space-y-0 flex flex-col items-center text-center z-10 text-white relative">
-        <p className="text-white text-3xl md:text-4xl !font-black sloganhero sm:font-black">
+        <p className="text-white text-4xl !font-black sloganhero sm:font-black">
           CAVE COOPÉRATIVE ENGAGÉE
           <br /><span className='text-xl md:text-3xl font-semibold sloganhero text-primary'>En direct des vignerons(nes)</span>
         </p>
