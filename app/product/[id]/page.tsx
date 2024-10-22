@@ -1,7 +1,7 @@
 'use client'; // Ajoutez cette ligne en haut du fichier
 
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Star, Package } from 'lucide-react';
 import Livraison from '@/components/Livraison';
@@ -97,6 +97,7 @@ const joinIfArray = (value: string | string[], separator: string = ', ') => {
 
 const ProductPage: React.FC = () => {
   const { id } = useParams() as { id: string };
+  const router = useRouter();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -123,11 +124,14 @@ const ProductPage: React.FC = () => {
     if (id) fetchProduct();
   }, [id]);
 
-  useEffect(() => {
-    if (!loading) {
-      window.scrollTo(0, 0); // Remonter en haut de l'écran après le chargement
+  const handleVendorClick = (vendorName: string | undefined) => {
+    if (vendorName) {
+      router.push(`/vendor/${vendorName}`);
+    } else {
+      // Rediriger vers la page par défaut si store_name est vide
+      router.push('/vendor/mémégeorgette');
     }
-  }, [loading]);
+  };
 
 
   if (loading) {
@@ -154,6 +158,7 @@ const ProductPage: React.FC = () => {
 
   if (!product) return null;
 
+
   return (
     <div className="mt-20 px-12">
 
@@ -169,7 +174,7 @@ const ProductPage: React.FC = () => {
               <span className="mx-2 text-gray-500">&gt;</span>
             </li>
             <li className="flex items-center">
-              <a href="/vendor" className="text-green-600 hover:text-gray-700">{product.store_name}</a>
+              <a onClick={() => product.store_name && handleVendorClick(product.store_name)} className="cursor-pointer text-green-600 hover:text-gray-700">{product.store_name}</a>
               <span className="mx-2 text-gray-500">&gt;</span>
             </li>
             <li className="flex items-center">
@@ -239,7 +244,13 @@ const ProductPage: React.FC = () => {
             <p>
               {product.appelation?.toUpperCase()} | {product.region__pays?.toUpperCase()}
             </p>
-            <p className="text-sm font-normal">Vendu par <span className="text-green-600">{product.store_name || 'Mémé Georgette'}</span></p>
+            <p className="text-sm font-normal">
+              Vendu par
+              <a onClick={() => handleVendorClick(product.store_name)} className="cursor-pointer text-green-600 hover:text-gray-700">
+                 {product.store_name || ' @MéméGeorgette'}
+              </a>
+            </p>
+
 
             <br />
             <SocialShare url={window.location.href} title={product.name} />

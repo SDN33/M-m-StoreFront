@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Wine, MapPin, Star} from 'lucide-react';
 import Image from 'next/image';
+import Livraison from '../../../components/Livraison';
 
 // Composants de base personnalisés
 const Card: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
@@ -217,6 +218,35 @@ const VendorPage = () => {
           </p>
         </Card>
       )}
+
+<br />
+          <br />
+
+          <video
+            src="/videos/minibanner.mp4"
+            width={1920}
+            height={400}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className={`hidden md:block w-full h-[400px] object-fit`}
+
+          >
+            Your browser does not support the video tag.
+          </video>
+
+          <Image
+            src="/images/bannereco2.png"
+            alt="Bannière écologique"
+            width={1920}
+            height={400}
+            objectFit="cover"
+            className="w-fit h-[400px] object-cover" // Ajuste la hauteur si nécessaire
+          />
+
+          <Livraison />
     </div>
   );
 };

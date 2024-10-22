@@ -129,7 +129,7 @@ const VendorList: React.FC = () => {
           <div ref={vendorContainerRef} className="flex overflow-x-auto space-x-6 scrollbar-hide appearance-none">
             {vendors.map((vendor) => (
               <div key={vendor.store_name} className="bg-gray-200 border-black rounded-lg w-80 shadow-md">
-                <div className="p-4 bg-orange-600 text-white py-4 border-gray-500 border-spacing-4 border-lg rounded-md shadow-md cursor-pointer hover:scale-110 mx-6 mt-6">
+                <div className="p-4 bg-orange-600 text-white py-4 border-gray-500 border-spacing-4 border-lg rounded-md shadow-md cursor-pointer mx-6 mt-6">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gray-200 border-4 border-white rounded-full overflow-hidden">
                       <Image
