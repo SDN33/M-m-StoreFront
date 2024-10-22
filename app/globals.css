@@ -78,4 +78,33 @@ body {
   100% { transform: rotate(360deg); }
 }
 
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
+.fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Animation pour les cartes */
+.zoom-in {
+  animation: zoomIn 0.5s ease-out forwards;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

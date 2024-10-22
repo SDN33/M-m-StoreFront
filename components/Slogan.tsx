@@ -3,7 +3,9 @@ import Image from 'next/image';
 
 const Slogan: React.FC = () => {
   const h2Ref = useRef<HTMLHeadingElement | null>(null);
+  const engagementRefs = [useRef<HTMLDivElement | null>(null), useRef<HTMLDivElement | null>(null), useRef<HTMLDivElement | null>(null)];
   const [isVisible, setIsVisible] = useState(false);
+  const [cardsVisible, setCardsVisible] = useState([false, false, false]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -26,6 +28,33 @@ const Slogan: React.FC = () => {
       if (currentH2Ref) {
         observer.unobserve(currentH2Ref);
       }
+    };
+  }, []);
+
+  useEffect(() => {
+    const cardObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setCardsVisible((prev) => {
+              const newVisibility = [...prev];
+              newVisibility[index] = true;
+              return newVisibility;
+            });
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    engagementRefs.forEach((ref) => {
+      if (ref.current) cardObserver.observe(ref.current);
+    });
+
+    return () => {
+      engagementRefs.forEach((ref) => {
+        if (ref.current) cardObserver.unobserve(ref.current);
+      });
     };
   }, []);
 
@@ -62,13 +91,13 @@ const Slogan: React.FC = () => {
 
       {/* Decorative elements and content */}
       <div className="absolute bottom-0 right-0 w-[100px] md:w-[200px] h-[100px] md:h-[200px] bg-gray-200 opacity-10 rounded-tl-full"></div>
-      <div className="absolute right-0 bottom-0 w-[150px] md:w-[300px]">
+      <div className="absolute right-0 bottom-0 w-[150px] md:w-[350px]">
         <Image
           src="/images/mémé-georgette2.png"
           alt="Mémé Newsletter"
           className="w-full h-auto object-cover"
-          width={500} // Remplacez 500 par la largeur en pixels souhaitée
-          height={300} // Remplacez 300 par la hauteur en pixels souhaitée
+          width={500}
+          height={300}
         />
       </div>
 
@@ -84,43 +113,25 @@ const Slogan: React.FC = () => {
         </h2>
 
         <div className="flex flex-col md:flex-row justify-around items-center mt-10 space-y-6 md:space-y-0 md:space-x-4">
-          <div className="relative w-full md:w-1/3">
-            <div className="bg-gray-100 text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
-              <h3 className="font-bold text-md md:text-lg">Notre Engagement</h3>
-              <p className="text-xs md:text-sm">
-                Nous travaillons main dans la main avec des producteurs locaux pour offrir des vins de qualité.
-              </p>
+          {['Notre Engagement', 'Circuit Court', 'Élan Éco-Responsable'].map((title, index) => (
+            <div key={index} ref={engagementRefs[index]} className={`relative w-full md:w-1/3 ${cardsVisible[index] ? 'fade-in-up' : ''}`}>
+              <div className="bg-gray-100 text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
+                <h3 className="font-bold text-md md:text-lg">{title}</h3>
+                <p className="text-xs md:text-sm">
+                  {index === 0
+                    ? 'Nous travaillons main dans la main avec des producteurs locaux pour offrir des vins de qualité.'
+                    : index === 1
+                    ? 'Nos vins sont livrés directement du producteur à votre table, sans intermédiaire.'
+                    : 'Nous nous engageons à respecter l\'environnement en choisissant des pratiques durables.'}
+                </p>
+              </div>
+              <div className={`absolute ${index === 0 ? '-top-3 -right-3' : index === 1 ? '-top-3 -left-3' : '-bottom-3 -right-3'} w-8 h-8 md:w-10 md:h-10 bg-orange-${index === 1 ? '300' : '700'} rounded-full`}></div>
             </div>
-            <div className="absolute -top-3 -right-3 w-8 h-8 md:w-10 md:h-10 bg-orange-700 rounded-full"></div>
-          </div>
-
-          <div className="relative w-full md:w-1/3">
-            <div className="bg-gray-100 text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
-              <h3 className="font-bold text-md md:text-lg">Circuit Court</h3>
-              <p className="text-xs md:text-sm">
-                Nos vins sont livrés directement du producteur à votre table, sans intermédiaire.
-              </p>
-            </div>
-            <div className="absolute -top-3 -left-3 w-8 h-8 md:w-10 md:h-10 bg-orange-300 rounded-full"></div>
-          </div>
-
-          <div className="relative w-full md:w-1/3">
-            <div className="bg-gray-100 text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
-              <h3 className="font-bold text-md md:text-lg">Élan Éco-Responsable</h3>
-              <p className="text-xs md:text-sm">
-                Nous nous engageons à respecter l&apos;environnement en choisissant des pratiques durables.
-              </p>
-            </div>
-            <div className="absolute -bottom-3 -right-3 w-8 h-8 md:w-10 md:h-10 bg-orange-700 rounded-full"></div>
-          </div>
+          ))}
         </div>
         <br />
         <span className="text-white text-xs block mt-4">* en comparaison avec les vins non bio</span>
-        <span className="text-white text-xs block">L&apos;abus d&apos;alcool est dangereux pour la santé, sachez consommer avec modération. Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.
-
-</span>
-
-
+        <span className="text-white text-xs block">L&apos;abus d&apos;alcool est dangereux pour la santé, sachez consommer avec modération. Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.</span>
       </div>
     </div>
   );
