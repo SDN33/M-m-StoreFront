@@ -83,7 +83,7 @@ const Header = () => {
   return (
     <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} ${headerHeight} z-20 transition-all duration-300 ease-in-out`}>
       {/* Left Navigation */}
-      <nav className="hidden md:flex items-center space-x-8 ml-10 font-semibold text-sm md:text-base">
+      <nav className=" items-center space-x-8 ml-10 font-semibold text-sm md:text-base hidden lg:flex">
         <a href="/" className="relative text-white hover:text-orange-600">Accueil</a>
         <div className="relative">
           <button
@@ -94,12 +94,12 @@ const Header = () => {
             <ChevronDown className="ml-2 w-4 h-4" />
           </button>
           {isVinsMenuOpen && (
-            <ul className="absolute mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30">
-              <li><a href="/products/category/rouge" className="block px-4 py-2 text-sm text-gray-800 hover:bg-orange-600">Nos vins rouges</a></li>
-              <li><a href="/products/category/blanc" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins blancs</a></li>
-              <li><a href="/products/category/rose" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins rosés</a></li>
-              <li><a href="/products/category/petillant" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins pétillants</a></li>
-              <li><a href="/products/category/liquoreux" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Nos vins liquoreux</a></li>
+            <ul className="absolute mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-30">
+              <li><a href="/products/category/rouge" className="block px-4 py-2 text-sm text-white hover:bg-orange-600">Nos vins rouges</a></li>
+              <li><a href="/products/category/blanc" className="block px-4 py-2 text-sm text-white hover:bg-orange-600">Nos vins blancs</a></li>
+              <li><a href="/products/category/rose" className="block px-4 py-2 text-sm text-white hover:bg-orange-600">Nos vins rosés</a></li>
+              <li><a href="/products/category/petillant" className="block px-4 py-2 text-sm text-white hover:bg-orange-600">Nos vins pétillants</a></li>
+              <li><a href="/products/category/liquoreux" className="block px-4 py-2 text-sm text-white hover:bg-orange-600">Nos vins liquoreux</a></li>
             </ul>
           )}
         </div>
@@ -122,7 +122,7 @@ const Header = () => {
 
       {/* Right Section */}
       <div className="hidden md:flex items-center space-x-6 mr-10">
-        <div className="relative">
+        <div className="relative hidden lg:flex ">
           <input
             type="text"
             value={searchTerm}
@@ -142,9 +142,9 @@ const Header = () => {
           )}
         </div>
 
-        <div className="relative">
+        <div className="relative hidden lg:flex">
           <button
-            className="text-white hover:text-gray-800 focus:outline-none"
+            className="text-white hover:text-gray-800 focus:outline-none "
             onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
           >
             <User className="w-6 h-6" />
@@ -159,7 +159,7 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <a href="/login" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Connecter/S&apos;inscrire</a>
+                  <a href="/login" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Connecter/S'inscrire</a>
                 </>
               )}
             </div>
@@ -172,33 +172,44 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu */}
-      <button
-        className="md:hidden"
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-      >
-        {isMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
-      </button>
+      <div className="lg:hidden flex items-center justify-between w-full z-50">
+        <button
+          className="lg:hidden"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
+        </button>
+
+        <a href="/cart" className="ml-4 hidden lg:flex sm:flex">
+          <ShoppingCart className="w-6 h-6 text-white hidden" />
+        </a>
+      </div>
 
       {isMenuOpen && (
         <div className="absolute top-full left-0 right-0 bg-gray-800 p-4 rounded-md shadow-lg z-20">
-          <a href="/" className="block py-2 text-white hover:bg-orange-600">Accueil</a>
-          <button
-            className="block py-2 text-white hover:bg-orange-600"
-            onClick={() => setIsVinsMenuOpen(!isVinsMenuOpen)}
-          >
-            Nos Vins
-          </button>
-          {isVinsMenuOpen && (
-            <div className="flex flex-col ml-4 bg-gray-600">
-              <a href="/products/category/rouge" className="py-1 text-white hover:bg-orange-400">Nos vins rouges</a>
-              <a href="/products/category/blanc" className="py-1 text-white hover:bg-orange-400">Nos vins blancs</a>
-              <a href="/products/category/rose" className="py-1 text-white hover:bg-orange-400">Nos vins rosés</a>
-              <a href="/products/category/petillant" className="py-1 text-white hover:bg-orange-400">Nos vins pétillants</a>
-              <a href="/products/category/liquoreux" className="py-1 text-white hover:bg-orange-400">Nos vins liquoreux</a>
-            </div>
-          )}
-          <a href="https://www.memegeorgette.com/" className="block py-2 text-white hover:bg-orange-600">Nous Découvrir</a>
-          <a href="/contact" className="block py-2 text-white hover:bg-orange-600">Contact</a>
+          <div className="relative mb-4">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleSearch}
+              placeholder="Rechercher un vin..."
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-gray-800"
+            />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800 w-6 h-6" />
+            {searchResults.length > 0 && (
+              <ul className="absolute mt-2 w-full bg-white rounded-md shadow-lg z-30">
+                {searchResults.map(product => (
+                  <li key={product.id} onClick={() => handleResultClick(product.id)} className="cursor-pointer px-4 py-2 text-sm text-gray-800 hover:bg-orange-600 hover:text-white">
+                    {product.name}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <a href="/" className="block text-white hover:text-orange-600 py-2">Accueil</a>
+          <a href="/products" className="block text-white hover:text-orange-600 py-2">Nos Vins</a>
+          <a href="https://www.memegeorgette.com/" className="block text-white hover:text-orange-600 py-2">Nous Découvrir</a>
+          <a href="/contact" className="block text-white hover:text-orange-600 py-2">Contact</a>
         </div>
       )}
     </header>
