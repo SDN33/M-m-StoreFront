@@ -8,8 +8,8 @@ interface Product {
   id: number;
   name: string;
   price: string;
-  nom_du_chateau?: string; // Cette propriété pour le nom du château
-  millesime?: string; // Ajoutez cette ligne pour le millésime
+  nom_du_chateau?: string;
+  millesime?: string;
   certification?: string;
   store_name?: string;
   vendor_image?: string;
@@ -112,8 +112,6 @@ const VendorList: React.FC = () => {
         <br /><div className="text-gray-800 text-sm font-extrabold tracking-tight text-center">Découvrez les derniers vins ajoutés par nos vignerons partenaires.</div>
       </h2>
 
-
-
       {vendors.length === 0 ? (
         <div className="bg-gray-100 shadow rounded-lg p-6">
           <p className="text-center text-gray-500">Aucun vendeur disponible.</p>
@@ -129,8 +127,8 @@ const VendorList: React.FC = () => {
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gray-200 border-4 border-white rounded-full overflow-hidden">
                       <Image
-                       src={vendor.vendor_image || '/images/mémé-georgette1.png'}
-                       alt={vendor.store_name}
+                        src={vendor.vendor_image || '/images/mémé-georgette1.png'}
+                        alt={vendor.store_name}
                         width={50}
                         height={50}
                       />
@@ -144,22 +142,20 @@ const VendorList: React.FC = () => {
                     <p className="text-gray-400">Aucuns vins disponibles.</p>
                   ) : (
                     <ul className="space-y-2">
-                      {vendor.products.slice(0, 4).map((product) => (
+                      {vendor.products.slice(0, 3).map((product) => (
                         <li
                           key={product.id}
                           className="p-2 bg-gray-50 rounded-lg flex justify-between transform transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer"
-                          onClick={() => handleCardClick(product.id)} // Utilisez handleCardClick ici
+                          onClick={() => handleCardClick(product.id)}
                         >
                           <div className="flex items-center space-x-3">
-                            {product.images?.[0] && (
-                              <Image
-                                src={product.images?.[0]?.src || '/images/vinmémé.png'}
-                                alt={product.name}
-                                className="w-10 h-10 object-cover"
-                                width={40}
-                                height={40}
-                              />
-                            )}
+                            <Image
+                              src={product.images?.[0]?.src || '/images/vinmémé.png'}
+                              alt={product.name}
+                              className="w-10 h-10 object-cover"
+                              width={40}
+                              height={40}
+                            />
                             <div>
                               <h4 className="font-semibold">{product.name}</h4>
                               <p className="text-sm text-gray-600">{product.nom_du_chateau}</p>
@@ -174,23 +170,12 @@ const VendorList: React.FC = () => {
                           <span className="text-base font-bold text-orange-600 px-8 py-8 w-26 h-26">
                             <span className="px-2 py-1 text-xs font-semibold text-black bg-gray-200 rounded-full">
                               {parseFloat(product.price).toFixed(2)}€
-                              {parseFloat(product.price) > 50 }
                             </span>
                           </span>
                         </li>
                       ))}
                     </ul>
                   )}
-                  {vendor.products.length > 4 && (
-                    <div className="mt-4 text-right">
-                      <button className="text-sm bg-gray-100 text-orange-600 font-semibold border-orange-600 border px-2 py-1 rounded-full">
-                        Voir plus
-                      </button>
-                    </div>
-                  )}
-                </div>
-                <div className='mx-auto'>
-                  <p className='mx-auto w-fit mb-4 bg-gray-100 text-gray-800 font-light border-orange-600 border-2 rounded-full p-2'>Voir plus</p>
                 </div>
               </div>
             ))}

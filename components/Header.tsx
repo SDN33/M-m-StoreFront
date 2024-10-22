@@ -10,7 +10,8 @@ const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isVinsMenuOpen, setIsVinsMenuOpen] = useState(false);
+  const [isVinsMenuOpen, setIsVinsMenuOpen] = useState(false); // For desktop
+  const [isMobileVinsMenuOpen, setIsMobileVinsMenuOpen] = useState(false); // For mobile
   const [bgColor, setBgColor] = useState('bg-transparent');
   const [headerHeight, setHeaderHeight] = useState('h-24');
   const [logoSize, setLogoSize] = useState('w-44 h-auto');
@@ -83,7 +84,7 @@ const Header = () => {
   return (
     <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} ${headerHeight} z-20 transition-all duration-300 ease-in-out`}>
       {/* Left Navigation */}
-      <nav className=" items-center space-x-8 ml-10 font-semibold text-sm md:text-base hidden lg:flex">
+      <nav className="items-center space-x-8 ml-10 font-semibold text-sm md:text-base hidden lg:flex">
         <a href="/" className="relative text-white hover:text-orange-600">Accueil</a>
         <div className="relative">
           <button
@@ -122,7 +123,7 @@ const Header = () => {
 
       {/* Right Section */}
       <div className="hidden md:flex items-center space-x-6 mr-10">
-        <div className="relative hidden lg:flex ">
+        <div className="relative hidden lg:flex">
           <input
             type="text"
             value={searchTerm}
@@ -144,7 +145,7 @@ const Header = () => {
 
         <div className="relative hidden lg:flex">
           <button
-            className="text-white hover:text-gray-800 focus:outline-none "
+            className="text-white hover:text-gray-800 focus:outline-none"
             onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
           >
             <User className="w-6 h-6" />
@@ -183,35 +184,45 @@ const Header = () => {
         <a href="/cart" className="ml-4 md:hidden lg:flex sm:flex">
           <ShoppingCart className="w-6 h-6 text-white " />
         </a>
-      </div>
 
-      {isMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-gray-800 p-4 rounded-md shadow-lg z-20">
-          <div className="relative mb-4">
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={handleSearch}
-              placeholder="Rechercher un vin..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-gray-800"
-            />
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800 w-6 h-6" />
-            {searchResults.length > 0 && (
-              <ul className="absolute mt-2 w-full bg-gray-100 rounded-md shadow-lg z-30">
-                {searchResults.map(product => (
-                  <li key={product.id} onClick={() => handleResultClick(product.id)} className="cursor-pointer px-4 py-2 text-sm text-gray-800 hover:bg-orange-600 hover:text-white">
-                    {product.name}
-                  </li>
-                ))}
-              </ul>
-            )}
+        {/* Mobile Menu Content */}
+        {isMenuOpen && (
+          <div className="absolute top-16 left-0 w-full bg-black bg-opacity-90 p-6 z-40">
+            <ul className="space-y-6 text-white">
+              <li>
+                <a href="/" className="block">Accueil</a>
+              </li>
+              <li>
+                <button
+                  className="flex items-center justify-between w-full"
+                  onClick={() => setIsMobileVinsMenuOpen(!isMobileVinsMenuOpen)}
+                >
+                  Nos Vins
+                  <ChevronDown className="ml-2 w-4 h-4" />
+                </button>
+                {isMobileVinsMenuOpen && (
+                  <ul className="mt-2 pl-4 space-y-2">
+                    <li><a href="/products/category/rouge" className="block">Nos vins rouges</a></li>
+                    <li><a href="/products/category/blanc" className="block">Nos vins blancs</a></li>
+                    <li><a href="/products/category/rose" className="block">Nos vins rosés</a></li>
+                    <li><a href="/products/category/petillant" className="block">Nos vins pétillants</a></li>
+                    <li><a href="/products/category/liquoreux" className="block">Nos vins liquoreux</a></li>
+                  </ul>
+                )}
+              </li>
+              <li>
+                <a href="https://www.memegeorgette.com/" className="block">Nous Découvrir</a>
+              </li>
+              <li>
+                <a href="/contact" className="block">Contact</a>
+              </li>
+              <li>
+                <a href="/login" className="block">Se Connecter/S&apos;inscrire</a>
+              </li>
+            </ul>
           </div>
-          <a href="/" className="block text-white hover:text-orange-600 py-2">Accueil</a>
-          <a href="/products" className="block text-white hover:text-orange-600 py-2">Nos Vins</a>
-          <a href="https://www.memegeorgette.com/" className="block text-white hover:text-orange-600 py-2">Nous Découvrir</a>
-          <a href="/contact" className="block text-white hover:text-orange-600 py-2">Contact</a>
-        </div>
-      )}
+        )}
+      </div>
     </header>
   );
 };
