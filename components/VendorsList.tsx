@@ -80,7 +80,7 @@ const VendorList: React.FC = () => {
   };
 
   if (loading) {
-    return <div className="p-6">Chargement...</div>;
+    return <div className="p-6 text-center bg-green-600 text-white">Chargement... Nos vignerons se préparent pour vous !</div>;
   }
 
   if (error) {
