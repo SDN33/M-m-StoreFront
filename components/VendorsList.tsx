@@ -138,8 +138,8 @@ const VendorList: React.FC = () => {
 
           <div ref={vendorContainerRef} className="flex overflow-x-auto space-x-6 scrollbar-hide appearance-none">
             {vendors.map((vendor) => (
-              <div key={vendor.store_name} className="bg-gray-200 border-black rounded-lg w-80 shadow-md">
-                <div className="p-4 bg-orange-600 text-white py-4 border-gray-500 border-spacing-4 border-lg rounded-md shadow-md cursor-pointer mx-6 mt-6">
+              <div key={vendor.store_name} className="bg-gray-200 border-black rounded-lg w-80 shadow-md hover:bg-gray-300 transition-colors">
+                <div className="p-4 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-4 border-gray-500 border-spacing-4 border-lg rounded-md shadow-md cursor-pointer mx-6 mt-6">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gray-200 border-4 border-white rounded-full overflow-hidden">
                       <Image
@@ -164,7 +164,7 @@ const VendorList: React.FC = () => {
                 </div>
                 <div className="p-4">
                   <div className="flex">
-                    <span className="text-sm font-serif text-orange-600 mx-auto text-center">{vendor.products.length} vins disponibles</span>
+                    <span className="text-sm font-serif text-green-600 mx-auto text-center">{vendor.products.length} vins disponibles</span>
                   </div>
                   <h3 className="text-sm font-black mb-4 text-black mx-auto text-center">Derniers vins ajoutés</h3>
                   {vendor.products.length === 0 ? (
