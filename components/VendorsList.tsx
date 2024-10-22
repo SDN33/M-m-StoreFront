@@ -80,7 +80,9 @@ const VendorList: React.FC = () => {
   };
 
   if (loading) {
-    return <div className="p-6 text-center bg-green-600 text-white">Chargement... Nos vignerons se préparent pour vous !</div>;
+    return <div className="p-6 text-center bg-green-600 text-white">
+             <div className="animate-bounce">Nos vignerons se préparent pour vous !</div>
+          </div>;
   }
 
   if (error) {
@@ -105,6 +107,10 @@ const VendorList: React.FC = () => {
     router.push(`/product/${productId}`);
   };
 
+  const handleVendorClick = (vendorName: string) => {
+    router.push(`/vendor/${vendorName}`);
+  }
+
   return (
     <div className="p-6 space-y-6">
       <h2 className="text-2xl md:text-3xl font-extrabold text-orange-600 tracking-tight mx-16 text-center">
@@ -123,7 +129,7 @@ const VendorList: React.FC = () => {
           <div ref={vendorContainerRef} className="flex overflow-x-auto space-x-6 scrollbar-hide appearance-none">
             {vendors.map((vendor) => (
               <div key={vendor.store_name} className="bg-gray-200 border-black rounded-lg w-80 shadow-md">
-                <div className="p-4 bg-orange-600 text-white py-4 border-lg rounded-md shadow-md">
+                <div className="p-4 bg-orange-600 text-white py-4 border-gray-500 border-spacing-4 border-lg rounded-md shadow-md cursor-pointer hover:scale-110 mx-6 my-6">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gray-200 border-4 border-white rounded-full overflow-hidden">
                       <Image
@@ -131,6 +137,9 @@ const VendorList: React.FC = () => {
                         alt={vendor.store_name}
                         width={50}
                         height={50}
+                        onClick={() => handleVendorClick(vendor.store_name)}
+                        className='cursor-pointer hover:scale-110'
+
                       />
                     </div>
                     <h2 className="text-lg font-bold">{vendor.store_name}</h2>

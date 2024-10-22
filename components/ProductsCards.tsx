@@ -169,7 +169,7 @@ const ProductsCards: React.FC = () => {
           {loading && (
             <div className="flex flex-col items-center">
               <div className="loader"></div>
-              <p className="text-orange-600 font-bold text-lg">Chargement des vins de Mémé...</p>
+              <p className="text-orange-600 font-bold text-lg animate-bounce">Chargement des vins de Mémé...</p>
             </div>
           )}
           {error && <p className="text-red-600">{error}</p>}
