@@ -186,12 +186,6 @@ const VendorPage = () => {
                 width={50}
                 height={30}
               />
-              {product.certification && (
-                <Badge variant="success" className="absolute top-2 right-2">
-                  <Award className="w-4 h-4 mr-1" />
-                  {product.certification}
-                </Badge>
-              )}
             </div>
             <CardContent className="space-y-4">
               <div>

@@ -169,7 +169,7 @@ const ProductPage: React.FC = () => {
               <span className="mx-2 text-gray-500">&gt;</span>
             </li>
             <li className="flex items-center">
-              <a href="#" className="text-green-600 hover:text-gray-700">{product.store_name}</a>
+              <a href="/vendor" className="text-green-600 hover:text-gray-700">{product.store_name}</a>
               <span className="mx-2 text-gray-500">&gt;</span>
             </li>
             <li className="flex items-center">
