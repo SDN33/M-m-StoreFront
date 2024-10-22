@@ -5,6 +5,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Search, ShoppingCart, User, Menu, X, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 import axios from 'axios';
+import CartPopup from './CartPopup';
+
 
 const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -16,10 +18,15 @@ const Header = () => {
   const [headerHeight, setHeaderHeight] = useState('h-24');
   const [logoSize, setLogoSize] = useState('w-44 h-auto');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   interface Product {
     id: string;
     name: string;
+  }
+
+  const toggleCartPopup = () => {
+    setIsCartOpen(!isCartOpen);
   }
 
   const [searchResults, setSearchResults] = useState<Product[]>([]);
@@ -167,8 +174,8 @@ const Header = () => {
           )}
         </div>
 
-        <a href="/cart" className="ml-4">
-          <ShoppingCart className="w-6 h-6 text-white" />
+        <a className="ml-4">
+          <ShoppingCart className="w-6 h-6 text-white" onClick={toggleCartPopup} />
         </a>
       </div>
 
@@ -181,8 +188,8 @@ const Header = () => {
           {isMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
         </button>
 
-        <a href="/cart" className="ml-4 md:hidden lg:flex sm:flex">
-          <ShoppingCart className="w-6 h-6 text-white " />
+        <a className="ml-4 md:hidden lg:flex sm:flex">
+          <ShoppingCart className="w-6 h-6 text-white" onClick={toggleCartPopup} />
         </a>
 
         {/* Mobile Menu Content */}
@@ -223,6 +230,7 @@ const Header = () => {
           </div>
         )}
       </div>
+      <CartPopup isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   );
 };

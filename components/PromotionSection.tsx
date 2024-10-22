@@ -31,7 +31,7 @@ const PromotionSection = () => {
         </span>
 
         {/* Affichage sur plus grand écran sans saut de ligne */}
-        <span className="hidden sm:inline text-lg">
+        <span className="hidden sm:inline text-base">
           🍇🚚 Livraison offerte dès 6 bouteilles achetées sur un même Domaine 🚚🍇
         </span>
       </p>

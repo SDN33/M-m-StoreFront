@@ -129,24 +129,6 @@ const transformMetaData = (metaData: { key: string; value: string | string[] }[]
   };
 };
 
-const getVendorDetails = async (vendorId: number) => {
-  const consumerKey = process.env.WC_CONSUMER_KEY!;
-  const consumerSecret = process.env.WC_CONSUMER_SECRET!;
-  const vendorUrl = `https://portailpro-memegeorgette.com/wp-json/mvx/v1/vendors/${vendorId}`;
-
-  try {
-    const response = await axios.get(vendorUrl, {
-      auth: {
-        username: consumerKey,
-        password: consumerSecret,
-      },
-    });
-    return response.data; // Retourne les détails du vendeur
-  } catch (error) {
-    console.error('Erreur lors de la récupération des détails du vendeur:', error);
-    return null;
-  }
-};
 
 const fetchProducts = async (url: string) => {
   const response = await axios.get<Product[]>(url);
@@ -248,12 +230,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
 
         const transformedProducts = await Promise.all((productsOrCategories as Product[]).map(async (product) => {
-          const vendor = await getVendorDetails(product.id);
           const transformedProduct: Product = {
             ...product,
             ...transformMetaData(product.meta_data),
             store_name: product.store_name || '', // Utilisation du nom du vendeur
-            vendor_image: vendor?.avatar_url || '', // Utilisation de l'avatar du vendeur
           };
           return transformedProduct;
         }));
