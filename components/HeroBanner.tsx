@@ -25,15 +25,14 @@ const HeroBanner = () => {
   }, []);
 
   return (
-    <div className="relative container mx-auto px-4 py-12 flex flex-col justify-center items-center min-h-screen">
+    <div className="relative container mx-auto px-4 py-12 flex flex-col justify-center items-center min-h-screen bg-black">
       {/* Vidéo pour mobile */}
       <video
         className={`absolute inset-0 w-full h-full object-cover md:hidden ${videoError ? 'hidden' : ''}`}
         autoPlay
         loop
         muted
-        playsInline // Ajout de l'attribut playsInline pour iPhoney
-        preload="auto" 
+        playsInline // Ajout de l'attribut playsInline pour iPhone
         onError={() => setVideoError(true)} // Affiche l'image de fond si la vidéo ne se charge pas
       >
         <source src="/videos/herobanner-mobile.mp4" type="video/mp4" />
