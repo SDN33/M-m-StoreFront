@@ -83,12 +83,11 @@ const Header = () => {
   return (
     <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} ${headerHeight} z-20 transition-all duration-300 ease-in-out`}>
       {/* Left Navigation */}
-      <nav className="hidden md:flex items-center space-x-8 ml-10 font-semibold">
-        <a href="/" className="relative text-white hover:text-orange-600 font-semibold">Accueil</a>
-        {/* Dropdown for 'Nos Vins' */}
+      <nav className="hidden md:flex items-center space-x-8 ml-10 font-semibold text-sm md:text-base">
+        <a href="/" className="relative text-white hover:text-orange-600">Accueil</a>
         <div className="relative">
           <button
-            className="relative text-white hover:text-orange-600 font-semibold flex items-center"
+            className="relative text-white hover:text-orange-600 flex items-center"
             onClick={() => setIsVinsMenuOpen(!isVinsMenuOpen)}
           >
             Nos Vins
@@ -104,8 +103,8 @@ const Header = () => {
             </ul>
           )}
         </div>
-        <a href="https://www.memegeorgette.com/" className="relative text-white hover:text-orange-600 font-semibold">Nous Découvrir</a>
-        <a href="/contact" className="relative text-white hover:text-orange-600 font-semibold">Contact</a>
+        <a href="https://www.memegeorgette.com/" className="relative text-white hover:text-orange-600">Nous Découvrir</a>
+        <a href="/contact" className="relative text-white hover:text-orange-600">Contact</a>
       </nav>
 
       {/* Center Logo */}
@@ -132,7 +131,6 @@ const Header = () => {
             className="pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-gray-800"
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800 w-6 h-6" />
-          {/* Suggestions Dropdown */}
           {searchResults.length > 0 && (
             <ul className="absolute mt-2 w-full bg-white rounded-md shadow-lg z-30">
               {searchResults.map(product => (
@@ -168,7 +166,6 @@ const Header = () => {
           )}
         </div>
 
-        {/* Shopping Cart Icon */}
         <a href="/cart" className="ml-4">
           <ShoppingCart className="w-6 h-6 text-white" />
         </a>
@@ -183,46 +180,25 @@ const Header = () => {
       </button>
 
       {isMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white p-4 rounded-md shadow-lg z-20">
-          <a href="/" className="block py-2 text-gray-800">Accueil</a>
-          <div className="relative">
-            <button
-              className="py-2 text-gray-800 flex items-center"
-              onClick={() => setIsVinsMenuOpen(!isVinsMenuOpen)}
-            >
-              Nos Vins
-              <ChevronDown className="ml-2 w-4 h-4" />
-            </button>
-            {isVinsMenuOpen && (
-              <ul className="mt-2">
-                <li><a href="/products/category/rouge" className="block py-2 text-gray-800">Nos vins rouges</a></li>
-                <li><a href="/products/category/blanc" className="block py-2 text-gray-800">Nos vins blancs</a></li>
-                <li><a href="/products/category/rose" className="block py-2 text-gray-800">Nos vins rosés</a></li>
-                <li><a href="/products/category/petillant" className="block py-2 text-gray-800">Nos vins pétillants</a></li>
-                <li><a href="/products/category/liquoreux" className="block py-2 text-gray-800">Nos vins liquoreux</a></li>
-              </ul>
-            )}
-          </div>
-          <a href="https://www.memegeorgette.com/" className="block py-2 text-gray-800">Découvrir Mémé Georgette</a>
-          <a href="/contact" className="block py-2 text-gray-800">Contact</a>
-          <div className="mt-2">
-            {isLoggedIn ? (
-              <>
-                <a href="/dashboard" className="block py-2 text-gray-800">Mon Dashboard</a>
-                <button onClick={() => setIsLoggedIn(false)} className="block py-2 text-gray-800">Se Déconnecter</button>
-              </>
-            ) : (
-              <>
-                <a href="/login" className="block py-2 text-gray-800">Se Connecter/S&apos;inscrire</a>
-              </>
-            )}
-          </div>
-          {/* Icône du panier sur mobile */}
-          <div className="mt-4 flex justify-end">
-            <a href="/cart" className="text-gray-800">
-              <ShoppingCart className="w-6 h-6" />
-            </a>
-          </div>
+        <div className="absolute top-full left-0 right-0 bg-gray-800 p-4 rounded-md shadow-lg z-20">
+          <a href="/" className="block py-2 text-white hover:bg-orange-600">Accueil</a>
+          <button
+            className="block py-2 text-white hover:bg-orange-600"
+            onClick={() => setIsVinsMenuOpen(!isVinsMenuOpen)}
+          >
+            Nos Vins
+          </button>
+          {isVinsMenuOpen && (
+            <div className="flex flex-col ml-4 bg-gray-600">
+              <a href="/products/category/rouge" className="py-1 text-white hover:bg-orange-400">Nos vins rouges</a>
+              <a href="/products/category/blanc" className="py-1 text-white hover:bg-orange-400">Nos vins blancs</a>
+              <a href="/products/category/rose" className="py-1 text-white hover:bg-orange-400">Nos vins rosés</a>
+              <a href="/products/category/petillant" className="py-1 text-white hover:bg-orange-400">Nos vins pétillants</a>
+              <a href="/products/category/liquoreux" className="py-1 text-white hover:bg-orange-400">Nos vins liquoreux</a>
+            </div>
+          )}
+          <a href="https://www.memegeorgette.com/" className="block py-2 text-white hover:bg-orange-600">Nous Découvrir</a>
+          <a href="/contact" className="block py-2 text-white hover:bg-orange-600">Contact</a>
         </div>
       )}
     </header>

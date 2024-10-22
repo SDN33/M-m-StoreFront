@@ -192,7 +192,7 @@ const RougeProductsCards: React.FC = () => {
             <div className="flex justify-center mt-4">
               <button
                 onClick={loadMoreProducts}
-                className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600"
+                className="bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-600"
               >
                 Voir Plus de Vins Rouges
               </button>

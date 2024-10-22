@@ -82,7 +82,7 @@ const getCategoryColor = (categoryName: string) => {
     case 'liquoreux':
       return 'bg-purple-400';
     default:
-      return 'bg-orange-500';
+      return 'bg-orange-600';
   }
 };
 
@@ -258,7 +258,7 @@ const ProductPage: React.FC = () => {
               </select>
               <button
                 onClick={() => console.log(`Ajouté ${quantity} ${product.name} au panier`)}
-                className="bg-orange-600 hover:bg-orange-500 text-white py-2 px-4 rounded"
+                className="bg-orange-600 hover:bg-orange-600 text-white py-2 px-4 rounded"
               >
                 Ajouter au panier
               </button>
@@ -339,7 +339,7 @@ const ProductPage: React.FC = () => {
             loop
             muted
             playsInline
-            preload="auto" 
+            preload="auto"
             className={`hidden md:block w-full h-[400px] object-fit`}
 
           >

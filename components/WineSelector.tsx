@@ -26,7 +26,7 @@ const WineSelector = () => {
           >
             <div className={`w-12 sm:w-14 h-20 sm:h-24 rounded-full ${wine.bg} flex items-center justify-center shadow-md relative overflow-hidden`}>
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-white font-black text-xs sm:text-sm transform rotate-[-90deg] whitespace-nowrap">
+                <span className="text-gradient-to-r from-gray-900 via-gray-800 to-black font-black text-xs sm:text-sm transform rotate-[-90deg] whitespace-nowrap">
                   {wine.name}
                 </span>
               </div>
