@@ -25,7 +25,7 @@ const HeroBanner = () => {
   }, []);
 
   return (
-    <div className="relative container mx-auto px-4 py-12 flex flex-col justify-center items-center min-h-screen bg-black">
+    <div className="relative container mx-auto px-4 py-12 flex flex-col justify-center items-center min-h-screen">
       {/* Vidéo pour mobile */}
       <video
         className={`absolute inset-0 w-full h-full object-cover md:hidden ${videoError ? 'hidden' : ''}`}
@@ -63,9 +63,9 @@ const HeroBanner = () => {
 
       {/* Conteneur avec z-10 pour rester au-dessus de l'image de fond */}
       <div className="md:mt-20 mt-40 space-y-3 md:space-y-0 flex flex-col items-center text-center z-10 text-white relative">
-        <p className="text-white text-4xl md:text-4xl !font-black sloganhero sm:-mt-12 ">
-          CAVE<br />COOPÉRATIVE<br />ENGAGÉE
-          <br /><span className='text-xl md:text-3xl font-semibold  md:font-black sloganhero text-primary'>En direct des vignerons(nes)</span>
+        <p className="text-white text-3xl md:text-4xl !font-black sloganhero sm:font-black">
+          CAVE COOPÉRATIVE ENGAGÉE
+          <br /><span className='text-xl md:text-3xl font-semibold sloganhero text-primary'>En direct des vignerons(nes)</span>
         </p>
         <br />
         {/* Logos pour web */}
@@ -83,7 +83,7 @@ const HeroBanner = () => {
           <h1 className="text-4xl md:text-4xl leading-tight md:font-black !font-semibold hidden md:block">
             <br />
             <span className="block fade-in" dangerouslySetInnerHTML={{ __html: slogans[currentSlogan] }} />
-            <p className="text-lg mt-4 md:text-xl font-black">- Mémé Georgette</p>
+            <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
           </h1>
           {/* Titre pour mobile */}
           <h1 className="text-xl md:text-4xl leading-tight font-black block md:hidden">
