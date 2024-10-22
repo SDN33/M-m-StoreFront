@@ -115,7 +115,7 @@ const VendorList: React.FC = () => {
 
 
       {vendors.length === 0 ? (
-        <div className="bg-white shadow rounded-lg p-6">
+        <div className="bg-gray-100 shadow rounded-lg p-6">
           <p className="text-center text-gray-500">Aucun vendeur disponible.</p>
         </div>
       ) : (
@@ -124,8 +124,8 @@ const VendorList: React.FC = () => {
 
           <div ref={vendorContainerRef} className="flex overflow-x-auto space-x-6 scrollbar-hide appearance-none">
             {vendors.map((vendor) => (
-              <div key={vendor.store_name} className="bg-orange-600 border-black shadow rounded-lg w-80">
-                <div className="p-4 bg-gray-100 py-4 border-lg rounded-md">
+              <div key={vendor.store_name} className="bg-gray-200 border-black rounded-lg w-80 shadow-md">
+                <div className="p-4 bg-orange-600 text-white py-4 border-lg rounded-md shadow-md">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gray-200 border-4 border-white rounded-full overflow-hidden">
                       <Image
@@ -139,7 +139,7 @@ const VendorList: React.FC = () => {
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="text-sm font-black mb-4 text-white">Derniers vins ajoutés</h3>
+                  <h3 className="text-sm font-black mb-4 text-black">Derniers vins ajoutés</h3>
                   {vendor.products.length === 0 ? (
                     <p className="text-gray-400">Aucuns vins disponibles.</p>
                   ) : (
@@ -182,14 +182,14 @@ const VendorList: React.FC = () => {
                   )}
                   {vendor.products.length > 4 && (
                     <div className="mt-4 text-right">
-                      <button className="text-sm bg-white text-orange-600 font-semibold border-orange-600 border px-2 py-1 rounded-full">
+                      <button className="text-sm bg-gray-100 text-orange-600 font-semibold border-orange-600 border px-2 py-1 rounded-full">
                         Voir plus
                       </button>
                     </div>
                   )}
                 </div>
                 <div className='mx-auto'>
-                  <p className='mx-auto w-fit mb-4 bg-white text-gray-800 font-light border-orange-600 border-2 rounded-full p-2'>Voir plus</p>
+                  <p className='mx-auto w-fit mb-4 bg-gray-100 text-gray-800 font-light border-orange-600 border-2 rounded-full p-2'>Voir plus</p>
                 </div>
               </div>
             ))}

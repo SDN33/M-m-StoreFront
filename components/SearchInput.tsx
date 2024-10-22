@@ -84,7 +84,7 @@ const SearchInput = () => {
 
       {/* Affichage des résultats de recherche */}
       {results.length > 0 && (
-        <ul className="absolute mt-2 w-full bg-white rounded-md shadow-lg py-1 z-30">
+        <ul className="absolute mt-2 w-full bg-gray-100 rounded-md shadow-lg py-1 z-30">
           {results.map((result, index) => (
             <li key={result.id}>
               <a

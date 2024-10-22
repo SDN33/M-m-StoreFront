@@ -250,7 +250,7 @@ const ProductPage: React.FC = () => {
               <select
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
-                className="mr-4 p-2 border rounded bg-white border-gray-300"
+                className="mr-4 p-2 border rounded bg-gray-100 border-gray-300"
               >
                 {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
                   <option key={num} value={num}>{num}</option>

@@ -107,7 +107,7 @@ const HeroBanner = () => {
           rel="noopener noreferrer"
           aria-label="Découvrir Mémé Georgette - Accédez à notre site pour explorer notre sélection de vins bio"
         >
-          <button className="flex items-center gap-2 px-4 py-3 bg-white border-b-2 border-black text-gray-800 rounded-full font-semibold hover:bg-gray-500 hover:text-white transition-colors text-sm">
+          <button className="flex items-center gap-2 px-4 py-3 bg-gray-100 border-b-2 border-black text-gray-800 rounded-full font-semibold hover:bg-gray-500 hover:text-white transition-colors text-sm">
             <Play className="w-3 h-3" />
             Découvrir Mémé Georgette
           </button>
@@ -136,7 +136,7 @@ const HeroBanner = () => {
           rel="noopener noreferrer"
           aria-label="Découvrir le site officiel de Mémé Georgette"
         >
-          <button className="flex items-center gap-2 px-4 md:px-6 py-3 md:py-4 bg-white border-b-2 border-black text-gray-900 rounded-full font-semibold hover:bg-gray-500 hover:text-white transition-colors text-sm md:text-base">
+          <button className="flex items-center gap-2 px-4 md:px-6 py-3 md:py-4 bg-gray-100 border-b-2 border-black text-gray-900 rounded-full font-semibold hover:bg-gray-500 hover:text-white transition-colors text-sm md:text-base">
             <Play className="w-3 h-3 md:w-4 md:h-4" />
             Découvrir Mémé Georgette
           </button>

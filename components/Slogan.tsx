@@ -85,7 +85,7 @@ const Slogan: React.FC = () => {
 
         <div className="flex flex-col md:flex-row justify-around items-center mt-10 space-y-6 md:space-y-0 md:space-x-4">
           <div className="relative w-full md:w-1/3">
-            <div className="bg-white text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
+            <div className="bg-gray-100 text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
               <h3 className="font-bold text-md md:text-lg">Notre Engagement</h3>
               <p className="text-xs md:text-sm">
                 Nous travaillons main dans la main avec des producteurs locaux pour offrir des vins de qualité.
@@ -95,7 +95,7 @@ const Slogan: React.FC = () => {
           </div>
 
           <div className="relative w-full md:w-1/3">
-            <div className="bg-white text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
+            <div className="bg-gray-100 text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
               <h3 className="font-bold text-md md:text-lg">Circuit Court</h3>
               <p className="text-xs md:text-sm">
                 Nos vins sont livrés directement du producteur à votre table, sans intermédiaire.
@@ -105,7 +105,7 @@ const Slogan: React.FC = () => {
           </div>
 
           <div className="relative w-full md:w-1/3">
-            <div className="bg-white text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
+            <div className="bg-gray-100 text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
               <h3 className="font-bold text-md md:text-lg">Élan Éco-Responsable</h3>
               <p className="text-xs md:text-sm">
                 Nous nous engageons à respecter l&apos;environnement en choisissant des pratiques durables.

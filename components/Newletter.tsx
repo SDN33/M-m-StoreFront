@@ -12,7 +12,7 @@ const Newsletter = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden max-w-4xl mx-auto mt-8">
+    <div className="bg-gray-100 rounded-lg shadow-md overflow-hidden max-w-4xl mx-auto mt-8">
       <div className="flex flex-col md:flex-row items-center justify-center">
         {/* Image des verres de vin */}
         <div className="md:w-1/3 h-64 relative">

@@ -30,7 +30,7 @@ const WineSelector = () => {
                   {wine.name}
                 </span>
               </div>
-              <div className="w-8 sm:w-10 h-14 sm:h-16 bg-white/20 absolute bottom-1 rounded-full"></div>
+              <div className="w-8 sm:w-10 h-14 sm:h-16 bg-gray-100/20 absolute bottom-1 rounded-full"></div>
             </div>
           </div>
         </Link>

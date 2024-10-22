@@ -48,7 +48,7 @@ const AgeVerificationModal = () => {
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl text-center">
+      <div className="bg-gray-100 rounded-lg max-w-md w-full p-6 shadow-xl text-center">
         <Image
           src="/images/logo2.png"
           alt="Logo Mémé Georgette"

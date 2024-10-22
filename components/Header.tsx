@@ -132,7 +132,7 @@ const Header = () => {
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800 w-6 h-6" />
           {searchResults.length > 0 && (
-            <ul className="absolute mt-2 w-full bg-white rounded-md shadow-lg z-30">
+            <ul className="absolute mt-2 w-full bg-gray-100 rounded-md shadow-lg z-30">
               {searchResults.map(product => (
                 <li key={product.id} onClick={() => handleResultClick(product.id)} className="cursor-pointer px-4 py-2 text-sm text-gray-800 hover:bg-orange-600 hover:text-white">
                   {product.name}
@@ -151,7 +151,7 @@ const Header = () => {
           </button>
 
           {isUserMenuOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30">
+            <div className="absolute right-0 mt-2 w-48 bg-gray-100 rounded-md shadow-lg py-1 z-30">
               {isLoggedIn ? (
                 <>
                   <a href="/dashboard" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Mon Dashboard</a>
@@ -197,7 +197,7 @@ const Header = () => {
             />
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800 w-6 h-6" />
             {searchResults.length > 0 && (
-              <ul className="absolute mt-2 w-full bg-white rounded-md shadow-lg z-30">
+              <ul className="absolute mt-2 w-full bg-gray-100 rounded-md shadow-lg z-30">
                 {searchResults.map(product => (
                   <li key={product.id} onClick={() => handleResultClick(product.id)} className="cursor-pointer px-4 py-2 text-sm text-gray-800 hover:bg-orange-600 hover:text-white">
                     {product.name}

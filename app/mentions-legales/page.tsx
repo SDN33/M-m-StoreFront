@@ -3,7 +3,7 @@ import React from 'react';
 const MentionsLegales: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-orange-600 px-4">
-      <div className="max-w-2xl w-full bg-white p-6 sm:p-8 shadow-lg rounded-lg mt-12"> {/* Ajout de mt-12 pour l'espacement en haut */}
+      <div className="max-w-2xl w-full bg-gray-100 p-6 sm:p-8 shadow-lg rounded-lg mt-12"> {/* Ajout de mt-12 pour l'espacement en haut */}
         <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-6 text-orange-600">Mentions Légales</h1>
 
         <section className="mb-6">

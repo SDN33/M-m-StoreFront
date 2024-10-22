@@ -87,7 +87,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
             <div key={filterType} className="border-b border-white/10 last:border-b-0">
               <button
                 onClick={() => toggleSection(filterType as keyof typeof filterOptions)}
-                className="w-full px-4 py-3 flex items-center justify-between hover:bg-white/10 transition-colors"
+                className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-100/10 transition-colors"
                 aria-expanded={openSections.includes(filterType)}
                 aria-controls={filterType}
               >
@@ -102,11 +102,11 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
               </button>
 
               {openSections.includes(filterType) && (
-                <div className="px-4 py-2 max-h-48 overflow-y-auto bg-white/10" id={filterType}>
+                <div className="px-4 py-2 max-h-48 overflow-y-auto bg-gray-100/10" id={filterType}>
                   {options.map((option) => (
                     <label
                       key={option}
-                      className="text-white flex items-center space-x-2 py-2 cursor-pointer hover:bg-white/5 px-2 rounded transition-colors"
+                      className="text-white flex items-center space-x-2 py-2 cursor-pointer hover:bg-gray-100/5 px-2 rounded transition-colors"
                     >
                       <input
                         type="checkbox"
