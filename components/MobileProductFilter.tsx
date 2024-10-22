@@ -83,7 +83,7 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 mpf">
           <div className="fixed inset-y-0 left-0 w-64 bg-orange-600 text-white overflow-y-auto transition-transform duration-300 ease-in-out transform translate-x-0">
             <div className="flex justify-between items-center p-4 border-b border-white/10">
               <h2 className="text-xl font-bold">Filtres</h2>

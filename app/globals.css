@@ -108,3 +108,7 @@ body {
     opacity: 1;
   }
 }
+
+.mpf {
+  z-index: 1000; /* Positionnement */
+}
