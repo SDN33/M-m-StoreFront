@@ -180,8 +180,8 @@ const Header = () => {
           {isMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
         </button>
 
-        <a href="/cart" className="ml-4 hidden lg:flex sm:flex">
-          <ShoppingCart className="w-6 h-6 text-white hidden" />
+        <a href="/cart" className="ml-4 md:hidden lg:flex sm:flex">
+          <ShoppingCart className="w-6 h-6 text-white " />
         </a>
       </div>
 
