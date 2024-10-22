@@ -30,8 +30,9 @@ const Newsletter = () => {
         {/* Contenu de la newsletter */}
         <div className="md:w-2/3 p-6 text-center md:text-left">
           <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800">
-            Restez informé des offres <br />de Mémé Georgette !
+            La Newsletter <br />de Mémé Georgette !
           </h2>
+          <p>Des offres exclusives, des nouveautés...</p>
           <p className="text-orange-600 mb-4">Parole de Mémé, on ne spamme pas.</p>
 
           <form onSubmit={handleSubscribe} className="mb-4">
