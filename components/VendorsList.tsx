@@ -152,7 +152,12 @@ const VendorList: React.FC = () => {
                         >
                           <div className="flex items-center space-x-3">
                             {product.images?.[0] && (
-                              <img src={product.images[0].src} alt={product.name} className="w-10 h-10 object-cover" />
+                              <Image
+                                src={product.images[0].src} alt={product.name}
+                                className="w-10 h-10 object-cover"
+                                width={40}
+                                height={40}
+                              />
                             )}
                             <div>
                               <h4 className="font-semibold">{product.name}</h4>
