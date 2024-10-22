@@ -129,7 +129,7 @@ const VendorList: React.FC = () => {
           <div ref={vendorContainerRef} className="flex overflow-x-auto space-x-6 scrollbar-hide appearance-none">
             {vendors.map((vendor) => (
               <div key={vendor.store_name} className="bg-gray-200 border-black rounded-lg w-80 shadow-md">
-                <div className="p-4 bg-orange-600 text-white py-4 border-gray-500 border-spacing-4 border-lg rounded-md shadow-md cursor-pointer hover:scale-110 mx-6 my-6">
+                <div className="p-4 bg-orange-600 text-white py-4 border-gray-500 border-spacing-4 border-lg rounded-md shadow-md cursor-pointer hover:scale-110 mx-6 mt-6">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gray-200 border-4 border-white rounded-full overflow-hidden">
                       <Image
@@ -145,10 +145,10 @@ const VendorList: React.FC = () => {
                   </div>
                 </div>
                 <div className="p-4">
-                  <div className="flex items-end">
-                    <span className="text-sm font-serif text-orange-600">{vendor.products.length} vins disponibles</span>
+                  <div className="flex">
+                    <span className="text-sm font-serif text-orange-600 mx-auto text-center">{vendor.products.length} vins disponibles</span>
                   </div>
-                  <h3 className="text-sm font-black mb-4 text-black">Derniers vins ajoutés</h3>
+                  <h3 className="text-sm font-black mb-4 text-black mx-auto text-center">Derniers vins ajoutés</h3>
                   {vendor.products.length === 0 ? (
                     <p className="text-gray-400">Aucuns vins disponibles.</p>
                   ) : (
