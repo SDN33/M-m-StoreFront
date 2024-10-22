@@ -6,9 +6,9 @@ const WineSelector = () => {
   const [hoveredWine, setHoveredWine] = useState<string | null>(null);
 
   const wines = [
-    { color: 'rouge', name: 'Rou', bg: 'bg-red-700', path: '/products/category/rouge' },
+    { color: 'rouge', name: 'Rou', bg: 'bg-red-800', path: '/products/category/rouge' },
     { color: 'blanc', name: 'Bla', bg: 'bg-yellow-500', path: '/products/category/blanc' },
-    { color: 'rose', name: 'Ros', bg: 'bg-pink-500', path: '/products/category/rose' },
+    { color: 'rose', name: 'Ros', bg: 'bg-pink-400', path: '/products/category/rose' },
     { color: 'petillant', name: 'Pét', bg: 'bg-yellow-200', path: '/products/category/petillant' },
     { color: 'liquoreux', name: 'Liq', bg: 'bg-amber-600', path: '/products/category/liquoreux' }
   ];
