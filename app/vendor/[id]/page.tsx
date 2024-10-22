@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Wine, MapPin, Star, Award } from 'lucide-react';
+import { Wine, MapPin, Star} from 'lucide-react';
 import Image from 'next/image';
 
 // Composants de base personnalisés
