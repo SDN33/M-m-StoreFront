@@ -119,7 +119,7 @@ const VendorList: React.FC = () => {
           <p className="text-center text-gray-500">Aucun vendeur disponible.</p>
         </div>
       ) : (
-        <div className="relative mx-auto max-w-2xl">
+        <div className="relative mx-auto max-w-3xl">
           <button onClick={handleScrollLeft} className="absolute -left-5 top-1/2 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white px-4 py-2 rounded-full z-10">←</button>
 
           <div ref={vendorContainerRef} className="flex overflow-x-auto space-x-6 scrollbar-hide appearance-none">
@@ -153,7 +153,8 @@ const VendorList: React.FC = () => {
                           <div className="flex items-center space-x-3">
                             {product.images?.[0] && (
                               <Image
-                                src={product.images[0].src} alt={product.name}
+                                src={product.images?.[0]?.src || '/images/vinmémé.png'}
+                                alt={product.name}
                                 className="w-10 h-10 object-cover"
                                 width={40}
                                 height={40}
