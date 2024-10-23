@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
@@ -87,35 +88,38 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
   };
 
   return (
-    <div className="flex flex-col mr-4 lg:mr-16 mt-60">
+    <div className="flex mr-4 lg:mr-16 mt-60">
       <div className="flex-grow mt-10">
         {loading && (
-          <div className="flex flex-col items-center">
-            <div className="loader"></div>
-            <p className="text-orange-600 font-bold text-lg animate-bounce">Chargement des vins de Mémé...</p>
+          <div className="flex justify-center mx-auto font-semibold">
+            <p>Chargement des vins...</p>
           </div>
         )}
         {error && <p className="text-red-600">{error}</p>}
-        {filteredProducts.length === 0 && !loading && <p>Aucun produit trouvé.</p>}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6 -mt-10">
-          {filteredProducts.slice(0, visibleCount).map(product => (
-            <ProductCard key={product.id} product={product} onAddToCart={(productId, quantity, variationId) => {
-              // Implement your onAddToCart logic here
-              return new Promise((resolve, reject) => {
-                // Example: Simulate an API call
-                setTimeout(() => {
-                  console.log(`Added product ${productId} with quantity ${quantity} and variation ${variationId} to cart`);
-                  resolve();
-                }, 1000);
-              });
-            }} />
-          ))}
-        </div>
+        {!loading && filteredProducts.length === 0 && <p>Aucun produit trouvé.</p>}
+
+        {/* Render the product cards only when loading is false */}
+        {!loading && filteredProducts.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6">
+            {filteredProducts.slice(0, visibleCount).map(product => (
+              <ProductCard key={product.id} product={product} onAddToCart={(productId, quantity, variationId) => {
+                // Implémentation logique pour ajouter au panier
+                return new Promise((resolve) => {
+                  setTimeout(() => {
+                    console.log(`Produit ${productId} ajouté au panier avec quantité ${quantity}`);
+                    resolve();
+                  }, 1000);
+                });
+              }} />
+            ))}
+          </div>
+        )}
+
         {filteredProducts.length > visibleCount && (
           <div className="flex justify-center mt-4">
             <button
               onClick={loadMoreProducts}
-              className="bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-600"
+              className="bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-700"
             >
               Voir Plus de Vins
             </button>

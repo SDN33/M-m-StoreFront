@@ -130,7 +130,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           objectFit="contain"
           priority
           onClick={handleRedirect}
-          className="hover:scale-110 transition-transform cursor-pointer"
+          className="hover:scale-110 transition-transform cursor-pointer "
         />
 
         <div className="absolute bottom-6 right-2 md:right-6 flex flex-col items-center">

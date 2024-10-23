@@ -51,7 +51,7 @@ const Header = () => {
             <SearchInput />
 
             {/* Right Actions */}
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-6 mr-3">
               <div className="hidden lg:flex items-center space-x-1 text-sm">
                 <span className='text-white'>Livraison en</span>
                 <Image

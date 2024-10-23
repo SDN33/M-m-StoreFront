@@ -79,7 +79,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
         onClick={handleAddToCart}
         disabled={loading}
       >
-        {loading ? 'Ajout en cours...' : 'Ajouter au panier'}
+        {loading ? 'Ajout en cours...' : 'Commander'}
       </button>
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>

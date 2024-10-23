@@ -60,7 +60,7 @@ const SearchInput = () => {
           metaDataMap.region__pays = meta.value;
           break;
         case '_couleur':
-          metaDataMap.categories = meta.value;
+          metaDataMap.categorie = meta.value; // Corrigé ici pour utiliser 'categorie'
           break;
       }
     });
@@ -78,6 +78,19 @@ const SearchInput = () => {
       .replace(/[\u0300-\u036f]/g, "")
       .replace(/[^a-z0-9]/g, " ")
       .trim();
+  };
+
+  const getSimilarityScore = (input: string, text: string) => {
+    const normalizedInput = normalizeString(input);
+    const normalizedText = normalizeString(text);
+
+    // Un score simple basé sur la présence de mots
+    const inputWords = normalizedInput.split(' ');
+    const textWords = normalizedText.split(' ');
+
+    // Compte des mots correspondants
+    const matches = inputWords.filter(word => textWords.includes(word)).length;
+    return matches / inputWords.length; // Normaliser par la longueur de l'input
   };
 
   const debouncedSearch = useMemo(
@@ -114,36 +127,15 @@ const SearchInput = () => {
 
   const filterResults = (products: FilteredProduct[], term: string): FilteredProduct[] => {
     const normalizedTerm = normalizeString(term);
+    const scoredResults = products
+      .map(product => ({
+        product,
+        score: getSimilarityScore(normalizedTerm, product.name) // Utilise le score de similarité
+      }))
+      .filter(({ score }) => score > 0) // Filtrer uniquement les produits correspondants
+      .sort((a, b) => b.score - a.score); // Trier par score décroissant
 
-    return products.filter(product => {
-      const searchableFields = [
-        product.name,
-        product.nom_chateau,
-        product.appellation,
-        product.region__pays,
-        ...product.categories.map(cat => cat.name)
-      ].filter(Boolean);
-
-      const matchesSearch = searchableFields.some(field =>
-        field && normalizeString(field).includes(normalizedTerm)
-      );
-
-      const matchesFilters = Array.from(selectedFilters).every(filter => {
-        const [type, value] = filter.split(':');
-        switch (type) {
-          case 'couleur':
-            return product.categorie === value;
-          case 'region':
-            return product.region__pays === value;
-          case 'millesime':
-            return product.millesime === value;
-          default:
-            return true;
-        }
-      });
-
-      return matchesSearch && matchesFilters;
-    });
+    return scoredResults.map(({ product }) => product);
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -176,11 +168,12 @@ const SearchInput = () => {
   }, []);
 
   useEffect(() => {
-    if (results.length) {
+    // Applique le filtre uniquement si searchTerm est rempli
+    if (searchTerm.length >= 2 && results.length) {
       const filtered = filterResults(results, searchTerm);
       setResults(filtered);
     }
-  }, [selectedFilters]);
+  }, [results, searchTerm]); // Ajoutez searchTerm comme dépendance
 
   // Fermeture des popups quand on clique en dehors
   useEffect(() => {
@@ -206,7 +199,7 @@ const SearchInput = () => {
   }, []);
 
   return (
-    <div className="relative flex-grow mx-8 max-w-3xl">
+    <div className="relative flex-grow mx-8 max-w-2xl">
       <div className="relative">
         <input
           type="text"
@@ -251,9 +244,7 @@ const SearchInput = () => {
             <a
               key={product.id}
               href={`/product/${product.id}`}
-              className={`flex items-center p-4 hover:bg-gray-50 ${
-                index !== results.length - 1 ? 'border-b' : ''
-              }`}
+              className={`flex items-center p-4 hover:bg-gray-50 ${index !== results.length - 1 ? 'border-b' : ''}`}
             >
               {product.images[0] && (
                 <img
@@ -280,7 +271,7 @@ const SearchInput = () => {
         </div>
       )}
 
-      {/* Recherches récentes au hover */}
+      {/* Recherches récentes */}
       {!searchTerm && recentSearches.length > 0 && showRecentSearches && (
         <div ref={recentSearchesRef} className="absolute mt-2 w-full bg-white rounded-lg shadow-lg p-4 z-20">
           <h3 className="text-sm font-semibold text-gray-500 mb-2">Recherches récentes</h3>
