@@ -1,6 +1,6 @@
 // components/CartPopup.tsx
 import React, { useEffect, useState } from 'react';
-import { viewCart } from '../pages/api/cart'; // Vérifiez que le chemin est correct
+import { viewCart } from '../pages/api/cart';
 
 interface CartPopupProps {
   isOpen: boolean;
@@ -27,6 +27,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
 
         try {
           const cartData = await viewCart();
+          console.log('Données du panier récupérées:', cartData); // Ajoutez ce log
           setCartItems(cartData.items || []);
         } catch (err) {
           console.error('Erreur lors de la récupération du panier:', err);

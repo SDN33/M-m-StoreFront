@@ -7,6 +7,8 @@ import Image from 'next/image';
 import axios from 'axios';
 import CartPopup from './CartPopup';
 
+
+
 const Header = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,7 +20,6 @@ const Header = () => {
   const [logoSize, setLogoSize] = useState('w-44 h-auto');
   const [searchTerm, setSearchTerm] = useState('');
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItemCount, setCartItemCount] = useState(0); // État pour le nombre d'articles
 
   interface Product {
     id: string;
@@ -27,7 +28,7 @@ const Header = () => {
 
   const toggleCartPopup = () => {
     setIsCartOpen(!isCartOpen);
-  };
+  }
 
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const router = useRouter();
@@ -87,6 +88,7 @@ const Header = () => {
     setSearchTerm('');
     setSearchResults([]);
   };
+
 
   return (
     <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} ${headerHeight} z-20 transition-all duration-300 ease-in-out`}>
@@ -151,39 +153,86 @@ const Header = () => {
         </div>
 
         <div className="relative hidden lg:flex">
-          <a className="relative ml-4" onClick={toggleCartPopup}>
-            <ShoppingCart className="w-6 h-6 text-white" />
-            {cartItemCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full px-1">
-                {cartItemCount}
-              </span>
-            )}
-          </a>
-          <CartPopup isOpen={isCartOpen} onClose={toggleCartPopup} />
+          <button
+            className="text-white hover:text-gray-800 focus:outline-none"
+            onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+          >
+            <User className="w-6 h-6" />
+          </button>
+
+          {isUserMenuOpen && (
+            <div className="absolute right-0 mt-2 w-48 bg-gray-100 rounded-md shadow-lg py-1 z-30">
+              {isLoggedIn ? (
+                <>
+                  <a href="/dashboard" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Mon Dashboard</a>
+                  <button onClick={() => setIsLoggedIn(false)} className="block w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Déconnecter</button>
+                </>
+              ) : (
+                <>
+                  <a href="/login" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Connecter/S&apos;inscrire</a>
+                </>
+              )}
+            </div>
+          )}
         </div>
 
-        <a href="/login" className="relative">
-          <User className="w-6 h-6 text-white" />
+        <a className="ml-4">
+          <ShoppingCart className="w-6 h-6 text-white" onClick={toggleCartPopup} />
         </a>
       </div>
 
       {/* Mobile Menu */}
-      <div className="flex lg:hidden">
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white">
-          {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+      <div className="lg:hidden flex items-center justify-between w-full z-50">
+        <button
+          className="lg:hidden"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
         </button>
-      </div>
 
-      {isMenuOpen && (
-        <div className="fixed top-0 left-0 right-0 bg-black bg-opacity-80 z-30">
-          <div className="flex flex-col items-center space-y-4 py-8">
-            <a href="/" className="text-white hover:text-orange-600">Accueil</a>
-            <a href="/products" className="text-white hover:text-orange-600">Nos Vins</a>
-            <a href="/about" className="text-white hover:text-orange-600">Nous Découvrir</a>
-            <a href="/contact" className="text-white hover:text-orange-600">Contact</a>
+        <a className="ml-4 md:hidden lg:flex sm:flex">
+          <ShoppingCart className="w-6 h-6 text-white" onClick={toggleCartPopup} />
+        </a>
+
+        {/* Mobile Menu Content */}
+        {isMenuOpen && (
+          <div className="absolute top-16 left-0 w-full bg-black bg-opacity-90 p-6 z-40">
+            <ul className="space-y-6 text-white">
+              <li>
+                <a href="/" className="block">Accueil</a>
+              </li>
+              <li>
+                <button
+                  className="flex items-center justify-between w-full"
+                  onClick={() => setIsMobileVinsMenuOpen(!isMobileVinsMenuOpen)}
+                >
+                  Nos Vins
+                  <ChevronDown className="ml-2 w-4 h-4" />
+                </button>
+                {isMobileVinsMenuOpen && (
+                  <ul className="mt-2 pl-4 space-y-2">
+                    <li><a href="/products/category/rouge" className="block">Nos vins rouges</a></li>
+                    <li><a href="/products/category/blanc" className="block">Nos vins blancs</a></li>
+                    <li><a href="/products/category/rose" className="block">Nos vins rosés</a></li>
+                    <li><a href="/products/category/petillant" className="block">Nos vins pétillants</a></li>
+                    <li><a href="/products/category/liquoreux" className="block">Nos vins liquoreux</a></li>
+                  </ul>
+                )}
+              </li>
+              <li>
+                <a href="https://www.memegeorgette.com/" className="block">Nous Découvrir</a>
+              </li>
+              <li>
+                <a href="/contact" className="block">Contact</a>
+              </li>
+              <li>
+                <a href="/login" className="block">Se Connecter/S&apos;inscrire</a>
+              </li>
+            </ul>
           </div>
-        </div>
-      )}
+        )}
+      </div>
+      <CartPopup isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   );
 };

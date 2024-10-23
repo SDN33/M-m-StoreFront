@@ -1,34 +1,76 @@
-// components/AddToCartButton.tsx
-import React from 'react';
-import { addToCart } from '../utils/cartUtils';
+import React, { useState } from 'react';
+import { viewCart } from '../pages/api/cart'; // Assurez-vous que le chemin est correct
+
 
 interface AddToCartButtonProps {
-  productId: string;
-  quantity?: number; // Quantité par défaut à 1
+  productId: number; // ID du produit à ajouter au panier
+  quantity?: number; // Quantité à ajouter au panier
+  onAddToCart?: (productId: number, quantity: number) => void; // Callback pour ajouter au panier
 }
 
-const AddToCartButton: React.FC<AddToCartButtonProps> = ({ productId, quantity = 1 }) => {
+const AddToCartButton: React.FC<AddToCartButtonProps> = ({
+  productId,
+  quantity = 1,
+}) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const handleAddToCart = async () => {
-    console.log(`Tentative d'ajout du produit ${productId} avec une quantité de ${quantity} au panier.`); // Log avant l'ajout
+    setLoading(true);
+    setError(null);
 
     try {
-      await addToCart(productId, quantity);
-      console.log(`Produit ${productId} ajouté au panier avec succès !`); // Log après l'ajout réussi
-      alert('Produit ajouté au panier !');
-      // Vous pouvez également mettre à jour l'état global du panier ici si nécessaire
+      // Ajouter le produit au localStorage
+      const cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+      const existingProductIndex = cartData.findIndex((item: { product_id: number; quantity: number }) => item.product_id === productId);
+
+      if (existingProductIndex > -1) {
+        cartData[existingProductIndex].quantity += quantity;
+      } else {
+        cartData.push({ product_id: productId, quantity });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cartData));
+
+      // Ajoutez ici l'appel à l'API pour ajouter le produit au panier dans WooCommerce
+      await fetch('/api/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ product_id: productId, quantity }),
+      });
+
+      // Récupérez le panier mis à jour après l'ajout
+      const updatedCart = await viewCart();
+      console.log('Données du panier mises à jour:', updatedCart);
+
+      // Mettez à jour l'état du panier si nécessaire
+      // setCartItems(updatedCart.items); // Par exemple, si vous avez une méthode pour cela
+
+      console.log(`Produit ${productId} ajouté au panier avec succès!`);
     } catch (error) {
-      console.error('Erreur lors de l’ajout au panier:', error); // Log de l'erreur
-      alert('Erreur lors de l’ajout au panier. Veuillez réessayer.');
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('Une erreur inconnue s\'est produite');
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <button
-      onClick={handleAddToCart}
-      className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded transition duration-300"
-    >
-      Commander
-    </button>
+    <div>
+      <button
+        className='bg-orange-600 text-white py-2 px-4 rounded'
+        onClick={handleAddToCart}
+        disabled={loading}
+      >
+        {loading ? 'Ajout en cours...' : 'Ajouter au panier'}
+      </button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+    </div>
   );
 };
 

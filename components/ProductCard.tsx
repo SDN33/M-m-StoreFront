@@ -1,10 +1,9 @@
-// path: components/ProductCard.tsx
 "use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Star } from 'lucide-react';
-import AddToCartButton from './AddToCartButton';
+import AddToCart from './AddToCartButton';
 
 interface Product {
   id: number;
@@ -22,30 +21,35 @@ interface Product {
   volume?: string;
   rating_count?: number;
   average_rating?: number;
-  style?: string; // Ajout de cette ligne
-  cepages?: string[]; // Ajout de cette ligne
+  style?: string;
+  cepages?: string[];
 }
 
 interface ProductCardProps {
   product: Product;
+  onAddToCart: (productId: number, quantity: number, variationId: number) => Promise<void>;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const router = useRouter();
   const [quantity, setQuantity] = useState<number>(1);
+  const [variationId, setVariationId] = useState<number>(product.id);
 
   const cacheProductData = (product: Product) => {
     const cachedProducts = JSON.parse(localStorage.getItem('cachedProducts') || '{}');
     cachedProducts[product.id] = product;
     localStorage.setItem('cachedProducts', JSON.stringify(cachedProducts));
+    console.log('Produit mis en cache:', product);
   };
 
   const getCachedProductData = (productId: number): Product | null => {
     const cachedProducts = JSON.parse(localStorage.getItem('cachedProducts') || '{}');
+    console.log('Récupération des données du produit:', cachedProducts[productId]);
     return cachedProducts[productId] || null;
   };
 
   const handleRedirect = () => {
+    console.log('Redirection vers le produit:', product.id);
     const cachedProduct = getCachedProductData(product.id);
     if (!cachedProduct) {
       cacheProductData(product);
@@ -55,32 +59,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const getCategoryColor = (categoryName: string) => {
     switch (categoryName.toLowerCase()) {
-      case 'rouge':
-        return 'bg-red-800';
-      case 'blanc':
-        return 'bg-yellow-500';
-      case 'rosé':
-        return 'bg-pink-400';
-      case 'pétillant':
-        return 'bg-yellow-200';
-      case 'liquoreux':
-        return 'bg-amber-600';
-      default:
-        return 'bg-orange-600';
+      case 'rouge': return 'bg-red-800';
+      case 'blanc': return 'bg-yellow-500';
+      case 'rosé': return 'bg-pink-400';
+      case 'pétillant': return 'bg-yellow-200';
+      case 'liquoreux': return 'bg-amber-600';
+      default: return 'bg-orange-600';
     }
   };
 
   const getCertificationLogo = (certification?: string) => {
     switch (certification?.toLowerCase()) {
-      case 'bio':
-        return { src: "/images/logobio.webp", width: 24, height: 24 };
+      case 'bio': return { src: "/images/logobio.webp", width: 24, height: 24 };
       case 'demeter':
-      case 'biodynamie':
-        return { src: "/images/biodemeter.png", width: 80, height: 80 };
-      case 'en conversion':
-        return { src: '/images/enconv.png', width: 28, height: 28 };
-      default:
-        return { src: '', width: 0, height: 0 };
+      case 'biodynamie': return { src: "/images/biodemeter.png", width: 80, height: 80 };
+      case 'en conversion': return { src: '/images/enconv.png', width: 28, height: 28 };
+      default: return { src: '', width: 0, height: 0 };
     }
   };
 
@@ -193,7 +187,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </svg>
           </div>
         </div>
-        <AddToCartButton productId={product.id.toString()} quantity={quantity} />
+        <AddToCart
+          productId={product.id}
+          quantity={quantity}
+          onAddToCart={async (productId, quantity) => {
+            console.log('Tentative d\'ajout au panier:', { productId, quantity });
+            await onAddToCart(productId, quantity, variationId);
+          }}
+        />
       </div>
     </div>
   );

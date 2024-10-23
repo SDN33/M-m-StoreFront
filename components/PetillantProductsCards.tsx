@@ -183,7 +183,11 @@ const PetillantProductsCards: React.FC = () => {
           {sortedProducts.length === 0 && !loading && <p>Aucun vin pétillant trouvé.</p>}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6 -mt-10">
             {sortedProducts.slice(0, visibleCount).map(product => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id} product={product} onAddToCart={async (productId, quantity) => {
+                // Implement your onAddToCart logic here
+                console.log(`Added product ${productId} with quantity ${quantity} to cart`);
+                return Promise.resolve();
+              }} />
             ))}
           </div>
           {sortedProducts.length > visibleCount && (
