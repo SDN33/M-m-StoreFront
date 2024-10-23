@@ -84,7 +84,7 @@ const getCategoryColor = (categoryName: string) => {
     case 'liquoreux':
       return 'bg-purple-400';
     default:
-      return 'bg-orange-600';
+      return 'bg-primary';
   }
 };
 
@@ -140,7 +140,7 @@ const ProductPage: React.FC = () => {
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-col items-center">
           <div className="loader"></div>
-          <p className="text-orange-600 font-bold text-lg">Chargement des vins de Mémé...</p>
+          <p className="text-primary font-bold text-lg">Chargement des vins de Mémé...</p>
         </div>
       </div>
     );
@@ -150,7 +150,7 @@ const ProductPage: React.FC = () => {
     return (
       <div className="flex items-center justify-center h-screen">
         <p className="text-red-600 font-bold text-lg">Erreur : {error}</p>
-        <button onClick={() => location.reload()} className="mt-4 bg-orange-600 text-white px-4 py-2 rounded">
+        <button onClick={() => location.reload()} className="mt-4 bg-primary text-white px-4 py-2 rounded">
           Réessayer
         </button>
       </div>
@@ -179,7 +179,7 @@ const ProductPage: React.FC = () => {
               <span className="mx-2 text-gray-500">&gt;</span>
             </li>
             <li className="flex items-center">
-              <span className="text-orange-600" aria-current="page">{product.name}</span>
+              <span className="text-primary" aria-current="page">{product.name}</span>
             </li>
           </ol>
         </nav>
@@ -271,7 +271,7 @@ const ProductPage: React.FC = () => {
               </select>
               <button
                 onClick={() => console.log(`Ajouté ${quantity} ${product.name} au panier`)}
-                className="bg-orange-600 hover:bg-orange-600 text-white py-2 px-4 rounded"
+                className="bg-primary hover:bg-primary text-white py-2 px-4 rounded"
               >
                 Ajouter au panier
               </button>
@@ -281,7 +281,7 @@ const ProductPage: React.FC = () => {
 
         <div className="mt-8">
           <h2 className="text-2xl font-bold !-mb-2 text-center">Description du produit</h2>
-          <div className="border-b-4 border-orange-600 w-[20rem] md:w-[50rem] my-2 md:my-2 slide-in-right"></div>
+          <div className="border-b-4 border-primary w-[20rem] md:w-[50rem] my-2 md:my-2 slide-in-right"></div>
           <p className='font-bold text-center'>
             {product.description ? formatDescription(product.description) : 'Pas de description disponible.'}
           </p>
@@ -291,7 +291,7 @@ const ProductPage: React.FC = () => {
             {/* Cépages */}
             <div className="bg-gray-100 p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center px-10">
-                <h3 className="text-lg font-bold text-orange-600 text-left">Cépages</h3>
+                <h3 className="text-lg font-bold text-primary text-left">Cépages</h3>
                 <p className="text-sm text-right">
                   {product.cepages ? joinIfArray(product.cepages) : 'Pas de cépages renseignés'}
                 </p>
@@ -301,7 +301,7 @@ const ProductPage: React.FC = () => {
             {/* Style */}
             <div className="bg-gray-100 p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-orange-600 text-left">Style</h3>
+                <h3 className="text-lg font-bold text-primary text-left">Style</h3>
                 <p className="text-sm text-right">
                   {typeof product.style === 'string'
                     ? product.style.charAt(0).toUpperCase() + product.style.slice(1).toLowerCase()
@@ -313,7 +313,7 @@ const ProductPage: React.FC = () => {
             {/* Accords mets et vins */}
             <div className="bg-gray-100 p-4 rounded-lg shadow-md">
                 <div className="flex justify-between items-center">
-                    <h3 className="text-lg font-bold text-orange-600 text-left">Accords mets</h3>
+                    <h3 className="text-lg font-bold text-primary text-left">Accords mets</h3>
                     <p className="text-sm text-right">
                         {product.accord_mets ? joinIfArray(product.accord_mets) : 'Pas d\'accords mets renseignés'}
                     </p>
@@ -323,7 +323,7 @@ const ProductPage: React.FC = () => {
             {/* Conservation */}
             <div className="bg-gray-100 p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-orange-600 text-left">Conservation</h3>
+                <h3 className="text-lg font-bold text-primary text-left">Conservation</h3>
                 <p className="text-sm text-right">
                   {product.conservation ? product.conservation : 'Pas d\'informations de conservation'}
                 </p>
@@ -333,7 +333,7 @@ const ProductPage: React.FC = () => {
             {/* Degré d'alcool */}
             <div className="bg-gray-100 p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-orange-600 text-left">Degré d&apos;alcool</h3>
+                <h3 className="text-lg font-bold text-primary text-left">Degré d&apos;alcool</h3>
                 <p className="text-sm text-right">
                   {product.degre ? product.degre : 'Pas d\'informations de conservation'}% alc. / vol.
                 </p>

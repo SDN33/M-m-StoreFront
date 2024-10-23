@@ -243,7 +243,7 @@ const SearchInput = () => {
                 <h4 className="font-semibold text-gray-900">{product.name}</h4>
               </div>
               <div className="ml-4 text-right">
-                <div className="font-semibold text-orange-600">
+                <div className="font-semibold text-primary">
                   {product.sale_price || product.regular_price}€
                 </div>
                 {product.sale_price && (

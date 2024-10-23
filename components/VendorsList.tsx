@@ -124,7 +124,7 @@ const VendorList: React.FC = () => {
   return (
     <div className="p-6 space-y-6">
       <br />
-      <h2 className="text-2xl md:text-3xl font-extrabold text-orange-600 tracking-tight mx-16 text-center">
+      <h2 className="text-2xl md:text-3xl font-extrabold text-primary tracking-tight mx-16 text-center">
         Nos Vignerons Partenaires
         <br /><div className="text-gray-800 text-sm font-extrabold tracking-tight text-center">Découvrez les derniers vins ajoutés par nos vignerons partenaires.</div>
       </h2>
@@ -193,7 +193,7 @@ const VendorList: React.FC = () => {
                               <p className="text-sm text-gray-600">{product.nom_du_chateau}</p>
                             </div>
                           </div>
-                          <span className="text-base font-bold text-orange-600 px-8 py-8 w-26 h-26">
+                          <span className="text-base font-bold text-primary px-8 py-8 w-26 h-26">
                             <span className="px-2 py-1 text-xs font-semibold text-black bg-gray-200 rounded-full">
                               {parseFloat(product.price).toFixed(2)}€
                             </span>

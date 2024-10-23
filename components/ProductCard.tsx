@@ -64,7 +64,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       case 'rosé': return 'bg-pink-400';
       case 'pétillant': return 'bg-yellow-200';
       case 'liquoreux': return 'bg-amber-600';
-      default: return 'bg-orange-600';
+      default: return 'bg-primary';
     }
   };
 
@@ -175,7 +175,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           <select
             value={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}
-            className="appearance-none bg-gray-100 border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-orange-600"
+            className="appearance-none bg-gray-100 border border-gray-300 rounded-md pl-3 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
           >
             {[1, 2, 3, 4, 5, 6].map(num => (
               <option key={num} value={num}>{num}</option>

@@ -60,12 +60,12 @@ const AgeVerificationModal = () => {
           Vérification de l&apos;âge
         </h2>
         <p className="text-gray-600 mb-6 font-serif">
-          Ce site est réservé aux personnes majeures.<br />En entrant sur ce site, vous certifiez<br /><span className='font-serif font-bold text-orange-600'>avoir 18 ans ou plus</span>.
+          Ce site est réservé aux personnes majeures.<br />En entrant sur ce site, vous certifiez<br /><span className='font-serif font-bold text-primary'>avoir 18 ans ou plus</span>.
         </p>
         <div className="space-y-3">
           <button
             onClick={handleAccept}
-            className="w-full bg-orange-600 text-white px-6 py-3 rounded-full font-medium hover:bg-orange-700 transition-colors"
+            className="w-full bg-primary text-white px-6 py-3 rounded-full font-medium hover:bg-orange-700 transition-colors"
           >
             Je certifie avoir plus de 18 ans
           </button>

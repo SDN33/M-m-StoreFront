@@ -76,7 +76,7 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
     <>
       <button
         onClick={toggleSidebar}
-        className="fixed left-0 top-1/2 -translate-y-1/2 bg-orange-600 text-white p-3 rounded-r-md shadow-lg md:hidden z-50"
+        className="fixed left-0 top-1/2 -translate-y-1/2 bg-primary text-white p-3 rounded-r-md shadow-lg md:hidden z-50"
         aria-label="Ouvrir les filtres"
       >
         <Filter className="w-6 h-6" />
@@ -84,7 +84,7 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
 
       {isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
-          <div className="fixed inset-y-0 left-0 w-64 bg-orange-600 text-white overflow-y-auto transition-transform duration-300 ease-in-out transform translate-x-0">
+          <div className="fixed inset-y-0 left-0 w-64 bg-primary text-white overflow-y-auto transition-transform duration-300 ease-in-out transform translate-x-0">
             <div className="flex justify-between items-center p-4 border-b border-white/10">
               <h2 className="text-xl font-bold">Filtres</h2>
               <button onClick={toggleSidebar} className="text-white" aria-label="Fermer les filtres">
@@ -124,7 +124,7 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
                               .map(opt => normalizeString(opt))
                               .includes(normalizeString(option))}
                             onChange={() => handleCheckboxChange(filterType as keyof MobileProductFilterProps['selectedFilters'], option)}
-                            className="w-4 h-4 rounded border-white/20 text-orange-600 focus:ring-orange-600"
+                            className="w-4 h-4 rounded border-white/20 text-primary focus:ring-primary"
                           />
                           <span className="text-sm">{option}</span>
                         </label>

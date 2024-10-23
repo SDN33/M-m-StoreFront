@@ -30,7 +30,7 @@ const Badge: React.FC<BadgeProps> = ({ children, variant = 'default', className 
     default: "bg-orange-100 text-orange-800",
     secondary: "bg-gray-100 text-gray-800",
     success: "bg-green-100 text-green-800",
-    outline: "border border-orange-600 text-orange-600",
+    outline: "border border-primary text-primary",
   };
 
   return (
@@ -105,8 +105,8 @@ const VendorPage = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center space-y-4">
-          <Wine className="w-12 h-12 text-orange-600 mx-auto" />
-          <p className="text-lg font-semibold animate-bounce text-orange-600">Le vigneron prépare sa sélection...</p>
+          <Wine className="w-12 h-12 text-primary mx-auto" />
+          <p className="text-lg font-semibold animate-bounce text-primary">Le vigneron prépare sa sélection...</p>
         </div>
       </div>
     );
@@ -161,11 +161,11 @@ const VendorPage = () => {
           </div>
           <div className="flex items-center space-x-4 mt-8">
             <div className="text-center">
-              <div className="text-2xl font-bold text-orange-600">{products.length}</div>
+              <div className="text-2xl font-bold text-primary">{products.length}</div>
               <div className="text-sm text-gray-600">Vins</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-orange-600">4.8</div>
+              <div className="text-2xl font-bold text-primary">4.8</div>
               <div className="flex items-center">
                 {renderStars(4.8)}
               </div>
@@ -195,7 +195,7 @@ const VendorPage = () => {
               </div>
               <Separator />
               <div className="flex justify-between items-center">
-                <span className="text-2xl font-bold text-orange-600">
+                <span className="text-2xl font-bold text-primary">
                   {parseFloat(product.price).toFixed(2)}€
                 </span>
                 <Badge variant="outline" className='p-2 b-2'>

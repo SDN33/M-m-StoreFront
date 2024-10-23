@@ -24,30 +24,30 @@ const Footer = () => {
           <div>
             <h3 className="text-black font-semibold mb-4 text-lg">À propos de Mémé Georgette</h3>
             <ul className="space-y-2 font-semibold">
-              <li><a href="https://www.memegeorgette.com/" className="text-white hover:text-orange-600 transition-colors text-sm">Découvrir Mémé Georgette</a></li>
-              <li><a href="/demarche" className="text-white hover:text-orange-600 transition-colors text-sm">Notre Démarche</a></li>
-              <li><a href="/actualites" className="text-white hover:text-orange-600 transition-colors text-sm">On parle de nous !</a></li>
+              <li><a href="https://www.memegeorgette.com/" className="text-white hover:text-primary transition-colors text-sm">Découvrir Mémé Georgette</a></li>
+              <li><a href="/demarche" className="text-white hover:text-primary transition-colors text-sm">Notre Démarche</a></li>
+              <li><a href="/actualites" className="text-white hover:text-primary transition-colors text-sm">On parle de nous !</a></li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-black font-semibold mb-4 text-lg">Découvrez nos vins</h3>
             <ul className="space-y-2 font-semibold">
-              <li><a href="/products/category/rouge" className="text-white hover:text-orange-600 transition-colors text-sm">Les rouges</a></li>
-              <li><a href="/products/category/blanc" className="text-white hover:text-orange-600 transition-colors text-sm">Les blancs</a></li>
-              <li><a href="/products/category/rose" className="text-white hover:text-orange-600 transition-colors text-sm">Les rosés</a></li>
-              <li><a href="/products/category/petillant" className="text-white hover:text-orange-600 transition-colors text-sm">Les pétillants</a></li>
-              <li><a href="/products/category/liquoreux"className="text-white hover:text-orange-600 transition-colors text-sm">Les liquoreux</a></li>
+              <li><a href="/products/category/rouge" className="text-white hover:text-primary transition-colors text-sm">Les rouges</a></li>
+              <li><a href="/products/category/blanc" className="text-white hover:text-primary transition-colors text-sm">Les blancs</a></li>
+              <li><a href="/products/category/rose" className="text-white hover:text-primary transition-colors text-sm">Les rosés</a></li>
+              <li><a href="/products/category/petillant" className="text-white hover:text-primary transition-colors text-sm">Les pétillants</a></li>
+              <li><a href="/products/category/liquoreux"className="text-white hover:text-primary transition-colors text-sm">Les liquoreux</a></li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-black font-semibold mb-4 text-lg">Besoin d&apos;aide ?</h3>
             <ul className="space-y-2 font-semibold">
-              <li><a href="/contact" className="text-white hover:text-orange-600 transition-colors text-sm">Nous contacter</a></li>
-              <li><a href="/faq" className="text-white hover:text-orange-600 transition-colors text-sm">FAQ (Foire aux questions)</a></li>
-              <li><a href="/mentions-legales" className="text-white hover:text-orange-600 transition-colors text-sm">Mentions légales</a></li>
-              <li><a href="/cgv" className="text-white hover:text-orange-600 transition-colors text-sm">CGV</a></li>
+              <li><a href="/contact" className="text-white hover:text-primary transition-colors text-sm">Nous contacter</a></li>
+              <li><a href="/faq" className="text-white hover:text-primary transition-colors text-sm">FAQ (Foire aux questions)</a></li>
+              <li><a href="/mentions-legales" className="text-white hover:text-primary transition-colors text-sm">Mentions légales</a></li>
+              <li><a href="/cgv" className="text-white hover:text-primary transition-colors text-sm">CGV</a></li>
             </ul>
           </div>
         </div>

@@ -123,7 +123,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
           <div className="flex justify-center mt-4">
             <button
               onClick={loadMoreProducts}
-              className="bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-700"
+              className="bg-primary text-white py-2 px-4 rounded hover:bg-orange-700"
             >
               Voir Plus de Vins
             </button>

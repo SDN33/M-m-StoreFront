@@ -181,7 +181,7 @@ const LiquoreuxProductsCards: React.FC = () => {
           {loading && (
             <div className="flex flex-col items-center">
               <div className="loader"></div>
-              <p className="text-orange-600 font-bold text-lg">Chargement des vins liquoreux...</p>
+              <p className="text-primary font-bold text-lg">Chargement des vins liquoreux...</p>
             </div>
           )}
           {error && <p className="text-red-600">{error}</p>}
@@ -199,7 +199,7 @@ const LiquoreuxProductsCards: React.FC = () => {
             <div className="flex justify-center mt-4">
               <button
                 onClick={loadMoreProducts}
-                className="bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-600"
+                className="bg-primary text-white py-2 px-4 rounded hover:bg-primary"
               >
                 Voir Plus de Vins Liquoreux
               </button>

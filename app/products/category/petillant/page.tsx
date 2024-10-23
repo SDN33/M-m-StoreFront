@@ -21,7 +21,7 @@ const PetillantPage = () => {
         Your browser does not support the video tag.
       </video>
       <PetillantIntro />
-      <div className="border-b-4 border-orange-600 w-full md:w-[70rem] my-2 md:my-4 slide-in-right"></div>
+      <div className="border-b-4 border-primary w-full md:w-[70rem] my-2 md:my-4 slide-in-right"></div>
       <br />
       <PetillantProductsCards />
       <br /><br />

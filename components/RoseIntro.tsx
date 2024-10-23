@@ -47,7 +47,7 @@ const RoseIntro: React.FC = () => {
 
       {/* Texte au centre avec espacement */}
       <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4 text-center sm:text-left md:pr-80">
-        <h3 className="text-2xl md:text-3xl font-extrabold text-orange-600 tracking-tight ml-26">
+        <h3 className="text-2xl md:text-3xl font-extrabold text-primary tracking-tight ml-26">
           Découvrez nos vins <span className='text-pink-600'>rosés</span> <br />
           <div className="text-gray-800 text-sm">* Livraison offerte dès 6 bouteilles achetées sur le même domaine</div>
         </h3>

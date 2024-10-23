@@ -182,7 +182,7 @@ const RoseProductsCards: React.FC = () => {
           {loading && (
             <div className="flex flex-col items-center">
               <div className="loader"></div>
-              <p className="text-orange-600 font-bold text-lg">Chargement des vins rosés...</p>
+              <p className="text-primary font-bold text-lg">Chargement des vins rosés...</p>
             </div>
           )}
           {error && <p className="text-red-600">{error}</p>}
@@ -200,7 +200,7 @@ const RoseProductsCards: React.FC = () => {
             <div className="flex justify-center mt-4">
               <button
                 onClick={loadMoreProducts}
-                className="bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-600"
+                className="bg-primary text-white py-2 px-4 rounded hover:bg-primary"
               >
                 Voir Plus de Vins Rosés
               </button>

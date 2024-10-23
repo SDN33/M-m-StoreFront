@@ -62,17 +62,17 @@ const Header = () => {
                 <span className="font-bold text-white">France</span>
               </div>
 
-              <a href=":" className="hidden lg:flex items-center text-sm text-white hover:text-orange-600">
+              <a href=":" className="hidden lg:flex items-center text-sm text-white hover:text-primary">
                 <User className="w-5 h-5 mr-1 text-white font-semibold" />
                 <span className='text-white font-semibold' >Espace pro</span>
               </a>
 
-              <a href="/faq" className="hidden lg:block text-sm text-white font-semibold hover:text-orange-600">
+              <a href="/faq" className="hidden lg:block text-sm text-white font-semibold hover:text-primary">
                 Aide
               </a>
 
               <div className="flex items-center space-x-4">
-                <a href="/login" className="text-sm text-white font-semibold hover:text-orange-600">
+                <a href="/login" className="text-sm text-white font-semibold hover:text-primary">
                   Se connecter
                 </a>
                 <a className="relative">
@@ -126,7 +126,7 @@ const Header = () => {
               <li key={category.name} className="whitespace-nowrap font-bold text-gray-900">
                 <a
                   href={category.href}
-                  className={`px-3 py-4 text-gray-900 hover:text-orange-600 block ${category.className || ''}`}
+                  className={`px-3 py-4 text-gray-900 hover:text-primary block ${category.className || ''}`}
                 >
                   {category.name}
                 </a>
