@@ -15,7 +15,6 @@ interface ProductFilterProps {
     region__pays: string[];
   };
   onFilterChange: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
-  onPriceRangeChange: (min: number, max: number) => void; // Ajout d'un callback pour changer la plage de prix
   hideColorFilter?: boolean;
 }
 
@@ -57,10 +56,8 @@ const normalizeString = (str: unknown) => {
 const ProductFilter: React.FC<ProductFilterProps> = ({
   selectedFilters,
   onFilterChange,
-  onPriceRangeChange,
   hideColorFilter = false,
 }) => {
-  const [priceRange, setPriceRange] = useState({ min: 25, max: 5000 });
   const [expandedSections, setExpandedSections] = useState<string[]>(Object.keys(filterOptions)); // Toutes les sections ouvertes par défaut
 
   const toggleSection = (section: string) => {
@@ -87,51 +84,10 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     onFilterChange('accord_mets', []);
     onFilterChange('region__pays', []);
     onFilterChange('volume', []);
-
-    // Réinitialisation de la plage de prix
-    setPriceRange({ min: 25, max: 5000 });
-    onPriceRangeChange(25, 5000); // Appeler le callback pour changer la plage de prix
   };
 
-  useEffect(() => {
-    onPriceRangeChange(priceRange.min, priceRange.max); // Met à jour la plage de prix
-  }, [priceRange, onPriceRangeChange]);
-
   return (
-    <div className=" bg-transparent mt-44  h-screen"> {/* Cacher le slider latéral */}
-      {/* Prix Section */}
-      <div className="p-4">
-        <h3 className="text-lg font-semibold mb-4 flex items-center">
-          PRIX €
-        </h3>
-        <div className="space-y-4">
-          <div className="flex gap-4">
-            <input
-              type="number"
-              value={priceRange.min}
-              onChange={(e) => setPriceRange({ ...priceRange, min: Number(e.target.value) })}
-              className="w-24 p-2 border rounded"
-            />
-            <span className="text-gray-500">€</span>
-            <input
-              type="number"
-              value={priceRange.max}
-              onChange={(e) => setPriceRange({ ...priceRange, max: Number(e.target.value) })}
-              className="w-24 p-2 border rounded"
-            />
-            <span className="text-gray-500">€</span>
-          </div>
-          <input
-            type="range"
-            min="25"
-            max="5000"
-            value={priceRange.max}
-            onChange={(e) => setPriceRange({ ...priceRange, max: Number(e.target.value) })}
-            className="w-60 accent-primary"
-          />
-        </div>
-      </div>
-
+    <div className="bg-transparent mt-44 h-screen"> {/* Cacher le slider latéral */}
       {/* Filter Sections */}
       {Object.entries(filterOptions).map(([filterType, options]) => {
         if (hideColorFilter && filterType === 'color') return null;

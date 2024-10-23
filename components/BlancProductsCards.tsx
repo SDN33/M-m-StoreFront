@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import ProductFilter from '@/components/ProductFilters';
-import FilterTop from './Filtertop';
 import ProductCard from './ProductCard';
 import MobileProductFilter from './MobileProductFilter';
 
@@ -128,7 +127,7 @@ const BlancProductsCards: React.FC = () => {
     setSortBy(event.target.value);
   };
 
-  const handleCheckboxChange = (filterType: string, selectedOptions: string[]) => {
+  const handleCheckboxChange = (filterType: string | number, selectedOptions: string[]) => {
     // Empêche l'utilisateur de modifier le filtre couleur
     if (filterType === 'color') return; // Ignore les changements sur la couleur
     setSelectedFilters(prevFilters => ({
@@ -137,21 +136,6 @@ const BlancProductsCards: React.FC = () => {
     }));
   };
 
-  const resetFilters = () => {
-    setSelectedFilters({
-      color: ['blanc'], // Réinitialise les filtres à uniquement blanc
-      region: [],
-      vintage: [],
-      certification: [],
-      style: [],
-      accord_mets: [],
-      region__pays: [],
-      price: [],
-      volume: [],
-    });
-    setSortBy('');
-    setVisibleCount(12);
-  };
 
   const loadMoreProducts = () => {
     setVisibleCount(prevCount => prevCount + 12);
@@ -159,19 +143,12 @@ const BlancProductsCards: React.FC = () => {
 
   return (
     <div className="flex flex-col mr-4 lg:mr-16 md:-mt-8">
-      <FilterTop sortBy={sortBy} handleSortChange={handleSortChange} resetFilters={resetFilters} />
-      <div className="flex flex-col md:flex-row mt-4">
+=      <div className="flex flex-col md:flex-row mt-4">
         <div className="hidden md:block md:w-1/4 ml-16">
-          <ProductFilter
+        <ProductFilter
             selectedFilters={selectedFilters}
             onFilterChange={handleCheckboxChange}
-            hideColorFilter // Passe cette prop pour cacher le filtre de couleur
-            onPriceRangeChange={(min: number, max: number) => {
-              setSelectedFilters(prevFilters => ({
-                ...prevFilters,
-                price: [`${min}`, `${max}`],
-              }));
-            }}
+            hideColorFilter
           />
         </div>
         <div className="md:hidden">

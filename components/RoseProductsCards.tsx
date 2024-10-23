@@ -165,12 +165,6 @@ const RoseProductsCards: React.FC = () => {
           <ProductFilter
             selectedFilters={selectedFilters}
             onFilterChange={handleCheckboxChange}
-            onPriceRangeChange={(min: number, max: number) => {
-              setSelectedFilters(prevFilters => ({
-                ...prevFilters,
-                price: [`${min}`, `${max}`],
-              }));
-            }}
             hideColorFilter
           />
         </div>
