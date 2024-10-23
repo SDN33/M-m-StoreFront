@@ -33,6 +33,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       try {
         const { product_id, quantity = 1, variation_id = 0, variation = {}, cart_item_data = {} } = req.body;
 
+        // Log des données reçues
+        console.log('Données reçues pour ajouter au panier:', {
+          product_id,
+          quantity,
+          variation_id,
+          variation,
+          cart_item_data,
+        });
+
         // Récupérer le nonce et le cart-token
         console.log('Tentative de récupération du nonce et du cart-token...');
         const response = await fetch(`${process.env.WC_API_URL}/cart/items`);
@@ -51,9 +60,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         // Récupérer le produit
         const productData = await wcApi.get(`products/${productId}`);
-        if (!productData) {
-          throw new Error('Le produit spécifié n\'existe pas.');
+        if (!productData || !productData.data) {
+          throw new Error('Le produit spécifié n\'existe pas ou n\'est pas valide.');
         }
+        console.log('Données du produit récupérées:', productData.data);
 
         // Vérifier la quantité
         if (quantity <= 0) {
@@ -63,9 +73,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // Gestion des variations
         if (variationId) {
           const variationData = await wcApi.get(`products/${productId}/variations/${variationId}`);
-          if (!variationData) {
+          if (!variationData || !variationData.data) {
             throw new Error('La variation spécifiée n\'existe pas.');
           }
+          console.log('Données de la variation récupérées:', variationData.data);
         }
 
         // Ajouter l'article au panier
@@ -84,18 +95,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
 
         console.log('Article ajouté au panier avec succès:', cartItemData.data);
-        res.status(200).json(cartItemData.data); // Retourner les données mises à jour du panier
+        return res.status(200).json(cartItemData.data); // Retourner les données mises à jour du panier
       } catch (error) {
         console.error('Erreur lors de l\'ajout au panier:', error);
         const errorMessage = (error instanceof Error) ? error.message : 'Erreur inconnue lors de l\'ajout au panier.';
-        res.status(500).json({ message: errorMessage });
+        return res.status(500).json({ message: errorMessage });
       }
-      break;
 
     default:
       res.setHeader('Allow', ['GET', 'POST']);
-      res.status(405).end(`Method ${method} Not Allowed`);
-      break;
+      return res.status(405).end(`Method ${method} Not Allowed`);
   }
 }
 

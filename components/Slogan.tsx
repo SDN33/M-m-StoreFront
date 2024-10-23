@@ -3,7 +3,11 @@ import Image from 'next/image';
 
 const Slogan: React.FC = () => {
   const h2Ref = useRef<HTMLHeadingElement | null>(null);
-  const engagementRefs = [useRef<HTMLDivElement | null>(null), useRef<HTMLDivElement | null>(null), useRef<HTMLDivElement | null>(null)];
+  const engagementRefs = [
+    useRef<HTMLDivElement | null>(null),
+    useRef<HTMLDivElement | null>(null),
+    useRef<HTMLDivElement | null>(null),
+  ];
   const [isVisible, setIsVisible] = useState(false);
   const [cardsVisible, setCardsVisible] = useState([false, false, false]);
 
@@ -29,7 +33,7 @@ const Slogan: React.FC = () => {
         observer.unobserve(currentH2Ref);
       }
     };
-  }, []);
+  }, []); // Assurez-vous que cette dépendance est bien fermée ici
 
   useEffect(() => {
     const cardObserver = new IntersectionObserver(
@@ -56,8 +60,7 @@ const Slogan: React.FC = () => {
         if (ref.current) cardObserver.unobserve(ref.current);
       });
     };
-  },
-  );
+  }, []); // Ajout de la dépendance fermante ici
 
   return (
     <div className="relative bg-orange-600 py-10 md:py-20 min-h-[750px] md:min-h-[400px] overflow-hidden">
