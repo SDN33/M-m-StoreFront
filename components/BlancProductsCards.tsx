@@ -166,6 +166,12 @@ const BlancProductsCards: React.FC = () => {
             selectedFilters={selectedFilters}
             onFilterChange={handleCheckboxChange}
             hideColorFilter // Passe cette prop pour cacher le filtre de couleur
+            onPriceRangeChange={(min: number, max: number) => {
+              setSelectedFilters(prevFilters => ({
+                ...prevFilters,
+                price: [`${min}`, `${max}`],
+              }));
+            }}
           />
         </div>
         <div className="md:hidden">
