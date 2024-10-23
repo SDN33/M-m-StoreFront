@@ -84,8 +84,7 @@ export default function Home() {
             <ProductFilter
               selectedFilters={selectedFilters}
               onFilterChange={handleFilterChange}
-              onPriceRangeChange={(priceRange) => {
-                // Handle price range change
+              onPriceRangeChange={() => {
               }}
             />
           </div>

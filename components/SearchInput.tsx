@@ -33,7 +33,6 @@ const SearchInput = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState<FilteredProduct[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedFilters, setSelectedFilters] = useState<Set<string>>(new Set());
   const [showFilters, setShowFilters] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [showRecentSearches, setShowRecentSearches] = useState(false);
@@ -147,17 +146,6 @@ const SearchInput = () => {
     }
   };
 
-  const handleFilterToggle = (filter: string) => {
-    setSelectedFilters(prev => {
-      const next = new Set(prev);
-      if (next.has(filter)) {
-        next.delete(filter);
-      } else {
-        next.add(filter);
-      }
-      return next;
-    });
-  };
 
   useEffect(() => {
     const saved = localStorage.getItem('recentSearches');

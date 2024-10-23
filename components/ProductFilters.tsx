@@ -98,11 +98,11 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   }, [priceRange, onPriceRangeChange]);
 
   return (
-    <div className="w-70 bg-transparent mt-44  h-screen"> {/* Cacher le slider latéral */}
+    <div className=" bg-transparent mt-44  h-screen"> {/* Cacher le slider latéral */}
       {/* Prix Section */}
       <div className="p-4">
         <h3 className="text-lg font-semibold mb-4 flex items-center">
-          € PRIX
+          PRIX €
         </h3>
         <div className="space-y-4">
           <div className="flex gap-4">
@@ -127,7 +127,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
             max="5000"
             value={priceRange.max}
             onChange={(e) => setPriceRange({ ...priceRange, max: Number(e.target.value) })}
-            className="w-full accent-primary"
+            className="w-60 accent-primary"
           />
         </div>
       </div>

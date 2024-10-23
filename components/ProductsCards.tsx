@@ -105,7 +105,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
               <ProductCard
                 key={product.id}
                 product={product}
-                onAddToCart={(productId, quantity, variationId) => {
+                onAddToCart={(productId, quantity) => {
                   // Implémentation logique pour ajouter au panier
                   return new Promise((resolve) => {
                     setTimeout(() => {

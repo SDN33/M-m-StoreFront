@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 
 const PromotionSection = () => {
   const [isVisible, setIsVisible] = useState(false); // Commence par être caché
