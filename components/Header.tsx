@@ -1,6 +1,6 @@
 'use client';
 
-import { Search, ShoppingCart, User, Menu as MenuIcon, X, ChevronDown } from 'lucide-react';
+import { ShoppingCart, User, Menu as MenuIcon, X, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import CartPopup from './CartPopup';
@@ -8,10 +8,8 @@ import SearchInput from './SearchInput';
 import PromotionSection from './PromotionSection';
 
 const Header = () => {
-  const [searchTerm, setSearchTerm] = useState('');
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
 
   const categories = [
     { name: 'PROMOS', href: '/promos', className: 'text-primary font-semibold' },

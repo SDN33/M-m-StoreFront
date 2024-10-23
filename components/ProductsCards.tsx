@@ -7,7 +7,7 @@ import ProductCard from './ProductCard';
 interface Product {
   id: number;
   name: string;
-  categories: { id: number; name: string }[];
+  categories: { id: number; name: string }[]; // Assurez-vous que chaque produit a une catégorie valide
   price: number;
   date_added: string;
   images: { src: string }[];
@@ -41,12 +41,12 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        setLoading(true);
         const response = await axios.get('/api/products');
         if (Array.isArray(response.data)) {
           setProducts(response.data);
         } else {
           console.error("La réponse de l'API n'est pas un tableau", response.data);
+          setError('Erreur lors de la récupération des produits. Veuillez réessayer.');
         }
       } catch (err) {
         console.error('Erreur lors de la récupération des produits', err);
@@ -102,15 +102,19 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
         {!loading && filteredProducts.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6">
             {filteredProducts.slice(0, visibleCount).map(product => (
-              <ProductCard key={product.id} product={product} onAddToCart={(productId, quantity, variationId) => {
-                // Implémentation logique pour ajouter au panier
-                return new Promise((resolve) => {
-                  setTimeout(() => {
-                    console.log(`Produit ${productId} ajouté au panier avec quantité ${quantity}`);
-                    resolve();
-                  }, 1000);
-                });
-              }} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={(productId, quantity, variationId) => {
+                  // Implémentation logique pour ajouter au panier
+                  return new Promise((resolve) => {
+                    setTimeout(() => {
+                      console.log(`Produit ${productId} ajouté au panier avec quantité ${quantity}`);
+                      resolve();
+                    }, 1000);
+                  });
+                }}
+              />
             ))}
           </div>
         )}

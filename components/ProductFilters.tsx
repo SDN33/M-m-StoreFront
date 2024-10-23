@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import WineSelector from './WineSelector';
 
@@ -15,6 +15,7 @@ interface ProductFilterProps {
     region__pays: string[];
   };
   onFilterChange: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
+  onPriceRangeChange: (min: number, max: number) => void; // Ajout d'un callback pour changer la plage de prix
   hideColorFilter?: boolean;
 }
 
@@ -53,14 +54,14 @@ const normalizeString = (str: unknown) => {
   return ''; // ou gérer autrement les cas où str n'est pas une chaîne
 };
 
-
 const ProductFilter: React.FC<ProductFilterProps> = ({
   selectedFilters,
   onFilterChange,
+  onPriceRangeChange,
   hideColorFilter = false,
 }) => {
   const [priceRange, setPriceRange] = useState({ min: 25, max: 5000 });
-  const [expandedSections, setExpandedSections] = useState<string[]>([]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(Object.keys(filterOptions)); // Toutes les sections ouvertes par défaut
 
   const toggleSection = (section: string) => {
     setExpandedSections(prev =>
@@ -86,10 +87,18 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     onFilterChange('accord_mets', []);
     onFilterChange('region__pays', []);
     onFilterChange('volume', []);
+
+    // Réinitialisation de la plage de prix
+    setPriceRange({ min: 25, max: 5000 });
+    onPriceRangeChange(25, 5000); // Appeler le callback pour changer la plage de prix
   };
 
+  useEffect(() => {
+    onPriceRangeChange(priceRange.min, priceRange.max); // Met à jour la plage de prix
+  }, [priceRange, onPriceRangeChange]);
+
   return (
-    <div className="w-64 bg-trnasparent mt-44">
+    <div className="w-70 bg-transparent mt-44  h-screen"> {/* Cacher le slider latéral */}
       {/* Prix Section */}
       <div className="p-4">
         <h3 className="text-lg font-semibold mb-4 flex items-center">
@@ -169,12 +178,15 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       })}
 
       <div className="p-4">
-        <button className="w-full bg-primary text-white py-2 px-4 rounded hover:bg-orange-700 transition-colors">
-          + DE FILTRES
+        <button
+          onClick={resetFilters} // Changement pour appeler resetFilters
+          className="w-full bg-primary text-white py-2 px-4 rounded hover:bg-orange-700 transition-colors"
+        >
+          Réinitialiser
         </button>
       </div>
       <div className="pt-4 ml-14">
-      <WineSelector />
+        <WineSelector />
       </div>
     </div>
   );
