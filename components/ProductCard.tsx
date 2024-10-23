@@ -33,7 +33,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const router = useRouter();
   const [quantity, setQuantity] = useState<number>(1);
-  const [variationId, setVariationId] = useState<number>(product.id);
+  const [variationId] = useState<number>(product.id);
 
   const cacheProductData = (product: Product) => {
     const cachedProducts = JSON.parse(localStorage.getItem('cachedProducts') || '{}');

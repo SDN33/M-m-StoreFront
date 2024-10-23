@@ -100,6 +100,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 
 // Fonction utilitaire pour convertir en entier
-function absint(value: any) {
+function absint(value: any): number {
   return Math.abs(parseInt(value, 10)) || 0;
 }

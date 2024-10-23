@@ -56,7 +56,8 @@ const Slogan: React.FC = () => {
         if (ref.current) cardObserver.unobserve(ref.current);
       });
     };
-  }, []);
+  },
+  );
 
   return (
     <div className="relative bg-orange-600 py-10 md:py-20 min-h-[750px] md:min-h-[400px] overflow-hidden">
