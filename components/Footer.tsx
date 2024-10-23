@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-2 text-center">
+    <footer className="bg-primary text-white py-2 text-center">
       <div className="max-w-7xl mx-auto px-4">
         {/* Section principale */}
         <div className="mb-12 h-auto w-auto">
@@ -22,7 +22,7 @@ const Footer = () => {
         {/* Grille de navigation centrée */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto">
           <div>
-            <h3 className="text-orange-600 font-semibold mb-4 text-lg">À propos de Mémé Georgette</h3>
+            <h3 className="text-black font-semibold mb-4 text-lg">À propos de Mémé Georgette</h3>
             <ul className="space-y-2 font-semibold">
               <li><a href="https://www.memegeorgette.com/" className="text-white hover:text-orange-600 transition-colors text-sm">Découvrir Mémé Georgette</a></li>
               <li><a href="/demarche" className="text-white hover:text-orange-600 transition-colors text-sm">Notre Démarche</a></li>
@@ -31,7 +31,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-orange-600 font-semibold mb-4 text-lg">Découvrez nos vins</h3>
+            <h3 className="text-black font-semibold mb-4 text-lg">Découvrez nos vins</h3>
             <ul className="space-y-2 font-semibold">
               <li><a href="/products/category/rouge" className="text-white hover:text-orange-600 transition-colors text-sm">Les rouges</a></li>
               <li><a href="/products/category/blanc" className="text-white hover:text-orange-600 transition-colors text-sm">Les blancs</a></li>
@@ -42,7 +42,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-orange-600 font-semibold mb-4 text-lg">Besoin d&apos;aide ?</h3>
+            <h3 className="text-black font-semibold mb-4 text-lg">Besoin d&apos;aide ?</h3>
             <ul className="space-y-2 font-semibold">
               <li><a href="/contact" className="text-white hover:text-orange-600 transition-colors text-sm">Nous contacter</a></li>
               <li><a href="/faq" className="text-white hover:text-orange-600 transition-colors text-sm">FAQ (Foire aux questions)</a></li>
@@ -53,7 +53,7 @@ const Footer = () => {
         </div>
 
         {/* Logos de paiement */}
-        <div className="flex justify-center items-center space-x-4 bg-gray-600">
+        <div className="flex justify-center items-center space-x-4 w-fit mx-auto ">
           <a href="https://www.visa.fr">
             <Image src="/images/visa.png" alt="Visa" width={30} height={30} />
           </a>
@@ -65,18 +65,18 @@ const Footer = () => {
           </a>
           <div className="flex items-center text-gray-600">
             <CreditCard className="h-4 w-4 mr-1 text-black" />
-            <span className="text-xs text-white">Paiement sécurisé</span>
+            <span className="text-xs text-gray-800">Paiement sécurisé</span>
           </div>
         </div>
         {/* Mentions légales et copyright */}
         <div className="pt-4">
-          <p className="text-xs text-white mb-4 font-light">
+          <p className="text-xs text-black mb-4 font-light">
             L&apos;abus d&apos;alcool est dangereux pour la santé, sachez consommer avec modération.
             Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.
           </p>
-          <p className="text-sm text-white font-light">
+          <p className="text-sm text-black font-light">
             © 2024 Les Vins de Mémé Georgette, tous droits réservés
-            <br />Création de <a className="font-bold" href="https://stillinov.com">Still-inov Agency</a>
+            <br />Création de <a className="font-bold text-white" href="https://stillinov.com">Still-inov Agency</a>
           </p>
         </div>
       </div>
