@@ -53,7 +53,7 @@ const Header = () => {
               <div className="hidden lg:flex items-center space-x-1 text-sm">
                 <span className='text-white'>Livraison en</span>
                 <Image
-                  src="/images/france-flag.png"
+                  src="/images/fr.png"
                   alt="France"
                   width={20}
                   height={14}
