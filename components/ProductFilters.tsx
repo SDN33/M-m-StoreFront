@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import WineSelector from './WineSelector';
 
 interface ProductFilterProps {
   selectedFilters: {
@@ -45,7 +46,13 @@ const filterOptions = {
   accord_mets: ['Viandes rouges', 'Viandes blanches', 'Poissons', 'Fruits de mer', 'Fromages', 'Desserts / Sucré', 'Plats végétariens'],
 };
 
-const normalizeString = (str: string) => str.toLowerCase().replace(/\s+/g, '');
+const normalizeString = (str: unknown) => {
+  if (typeof str === 'string') {
+    return str.toLowerCase().replace(/\s+/g, '');
+  }
+  return ''; // ou gérer autrement les cas où str n'est pas une chaîne
+};
+
 
 const ProductFilter: React.FC<ProductFilterProps> = ({
   selectedFilters,
@@ -70,9 +77,19 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     onFilterChange(filterType, updatedOptions);
   };
 
+  const resetFilters = () => {
+    onFilterChange('color', []);
+    onFilterChange('region', []);
+    onFilterChange('vintage', []);
+    onFilterChange('certification', []);
+    onFilterChange('style', []);
+    onFilterChange('accord_mets', []);
+    onFilterChange('region__pays', []);
+    onFilterChange('volume', []);
+  };
+
   return (
-    <div className="w-64 bg-trnasparent">
-      <br /><br /><br /><br /><br />
+    <div className="w-64 bg-trnasparent mt-44">
       {/* Prix Section */}
       <div className="p-4">
         <h3 className="text-lg font-semibold mb-4 flex items-center">
@@ -155,6 +172,9 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
         <button className="w-full bg-primary text-white py-2 px-4 rounded hover:bg-orange-700 transition-colors">
           + DE FILTRES
         </button>
+      </div>
+      <div className="pt-4 ml-14">
+      <WineSelector />
       </div>
     </div>
   );

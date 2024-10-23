@@ -16,7 +16,7 @@ const Header = () => {
   const categories = [
     { name: 'PROMOS', href: '/promos', className: 'text-primary font-semibold' },
     { name: '⚡ VENTES FLASH', href: '/ventes-flash', className: 'text-primary font-semibold' },
-    { name: 'Tous nos vins Bio', href: '/vins' },
+    { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com' },
     { name: 'Vins rouges', href: '/products/category/rouge' },
     { name: 'Vins blancs', href: '/products/category/blanc' },
     { name: 'Vins rosés', href: '/products/category/rose' },
@@ -29,7 +29,7 @@ const Header = () => {
   }
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-primary shadow">
       <PromotionSection />
 
       {/* Top Header */}
@@ -40,11 +40,10 @@ const Header = () => {
             {/* Logo */}
             <a href="/" className="flex-shrink-0">
               <Image
-                src="/images/logo.svg"
+                src="/images/logoblanc.png"
                 alt="Logo"
-                width={120}
-                height={40}
-                className="h-20 w-auto"
+                width={200}
+                height={100}
               />
             </a>
 
@@ -54,7 +53,7 @@ const Header = () => {
             {/* Right Actions */}
             <div className="flex items-center space-x-6">
               <div className="hidden lg:flex items-center space-x-1 text-sm">
-                <span>Livraison en</span>
+                <span className='text-white'>Livraison en</span>
                 <Image
                   src="/images/france-flag.png"
                   alt="France"
@@ -62,25 +61,25 @@ const Header = () => {
                   height={14}
                   className="mx-1"
                 />
-                <span className="font-bold">France</span>
+                <span className="font-bold text-white">France</span>
               </div>
 
-              <a href=":" className="hidden lg:flex items-center text-sm text-gray-600 hover:text-orange-600">
-                <User className="w-5 h-5 mr-1" />
-                <span>Espace pro</span>
+              <a href=":" className="hidden lg:flex items-center text-sm text-white hover:text-orange-600">
+                <User className="w-5 h-5 mr-1 text-white font-semibold" />
+                <span className='text-white font-semibold' >Espace pro</span>
               </a>
 
-              <a href="/faq" className="hidden lg:block text-sm text-gray-600 hover:text-orange-600">
+              <a href="/faq" className="hidden lg:block text-sm text-white font-semibold hover:text-orange-600">
                 Aide
               </a>
 
               <div className="flex items-center space-x-4">
-                <a href="/login" className="text-sm text-gray-600 hover:text-orange-600">
+                <a href="/login" className="text-sm text-white font-semibold hover:text-orange-600">
                   Se connecter
                 </a>
                 <a className="relative">
-                  <ShoppingCart onClick={toggleCartPopup} className="w-6 h-6 text-primary" />
-                  <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                  <ShoppingCart onClick={toggleCartPopup} className="w-6 h-6 text-white font-semibold" />
+                  <span className="absolute -top-1 -right-1 bg-gray-400 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                     0
                   </span>
                 </a>
@@ -112,8 +111,8 @@ const Header = () => {
             </a>
 
             <a href="/cart" className="relative p-2">
-              <ShoppingCart className="w-6 h-6 text-primary" />
-              <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+              <ShoppingCart className="w-6 h-6 text-white" />
+              <span className="absolute -top-1 -right-1 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                 0
               </span>
             </a>
@@ -122,14 +121,14 @@ const Header = () => {
       </div>
 
       {/* Navigation Bar - Desktop and Tablet */}
-      <nav className="hidden md:block bg-white shadow">
+      <nav className="hidden md:block bg-white shadow-lg">
         <div className="container mx-auto px-4">
-          <ul className="flex items-center space-x-4 lg:space-x-8 overflow-x-auto">
+          <ul className="flex items-center space-x-4 lg:space-x-8 overflow-x-auto text-gray-900">
             {categories.map((category) => (
-              <li key={category.name} className="whitespace-nowrap">
+              <li key={category.name} className="whitespace-nowrap font-bold text-gray-900">
                 <a
                   href={category.href}
-                  className={`px-3 py-4 text-gray-700 hover:text-orange-600 block ${category.className || ''}`}
+                  className={`px-3 py-4 text-gray-900 hover:text-orange-600 block ${category.className || ''}`}
                 >
                   {category.name}
                 </a>

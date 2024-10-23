@@ -215,7 +215,7 @@ const SearchInput = () => {
           onMouseEnter={() => setShowRecentSearches(true)} // Affiche au hover
           onMouseLeave={() => setTimeout(() => setShowRecentSearches(false), 2000)} // Masque après 2 secondes
           placeholder="Rechercher un vin, un château, une appellation..."
-          className="w-full pl-4 pr-20 py-3 border rounded-full border-gray-300 focus:outline-none focus:border-orange-500"
+          className="w-full pl-4 pr-20 py-3 border rounded-full border-gray-400 text-primary focus:outline-none focus:border-orange-500"
         />
 
         <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">

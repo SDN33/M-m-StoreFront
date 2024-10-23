@@ -23,9 +23,9 @@ const PromotionSection = () => {
 
   return (
     <div
-      className={`bg-gray-100 opacity-80 text-center   shadow-sm  w-full z-10 ${isVisible ? 'block' : 'hidden'}`}
+      className={`opacity-90 text-center   shadow-sm  w-full z-10 ${isVisible ? 'block' : 'hidden'}`}
     >
-      <p className="font-extrabold bg-gray-900 text-white text-xs sm:text-xs lg:text-sm">
+      <p className="font-extrabold bg-black shadow-sm text-white text-xs sm:text-xs lg:text-sm">
         <span className="sm:hidden">
         Livraison offerte<br /> Dès 6 bouteilles achetées sur un même domaine
         </span>
