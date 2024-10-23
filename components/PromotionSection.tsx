@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const PromotionSection = () => {
   const [isVisible, setIsVisible] = useState(false); // Commence par être caché
@@ -24,15 +25,14 @@ const PromotionSection = () => {
     <div
       className={`bg-gray-100 opacity-80 text-center   shadow-sm  w-full z-10 ${isVisible ? 'block' : 'hidden'}`}
     >
-      <p className="font-extrabold bg-primary text-white text-xs sm:text-xs lg:text-sm">
-        {/* Affichage sur mobile avec emojis */}
+      <p className="font-extrabold bg-gray-900 text-white text-xs sm:text-xs lg:text-sm">
         <span className="sm:hidden">
-          🍇🚚 Livraison offerte 🚚🍇<br /> Dès 6 bouteilles achetées sur un même Domaine
+        Livraison offerte<br /> Dès 6 bouteilles achetées sur un même domaine
         </span>
 
         {/* Affichage sur plus grand écran sans saut de ligne */}
         <span className="hidden sm:inline text-base">
-          🍇🚚 Livraison offerte dès 6 bouteilles achetées sur un même Domaine 🚚🍇
+        Livraison offerte dès 6 bouteilles achetées sur un même domaine
         </span>
       </p>
     </div>

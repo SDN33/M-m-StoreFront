@@ -52,9 +52,7 @@ export default function RootLayout({
     <html lang="fr">
       <body>
         <AgeVerificationModal />
-        <Header />
-        <ClientLayout>{children}</ClientLayout> 
-        <Footer />
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

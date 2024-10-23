@@ -6,10 +6,6 @@ const Products: React.FC = () => {
   return (
     <div id="products" className="text-center relative px-16">
       <br />
-      <br />
-      <ProductsIntro />
-      <div className="border-b-4 border-orange-600 w-full  my-2 md:my-4 slide-in-right"></div>
-      <br />
       <ProductsCards /> {/* Pas de props nécessaires ici */}
       <br />
       <br />

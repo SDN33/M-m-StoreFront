@@ -129,7 +129,6 @@ const VendorList: React.FC = () => {
         <br /><div className="text-gray-800 text-sm font-extrabold tracking-tight text-center">Découvrez les derniers vins ajoutés par nos vignerons partenaires.</div>
       </h2>
       <br />
-      <div className="border-b-4 border-orange-600 w-full  my-2 md:my-4 slide-in-right"></div>
       <br />
 
       {vendors.length === 0 ? (

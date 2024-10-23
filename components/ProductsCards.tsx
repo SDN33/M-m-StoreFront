@@ -83,25 +83,20 @@ const ProductsCards: React.FC = () => {
   const filterProducts = useCallback((product: Product) => {
     const isColorMatch = selectedFilters.color.length === 0 || selectedFilters.color.includes(product.categories[0]?.name || '');
     const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millesime || '');
-
     const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.some(region =>
-        region.toLowerCase().trim() === (product.region__pays || '').toLowerCase().trim()
+      region.toLowerCase().trim() === (product.region__pays || '').toLowerCase().trim()
     );
-
     const isCertificationMatch = selectedFilters.certification.length === 0 || selectedFilters.certification.some(certification =>
-        certification.toLowerCase().trim() === (product.certification || '').toLowerCase().trim()
+      certification.toLowerCase().trim() === (product.certification || '').toLowerCase().trim()
     );
-
     const isStyleMatch = selectedFilters.style.length === 0 || selectedFilters.style.some(style =>
-        style.toLowerCase().trim() === (product.style || '').toLowerCase().trim()
+      style.toLowerCase().trim() === (product.style || '').toLowerCase().trim()
     );
-
     const isVolumeMatch = selectedFilters.volume.length === 0 || selectedFilters.volume.some(volume =>
-        volume.toLowerCase().trim() === (product.volume || '').toLowerCase().trim()
+      volume.toLowerCase().trim() === (product.volume || '').toLowerCase().trim()
     );
-
     const isAccordMetsMatch = selectedFilters.accord_mets.length === 0 || selectedFilters.accord_mets.some(accordMets =>
-        (product.accord_mets || []).some(met => met.toLowerCase().trim() === accordMets.toLowerCase().trim())
+      (product.accord_mets || []).some(met => met.toLowerCase().trim() === accordMets.toLowerCase().trim())
     );
 
     return isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch && isStyleMatch && isVolumeMatch && isAccordMetsMatch;
@@ -133,6 +128,8 @@ const ProductsCards: React.FC = () => {
       ...prevFilters,
       [filterType]: selectedOptions,
     }));
+    // Réinitialiser le compteur de produits visibles après modification des filtres
+    setVisibleCount(12);
   };
 
   const resetFilters = () => {
@@ -155,45 +152,58 @@ const ProductsCards: React.FC = () => {
     setVisibleCount(prevCount => prevCount + 12);
   };
 
+  const handleAddToCart = async (productId: number, quantity: number) => {
+    try {
+      const response = await axios.post('/api/cart', {
+        product_id: productId,
+        quantity: quantity,
+      });
+      console.log(`Produit ajouté au panier : ${response.data}`);
+    } catch (error) {
+      console.error("Erreur lors de l'ajout au panier", error);
+    }
+  };
+
   return (
     <div className="flex flex-col mr-4 lg:mr-16 md:-mt-8">
+      <br /><br /><br /><br /><br /><br /><br /><br />
       <FilterTop sortBy={sortBy} handleSortChange={handleSortChange} resetFilters={resetFilters} />
-      <div className="flex flex-col md:flex-row mt-4">
-        <div className="hidden md:block md:w-1/4">
-          <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
 
-        </div>
-        <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
+      {/* Composant de filtre avec position fixe */}
+      <div className="hidden md:block md:w-1/4 fixed top-[60px] left-0 z-30 bg-white border border-gray-300 rounded-md shadow-lg">
+        <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleCheckboxChange} />
+      </div>
 
-        <div className="flex-grow mt-10">
-          {loading && (
-            <div className="flex flex-col items-center">
-              <div className="loader"></div>
-              <p className="text-orange-600 font-bold text-lg animate-bounce">Chargement des vins de Mémé...</p>
-            </div>
-          )}
-          {error && <p className="text-red-600">{error}</p>}
-          {sortedProducts.length === 0 && !loading && <p>Aucun produit trouvé.</p>}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6 -mt-10">
-            {sortedProducts.slice(0, visibleCount).map(product => (
-              <ProductCard key={product.id} product={product} onAddToCart={async (productId, quantity) => {
-                // Implement the onAddToCart functionality here
-                console.log(`Added product ${productId} with quantity ${quantity} to cart`);
-                return Promise.resolve();
-              }} />
-            ))}
+      <div className="flex-grow mt-10 md:ml-1/4 md:pl-4"> {/* Ajout d'une marge gauche pour compenser la largeur du filtre */}
+        {loading && (
+          <div className="flex">
+            <div className="loader"></div>
+            <p className="text-orange-600 font-bold text-lg animate-bounce">Chargement des vins de Mémé...</p>
           </div>
-          {sortedProducts.length > visibleCount && (
-            <div className="flex justify-center mt-4">
-              <button
-                onClick={loadMoreProducts}
-                className="bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-600"
-              >
-                Voir Plus de Vins
-              </button>
-            </div>
-          )}
+        )}
+        {error && <p className="text-red-600">{error}</p>}
+        {sortedProducts.length === 0 && !loading && <p>Aucun produit trouvé.</p>}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6 -mt-10">
+          {sortedProducts.slice(0, visibleCount).map(product => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onAddToCart={async (productId, quantity) => {
+                await handleAddToCart(productId, quantity);
+              }}
+            />
+          ))}
         </div>
+        {sortedProducts.length > visibleCount && (
+          <div className="flex justify-center mt-4">
+            <button
+              onClick={loadMoreProducts}
+              className="bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-700"
+            >
+              Voir Plus de Vins
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -190,7 +190,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         <AddToCart
           productId={product.id}
           quantity={quantity}
-          variation_id={variationId}
           cart_item_data={{}}
           onAddToCart={async () => {
             console.log('Tentative d\'ajout au panier:', { productId: product.id, quantity });

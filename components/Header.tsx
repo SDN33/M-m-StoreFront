@@ -138,6 +138,7 @@ const Header = () => {
           </ul>
         </div>
       </nav>
+      <CartPopup isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </div>
   );
 };

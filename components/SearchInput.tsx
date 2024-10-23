@@ -1,107 +1,302 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Search } from 'lucide-react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { Search, X } from 'lucide-react';
 import axios from 'axios';
+import debounce from 'lodash/debounce';
+
+interface ProductMetaData {
+  key: string;
+  value: string;
+}
 
 interface Product {
   id: number;
   name: string;
-  nom_du_chateau: string;
+  meta_data: ProductMetaData[];
+  price: string;
+  regular_price: string;
+  sale_price: string;
+  categories: Array<{ id: number; name: string }>;
+  images: Array<{ src: string }>;
+}
+
+interface FilteredProduct extends Product {
+  nom_chateau?: string;
+  appellation?: string;
+  millesime?: string;
+  region__pays?: string;
+  categorie?: string;
 }
 
 const SearchInput = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [results, setResults] = useState<Product[]>([]);
-  const [filteredAnswer, setFilteredAnswer] = useState<string | null>(null);
+  const [results, setResults] = useState<FilteredProduct[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState<Set<string>>(new Set());
+  const [showFilters, setShowFilters] = useState(false);
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [showRecentSearches, setShowRecentSearches] = useState(false); // État pour le hover
 
-  const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const resultsRef = useRef<HTMLDivElement>(null); // Référence pour la fermeture des pop-ups
+  const filtersRef = useRef<HTMLDivElement>(null); // Référence pour la fermeture des filtres
+  const recentSearchesRef = useRef<HTMLDivElement>(null); // Référence pour la fermeture des recherches récentes
 
-    if (!searchTerm.trim()) return;
+  const extractMetaData = (product: Product): FilteredProduct => {
+    const metaDataMap: { [key: string]: string } = {};
 
-    try {
-      const response = await axios.get(`/api/products?search=${searchTerm}`);
-      const data: Product[] = response.data;
+    product.meta_data.forEach(meta => {
+      switch (meta.key) {
+        case '_nom_chateau':
+          metaDataMap.nom_chateau = meta.value;
+          break;
+        case '_appellation':
+          metaDataMap.appellation = meta.value;
+          break;
+        case '_millesime':
+          metaDataMap.millesime = meta.value;
+          break;
+        case '_region':
+          metaDataMap.region__pays = meta.value;
+          break;
+        case '_couleur':
+          metaDataMap.categories = meta.value;
+          break;
+      }
+    });
 
-      console.log('Résultats de l\'API:', data); // Log des résultats de l'API
-
-      // Tri des résultats
-      data.sort((a, b) => (a.name > b.name ? 1 : -1));
-
-      setResults(data);
-      setFilteredAnswer(null); // Réinitialiser la réponse filtrée
-    } catch (error) {
-      console.error('Erreur lors de la recherche:', error);
-      setFilteredAnswer("Erreur lors de la recherche."); // Message d'erreur à l'utilisateur
-    }
+    return {
+      ...product,
+      ...metaDataMap
+    };
   };
 
-  const normalizeString = (str: string) => str.toLowerCase().replace(/\s+/g, '');
+  const normalizeString = (str: string) => {
+    return str
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]/g, " ")
+      .trim();
+  };
 
-  const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = normalizeString(event.target.value);
-    setSearchTerm(query);
+  const debouncedSearch = useMemo(
+    () =>
+      debounce(async (term: string) => {
+        if (term.length < 2) return;
 
-    console.log('Requête de recherche normalisée:', query); // Log de la requête normalisée
+        setIsLoading(true);
+        try {
+          const response = await axios.get('/api/products', {
+            params: {
+              search: term,
+              per_page: 10,
+              status: 'publish'
+            }
+          });
 
-    // Filtrer les résultats
-    const foundResults = results.filter(result =>
-      normalizeString(result.name).includes(query) ||
-      normalizeString(result.nom_du_chateau).includes(query)
-    );
+          const processedResults = response.data.map(extractMetaData);
+          setResults(processedResults);
 
-    console.log('Résultats filtrés:', foundResults); // Log des résultats filtrés
+          setRecentSearches(prev => {
+            const updated = [term, ...prev.filter(s => s !== term)].slice(0, 5);
+            localStorage.setItem('recentSearches', JSON.stringify(updated));
+            return updated;
+          });
+        } catch (error) {
+          console.error('Erreur de recherche:', error);
+        } finally {
+          setIsLoading(false);
+        }
+      }, 300),
+    []
+  );
 
-    if (foundResults.length > 0) {
-      setFilteredAnswer(`Trouvé : ${foundResults.map(r => r.name).join(', ')}`);
+  const filterResults = (products: FilteredProduct[], term: string): FilteredProduct[] => {
+    const normalizedTerm = normalizeString(term);
+
+    return products.filter(product => {
+      const searchableFields = [
+        product.name,
+        product.nom_chateau,
+        product.appellation,
+        product.region__pays,
+        ...product.categories.map(cat => cat.name)
+      ].filter(Boolean);
+
+      const matchesSearch = searchableFields.some(field =>
+        field && normalizeString(field).includes(normalizedTerm)
+      );
+
+      const matchesFilters = Array.from(selectedFilters).every(filter => {
+        const [type, value] = filter.split(':');
+        switch (type) {
+          case 'couleur':
+            return product.categorie === value;
+          case 'region':
+            return product.region__pays === value;
+          case 'millesime':
+            return product.millesime === value;
+          default:
+            return true;
+        }
+      });
+
+      return matchesSearch && matchesFilters;
+    });
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+    if (term) {
+      debouncedSearch(term);
     } else {
-      setFilteredAnswer("Aucun produit trouvé correspondant à votre recherche.");
+      setResults([]);
     }
   };
 
+  const handleFilterToggle = (filter: string) => {
+    setSelectedFilters(prev => {
+      const next = new Set(prev);
+      if (next.has(filter)) {
+        next.delete(filter);
+      } else {
+        next.add(filter);
+      }
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    const saved = localStorage.getItem('recentSearches');
+    if (saved) {
+      setRecentSearches(JSON.parse(saved));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (results.length) {
+      const filtered = filterResults(results, searchTerm);
+      setResults(filtered);
+    }
+  }, [selectedFilters]);
+
+  // Fermeture des popups quand on clique en dehors
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        resultsRef.current &&
+        !resultsRef.current.contains(event.target as Node) &&
+        filtersRef.current &&
+        !filtersRef.current.contains(event.target as Node) &&
+        recentSearchesRef.current &&
+        !recentSearchesRef.current.contains(event.target as Node)
+      ) {
+        setShowFilters(false);
+        setResults([]);
+        setShowRecentSearches(false); // Ferme aussi les recherches récentes
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="flex-grow mx-8 max-w-3xl">
-      <form onSubmit={handleSearch} className="relative">
+    <div className="relative flex-grow mx-8 max-w-3xl">
+      <div className="relative">
         <input
           type="text"
-          placeholder="Rechercher un vin ou un château..."
           value={searchTerm}
-          onChange={handleFilter}
-          className="w-full pl-4 pr-10 py-2 border rounded-full border-gray-300 focus:outline-none focus:border-orange-500"
+          onChange={handleSearchChange}
+          onMouseEnter={() => setShowRecentSearches(true)} // Affiche au hover
+          onMouseLeave={() => setTimeout(() => setShowRecentSearches(false), 2000)} // Masque après 2 secondes
+          placeholder="Rechercher un vin, un château, une appellation..."
+          className="w-full pl-4 pr-20 py-3 border rounded-full border-gray-300 focus:outline-none focus:border-orange-500"
         />
-        <button type="submit" className="absolute right-3 top-1/2 transform -translate-y-1/2">
-          <Search className="w-6 h-6" />
-        </button>
-      </form>
 
-      {/* Affichage des résultats de recherche */}
-      {results.length > 0 && (
-        <ul className="absolute mt-2 w-full bg-gray-100 rounded-md shadow-lg py-1 z-30">
-          {results.map((result, index) => (
-            <li key={result.id}>
-              <a
-                href={`/product/${result.id}`}
-                className={`block px-4 py-2 text-sm text-gray-800 ${
-                  index === 0 ? 'bg-orange-600 text-white font-semibold' : 'hover:bg-orange-600'
-                }`}
-              >
-                <span className="font-semibold">{result.name}</span>
-                {result.nom_du_chateau && (
-                  <span className="text-gray-500"> - {result.nom_du_chateau}</span>
-                )}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
-      {/* Affichage de la réponse filtrée */}
-      <div className="mt-2">
-        {filteredAnswer && (
-          <p className="text-gray-700 text-base leading-relaxed">{filteredAnswer}</p>
-        )}
+        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+          {isLoading ? (
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-orange-500" />
+          ) : (
+            <Search className="w-5 h-5 text-gray-400" />
+          )}
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm('')}
+              className="p-1 hover:bg-gray-100 rounded-full"
+            >
+              <X className="w-4 h-4 text-gray-400" />
+            </button>
+          )}
+        </div>
       </div>
+
+      {/* Filtres */}
+      {showFilters && (
+        <div ref={filtersRef} className="absolute top-full mt-2 w-full bg-white rounded-lg shadow-lg p-4 z-30">
+          <div className="space-y-4">
+            {/* Filtres ici */}
+          </div>
+        </div>
+      )}
+
+      {/* Résultats de recherche */}
+      {results.length > 0 && (
+        <div ref={resultsRef} className="absolute mt-2 w-full bg-white rounded-lg shadow-lg overflow-hidden z-20">
+          {results.map((product, index) => (
+            <a
+              key={product.id}
+              href={`/product/${product.id}`}
+              className={`flex items-center p-4 hover:bg-gray-50 ${
+                index !== results.length - 1 ? 'border-b' : ''
+              }`}
+            >
+              {product.images[0] && (
+                <img
+                  src={product.images[0].src}
+                  alt={product.name}
+                  className="w-12 h-12 object-cover rounded"
+                />
+              )}
+              <div className="ml-4 flex-grow">
+                <h4 className="font-semibold text-gray-900">{product.name}</h4>
+              </div>
+              <div className="ml-4 text-right">
+                <div className="font-semibold text-orange-600">
+                  {product.sale_price || product.regular_price}€
+                </div>
+                {product.sale_price && (
+                  <div className="text-sm text-gray-400 line-through">
+                    {product.regular_price}€
+                  </div>
+                )}
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+
+      {/* Recherches récentes au hover */}
+      {!searchTerm && recentSearches.length > 0 && showRecentSearches && (
+        <div ref={recentSearchesRef} className="absolute mt-2 w-full bg-white rounded-lg shadow-lg p-4 z-20">
+          <h3 className="text-sm font-semibold text-gray-500 mb-2">Recherches récentes</h3>
+          <div className="flex flex-wrap gap-2">
+            {recentSearches.map((term, index) => (
+              <button
+                key={index}
+                onClick={() => setSearchTerm(term)}
+                className="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-gray-200"
+              >
+                {term}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

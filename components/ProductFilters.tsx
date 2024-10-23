@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import WineSelector from './WineSelector';
 
 interface ProductFilterProps {
   selectedFilters: {
@@ -15,20 +14,35 @@ interface ProductFilterProps {
     region__pays: string[];
   };
   onFilterChange: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
-  hideColorFilter?: boolean; // Nouvelle prop pour masquer le filtre de couleur
+  hideColorFilter?: boolean;
 }
 
 const getFilterTitle = (filterType: string) => {
   const titles: { [key: string]: string } = {
-    color: 'Couleur',
-    region: 'Région',
-    vintage: 'Millésime',
-    certification: 'Certification',
-    style: 'Style',
-    volume: 'Volume',
-    accord_mets: 'Accord Mets',
+    color: 'COULEUR',
+    region: 'RÉGION',
+    vintage: 'MILLÉSIME',
+    certification: 'CERTIFICATION',
+    style: 'STYLE',
+    volume: 'VOLUME',
+    accord_mets: 'ACCORD METS',
   };
   return titles[filterType] || filterType;
+};
+
+const filterOptions = {
+  color: ['Rouge', 'Blanc', 'Rosé', 'Pétillant', 'Liquoreux', 'Autres'],
+  region: [
+    'Alsace', 'Beaujolais', 'Bourgogne', 'Bordeaux',
+    'Champagne', 'Jura', 'Languedoc', 'Loire',
+    'PACA', 'Roussillon', 'Savoie', 'Sud Ouest', 'Vallée du Rhône',
+    'Italie', 'Espagne', 'Portugal', 'Allemagne',
+  ],
+  vintage: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+  certification: ['Bio', 'Biodynamie', 'En conversion'],
+  style: ['Charpenté', 'Fruité', 'Moelleux', 'Corsé', 'Sec'],
+  volume: ['75 cl', '1 Litre', 'Autres'],
+  accord_mets: ['Viandes rouges', 'Viandes blanches', 'Poissons', 'Fruits de mer', 'Fromages', 'Desserts / Sucré', 'Plats végétariens'],
 };
 
 const normalizeString = (str: string) => str.toLowerCase().replace(/\s+/g, '');
@@ -36,28 +50,14 @@ const normalizeString = (str: string) => str.toLowerCase().replace(/\s+/g, '');
 const ProductFilter: React.FC<ProductFilterProps> = ({
   selectedFilters,
   onFilterChange,
-  hideColorFilter = false, // Valeur par défaut à false
+  hideColorFilter = false,
 }) => {
-  const [openSections, setOpenSections] = useState<string[]>([]);
+  const [priceRange, setPriceRange] = useState({ min: 25, max: 5000 });
+  const [expandedSections, setExpandedSections] = useState<string[]>([]);
 
-  const filterOptions = {
-    color: ['Rouge', 'Blanc', 'Rosé', 'Pétillant', 'Liquoreux', 'Autres'],
-    region: [
-      'Alsace', 'Beaujolais', 'Bourgogne', 'Bordeaux',
-      'Champagne', 'Jura', 'Languedoc', 'Loire',
-      'PACA', 'Roussillon', 'Savoie', 'Sud Ouest', 'Vallée du Rhône',
-      'Italie', 'Espagne', 'Portugal', 'Allemagne',
-    ],
-    vintage: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
-    certification: ['Bio', 'Biodynamie', 'En conversion'],
-    style: ['Charpenté', 'Fruité', 'Moelleux', 'Corsé', 'Sec'],
-    volume: ['75 cl', '1 Litre', 'Autres'],
-    accord_mets: ['Viandes rouges', 'Viandes blanches', 'Poissons', 'Fruits de mer', 'Fromages', 'Desserts / Sucré', 'Plats végétariens'],
-  };
-
-  const toggleSection = (section: keyof typeof filterOptions) => {
-    setOpenSections((prev) =>
-      prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]
+  const toggleSection = (section: string) => {
+    setExpandedSections(prev =>
+      prev.includes(section) ? prev.filter(s => s !== section) : [...prev, section]
     );
   };
 
@@ -71,65 +71,91 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div className="relative max-w-sm w-full lg:w-52 lg:ml-5 rounded-lg shadow-lg overflow-hidden hidden md:block">
-      <div className="absolute inset-0 bg-orange-600"></div>
+    <div className="w-64 bg-trnasparent">
+      <br /><br /><br /><br /><br />
+      {/* Prix Section */}
+      <div className="p-4">
+        <h3 className="text-lg font-semibold mb-4 flex items-center">
+          € PRIX
+        </h3>
+        <div className="space-y-4">
+          <div className="flex gap-4">
+            <input
+              type="number"
+              value={priceRange.min}
+              onChange={(e) => setPriceRange({ ...priceRange, min: Number(e.target.value) })}
+              className="w-24 p-2 border rounded"
+            />
+            <span className="text-gray-500">€</span>
+            <input
+              type="number"
+              value={priceRange.max}
+              onChange={(e) => setPriceRange({ ...priceRange, max: Number(e.target.value) })}
+              className="w-24 p-2 border rounded"
+            />
+            <span className="text-gray-500">€</span>
+          </div>
+          <input
+            type="range"
+            min="25"
+            max="5000"
+            value={priceRange.max}
+            onChange={(e) => setPriceRange({ ...priceRange, max: Number(e.target.value) })}
+            className="w-full accent-primary"
+          />
+        </div>
+      </div>
 
-      <div className="relative">
-        <h2 className="text-xl font-bold text-white pt-2 text-start ml-3">
-          Trier nos vins
-        </h2>
-        <br />
-        {Object.entries(filterOptions).map(([filterType, options]) => {
-          // Ne pas afficher le filtre de couleur si hideColorFilter est vrai
-          if (hideColorFilter && filterType === 'color') return null;
+      {/* Filter Sections */}
+      {Object.entries(filterOptions).map(([filterType, options]) => {
+        if (hideColorFilter && filterType === 'color') return null;
 
-          return (
-            <div key={filterType} className="border-b border-white/10 last:border-b-0">
-              <button
-                onClick={() => toggleSection(filterType as keyof typeof filterOptions)}
-                className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-100/10 transition-colors"
-                aria-expanded={openSections.includes(filterType)}
-                aria-controls={filterType}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-white">{getFilterTitle(filterType)}</span>
-                </div>
-                {openSections.includes(filterType) ? (
-                  <ChevronUp className="w-4 h-4" />
-                ) : (
-                  <ChevronDown className="w-4 h-4" />
-                )}
-              </button>
-
-              {openSections.includes(filterType) && (
-                <div className="px-4 py-2 max-h-48 overflow-y-auto bg-gray-100/10" id={filterType}>
-                  {options.map((option) => (
-                    <label
-                      key={option}
-                      className="text-white flex items-center space-x-2 py-2 cursor-pointer hover:bg-gray-100/5 px-2 rounded transition-colors"
-                    >
+        return (
+          <div key={filterType} className="border-b border-gray-200">
+            <button
+              onClick={() => toggleSection(filterType)}
+              className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between hover:bg-gray-50"
+            >
+              <span>{getFilterTitle(filterType)}</span>
+              {expandedSections.includes(filterType) ?
+                <ChevronUp className="w-5 h-5 text-gray-500" /> :
+                <ChevronDown className="w-5 h-5 text-gray-500" />
+              }
+            </button>
+            {expandedSections.includes(filterType) && (
+              <div className="p-4 space-y-2 bg-gray-50">
+                {options.map((option) => (
+                  <label
+                    key={option}
+                    className="flex items-center justify-between cursor-pointer hover:bg-gray-100 p-2 rounded"
+                  >
+                    <div className="flex items-center">
                       <input
                         type="checkbox"
                         checked={selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']]
                           .map(opt => normalizeString(opt))
                           .includes(normalizeString(option))}
-                        onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
-                        className="w-4 h-4 rounded border-white/20 text-orange-600 focus:ring-orange-600"
+                        onChange={() => handleCheckboxChange(
+                          filterType as keyof ProductFilterProps['selectedFilters'],
+                          option
+                        )}
+                        className="form-checkbox h-4 w-4 text-primary rounded border-gray-300"
                       />
-                      <span className="text-sm">{option}</span>
-                    </label>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-      <div className="hidden lg:flex justify-center items-center mt-4 ml-14">
-        <WineSelector />
-      </div>
+                      <span className="ml-2 text-sm">{option}</span>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      })}
 
-
+      <div className="p-4">
+        <button className="w-full bg-primary text-white py-2 px-4 rounded hover:bg-orange-700 transition-colors">
+          + DE FILTRES
+        </button>
+      </div>
     </div>
   );
 };
