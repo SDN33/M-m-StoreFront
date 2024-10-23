@@ -1,6 +1,6 @@
 'use client';
 import LiqProductsCards from '@/components/LiquoreuxProductsCards';
-import LiqIntro from '@/components/ LiquoreuxIntro';
+import LiqIntro from '@/components/LiquoreuxIntro';
 
 const LiqPage = () => {
   return (

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Star } from 'lucide-react';
+import AddToCartButton from './AddToCartButton';
 
 interface Product {
   id: number;
@@ -50,10 +51,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       cacheProductData(product);
     }
     router.push(`/product/${product.id}`);
-  };
-
-  const handleAddToCart = () => {
-    console.log(`Added ${quantity} of ${product.name} to the cart.`);
   };
 
   const getCategoryColor = (categoryName: string) => {
@@ -196,12 +193,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </svg>
           </div>
         </div>
-        <button
-          onClick={handleAddToCart}
-          className="bg-orange-600 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition duration-300"
-        >
-          Commander {quantity > 1 ? `x ${quantity}` : ''}
-        </button>
+        <AddToCartButton productId={product.id.toString()} quantity={quantity} />
       </div>
     </div>
   );
