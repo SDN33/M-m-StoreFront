@@ -85,7 +85,10 @@ export default function Home() {
               selectedFilters={selectedFilters}
               onFilterChange={handleFilterChange}
               onPriceRangeChange={(min: number, max: number) => {
-                // Implement the price range change logic here
+                setSelectedFilters((prev) => ({
+                  ...prev,
+                  price: [`${min}`, `${max}`]
+                }));
               }}
             />
           </div>
