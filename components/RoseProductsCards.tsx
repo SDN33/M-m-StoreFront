@@ -165,7 +165,13 @@ const RoseProductsCards: React.FC = () => {
           <ProductFilter
             selectedFilters={selectedFilters}
             onFilterChange={handleCheckboxChange}
-            hideColorFilter // Passe cette prop pour cacher le filtre de couleur
+            onPriceRangeChange={(min: number, max: number) => {
+              setSelectedFilters(prevFilters => ({
+                ...prevFilters,
+                price: [`${min}`, `${max}`],
+              }));
+            }}
+            hideColorFilter
           />
         </div>
         <div className="md:hidden">

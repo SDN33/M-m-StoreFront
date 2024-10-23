@@ -165,9 +165,15 @@ const RougeProductsCards: React.FC = () => {
       <div className="flex flex-col md:flex-row mt-4">
         <div className="hidden md:block md:w-1/4 ml-16">
           <ProductFilter
-            selectedFilters={selectedFilters}
-            onFilterChange={handleCheckboxChange}
-            hideColorFilter // Passe cette prop pour cacher le filtre de couleur
+              selectedFilters={selectedFilters}
+              onFilterChange={handleCheckboxChange}
+              onPriceRangeChange={(min: number, max: number) => {
+                setSelectedFilters(prevFilters => ({
+                  ...prevFilters,
+                  price: [`${min}`, `${max}`],
+                }));
+              }}
+              hideColorFilter
           />
         </div>
         <div className="md:hidden">

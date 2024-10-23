@@ -162,9 +162,15 @@ const PetillantProductsCards: React.FC = () => {
       <FilterTop sortBy={sortBy} handleSortChange={handleSortChange} resetFilters={resetFilters} />
       <div className="flex flex-col md:flex-row mt-4">
         <div className="hidden md:block md:w-1/4 ml-16">
-          <ProductFilter
+        <ProductFilter
             selectedFilters={selectedFilters}
             onFilterChange={handleCheckboxChange}
+            onPriceRangeChange={(min: number, max: number) => {
+              setSelectedFilters(prevFilters => ({
+                ...prevFilters,
+                price: [`${min}`, `${max}`],
+              }));
+            }}
             hideColorFilter
           />
         </div>
