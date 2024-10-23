@@ -1,6 +1,6 @@
 // components/CartPopup.tsx
 import React, { useEffect, useState } from 'react';
-import { viewCart } from '../utils/cart'; // Ton utilitaire pour gérer le panier
+import { viewCart } from '../pages/api/cart'; // Vérifiez que le chemin est correct
 
 interface CartPopupProps {
   isOpen: boolean;
@@ -12,24 +12,25 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
     product_id: string;
     name: string;
     quantity: number;
+    price: number; // Assurez-vous que le prix est inclus dans l'API
   }
 
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null); // Ajout d'un état d'erreur
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchCart = async () => {
       if (isOpen) {
         setLoading(true);
-        setError(null); // Réinitialiser l'erreur à chaque ouverture
+        setError(null);
 
         try {
           const cartData = await viewCart();
-          setCartItems(cartData.items || []); // Utilisation de `cartData.items` si disponible
+          setCartItems(cartData.items || []);
         } catch (err) {
           console.error('Erreur lors de la récupération du panier:', err);
-          setError('Échec de la récupération du panier. Veuillez réessayer.'); // Gestion d'erreur utilisateur
+          setError('Échec de la récupération du panier. Veuillez réessayer.');
         } finally {
           setLoading(false);
         }
@@ -43,7 +44,10 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
     fetchCart();
   }, [isOpen]);
 
-  if (!isOpen) return null; // Ne rien rendre si le pop-up est fermé
+  if (!isOpen) return null;
+
+  // Calculer le total du panier
+  const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -56,20 +60,29 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
           <p>Chargement...</p>
         ) : (
           <>
-            {error ? ( // Afficher l'erreur si elle existe
+            {error ? (
               <p className="text-red-500">{error}</p>
             ) : (
               <>
                 {cartItems.length === 0 ? (
                   <p>Votre panier est vide</p>
                 ) : (
-                  <ul>
-                    {cartItems.map((item) => (
-                      <li key={item.product_id} className="mb-2">
-                        {item.name} - Quantité : {item.quantity}
-                      </li>
-                    ))}
-                  </ul>
+                  <div>
+                    <ul className="mb-4">
+                      {cartItems.map((item) => (
+                        <li key={item.product_id} className="flex justify-between mb-2">
+                          <span>{item.name}</span>
+                          <span>Quantité : {item.quantity}</span>
+                          <span>Prix : {item.price} €</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="flex justify-between font-semibold">
+                      <span>Total :</span>
+                      <span>{total.toFixed(2)} €</span>
+                    </div>
+                    <button className="mt-4 w-full bg-blue-500 text-white py-2 rounded">Passer à la caisse</button>
+                  </div>
                 )}
               </>
             )}
