@@ -4,7 +4,6 @@ import HeroBanner from '@/components/HeroBanner';
 import Products from '@/components/Products';
 import Slogan from '@/components/Slogan';
 import Newletter from '@/components/Newletter';
-import PromotionSection from '@/components/PromotionSection';
 import Livraison from '@/components/Livraison';
 import { useEffect, useState } from 'react';
 import VendorList from '@/components/VendorsList';
@@ -30,7 +29,6 @@ export default function Home() {
   return (
     <div className={`flex flex-col min-h-screen ${isMobile ? 'max-w-screen-sm mx-auto' : 'max-w-screen-lg mx-auto'}`}>
       <div className="flex-grow">
-        <PromotionSection />
         <HeroBanner />
         <Products />
         <Livraison />

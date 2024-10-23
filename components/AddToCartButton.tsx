@@ -4,7 +4,7 @@ import { viewCart } from '../pages/api/cart'; // Assurez-vous que le chemin est 
 interface AddToCartButtonProps {
   productId: number; // ID du produit à ajouter au panier
   quantity?: number; // Quantité à ajouter au panier
-  onAddToCart?: (cartData: any) => void; // Callback pour notifier le parent
+  onAddToCart?: (cartData: { product_id: number; quantity: number }[]) => void; // Callback pour notifier le parent
   cart_item_data: { [key: string]: string }; // Données supplémentaires pour le produit
 }
 
@@ -12,6 +12,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   productId,
   quantity = 1,
   onAddToCart,
+  cart_item_data,
 }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -40,7 +41,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ product_id: productId, quantity }),
+        body: JSON.stringify({ product_id: productId, quantity, ...cart_item_data }),
       });
 
       if (!response.ok) {

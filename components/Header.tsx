@@ -1,239 +1,144 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
-import { Search, ShoppingCart, User, Menu, X, ChevronDown } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu as MenuIcon, X, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
-import axios from 'axios';
+import { useState } from 'react';
 import CartPopup from './CartPopup';
-
-
+import SearchInput from './SearchInput';
+import PromotionSection from './PromotionSection';
 
 const Header = () => {
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isVinsMenuOpen, setIsVinsMenuOpen] = useState(false); // For desktop
-  const [isMobileVinsMenuOpen, setIsMobileVinsMenuOpen] = useState(false); // For mobile
-  const [bgColor, setBgColor] = useState('bg-transparent');
-  const [headerHeight, setHeaderHeight] = useState('h-24');
-  const [logoSize, setLogoSize] = useState('w-44 h-auto');
   const [searchTerm, setSearchTerm] = useState('');
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
 
-  interface Product {
-    id: string;
-    name: string;
-  }
+  const categories = [
+    { name: 'PROMOS', href: '/promos', className: 'text-primary font-semibold' },
+    { name: '⚡ VENTES FLASH', href: '/ventes-flash', className: 'text-primary font-semibold' },
+    { name: 'Tous nos vins Bio', href: '/vins' },
+    { name: 'Vins rouges', href: '/products/category/rouge' },
+    { name: 'Vins blancs', href: '/products/category/blanc' },
+    { name: 'Vins rosés', href: '/products/category/rose' },
+    { name: 'Vins pétillants', href: '/products/category/petillant' },
+    { name: 'Vins liquoreux', href: '/products/category/liquoreux' },
+  ];
 
   const toggleCartPopup = () => {
     setIsCartOpen(!isCartOpen);
   }
 
-  const [searchResults, setSearchResults] = useState<Product[]>([]);
-  const router = useRouter();
-  const pathname = usePathname();
-  const isHomePage = pathname === '/';
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScroll = window.scrollY;
-
-      if (isHomePage) {
-        if (currentScroll > 0) {
-          setBgColor('bg-black bg-opacity-80');
-          setHeaderHeight('h-16');
-          setLogoSize('w-32 h-auto');
-        } else {
-          setBgColor('bg-transparent');
-          setHeaderHeight('h-24');
-          setLogoSize('w-44 h-auto');
-        }
-      } else if (pathname && pathname.startsWith('/product/')) {
-        setBgColor('bg-black bg-opacity-80');
-        setHeaderHeight('h-24');
-        setLogoSize('w-44 h-auto');
-      } else {
-        setBgColor('bg-black bg-opacity-80');
-        setHeaderHeight('h-24');
-        setLogoSize('w-44 h-auto');
-      }
-    };
-
-    handleScroll();
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isHomePage, pathname]);
-
-  const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const term = e.target.value;
-    setSearchTerm(term);
-
-    if (term) {
-      try {
-        const response = await axios.get(`/api/products?search=${term}`);
-        setSearchResults(response.data);
-      } catch (error) {
-        console.error('Erreur lors de la recherche:', error);
-        setSearchResults([]);
-      }
-    } else {
-      setSearchResults([]);
-    }
-  };
-
-  const handleResultClick = (id: string) => {
-    router.push(`/product/${id}`);
-    setSearchTerm('');
-    setSearchResults([]);
-  };
-
-
   return (
-    <header className={`fixed top-0 left-0 right-0 flex items-center justify-between px-8 py-8 ${bgColor} ${headerHeight} z-20 transition-all duration-300 ease-in-out`}>
-      {/* Left Navigation */}
-      <nav className="items-center space-x-8 ml-10 font-semibold text-sm md:text-base hidden lg:flex">
-        <a href="/" className="relative text-white hover:text-orange-600">Accueil</a>
-        <div className="relative">
-          <button
-            className="relative text-white hover:text-orange-600 flex items-center"
-            onClick={() => setIsVinsMenuOpen(!isVinsMenuOpen)}
-          >
-            Nos Vins
-            <ChevronDown className="ml-2 w-4 h-4" />
-          </button>
-          {isVinsMenuOpen && (
-            <ul className="absolute mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-30">
-              <li><a href="/products/category/rouge" className="block px-4 py-2 text-sm text-white hover:bg-orange-600">Nos vins rouges</a></li>
-              <li><a href="/products/category/blanc" className="block px-4 py-2 text-sm text-white hover:bg-orange-600">Nos vins blancs</a></li>
-              <li><a href="/products/category/rose" className="block px-4 py-2 text-sm text-white hover:bg-orange-600">Nos vins rosés</a></li>
-              <li><a href="/products/category/petillant" className="block px-4 py-2 text-sm text-white hover:bg-orange-600">Nos vins pétillants</a></li>
-              <li><a href="/products/category/liquoreux" className="block px-4 py-2 text-sm text-white hover:bg-orange-600">Nos vins liquoreux</a></li>
-            </ul>
-          )}
-        </div>
-        <a href="https://www.memegeorgette.com/" className="relative text-white hover:text-orange-600">Nous Découvrir</a>
-        <a href="/contact" className="relative text-white hover:text-orange-600">Contact</a>
-      </nav>
+    <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow">
+      <PromotionSection />
 
-      {/* Center Logo */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center">
-        <a href="/" className="flex items-center transition-all duration-300 ease-in-out">
-          <Image
-            src="/images/logo3.svg"
-            alt="Logo Mémé Georgette"
-            width={logoSize === 'w-44 h-auto' ? 180 : 120}
-            height={30}
-            className={`${logoSize} transition-all duration-300 ease-in-out`}
-          />
-        </a>
-      </div>
+      {/* Top Header */}
+      <div className="border-b">
+        <div className="container mx-auto px-4 py-3">
+          {/* Desktop and Tablet View */}
+          <div className="hidden md:flex items-center justify-between">
+            {/* Logo */}
+            <a href="/" className="flex-shrink-0">
+              <Image
+                src="/images/logo.svg"
+                alt="Logo"
+                width={120}
+                height={40}
+                className="h-20 w-auto"
+              />
+            </a>
 
-      {/* Right Section */}
-      <div className="hidden md:flex items-center space-x-6 mr-10">
-        <div className="relative hidden lg:flex">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={handleSearch}
-            placeholder="Rechercher un vin..."
-            className="pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-gray-800"
-          />
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800 w-6 h-6" />
-          {searchResults.length > 0 && (
-            <ul className="absolute mt-2 w-full bg-gray-100 rounded-md shadow-lg z-30">
-              {searchResults.map(product => (
-                <li key={product.id} onClick={() => handleResultClick(product.id)} className="cursor-pointer px-4 py-2 text-sm text-gray-800 hover:bg-orange-600 hover:text-white">
-                  {product.name}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+            {/* Search Bar */}
+            <SearchInput />
 
-        <div className="relative hidden lg:flex">
-          <button
-            className="text-white hover:text-gray-800 focus:outline-none"
-            onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-          >
-            <User className="w-6 h-6" />
-          </button>
+            {/* Right Actions */}
+            <div className="flex items-center space-x-6">
+              <div className="hidden lg:flex items-center space-x-1 text-sm">
+                <span>Livraison en</span>
+                <Image
+                  src="/images/france-flag.png"
+                  alt="France"
+                  width={20}
+                  height={14}
+                  className="mx-1"
+                />
+                <span className="font-bold">France</span>
+              </div>
 
-          {isUserMenuOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-gray-100 rounded-md shadow-lg py-1 z-30">
-              {isLoggedIn ? (
-                <>
-                  <a href="/dashboard" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Mon Dashboard</a>
-                  <button onClick={() => setIsLoggedIn(false)} className="block w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Déconnecter</button>
-                </>
-              ) : (
-                <>
-                  <a href="/login" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Se Connecter/S&apos;inscrire</a>
-                </>
-              )}
+              <a href=":" className="hidden lg:flex items-center text-sm text-gray-600 hover:text-orange-600">
+                <User className="w-5 h-5 mr-1" />
+                <span>Espace pro</span>
+              </a>
+
+              <a href="/faq" className="hidden lg:block text-sm text-gray-600 hover:text-orange-600">
+                Aide
+              </a>
+
+              <div className="flex items-center space-x-4">
+                <a href="/login" className="text-sm text-gray-600 hover:text-orange-600">
+                  Se connecter
+                </a>
+                <a className="relative">
+                  <ShoppingCart onClick={toggleCartPopup} className="w-6 h-6 text-primary" />
+                  <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                    0
+                  </span>
+                </a>
+              </div>
             </div>
-          )}
-        </div>
-
-        <a className="ml-4">
-          <ShoppingCart className="w-6 h-6 text-white" onClick={toggleCartPopup} />
-        </a>
-      </div>
-
-      {/* Mobile Menu */}
-      <div className="lg:hidden flex items-center justify-between w-full z-50">
-        <button
-          className="lg:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
-        </button>
-
-        <a className="ml-4 md:hidden lg:flex sm:flex">
-          <ShoppingCart className="w-6 h-6 text-white" onClick={toggleCartPopup} />
-        </a>
-
-        {/* Mobile Menu Content */}
-        {isMenuOpen && (
-          <div className="absolute top-16 left-0 w-full bg-black bg-opacity-90 p-6 z-40">
-            <ul className="space-y-6 text-white">
-              <li>
-                <a href="/" className="block">Accueil</a>
-              </li>
-              <li>
-                <button
-                  className="flex items-center justify-between w-full"
-                  onClick={() => setIsMobileVinsMenuOpen(!isMobileVinsMenuOpen)}
-                >
-                  Nos Vins
-                  <ChevronDown className="ml-2 w-4 h-4" />
-                </button>
-                {isMobileVinsMenuOpen && (
-                  <ul className="mt-2 pl-4 space-y-2">
-                    <li><a href="/products/category/rouge" className="block">Nos vins rouges</a></li>
-                    <li><a href="/products/category/blanc" className="block">Nos vins blancs</a></li>
-                    <li><a href="/products/category/rose" className="block">Nos vins rosés</a></li>
-                    <li><a href="/products/category/petillant" className="block">Nos vins pétillants</a></li>
-                    <li><a href="/products/category/liquoreux" className="block">Nos vins liquoreux</a></li>
-                  </ul>
-                )}
-              </li>
-              <li>
-                <a href="https://www.memegeorgette.com/" className="block">Nous Découvrir</a>
-              </li>
-              <li>
-                <a href="/contact" className="block">Contact</a>
-              </li>
-              <li>
-                <a href="/login" className="block">Se Connecter/S&apos;inscrire</a>
-              </li>
-            </ul>
           </div>
-        )}
+
+          {/* Mobile View */}
+          <div className="flex md:hidden items-center justify-between">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 text-gray-600"
+            >
+              {isMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <MenuIcon className="w-6 h-6" />
+              )}
+            </button>
+
+            <a href="/" className="flex-shrink-0">
+              <Image
+                src="/images/logo.svg"
+                alt="Logo"
+                width={100}
+                height={32}
+                className="h-12 w-auto"
+              />
+            </a>
+
+            <a href="/cart" className="relative p-2">
+              <ShoppingCart className="w-6 h-6 text-primary" />
+              <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                0
+              </span>
+            </a>
+          </div>
+        </div>
       </div>
-      <CartPopup isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-    </header>
+
+      {/* Navigation Bar - Desktop and Tablet */}
+      <nav className="hidden md:block bg-white shadow">
+        <div className="container mx-auto px-4">
+          <ul className="flex items-center space-x-4 lg:space-x-8 overflow-x-auto">
+            {categories.map((category) => (
+              <li key={category.name} className="whitespace-nowrap">
+                <a
+                  href={category.href}
+                  className={`px-3 py-4 text-gray-700 hover:text-orange-600 block ${category.className || ''}`}
+                >
+                  {category.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+    </div>
   );
 };
 
