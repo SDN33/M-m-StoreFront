@@ -123,9 +123,6 @@ const BlancProductsCards: React.FC = () => {
 
   const sortedProducts = sortProducts(filteredProducts, sortBy);
 
-  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortBy(event.target.value);
-  };
 
   const handleCheckboxChange = (filterType: string | number, selectedOptions: string[]) => {
     // Empêche l'utilisateur de modifier le filtre couleur
