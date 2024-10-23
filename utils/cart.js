@@ -16,7 +16,10 @@ export const addToCart = async (productId, qty = 1) => {
     // Étape 2 : Faire une requête POST pour ajouter un produit au panier
     const res = await wcApi.post('cart/add-item', {
       product_id: productId,
-      quantity: qty
+      quantity: qty,
+      variations_id: [],
+
+
     }, {
       headers: {
         'Content-Type': 'application/json',

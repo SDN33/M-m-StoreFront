@@ -5,9 +5,7 @@ interface AddToCartButtonProps {
   productId: number; // ID du produit à ajouter au panier
   quantity?: number; // Quantité à ajouter au panier
   onAddToCart?: (cartData: any) => void; // Callback pour notifier le parent
-  variation_id?: number; // ID de la variation du produit
-  variation: any; // Données de la variation
-  cart_item_data: any; // Données supplémentaires pour le produit
+  cart_item_data: { [key: string]: string }; // Données supplémentaires pour le produit
 }
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({
