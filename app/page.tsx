@@ -4,19 +4,16 @@ import React, { useEffect, useState } from 'react';
 import ProductsCards from '@/components/ProductsCards';
 import ProductFilter from '@/components/ProductFilters';
 
-interface Product {
-  id: number;
-  name: string;
-  categories: { name: string }[];
-  price: number;
-  date_added: string;
-  images: { src: string }[];
-  millesime?: string;
-  certification?: string;
-  region__pays?: string;
-  volume: string;
-  style?: string;
-  accord_mets?: string[];
+
+interface ProductFilter {
+  color: string[];
+  region: string[];
+  vintage: string[];
+  certification: string[];
+  style: string[];
+  volume: string[];
+  accord_mets: string[];
+  region__pays: string[];
 }
 
 export default function Home() {
@@ -30,6 +27,7 @@ export default function Home() {
     volume: string[];
     accord_mets: string[];
     region__pays: string[];
+    categories: string[];
   }>({
     color: [],
     region: [],
@@ -38,20 +36,12 @@ export default function Home() {
     style: [],
     volume: [],
     accord_mets: [],
-    region__pays: []
+    region__pays: [],
+    categories: []
   });
-  const [products, setProducts] = useState<Product[]>([]);
+
+
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await fetch('/api/products');
-      const data = await response.json();
-      setProducts(data);
-    };
-
-    fetchProducts();
-  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
@@ -74,12 +64,6 @@ export default function Home() {
     }));
   };
 
-  const filteredProducts = products.filter((product) => {
-    return Object.entries(selectedFilters).every(([category, filters]) => {
-      if (filters.length === 0) return true;
-      return product.categories.some((cat: { name: string }) => filters.includes(cat.name));
-    });
-  });
 
   return (
     <div className="flex flex-col min-h-screen">

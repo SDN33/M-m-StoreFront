@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductsCards from './ProductsCards'; // Importer le composant ProductsCards
+import ProductsCards from './ProductsCards';
 
 const Products: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const Products: React.FC = () => {
           accord_mets: [],
           region__pays: []
         }}
-      /> 
+      />
       <br />
       <br />
     </div>

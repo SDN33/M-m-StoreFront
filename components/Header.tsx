@@ -38,12 +38,12 @@ const Header = () => {
           {/* Desktop and Tablet View */}
           <div className="hidden md:flex items-center justify-between">
             {/* Logo */}
-            <a href="/" className="flex-shrink-0">
+            <a href="/" className="flex-shrink-0 ml-8">
               <Image
-                src="/images/logoblanc.png"
+                src="/images/logo3.svg"
                 alt="Logo"
-                width={200}
-                height={100}
+                width={150}
+                height={50}
               />
             </a>
 
@@ -79,7 +79,7 @@ const Header = () => {
                 </a>
                 <a className="relative">
                   <ShoppingCart onClick={toggleCartPopup} className="w-6 h-6 text-white font-semibold" />
-                  <span className="absolute -top-1 -right-1 bg-gray-400 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                     0
                   </span>
                 </a>

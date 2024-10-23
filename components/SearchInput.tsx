@@ -36,11 +36,12 @@ const SearchInput = () => {
   const [selectedFilters, setSelectedFilters] = useState<Set<string>>(new Set());
   const [showFilters, setShowFilters] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
-  const [showRecentSearches, setShowRecentSearches] = useState(false); // État pour le hover
+  const [showRecentSearches, setShowRecentSearches] = useState(false);
 
-  const resultsRef = useRef<HTMLDivElement>(null); // Référence pour la fermeture des pop-ups
-  const filtersRef = useRef<HTMLDivElement>(null); // Référence pour la fermeture des filtres
-  const recentSearchesRef = useRef<HTMLDivElement>(null); // Référence pour la fermeture des recherches récentes
+  const resultsRef = useRef<HTMLDivElement>(null);
+  const filtersRef = useRef<HTMLDivElement>(null);
+  const recentSearchesRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null); // Référence pour l'input de recherche
 
   const extractMetaData = (product: Product): FilteredProduct => {
     const metaDataMap: { [key: string]: string } = {};
@@ -60,7 +61,7 @@ const SearchInput = () => {
           metaDataMap.region__pays = meta.value;
           break;
         case '_couleur':
-          metaDataMap.categorie = meta.value; // Corrigé ici pour utiliser 'categorie'
+          metaDataMap.categorie = meta.value;
           break;
       }
     });
@@ -84,13 +85,11 @@ const SearchInput = () => {
     const normalizedInput = normalizeString(input);
     const normalizedText = normalizeString(text);
 
-    // Un score simple basé sur la présence de mots
     const inputWords = normalizedInput.split(' ');
     const textWords = normalizedText.split(' ');
 
-    // Compte des mots correspondants
     const matches = inputWords.filter(word => textWords.includes(word)).length;
-    return matches / inputWords.length; // Normaliser par la longueur de l'input
+    return matches / inputWords.length;
   };
 
   const debouncedSearch = useMemo(
@@ -130,10 +129,10 @@ const SearchInput = () => {
     const scoredResults = products
       .map(product => ({
         product,
-        score: getSimilarityScore(normalizedTerm, product.name) // Utilise le score de similarité
+        score: getSimilarityScore(normalizedTerm, product.name)
       }))
-      .filter(({ score }) => score > 0) // Filtrer uniquement les produits correspondants
-      .sort((a, b) => b.score - a.score); // Trier par score décroissant
+      .filter(({ score }) => score > 0)
+      .sort((a, b) => b.score - a.score);
 
     return scoredResults.map(({ product }) => product);
   };
@@ -168,14 +167,12 @@ const SearchInput = () => {
   }, []);
 
   useEffect(() => {
-    // Applique le filtre uniquement si searchTerm est rempli
     if (searchTerm.length >= 2 && results.length) {
       const filtered = filterResults(results, searchTerm);
       setResults(filtered);
     }
-  }, [results, searchTerm]); // Ajoutez searchTerm comme dépendance
+  }, [results, searchTerm]);
 
-  // Fermeture des popups quand on clique en dehors
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -184,11 +181,13 @@ const SearchInput = () => {
         filtersRef.current &&
         !filtersRef.current.contains(event.target as Node) &&
         recentSearchesRef.current &&
-        !recentSearchesRef.current.contains(event.target as Node)
+        !recentSearchesRef.current.contains(event.target as Node) &&
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node) // Vérifiez également l'input
       ) {
         setShowFilters(false);
         setResults([]);
-        setShowRecentSearches(false); // Ferme aussi les recherches récentes
+        setShowRecentSearches(false);
       }
     };
 
@@ -202,11 +201,12 @@ const SearchInput = () => {
     <div className="relative flex-grow mx-8 max-w-2xl">
       <div className="relative">
         <input
+          ref={inputRef} // Ajout de la référence à l'input
           type="text"
           value={searchTerm}
           onChange={handleSearchChange}
-          onMouseEnter={() => setShowRecentSearches(true)} // Affiche au hover
-          onMouseLeave={() => setTimeout(() => setShowRecentSearches(false), 2000)} // Masque après 2 secondes
+          onMouseEnter={() => setShowRecentSearches(true)}
+          onMouseLeave={() => setTimeout(() => setShowRecentSearches(false), 2000)}
           placeholder="Rechercher un vin, un château, une appellation..."
           className="w-full pl-4 pr-20 py-3 border rounded-full border-gray-400 text-primary focus:outline-none focus:border-orange-500"
         />
@@ -228,7 +228,6 @@ const SearchInput = () => {
         </div>
       </div>
 
-      {/* Filtres */}
       {showFilters && (
         <div ref={filtersRef} className="absolute top-full mt-2 w-full bg-white rounded-lg shadow-lg p-4 z-30">
           <div className="space-y-4">
@@ -237,7 +236,6 @@ const SearchInput = () => {
         </div>
       )}
 
-      {/* Résultats de recherche */}
       {results.length > 0 && (
         <div ref={resultsRef} className="absolute mt-2 w-full bg-white rounded-lg shadow-lg overflow-hidden z-20">
           {results.map((product, index) => (
@@ -271,7 +269,6 @@ const SearchInput = () => {
         </div>
       )}
 
-      {/* Recherches récentes */}
       {!searchTerm && recentSearches.length > 0 && showRecentSearches && (
         <div ref={recentSearchesRef} className="absolute mt-2 w-full bg-white rounded-lg shadow-lg p-4 z-20">
           <h3 className="text-sm font-semibold text-gray-500 mb-2">Recherches récentes</h3>
