@@ -131,7 +131,17 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                         className="form-checkbox h-4 w-4 text-primary rounded border-gray-300"
                       />
                       <span className="ml-2 text-sm">
-                        {option.label}
+                        {option.label === 'Bio' ? (
+                          <span className="flex items-center">
+                            {option.label} <Image src="/images/logobio.webp" alt="Bio" width={16} height={16} className="ml-1" />
+                          </span>
+                        ) : option.label === 'Biodynamie' ? (
+                          <span className="flex items-center">
+                            {option.label} <Image src="/images/biodemeter.png" alt="Biodynamie" width={50} height={16} className="ml-1" />
+                          </span>
+                        ) : (
+                          option.label
+                        )}
                       </span>
                     </div>
                   </label>
