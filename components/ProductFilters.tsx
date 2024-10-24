@@ -4,9 +4,8 @@ import { ChevronDown, ChevronUp, Wine, Locate, Calendar, Grape, Medal, Ruler, Ut
 
 interface ProductFilterProps {
   selectedFilters: {
-    color: string[];
-    region: string[];
-    vintage: string[];
+    categories: string[];
+    millesime: string[];
     certification: string[];
     style: string[];
     volume: string[];
@@ -19,7 +18,7 @@ interface ProductFilterProps {
 
 const getFilterTitle = (filterType: string) => {
   const titles: { [key: string]: JSX.Element } = {
-    color: <>COULEUR <br /><Wine className="inline-block ml-1" /></>,
+    categories: <>COULEUR <br /><Wine className="inline-block ml-1" /></>,
     region: <>RÉGIONS <br /><Locate className="inline-block ml-1" /></>,
     vintage: <>MILLÉSIME <br /><Calendar className="inline-block ml-1" /></>,
     certification: <>CERTIFICATION <br /><Medal className="inline-block ml-1" /></>,
@@ -102,7 +101,15 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       })}
 
       <div className="p-4">
-        <button onClick={() => onFilterChange('color', [])} className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-2 px-4 rounded hover:bg-orange-700 transition-colors">
+        <button onClick={() => {
+          onFilterChange('categories', []);
+          onFilterChange('region__pays', []);
+          onFilterChange('millesime', []);
+          onFilterChange('certification', []);
+          onFilterChange('style', []);
+          onFilterChange('volume', []);
+          onFilterChange('accord_mets', []);
+        }} className="w-full bg-primary text-white py-2 rounded-md hover:bg-primary-dark transition-colors">
           Réinitialiser
         </button>
       </div>

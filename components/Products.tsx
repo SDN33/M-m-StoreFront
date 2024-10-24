@@ -14,7 +14,8 @@ const Products: React.FC = () => {
           style: [],
           volume: [],
           accord_mets: [],
-          region__pays: []
+          region__pays: [],
+          categories: []
         }}
       />
       <br />

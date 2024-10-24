@@ -10,7 +10,6 @@ import Newletter from '@/components/Newletter';
 import ProductsIntro from '@/components/ProductIntro';
 import WineSelector from '@/components/WineSelector';
 import Filtertop from '@/components/Filtertop';
-import MobileProductFilter from '@/components/MobileProductFilter';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -22,6 +21,7 @@ export default function Home() {
     color: [],
     region: [],
     vintage: [],
+    millesime: [],
     certification: [],
     style: [],
     volume: [],
@@ -29,6 +29,21 @@ export default function Home() {
     region__pays: [],
     categories: []
   });
+
+  interface Product {
+    id: number;
+    name: string;
+    categories: { id: number; name: string }[];
+    price: number;
+    date_added: string;
+    millesime?: string[];
+    certification?: string;
+    region__pays?: string;
+    volume: string;
+    style?: string;
+    accord_mets?: string[];
+  }
+
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
@@ -72,7 +87,7 @@ export default function Home() {
 
     return (
       <div className="flex flex-col min-h-screen">
-        
+
         <div className="flex flex-1">
           <aside
             className={`w-64 bg-white border-r border-gray-200 ${isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out' : 'relative'} ${isMobile && !isFilterOpen ? '-translate-x-full' : 'translate-x-0'}`}
@@ -87,7 +102,7 @@ export default function Home() {
               }}
             >
               {/* Vous pouvez également cacher le ProductFilter si nécessaire sur mobile */}
-              {!isMobile && <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} />}
+              <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} />
             </div>
           </aside>
 

@@ -29,6 +29,8 @@ interface ProductsCardsProps {
     volume: string[];
     accord_mets: string[];
     region__pays: string[];
+    categories: string[];
+
   };
 }
 
@@ -75,7 +77,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
       volume.toLowerCase().trim() === (product.volume || '').toLowerCase().trim()
     );
     const isAccordMetsMatch = selectedFilters.accord_mets.length === 0 || selectedFilters.accord_mets.some(accordMets =>
-      (product.accord_mets || []).some(met => met.toLowerCase().trim() === accordMets.toLowerCase().trim())
+      (product.accord_mets ?? []).some(met => met.toLowerCase().trim() === accordMets.toLowerCase().trim())
     );
 
     return isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch && isStyleMatch && isVolumeMatch && isAccordMetsMatch;
@@ -108,8 +110,8 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
       ) : (
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {products.map(product => (
-             <ProductCard key={product.id} product={product} onAddToCart={() => onAddToCart(product.id, 1, 0)} />
+            {filteredProducts.slice(0, visibleCount).map(product => (
+              <ProductCard key={product.id} product={product} onAddToCart={() => onAddToCart(product.id, 1, 0)} />
             ))}
           </div>
 
@@ -127,6 +129,5 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
       )}
     </div>
   );
-};
-
+}
 export default ProductsCards;
