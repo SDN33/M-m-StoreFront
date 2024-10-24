@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import ProductFilter from '@/components/ProductFilters';
@@ -29,7 +30,6 @@ interface Product {
 }
 
 const BlancProductsCards: React.FC = () => {
-  const [sortBy, setSortBy] = useState<string>('');
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -41,7 +41,6 @@ const BlancProductsCards: React.FC = () => {
     style: string[];
     accord_mets: string[];
     region__pays: string[];
-    price: string[];
     volume: string[];
   }>({
     color: ['blanc'], // Bloqué sur la couleur blanc
@@ -51,7 +50,6 @@ const BlancProductsCards: React.FC = () => {
     style: [],
     accord_mets: [],
     region__pays: [],
-    price: [],
     volume: [],
   });
 
@@ -108,21 +106,9 @@ const BlancProductsCards: React.FC = () => {
 
   const filteredProducts = useMemo(() => products.filter(filterProducts), [products, filterProducts]);
 
-  const sortProducts = (products: Product[], sortBy: string) => {
-    switch (sortBy) {
-      case 'price-asc':
-        return [...products].sort((a, b) => a.price - b.price);
-      case 'price-desc':
-        return [...products].sort((a, b) => b.price - a.price);
-      case 'date-added':
-        return [...products].sort((a, b) => new Date(b.date_added).getTime() - new Date(a.date_added).getTime());
-      default:
-        return products;
-    }
+  const loadMoreProducts = () => {
+    setVisibleCount(prevCount => prevCount + 12);
   };
-
-  const sortedProducts = sortProducts(filteredProducts, sortBy);
-
 
   const handleCheckboxChange = (filterType: string | number, selectedOptions: string[]) => {
     // Empêche l'utilisateur de modifier le filtre couleur
@@ -133,16 +119,11 @@ const BlancProductsCards: React.FC = () => {
     }));
   };
 
-
-  const loadMoreProducts = () => {
-    setVisibleCount(prevCount => prevCount + 12);
-  };
-
   return (
     <div className="flex flex-col mr-4 lg:mr-16 md:-mt-8">
-=      <div className="flex flex-col md:flex-row mt-4">
+      <div className="flex flex-col md:flex-row mt-4">
         <div className="hidden md:block md:w-1/4 ml-16">
-        <ProductFilter
+          <ProductFilter
             selectedFilters={selectedFilters}
             onFilterChange={handleCheckboxChange}
             hideColorFilter
@@ -156,27 +137,26 @@ const BlancProductsCards: React.FC = () => {
           {loading && (
             <div className="flex flex-col items-center">
               <div className="loader"></div>
-              <p className="text-primary font-bold text-lg">Chargement des vins blancs...</p> {/* Texte modifié */}
+              <p className="text-primary font-bold text-lg">Chargement des vins blancs...</p>
             </div>
           )}
           {error && <p className="text-red-600">{error}</p>}
-          {sortedProducts.length === 0 && !loading && <p>Aucun vin blanc trouvé.</p>} {/* Texte modifié */}
+          {filteredProducts.length === 0 && !loading && <p>Aucun vin blanc trouvé.</p>}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6 -mt-10">
-            {sortedProducts.slice(0, visibleCount).map(product => (
+            {filteredProducts.slice(0, visibleCount).map(product => (
               <ProductCard key={product.id} product={product} onAddToCart={async (productId, quantity) => {
-                // Implement your onAddToCart logic here
                 console.log(`Added product ${productId} with quantity ${quantity} to cart`);
                 return Promise.resolve();
               }} />
             ))}
           </div>
-          {sortedProducts.length > visibleCount && (
+          {filteredProducts.length > visibleCount && (
             <div className="flex justify-center mt-4">
               <button
                 onClick={loadMoreProducts}
                 className="bg-primary text-white py-2 px-4 rounded hover:bg-primary"
               >
-                Voir Plus de Vins Blancs {/* Texte modifié */}
+                Voir Plus de Vins Blancs
               </button>
             </div>
           )}
