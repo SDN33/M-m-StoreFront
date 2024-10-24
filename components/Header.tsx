@@ -63,8 +63,8 @@ const Header = () => {
               </div>
 
               <a href=":" className="hidden lg:flex items-center text-sm hover:text-primary">
-                <User className="w-5 h-5 mr-1 text-white font-semibold" />
-                <span className='font-semibold' >Espace pro</span>
+                <User className="w-5 h-5 mr-1  font-semibold" />
+                <span className='font-semibold ml-1' >Espace pro</span>
               </a>
 
               <a href="/faq" className="hidden lg:block text-sm  font-semibold hover:text-primary">
