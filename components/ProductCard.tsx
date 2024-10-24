@@ -40,14 +40,44 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   };
 
   const formatRating = (rating?: number) => {
-    return rating ? (rating / 5 * 20).toFixed(1) : "pas encore noté";
+    return rating ? (rating / 5 * 20).toFixed(1) : "pas encore d'avis";
   };
+
+  const cleanHTMLTags = (description?: string) => {
+    if (!description) return '';
+    return description.replace(/<\/?[^>]+(>|$)/g, ""); // Supprimer toutes les balises HTML
+  };
+
+  // Génération du titre en fonction du prix
+  const generateTitle = () => {
+    if (product.price < 6) {
+      return `Le vin ${product.categories[0]?.name || 'de Mémé'} - Bon plan de mémé`;
+    } else if (product.price >= 6 && product.price < 20) {
+      return `Le prestigieux vin ${product.categories[0]?.name || 'raffiné'}`;
+    } else {
+      return `L'excellence de ${product.categories[0]?.name || 'la cave'}`;
+    }
+  };
+
+  // Génération d'une dizaine de slogans personnalisés
+  const slogans = [
+    "Un vin à savourer en toute occasion",
+    "La sélection unique de mémé",
+    "Un cru exceptionnel pour les connaisseurs",
+    "Le choix des gourmets à petit prix",
+    "Le meilleur rapport qualité-prix",
+    "Un vin qui fait plaisir sans se ruiner",
+    "L'ami de vos apéros et repas de fête",
+    "Un classique indémodable à découvrir",
+    "L'élégance à portée de main",
+    "Le charme discret de la tradition",
+  ];
 
   return (
     <div className="w-full max-w-[300px] bg-white rounded-lg overflow-hidden shadow-md">
       {/* Header - Purple Banner */}
-      <div className="bg-primary text-white p-2 text-center font-semibold">
-        Le {product.categories[0]?.name || 'Vin'} Imbattable
+      <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-black text-primary p-2 text-center font-semibold">
+        {generateTitle()} - {slogans[Math.floor(Math.random() * slogans.length)]}
       </div>
 
       {/* Main Content */}
@@ -101,30 +131,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </p>
         <p className="text-sm mb-4 text-gray-700">
           {(() => {
-            const shortDescription = product.short_description || '';
+            const shortDescription = cleanHTMLTags(product.short_description);
             const maxLength = 100;
 
-            // Si la description est plus courte ou égale à 100 caractères, pas besoin de couper.
             if (shortDescription.length <= maxLength) return shortDescription;
 
-            // Trouve le dernier espace avant la limite des 100 caractères.
             const lastSpaceIndex = shortDescription.substring(0, maxLength).lastIndexOf(' ');
-
-            // Coupe à cet espace pour ne pas couper en plein milieu d'un mot.
             const truncatedDescription = shortDescription.substring(0, lastSpaceIndex);
 
-            return `${truncatedDescription}... `;
+            return (
+              <>
+                {truncatedDescription}...{' '}
+                <a href={`/product/${product.id}`} className="text-blue-500 hover:underline">
+                  voir plus
+                </a>
+              </>
+            );
           })()}
-          <a href={`/product/${product.id}`} className="text-blue-500 hover:underline">
-            voir plus
-          </a>
         </p>
-
-        {/* Delivery Badge */}
-        <div className="bg-teal-500 text-white text-sm p-2 rounded-md flex items-center gap-2 mb-4">
-          <span>🚚</span>
-          <span>Produit en livraison 24H OFFERTE</span>
-        </div>
 
         {/* Price Section */}
         <div className="flex items-center justify-between mb-4">

@@ -62,26 +62,61 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
   }, []);
 
   const filterProducts = useCallback((product: Product) => {
-    const isColorMatch = selectedFilters.color.length === 0 || selectedFilters.color.includes(product.categories[0]?.name || '');
-    const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millesime || '');
-    const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.some(region =>
-      region.toLowerCase().trim() === (product.region__pays || '').toLowerCase().trim()
-    );
-    const isCertificationMatch = selectedFilters.certification.length === 0 || selectedFilters.certification.some(certification =>
-      certification.toLowerCase().trim() === (product.certification || '').toLowerCase().trim()
-    );
-    const isStyleMatch = selectedFilters.style.length === 0 || selectedFilters.style.some(style =>
-      style.toLowerCase().trim() === (product.style || '').toLowerCase().trim()
-    );
-    const isVolumeMatch = selectedFilters.volume.length === 0 || selectedFilters.volume.some(volume =>
-      volume.toLowerCase().trim() === (product.volume || '').toLowerCase().trim()
-    );
-    const isAccordMetsMatch = selectedFilters.accord_mets.length === 0 || selectedFilters.accord_mets.some(accordMets =>
-      (product.accord_mets ?? []).some(met => met.toLowerCase().trim() === accordMets.toLowerCase().trim())
-    );
+    const isColorMatch =
+      selectedFilters.color.length === 0 ||
+      selectedFilters.color.some((selectedColor) =>
+        product.categories?.some((category) =>
+          category.name?.toLowerCase().trim() === selectedColor.toLowerCase().trim()
+        )
+      );
 
-    return isColorMatch && isRegionMatch && isVintageMatch && isCertificationMatch && isStyleMatch && isVolumeMatch && isAccordMetsMatch;
+    const isVintageMatch =
+      selectedFilters.vintage.length === 0 ||
+      selectedFilters.vintage.includes(product.millesime || '');
+
+    const isRegionMatch =
+      selectedFilters.region.length === 0 ||
+      selectedFilters.region.some((region) =>
+        region.toLowerCase().trim() === (product.region__pays || '').toLowerCase().trim()
+      );
+
+    const isCertificationMatch =
+      selectedFilters.certification.length === 0 ||
+      selectedFilters.certification.some((certification) =>
+        certification.toLowerCase().trim() === (product.certification || '').toLowerCase().trim()
+      );
+
+    const isStyleMatch =
+      selectedFilters.style.length === 0 ||
+      selectedFilters.style.some((style) =>
+        style.toLowerCase().trim() === (product.style || '').toLowerCase().trim()
+      );
+
+    const isVolumeMatch =
+      selectedFilters.volume.length === 0 ||
+      selectedFilters.volume.some((volume) =>
+        volume.toLowerCase().trim() === (product.volume || '').toLowerCase().trim()
+      );
+
+    const isAccordMetsMatch =
+      selectedFilters.accord_mets.length === 0 ||
+      selectedFilters.accord_mets.some((accordMets) =>
+        (product.accord_mets ?? []).some((met) =>
+          met.toLowerCase().trim() === accordMets.toLowerCase().trim()
+        )
+      );
+
+    return (
+      isColorMatch &&
+      isVintageMatch &&
+      isRegionMatch &&
+      isCertificationMatch &&
+      isStyleMatch &&
+      isVolumeMatch &&
+      isAccordMetsMatch
+    );
   }, [selectedFilters]);
+
 
   const filteredProducts = useMemo(() => products.filter(filterProducts), [products, filterProducts]);
 
