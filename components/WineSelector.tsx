@@ -9,7 +9,7 @@ const WineSelector = () => {
     { color: 'rouge', name: 'Rou', bg: 'bg-red-800', path: '/products/category/rouge', fullName: 'Rouges' },
     { color: 'blanc', name: 'Bla', bg: 'bg-yellow-500', path: '/products/category/blanc', fullName: 'Blancs' },
     { color: 'rose', name: 'Ros', bg: 'bg-pink-400', path: '/products/category/rose', fullName: 'Rosés' },
-    { color: 'petillant', name: 'Pét', bg: 'bg-yellow-200', path: '/products/category/petillant', fullName: 'Pétillants' },
+    { color: 'petillant', name: 'Pét', bg: 'bg-teal-500', path: '/products/category/petillant', fullName: 'Pétillants' },
     { color: 'liquoreux', name: 'Liq', bg: 'bg-amber-600', path: '/products/category/liquoreux', fullName: 'Liquoreux' }
   ];
 
