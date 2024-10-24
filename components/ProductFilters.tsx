@@ -19,16 +19,16 @@ interface ProductFilterProps {
 }
 
 const getFilterTitle = (filterType: string) => {
-  const titles: { [key: string]: string } = {
-    color: 'COULEUR',
-    region: 'RÉGIONS',
-    vintage: 'MILLÉSIME',
-    certification: 'CERTIFICATION',
-    style: 'STYLE',
-    volume: 'VOLUME',
-    accord_mets: 'ACCORD METS',
+  const titles: { [key: string]: JSX.Element } = {
+    color: <>COULEUR <br /><Wine className="inline-block ml-1" /></>,
+    region: <>RÉGIONS <br /><Locate className="inline-block ml-1" /></>,
+    vintage: <>MILLÉSIME <br /><Calendar className="inline-block ml-1" /></>,
+    certification: <>CERTIFICATION <br /><Medal className="inline-block ml-1" /></>,
+    style: <>STYLE <br /><Grape className="inline-block ml-1" /></>,
+    volume: <>VOLUME <br /><Ruler className="inline-block ml-1" /></>,
+    accord_mets: <>ACCORD METS <br /><Utensils className="inline-block ml-1" /></>,
   };
-  return titles[filterType] || filterType;
+  return titles[filterType] || <>{filterType}</>;
 };
 
 const filterOptions = {

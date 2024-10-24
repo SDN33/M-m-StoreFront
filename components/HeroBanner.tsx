@@ -1,6 +1,4 @@
 
-import { Play } from 'lucide-react';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const slogans = [
@@ -13,7 +11,6 @@ const slogans = [
 ];
 
 const HeroBanner = () => {
-  const [videoError, setVideoError] = useState(false);
   const [currentSlogan, setCurrentSlogan] = useState(0);
 
   useEffect(() => {
