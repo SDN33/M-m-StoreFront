@@ -69,16 +69,16 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div className="hidden sm:block bg-transparent h-full w-52 ml-10 overflow-y-auto mt-56 bg-white">
+    <div className="hidden sm:block bg-transparent h-full w-52 ml-10 overflow-y-auto mt-56 bg-accent">
       {Object.entries(filterOptions).map(([filterType, options]) => {
         if (hideColorFilter && filterType === 'color') return null;
         return (
           <div key={filterType} className="border-b border-gray-200">
             <button
               onClick={() => toggleSection(filterType)}
-              className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between hover:bg-gray-50"
+              className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between"
             >
-              <span className="text-primary">{getFilterTitle(filterType)}</span>
+              <span>{getFilterTitle(filterType)}</span>
               {expandedSections.includes(filterType) ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
             </button>
             {expandedSections.includes(filterType) && (
@@ -96,6 +96,10 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                         {option === 'Bio' ? (
                           <span className="flex items-center">
                             {option} <Image src="/images/logobio.webp" alt="Bio" width={16} height={16} className="ml-1" />
+                          </span>
+                        ) : option === 'Biodynamie' ? (
+                          <span className="flex items-center">
+                            {option} <Image src="/images/biodemeter.png" alt="Biodynamie" width={50} height={16} className="ml-1" />
                           </span>
                         ) : (
                           option
