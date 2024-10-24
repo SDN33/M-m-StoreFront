@@ -44,6 +44,8 @@ const PetillantProductsCards: React.FC = () => {
     region__pays: string[];
     price: string[];
     volume: string[];
+    categories: string[];
+    millesime: string[];
   }>({
     color: ['pétillant'], // Bloqué sur la catégorie pétillant
     region: [],
@@ -54,6 +56,8 @@ const PetillantProductsCards: React.FC = () => {
     region__pays: [],
     price: [],
     volume: [],
+    categories: ['pétillant'],
+    millesime: [],
   });
 
   const [visibleCount, setVisibleCount] = useState<number>(12);
@@ -148,6 +152,8 @@ const PetillantProductsCards: React.FC = () => {
       region__pays: [],
       price: [],
       volume: [],
+      categories: ['pétillant'],
+      millesime: [],
     });
     setSortBy('');
     setVisibleCount(12);

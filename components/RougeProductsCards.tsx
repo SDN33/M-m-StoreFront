@@ -36,8 +36,10 @@ const RougeProductsCards: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedFilters, setSelectedFilters] = useState<{
-    color: string[]; // Force la couleur à être 'rouge'
+    categories: string[]; // Force la couleur à être 'rouge'
     region: string[];
+    millesime: string[];
+    color: string[];
     vintage: string[];
     certification: string[];
     style: string[];
@@ -46,9 +48,11 @@ const RougeProductsCards: React.FC = () => {
     price: string[];
     volume: string[];
   }>({
+    categories: ['rouge'], // Force la couleur à être 'rouge'
+    millesime: [],
     color: ['rouge'], // Bloqué sur la couleur rouge
-    region: [],
     vintage: [],
+    region: [],
     certification: [],
     style: [],
     accord_mets: [],
@@ -83,7 +87,7 @@ const RougeProductsCards: React.FC = () => {
   }, []);
 
   const filterProducts = useCallback((product: Product) => {
-    const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millesime || '');
+    const isVintageMatch = selectedFilters.millesime.length === 0 || selectedFilters.millesime.includes(product.millesime || '');
 
     const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.some(region =>
         region.toLowerCase().trim() === (product.region__pays || '').toLowerCase().trim()
@@ -141,8 +145,10 @@ const RougeProductsCards: React.FC = () => {
 
   const resetFilters = () => {
     setSelectedFilters({
-      color: ['rouge'], // Réinitialise les filtres à uniquement rouge
+      categories: ['rouge'], // Réinitialise les filtres à uniquement rouge
       region: [],
+      millesime: [],
+      color: ['rouge'], // Bloqué sur la couleur rouge
       vintage: [],
       certification: [],
       style: [],

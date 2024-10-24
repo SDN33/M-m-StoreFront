@@ -37,6 +37,8 @@ const LiquoreuxProductsCards: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState<{
     color: string[];
     region: string[];
+    categories: string[];
+    millesime: string[];
     vintage: string[];
     certification: string[];
     style: string[];
@@ -47,6 +49,8 @@ const LiquoreuxProductsCards: React.FC = () => {
   }>({
     color: ['liquoreux'],
     region: [],
+    categories: [],
+    millesime: [],
     vintage: [],
     certification: [],
     style: [],
@@ -82,7 +86,7 @@ const LiquoreuxProductsCards: React.FC = () => {
   }, []);
 
   const filterProducts = useCallback((product: Product) => {
-    const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millesime || '');
+    const isVintageMatch = selectedFilters.millesime.length === 0 || selectedFilters.millesime.includes(product.millesime || '');
 
     const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.some(region =>
         region.toLowerCase().trim() === (product.region__pays || '').toLowerCase().trim()
@@ -138,16 +142,18 @@ const LiquoreuxProductsCards: React.FC = () => {
 
   const resetFilters = () => {
     setSelectedFilters({
-      color: ['liquoreux'],
-      region: [],
-      vintage: [],
-      certification: [],
-      style: [],
-      accord_mets: [],
-      region__pays: [],
-      price: [],
-      volume: [],
-    });
+          color: ['liquoreux'],
+          region: [],
+          certification: [],
+          style: [],
+          accord_mets: [],
+          region__pays: [],
+          price: [],
+          volume: [],
+          millesime: [],
+          categories: [],
+          vintage: [],
+        });
     setSortBy('');
     setVisibleCount(12);
   };

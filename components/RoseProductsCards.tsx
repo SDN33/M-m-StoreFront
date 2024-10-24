@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import ProductFilter from '@/components/ProductFilters';
 import FilterTop from './Filtertop';
-import ProductCard from './ProductCard';
+import ProductCard from './ProductCard'; // Ensure this import is correct and the path is accurate
 import MobileProductFilter from './MobileProductFilter';
 
 interface Product {
@@ -36,8 +36,10 @@ const RoseProductsCards: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [selectedFilters, setSelectedFilters] = useState<{
     color: string[]; // Force la couleur à être 'rose'
-    region: string[];
+    categories: string[];
+    millesime: string[];
     vintage: string[];
+    region: string[];
     certification: string[];
     style: string[];
     accord_mets: string[];
@@ -46,12 +48,14 @@ const RoseProductsCards: React.FC = () => {
     volume: string[];
   }>({
     color: ['rose'], // Bloqué sur la couleur rose
-    region: [],
+    millesime: [],
     vintage: [],
+    region: [],
+    categories: [],
+    region__pays: [],
     certification: [],
     style: [],
     accord_mets: [],
-    region__pays: [],
     price: [],
     volume: [],
   });
@@ -82,9 +86,9 @@ const RoseProductsCards: React.FC = () => {
   }, []);
 
   const filterProducts = useCallback((product: Product) => {
-    const isVintageMatch = selectedFilters.vintage.length === 0 || selectedFilters.vintage.includes(product.millesime || '');
+    const isVintageMatch = selectedFilters.millesime.length === 0 || selectedFilters.millesime.includes(product.millesime || '');
 
-    const isRegionMatch = selectedFilters.region.length === 0 || selectedFilters.region.some(region =>
+    const isRegionMatch = selectedFilters.region__pays.length === 0 || selectedFilters.region__pays.some(region =>
         region.toLowerCase().trim() === (product.region__pays || '').toLowerCase().trim()
     );
 
@@ -139,16 +143,18 @@ const RoseProductsCards: React.FC = () => {
 
   const resetFilters = () => {
     setSelectedFilters({
-      color: ['rose'], // Réinitialise les filtres à uniquement rose
-      region: [],
-      vintage: [],
-      certification: [],
-      style: [],
-      accord_mets: [],
-      region__pays: [],
-      price: [],
-      volume: [],
-    });
+          color: ['rose'], // Réinitialise les filtres à uniquement rose
+          categories: [],
+          millesime: [],
+          vintage: [],
+          region: [],
+          certification: [],
+          style: [],
+          accord_mets: [],
+          region__pays: [],
+          price: [],
+          volume: [],
+        });
     setSortBy('');
     setVisibleCount(12);
   };
@@ -183,11 +189,15 @@ const RoseProductsCards: React.FC = () => {
           {sortedProducts.length === 0 && !loading && <p>Aucun vin rosé trouvé.</p>}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6 -mt-10">
             {sortedProducts.slice(0, visibleCount).map(product => (
-              <ProductCard key={product.id} product={product} onAddToCart={async (productId, quantity) => {
-                // Implement the onAddToCart functionality here
-                console.log(`Added product ${productId} with quantity ${quantity} to cart`);
-                return Promise.resolve();
-              }} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={async (productId: number, quantity: number) => {
+                  // Implement the onAddToCart functionality here
+                  console.log(`Added product ${productId} with quantity ${quantity} to cart`);
+                  return Promise.resolve();
+                }}
+              />
             ))}
           </div>
           {sortedProducts.length > visibleCount && (
