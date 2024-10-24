@@ -1,4 +1,3 @@
-'use client';
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, Wine, Locate, Calendar, Grape, Medal, Ruler, Utensils } from 'lucide-react';
 import Image from 'next/image';
@@ -31,20 +30,59 @@ const getFilterTitle = (filterType: string) => {
 };
 
 const filterOptions = {
-  color: ['Rouge 🔴', 'Blanc 🟡', 'Rosé ⭕', 'Pétillant 🫧', 'Liquoreux 🟠', 'Autres'],
+  color: [
+    { label: 'Rouge 🔴', value: 'Rouge' },
+    { label: 'Blanc 🟡', value: 'Blanc' },
+    { label: 'Rosé ⭕', value: 'Rosé' },
+    { label: 'Pétillant 🫧', value: 'Pétillant' },
+    { label: 'Liquoreux 🟠', value: 'Liquoreux' },
+    { label: 'Autres', value: 'Autres' },
+  ],
   region: [
-    'Alsace', 'Beaujolais', 'Bourgogne', 'Bordeaux', 'Champagne', 'Jura',
-    'Languedoc', 'Loire', 'PACA', 'Roussillon', 'Savoie', 'Sud Ouest',
-    'Vallée du Rhône', 'Italie', 'Espagne', 'Portugal', 'Allemagne',
+    { label: 'Alsace', value: 'Alsace' },
+    { label: 'Beaujolais', value: 'Beaujolais' },
+    { label: 'Bourgogne', value: 'Bourgogne' },
+    { label: 'Bordeaux', value: 'Bordeaux' },
+    { label: 'Champagne', value: 'Champagne' },
+    { label: 'Jura', value: 'Jura' },
+    { label: 'Languedoc', value: 'Languedoc' },
+    { label: 'Loire', value: 'Loire' },
+    { label: 'PACA', value: 'PACA' },
+    { label: 'Roussillon', value: 'Roussillon' },
+    { label: 'Savoie', value: 'Savoie' },
+    { label: 'Sud Ouest', value: 'Sud Ouest' },
+    { label: 'Vallée du Rhône', value: 'Vallée du Rhône' },
+    { label: 'Italie', value: 'Italie' },
+    { label: 'Espagne', value: 'Espagne' },
+    { label: 'Portugal', value: 'Portugal' },
+    { label: 'Allemagne', value: 'Allemagne' },
   ],
   certification: [
-    'Bio',
-    'Biodynamie',
-    'En conversion 🔄 '
+    { label: 'Bio', value: 'Bio' },
+    { label: 'Biodynamie', value: 'Biodynamie' },
+    { label: 'En conversion 🔄', value: 'En conversion' },
   ],
-  style: ['Charpenté', 'Fruité', 'Moelleux', 'Corsé', 'Sec'],
-  volume: ['75 cl', '1 Litre', 'Autres'],
-  accord_mets: ['Viandes rouges 🥩', 'Viandes blanches 🍗', 'Poissons 🐟', 'Fruits de mer 🦪', 'Fromages 🧀', 'Desserts / Sucré 🍰', 'Plats végétariens 🥗'],
+  style: [
+    { label: 'Charpenté', value: 'Charpenté' },
+    { label: 'Fruité', value: 'Fruité' },
+    { label: 'Moelleux', value: 'Moelleux' },
+    { label: 'Corsé', value: 'Corsé' },
+    { label: 'Sec', value: 'Sec' },
+  ],
+  volume: [
+    { label: '75 cl', value: '75 cl' },
+    { label: '1 Litre', value: '1 Litre' },
+    { label: 'Autres', value: 'Autres' },
+  ],
+  accord_mets: [
+    { label: 'Viandes rouges 🥩', value: 'Viandes rouges' },
+    { label: 'Viandes blanches 🍗', value: 'Viandes blanches' },
+    { label: 'Poissons 🐟', value: 'Poissons' },
+    { label: 'Fruits de mer 🦪', value: 'Fruits de mer' },
+    { label: 'Fromages 🧀', value: 'Fromages' },
+    { label: 'Desserts / Sucré 🍰', value: 'Desserts / Sucré' },
+    { label: 'Plats végétariens 🥗', value: 'Plats végétariens' },
+  ],
 };
 
 const ProductFilter: React.FC<ProductFilterProps> = ({
@@ -60,11 +98,11 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     );
   };
 
-  const handleCheckboxChange = (filterType: keyof ProductFilterProps['selectedFilters'], option: string) => {
+  const handleCheckboxChange = (filterType: keyof ProductFilterProps['selectedFilters'], option: { label: string, value: string }) => {
     const currentOptions = selectedFilters[filterType] ?? [];
-    const updatedOptions = currentOptions.includes(option)
-      ? currentOptions.filter((item) => item !== option)
-      : [...currentOptions, option];
+    const updatedOptions = currentOptions.includes(option.value)
+      ? currentOptions.filter((item) => item !== option.value)
+      : [...currentOptions, option.value];
     onFilterChange(filterType, updatedOptions);
   };
 
@@ -84,31 +122,20 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
             {expandedSections.includes(filterType) && (
               <div className="p-4 space-y-2 bg-white">
                 {options.map((option) => (
-                  <label key={option} className="flex items-center justify-between cursor-pointer hover:bg-gray-100 p-2 rounded">
+                  <label key={option.value} className="flex items-center justify-between cursor-pointer hover:bg-gray-100 p-2 rounded">
                     <div className="flex items-center">
                       <input
                         type="checkbox"
-                        checked={selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']].includes(option)}
+                        checked={selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']].includes(option.value)}
                         onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
                         className="form-checkbox h-4 w-4 text-primary rounded border-gray-300"
                       />
                       <span className="ml-2 text-sm">
-                        {option === 'Bio' ? (
-                          <span className="flex items-center">
-                            {option} <Image src="/images/logobio.webp" alt="Bio" width={16} height={16} className="ml-1" />
-                          </span>
-                        ) : option === 'Biodynamie' ? (
-                          <span className="flex items-center">
-                            {option} <Image src="/images/biodemeter.png" alt="Biodynamie" width={50} height={16} className="ml-1" />
-                          </span>
-                        ) : (
-                          option
-                        )}
+                        {option.label}
                       </span>
                     </div>
                   </label>
                 ))}
-                <br /><br />
                 <br /><br />
               </div>
             )}
