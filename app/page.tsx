@@ -71,8 +71,9 @@ export default function Home() {
           <br /><br /><br /><br />
           <br /><br /><br /><br />
           <HeroBanner />
-          <ProductsIntro />
           <WineSelector />
+          <ProductsIntro />
+
           <Filtertop
             sortBy="default"
             handleSortChange={(event: React.ChangeEvent<HTMLSelectElement>) => console.log(event.target.value)}
