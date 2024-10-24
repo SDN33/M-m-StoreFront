@@ -40,7 +40,7 @@ const filterOptions = {
   certification: ['Bio', 'Biodynamie', 'En conversion'],
   style: ['Charpenté', 'Fruité', 'Moelleux', 'Corsé', 'Sec'],
   volume: ['75 cl', '1 Litre', 'Autres'],
-  accord_mets: ['Viandes rouges', 'Viandes blanches', 'Poissons', 'Fruits de mer', 'Fromages', 'Desserts / Sucré', 'Plats végétariens'],
+  accord_mets: ['Viandes rouges 🥩', 'Viandes blanches 🍗', 'Poissons 🐟', 'Fruits de mer 🦪', 'Fromages 🧀', 'Desserts / Sucré  🍰', 'Plats végétariens 🥗'],
 };
 
 const ProductFilter: React.FC<ProductFilterProps> = ({
