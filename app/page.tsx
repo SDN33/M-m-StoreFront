@@ -105,7 +105,6 @@ export default function Home() {
               <br /><br /><br /><br />
               <br /><br /><br /><br />
               <ProductsIntro />
-              <HeroBanner />
               <WineSelector />
               <div className="max-w-7xl mx-auto px-4 space-y-8">
                 <section className="bg-white rounded-lg shadow">
@@ -123,6 +122,7 @@ export default function Home() {
                 muted
                 playsInline
               />
+              <HeroBanner />
               <Livraison />
               <Slogan />
               <Newletter />
