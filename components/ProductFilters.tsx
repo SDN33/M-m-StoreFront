@@ -1,6 +1,6 @@
 'use client';
 import React, { useState} from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, Wine, Locate, Calendar, Grape, Medal, Ruler, Utensils} from 'lucide-react';
 import WineSelector from './WineSelector';
 
 interface ProductFilterProps {
@@ -21,7 +21,7 @@ interface ProductFilterProps {
 const getFilterTitle = (filterType: string) => {
   const titles: { [key: string]: string } = {
     color: 'COULEUR',
-    region: 'RÉGION',
+    region: 'RÉGIONS',
     vintage: 'MILLÉSIME',
     certification: 'CERTIFICATION',
     style: 'STYLE',
@@ -98,7 +98,43 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
               onClick={() => toggleSection(filterType)}
               className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between hover:bg-gray-50"
             >
-              <span>{getFilterTitle(filterType)}</span>
+              <span>
+                {filterType === 'color' && (
+                  <>
+                    {getFilterTitle(filterType)} <Wine />
+                  </>
+                )}
+                {filterType === 'region' && (
+                  <>
+                    {getFilterTitle('RÉGIONS')} <Locate />
+                  </>
+                )}
+                {filterType === 'vintage' && (
+                  <>
+                    {getFilterTitle('MILLÉSIME')} <Calendar />
+                  </>
+                )}
+                {filterType === 'certification' && (
+                  <>
+                    {getFilterTitle('CERTIFICATION')} <Medal />
+                  </>
+                )}
+                {filterType === 'style' && (
+                  <>
+                    {getFilterTitle('STYLE')} <Grape />
+                  </>
+                )}
+                {filterType === 'volume' && (
+                  <>
+                    {getFilterTitle('VOLUME')} <Ruler />
+                  </>
+                )}
+                {filterType === 'accord_mets' && (
+                  <>
+                    {getFilterTitle('ACCORD METS')} <Utensils />
+                  </>
+                )}
+              </span>
               {expandedSections.includes(filterType) ?
                 <ChevronUp className="w-5 h-5 text-gray-500" /> :
                 <ChevronDown className="w-5 h-5 text-gray-500" />
