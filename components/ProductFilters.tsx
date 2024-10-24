@@ -18,7 +18,7 @@ interface ProductFilterProps {
 
 const getFilterTitle = (filterType: string) => {
   const titles: { [key: string]: JSX.Element } = {
-    categories: <>COULEUR <br /><Wine className="inline-block ml-1" /></>,
+    color: <>COULEUR <br /><Wine className="inline-block ml-1" /></>,
     region: <>RÉGIONS <br /><Locate className="inline-block ml-1" /></>,
     vintage: <>MILLÉSIME <br /><Calendar className="inline-block ml-1" /></>,
     certification: <>CERTIFICATION <br /><Medal className="inline-block ml-1" /></>,

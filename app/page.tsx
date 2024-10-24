@@ -9,7 +9,8 @@ import Livraison from '@/components/Livraison';
 import Newletter from '@/components/Newletter';
 import ProductsIntro from '@/components/ProductIntro';
 import WineSelector from '@/components/WineSelector';
-import Filtertop from '@/components/Filtertop';
+// Removed import for Video as we will use the HTML video element
+
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -106,17 +107,22 @@ export default function Home() {
               <HeroBanner />
               <WineSelector />
               <ProductsIntro />
-
-              <Filtertop
-                sortBy="default"
-                handleSortChange={(event: React.ChangeEvent<HTMLSelectElement>) => console.log(event.target.value)}
-                resetFilters={() => console.log('Filters reset')}
-              />
               <div className="max-w-7xl mx-auto px-4 py-6 space-y-8">
                 <section className="bg-white rounded-lg shadow">
                   <ProductsCards selectedFilters={selectedFilters} />
                 </section>
               </div>
+              <video
+                src="../videos/minibanner.mp4"
+                title="Vidéo de présentation"
+                className="w-full h-96"
+                width={1920}
+                height={1080}
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
               <Livraison />
               <Slogan />
               <Newletter />

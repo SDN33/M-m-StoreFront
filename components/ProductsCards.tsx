@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
+import Filtertop from './Filtertop';
 
 interface Product {
   id: number;
@@ -95,7 +96,13 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
   };
 
   return (
-    <div className="flex-1 px-4 lg:px-6">
+    <div className="flex-1 px-8 lg:px-6">
+      <Filtertop
+        sortBy="default"
+        handleSortChange={() => {}}
+        resetFilters={() => {}}
+      />
+      <br />
       {loading ? (
         <div className="flex items-center justify-center min-h-[200px]">
           <div className="flex items-center space-x-2">
