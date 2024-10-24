@@ -139,14 +139,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
                 ? 'du Sud-Ouest'
                 : 'de ' + product.region__pays.charAt(0).toUpperCase() + product.region__pays.slice(1).toLowerCase()
               : '';
-        
+
             const millesime = product.millesime ? ` millésimé en ${product.millesime}` : '';
             const chateau = product.nom_chateau ? ` par ${product.nom_chateau}` : '';
-        
+
             return `Un ${product.categories[0]?.name || 'vin'} ${product.appelation || ''} ${region}${millesime}${chateau}`;
           })()}
         </p>
-        
+
 
 
         {/* Price Section */}
@@ -163,7 +163,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             </div>
           </div>
           <div className="text-gray-500">
-            <div className="text-sm">à l'unité</div>
+            <div className="text-sm">à l&apos;unité</div>
             <div className="text-lg">{(product.price * 1.2).toFixed(2)}€</div>
           </div>
         </div>
