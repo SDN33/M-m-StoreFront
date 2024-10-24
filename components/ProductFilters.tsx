@@ -83,7 +83,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
             </button>
             {expandedSections.includes(filterType) && (
               <div className="p-4 space-y-2 bg-white">
-                {options.map((option, index) => (
+                {options.map((option) => (
                   <label key={option} className="flex items-center justify-between cursor-pointer hover:bg-gray-100 p-2 rounded">
                     <div className="flex items-center">
                       <input
