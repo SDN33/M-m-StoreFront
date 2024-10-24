@@ -121,9 +121,9 @@ const Header = () => {
       {/* Navigation Bar - Desktop and Tablet */}
       <nav className="hidden md:block bg-white shadow-lg">
         <div className="container mx-auto px-4">
-          <ul className="flex items-center space-x-4 lg:space-x-8 overflow-x-auto text-gray-900">
+          <ul className="flex items-center space-x-4 lg:space-x-8 overflow-x-auto">
             {categories.map((category) => (
-              <li key={category.name} className="whitespace-nowrap font-bold text-gray-900">
+              <li key={category.name} className="whitespace-nowrap font-bold">
                 <a
                   href={category.href}
                   className={`px-3 py-4 text-gray-900 hover:text-primary block ${category.className || ''}`}

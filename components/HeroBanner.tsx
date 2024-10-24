@@ -8,15 +8,12 @@ const HeroBanner = () => {
 
 
   return (
-    <div className="relative container max-h-100 w-auto mx-auto px-4 py-12 flex justify-center items-center bg-black">
-      <div className="absolute bg-black"></div>
-
+    <div className="relative container max-h-100 w-auto mx-auto px-4 py-12 flex justify-center items-center bg-primary">
+      <br /><br />
       {/* Conteneur avec z-10 pour rester au-dessus de l'image de fond */}
-      <div className="mt-20 flex items-center text-center  text-white relative">
+      <div className="mt-28 flex items-center text-center  text-white relative">
         <p className="text-white text-3xl sm:text-4xl !font-black sloganhero">
-          <Image src="/images/logo3.svg" alt="Logo" width={400} height={200} className="mx-auto"></Image>
-          2500 vins bio en direct des vignerons(nes)
-          <br /><span className='text-xl md:text-3xl font-semibold sloganhero text-primary'>En direct des vignerons(nes)</span>
+          2500 vins bio en direct des vignerons<span className='text-accent'>(nes)</span>
         </p>
         <br />
       </div>

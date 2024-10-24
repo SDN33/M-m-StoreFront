@@ -1,6 +1,6 @@
 'use client';
-import React, { useState} from 'react';
-import { ChevronDown, ChevronUp, Wine, Locate, Calendar, Grape, Medal, Ruler, Utensils} from 'lucide-react';
+import React, { useState } from 'react';
+import { ChevronDown, ChevronUp, Wine, Locate, Calendar, Grape, Medal, Ruler, Utensils } from 'lucide-react';
 import WineSelector from './WineSelector';
 
 interface ProductFilterProps {
@@ -34,10 +34,9 @@ const getFilterTitle = (filterType: string) => {
 const filterOptions = {
   color: ['Rouge', 'Blanc', 'Rosé', 'Pétillant', 'Liquoreux', 'Autres'],
   region: [
-    'Alsace', 'Beaujolais', 'Bourgogne', 'Bordeaux',
-    'Champagne', 'Jura', 'Languedoc', 'Loire',
-    'PACA', 'Roussillon', 'Savoie', 'Sud Ouest', 'Vallée du Rhône',
-    'Italie', 'Espagne', 'Portugal', 'Allemagne',
+    'Alsace', 'Beaujolais', 'Bourgogne', 'Bordeaux', 'Champagne', 'Jura',
+    'Languedoc', 'Loire', 'PACA', 'Roussillon', 'Savoie', 'Sud Ouest',
+    'Vallée du Rhône', 'Italie', 'Espagne', 'Portugal', 'Allemagne',
   ],
   vintage: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
   certification: ['Bio', 'Biodynamie', 'En conversion'],
@@ -46,19 +45,12 @@ const filterOptions = {
   accord_mets: ['Viandes rouges', 'Viandes blanches', 'Poissons', 'Fruits de mer', 'Fromages', 'Desserts / Sucré', 'Plats végétariens'],
 };
 
-const normalizeString = (str: unknown) => {
-  if (typeof str === 'string') {
-    return str.toLowerCase().replace(/\s+/g, '');
-  }
-  return ''; // ou gérer autrement les cas où str n'est pas une chaîne
-};
-
 const ProductFilter: React.FC<ProductFilterProps> = ({
   selectedFilters,
   onFilterChange,
   hideColorFilter = false,
 }) => {
-  const [expandedSections, setExpandedSections] = useState<string[]>(Object.keys(filterOptions)); // Toutes les sections ouvertes par défaut
+  const [expandedSections, setExpandedSections] = useState<string[]>(Object.keys(filterOptions));
 
   const toggleSection = (section: string) => {
     setExpandedSections(prev =>
@@ -71,92 +63,31 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     const updatedOptions = currentOptions.includes(option)
       ? currentOptions.filter((item) => item !== option)
       : [...currentOptions, option];
-
     onFilterChange(filterType, updatedOptions);
   };
 
-  const resetFilters = () => {
-    onFilterChange('color', []);
-    onFilterChange('region', []);
-    onFilterChange('vintage', []);
-    onFilterChange('certification', []);
-    onFilterChange('style', []);
-    onFilterChange('accord_mets', []);
-    onFilterChange('region__pays', []);
-    onFilterChange('volume', []);
-  };
-
   return (
-    <div className="bg-transparent mt-44 h-screen"> {/* Cacher le slider latéral */}
-      {/* Filter Sections */}
+    <div className="bg-transparent h-full overflow-y-auto mt-56">
       {Object.entries(filterOptions).map(([filterType, options]) => {
         if (hideColorFilter && filterType === 'color') return null;
-
         return (
           <div key={filterType} className="border-b border-gray-200">
             <button
               onClick={() => toggleSection(filterType)}
               className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between hover:bg-gray-50"
             >
-              <span>
-                {filterType === 'color' && (
-                  <>
-                    {getFilterTitle(filterType)} <Wine />
-                  </>
-                )}
-                {filterType === 'region' && (
-                  <>
-                    {getFilterTitle('RÉGIONS')} <Locate />
-                  </>
-                )}
-                {filterType === 'vintage' && (
-                  <>
-                    {getFilterTitle('MILLÉSIME')} <Calendar />
-                  </>
-                )}
-                {filterType === 'certification' && (
-                  <>
-                    {getFilterTitle('CERTIFICATION')} <Medal />
-                  </>
-                )}
-                {filterType === 'style' && (
-                  <>
-                    {getFilterTitle('STYLE')} <Grape />
-                  </>
-                )}
-                {filterType === 'volume' && (
-                  <>
-                    {getFilterTitle('VOLUME')} <Ruler />
-                  </>
-                )}
-                {filterType === 'accord_mets' && (
-                  <>
-                    {getFilterTitle('ACCORD METS')} <Utensils />
-                  </>
-                )}
-              </span>
-              {expandedSections.includes(filterType) ?
-                <ChevronUp className="w-5 h-5 text-gray-500" /> :
-                <ChevronDown className="w-5 h-5 text-gray-500" />
-              }
+              <span>{getFilterTitle(filterType)}</span>
+              {expandedSections.includes(filterType) ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
             </button>
             {expandedSections.includes(filterType) && (
               <div className="p-4 space-y-2 bg-gray-50">
                 {options.map((option) => (
-                  <label
-                    key={option}
-                    className="flex items-center justify-between cursor-pointer hover:bg-gray-100 p-2 rounded"
-                  >
+                  <label key={option} className="flex items-center justify-between cursor-pointer hover:bg-gray-100 p-2 rounded">
                     <div className="flex items-center">
                       <input
                         type="checkbox"
-                        checked={selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']]
-                          .map(opt => normalizeString(opt))
-                          .includes(normalizeString(option))}
-                        onChange={() => handleCheckboxChange(
-                          filterType as keyof ProductFilterProps['selectedFilters'],
-                          option
-                        )}
+                        checked={selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']].includes(option)}
+                        onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
                         className="form-checkbox h-4 w-4 text-primary rounded border-gray-300"
                       />
                       <span className="ml-2 text-sm">{option}</span>
@@ -170,15 +101,9 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       })}
 
       <div className="p-4">
-        <button
-          onClick={resetFilters} // Changement pour appeler resetFilters
-          className="w-full bg-primary text-white py-2 px-4 rounded hover:bg-orange-700 transition-colors"
-        >
+        <button onClick={() => onFilterChange('color', [])} className="w-full bg-primary text-white py-2 px-4 rounded hover:bg-orange-700 transition-colors">
           Réinitialiser
         </button>
-      </div>
-      <div className="pt-4 ml-14">
-        <WineSelector />
       </div>
     </div>
   );

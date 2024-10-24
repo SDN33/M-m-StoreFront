@@ -33,6 +33,7 @@ const SearchInput = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState<FilteredProduct[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState<Set<string>>(new Set());
   const [showFilters, setShowFilters] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [showRecentSearches, setShowRecentSearches] = useState(false);
@@ -146,6 +147,17 @@ const SearchInput = () => {
     }
   };
 
+  const handleFilterToggle = (filter: string) => {
+    setSelectedFilters(prev => {
+      const next = new Set(prev);
+      if (next.has(filter)) {
+        next.delete(filter);
+      } else {
+        next.add(filter);
+      }
+      return next;
+    });
+  };
 
   useEffect(() => {
     const saved = localStorage.getItem('recentSearches');
@@ -243,7 +255,7 @@ const SearchInput = () => {
                 <h4 className="font-semibold text-gray-900">{product.name}</h4>
               </div>
               <div className="ml-4 text-right">
-                <div className="font-semibold text-primary">
+                <div className="font-semibold text-orange-600">
                   {product.sale_price || product.regular_price}€
                 </div>
                 {product.sale_price && (
