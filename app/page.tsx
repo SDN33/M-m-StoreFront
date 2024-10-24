@@ -104,9 +104,9 @@ export default function Home() {
             <div className="space-y-8">
               <br /><br /><br /><br />
               <br /><br /><br /><br />
+              <ProductsIntro />
               <HeroBanner />
               <WineSelector />
-              <ProductsIntro />
               <div className="max-w-7xl mx-auto px-4 py-6 space-y-8">
                 <section className="bg-white rounded-lg shadow">
                   <ProductsCards selectedFilters={selectedFilters} />

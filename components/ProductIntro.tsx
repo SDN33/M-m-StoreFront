@@ -38,7 +38,7 @@ const ProductsIntro: React.FC = () => {
     >
 
       {/* Texte au centre avec espacement */}
-      <div className="flex mx-auto mt-6">
+      <div className="flex mx-auto mt-10">
         <h3 className="text-2xl md:text-3xl font-extrabold text-primary tracking-tight text-center">
          2500 vins bio en direct des vignerons(nes)
         <br />
