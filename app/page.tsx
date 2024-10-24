@@ -9,6 +9,7 @@ import Livraison from '@/components/Livraison';
 import Newletter from '@/components/Newletter';
 import ProductsIntro from '@/components/ProductIntro';
 import WineSelector from '@/components/WineSelector';
+import Filtertop from '@/components/Filtertop';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -72,6 +73,11 @@ export default function Home() {
           <HeroBanner />
           <ProductsIntro />
           <WineSelector />
+          <Filtertop
+            sortBy="default"
+            handleSortChange={(event: React.ChangeEvent<HTMLSelectElement>) => console.log(event.target.value)}
+            resetFilters={() => console.log('Filters reset')}
+          />
           <div className="max-w-7xl mx-auto px-4 py-6 space-y-8">
             <section className="bg-white rounded-lg shadow">
               <ProductsCards selectedFilters={selectedFilters} />

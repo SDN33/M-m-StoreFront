@@ -36,18 +36,9 @@ const RougeIntro: React.FC = () => {
       ref={introRef}
       className={`flex flex-col md:flex-row justify-between items-center mb-4 ${isVisible ? 'slide-in-visible' : 'slide-in'}`}
     >
-      {/* Image de Vin à gauche */}
-      <Image
-        src="/images/vinentete.svg"
-        alt="Vin Mémé Georgette"
-        className="w-30 h-auto border-lg mb-4 md:mb-0 md:ml-24 hidden sm:block md:mt-0"
-        width={118} // Set the width based on the className
-        height={120} // Set the height appropriately
-      />
-
       {/* Texte au centre avec espacement */}
-      <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4 text-center sm:text-left md:pr-80">
-        <h3 className="text-2xl md:text-3xl font-extrabold text-primary tracking-tight ml-26">
+      <div className="flex items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4 mx-auto">
+        <h3 className="text-2xl md:text-3xl font-extrabold text-primary tracking-tight mx-auto text-center ">
           Découvrez nos vins <span className='text-red-600'>rouges</span> <br />
           <div className="text-gray-800 text-sm">* Livraison offerte dès 6 bouteilles achetées sur le même domaine</div>
         </h3>

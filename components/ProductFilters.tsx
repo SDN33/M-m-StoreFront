@@ -101,7 +101,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       })}
 
       <div className="p-4">
-        <button onClick={() => onFilterChange('color', [])} className="w-full bg-primary text-white py-2 px-4 rounded hover:bg-orange-700 transition-colors">
+        <button onClick={() => onFilterChange('color', [])} className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-2 px-4 rounded hover:bg-orange-700 transition-colors">
           Réinitialiser
         </button>
       </div>
