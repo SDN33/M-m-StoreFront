@@ -18,13 +18,13 @@ interface ProductFilterProps {
 
 const getFilterTitle = (filterType: string) => {
   const titles: { [key: string]: JSX.Element } = {
-    color: <>COULEUR <br /><Wine className="inline-block ml-1 text-white" /></>,
-    region: <>RÉGIONS <br /><Locate className="inline-block ml-1 text-white" /></>,
-    vintage: <>MILLÉSIME <br /><Calendar className="inline-block ml-1 text-white" /></>,
-    certification: <>CERTIFICATION <br /><Medal className="inline-block ml-1 text-white" /></>,
-    style: <>STYLE <br /><Grape className="inline-block ml-1 text-white" /></>,
-    volume: <>VOLUME <br /><Ruler className="inline-block ml-1 text-white" /></>,
-    accord_mets: <>ACCORD METS <br /><Utensils className="inline-block ml-1 text-white" /></>,
+    color: <>COULEUR <br /><Wine className="inline-block ml-1 text-teal-500" /></>,
+    region: <>RÉGIONS <br /><Locate className="inline-block ml-1 text-teal-500" /></>,
+    vintage: <>MILLÉSIME <br /><Calendar className="inline-block ml-1 text-teal-500" /></>,
+    certification: <>CERTIFICATION <br /><Medal className="inline-block ml-1 text-teal-500" /></>,
+    style: <>STYLE <br /><Grape className="inline-block ml-1 text-teal-500" /></>,
+    volume: <>VOLUME <br /><Ruler className="inline-block ml-1 text-teal-500" /></>,
+    accord_mets: <>ACCORD METS <br /><Utensils className="inline-block ml-1 text-teal-500" /></>,
   };
   return titles[filterType] || <>{filterType}</>;
 };
@@ -107,7 +107,8 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div className="hidden sm:block bg-transparent h-full w-52 ml-10 overflow-y-auto mt-56 bg-teal-500 bg-opacity-30">
+    <div className="hidden sm:block bg-transparent h-full w-52 ml-10 overflow-y-auto mt-56 bg-white
+     bg-opacity-30">
       {Object.entries(filterOptions).map(([filterType, options]) => {
         if (hideColorFilter && filterType === 'color') return null;
         return (

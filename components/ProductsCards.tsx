@@ -102,6 +102,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
         resetFilters={() => {}}
       />
       <br />
+      <br />
       {loading ? (
         <div className="flex items-center justify-center min-h-[200px]">
           <div className="flex items-center space-x-2">
