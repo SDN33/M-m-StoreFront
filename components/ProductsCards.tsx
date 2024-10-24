@@ -31,7 +31,6 @@ interface ProductsCardsProps {
     accord_mets: string[];
     region__pays: string[];
     categories: string[];
-
   };
 }
 
@@ -96,7 +95,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
   };
 
   return (
-    <div className="flex-1 px-8 lg:px-8">
+    <div className="flex-1 px-4 lg:px-4">
       <Filtertop
         sortBy="default"
         handleSortChange={() => {}}
@@ -116,7 +115,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
         <div className="text-center p-4">Aucun produit trouvé.</div>
       ) : (
         <div className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3"> {/* Modifié ici pour 3 colonnes */}
             {filteredProducts.slice(0, visibleCount).map(product => (
               <ProductCard key={product.id} product={product} onAddToCart={() => onAddToCart(product.id, 1, 0)} />
             ))}
@@ -136,5 +135,6 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
       )}
     </div>
   );
-}
+};
+
 export default ProductsCards;

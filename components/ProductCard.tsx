@@ -92,7 +92,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const certificationLogo = getCertificationLogo(product.certification);
 
   return (
-    <div className="border rounded-lg shadow-md p-4 flex flex-col w-full max-w-[250px]" style={{ height: '490px' }}>
+    <div className="border rounded-lg shadow-md p-4 flex flex-col w-full max-w-[300px]" style={{ height: '490px' }}>
       {/* Affichage des couleurs de catégories */}
       <div className={`h-2 ${getCategoryColor(product.categories[0]?.name || 'default')} mb-4`}></div>
 
