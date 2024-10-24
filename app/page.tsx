@@ -105,12 +105,12 @@ export default function Home() {
               <br /><br /><br /><br />
               <br /><br /><br /><br />
               <ProductsIntro />
-              <WineSelector />
               <div className="max-w-7xl mx-auto px-4 space-y-8">
                 <section className="bg-white rounded-lg shadow">
                   <ProductsCards selectedFilters={selectedFilters} />
                 </section>
               </div>
+              <WineSelector />
               <video
                 src="../videos/minibanner.mp4"
                 title="Vidéo de présentation"

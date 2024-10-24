@@ -40,44 +40,46 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   };
 
   const formatRating = (rating?: number) => {
-    return rating ? (rating / 5 * 20).toFixed(1) : "pas encore d'avis";
+    if (!rating || product.rating_count === 0) return "pas encore noté";
+    return (rating * 4).toFixed(1) + "/20"; // Conversion to /20
   };
 
-  const cleanHTMLTags = (description?: string) => {
-    if (!description) return '';
-    return description.replace(/<\/?[^>]+(>|$)/g, ""); // Supprimer toutes les balises HTML
-  };
-
-  // Génération du titre en fonction du prix
-  const generateTitle = () => {
-    if (product.price < 6) {
-      return `Le vin ${product.categories[0]?.name || 'de Mémé'} - Bon plan de mémé`;
-    } else if (product.price >= 6 && product.price < 20) {
-      return `Le prestigieux vin ${product.categories[0]?.name || 'raffiné'}`;
-    } else {
-      return `L'excellence de ${product.categories[0]?.name || 'la cave'}`;
+  const renderCertification = () => {
+    if (product.certification?.toLowerCase() === 'biodynamie') {
+      return <Image src="/images/demeter.png" alt="Certification biodynamique" width={24} height={24} />;
     }
+    if (product.certification?.toLowerCase() === 'bio') {
+      return <Image src="/images/logobio.webp" alt="Certification bio" width={24} height={24} />;
+    }
+    return null;
   };
 
-  // Génération d'une dizaine de slogans personnalisés
-  const slogans = [
-    "Un vin à savourer en toute occasion",
-    "La sélection unique de mémé",
-    "Un cru exceptionnel pour les connaisseurs",
-    "Le choix des gourmets à petit prix",
-    "Le meilleur rapport qualité-prix",
-    "Un vin qui fait plaisir sans se ruiner",
-    "L'ami de vos apéros et repas de fête",
-    "Un classique indémodable à découvrir",
-    "L'élégance à portée de main",
-    "Le charme discret de la tradition",
-  ];
+  const generateSlogan = () => {
+    if (product.price < 9) {
+      return `Le qualité/prix IMBATTABLE !`;
+    }
+    if (product.price > 20) {
+      return `${product.appelation || 'Vin'} D'Exception`;
+    }
+    if (product.average_rating && product.average_rating > 3.5) {
+      return `Coup De Coeur de Mémé`;
+    }
+    if (product.certification?.toLowerCase().includes('biodynamie')) {
+      return `Vin Démeter qui respecte la nature`;
+    }
+
+    if (product.categories[0]?.name.toLowerCase().includes('petillant')) {
+      return `Des Bulles À Découvrir`;
+    }
+
+    return `Un ${product.appelation?.toUpperCase() || 'Vin'} À Découvrir`;
+  };
 
   return (
     <div className="w-full max-w-[300px] bg-white rounded-lg overflow-hidden shadow-md">
-      {/* Header - Purple Banner */}
+      {/* Header - Personalized Banner */}
       <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-black text-primary p-2 text-center font-semibold">
-        {generateTitle()} - {slogans[Math.floor(Math.random() * slogans.length)]}
+        {generateSlogan()}
       </div>
 
       {/* Main Content */}
@@ -92,7 +94,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
               {product.name}
             </h3>
             <p className="text-sm text-gray-500 pl-8">
-              {product.appelation} · {product.volume}
+              {product.categories.map(category => category.name).join(', ')} · {product.volume} - {product.millesime}
             </p>
           </div>
         </div>
@@ -101,7 +103,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         <div className="relative">
           <div className="absolute top-0 left-0 z-10 bg-accent rounded-full p-2 text-white">
             <div className="text-xs">NOTE</div>
-            <div className="font-bold">{formatRating(product.average_rating)}/20</div>
+            <div className="font-bold">{formatRating(product.average_rating)}</div>
           </div>
           <div className="relative w-full h-72 mb-4">
             <Image
@@ -116,6 +118,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           </div>
         </div>
 
+        {/* Certification */}
+        <div className="mb-4 flex justify-end gap-2"> {renderCertification()} </div>
+
         {/* Rating Section */}
         <div className="mb-4">
           <div className="flex items-center justify-between">
@@ -126,29 +131,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
 
         {/* Description */}
-        <p className="text-sm mb-4 text-gray-700">
-          Un {product.categories[0]?.name} {product.appelation} au rapport prix/plaisir imbattable
-        </p>
+        {/* Description */}
         <p className="text-sm mb-4 text-gray-700">
           {(() => {
-            const shortDescription = cleanHTMLTags(product.short_description);
-            const maxLength = 100;
-
-            if (shortDescription.length <= maxLength) return shortDescription;
-
-            const lastSpaceIndex = shortDescription.substring(0, maxLength).lastIndexOf(' ');
-            const truncatedDescription = shortDescription.substring(0, lastSpaceIndex);
-
-            return (
-              <>
-                {truncatedDescription}...{' '}
-                <a href={`/product/${product.id}`} className="text-blue-500 hover:underline">
-                  voir plus
-                </a>
-              </>
-            );
+            const region = product.region__pays
+              ? product.region__pays.toLowerCase() === 'bordeaux'
+                ? 'du Sud-Ouest'
+                : 'de ' + product.region__pays.charAt(0).toUpperCase() + product.region__pays.slice(1).toLowerCase()
+              : '';
+        
+            const millesime = product.millesime ? ` millésimé en ${product.millesime}` : '';
+            const chateau = product.nom_chateau ? ` par ${product.nom_chateau}` : '';
+        
+            return `Un ${product.categories[0]?.name || 'vin'} ${product.appelation || ''} ${region}${millesime}${chateau}`;
           })()}
         </p>
+        
+
 
         {/* Price Section */}
         <div className="flex items-center justify-between mb-4">
@@ -158,8 +157,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             </div>
             <div>
               <div className="text-2xl font-bold">
-                {Math.floor(product.price)},
-                <sup className="text-sm">{(product.price % 1).toFixed(2).substring(2)}€</sup>
+                {Math.floor(product.price)}<sup className="text-sm">{(product.price % 1).toFixed(2).substring(2)}€</sup>
               </div>
               <div className="text-sm text-gray-500">dès 3 bouteilles</div>
             </div>
