@@ -118,3 +118,10 @@ body {
 
 }
 
+ul {
+  scrollbar-width: none; /* Firefox */
+}
+
+ul::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
