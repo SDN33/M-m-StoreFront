@@ -31,7 +31,7 @@ const getFilterTitle = (filterType: string) => {
 };
 
 const filterOptions = {
-  color: ['Rouge', 'Blanc', 'Rosé', 'Pétillant', 'Liquoreux', 'Autres'],
+  color: ['Rouge 🔴', 'Blanc 🟡', 'Rosé ⭕', 'Pétillant 🫧', 'Liquoreux 🟠', 'Autres'],
   region: [
     'Alsace', 'Beaujolais', 'Bourgogne', 'Bordeaux', 'Champagne', 'Jura',
     'Languedoc', 'Loire', 'PACA', 'Roussillon', 'Savoie', 'Sud Ouest',
