@@ -12,10 +12,20 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNosVinsOpen, setIsNosVinsOpen] = useState(false);
 
+
+
+  const toggleNosVinsPopup = () => {
+    setIsNosVinsOpen(!isNosVinsOpen);
+  };
+
   const categories = [
     { name: 'PROMOS', href: '/promos', className: 'text-primary font-semibold' },
     { name: '⚡ VENTES FLASH', href: '/ventes-flash', className: 'text-primary font-semibold' },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com' },
+    { name: 'Nos Vins', className: 'text-primary font-semibold', onClick: toggleNosVinsPopup },
+    { name: 'Nos Vignerons.nes', href: '/vignerons' },
+    { name: 'Vins du Monde', href: '/vins-du-monde' },
+    { name: 'Contactez-nous', href: '/contact' },
   ];
 
   const vinsSubCategories = [
@@ -28,10 +38,6 @@ const Header = () => {
 
   const toggleCartPopup = () => {
     setIsCartOpen(!isCartOpen);
-  };
-
-  const toggleNosVinsPopup = () => {
-    setIsNosVinsOpen(!isNosVinsOpen);
   };
 
   // Fermeture du popup en cliquant en dehors
@@ -160,16 +166,6 @@ const Header = () => {
                 </a>
               </li>
             ))}
-
-            {/* Nos Vins Menu */}
-            <li className="relative font-bold">
-              <button
-                className="px-3 py-4 text-gray-900 hover:text-primary flex items-center"
-                onClick={toggleNosVinsPopup}
-              >
-                Nos Vins <ChevronDown className="ml-1 w-4 h-4" />
-              </button>
-            </li>
           </ul>
         </div>
       </nav>
