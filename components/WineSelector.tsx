@@ -1,6 +1,6 @@
-'use client'; // Assure que le composant est côté client
+'use client';
 import React, { useState } from 'react';
-import Link from 'next/link'; // Utilise le composant Link de Next.js pour les redirections
+import Link from 'next/link';
 
 const WineSelector = () => {
   const [hoveredWine, setHoveredWine] = useState<string | null>(null);
@@ -14,27 +14,28 @@ const WineSelector = () => {
   ];
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:justify-center items-start gap-6 pt-8 p-4 bg-transparent -ml-2 lg:-ml-14">
-      {wines.map((wine, index) => (
-        <Link href={wine.path} key={wine.color} passHref> {/* Utilisation du lien Next.js */}
-          <div
-            className={`flex flex-col items-center cursor-pointer transition-all duration-300 ease-in-out
-                      ${hoveredWine === wine.color ? 'translate-y-[-8px]' : ''}
-                      ${index === 0 ? 'sm:-ml-0' : 'sm:-ml-8'}`}
-            onMouseEnter={() => setHoveredWine(wine.color)}
-            onMouseLeave={() => setHoveredWine(null)}
-          >
-            <div className={`w-12 sm:w-14 h-20 sm:h-24 rounded-full ${wine.bg} flex items-center justify-center shadow-md relative overflow-hidden`}>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-gradient-to-r from-gray-900 via-gray-800 to-black font-black text-xs sm:text-sm transform rotate-[-90deg] whitespace-nowrap">
-                  {wine.name}
-                </span>
+    <div className="flex justify-center items-center w-full py-8">
+      <div className="flex space-x-4 px-4">
+        {wines.map((wine) => (
+          <Link href={wine.path} key={wine.color}>
+            <div
+              className={`transform transition-all duration-300 ease-in-out hover:scale-110
+                ${hoveredWine === wine.color ? 'translate-y-[-8px]' : ''}`}
+              onMouseEnter={() => setHoveredWine(wine.color)}
+              onMouseLeave={() => setHoveredWine(null)}
+            >
+              <div className={`w-16 h-24 rounded-full ${wine.bg} flex items-center justify-center shadow-lg relative overflow-hidden mx-2`}>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-black font-black text-sm transform rotate-[-90deg] whitespace-nowrap">
+                    {wine.name}
+                  </span>
+                </div>
+                <div className="w-10 h-16 bg-white/20 absolute bottom-1 rounded-full"></div>
               </div>
-              <div className="w-8 sm:w-10 h-14 sm:h-16 bg-gray-100/20 absolute bottom-1 rounded-full"></div>
             </div>
-          </div>
-        </Link>
-      ))}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };
