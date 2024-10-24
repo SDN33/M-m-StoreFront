@@ -87,6 +87,11 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
     setVisibleCount(prevCount => prevCount + 12);
   };
 
+  const onAddToCart = async (productId: number, quantity: number, variationId: number) => {
+    // Implement the logic to add the product to the cart
+    console.log(`Product added to cart: ${productId}, Quantity: ${quantity}, Variation ID: ${variationId}`);
+  };
+
   return (
     <div className="flex-1 px-4 lg:px-6">
       {loading ? (
@@ -102,20 +107,9 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
         <div className="text-center p-4">Aucun produit trouvé.</div>
       ) : (
         <div className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProducts.slice(0, visibleCount).map(product => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onAddToCart={(productId, quantity) => {
-                  return new Promise((resolve) => {
-                    setTimeout(() => {
-                      console.log(`Produit ${productId} ajouté au panier avec quantité ${quantity}`);
-                      resolve();
-                    }, 1000);
-                  });
-                }}
-              />
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {products.map(product => (
+             <ProductCard key={product.id} product={product} onAddToCart={() => onAddToCart(product.id, 1, 0)} />
             ))}
           </div>
 

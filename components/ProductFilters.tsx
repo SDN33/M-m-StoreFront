@@ -93,6 +93,8 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                     </div>
                   </label>
                 ))}
+                <br /><br />
+                <br /><br />
               </div>
             )}
           </div>

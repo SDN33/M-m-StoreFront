@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import ProductsCards from '@/components/ProductsCards';
 import ProductFilter from '@/components/ProductFilters';
 import HeroBanner from '@/components/HeroBanner';
@@ -14,6 +14,9 @@ import Filtertop from '@/components/Filtertop';
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const mainContentRef = useRef<HTMLDivElement>(null);
+  const filterContentRef = useRef<HTMLDivElement>(null);
+
   const [selectedFilters, setSelectedFilters] = useState({
     color: [],
     region: [],
@@ -40,6 +43,25 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = (e: WheelEvent) => {
+      if (!isMobile) {
+        const target = e.target as Node;
+        const filterContent = filterContentRef.current;
+
+        if (filterContent?.contains(target)) {
+          e.preventDefault();
+          filterContent.scrollTop += e.deltaY;
+        }
+      }
+    };
+
+    window.addEventListener('wheel', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('wheel', handleScroll);
+    };
+  }, [isMobile]);
+
   const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {
     setSelectedFilters((prev) => ({
       ...prev,
@@ -60,34 +82,54 @@ export default function Home() {
 
       <div className="flex flex-1">
         <aside
-          className={`w-64 bg-white border-r border-gray-200 ${isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out' : 'relative'} ${isMobile && !isFilterOpen ? '-translate-x-full' : 'translate-x-0'}`}
+          className={`w-64 bg-white border-r border-gray-200 ${
+            isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out'
+            : 'relative'
+          } ${isMobile && !isFilterOpen ? '-translate-x-full' : 'translate-x-0'}`}
         >
-          <div className="p-4 h-full overflow-y-auto">
+          <div
+            ref={filterContentRef}
+            className="p-4 h-full overflow-y-auto scroll-container"
+            style={{
+              overscrollBehavior: 'contain',
+              msOverflowStyle: 'none',
+              scrollbarWidth: 'thin'
+            }}
+          >
             <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} />
           </div>
         </aside>
 
-        <main className="flex-1 bg-gray-50">
-          <br /><br /><br /><br />
-          <br /><br /><br /><br />
-          <HeroBanner />
-          <WineSelector />
-          <ProductsIntro />
+        <main
+          ref={mainContentRef}
+          className="flex-1 bg-gray-50 overflow-y-auto"
+          style={{
+            overscrollBehavior: 'contain',
+            height: '100vh'
+          }}
+        >
+          <div className="space-y-8">
+            <br /><br /><br /><br />
+            <br /><br /><br /><br />
+            <HeroBanner />
+            <WineSelector />
+            <ProductsIntro />
 
-          <Filtertop
-            sortBy="default"
-            handleSortChange={(event: React.ChangeEvent<HTMLSelectElement>) => console.log(event.target.value)}
-            resetFilters={() => console.log('Filters reset')}
-          />
-          <div className="max-w-7xl mx-auto px-4 py-6 space-y-8">
-            <section className="bg-white rounded-lg shadow">
-              <ProductsCards selectedFilters={selectedFilters} />
-            </section>
+            <Filtertop
+              sortBy="default"
+              handleSortChange={(event: React.ChangeEvent<HTMLSelectElement>) => console.log(event.target.value)}
+              resetFilters={() => console.log('Filters reset')}
+            />
+            <div className="max-w-7xl mx-auto px-4 py-6 space-y-8">
+              <section className="bg-white rounded-lg shadow">
+                <ProductsCards selectedFilters={selectedFilters} />
+              </section>
+            </div>
+            <Livraison />
+            <Slogan />
+            <Newletter />
+            <br /><br />
           </div>
-          <Livraison />
-          <Slogan />
-          <Newletter />
-
         </main>
       </div>
 
