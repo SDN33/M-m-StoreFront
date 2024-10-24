@@ -27,7 +27,7 @@ const Header = () => {
   }
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-primary shadow-xl">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-xl">
       <PromotionSection />
 
       {/* Top Header */}
@@ -38,7 +38,7 @@ const Header = () => {
             {/* Logo */}
             <a href="/" className="flex-shrink-0 ml-8">
               <Image
-                src="/images/logon.png"
+                src="/images/logow.png"
                 alt="Logo"
                 width={180}
                 height={50}
@@ -50,8 +50,8 @@ const Header = () => {
 
             {/* Right Actions */}
             <div className="flex items-center space-x-6 mr-3">
-              <div className="hidden lg:flex items-center space-x-1 text-sm">
-                <span className='text-white'>Livraison en</span>
+              <div className="  hidden lg:flex items-center space-x-1 text-sm">
+                <span className='text-black'>Livraison en</span>
                 <Image
                   src="/images/fr.png"
                   alt="France"
@@ -59,24 +59,24 @@ const Header = () => {
                   height={14}
                   className="mx-1"
                 />
-                <span className="font-bold text-white">France</span>
+                <span className="font-bold text-black">France</span>
               </div>
 
-              <a href=":" className="hidden lg:flex items-center text-sm text-white hover:text-primary">
+              <a href=":" className="hidden lg:flex items-center text-sm hover:text-primary">
                 <User className="w-5 h-5 mr-1 text-white font-semibold" />
-                <span className='text-white font-semibold' >Espace pro</span>
+                <span className='font-semibold' >Espace pro</span>
               </a>
 
-              <a href="/faq" className="hidden lg:block text-sm text-white font-semibold hover:text-primary">
+              <a href="/faq" className="hidden lg:block text-sm  font-semibold hover:text-primary">
                 Aide
               </a>
 
               <div className="flex items-center space-x-4">
-                <a href="/login" className="text-sm text-white font-semibold hover:text-primary">
+                <a href="/login" className="text-sm font-semibold hover:text-primary">
                   Se connecter
                 </a>
                 <a className="relative">
-                  <ShoppingCart onClick={toggleCartPopup} className="w-6 h-6 text-white font-semibold" />
+                  <ShoppingCart onClick={toggleCartPopup} className="w-6 h-6 text-black font-semibold" />
                   <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                     0
                   </span>
@@ -109,7 +109,7 @@ const Header = () => {
             </a>
 
             <a href="/cart" className="relative p-2">
-              <ShoppingCart className="w-6 h-6 text-white" />
+              <ShoppingCart className="w-6 h-6 text-black" />
               <span className="absolute -top-1 -right-1 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                 0
               </span>
