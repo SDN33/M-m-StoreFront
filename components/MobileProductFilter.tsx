@@ -12,9 +12,11 @@ interface MobileProductFilterProps {
     volume: string[];
     accord_mets: string[];
     region__pays: string[];
+
   };
   onFilterChange: (filterType: keyof MobileProductFilterProps['selectedFilters'], value: string[]) => void;
   hideColorFilter?: boolean;
+
 }
 
 const getFilterTitle = (filterType: string) => {
@@ -26,6 +28,7 @@ const getFilterTitle = (filterType: string) => {
     style: 'Style',
     volume: 'Volume',
     accord_mets: 'Accord Mets',
+
   };
   return titles[filterType] || filterType;
 };
@@ -37,7 +40,7 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
   onFilterChange,
   hideColorFilter = false,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [openSections, setOpenSections] = useState<string[]>([]);
 
   const filterOptions = {

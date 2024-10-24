@@ -28,10 +28,10 @@ const HeroBanner = () => {
 
         <div>
           {/* Titre avec slogans */}
-          <h1 className="text-4xl md:text-4xl leading-tight md:font-serif !font-semibold">
+          <h1 className="text-3xl md:text-3xl leading-tight md:font-extrabold sloganhero !font-semibold">
             <br />
             <span className="block fade-in" dangerouslySetInnerHTML={{ __html: slogans[currentSlogan] }} />
-            <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette</p>
+            <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette -</p>
           </h1>
         </div>
         <br />
