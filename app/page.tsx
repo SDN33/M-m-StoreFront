@@ -4,6 +4,11 @@ import React, { useEffect, useState } from 'react';
 import ProductsCards from '@/components/ProductsCards';
 import ProductFilter from '@/components/ProductFilters';
 import HeroBanner from '@/components/HeroBanner';
+import Slogan from '@/components/Slogan';
+import Livraison from '@/components/Livraison';
+import Newletter from '@/components/Newletter';
+import ProductsIntro from '@/components/ProductIntro';
+import WineSelector from '@/components/WineSelector';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -62,12 +67,20 @@ export default function Home() {
         </aside>
 
         <main className="flex-1 bg-gray-50">
+          <br /><br /><br />
+          <br /><br /><br />
           <HeroBanner />
+          <ProductsIntro />
+          <WineSelector />
           <div className="max-w-7xl mx-auto px-4 py-6 space-y-8">
             <section className="bg-white rounded-lg shadow">
               <ProductsCards selectedFilters={selectedFilters} />
             </section>
           </div>
+          <Livraison />
+          <Slogan />
+          <Newletter />
+
         </main>
       </div>
 

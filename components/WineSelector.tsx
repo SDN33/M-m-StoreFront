@@ -14,7 +14,7 @@ const WineSelector = () => {
   ];
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:justify-center items-start gap-3 pt-8 p-4 bg-transparent -ml-2 lg:-ml-14">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:justify-center items-start gap-6 pt-8 p-4 bg-transparent -ml-2 lg:-ml-14">
       {wines.map((wine, index) => (
         <Link href={wine.path} key={wine.color} passHref> {/* Utilisation du lien Next.js */}
           <div
