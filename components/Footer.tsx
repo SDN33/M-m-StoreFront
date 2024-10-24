@@ -7,6 +7,7 @@ import Image from "next/image";
 const Footer = () => {
   return (
     <footer className="bg-white shadow-lg text-white py-2 text-center">
+      
       <div className="max-w-7xl mx-auto px-4">
         {/* Section principale */}
         <div className="mb-12 h-auto w-auto">
@@ -65,18 +66,18 @@ const Footer = () => {
           </a>
           <div className="flex items-center text-gray-600">
             <CreditCard className="h-4 w-4 mr-1 text-black" />
-            <span className="text-xs text-gray-800">Paiement sécurisé</span>
+            <span className="text-xs font-semibold text-gray-800">Paiement sécurisé</span>
           </div>
         </div>
         {/* Mentions légales et copyright */}
         <div className="pt-4">
-          <p className="text-xs text-black mb-4 font-light">
+          <p className="text-xs text-black mb-4 font-semibold">
             L&apos;abus d&apos;alcool est dangereux pour la santé, sachez consommer avec modération.
             Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.
           </p>
-          <p className="text-sm text-black font-light">
+          <p className="font-semibold text-black text-xs">
             © 2024 Les Vins de Mémé Georgette, © Mémé Georgette, tous droits réservés
-            <br />Création de <a className="font-bold text-accent" href="https://stillinov.com">Still-inov Agency</a>
+            <br />Création de <a className="font-bold text-primary" href="https://stillinov.com">Still-inov Agency</a>
           </p>
         </div>
       </div>

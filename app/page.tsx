@@ -107,7 +107,7 @@ export default function Home() {
               <ProductsIntro />
               <HeroBanner />
               <WineSelector />
-              <div className="max-w-7xl mx-auto px-4 py-6 space-y-8">
+              <div className="max-w-7xl mx-auto px-4 space-y-8">
                 <section className="bg-white rounded-lg shadow">
                   <ProductsCards selectedFilters={selectedFilters} />
                 </section>
