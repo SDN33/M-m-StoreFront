@@ -10,7 +10,7 @@ module.exports = {
       colors: {
         primary: '#EC681F', // Orange principal
         secondary: '#6B7280', // Gris
-        accent: '#FFC107', // Jaune
+        accent: '#F6BC9B', // Orange clair
         background: '#FFFFFF', // Blanc
         foreground: '#171717', // Noir
         // Ajoutez d'autres couleurs si nécessaire

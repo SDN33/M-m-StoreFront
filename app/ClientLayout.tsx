@@ -3,7 +3,6 @@
 "use client"; // Marquez ce composant comme client
 
 import { useEffect } from "react";
-import { cacheVideos } from "@/utils/cacheVideos"; // Importez votre fonction
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -13,7 +12,6 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       '/videos/minibanner.mp4',
       '/videos/newsletter.mp4',
     ];
-    cacheVideos(videoUrls);
   }, []);
 
   return <>{children}</>; // Rendre les enfants
