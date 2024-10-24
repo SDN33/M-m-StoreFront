@@ -68,8 +68,8 @@ export default function Home() {
         </aside>
 
         <main className="flex-1 bg-gray-50">
-          <br /><br /><br />
-          <br /><br /><br />
+          <br /><br /><br /><br />
+          <br /><br /><br /><br />
           <HeroBanner />
           <ProductsIntro />
           <WineSelector />
