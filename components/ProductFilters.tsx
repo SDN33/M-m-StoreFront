@@ -69,7 +69,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div className="hidden sm:block bg-transparent h-full w-52 ml-10 overflow-y-auto mt-56 bg-[#F6BC9B]">
+    <div className="hidden sm:block bg-transparent h-full w-52 ml-10 overflow-y-auto mt-56 bg-[#F6BC9B] bg-opacity-50">
       {Object.entries(filterOptions).map(([filterType, options]) => {
         if (hideColorFilter && filterType === 'color') return null;
         return (
