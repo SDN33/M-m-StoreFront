@@ -38,9 +38,9 @@ const Header = () => {
             {/* Logo */}
             <a href="/" className="flex-shrink-0 ml-8">
               <Image
-                src="/images/logo3.svg"
+                src="/images/logo3.png"
                 alt="Logo"
-                width={150}
+                width={200}
                 height={50}
               />
             </a>
