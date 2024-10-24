@@ -75,7 +75,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
               onClick={() => toggleSection(filterType)}
               className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between hover:bg-gray-50"
             >
-              <span>{getFilterTitle(filterType)}</span>
+              <span className='text-primary'>{getFilterTitle(filterType)}</span>
               {expandedSections.includes(filterType) ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
             </button>
             {expandedSections.includes(filterType) && (
