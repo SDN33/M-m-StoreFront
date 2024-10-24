@@ -1,9 +1,7 @@
-'use client';
-
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
-import Filtertop from './Filtertop';
+import Filtertop from './Filtertop'; // Ensure Filtertop is correctly imported
 
 interface Product {
   id: number;
@@ -39,6 +37,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState<number>(12);
+  const [sortBy, setSortBy] = useState<string>(''); // New state for sorting
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -117,24 +116,49 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
     );
   }, [selectedFilters]);
 
+  const sortProducts = (products: Product[], sortBy: string) => {
+    switch (sortBy) {
+      case 'price-asc':
+        return [...products].sort((a, b) => a.price - b.price);
+      case 'price-desc':
+        return [...products].sort((a, b) => b.price - a.price);
+      case 'date-added':
+        return [...products].sort(
+          (a, b) => new Date(b.date_added).getTime() - new Date(a.date_added).getTime()
+        );
+      default:
+        return products;
+    }
+  };
 
-  const filteredProducts = useMemo(() => products.filter(filterProducts), [products, filterProducts]);
+  const filteredProducts = useMemo(() => {
+    const filtered = products.filter(filterProducts);
+    return sortProducts(filtered, sortBy); // Use the state sortBy here
+  }, [products, filterProducts, sortBy]);
 
   const loadMoreProducts = () => {
-    setVisibleCount(prevCount => prevCount + 12);
+    setVisibleCount((prevCount) => prevCount + 12);
+  };
+
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortBy(event.target.value); // Update the sortBy state
+  };
+
+  const resetFilters = () => {
+    setSortBy(''); // Reset sorting and any other filters
+    setVisibleCount(12); // Reset visible count if needed
   };
 
   const onAddToCart = async (productId: number, quantity: number, variationId: number) => {
-    // Implement the logic to add the product to the cart
     console.log(`Product added to cart: ${productId}, Quantity: ${quantity}, Variation ID: ${variationId}`);
   };
 
   return (
     <div className="flex-1 px-4 lg:px-4">
       <Filtertop
-        sortBy="default"
-        handleSortChange={() => {}}
-        resetFilters={() => {}}
+        sortBy={sortBy}
+        handleSortChange={handleSortChange}
+        resetFilters={resetFilters}
       />
       <br />
       <br />
@@ -151,8 +175,8 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
         <div className="text-center p-4">Aucun produit trouvé.</div>
       ) : (
         <div className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3"> {/* Modifié ici pour 3 colonnes */}
-            {filteredProducts.slice(0, visibleCount).map(product => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {filteredProducts.slice(0, visibleCount).map((product) => (
               <ProductCard key={product.id} product={product} onAddToCart={() => onAddToCart(product.id, 1, 0)} />
             ))}
           </div>
@@ -174,3 +198,4 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
 };
 
 export default ProductsCards;
+

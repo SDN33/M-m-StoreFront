@@ -71,6 +71,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     if (product.categories[0]?.name.toLowerCase().includes('petillant')) {
       return `Des Bulles À Découvrir`;
     }
+    if (product.categories[0]?.name.toLowerCase().includes('autres')) {
+      return `Un Vin Original pour Surprendre`;
+    }
 
     return `Un ${product.appelation?.toUpperCase() || 'Vin'} À Découvrir`;
   };

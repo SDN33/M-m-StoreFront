@@ -2,7 +2,7 @@
 import React from 'react';
 
 interface FiltertopProps {
-  sortBy: string;
+  sortBy?: string;
   handleSortChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   resetFilters: () => void;
 }
@@ -10,7 +10,6 @@ interface FiltertopProps {
 const Filtertop: React.FC<FiltertopProps> = ({ sortBy, handleSortChange, resetFilters }) => {
   return (
     <div className="flex mx-auto text-center items-center justify-center mt-8">
-      <br />
       <label htmlFor="sortBySelect" className="mr-2 font-bold text-gray-800 hidden sm:inline">
         Trier par :
       </label>
@@ -25,12 +24,12 @@ const Filtertop: React.FC<FiltertopProps> = ({ sortBy, handleSortChange, resetFi
         <option value="">Choisir une option</option>
         <option value="price-asc">Prix croissant</option>
         <option value="price-desc">Prix décroissant</option>
-        <option value="rating">Note</option>
+        <option value="date-added">Date d'ajout</option>
       </select>
 
       <button
         onClick={resetFilters}
-        className="ml-4 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white  px-4 py-2 rounded transition duration-300"
+        className="ml-4 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white px-4 py-2 rounded transition duration-300"
       >
         Réinitialiser les filtres
       </button>
