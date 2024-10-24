@@ -30,20 +30,6 @@ export default function Home() {
     categories: []
   });
 
-  interface Product {
-    id: number;
-    name: string;
-    categories: { id: number; name: string }[];
-    price: number;
-    date_added: string;
-    millesime?: string[];
-    certification?: string;
-    region__pays?: string;
-    volume: string;
-    style?: string;
-    accord_mets?: string[];
-  }
-
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
