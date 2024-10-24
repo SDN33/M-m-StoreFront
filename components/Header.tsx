@@ -76,7 +76,7 @@ const Header = () => {
                   Se connecter
                 </a>
                 <a className="relative">
-                  <ShoppingCart onClick={toggleCartPopup} className="w-6 h-6 text-black font-semibold" />
+                  <ShoppingCart onClick={toggleCartPopup} className="w-6 h-6 text-black font-semibold cursor-pointer" />
                   <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                     0
                   </span>
