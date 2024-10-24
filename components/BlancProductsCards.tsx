@@ -34,24 +34,28 @@ const BlancProductsCards: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedFilters, setSelectedFilters] = useState<{
-    color: string[]; // Force la couleur à être 'blanc'
-    region: string[];
-    vintage: string[];
-    certification: string[];
-    style: string[];
-    accord_mets: string[];
-    region__pays: string[];
-    volume: string[];
-  }>({
-    color: ['blanc'], // Bloqué sur la couleur blanc
-    region: [],
-    vintage: [],
-    certification: [],
-    style: [],
-    accord_mets: [],
-    region__pays: [],
-    volume: [],
-  });
+      color: string[]; // Force la couleur à être 'blanc'
+      categories: string[];
+      millesime: string[];
+      region: string[];
+      vintage: string[];
+      certification: string[];
+      style: string[];
+      accord_mets: string[];
+      region__pays: string[];
+      volume: string[];
+    }>({
+      color: ['blanc'], // Bloqué sur la couleur blanc
+      categories: [],
+      millesime: [],
+      region: [],
+      vintage: [],
+      certification: [],
+      style: [],
+      accord_mets: [],
+      region__pays: [],
+      volume: [],
+    });
 
   const [visibleCount, setVisibleCount] = useState<number>(12);
 
