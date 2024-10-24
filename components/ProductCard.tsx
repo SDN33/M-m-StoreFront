@@ -62,7 +62,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       case 'rouge': return 'bg-red-800';
       case 'blanc': return 'bg-yellow-500';
       case 'rosé': return 'bg-pink-400';
-      case 'pétillant': return 'bg-yellow-200';
+      case 'pétillant': return 'bg-yellow-300';
       case 'liquoreux': return 'bg-amber-600';
       default: return 'bg-primary';
     }

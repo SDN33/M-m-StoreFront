@@ -65,7 +65,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div className="bg-transparent h-full w-52 overflow-y-auto mt-56 bg-white">
+    <div className="hidden sm:block bg-transparent h-full w-52 ml-10 overflow-y-auto mt-56 bg-white">
       {Object.entries(filterOptions).map(([filterType, options]) => {
         if (hideColorFilter && filterType === 'color') return null;
         return (
@@ -74,7 +74,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
               onClick={() => toggleSection(filterType)}
               className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between hover:bg-gray-50"
             >
-              <span className='text-primary'>{getFilterTitle(filterType)}</span>
+              <span className="text-primary">{getFilterTitle(filterType)}</span>
               {expandedSections.includes(filterType) ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
             </button>
             {expandedSections.includes(filterType) && (
@@ -109,12 +109,13 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
           onFilterChange('style', []);
           onFilterChange('volume', []);
           onFilterChange('accord_mets', []);
-        }} className="w-full bg-primary text-white py-2 rounded-md hover:bg-primary-dark transition-colors">
+        }} className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-2 rounded-md hover:bg-primary-dark transition-colors">
           Réinitialiser
         </button>
       </div>
     </div>
   );
+
 };
 
 export default ProductFilter;

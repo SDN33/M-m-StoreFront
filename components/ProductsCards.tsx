@@ -96,7 +96,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
   };
 
   return (
-    <div className="flex-1 px-8 lg:px-6">
+    <div className="flex-1 px-8 lg:px-8">
       <Filtertop
         sortBy="default"
         handleSortChange={() => {}}

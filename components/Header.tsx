@@ -1,8 +1,8 @@
 'use client';
 
-import { ShoppingCart, User, Menu as MenuIcon, X} from 'lucide-react';
+import { ShoppingCart, User, Menu as MenuIcon, X, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CartPopup from './CartPopup';
 import SearchInput from './SearchInput';
 import PromotionSection from './PromotionSection';
@@ -10,11 +10,15 @@ import PromotionSection from './PromotionSection';
 const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isNosVinsOpen, setIsNosVinsOpen] = useState(false);
 
   const categories = [
     { name: 'PROMOS', href: '/promos', className: 'text-primary font-semibold' },
     { name: '⚡ VENTES FLASH', href: '/ventes-flash', className: 'text-primary font-semibold' },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com' },
+  ];
+
+  const vinsSubCategories = [
     { name: 'Vins rouges', href: '/products/category/rouge' },
     { name: 'Vins blancs', href: '/products/category/blanc' },
     { name: 'Vins rosés', href: '/products/category/rose' },
@@ -24,7 +28,31 @@ const Header = () => {
 
   const toggleCartPopup = () => {
     setIsCartOpen(!isCartOpen);
-  }
+  };
+
+  const toggleNosVinsPopup = () => {
+    setIsNosVinsOpen(!isNosVinsOpen);
+  };
+
+  // Fermeture du popup en cliquant en dehors
+  const handleClickOutside = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+    if (target.closest('.nos-vins-modal') === null) {
+      setIsNosVinsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isNosVinsOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isNosVinsOpen]);
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-xl">
@@ -50,7 +78,7 @@ const Header = () => {
 
             {/* Right Actions */}
             <div className="flex items-center space-x-6 mr-3">
-              <div className="  hidden lg:flex items-center space-x-1 text-sm">
+              <div className="hidden lg:flex items-center space-x-1 text-sm">
                 <span className='text-black'>Livraison en</span>
                 <Image
                   src="/images/fr.png"
@@ -63,11 +91,11 @@ const Header = () => {
               </div>
 
               <a href=":" className="hidden lg:flex items-center text-sm hover:text-primary">
-                <User className="w-5 h-5 mr-1  font-semibold" />
-                <span className='font-semibold ml-1' >Espace pro</span>
+                <User className="w-5 h-5 mr-1 font-semibold" />
+                <span className='font-semibold ml-1'>Espace pro</span>
               </a>
 
-              <a href="/faq" className="hidden lg:block text-sm  font-semibold hover:text-primary">
+              <a href="/faq" className="hidden lg:block text-sm font-semibold hover:text-primary">
                 Aide
               </a>
 
@@ -100,7 +128,7 @@ const Header = () => {
 
             <a href="/" className="flex-shrink-0">
               <Image
-                src="/images/logo.svg"
+                src="/images/logow.png"
                 alt="Logo"
                 width={100}
                 height={32}
@@ -132,9 +160,41 @@ const Header = () => {
                 </a>
               </li>
             ))}
+
+            {/* Nos Vins Menu */}
+            <li className="relative font-bold">
+              <button
+                className="px-3 py-4 text-gray-900 hover:text-primary flex items-center"
+                onClick={toggleNosVinsPopup}
+              >
+                Nos Vins <ChevronDown className="ml-1 w-4 h-4" />
+              </button>
+            </li>
           </ul>
         </div>
       </nav>
+
+      {/* Popup modale pour Nos Vins */}
+      {isNosVinsOpen && (
+        <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-20">
+          <div className="bg-white p-4 rounded-lg shadow-xl w-96 h-80 overflow-y-auto nos-vins-modal relative">
+            <button className="absolute top-2 right-2" onClick={toggleNosVinsPopup}>
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+            <h2 className="text-lg font-bold mb-4 text-primary">Nos Vins</h2>
+            <ul>
+              {vinsSubCategories.map((subcategory) => (
+                <li key={subcategory.name} className="py-2">
+                  <a href={subcategory.href} className="text-gray-700 hover:text-primary">
+                    {subcategory.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
       <CartPopup isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </div>
   );
