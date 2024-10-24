@@ -1,6 +1,6 @@
 'use client';
 
-import { ShoppingCart, User, Menu as MenuIcon, X, ChevronDown } from 'lucide-react';
+import { ShoppingCart, User, Menu as MenuIcon, X, ChevronDown, ChevronRight, ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import CartPopup from './CartPopup';
@@ -21,9 +21,9 @@ const Header = () => {
   const categories = [
     { name: 'PROMOS', href: '/promos', className: 'text-primary font-semibold' },
     { name: '⚡ VENTES FLASH', href: '/ventes-flash', className: 'text-primary font-semibold' },
+    { name: 'Nos Vins', href: "", onClick: toggleNosVinsPopup, icon: <ChevronDown className="inline-block ml-1" /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com' },
-    { name: 'La Sélection de Mémé Georgette', href: '/selection-meme' },
-    { name: 'Nos Vins', href:"", onClick: toggleNosVinsPopup },
+    { name: 'La Sélection de Mémé', href: '/selection-meme' },
     { name: 'Nos Vignerons.nes', href: '/vignerons' },
     { name: 'Vins du Monde', href: '/vins-du-monde' },
     { name: 'Contactez-nous', href: '/contact' },
@@ -154,22 +154,40 @@ const Header = () => {
       </div>
 
       {/* Navigation Bar - Desktop and Tablet */}
-      <nav className="hidden md:block bg-white shadow-xl">
-        <div className="container mx-auto px-4">
-          <ul className="flex items-center space-x-4 lg:space-x-8 overflow-x-auto">
+      <nav className="hidden md:block bg-white shadow-xl relative">
+        <div className="container mx-auto px-4 flex items-center justify-between">
+          {/* Icone de gauche */}
+          <ChevronLeft className="w-6 h-6 text-primary cursor-pointer hover-animate" onClick={() => {
+            const scrollContainer = document.querySelector('.scrollable-menu');
+            if (scrollContainer) {
+              scrollContainer.scrollBy({ left: -150, behavior: 'smooth' });
+            }
+          }} />
+
+          <ul className="scrollable-menu flex items-center space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar">
             {categories.map((category) => (
-              <li key={category.name} className="whitespace-nowrap font-bold">
+              <li key={category.name} className="whitespace-nowrap font-bold hover-animate">
                 <a
                   href={category.href}
                   className={`px-3 py-4 text-gray-900 hover:text-primary block ${category.className || ''}`}
+                  onClick={category.onClick}
                 >
                   {category.name}
+                  {category.icon && category.icon}
                 </a>
               </li>
             ))}
           </ul>
+
+          <ChevronRight className="w-6 h-6 text-primary cursor-pointer hover-animate" onClick={() => {
+            const scrollContainer = document.querySelector('.scrollable-menu');
+            if (scrollContainer) {
+              scrollContainer.scrollBy({ left: 150, behavior: 'smooth' });
+            }
+          }} />
         </div>
       </nav>
+
 
       {/* Popup modale pour Nos Vins */}
       {isNosVinsOpen && (

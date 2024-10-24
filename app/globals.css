@@ -125,3 +125,20 @@ ul {
 ul::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.hover-animate {
+  transition: transform 0.2s ease-in-out;
+}
+
+.hover-animate:hover {
+  transform: scale(1.05);
+}
+
