@@ -27,7 +27,7 @@ const Header = () => {
   }
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-primary shadow">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-primary shadow-xl">
       <PromotionSection />
 
       {/* Top Header */}
@@ -119,7 +119,7 @@ const Header = () => {
       </div>
 
       {/* Navigation Bar - Desktop and Tablet */}
-      <nav className="hidden md:block bg-white shadow-lg">
+      <nav className="hidden md:block bg-white shadow-xl">
         <div className="container mx-auto px-4">
           <ul className="flex items-center space-x-4 lg:space-x-8 overflow-x-auto">
             {categories.map((category) => (

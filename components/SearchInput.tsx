@@ -33,16 +33,14 @@ const SearchInput = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState<FilteredProduct[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedFilters, setSelectedFilters] = useState<Set<string>>(new Set());
-  const [showFilters, setShowFilters] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [showRecentSearches, setShowRecentSearches] = useState(false);
 
   const resultsRef = useRef<HTMLDivElement>(null);
-  const filtersRef = useRef<HTMLDivElement>(null);
   const recentSearchesRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null); // Référence pour l'input de recherche
+  const inputRef = useRef<HTMLInputElement>(null);
 
+  // Fonction pour extraire les métadonnées
   const extractMetaData = (product: Product): FilteredProduct => {
     const metaDataMap: { [key: string]: string } = {};
 
@@ -66,12 +64,10 @@ const SearchInput = () => {
       }
     });
 
-    return {
-      ...product,
-      ...metaDataMap
-    };
+    return { ...product, ...metaDataMap };
   };
 
+  // Normalisation des chaînes pour une comparaison simplifiée
   const normalizeString = (str: string) => {
     return str
       .toLowerCase()
@@ -81,6 +77,7 @@ const SearchInput = () => {
       .trim();
   };
 
+  // Calcul du score de similarité
   const getSimilarityScore = (input: string, text: string) => {
     const normalizedInput = normalizeString(input);
     const normalizedText = normalizeString(text);
@@ -92,6 +89,7 @@ const SearchInput = () => {
     return matches / inputWords.length;
   };
 
+  // Déclenchement de la recherche avec un délai (debounce)
   const debouncedSearch = useMemo(
     () =>
       debounce(async (term: string) => {
@@ -147,18 +145,7 @@ const SearchInput = () => {
     }
   };
 
-  const handleFilterToggle = (filter: string) => {
-    setSelectedFilters(prev => {
-      const next = new Set(prev);
-      if (next.has(filter)) {
-        next.delete(filter);
-      } else {
-        next.add(filter);
-      }
-      return next;
-    });
-  };
-
+  // Chargement des recherches récentes depuis localStorage
   useEffect(() => {
     const saved = localStorage.getItem('recentSearches');
     if (saved) {
@@ -166,6 +153,7 @@ const SearchInput = () => {
     }
   }, []);
 
+  // Filtrage des résultats
   useEffect(() => {
     if (searchTerm.length >= 2 && results.length) {
       const filtered = filterResults(results, searchTerm);
@@ -173,19 +161,17 @@ const SearchInput = () => {
     }
   }, [results, searchTerm]);
 
+  // Gestion des clics en dehors des fenêtres pour fermer les résultats
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         resultsRef.current &&
         !resultsRef.current.contains(event.target as Node) &&
-        filtersRef.current &&
-        !filtersRef.current.contains(event.target as Node) &&
         recentSearchesRef.current &&
         !recentSearchesRef.current.contains(event.target as Node) &&
         inputRef.current &&
-        !inputRef.current.contains(event.target as Node) // Vérifiez également l'input
+        !inputRef.current.contains(event.target as Node)
       ) {
-        setShowFilters(false);
         setResults([]);
         setShowRecentSearches(false);
       }
@@ -197,16 +183,22 @@ const SearchInput = () => {
     };
   }, []);
 
+  // Méthode pour effacer la recherche
+  const clearSearch = () => {
+    setSearchTerm('');
+    setResults([]);
+    setShowRecentSearches(false);
+  };
+
   return (
     <div className="relative flex-grow mx-8 max-w-2xl">
       <div className="relative">
         <input
-          ref={inputRef} // Ajout de la référence à l'input
+          ref={inputRef}
           type="text"
           value={searchTerm}
           onChange={handleSearchChange}
-          onMouseEnter={() => setShowRecentSearches(true)}
-          onMouseLeave={() => setTimeout(() => setShowRecentSearches(false), 2000)}
+          onFocus={() => setShowRecentSearches(true)}
           placeholder="Rechercher un vin, un château, une appellation..."
           className="w-full pl-4 pr-20 py-3 border rounded-full border-gray-400 text-primary focus:outline-none focus:border-orange-500"
         />
@@ -219,7 +211,7 @@ const SearchInput = () => {
           )}
           {searchTerm && (
             <button
-              onClick={() => setSearchTerm('')}
+              onClick={clearSearch} // Utiliser la méthode clearSearch ici
               className="p-1 hover:bg-gray-100 rounded-full"
             >
               <X className="w-4 h-4 text-gray-400" />
@@ -227,14 +219,6 @@ const SearchInput = () => {
           )}
         </div>
       </div>
-
-      {showFilters && (
-        <div ref={filtersRef} className="absolute top-full mt-2 w-full bg-white rounded-lg shadow-lg p-4 z-30">
-          <div className="space-y-4">
-            {/* Filtres ici */}
-          </div>
-        </div>
-      )}
 
       {results.length > 0 && (
         <div ref={resultsRef} className="absolute mt-2 w-full bg-white rounded-lg shadow-lg overflow-hidden z-20">
@@ -255,7 +239,7 @@ const SearchInput = () => {
                 <h4 className="font-semibold text-gray-900">{product.name}</h4>
               </div>
               <div className="ml-4 text-right">
-                <div className="font-semibold text-orange-600">
+                <div className="font-semibold text-secondary">
                   {product.sale_price || product.regular_price}€
                 </div>
                 {product.sale_price && (
