@@ -5,7 +5,6 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AgeVerificationModal from "@/components/AgeVerificationModal";
-import ClientLayout from "./ClientLayout"; // Importez le nouveau composant client
 
 export const metadata: Metadata = {
   title: "les vins de Mémé Georgette | 2 500 vins bio en direct de vignerons et vigneronnes engagé(e)s | Vins Bio et Biodynamie Démeter",
@@ -53,7 +52,7 @@ export default function RootLayout({
       <body>
         <Header />
         <AgeVerificationModal />
-        <ClientLayout>{children}</ClientLayout>
+        {children}
         <Footer />
       </body>
     </html>

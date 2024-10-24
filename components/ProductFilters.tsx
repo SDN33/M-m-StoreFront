@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, Wine, Locate, Calendar, Grape, Medal, Ruler, Utensils } from 'lucide-react';
-import WineSelector from './WineSelector';
 
 interface ProductFilterProps {
   selectedFilters: {
