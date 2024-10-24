@@ -93,10 +93,7 @@ body {
   animation: fadeInUp 1s ease-out forwards;
 }
 
-/* Animation pour les cartes */
-.zoom-in {
-  animation: zoomIn 0.5s ease-out forwards;
-}
+
 
 @keyframes zoomIn {
   from {
@@ -141,4 +138,3 @@ ul::-webkit-scrollbar {
 .hover-animate:hover {
   transform: scale(1.05);
 }
-
