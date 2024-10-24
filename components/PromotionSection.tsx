@@ -26,12 +26,12 @@ const PromotionSection = () => {
     >
       <p className="font-extrabold bg-primary shadow-sm text-white text-xs sm:text-xs lg:text-sm">
         <span className="sm:hidden">
-        Livraison <span className='text-black'>offerte</span><br />Dès 6 bouteilles achetées sur un même domaine
+        Livraison <span className='text-black'>OFFERTE 🎉</span><br />Dès 6 bouteilles achetées sur un même domaine
         </span>
 
         {/* Affichage sur plus grand écran sans saut de ligne */}
         <span className=" hidden sm:inline text-base fade-in-up ">
-        Livraison <span className='text-black'>OFFERTE</span> dès 6 bouteilles achetées sur un même domaine
+        Livraison <span className='text-black'>OFFERTE 🎉</span> dès 6 bouteilles achetées sur un même domaine
         </span>
       </p>
     </div>

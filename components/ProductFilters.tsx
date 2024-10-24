@@ -40,7 +40,7 @@ const filterOptions = {
   certification: [
     'Bio',
     'Biodynamie',
-    'En conversion'
+    'En conversion 🔄 '
   ],
   style: ['Charpenté', 'Fruité', 'Moelleux', 'Corsé', 'Sec'],
   volume: ['75 cl', '1 Litre', 'Autres'],
