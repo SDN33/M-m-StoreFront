@@ -7,7 +7,7 @@ import ProductCard from './ProductCard';
 interface Product {
   id: number;
   name: string;
-  categories: { id: number; name: string }[]; // Assurez-vous que chaque produit a une catégorie valide
+  categories: { id: number; name: string }[];
   price: number;
   date_added: string;
   images: { src: string }[];
@@ -88,25 +88,26 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
   };
 
   return (
-    <div className="flex mr-4 lg:mr-16 mt-60">
-      <div className="flex-grow mt-10">
-        {loading && (
-          <div className="flex justify-center mx-auto font-semibold">
-            <p>Chargement des vins...</p>
+    <div className="flex-1 px-4 lg:px-6">
+      {loading ? (
+        <div className="flex items-center justify-center min-h-[200px]">
+          <div className="flex items-center space-x-2">
+            <div className="w-4 h-4 bg-primary rounded-full animate-bounce" />
+            <p className="font-semibold">Chargement des vins...</p>
           </div>
-        )}
-        {error && <p className="text-red-600">{error}</p>}
-        {!loading && filteredProducts.length === 0 && <p>Aucun produit trouvé.</p>}
-
-        {/* Render the product cards only when loading is false */}
-        {!loading && filteredProducts.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-4 lg:px-6">
+        </div>
+      ) : error ? (
+        <div className="text-red-600 p-4 text-center">{error}</div>
+      ) : filteredProducts.length === 0 ? (
+        <div className="text-center p-4">Aucun produit trouvé.</div>
+      ) : (
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProducts.slice(0, visibleCount).map(product => (
               <ProductCard
                 key={product.id}
                 product={product}
                 onAddToCart={(productId, quantity) => {
-                  // Implémentation logique pour ajouter au panier
                   return new Promise((resolve) => {
                     setTimeout(() => {
                       console.log(`Produit ${productId} ajouté au panier avec quantité ${quantity}`);
@@ -117,19 +118,19 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
               />
             ))}
           </div>
-        )}
 
-        {filteredProducts.length > visibleCount && (
-          <div className="flex justify-center mt-4">
-            <button
-              onClick={loadMoreProducts}
-              className="bg-primary text-white py-2 px-4 rounded hover:bg-orange-700"
-            >
-              Voir Plus de Vins
-            </button>
-          </div>
-        )}
-      </div>
+          {filteredProducts.length > visibleCount && (
+            <div className="flex justify-center py-6">
+              <button
+                onClick={loadMoreProducts}
+                className="bg-primary text-white py-2 px-6 rounded-full hover:bg-orange-700 transition-colors duration-200"
+              >
+                Voir Plus de Vins
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
