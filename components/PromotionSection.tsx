@@ -24,13 +24,13 @@ const PromotionSection = () => {
     <div
       className={`opacity-90 text-center   shadow-sm  w-full z-10 ${isVisible ? 'block' : 'hidden'}`}
     >
-      <p className="font-extrabold bg-black shadow-sm text-white text-xs sm:text-xs lg:text-sm">
+      <p className="font-extrabold bg-gradient-to-r from-gray-900 via-gray-800 to-black shadow-sm text-white text-xs sm:text-xs lg:text-sm">
         <span className="sm:hidden">
         Livraison <span className='text-primary'>offerte</span><br />Dès 6 bouteilles achetées sur un même domaine
         </span>
 
         {/* Affichage sur plus grand écran sans saut de ligne */}
-        <span className="hidden sm:inline text-base">
+        <span className=" hidden sm:inline text-base">
         Livraison <span className='text-primary'>OFFERTE</span> dès 6 bouteilles achetées sur un même domaine
         </span>
       </p>

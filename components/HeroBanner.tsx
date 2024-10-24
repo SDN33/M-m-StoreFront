@@ -22,7 +22,7 @@ const HeroBanner = () => {
   }, []);
 
   return (
-    <div className="relative container mx-auto px-4 flex flex-col justify-center items-center bg-primary">
+    <div className="relative container mx-auto px-4 flex flex-col justify-center items-center bg-gradient-to-r from-gray-900 via-gray-800 to-black">
       {/* Conteneur avec z-10 pour rester*/}
       <div className=" flex items-center text-center z-10 text-white relative mb-10">
 
