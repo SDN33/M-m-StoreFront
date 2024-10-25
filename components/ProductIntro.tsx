@@ -60,9 +60,9 @@ const ProductsIntro: React.FC = () => {
       {/* Texte au centre avec espacement */}
       <div className="flex mx-auto mt-10 slide-in-right">
         <h3 className="text-xl md:text-2xl font-extrabold text-primary tracking-tight text-center">
-          {counter.toLocaleString()} vins <span className="text-green-600">biologique</span> en direct des vignerons<span className="text-sm">(nes)</span>
+          {counter.toLocaleString()} vins bio en direct des vignerons<span className="text-sm">(nes)</span>
           <br />
-          <div className="text-gray-800 text-sm">
+          <div className="text-black text-sm">
             Tu sais, celles et ceux qui respectent la terre, ses locataires...
           </div>
         </h3>
@@ -72,7 +72,7 @@ const ProductsIntro: React.FC = () => {
           alt="bio demeter"
           width={80}
           height={20}
-          className="rounded-lg object-contain"
+          className="rounded-lg object-contain ml-2"
         />
       </div>
     </div>
