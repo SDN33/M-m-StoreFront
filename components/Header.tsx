@@ -94,7 +94,7 @@ const Header = () => {
                   height={14}
                   className="mx-1"
                 />
-                <span className="font-bold text-black">France <em className='text-xs'>Métropole</em></span>
+                <span className="font-bold text-black">France</span>
               </div>
 
               <a href=":" className="hidden lg:flex items-center text-sm hover:text-primary">

@@ -11,7 +11,7 @@ import ProductsIntro from '@/components/ProductIntro';
 import WineSelector from '@/components/WineSelector';
 import Slider from '@/components/Slider';
 import Footer from '@/components/Footer';
-import VendorsList from '@/components/VendorsList';
+import WineCategories from '@/components/WineCategories';
 
 
 export default function Home() {
@@ -109,15 +109,15 @@ export default function Home() {
               <br /><br />
               <ProductsIntro />
               <Slider />
+              <WineCategories />
+              <HeroBanner />
               <div className="max-w-7xl mx-auto px-4 space-y-8">
                 <section className="bg-white rounded-lg shadow">
                   <ProductsCards selectedFilters={selectedFilters} />
                 </section>
               </div>
               <WineSelector />
-              <HeroBanner />
               <Livraison />
-              <VendorsList />
               <Slogan />
               <Newletter />
               <br /><br />
