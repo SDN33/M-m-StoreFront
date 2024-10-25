@@ -38,6 +38,8 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
   const [error, setError] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState<number>(12);
   const [sortBy, setSortBy] = useState<string>('');
+  const productsRef = useRef<HTMLDivElement>(null);
+  const [initialLoad, setInitialLoad] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -158,11 +160,13 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
     console.log(`Product added to cart: ${productId}, Quantity: ${quantity}, Variation ID: ${variationId}`);
   };
 
-  const productsRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    if (productsRef.current) {
-      productsRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (!initialLoad) {
+      if (productsRef.current) {
+        productsRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      setInitialLoad(false); // Ne pas faire défiler lors du chargement initial
     }
   }, [selectedFilters]);
 
