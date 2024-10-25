@@ -13,6 +13,7 @@ interface ProductFilterProps {
     region__pays: string[];
   };
   onFilterChange: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
+  resetFilters: () => void;
   hideColorFilter?: boolean;
 }
 
@@ -89,6 +90,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   selectedFilters,
   onFilterChange,
   hideColorFilter = false,
+  resetFilters,
 }) => {
   const [expandedSections, setExpandedSections] = useState<string[]>(Object.keys(filterOptions));
 
@@ -155,17 +157,14 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       })}
 
       <div className="p-4">
-        <button onClick={() => {
-          onFilterChange('categories', []);
-          onFilterChange('region__pays', []);
-          onFilterChange('millesime', []);
-          onFilterChange('certification', []);
-          onFilterChange('style', []);
-          onFilterChange('volume', []);
-          onFilterChange('accord_mets', []);
-        }} className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-2 rounded-md hover:bg-primary-dark transition-colors">
-          Réinitialiser
-        </button>
+      <button
+    onClick={() => {
+      resetFilters(); // Appelle la fonction de réinitialisation passée en props
+    }}
+    className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-2 rounded-md hover:bg-primary-dark transition-colors"
+  >
+    Réinitialiser
+  </button>
       </div>
     </div>
   );

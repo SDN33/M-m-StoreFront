@@ -63,12 +63,11 @@ const Suggestion = () => {
   return (
     <div className="relative max-w-6xl text-center mx-auto py-8 bg-gradient-to-b from-gray-50 to-white">
       <div className="flex flex-wrap justify-center gap-4 ">
-        <CategoryBubble icon={Wine} label="ROUGE" color="red" />
-        <CategoryBubble icon={Wine} label="BLANC" color="yellow" />
-        <CategoryBubble icon={Wine} label="ROSÉ" color="purple" />
+        <CategoryBubble icon={Wine} label="NOËL" color="purple" active={true} />
         <CategoryBubble icon={Gift} label="PROMO" active={true} color="orange" />
         <CategoryBubble icon={Grape} label="PRESTIGE" active={true} color="yellow" />
         <CategoryBubble icon={BadgeEuro} label="PETIT BUDGET" active={true} color="red" />
+
       </div>
 
       {/* Background decoration */}

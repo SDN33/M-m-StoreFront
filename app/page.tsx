@@ -88,7 +88,18 @@ export default function Home() {
               scrollbarWidth: 'thin'
             }}
           >
-            <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} />
+            <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} resetFilters={() => setSelectedFilters({
+              color: [],
+              region: [],
+              vintage: [],
+              millesime: [],
+              certification: [],
+              style: [],
+              volume: [],
+              accord_mets: [],
+              region__pays: [],
+              categories: []
+            })} />
           </div>
         </aside>
 
@@ -114,8 +125,9 @@ export default function Home() {
                 <ProductsCards selectedFilters={selectedFilters} />
               </section>
             </div>
-            <WineSelector />
+            <br /><br />
             <Livraison />
+            <WineSelector />
             <Slogan />
             <Newletter />
             <br /><br />

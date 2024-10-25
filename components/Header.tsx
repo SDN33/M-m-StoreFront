@@ -2,7 +2,7 @@
 
 import { ShoppingCart, User, Menu as MenuIcon, X, ChevronDown, ChevronRight, ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import CartPopup from './CartPopup';
 import SearchInput from './SearchInput';
 import PromotionSection from './PromotionSection';
@@ -12,16 +12,14 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNosVinsOpen, setIsNosVinsOpen] = useState(false);
 
-
-
   const toggleNosVinsPopup = () => {
-    setIsNosVinsOpen(!isNosVinsOpen);
+    setIsNosVinsOpen((prev) => !prev);
   };
 
   const categories = [
     { name: 'PROMOS', href: '/promos', className: 'text-primary font-semibold' },
     { name: '⚡ VENTES FLASH', href: '/ventes-flash', className: 'text-primary font-semibold' },
-    { name: 'Nos Vins', href: "", onClick: toggleNosVinsPopup, icon: <ChevronDown className="inline-block ml-1" /> },
+    { name: 'Nos Vins', onClick: toggleNosVinsPopup, icon: <ChevronDown className="inline-block ml-1" /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com' },
     { name: 'La Sélection de Mémé', href: '/selection-meme' },
     { name: 'Nos Vignerons.nes', href: '/vignerons' },
@@ -41,28 +39,8 @@ const Header = () => {
     setIsCartOpen(!isCartOpen);
   };
 
-  // Fermeture du popup en cliquant en dehors
-  const handleClickOutside = (event: MouseEvent) => {
-    const target = event.target as HTMLElement;
-    if (target.closest('.nos-vins-modal') === null) {
-      setIsNosVinsOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    if (isNosVinsOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isNosVinsOpen]);
-
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 w-full  bg-white shadow-xl">
+    <div className="fixed top-0 left-0 right-0 z-50 w-full bg-white shadow-xl">
       <PromotionSection />
 
       {/* Top Header */}
@@ -111,7 +89,7 @@ const Header = () => {
                   Se connecter
                 </a>
                 <a className="relative">
-                  <ShoppingCart onClick={toggleCartPopup} className="w-6 h-6 text-black font-semibold cursor-pointer" />
+                  <ShoppingCart onClick={toggleCartPopup} className="w-6 h-6 hover:text-primary font-semibold cursor-pointer" />
                   <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                     0
                   </span>
@@ -166,7 +144,10 @@ const Header = () => {
 
           <ul className="scrollable-menu flex items-center space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar">
             {categories.map((category) => (
-              <li key={category.name} className="whitespace-nowrap font-bold hover-animate">
+              <li
+                key={category.name}
+                className="whitespace-nowrap font-bold hover-animate"
+              >
                 <a
                   href={category.href}
                   className={`px-3 py-4 text-gray-900 hover:text-primary block ${category.className || ''}`}
@@ -188,29 +169,37 @@ const Header = () => {
         </div>
       </nav>
 
-
-      {/* Popup modale pour Nos Vins */}
+      {/* Overlay et Popup modale pour Nos Vins */}
       {isNosVinsOpen && (
-        <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-20">
-          <div className="bg-white p-4 rounded-lg shadow-xl w-96 h-80 overflow-y-auto nos-vins-modal relative">
-            <button className="absolute top-2 right-2" onClick={toggleNosVinsPopup}>
-              <X className="w-6 h-6 text-gray-600" />
-            </button>
-            <h2 className="text-lg font-bold mb-4 text-primary">Nos Vins</h2>
-            <ul>
-              {vinsSubCategories.map((subcategory) => (
-                <li key={subcategory.name} className="py-2">
-                  <a href={subcategory.href} className="text-gray-700 hover:text-primary">
-                    {subcategory.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
+        <>
+          <div
+            className="fixed inset-0 bg-black opacity-50 z-40"
+            onClick={toggleNosVinsPopup}
+          ></div>
+          <div
+            className="fixed z-50 inset-0 flex items-center justify-center p-4"
+          >
+            <div className="relative bg-white p-6 rounded-lg shadow-xl w-96 max-h-80 overflow-y-auto">
+              <button className="absolute top-2 right-2" onClick={toggleNosVinsPopup}>
+                <X className="w-6 h-6 text-gray-600" />
+              </button>
+              <h2 className="text-lg font-bold mb-4 text-primary">Nos Vins</h2>
+              <ul>
+                {vinsSubCategories.map((subcategory) => (
+                  <li key={subcategory.name} className="py-2">
+                    <a href={subcategory.href} className="text-gray-700 hover:text-primary">
+                      {subcategory.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
+        </>
       )}
 
-      <CartPopup isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      {/* Popup Panier */}
+      {isCartOpen && <CartPopup isOpen={isCartOpen} onClose={toggleCartPopup} />}
     </div>
   );
 };

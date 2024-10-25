@@ -68,8 +68,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       return `Vin Démeter qui respecte la nature`;
     }
 
-    if (product.categories[0]?.name.toLowerCase().includes('petillant')) {
-      return `Des Bulles À Découvrir`;
+    if (product.categories.length > 0 && product.categories[0]?.name.toLowerCase().includes('pétillant')) {
+      if (product.categories[0]?.name.toLowerCase() === 'rosé') {
+        return `Des Bulles ${product.categories.map(category => category.name).filter(name => name.toLowerCase() !== 'pétillant').join(', ')} À Découvrir`;
+      }
+      if (product.categories[0]?.name.toLowerCase() === 'blanc') {
+        return `Un ${product.categories.map(category => category.name).filter(name => name.toLowerCase() !== 'pétillant').join(', ')} pétillant À Découvrir`;
+      }
+      return `Un Vin ${product.categories.map(category => category.name).join(' et  ')} À Découvrir`;
     }
     if (product.categories[0]?.name.toLowerCase().includes('autres')) {
       return `Un Vin Original pour Surprendre`;

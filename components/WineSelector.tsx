@@ -48,8 +48,6 @@ const WineSelector = () => {
           ${hoveredWine ? wines.find(w => w.color === hoveredWine)?.bg : 'text-gray-800'}`}>
         <strong>{getSlogan()}</strong>
       </h2>
-
-      {/* SVG Tache de vin */}
     </div>
   );
 };

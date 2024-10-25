@@ -2,12 +2,12 @@
 import React from 'react';
 
 interface FiltertopProps {
-  sortBy?: string;
+  sortBy: string;
   handleSortChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   resetFilters: () => void;
 }
 
-const Filtertop: React.FC<FiltertopProps> = ({ sortBy, handleSortChange, resetFilters }) => {
+const Filtertop: React.FC<FiltertopProps> = ({ sortBy = '', handleSortChange, resetFilters }) => {
   return (
     <div className="flex mx-auto text-center items-center justify-center mt-8 -mb-6">
       <label htmlFor="sortBySelect" className="mr-2 font-bold text-gray-800 hidden sm:inline">
