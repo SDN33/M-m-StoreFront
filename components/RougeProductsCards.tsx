@@ -173,7 +173,7 @@ const RougeProductsCards: React.FC = () => {
           <ProductFilter
               selectedFilters={selectedFilters}
               onFilterChange={handleCheckboxChange}
-
+              resetFilters={resetFilters}
               hideColorFilter
           />
         </div>

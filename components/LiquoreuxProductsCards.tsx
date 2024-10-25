@@ -171,6 +171,7 @@ const LiquoreuxProductsCards: React.FC = () => {
             selectedFilters={selectedFilters}
             onFilterChange={handleCheckboxChange}
             hideColorFilter
+            resetFilters={resetFilters}
           />
         </div>
         <div className="md:hidden">

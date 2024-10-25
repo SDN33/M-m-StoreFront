@@ -131,6 +131,18 @@ const BlancProductsCards: React.FC = () => {
             selectedFilters={selectedFilters}
             onFilterChange={handleCheckboxChange}
             hideColorFilter
+            resetFilters={() => setSelectedFilters({
+              color: ['blanc'],
+              categories: [],
+              millesime: [],
+              region: [],
+              vintage: [],
+              certification: [],
+              style: [],
+              accord_mets: [],
+              region__pays: [],
+              volume: [],
+            })}
           />
         </div>
         <div className="md:hidden">

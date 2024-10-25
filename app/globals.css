@@ -143,7 +143,7 @@ ul::-webkit-scrollbar {
 
 /* styles.css ou dans votre fichier CSS global */
 .card-bg {
-  background-image: url('/images/vcardbg.webp'); /* Remplacez par le chemin de votre image */
+  background-image: url('https://imgs.search.brave.com/jUtHp_ooo8YEr8TB07fr15leUeBA73jNfO5No8rmBHE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM0/NjMxNjAyNS9mci9w/aG90by9mb25kLWRl/LXJhaXNpbi1yb3Vn/ZS1mb25jJUMzJUE5/LWZyYWlzLmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz1XYUE1/UGJxV1FKNnF4OVFB/cDBHRnVzMlhnZ1lR/b3ZUdU95akRzOHhF/VjJNPQ'); /* Remplacez par le chemin de votre image */
   background-size: cover; /* Couvre toute la zone */
   background-position: center; /* Centre l'image */
   background-repeat: no-repeat; /* Évite de répéter l'image */

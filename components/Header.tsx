@@ -22,7 +22,7 @@ const Header = () => {
     { name: 'Nos Vins', onClick: toggleNosVinsPopup, icon: <ChevronDown className="inline-block ml-1" /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com' },
     { name: 'La Sélection de Mémé', href: '/selection-meme' },
-    { name: 'Nos Vignerons.nes', href: '/vignerons' },
+    { name: 'Nos Vignerons.nes', href: '/vendors' },
     { name: 'Vins du Monde', href: '/vins-du-monde' },
     { name: 'Contactez-nous', href: '/contact' },
   ];
@@ -146,7 +146,7 @@ const Header = () => {
             {categories.map((category) => (
               <li
                 key={category.name}
-                className="whitespace-nowrap font-bold hover-animate"
+                className="whitespace-nowrap font-bold hover-animate font-sm"
               >
                 <a
                   href={category.href}
