@@ -146,7 +146,7 @@ const VendorList: React.FC = () => {
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gray-200 border-4 border-white rounded-full overflow-hidden">
                       <Image
-                        src={vendor.vendor_image || '/images/memegeorgette1.png'}
+                        src={vendor.vendor_image || '/images/meme-pas-contente-removebg-preview.png'}
                         alt={vendor.store_name}
                         width={50}
                         height={50}
