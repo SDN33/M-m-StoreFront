@@ -100,7 +100,7 @@ const VendorList: React.FC = () => {
             className="relative overflow-hidden rounded-xl group transition-transform duration-200 hover:-translate-y-1 cursor-pointer"
             onClick={() => handleVendorClick(vendor.store_name)}
           >
-            <div className="relative h-64 bg-teal-500 p-6">
+            <div className="relative h-64 p-6 card-bg"> {/* Ajoutez la classe card-bg ici */}
               <div className="absolute top-4 left-4 text-white text-3xl">
                 <FaWineBottle />
               </div>
@@ -113,14 +113,14 @@ const VendorList: React.FC = () => {
                   className="rounded-full bg-white"
                 />
               </div>
-              <h3 className="text-2xl font-bold mb-2">{vendor.store_name}</h3>
+              <h3 className="text-2xl font-bold mb-2 text-white">{vendor.store_name}</h3>
               {vendor.region__pays && (
                 <p className="text-sm text-white flex items-center">
                   <FaMapMarkerAlt className="mr-2" /> {vendor.region__pays}
                 </p>
               )}
               <p className="text-white">{generateDescription(vendor.products)}</p>
-              <button className=" mt-2 bg-white text-black px-4 py-2 rounded-lg mb-2 hover-animate transition-colors duration-300 hover:text-primary shadow-lg hover:shadow-xl">
+              <button className="mt-2 bg-white text-black px-4 py-2 rounded-lg mb-2 hover-animate transition-colors duration-300 hover:text-primary shadow-lg hover:shadow-xl">
                 <p className="text-black hover:text-primary">{vendor.products.length} vins disponibles</p>
               </button>
             </div>

@@ -138,3 +138,14 @@ ul::-webkit-scrollbar {
 .hover-animate:hover {
   transform: scale(1.05);
 }
+
+/* styles.css ou dans votre fichier CSS global */
+.card-bg {
+  background-image: url('/images/slider2.png'); /* Remplacez par le chemin de votre image */
+  background-size: cover; /* Couvre toute la zone */
+  background-position: center; /* Centre l'image */
+  background-repeat: no-repeat; /* Évite de répéter l'image */
+  padding: 20px; /* Optionnel : Ajoute de l'espace autour du contenu */
+  border-radius: 10px; /* Coins arrondis */
+  hover-animate: transform 0.2s ease-in-out; /* Animation au survol */
+}
