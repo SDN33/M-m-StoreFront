@@ -13,7 +13,7 @@ const nextConfig = {
         source: '/store-api/:path*',
         destination: 'https://portailpro-memegeorgette.com/wp-json/wc/store/:path*', // Redirection pour les opérations spécifiques au panier via Store API
       },
-      
+
     ];
   },
 };

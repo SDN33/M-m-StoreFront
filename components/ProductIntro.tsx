@@ -5,19 +5,20 @@ import Image from 'next/image';
 
 const ProductsIntro: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [counter, setCounter] = useState(0); // State for the counter
+  const [counter, setCounter] = useState(0); // État pour le compteur
   const introRef = useRef<HTMLDivElement | null>(null);
-  const targetCount = 2500; // The total number of products (you can replace this with a dynamic value if needed)
+  const targetCount = 2500; // Nombre total de produits
 
   useEffect(() => {
+    // Intersection observer pour détecter la visibilité du composant
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.disconnect(); // Stop observing once visible
+          observer.disconnect(); // Arrêter l'observation une fois visible
         }
       },
-      { threshold: 0.1 } // Trigger when 10% of the component is visible
+      { threshold: 0.1 } // Déclenchement lorsque 10% du composant est visible
     );
 
     const currentIntroRef = introRef.current;
@@ -33,19 +34,19 @@ const ProductsIntro: React.FC = () => {
     };
   }, []);
 
-  // Effect to animate the counter
+  // Effet pour animer le compteur
   useEffect(() => {
     if (isVisible && counter < targetCount) {
       const interval = setInterval(() => {
         setCounter((prevCounter) => {
           if (prevCounter < targetCount) {
-            return prevCounter + 50; // Adjust the increment speed here
+            return prevCounter + 50; // Ajuster la vitesse d'incrémentation ici
           } else {
             clearInterval(interval);
-            return targetCount;
+            return targetCount; // Assurer que le compteur atteigne la valeur cible
           }
         });
-      }, 50); // Update every 50ms for smooth animation
+      }, 50); // Mise à jour toutes les 50ms pour une animation fluide
 
       return () => clearInterval(interval);
     }
