@@ -14,6 +14,24 @@ const Slider = () => {
       discount: '-10%',
       link: '/selection'
     },
+    {
+      id: 2,
+      imageUrl: '/images/slider2.png',
+      title: 'Château Moulin De Peyronin',
+      subtitle: 'Vignoble Bordelais eco-responsable',
+      description: 'bienfait pour nous !',
+      discount: '-10%',
+      link: '/selection'
+    },
+    {
+      id: 3,
+      imageUrl: '/images/slider3.png',
+      title: 'Château Moulin De Peyronin',
+      subtitle: 'Vignoble Bordelais eco-responsable',
+      description: 'bienfait pour nous !',
+      discount: '-10%',
+      link: '/selection'
+    }
 
   ];
 
@@ -21,9 +39,6 @@ const Slider = () => {
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  };
 
   useEffect(() => {
     const timer = setInterval(nextSlide, 12000);
