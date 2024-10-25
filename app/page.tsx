@@ -10,7 +10,6 @@ import Newletter from '@/components/Newletter';
 import ProductsIntro from '@/components/ProductIntro';
 import WineSelector from '@/components/WineSelector';
 import Slider from '@/components/Slider';
-import Footer from '@/components/Footer';
 import WineCategories from '@/components/WineCategories';
 import Suggestion from '@/components/Suggestion';
 
@@ -19,6 +18,8 @@ export default function Home() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const mainContentRef = useRef<HTMLDivElement>(null);
   const filterContentRef = useRef<HTMLDivElement>(null);
+  const lastComponentRef = useRef<HTMLDivElement>(null);
+  const [isAtBottom, setIsAtBottom] = useState(false);
 
   const [selectedFilters, setSelectedFilters] = useState({
     color: [],
@@ -52,10 +53,41 @@ export default function Home() {
       if (!isMobile) {
         const target = e.target as Node;
         const filterContent = filterContentRef.current;
+        const mainContent = mainContentRef.current;
+        const lastComponent = lastComponentRef.current;
+        const footer = document.querySelector('footer');
 
+        // Gérer le scroll indépendant des filtres
         if (filterContent?.contains(target)) {
           e.preventDefault();
           filterContent.scrollTop += e.deltaY;
+          return;
+        }
+
+        if (mainContent && lastComponent && footer) {
+          const mainRect = mainContent.getBoundingClientRect();
+          const lastComponentRect = lastComponent.getBoundingClientRect();
+          const footerRect = footer.getBoundingClientRect();
+
+          // Vérifier si on est au bas de la page
+          const isAtBottomOfPage = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight;
+
+          // Scroll vers le bas
+          if (lastComponentRect.bottom <= mainRect.bottom && e.deltaY > 0 && !isAtBottom) {
+            e.preventDefault();
+            footer.scrollIntoView({ behavior: 'smooth' });
+            setIsAtBottom(true);
+          }
+
+          // Scroll vers le haut
+          if (isAtBottom && e.deltaY < 0) {
+            e.preventDefault();
+            // Vérifier si le footer est visible
+            if (footerRect.top < window.innerHeight) {
+              lastComponent.scrollIntoView({ behavior: 'smooth' });
+              setIsAtBottom(false);
+            }
+          }
         }
       }
     };
@@ -64,7 +96,7 @@ export default function Home() {
     return () => {
       window.removeEventListener('wheel', handleScroll);
     };
-  }, [isMobile]);
+  }, [isMobile, isAtBottom]);
 
   const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {
     setSelectedFilters((prev) => ({
@@ -129,10 +161,11 @@ export default function Home() {
             <Livraison />
             <WineSelector />
             <Slogan />
-            <Newletter />
+            <div ref={lastComponentRef}>
+              <Newletter />
+            </div>
             <br /><br />
           </div>
-          <Footer />
         </main>
       </div>
 

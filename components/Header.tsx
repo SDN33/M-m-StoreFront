@@ -146,7 +146,7 @@ const Header = () => {
             {categories.map((category) => (
               <li
                 key={category.name}
-                className="whitespace-nowrap font-bold hover-animate font-sm"
+                className="whitespace-nowrap font-bold hover-animate text-sm"
               >
                 <a
                   href={category.href}

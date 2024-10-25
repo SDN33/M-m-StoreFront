@@ -110,11 +110,10 @@ body {
 
 .scroll-container {
   position: fixed; /* Position fixe */
-  bottom: 20px; /* Bas de la page */
-  right: 20px; /* Droite de la page */
+  bottom: 50px; /* Bas de la page */
+  right: 1px; /* Droite de la page */
   z-index: 1000; /* Z-index */
   overflow: hidden;
-
 }
 
 ul {
