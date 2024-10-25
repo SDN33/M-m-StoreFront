@@ -62,12 +62,12 @@ const Header = () => {
   }, [isNosVinsOpen]);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-xl">
+    <div className="fixed top-0 left-0 right-0 z-50 w-full  bg-white shadow-xl">
       <PromotionSection />
 
       {/* Top Header */}
       <div className="border-b">
-        <div className="container mx-auto px-4 py-3">
+        <div className="container mx-auto px-4 py-1">
           {/* Desktop and Tablet View */}
           <div className="hidden md:flex items-center justify-between">
             {/* Logo */}
@@ -94,7 +94,7 @@ const Header = () => {
                   height={14}
                   className="mx-1"
                 />
-                <span className="font-bold text-black">France</span>
+                <span className="font-bold text-black">France <em className='text-xs'>Métropole</em></span>
               </div>
 
               <a href=":" className="hidden lg:flex items-center text-sm hover:text-primary">

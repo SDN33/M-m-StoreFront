@@ -11,6 +11,7 @@ import ProductsIntro from '@/components/ProductIntro';
 import WineSelector from '@/components/WineSelector';
 import Slider from '@/components/Slider';
 import Footer from '@/components/Footer';
+import VendorsList from '@/components/VendorsList';
 
 
 export default function Home() {
@@ -103,8 +104,9 @@ export default function Home() {
             }}
           >
             <div className="space-y-8">
-              <br /><br /><br /><br />
-              <br /><br /><br />
+              <br /><br />
+              <br /><br />
+              <br /><br />
               <ProductsIntro />
               <Slider />
               <div className="max-w-7xl mx-auto px-4 space-y-8">
@@ -115,6 +117,7 @@ export default function Home() {
               <WineSelector />
               <HeroBanner />
               <Livraison />
+              <VendorsList />
               <Slogan />
               <Newletter />
               <br /><br />

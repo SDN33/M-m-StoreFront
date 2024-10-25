@@ -59,8 +59,8 @@ const ProductsIntro: React.FC = () => {
     >
       {/* Texte au centre avec espacement */}
       <div className="flex mx-auto mt-10 slide-in-right">
-        <h3 className="text-3xl md:text-4xl font-extrabold text-primary tracking-tight text-center">
-          {counter.toLocaleString()} vins <span className="text-green-600">bio</span> en direct des vignerons<span className="text-accent">(nes)</span>
+        <h3 className="text-xl md:text-2xl font-extrabold text-primary tracking-tight text-center">
+          {counter.toLocaleString()} vins <span className="text-green-600">biologique</span> en direct des vignerons<span className="text-sm">(nes)</span>
           <br />
           <div className="text-gray-800 text-sm">
             Tu sais, celles et ceux qui respectent la terre, ses locataires...
