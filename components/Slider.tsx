@@ -12,7 +12,7 @@ const Slider = () => {
       subtitle: 'Vignoble Bordelais eco-responsable',
       description: 'bienfait pour nous !',
       discount: '-10%',
-      link: '/selection'
+      link: '/vendor/mémégeorgette'
     },
     {
       id: 2,
