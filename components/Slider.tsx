@@ -7,13 +7,14 @@ const Slider = () => {
   const slides = [
     {
       id: 1,
-      imageUrl: '/images/slider1.png',
-      title: 'Château Moulin De Peyronin',
-      subtitle: 'Vignoble Bordelais eco-responsable',
-      description: 'bienfait pour nous !',
-      discount: '-10%',
+      imageUrl: '/images/slider3.png',
+      title: 'Mémé Georgette',
+      subtitle: 'bienfait pour nous !',
+      description: '',
+      discount: '',
       link: '/vendor/mémégeorgette'
     },
+
     {
       id: 2,
       imageUrl: '/images/slider2.png',
@@ -25,13 +26,14 @@ const Slider = () => {
     },
     {
       id: 3,
-      imageUrl: '/images/slider3.png',
-      title: 'Mémé Georgette',
-      subtitle: 'bienfait pour nous !',
-      description: '',
-      discount: '',
+      imageUrl: '/images/slider1.png',
+      title: 'Château Moulin De Peyronin',
+      subtitle: 'Vignoble Bordelais eco-responsable',
+      description: 'bienfait pour nous !',
+      discount: '-10%',
       link: '/vendor/mémégeorgette'
     }
+
 
   ];
 
