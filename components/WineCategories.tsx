@@ -87,7 +87,7 @@ const VendorList: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 mb-8">
       <h2 className="flex items-center justify-center text-xl font-bold mb-6 text-center">
         <div className="border-t border-black w-1/5" /> {/* Bordure gauche */}
         <span className="mx-4">Vignerons engagés et passionnés</span>

@@ -12,6 +12,7 @@ import WineSelector from '@/components/WineSelector';
 import Slider from '@/components/Slider';
 import Footer from '@/components/Footer';
 import WineCategories from '@/components/WineCategories';
+import Suggestion from '@/components/Suggestion';
 
 
 export default function Home() {
@@ -109,6 +110,7 @@ export default function Home() {
               <br /><br />
               <ProductsIntro />
               <Slider />
+              <Suggestion />
               <WineCategories />
               <HeroBanner />
               <div className="max-w-7xl mx-auto px-4 space-y-8">

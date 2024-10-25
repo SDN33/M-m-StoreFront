@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, Wine, Locate, Calendar, Grape, Medal, Ruler, Utensils } from 'lucide-react';
 import Image from 'next/image';
+import Suggestion from './Suggestion';
 
 interface ProductFilterProps {
   selectedFilters: {
