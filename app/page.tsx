@@ -62,7 +62,7 @@ export default function Home() {
       }
     };
 
-    window.addEventListener('wheel', handleScroll, { passive: true });
+    window.addEventListener('wheel', handleScroll);
     return () => {
       window.removeEventListener('wheel', handleScroll);
     };

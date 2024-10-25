@@ -17,6 +17,8 @@ body {
   padding: 0; /* Évite les paddings par défaut */
   box-sizing: border-box; /* Inclus les paddings et les bordures dans la largeur totale */
   overflow-x: hidden;
+  min-height: 100vh; /* Hauteur minimale de la page */
+  max-height: 100vh; /* Hauteur maximale de la page */
 
 }
 
