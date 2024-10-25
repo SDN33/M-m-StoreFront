@@ -7,7 +7,7 @@ import Livraison from '../../../components/Livraison';
 
 // Composants de base personnalisés
 const Card: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
-  <div className={`bg-white rounded-lg shadow-md overflow-hidden ${className}`}>
+  <div className={`bg-gray-50 rounded-lg shadow-md overflow-hidden ${className}`}>
     {children}
   </div>
 );
@@ -28,7 +28,7 @@ const Badge: React.FC<BadgeProps> = ({ children, variant = 'default', className 
   const baseStyle = "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium";
   const variants = {
     default: "bg-orange-100 text-orange-800",
-    secondary: "bg-gray-100 text-gray-800",
+    secondary: "bg-gray-50 text-gray-800",
     success: "bg-green-100 text-green-800",
     outline: "border border-primary text-primary",
   };

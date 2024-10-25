@@ -265,7 +265,7 @@ const ProductPage: React.FC = () => {
               <select
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
-                className="mr-4 p-2 border rounded bg-gray-100 border-gray-300"
+                className="mr-4 p-2 border rounded bg-gray-50 border-gray-300"
               >
                 {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
                   <option key={num} value={num}>{num}</option>
@@ -291,7 +291,7 @@ const ProductPage: React.FC = () => {
           {/* Grille de 2 colonnes plus compact */}
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 mx-auto px-10">
             {/* Cépages */}
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+            <div className="bg-gray-50 p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center px-10">
                 <h3 className="text-lg font-bold text-primary text-left">Cépages</h3>
                 <p className="text-sm text-right">
@@ -301,7 +301,7 @@ const ProductPage: React.FC = () => {
             </div>
 
             {/* Style */}
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+            <div className="bg-gray-50 p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-bold text-primary text-left">Style</h3>
                 <p className="text-sm text-right">
@@ -313,7 +313,7 @@ const ProductPage: React.FC = () => {
             </div>
 
             {/* Accords mets et vins */}
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+            <div className="bg-gray-50 p-4 rounded-lg shadow-md">
                 <div className="flex justify-between items-center">
                     <h3 className="text-lg font-bold text-primary text-left">Accords mets</h3>
                     <p className="text-sm text-right">
@@ -323,7 +323,7 @@ const ProductPage: React.FC = () => {
             </div>
 
             {/* Conservation */}
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+            <div className="bg-gray-50 p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-bold text-primary text-left">Conservation</h3>
                 <p className="text-sm text-right">
@@ -333,7 +333,7 @@ const ProductPage: React.FC = () => {
             </div>
 
             {/* Degré d'alcool */}
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+            <div className="bg-gray-50 p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-bold text-primary text-left">Degré d&apos;alcool</h3>
                 <p className="text-sm text-right">

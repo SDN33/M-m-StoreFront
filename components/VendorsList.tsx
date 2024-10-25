@@ -132,7 +132,7 @@ const VendorList: React.FC = () => {
       <br />
 
       {vendors.length === 0 ? (
-        <div className="bg-gray-100 shadow rounded-lg p-6">
+        <div className="bg-gray-50 shadow rounded-lg p-6">
           <p className="text-center text-gray-500">Aucun vendeur disponible.</p>
         </div>
       ) : (

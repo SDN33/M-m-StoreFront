@@ -78,7 +78,7 @@ const Slider = () => {
                 <div className="flex items-center gap-6">
                   <Link
                     href={slide.link}
-                    className="bg-white text-black px-6 py-3 rounded-md text-sm font-semibold
+                    className="bg-gray-50 text-black px-6 py-3 rounded-md text-sm font-semibold
                            hover:text-primary hover-animate transition-colors duration-300
                              shadow-lg hover:shadow-xl"
                   >
@@ -99,8 +99,8 @@ const Slider = () => {
             onClick={() => setCurrentSlide(index)}
             className={`w-3 h-3 rounded-full transition-colors duration-300
                        ${currentSlide === index
-                         ? 'bg-white scale-100'
-                         : 'bg-white/50 scale-90 hover:scale-95'}`}
+                         ? 'bg-gray-50 scale-100'
+                         : 'bg-gray-50/50 scale-90 hover:scale-95'}`}
             aria-label={`Aller au slide ${index + 1}`}
           />
         ))}

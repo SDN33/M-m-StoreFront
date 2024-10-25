@@ -43,7 +43,7 @@ const CategoryBubble = ({ icon: Icon, label, active = false, color = 'purple' }:
         transition-all duration-300 transform hover:scale-105 active:scale-95
         ${active ? colorStyles[color].active : colorStyles[color].inactive}
         shadow-lg hover:shadow-xl
-        border border-gray-100`}
+        border border-white`}
     >
       <div className={`transition-transform duration-300 ${isHovered ? 'rotate-12' : ''}`}>
         <Icon size={20} className="w-5 h-5" />
@@ -51,8 +51,8 @@ const CategoryBubble = ({ icon: Icon, label, active = false, color = 'purple' }:
       <span className="text-sm font-bold tracking-wide">{label}</span>
       {active && (
         <span className="flex h-2 w-2 relative">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gray-50 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-gray-50"></span>
         </span>
       )}
     </div>

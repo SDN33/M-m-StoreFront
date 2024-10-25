@@ -47,7 +47,7 @@ const AgeVerificationModal = () => {
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-gray-100 rounded-lg max-w-md w-full p-6 shadow-xl text-center">
+      <div className="bg-gray-50 rounded-lg max-w-md w-full p-6 shadow-xl text-center">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">
           Vérification de l&apos;âge
         </h2>

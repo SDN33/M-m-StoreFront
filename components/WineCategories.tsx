@@ -110,7 +110,7 @@ const VendorList: React.FC = () => {
                   alt={vendor.store_name}
                   width={100}
                   height={100}
-                  className="rounded-full bg-white"
+                  className="rounded-full bg-gray-50"
                 />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-white">{vendor.store_name}</h3>
@@ -120,7 +120,7 @@ const VendorList: React.FC = () => {
                 </p>
               )}
               <p className="text-white">{generateDescription(vendor.products)}</p>
-              <button className="mt-2 bg-white text-black px-4 py-2 rounded-lg mb-2 hover-animate transition-colors duration-300 hover:text-primary shadow-lg hover:shadow-xl">
+              <button className="mt-2 bg-gray-50 text-black px-4 py-2 rounded-lg mb-2 hover-animate transition-colors duration-300 hover:text-primary shadow-lg hover:shadow-xl">
                 <p className="text-black hover:text-primary">{vendor.products.length} vins disponibles</p>
               </button>
             </div>

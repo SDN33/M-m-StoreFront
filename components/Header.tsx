@@ -62,7 +62,7 @@ const Header = () => {
   }, [isNosVinsOpen]);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 w-full  bg-white shadow-xl">
+    <div className="fixed top-0 left-0 right-0 z-50 w-full  bg-gray-50 shadow-xl">
       <PromotionSection />
 
       {/* Top Header */}
@@ -154,7 +154,7 @@ const Header = () => {
       </div>
 
       {/* Navigation Bar - Desktop and Tablet */}
-      <nav className="hidden md:block bg-white shadow-xl relative">
+      <nav className="hidden md:block bg-gray-50 shadow-xl relative">
         <div className="container mx-auto px-4 flex items-center justify-between">
           {/* Icone de gauche */}
           <ChevronLeft className="w-6 h-6 text-primary cursor-pointer hover-animate" onClick={() => {
@@ -192,7 +192,7 @@ const Header = () => {
       {/* Popup modale pour Nos Vins */}
       {isNosVinsOpen && (
         <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-20">
-          <div className="bg-white p-4 rounded-lg shadow-xl w-96 h-80 overflow-y-auto nos-vins-modal relative">
+          <div className="bg-gray-50 p-4 rounded-lg shadow-xl w-96 h-80 overflow-y-auto nos-vins-modal relative">
             <button className="absolute top-2 right-2" onClick={toggleNosVinsPopup}>
               <X className="w-6 h-6 text-gray-600" />
             </button>
