@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
-import Filtertop from './Filtertop'; // Ensure Filtertop is correctly imported
+import Filtertop from './Filtertop';
 
 interface Product {
   id: number;
@@ -37,7 +37,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState<number>(12);
-  const [sortBy, setSortBy] = useState<string>(''); // New state for sorting
+  const [sortBy, setSortBy] = useState<string>('');
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -60,61 +60,66 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
     fetchProducts();
   }, []);
 
-  const filterProducts = useCallback((product: Product) => {
-    const isColorMatch =
-      selectedFilters.color.length === 0 ||
-      selectedFilters.color.some((selectedColor) =>
-        product.categories?.some((category) =>
-          category.name?.toLowerCase().trim() === selectedColor.toLowerCase().trim()
-        )
+  const filterProducts = useCallback(
+    (product: Product) => {
+      const isColorMatch =
+        selectedFilters.color.length === 0 ||
+        selectedFilters.color.some((selectedColor) =>
+          product.categories?.some((category) =>
+            category.name?.toLowerCase().trim() === selectedColor.toLowerCase().trim()
+          )
+        );
+
+      const isVintageMatch =
+        selectedFilters.vintage.length === 0 ||
+        selectedFilters.vintage.includes(product.millesime || '');
+
+      const isRegionMatch =
+        selectedFilters.region.length === 0 ||
+        selectedFilters.region.some(
+          (region) =>
+            region.toLowerCase().trim() === (product.region__pays || '').toLowerCase().trim()
+        );
+
+      const isCertificationMatch =
+        selectedFilters.certification.length === 0 ||
+        selectedFilters.certification.some(
+          (certification) =>
+            certification.toLowerCase().trim() === (product.certification || '').toLowerCase().trim()
+        );
+
+      const isStyleMatch =
+        selectedFilters.style.length === 0 ||
+        selectedFilters.style.some(
+          (style) => style.toLowerCase().trim() === (product.style || '').toLowerCase().trim()
+        );
+
+      const isVolumeMatch =
+        selectedFilters.volume.length === 0 ||
+        selectedFilters.volume.some(
+          (volume) => volume.toLowerCase().trim() === (product.volume || '').toLowerCase().trim()
+        );
+
+      const isAccordMetsMatch =
+        selectedFilters.accord_mets.length === 0 ||
+        selectedFilters.accord_mets.some((accordMets) =>
+          (product.accord_mets ?? []).some(
+            (met) => met.toLowerCase().trim() === accordMets.toLowerCase().trim()
+          )
+        );
+
+      return (
+        isColorMatch &&
+        isVintageMatch &&
+        isRegionMatch &&
+        isCertificationMatch &&
+        isStyleMatch &&
+        isVolumeMatch &&
+        isAccordMetsMatch
       );
-
-    const isVintageMatch =
-      selectedFilters.vintage.length === 0 ||
-      selectedFilters.vintage.includes(product.millesime || '');
-
-    const isRegionMatch =
-      selectedFilters.region.length === 0 ||
-      selectedFilters.region.some((region) =>
-        region.toLowerCase().trim() === (product.region__pays || '').toLowerCase().trim()
-      );
-
-    const isCertificationMatch =
-      selectedFilters.certification.length === 0 ||
-      selectedFilters.certification.some((certification) =>
-        certification.toLowerCase().trim() === (product.certification || '').toLowerCase().trim()
-      );
-
-    const isStyleMatch =
-      selectedFilters.style.length === 0 ||
-      selectedFilters.style.some((style) =>
-        style.toLowerCase().trim() === (product.style || '').toLowerCase().trim()
-      );
-
-    const isVolumeMatch =
-      selectedFilters.volume.length === 0 ||
-      selectedFilters.volume.some((volume) =>
-        volume.toLowerCase().trim() === (product.volume || '').toLowerCase().trim()
-      );
-
-    const isAccordMetsMatch =
-      selectedFilters.accord_mets.length === 0 ||
-      selectedFilters.accord_mets.some((accordMets) =>
-        (product.accord_mets ?? []).some((met) =>
-          met.toLowerCase().trim() === accordMets.toLowerCase().trim()
-        )
-      );
-
-    return (
-      isColorMatch &&
-      isVintageMatch &&
-      isRegionMatch &&
-      isCertificationMatch &&
-      isStyleMatch &&
-      isVolumeMatch &&
-      isAccordMetsMatch
-    );
-  }, [selectedFilters]);
+    },
+    [selectedFilters]
+  );
 
   const sortProducts = (products: Product[], sortBy: string) => {
     switch (sortBy) {
@@ -133,7 +138,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
 
   const filteredProducts = useMemo(() => {
     const filtered = products.filter(filterProducts);
-    return sortProducts(filtered, sortBy); // Use the state sortBy here
+    return sortProducts(filtered, sortBy);
   }, [products, filterProducts, sortBy]);
 
   const loadMoreProducts = () => {
@@ -141,25 +146,29 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
   };
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortBy(event.target.value); // Update the sortBy state
+    setSortBy(event.target.value);
   };
 
   const resetFilters = () => {
-    setSortBy(''); // Reset sorting and any other filters
-    setVisibleCount(12); // Reset visible count if needed
+    setSortBy('');
+    setVisibleCount(12);
   };
 
   const onAddToCart = async (productId: number, quantity: number, variationId: number) => {
     console.log(`Product added to cart: ${productId}, Quantity: ${quantity}, Variation ID: ${variationId}`);
   };
 
+  const productsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (productsRef.current) {
+      productsRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [selectedFilters]);
+
   return (
-    <div className="flex-1 px-4 lg:px-4">
-      <Filtertop
-        sortBy={sortBy}
-        handleSortChange={handleSortChange}
-        resetFilters={resetFilters}
-      />
+    <div ref={productsRef} className="flex-1 px-4 lg:px-4">
+      <Filtertop sortBy={sortBy} handleSortChange={handleSortChange} resetFilters={resetFilters} />
       <br />
       <br />
       {loading ? (

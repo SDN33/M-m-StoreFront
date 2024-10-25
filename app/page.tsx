@@ -14,7 +14,6 @@ import Footer from '@/components/Footer';
 import WineCategories from '@/components/WineCategories';
 import Suggestion from '@/components/Suggestion';
 
-
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -33,7 +32,6 @@ export default function Home() {
     region__pays: [],
     categories: []
   });
-
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
@@ -75,66 +73,63 @@ export default function Home() {
     }));
   };
 
-    return (
-      <div className="flex flex-col min-h-screen">
-
-        <div className="flex flex-1">
-          <aside
-            className={`w-64 bg-white border-r border-gray-200 ${isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out' : 'relative'} ${isMobile && !isFilterOpen ? '-translate-x-full' : 'translate-x-0'}`}
-          >
-            <div
-              ref={filterContentRef}
-              className="p-4 h-full overflow-y-auto scroll-container"
-              style={{
-                overscrollBehavior: 'contain',
-                msOverflowStyle: 'none',
-                scrollbarWidth: 'thin'
-              }}
-            >
-              {/* Vous pouvez également cacher le ProductFilter si nécessaire sur mobile */}
-              <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} />
-            </div>
-          </aside>
-
-          <main
-            ref={mainContentRef}
-            className="flex-1 bg-gray-50 overflow-y-auto"
+  return (
+    <div className="flex flex-col min-h-screen">
+      <div className="flex flex-1">
+        <aside
+          className={`w-64 bg-white border-r border-gray-200 ${isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out' : 'relative'} ${isMobile && !isFilterOpen ? '-translate-x-full' : 'translate-x-0'}`}
+        >
+          <div
+            ref={filterContentRef}
+            className="p-4 h-full overflow-y-auto scroll-container"
             style={{
               overscrollBehavior: 'contain',
-              height: '100vh'
+              msOverflowStyle: 'none',
+              scrollbarWidth: 'thin'
             }}
           >
-            <div className="space-y-8">
-              <br /><br />
-              <br /><br />
-              <br /><br />
-              <ProductsIntro />
-              <Slider />
-              <Suggestion />
-              <WineCategories />
-              <HeroBanner />
-              <div className="max-w-7xl mx-auto px-4 space-y-8">
-                <section className="bg-white rounded-lg shadow">
-                  <ProductsCards selectedFilters={selectedFilters} />
-                </section>
-              </div>
-              <WineSelector />
-              <Livraison />
-              <Slogan />
-              <Newletter />
-              <br /><br />
+            <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} />
+          </div>
+        </aside>
+
+        <main
+          ref={mainContentRef}
+          className="flex-1 bg-gray-50 overflow-y-auto"
+          style={{
+            overscrollBehavior: 'contain',
+            height: '100vh'
+          }}
+        >
+          <div className="space-y-8">
+            <br /><br />
+            <br /><br />
+            <br /><br />
+            <ProductsIntro />
+            <Slider />
+            <Suggestion />
+            <WineCategories />
+            <HeroBanner />
+            <div className="max-w-7xl mx-auto px-4 space-y-8">
+              <section className="bg-white rounded-lg shadow">
+                <ProductsCards selectedFilters={selectedFilters} />
+              </section>
             </div>
-            <Footer />
-
-          </main>
-        </div>
-
-        {isMobile && isFilterOpen && (
-          <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-30"
-            onClick={() => setIsFilterOpen(false)}
-          />
-        )}
+            <WineSelector />
+            <Livraison />
+            <Slogan />
+            <Newletter />
+            <br /><br />
+          </div>
+          <Footer />
+        </main>
       </div>
-    );
-  }
+
+      {isMobile && isFilterOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-30"
+          onClick={() => setIsFilterOpen(false)}
+        />
+      )}
+    </div>
+  );
+}
