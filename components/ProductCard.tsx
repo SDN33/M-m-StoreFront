@@ -112,7 +112,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             <Image
               src={product.images[0]?.src || '/images/vinmémé.png'}
               alt={product.name}
-              layout="fill"
+              fill
               objectFit="contain"
               priority
               onClick={handleRedirect}
