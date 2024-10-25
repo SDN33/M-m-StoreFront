@@ -28,7 +28,7 @@ const Slider = () => {
       imageUrl: '/images/slider3.png',
       title: 'Mémé Georgette',
       subtitle: 'bienfait pour nous !',
-      description: 'bienfait pour nous !',
+      description: '',
       discount: '',
       link: '/vendor/mémégeorgette'
     }

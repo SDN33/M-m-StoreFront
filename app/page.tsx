@@ -10,7 +10,7 @@ import Newletter from '@/components/Newletter';
 import ProductsIntro from '@/components/ProductIntro';
 import WineSelector from '@/components/WineSelector';
 import Slider from '@/components/Slider';
-// Removed import for Video as we will use the HTML video element
+import Footer from '@/components/Footer';
 
 
 export default function Home() {
@@ -118,6 +118,7 @@ export default function Home() {
               <Slogan />
               <Newletter />
               <br /><br />
+              <Footer />
             </div>
           </main>
         </div>

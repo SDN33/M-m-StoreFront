@@ -104,7 +104,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
         {/* Product Image and Rating Badge */}
         <div className="relative">
-          <div className="absolute top-0 left-0 z-10 bg-accent rounded-full p-2 text-white">
+          <div className="absolute top-0 left-0 z-10 bg-teal-500 rounded-full p-2 text-white">
             <div className="text-xs">NOTE</div>
             <div className="font-bold">{formatRating(product.average_rating)}</div>
           </div>

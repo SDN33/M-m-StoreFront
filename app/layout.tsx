@@ -53,7 +53,6 @@ export default function RootLayout({
         <Header />
         <AgeVerificationModal />
         {children}
-        <Footer />
       </body>
     </html>
   );
