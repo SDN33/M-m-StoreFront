@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Star, Package } from 'lucide-react';
 import Livraison from '@/components/Livraison';
 import SocialShare from '@/components/Socialshare';
+import Footer from '@/components/Footer';
 
 
 
@@ -165,7 +166,7 @@ const ProductPage: React.FC = () => {
 
       <div className="relative top-0 left-0 w-full">
       </div>
-      <br /><br />
+      <br />
       <br /><br /><br />
       <br /><br /><br />
       <div className="max-w-6xl mx-auto px-8 sm:px-6 lg:px-8 py-8 min-h-screen">
@@ -370,6 +371,8 @@ const ProductPage: React.FC = () => {
           />
 
           <Livraison />
+          <br /><br />
+          <Footer />
         </div>
       </div>
     </div>
