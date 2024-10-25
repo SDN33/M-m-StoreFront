@@ -9,6 +9,7 @@ import Livraison from '@/components/Livraison';
 import Newletter from '@/components/Newletter';
 import ProductsIntro from '@/components/ProductIntro';
 import WineSelector from '@/components/WineSelector';
+import Slider from '@/components/Slider';
 // Removed import for Video as we will use the HTML video element
 
 
@@ -103,8 +104,9 @@ export default function Home() {
           >
             <div className="space-y-8">
               <br /><br /><br /><br />
-              <br /><br /><br /><br />
+              <br /><br /><br />
               <ProductsIntro />
+              <Slider />
               <div className="max-w-7xl mx-auto px-4 space-y-8">
                 <section className="bg-white rounded-lg shadow">
                   <ProductsCards selectedFilters={selectedFilters} />
