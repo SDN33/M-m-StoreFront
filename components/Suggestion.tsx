@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Wine, Glasses, Grape, BadgeEuro } from 'lucide-react';
+import { Wine, Grape, BadgeEuro, Gift } from 'lucide-react';
 import { LucideProps } from 'lucide-react';
 
-type ColorStyle = 'purple' | 'red' | 'yellow' | 'green';
+type ColorStyle = 'purple' | 'red' | 'yellow' | 'orange';
 
 interface CategoryBubbleProps {
   icon: React.ComponentType<LucideProps>;
@@ -23,16 +23,16 @@ const colorStyles: Record<ColorStyle, { active: string; inactive: string }> = {
     inactive: 'bg-gray-50 hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-500 hover:text-white',
   },
   yellow: {
-    active: 'bg-gradient-to-r from-amber-400 to-yellow-500 text-white',
+    active: 'bg-gradient-to-r from-amber-400 to-yellow-800 text-white',
     inactive: 'bg-gray-50 hover:bg-gradient-to-r hover:from-amber-400 hover:to-yellow-500 hover:text-white',
   },
-  green: {
-    active: 'bg-gradient-to-r from-emerald-500 to-green-500 text-white',
+  orange: {
+    active: 'bg-gradient-to-r from-primary to-orange-800 text-white',
     inactive: 'bg-gray-50 hover:bg-gradient-to-r hover:from-emerald-500 hover:to-green-500 hover:text-white',
   },
 };
 
-const CategoryBubble = ({ icon: Icon, label, active = false, color = 'purple' }: CategoryBubbleProps) => {
+const CategoryBubble = ({ icon: Icon, label, active = false, color = 'orange' }: CategoryBubbleProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -66,8 +66,8 @@ const Suggestion = () => {
         <CategoryBubble icon={Wine} label="ROUGE" color="red" />
         <CategoryBubble icon={Wine} label="BLANC" color="yellow" />
         <CategoryBubble icon={Wine} label="ROSÉ" color="purple" />
-        <CategoryBubble icon={Glasses} label="PROMO" active={true} color="green" />
-        <CategoryBubble icon={Grape} label="PRESTIGE" active={true} color="purple" />
+        <CategoryBubble icon={Gift} label="PROMO" active={true} color="orange" />
+        <CategoryBubble icon={Grape} label="PRESTIGE" active={true} color="yellow" />
         <CategoryBubble icon={BadgeEuro} label="PETIT BUDGET" active={true} color="red" />
       </div>
 
