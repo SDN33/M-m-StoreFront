@@ -69,8 +69,6 @@ export default function Home() {
           const lastComponentRect = lastComponent.getBoundingClientRect();
           const footerRect = footer.getBoundingClientRect();
 
-          // Vérifier si on est au bas de la page
-          const isAtBottomOfPage = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight;
 
           // Scroll vers le bas
           if (lastComponentRect.bottom <= mainRect.bottom && e.deltaY > 0 && !isAtBottom) {
