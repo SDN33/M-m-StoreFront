@@ -81,7 +81,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   return (
     <div className="w-full max-w-[400px] max-h-[100] min-w-[300px] bg-white rounded-lg overflow-hidden shadow-md">
       {/* Header - Personalized Banner */}
-      <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-black text-primary p-2 text-center font-semibold">
+      <div className="bg-gradient-to-r from-black via-gray-800 to-black text-white p-2 text-center font-semibold">
         {generateSlogan()}
       </div>
 
