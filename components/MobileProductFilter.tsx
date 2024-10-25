@@ -102,7 +102,7 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
                 <div key={filterType} className="border-b border-white/10 last:border-b-0">
                   <button
                     onClick={() => toggleSection(filterType as keyof typeof filterOptions)}
-                    className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-50/10 transition-colors"
+                    className="w-full px-4 py-3 flex items-center justify-between hover:bg-white/10 transition-colors"
                     aria-expanded={openSections.includes(filterType)}
                     aria-controls={`mobile-${filterType}`}
                   >
@@ -115,11 +115,11 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
                   </button>
 
                   {openSections.includes(filterType) && (
-                    <div className="px-4 py-2 bg-gray-50/10" id={`mobile-${filterType}`}>
+                    <div className="px-4 py-2 bg-white/10" id={`mobile-${filterType}`}>
                       {options.map((option) => (
                         <label
                           key={option}
-                          className="flex items-center space-x-2 py-2 cursor-pointer hover:bg-gray-50/5 px-2 rounded transition-colors"
+                          className="flex items-center space-x-2 py-2 cursor-pointer hover:bg-white/5 px-2 rounded transition-colors"
                         >
                           <input
                             type="checkbox"

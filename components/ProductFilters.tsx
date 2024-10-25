@@ -107,7 +107,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div className="hidden sm:block bg-transparent h-full w-56 ml-10 overflow-y-auto mt-56 bg-gray-50
+    <div className="hidden sm:block bg-transparent h-full w-56 ml-10 overflow-y-auto mt-56 bg-white
      bg-opacity-30">
       {Object.entries(filterOptions).map(([filterType, options]) => {
         if (hideColorFilter && filterType === 'color') return null;
@@ -121,9 +121,9 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
               {expandedSections.includes(filterType) ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
             </button>
             {expandedSections.includes(filterType) && (
-              <div className="p-4 space-y-2 bg-gray-50">
+              <div className="p-4 space-y-2 bg-white">
                 {options.map((option) => (
-                  <label key={option.value} className="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded">
+                  <label key={option.value} className="flex items-center justify-between cursor-pointer hover:bg-white p-2 rounded">
                     <div className="flex items-center">
                       <input
                         type="checkbox"

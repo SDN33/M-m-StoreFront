@@ -38,7 +38,7 @@ const WineSelector = () => {
                     {wine.name}
                   </span>
                 </div>
-                <div className="w-10 h-16 bg-gray-50/20 absolute bottom-1 rounded-full"></div>
+                <div className="w-10 h-16 bg-white/20 absolute bottom-1 rounded-full"></div>
               </div>
             </div>
           </Link>
@@ -50,29 +50,6 @@ const WineSelector = () => {
       </h2>
 
       {/* SVG Tache de vin */}
-      <svg
-        className={`absolute z-0 w-full h-full transition-all duration-300 ${hoveredWine ? wines.find(w => w.color === hoveredWine)?.bg : 'opacity-10'}`}
-        viewBox="0 0 100 100"
-        xmlns="http://www.w3.org/2000/svg"
-        style={{ animation: `${hoveredWine ? 'pulse 4s infinite' : 'none'}` }}
-      >
-        <path
-          d="M50,0 C65,30 35,40 50,60 C65,80 30,80 50,100 C70,80 90,40 50,0 Z"
-          fill="currentColor"
-        />
-        <style jsx>{`
-          @keyframes pulse {
-            0%, 100% {
-              opacity: 0.1;
-              transform: scale(1);
-            }
-            50% {
-              opacity: 0.3;
-              transform: scale(1.05);
-            }
-          }
-        `}</style>
-      </svg>
     </div>
   );
 };

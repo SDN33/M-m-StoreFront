@@ -80,7 +80,7 @@ export default function Home() {
 
         <div className="flex flex-1">
           <aside
-            className={`w-64 bg-gray-50 border-r border-gray-200 ${isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out' : 'relative'} ${isMobile && !isFilterOpen ? '-translate-x-full' : 'translate-x-0'}`}
+            className={`w-64 bg-white border-r border-gray-200 ${isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out' : 'relative'} ${isMobile && !isFilterOpen ? '-translate-x-full' : 'translate-x-0'}`}
           >
             <div
               ref={filterContentRef}
@@ -114,7 +114,7 @@ export default function Home() {
               <WineCategories />
               <HeroBanner />
               <div className="max-w-7xl mx-auto px-4 space-y-8">
-                <section className="bg-gray-50 rounded-lg shadow">
+                <section className="bg-white rounded-lg shadow">
                   <ProductsCards selectedFilters={selectedFilters} />
                 </section>
               </div>

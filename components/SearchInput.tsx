@@ -212,7 +212,7 @@ const SearchInput = () => {
           {searchTerm && (
             <button
               onClick={clearSearch} // Utiliser la méthode clearSearch ici
-              className="p-1 hover:bg-gray-50 rounded-full"
+              className="p-1 hover:bg-white rounded-full"
             >
               <X className="w-4 h-4 text-gray-400" />
             </button>
@@ -221,7 +221,7 @@ const SearchInput = () => {
       </div>
 
       {results.length > 0 && (
-        <div ref={resultsRef} className="absolute mt-2 w-full bg-gray-50 rounded-lg shadow-lg overflow-hidden z-20">
+        <div ref={resultsRef} className="absolute mt-2 w-full bg-white rounded-lg shadow-lg overflow-hidden z-20">
           {results.map((product, index) => (
             <a
               key={product.id}
@@ -254,14 +254,14 @@ const SearchInput = () => {
       )}
 
       {!searchTerm && recentSearches.length > 0 && showRecentSearches && (
-        <div ref={recentSearchesRef} className="absolute mt-2 w-full bg-gray-50 rounded-lg shadow-lg p-4 z-20">
+        <div ref={recentSearchesRef} className="absolute mt-2 w-full bg-white rounded-lg shadow-lg p-4 z-20">
           <h3 className="text-sm font-semibold text-gray-500 mb-2">Recherches récentes</h3>
           <div className="flex flex-wrap gap-2">
             {recentSearches.map((term, index) => (
               <button
                 key={index}
                 onClick={() => setSearchTerm(term)}
-                className="px-3 py-1 bg-gray-50 rounded-full text-sm hover:bg-gray-200"
+                className="px-3 py-1 bg-white rounded-full text-sm hover:bg-gray-200"
               >
                 {term}
               </button>

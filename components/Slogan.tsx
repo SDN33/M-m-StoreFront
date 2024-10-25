@@ -119,7 +119,7 @@ const Slogan: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-around items-center mt-10 space-y-6 md:space-y-0 md:space-x-4">
           {['Notre Engagement', 'Circuit Court', 'Élan Éco-Responsable'].map((title, index) => (
             <div key={index} ref={engagementRefs[index]} className={`relative w-full md:w-1/3 ${cardsVisible[index] ? 'fade-in-up' : ''}`}>
-              <div className="bg-gray-50 text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
+              <div className="bg-white text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
                 <h3 className="font-bold text-md md:text-lg">{title}</h3>
                 <p className="text-xs md:text-sm">
                   {index === 0

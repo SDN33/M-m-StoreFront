@@ -79,7 +79,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   };
 
   return (
-    <div className="w-full max-w-[400px] max-h-[90] min-w-[300px] bg-gray-50 rounded-lg overflow-hidden shadow-md">
+    <div className="w-full max-w-[400px] max-h-[90] min-w-[300px] bg-white rounded-lg overflow-hidden shadow-md">
       {/* Header - Personalized Banner */}
       <div className="bg-gradient-to-r from-black via-gray-800 to-black text-white p-2 text-center font-semibold">
         {generateSlogan()}
@@ -177,7 +177,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           <select
             value={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}
-            className="border rounded-md px-3 py-2 bg-gray-50"
+            className="border rounded-md px-3 py-2 bg-white"
           >
             {[1, 2, 3, 4, 5, 6].map(num => (
               <option key={num} value={num}>{num}</option>
