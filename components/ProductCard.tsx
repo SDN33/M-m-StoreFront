@@ -162,7 +162,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
               <div className="text-2xl font-bold">
                 {Math.floor(product.price)}<sup className="text-sm">{(product.price % 1).toFixed(2).substring(2)}€</sup>
               </div>
-              <div className="text-sm text-gray-500">dès 3 bouteilles</div>
             </div>
           </div>
           <div className="text-gray-500">

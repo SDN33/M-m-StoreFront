@@ -23,11 +23,11 @@ const colorStyles: Record<ColorStyle, { active: string; inactive: string }> = {
     inactive: 'bg-gray-50 hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-500 hover:text-white',
   },
   yellow: {
-    active: 'bg-gradient-to-r from-amber-400 to-yellow-800 text-white',
+    active: 'bg-gradient-to-r from-amber-400 to-yellow-700 text-white',
     inactive: 'bg-gray-50 hover:bg-gradient-to-r hover:from-amber-400 hover:to-yellow-500 hover:text-white',
   },
   orange: {
-    active: 'bg-gradient-to-r from-primary to-orange-800 text-white',
+    active: 'bg-gradient-to-r from-teal-500 to-teal-700 text-white',
     inactive: 'bg-gray-50 hover:bg-gradient-to-r hover:from-emerald-500 hover:to-green-500 hover:text-white',
   },
 };
