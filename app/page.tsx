@@ -113,17 +113,6 @@ export default function Home() {
                 </section>
               </div>
               <WineSelector />
-              <video
-                src="../videos/minibanner.mp4"
-                title="Vidéo de présentation"
-                className="w-full h-96"
-                width={1920}
-                height={1080}
-                autoPlay
-                loop
-                muted
-                playsInline
-              />
               <HeroBanner />
               <Livraison />
               <Slogan />

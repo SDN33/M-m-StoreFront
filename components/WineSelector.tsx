@@ -22,8 +22,8 @@ const WineSelector = () => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full py-8">
-      <div className="flex space-x-4 px-4">
+    <div className="flex flex-col items-center w-full mt-16 mb-16">
+      <div className="flex space-x-12 px-4">
         {wines.map((wine) => (
           <Link href={wine.path} key={wine.color}>
             <div
@@ -44,7 +44,7 @@ const WineSelector = () => {
           </Link>
         ))}
       </div>
-      <h2 className="text-xl font-semibold !mt-4 text-center min-h-[1rem] transition-all duration-300 sloganhero">
+      <h2 className="text-xl font-serif !mt-4 text-center min-h-[1rem] transition-all duration-300">
         {getSlogan()}
       </h2>
     </div>
