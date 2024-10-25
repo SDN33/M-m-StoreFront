@@ -123,8 +123,9 @@ export default function Home() {
               <Slogan />
               <Newletter />
               <br /><br />
-              <Footer />
             </div>
+            <Footer />
+
           </main>
         </div>
 
