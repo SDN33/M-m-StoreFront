@@ -58,8 +58,8 @@ const ProductsIntro: React.FC = () => {
       className={`flex flex-col md:flex-row justify-between items-center mb-4 ${isVisible ? 'slide-in-visible' : 'slide-in'}`}
     >
       {/* Texte au centre avec espacement */}
-      <div className="flex mx-auto mt-10 slide-in-right">
-        <h3 className="text-xl md:text-2xl font-extrabold text-primary tracking-tight text-center">
+      <div className="flex mx-auto mt-28 lg:mt-16 slide-in-right">
+        <h3 className="text-med md:text-2xl font-extrabold text-primary tracking-tight text-center">
           {counter.toLocaleString()} vins bio en direct des vignerons<span className="text-sm">(nes)</span>
           <br />
           <div className="text-black text-sm">
@@ -72,9 +72,16 @@ const ProductsIntro: React.FC = () => {
           alt="bio demeter"
           width={80}
           height={20}
-          className="rounded-lg object-contain ml-2"
+          className="rounded-lg object-contain ml-2 hidden md:block"
         />
       </div>
+      <Image
+          src="/images/biodemeter.png"
+          alt="bio demeter"
+          width={120}
+          height={20}
+          className="rounded-lg object-contain ml-2 mt-4 md:hidden -mb-8"
+        />
     </div>
   );
 };

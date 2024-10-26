@@ -150,7 +150,7 @@ export default function Home() {
               height: '100vh'
             }}
           >
-            <div className="space-y-8">
+            <div className="">
               <br /><br />
               <br /><br />
               <br />
@@ -165,8 +165,8 @@ export default function Home() {
                 </section>
               </div>
               <br /><br />
-              <HeroBanner />
               <Livraison />
+              <HeroBanner />
               <WineSelector />
               <Slogan />
               <div ref={lastComponentRef}>

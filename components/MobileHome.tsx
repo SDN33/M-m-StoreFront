@@ -7,7 +7,6 @@ import Slogan from '@/components/Slogan';
 import Livraison from '@/components/Livraison';
 import Newletter from '@/components/Newletter';
 import ProductsIntro from '@/components/ProductIntro';
-import WineSelector from '@/components/WineSelector';
 import Slider from '@/components/Slider';
 import WineCategories from '@/components/WineCategories';
 import Suggestion from '@/components/Suggestion';
@@ -49,7 +48,6 @@ const MobileHome: React.FC = () => {
         </div>
         <HeroBanner />
         <Livraison />
-        <WineSelector />
         <Slogan />
         <Newletter />
         <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} />

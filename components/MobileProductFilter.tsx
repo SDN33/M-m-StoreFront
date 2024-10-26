@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, X, Filter } from 'lucide-react';
-import WineSelector from '../components/WineSelector';
 
 interface MobileProductFilterProps {
   selectedFilters: {
@@ -138,7 +137,6 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
               );
             })}
             <div className="md:hidden lg:hidden sm:flex justify-center items-center mt-4">
-              <WineSelector />
             </div>
           </div>
         </div>

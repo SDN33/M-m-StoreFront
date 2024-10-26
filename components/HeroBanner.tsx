@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const slogans = [
-  "À une époque de supercherie alimentaire,<br />boire un vin bio est un acte révolutionnaire !",
+  "Boire un vin bio est un acte révolutionnaire !",
   "La vigne couvre 4% de la surface agricole nationale,<br />mais à elle seule c'est 20% des pesticides...",
   "Le vin bio est un choix pour la terre, et pour notre santé !",
   "La biodynamie,<br />un gage de qualité et de respect de l'environnement !",
@@ -26,7 +26,7 @@ const HeroBanner = () => {
       <div className="flex flex-col items-center text-center z-10 text-white relative max-w-md"> {/* Réduit la largeur maximale */}
         <h1 className="text-2xl md:text-2xl leading-tight md:font-bold sloganhero font-semibold"> {/* Réduit la taille de la police */}
           <span
-            className="block fade-in min-h-[3rem] md:min-h-[4rem]"
+            className="block font-serif fade-in min-h-[3rem] md:min-h-[4rem]"
             dangerouslySetInnerHTML={{ __html: slogans[currentSlogan] }}
           />
         </h1>

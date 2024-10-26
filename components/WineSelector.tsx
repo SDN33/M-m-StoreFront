@@ -15,36 +15,33 @@ const WineSelector = () => {
 
   const getSlogan = () => {
     const hoveredWineInfo = wines.find(w => w.color === hoveredWine);
-    if (hoveredWineInfo) {
-      return hoveredWineInfo.slogan;
-    }
-    return "Rouges, Blancs, Rosés... on a le vin bio pour vous !";
+    return hoveredWineInfo ? hoveredWineInfo.slogan : "Rouges, Blancs, Rosés... on a le vin bio pour vous !";
   };
 
   return (
-    <div className="flex flex-col items-center w-full mt-16 mb-16">
-      <div className="flex space-x-12 px-4">
+    <div className="flex flex-col items-center w-full mt-12 mb-16">
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 px-4"> {/* Adaptation en grille responsive */}
         {wines.map((wine) => (
           <Link href={wine.path} key={wine.color}>
             <div
-              className={`transform transition-transform duration-300 ease-in-out hover:scale-110
-                ${hoveredWine === wine.color ? 'translate-y-[-8px] opacity-90' : 'opacity-100'}`}
+              className={`transform transition-transform duration-300 ease-in-out hover:scale-105
+                ${hoveredWine === wine.color ? 'translate-y-[-4px] opacity-90' : 'opacity-100'}`}
               onMouseEnter={() => setHoveredWine(wine.color)}
               onMouseLeave={() => setHoveredWine(null)}
             >
-              <div className={`w-16 h-24 rounded-full ${wine.bg} flex items-center justify-center shadow-lg relative overflow-hidden mx-2`}>
+              <div className={`w-12 h-20 sm:w-16 sm:h-24 rounded-full ${wine.bg} flex items-center justify-center shadow-lg relative overflow-hidden mx-auto`}>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-white font-black text-sm transform rotate-[-90deg] whitespace-nowrap">
+                  <span className="text-white font-black text-xs sm:text-sm transform rotate-[-90deg] whitespace-nowrap">
                     {wine.name}
                   </span>
                 </div>
-                <div className="w-10 h-16 bg-white/20 absolute bottom-1 rounded-full"></div>
+                <div className="w-8 h-14 sm:w-10 sm:h-16 bg-white/20 absolute bottom-1 rounded-full"></div>
               </div>
             </div>
           </Link>
         ))}
       </div>
-      <h2 className={`text-xl font-serif !mt-4 text-center min-h-[1rem] transition-all duration-300
+      <h2 className={`text-base sm:text-xl font-serif !mt-4 text-center min-h-[1rem] transition-all duration-300
           ${hoveredWine ? wines.find(w => w.color === hoveredWine)?.bg : 'text-gray-800'}`}>
         <strong>{getSlogan()}</strong>
       </h2>

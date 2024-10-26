@@ -27,7 +27,7 @@ const Slider = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[40vh] sm:h-[45vh] md:h-[50vh] max-h-[300px] overflow-hidden">
+    <div className="relative w-full h-[20vh] sm:h-[20vh] md:h-[50vh] max-h-[300px] overflow-hidden">
       {/* Slides container */}
       <div
         className="flex h-full transition-transform duration-700 ease-in-out"
