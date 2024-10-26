@@ -1,4 +1,4 @@
-
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const slogans = [
@@ -22,19 +22,25 @@ const HeroBanner = () => {
   }, []);
 
   return (
-    <div className="relative container mx-auto px-4 flex flex-col justify-center items-center bg-primary">
-      {/* Conteneur avec z-10 pour rester*/}
-      <div className=" flex items-center text-center z-10 text-white relative mb-10">
-
-        <div>
-          {/* Titre avec slogans */}
-          <h1 className="text-3xl md:text-3xl leading-tight md:font-extrabold sloganhero !font-semibold">
-            <br />
-            <span className="block fade-in" dangerouslySetInnerHTML={{ __html: slogans[currentSlogan] }} />
-            <p className="text-lg mt-4 md:text-xl font-light">- Mémé Georgette -</p>
-          </h1>
-        </div>
-        <br />
+    <div className="relative container mx-auto px-4 flex flex-col justify-center items-center bg-primary py-6">
+      {/* Conteneur fixe pour les slogans et le logo */}
+      <div className="flex flex-col items-center text-center z-10 text-white relative max-w-2xl">
+        {/* Titre avec slogans */}
+        <h1 className="text-3xl md:text-3xl leading-tight md:font-extrabold sloganhero font-semibold">
+          <span
+            className="block fade-in min-h-[3rem] md:min-h-[4rem]" // Hauteur fixe pour stabiliser l'affichage
+            dangerouslySetInnerHTML={{ __html: slogans[currentSlogan] }}
+          />
+        </h1>
+        <div className='border-t-2 border-white w-20 mt-4'></div>
+        {/* Logo avec taille fixe */}
+        <Image
+          src="/images/memelogo.png"
+          alt="Mémé Georgette"
+          className="mt-8 object-contain"
+          width={180}
+          height={180}
+        />
       </div>
     </div>
   );
