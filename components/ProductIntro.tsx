@@ -59,13 +59,13 @@ const ProductsIntro: React.FC = () => {
     >
       {/* Texte au centre avec espacement */}
       <div className="flex mx-auto mt-28 lg:mt-16 slide-in-right">
-        <h3 className="text-med md:text-2xl font-extrabold text-primary tracking-tight text-center">
+        <h1 className="text-med md:text-2xl font-extrabold text-primary tracking-tight text-center">
           {counter.toLocaleString()} vins bio en direct des vignerons<span className="text-sm">(nes)</span>
           <br />
           <div className="text-black text-sm">
             Tu sais, celles et ceux qui respectent la terre, ses locataires...
           </div>
-        </h3>
+        </h1>
         <br />
         <Image
           src="/images/biodemeter.png"

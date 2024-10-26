@@ -129,16 +129,21 @@ const VendorList: React.FC = () => {
     fetchVendors();
   }, []);
 
-  {loading ? (
-    <div className="flex items-center justify-center min-h-[200px]">
-      <div className="flex items-center space-x-2">
-        <div className="w-4 h-4 bg-primary rounded-full animate-bounce" />
-        <p className="font-semibold">Chargement des vignerons...</p>
+  // Gérer l'état de chargement et d'erreur
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[200px]">
+        <div className="flex items-center space-x-2">
+          <div className="w-4 h-4 bg-primary rounded-full animate-bounce" />
+          <p className="font-semibold">Chargement des vignerons...</p>
+        </div>
       </div>
-    </div>
-  ) : error ? (
-    <div className="text-red-600 p-4 text-center">{error}</div>
-  ) : null}
+    );
+  }
+
+  if (error) {
+    return <div className="text-red-600 p-4 text-center">{error}</div>;
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 mb-8">
@@ -180,7 +185,6 @@ const VendorList: React.FC = () => {
                     {vendor.region__pays.charAt(0).toUpperCase() + vendor.region__pays.slice(1)}
                   </p>
                 )}
-
                 <p className="text-xs md:text-sm text-white/90 text-center mb-2">
                   {vendor.store_name}, vigneron de {vendor.region__pays ? vendor.region__pays.charAt(0).toUpperCase() + vendor.region__pays.slice(1) : 'région inconnue'}, propose majoritairement des vins {getDominantCategory(vendor)}.
                 </p>

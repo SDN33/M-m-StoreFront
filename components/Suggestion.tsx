@@ -61,7 +61,7 @@ const CategoryBubble = ({ icon: Icon, label, active = false, color = 'orange' }:
 
 const Suggestion = () => {
   return (
-    <div className="relative max-w-5xl text-center mx-auto py-8 bg-gradient-to-b from-gray-50 to-white">
+    <div className="relative max-w-5xl text-center mx-auto py-8 bg-transparent">
       <div className="flex flex-wrap justify-center gap-4 ">
         <CategoryBubble icon={Wine} label="NOËL" color="purple" active={true} />
         <CategoryBubble icon={Gift} label="PROMO" active={true} color="orange" />
@@ -71,10 +71,10 @@ const Suggestion = () => {
       </div>
 
       {/* Background decoration */}
-      <div className="absolute top-0 right-0 -z-10 opacity-5">
+      <div className="absolute top-0 right-0 -z-10 opacity-5 bg-transparent">
         <div className="w-64 h-64 rounded-full bg-gradient-to-r from-purple-300 to-pink-300 blur-3xl"></div>
       </div>
-      <div className="absolute bottom-0 left-0 -z-10 opacity-5">
+      <div className="absolute bottom-0 left-0 -z-10 opacity-5 bg-transparent">
         <div className="w-64 h-64 rounded-full bg-gradient-to-r from-blue-300 to-green-300 blur-3xl"></div>
       </div>
     </div>

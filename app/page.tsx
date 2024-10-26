@@ -157,6 +157,7 @@ export default function Home() {
               <ProductsIntro />
               <Slider />
               <Suggestion />
+              <WineSelector />
               <WineCategories />
               <br />
               <div className="max-w-7xl mx-auto px-4 space-y-8">
@@ -165,9 +166,8 @@ export default function Home() {
                 </section>
               </div>
               <br /><br />
-              <Livraison />
               <HeroBanner />
-              <WineSelector />
+              <Livraison />
               <Slogan />
               <div ref={lastComponentRef}>
                 <Newletter />
