@@ -10,14 +10,30 @@ const Footer = () => {
 
       <div className="max-w-7xl mx-auto px-4">
         {/* Section principale */}
-        <div className="mb-12 h-auto w-auto">
+        <div className="mb-4 h-auto w-auto">
           <Image
             src="/images/logow.png"
             alt="Logo Mémé Georgette"
             className="mx-auto"
-            width={100}
+            width={200}
             height={60}
           />
+        </div>
+        {/* Logos de paiement */}
+        <div className="flex justify-center items-center space-x-4 w-fit mx-auto mb-8 ">
+          <a href="https://www.visa.fr">
+            <Image src="/images/visa.png" alt="Visa" width={30} height={30} />
+          </a>
+          <a href="https://www.mastercard.fr">
+            <Image src="/images/mastercard.png" alt="Mastercard" width={30} height={30} />
+          </a>
+          <a href="https://www.paypal.com">
+            <Image src="/images/paypal.png" alt="PayPal" width={50} height={50} />
+          </a>
+          <div className="flex items-center text-gray-600">
+            <CreditCard className="h-4 w-4 mr-1 text-black" />
+            <span className="text-xs font-semibold text-gray-800">Paiement sécurisé</span>
+          </div>
         </div>
 
         {/* Grille de navigation centrée */}
@@ -53,24 +69,9 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Logos de paiement */}
-        <div className="flex justify-center items-center space-x-4 w-fit mx-auto ">
-          <a href="https://www.visa.fr">
-            <Image src="/images/visa.png" alt="Visa" width={30} height={30} />
-          </a>
-          <a href="https://www.mastercard.fr">
-            <Image src="/images/mastercard.png" alt="Mastercard" width={30} height={30} />
-          </a>
-          <a href="https://www.paypal.com">
-            <Image src="/images/paypal.png" alt="PayPal" width={50} height={50} />
-          </a>
-          <div className="flex items-center text-gray-600">
-            <CreditCard className="h-4 w-4 mr-1 text-black" />
-            <span className="text-xs font-semibold text-gray-800">Paiement sécurisé</span>
-          </div>
-        </div>
         {/* Mentions légales et copyright */}
-        <div className="pt-4">
+        <div className="pt-4 -mb-2">
+          <Image src="/images/image-restriction.svg" alt="Prévention Alcool" width={500} height={50} className="mb-4 mx-auto" />
           <p className="text-xs text-black mb-4 font-normal">
             L&apos;abus d&apos;alcool est dangereux pour la santé, sachez consommer avec modération.
             Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.
@@ -79,6 +80,7 @@ const Footer = () => {
             © 2024 Les Vins de Mémé Georgette, © Mémé Georgette, tous droits réservés
             <br />Création de <a className="font-bold text-primary" href="https://stillinov.com">Still-inov Agency</a>
           </p>
+          <br />
         </div>
       </div>
     </footer>

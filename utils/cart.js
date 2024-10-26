@@ -17,8 +17,6 @@ export const addToCart = async (productId, qty = 1) => {
     const res = await wcApi.post('cart/add-item', {
       product_id: productId,
       quantity: qty,
-      variations_id: [],
-
 
     }, {
       headers: {
