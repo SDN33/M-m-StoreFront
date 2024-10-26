@@ -11,6 +11,7 @@ import WineSelector from '@/components/WineSelector';
 import Slider from '@/components/Slider';
 import WineCategories from '@/components/WineCategories';
 import Suggestion from '@/components/Suggestion';
+import MobileProductFilter from './MobileProductFilter';
 
 const MobileHome: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -33,20 +34,6 @@ const MobileHome: React.FC = () => {
     }));
   };
 
-  const resetAllFilters = () => {
-    setSelectedFilters({
-      color: [],
-      region: [],
-      vintage: [],
-      millesime: [],
-      certification: [],
-      style: [],
-      volume: [],
-      accord_mets: [],
-      region__pays: [],
-      categories: []
-    });
-  };
 
   return (
     <div className="flex flex-col bg-gray-50 overflow-y-auto">
@@ -65,6 +52,7 @@ const MobileHome: React.FC = () => {
         <WineSelector />
         <Slogan />
         <Newletter />
+        <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} />
       </div>
     </div>
   );
