@@ -39,7 +39,7 @@ const VendorList: React.FC = () => {
       return 'bg-gradient-to-br from-purple-700 to-purple-900';
     }
     if (vendor.certifications.bio > 0) {
-      return 'bg-gradient-to-br from-emerald-600 to-emerald-800';
+      return 'bg-gradient-to-r from-teal-500 to-teal-700';
     }
     if (vendor.certifications.conversion > 0) {
       return 'bg-gradient-to-br from-amber-600 to-amber-800';

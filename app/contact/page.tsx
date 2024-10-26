@@ -88,6 +88,7 @@ const ContactPage = () => {
           </button>
         </form>
       </div>
+      <br /><br />
     </div>
   );
 };
