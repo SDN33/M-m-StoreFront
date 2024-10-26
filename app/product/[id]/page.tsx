@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { Star, Package } from 'lucide-react';
 import Livraison from '@/components/Livraison';
 import SocialShare from '@/components/Socialshare';
-import Footer from '@/components/Footer';
 
 
 
@@ -62,7 +61,7 @@ const formatDescription = (description: string, maxChars = 90) => {
 const getCertificationLogo = (certification?: string) => {
   switch (certification?.toLowerCase()) {
     case 'bio':
-      return { src: '/images/logobio.webp', width: 24, height: 24 };
+      return { src: '/images/logobio1.webp', width: 24, height: 24 };
     case 'biodynamie':
       return { src: '/images/biodemeter.png', width: 80, height: 80 };
     case 'en conversion':
@@ -166,8 +165,6 @@ const ProductPage: React.FC = () => {
 
       <div className="relative top-0 left-0 w-full">
       </div>
-      <br />
-      <br /><br /><br />
       <br /><br /><br />
       <div className="max-w-6xl mx-auto px-8 sm:px-6 lg:px-8 py-8 min-h-screen">
         <nav aria-label="Breadcrumb" className="text-sm mb-4">
@@ -213,7 +210,7 @@ const ProductPage: React.FC = () => {
 
             </div>
             <Image
-              src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmémé.png'}
+              src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
               alt={product.name}
               width={300}
               height={500}
@@ -372,7 +369,6 @@ const ProductPage: React.FC = () => {
 
           <Livraison />
           <br /><br />
-          <Footer />
         </div>
       </div>
     </div>

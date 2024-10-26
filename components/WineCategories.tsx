@@ -129,13 +129,16 @@ const VendorList: React.FC = () => {
     fetchVendors();
   }, []);
 
-  if (loading) {
-    return <div className="text-center p-6">Chargement des vignerons...</div>;
-  }
-
-  if (error) {
-    return <div className="p-6 text-red-500">{error}</div>;
-  }
+  {loading ? (
+    <div className="flex items-center justify-center min-h-[200px]">
+      <div className="flex items-center space-x-2">
+        <div className="w-4 h-4 bg-primary rounded-full animate-bounce" />
+        <p className="font-semibold">Chargement des vignerons...</p>
+      </div>
+    </div>
+  ) : error ? (
+    <div className="text-red-600 p-4 text-center">{error}</div>
+  ) : null}
 
   return (
     <div className="max-w-7xl mx-auto px-4 mb-8">

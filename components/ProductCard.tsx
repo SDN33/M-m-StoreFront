@@ -66,7 +66,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       if (product.categories[0]?.name.toLowerCase() === 'blanc') {
         return `Un ${product.categories.map(category => category.name).filter(name => name.toLowerCase() !== 'pétillant').join(', ')} pétillant À Découvrir`;
       }
-      return `Un Vin ${product.categories.map(category => category.name).join(' et  ')} À Découvrir`;
+      return `Un ${product.categories.map(category => category.name).join(' et  ')} À Découvrir`;
     }
     if (product.categories[0]?.name.toLowerCase().includes('autres')) return `Un Vin Original pour Surprendre`;
     return `Un ${product.appelation?.toUpperCase() || 'Vin'} À Découvrir`;
