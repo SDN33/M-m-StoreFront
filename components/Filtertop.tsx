@@ -1,5 +1,11 @@
-'use client';
 import React from 'react';
+
+// Extend the Window interface to include resetProductFilters
+declare global {
+  interface Window {
+    resetProductFilters?: () => void;
+  }
+}
 
 interface FiltertopProps {
   sortBy: string;
@@ -27,7 +33,13 @@ const Filtertop: React.FC<FiltertopProps> = ({ sortBy = '', handleSortChange, re
       </select>
 
       <button
-        onClick={resetFilters}
+        onClick={() => {
+          resetFilters();
+          // Assuming you have a reference or a method to reset the filters in the ProductFilter component
+          if (typeof window !== 'undefined' && window.resetProductFilters) {
+        window.resetProductFilters();
+          }
+        }}
         className="ml-4 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white px-4 py-2 rounded transition duration-300"
       >
         Réinitialiser les filtres

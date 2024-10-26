@@ -15,6 +15,7 @@ interface ProductFilterProps {
   onFilterChange: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
   resetFilters: () => void;
   hideColorFilter?: boolean;
+
 }
 
 const getFilterTitle = (filterType: string) => {

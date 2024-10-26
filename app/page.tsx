@@ -69,7 +69,6 @@ export default function Home() {
           const lastComponentRect = lastComponent.getBoundingClientRect();
           const footerRect = footer.getBoundingClientRect();
 
-
           // Scroll vers le bas
           if (lastComponentRect.bottom <= mainRect.bottom && e.deltaY > 0 && !isAtBottom) {
             e.preventDefault();
@@ -103,77 +102,80 @@ export default function Home() {
     }));
   };
 
-  return (
-    <div className="flex flex-col min-h-screen">
-      <div className="flex flex-1">
-        <aside
-          className={`w-64 bg-white border-r border-gray-200 ${isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out' : 'relative'} ${isMobile && !isFilterOpen ? '-translate-x-full' : 'translate-x-0'}`}
-        >
-          <div
-            ref={filterContentRef}
-            className="p-4 h-full overflow-y-auto scroll-container"
-            style={{
-              overscrollBehavior: 'contain',
-              msOverflowStyle: 'none',
-              scrollbarWidth: 'thin'
-            }}
-          >
-            <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} resetFilters={() => setSelectedFilters({
-              color: [],
-              region: [],
-              vintage: [],
-              millesime: [],
-              certification: [],
-              style: [],
-              volume: [],
-              accord_mets: [],
-              region__pays: [],
-              categories: []
-            })} />
-          </div>
-        </aside>
+  const resetAllFilters = () => {
+    setSelectedFilters({
+      color: [],
+      region: [],
+      vintage: [],
+      millesime: [],
+      certification: [],
+      style: [],
+      volume: [],
+      accord_mets: [],
+      region__pays: [],
+      categories: []
+    });
+  };
 
-        <main
-          ref={mainContentRef}
-          className="flex-1 bg-gray-50 overflow-y-auto"
+  return (
+    <>
+      <div className="flex flex-1">
+      <aside
+        className={`w-64 bg-white border-r border-gray-200 ${isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out' : 'relative'} ${isMobile && !isFilterOpen ? '-translate-x-full' : 'translate-x-0'}`}
+      >
+        <div
+          ref={filterContentRef}
+          className="p-4 h-full overflow-y-auto scroll-container"
           style={{
             overscrollBehavior: 'contain',
-            height: '100vh'
+            msOverflowStyle: 'none',
+            scrollbarWidth: 'thin'
           }}
         >
-          <div className="space-y-8">
-            <br /><br />
-            <br /><br />
-            <br /><br />
-            <ProductsIntro />
-            <Slider />
-            <Suggestion />
-            <WineCategories />
-            <br />
-            <div className="max-w-7xl mx-auto px-4 space-y-8">
-              <section className="bg-white rounded-lg shadow">
-                <ProductsCards selectedFilters={selectedFilters} />
-              </section>
-            </div>
-            <br /><br />
-            <HeroBanner />
-            <Livraison />
-            <WineSelector />
-            <Slogan />
-            <div ref={lastComponentRef}>
-              <Newletter />
-            </div>
-            <br /><br />
-          </div>
-        </main>
-      </div>
+          <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} resetFilters={resetAllFilters} />
+        </div>
+      </aside>
 
-      {isMobile && isFilterOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30"
-          onClick={() => setIsFilterOpen(false)}
-        />
-      )}
+      <main
+        ref={mainContentRef}
+        className="flex-1 bg-gray-50 overflow-y-auto"
+        style={{
+          overscrollBehavior: 'contain',
+          height: '100vh'
+        }}
+      >
+        <div className="space-y-8">
+          <br /><br />
+          <br /><br />
+          <br /><br />
+          <ProductsIntro />
+          <Slider />
+          <Suggestion />
+          <WineCategories />
+          <br />
+          <div className="max-w-7xl mx-auto px-4 space-y-8">
+            <section className="bg-white rounded-lg shadow">
+              <ProductsCards selectedFilters={selectedFilters} />
+            </section>
+          </div>
+          <br /><br />
+          <HeroBanner />
+          <Livraison />
+          <WineSelector />
+          <Slogan />
+          <div ref={lastComponentRef}>
+            <Newletter />
+          </div>
+          <br /><br />
+        </div>
+      </main>
     </div>
+    {isMobile && isFilterOpen && (
+      <div
+        className="fixed inset-0 bg-black bg-opacity-50 z-30"
+        onClick={() => setIsFilterOpen(false)}
+      />
+    )}
+  </>
   );
 }
