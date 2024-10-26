@@ -10,24 +10,20 @@ interface MobileProductFilterProps {
     style: string[];
     volume: string[];
     accord_mets: string[];
-    region__pays: string[];
-
   };
   onFilterChange: (filterType: keyof MobileProductFilterProps['selectedFilters'], value: string[]) => void;
   hideColorFilter?: boolean;
-
 }
 
 const getFilterTitle = (filterType: string) => {
   const titles: { [key: string]: string } = {
-    color: 'Couleur',
-    region: 'Région',
-    vintage: 'Millésime',
-    certification: 'Certification',
-    style: 'Style',
-    volume: 'Volume',
-    accord_mets: 'Accord Mets',
-
+    color: '🍇 Couleur',
+    region: '📍 Région',
+    vintage: '📅 Millésime',
+    certification: '🌱 Certification',
+    style: '🎨 Style',
+    volume: '🍾 Volume',
+    accord_mets: '🍽 Accord Mets',
   };
   return titles[filterType] || filterType;
 };

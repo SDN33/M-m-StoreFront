@@ -50,8 +50,8 @@ const Newsletter = () => {
               </div>
               <button
                 type="submit"
-                className="bg-primary text-white py-3 px-6 rounded-md hover:bg-primary transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
-              >
+                className='bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white py-2 px-4 rounded'
+                >
                 S&apos;inscrire
               </button>
             </div>

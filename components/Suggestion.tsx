@@ -61,7 +61,7 @@ const CategoryBubble = ({ icon: Icon, label, active = false, color = 'orange' }:
 
 const Suggestion = () => {
   return (
-    <div className="relative max-w-6xl text-center mx-auto py-8 bg-gradient-to-b from-gray-50 to-white">
+    <div className="relative max-w-5xl text-center mx-auto py-8 bg-gradient-to-b from-gray-50 to-white">
       <div className="flex flex-wrap justify-center gap-4 ">
         <CategoryBubble icon={Wine} label="NOËL" color="purple" active={true} />
         <CategoryBubble icon={Gift} label="PROMO" active={true} color="orange" />

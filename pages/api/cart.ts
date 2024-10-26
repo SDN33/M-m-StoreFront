@@ -3,11 +3,8 @@ import { wcApi } from './wcApi'; // Assurez-vous que wcApi est correctement conf
 
 // Fonction pour afficher le panier
 export const viewCart = async () => {
-  const response = await fetch(`${process.env.WC_API_URL}/cart`, {
+  const response = await fetch('/api/cart', {
     method: 'GET',
-    headers: {
-      // Ajoutez des en-têtes si nécessaire, comme l'authentification
-    },
   });
   if (!response.ok) {
     throw new Error('Failed to fetch cart');
@@ -21,7 +18,7 @@ export const emptyCart = async () => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      // Authentification si nécessaire
+      // Vous devez fournir l'authentification ici si nécessaire
     },
   });
 
@@ -41,9 +38,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case 'GET':
       try {
         console.log('Tentative de récupération du panier...');
-        const cartData = await viewCart(); // Utiliser la fonction viewCart
-        console.log('Panier récupéré avec succès:', cartData);
-        return res.status(200).json(cartData);
+        const cartData = await wcApi.get('cart');
+        console.log('Panier récupéré avec succès:', cartData.data);
+        return res.status(200).json(cartData.data);
       } catch (error) {
         console.error('Erreur lors de la récupération du panier:', error);
         return res.status(500).json({ message: 'Erreur lors de la récupération du panier' });
@@ -76,12 +73,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
           // Récupérer le nonce et le cart-token
           console.log('Tentative de récupération du nonce et du cart-token...');
-          const response = await fetch(`${process.env.WC_API_URL}/cart/items`, {
-            method: 'GET',
-            headers: {
-              // Ajoutez des en-têtes si nécessaire
-            },
-          });
+          const response = await fetch(`${process.env.WC_API_URL}/cart/items`);
           if (!response.ok) {
             throw new Error('Erreur lors de la récupération du nonce');
           }

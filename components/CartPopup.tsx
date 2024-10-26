@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { viewCart, emptyCart as emptyCartAPI } from '../pages/api/cart'; // Assurez-vous d'importer la fonction `emptyCart` depuis l'API
+import { viewCart } from '../pages/api/cart';
 
 interface CartPopupProps {
   isOpen: boolean;
@@ -37,6 +37,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
           setLoading(false);
         }
       } else {
+        // Réinitialiser le panier si le pop-up est fermé
         setCartItems([]);
         setLoading(true);
       }
@@ -47,16 +48,9 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
 
   const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-  const emptyCart = async () => {
+  const emptyCart = () => {
     // Fonction pour vider le panier
-    try {
-      await emptyCartAPI(); // Appel à l'API pour vider le panier
-      setCartItems([]); // Réinitialiser l'état local
-      console.log('Panier vidé avec succès');
-    } catch (err) {
-      console.error('Erreur lors de la vidange du panier:', err);
-      setError('Échec de la vidange du panier. Veuillez réessayer.');
-    }
+    setCartItems([]);
   };
 
   if (!isOpen) return null;
