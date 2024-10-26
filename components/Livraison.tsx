@@ -20,6 +20,7 @@ const Livraison: React.FC = () => {
           width={120} // Ajustement de la taille
           height={100} // Ajustement de la taille
           className="rounded-lg mr-2" // Ajout d'une marge à droite du logo
+          loading='lazy' // Ajout de l'attribut loading pour le chargement paresseux
         />
       </div>
     </div>

@@ -102,6 +102,7 @@ const Slogan: React.FC = () => {
           className="w-full h-auto object-cover"
           width={500}
           height={300}
+          loading='lazy'
         />
       </div>
 
