@@ -22,24 +22,21 @@ const HeroBanner = () => {
   }, []);
 
   return (
-    <div className="relative container mx-auto px-4 flex flex-col justify-center items-center bg-primary py-6">
-      {/* Conteneur fixe pour les slogans et le logo */}
-      <div className="flex flex-col items-center text-center z-10 text-white relative max-w-2xl">
-        {/* Titre avec slogans */}
-        <h1 className="text-3xl md:text-3xl leading-tight md:font-extrabold sloganhero font-semibold">
+    <div className="relative container mx-auto px-4 flex flex-col justify-center items-center bg-primary py-4"> {/* Réduit le padding vertical */}
+      <div className="flex flex-col items-center text-center z-10 text-white relative max-w-md"> {/* Réduit la largeur maximale */}
+        <h1 className="text-2xl md:text-2xl leading-tight md:font-bold sloganhero font-semibold"> {/* Réduit la taille de la police */}
           <span
-            className="block fade-in min-h-[3rem] md:min-h-[4rem]" // Hauteur fixe pour stabiliser l'affichage
+            className="block fade-in min-h-[3rem] md:min-h-[4rem]"
             dangerouslySetInnerHTML={{ __html: slogans[currentSlogan] }}
           />
         </h1>
-        <div className='border-t-2 border-white w-20 mt-4'></div>
-        {/* Logo avec taille fixe */}
+        <div className='border-t-2 border-white w-16 mt-2'></div> {/* Réduit la largeur de la bordure et l'espacement */}
         <Image
           src="/images/memelogo.png"
           alt="Mémé Georgette"
-          className="mt-8 object-contain"
-          width={180}
-          height={180}
+          className="mt-6 object-contain"
+          width={150}
+          height={150}
         />
       </div>
     </div>
