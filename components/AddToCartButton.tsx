@@ -76,7 +76,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   return (
     <div>
       <button
-        className='bg-primary text-white py-2 px-4 rounded'
+        className='bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white py-2 px-4 rounded'
         onClick={handleAddToCart}
         disabled={loading}
       >

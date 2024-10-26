@@ -78,9 +78,9 @@ const ProductsIntro: React.FC = () => {
       <Image
           src="/images/biodemeter.png"
           alt="bio demeter"
-          width={120}
+          width={80}
           height={20}
-          className="rounded-lg object-contain ml-2 mt-4 md:hidden -mb-8"
+          className="rounded-lg object-contain ml-2 mt-2 md:hidden -mb-10"
         />
     </div>
   );
