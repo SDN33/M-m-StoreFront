@@ -153,7 +153,7 @@ export default function Home() {
             <div className="space-y-8">
               <br /><br />
               <br /><br />
-              <br /><br />
+              <br />
               <ProductsIntro />
               <Slider />
               <Suggestion />
