@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ProductsCards from '@/components/ProductsCards';
 import HeroBanner from '@/components/HeroBanner';
 import Slogan from '@/components/Slogan';
