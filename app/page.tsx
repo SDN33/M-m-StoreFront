@@ -149,13 +149,14 @@ export default function Home() {
             <Slider />
             <Suggestion />
             <WineCategories />
-            <HeroBanner />
+            <br />
             <div className="max-w-7xl mx-auto px-4 space-y-8">
               <section className="bg-white rounded-lg shadow">
                 <ProductsCards selectedFilters={selectedFilters} />
               </section>
             </div>
             <br /><br />
+            <HeroBanner />
             <Livraison />
             <WineSelector />
             <Slogan />

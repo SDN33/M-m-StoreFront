@@ -8,12 +8,12 @@ const Slider = () => {
     {
       id: 1,
       imageUrl: '/images/slider1.png',
-      link: '/vendor/mémégeorgette' // Lien pour la quatrième diapositive
+      link: '/vendor/mémégeorgette',
     },
     {
       id: 2,
       imageUrl: '/images/slider2.png',
-      link: '/vendor/mémégeorgette' // Lien pour la troisième diapositive
+      link: '/vendor/mémégeorgette',
     },
   ];
 
@@ -27,7 +27,7 @@ const Slider = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[300px] overflow-hidden">
+    <div className="relative w-full h-[40vh] sm:h-[45vh] md:h-[50vh] max-h-[300px] overflow-hidden">
       {/* Slides container */}
       <div
         className="flex h-full transition-transform duration-700 ease-in-out"
@@ -38,15 +38,14 @@ const Slider = () => {
             key={slide.id}
             className="min-w-full h-full relative flex-shrink-0"
           >
-            {/* Background image with gradient overlay */}
             <div
-              className="absolute inset-0 bg-cover bg-center"
+              className="absolute inset-0 bg-center"
               style={{
                 backgroundImage: `url(${slide.imageUrl})`,
-                backgroundSize: 'cover'
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
             </div>
 
             {/* Lien cliquable sur toute la diapositive */}
@@ -60,7 +59,7 @@ const Slider = () => {
       </div>
 
       {/* Slide indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3">
         {slides.map((_, index) => (
           <button
             key={index}

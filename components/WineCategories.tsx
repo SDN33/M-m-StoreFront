@@ -106,7 +106,7 @@ const VendorList: React.FC = () => {
               </div>
               <div className=" w-30 h-30 opacity-90">
                 <Image
-                  src={vendor.vendor_image || '/images/meme-pas-contente-removebg-preview.png'}
+                  src={vendor.vendor_image || '/images/meme-pas-contente.png'}
                   alt={vendor.store_name}
                   width={100}
                   height={100}

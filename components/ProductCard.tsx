@@ -49,7 +49,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       return <Image src="/images/demeter.png" alt="Certification biodynamique" width={24} height={24} />;
     }
     if (product.certification?.toLowerCase() === 'bio') {
-      return <Image src="/images/logobio.webp" alt="Certification bio" width={24} height={24} />;
+      return <Image src="/images/logobio1.webp" alt="Certification bio" width={24} height={24} />;
     }
     return null;
   };
@@ -116,7 +116,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           </div>
           <div className="relative w-full h-72 mb-4">
             <Image
-              src={product.images[0]?.src || '/images/vinmémé.png'}
+              src={product.images[0]?.src || '/images/vinmeme.png'}
               alt={product.name}
               fill
               objectFit="contain"
