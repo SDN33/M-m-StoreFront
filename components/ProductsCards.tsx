@@ -178,7 +178,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
         <div className="text-center p-4">Aucun produit trouvé.</div>
       ) : (
         <div className="space-y-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
             {filteredProducts.slice(0, visibleCount).map((product) => (
               <ProductCard key={product.id} product={product} onAddToCart={async () => await onAddToCart(product.id, 1, 0)} />
             ))}

@@ -111,7 +111,7 @@ body {
 .scroll-container {
   position: fixed; /* Position fixe */
   bottom: 50px; /* Bas de la page */
-  right: 1px; /* Droite de la page */
+  right: 10px; /* Droite de la page */
   z-index: 1000; /* Z-index */
   overflow: hidden;
 }
@@ -158,4 +158,3 @@ ul::-webkit-scrollbar {
 .scrollbar-hidden::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
-
