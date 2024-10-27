@@ -43,7 +43,6 @@ const MobileHome: React.FC = () => {
     <div className="flex flex-col bg-gray-50 overflow-y-auto">
       <div className="space-y-8">
         <ProductsIntro />
-            <ProductsCards selectedFilters={selectedFilters} onAddToCart={handleAddToCart} />
         <Suggestion />
         <WineCategories />
         <div className="max-w-7xl mx-auto px-4 space-y-8">

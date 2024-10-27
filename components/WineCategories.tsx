@@ -9,6 +9,10 @@ const VendorSlider = () => {
     products: {
       id: number;
       name: string;
+      store_name: string;
+      vendor_id: number;
+      vendor_image: string;
+      region__pays: string;
       images: { src: string }[];
       certification?: string;
     }[];
@@ -32,8 +36,8 @@ const VendorSlider = () => {
         const response = await fetch('/api/products');
         const products = await response.json();
 
-        const vendorMap: { [key: string]: any } = {};
-        products.forEach((product: any) => {
+        const vendorMap: { [key: string]: Vendor } = {};
+        products.forEach((product: Vendor['products'][0]) => {
           const storeName = product.store_name || '@MéméGeorgette';
           if (!vendorMap[storeName]) {
             vendorMap[storeName] = {
