@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useAuth } from '../../context/AuthContext';
 
 export default function LoginPage() {
+  const { login } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -15,12 +17,15 @@ export default function LoginPage() {
     setError("");
 
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_WC_API_DOMAIN}/wp-json/les-vins-auth/v1/token`, {
+      const response = await axios.post(`${process.env.WC_API_DOMAIN}/wp-json/les-vins-auth/v1/token`, {
         username,
         password,
       });
-      localStorage.setItem("jwtToken", response.data.token);
-      localStorage.setItem("userData", JSON.stringify(response.data));
+      // localStorage.setItem("jwtToken", response.data.token);
+      if(response.data.token){
+        login(response.data.token);
+      }
+      // localStorage.setItem("userData", JSON.stringify(response.data));
       router.push("/profile");
     } catch (err) {
       setError("Invalid credentials. Please try again.");

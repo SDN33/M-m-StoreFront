@@ -6,22 +6,12 @@ import { useState } from 'react';
 import CartPopup from './CartPopup';
 import SearchInput from './SearchInput';
 import PromotionSection from './PromotionSection';
-import useAuth from '../hooks/useAuth';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import AuthButton from './AuthButton';
 
 const Header = () => {
-  const isAuthenticated = useAuth();
-  const router = useRouter();
-  console.log('isAuthenticated :>> ', isAuthenticated);
-  const [isLogin, setIsLogin] = useState(isAuthenticated);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNosVinsOpen, setIsNosVinsOpen] = useState(false);
-
-  useEffect(() =>{
-    setIsLogin(isAuthenticated)
-  }, [isAuthenticated, router])
 
   const toggleNosVinsPopup = () => {
     setIsNosVinsOpen((prev) => !prev);
@@ -96,20 +86,7 @@ const Header = () => {
               </a>
 
               <div className="flex items-center space-x-4">
-                {isLogin ? (
-                  <span onClick={() => {
-                    localStorage.removeItem('jwtToken');
-                    setIsLogin(false);
-                    router.push('/login');
-                  }} className="text-sm font-semibold hover:text-primary">
-                  Se déconnecter
-                  </span>
-                ) : (
-                  <a href="/login" className="text-sm font-semibold hover:text-primary">
-                  Se connecter
-                  </a>
-                )}
-                
+                <AuthButton/>
                 <a className="relative">
                   <ShoppingCart onClick={toggleCartPopup} className="w-6 h-6 hover:text-primary font-semibold cursor-pointer" />
                   <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">

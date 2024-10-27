@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '../../context/AuthContext';
 
 export default function Profile() {
+  const { logout } = useAuth();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -55,7 +57,8 @@ export default function Profile() {
           <p>Email: {user.user_email}</p>
           <button
             onClick={() => {
-              localStorage.removeItem('jwtToken');
+              // localStorage.removeItem('jwtToken');
+              logout();
               router.push('/login');
             }}
             style={{
