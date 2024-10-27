@@ -46,7 +46,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
   const renderCertification = () => {
     if (product.certification?.toLowerCase() === 'biodynamie') {
-      return <Image src="/images/demeter.png" alt="Certification biodynamique" width={24} height={24} />;
+      return <Image src="/images/biodemeter.png" alt="Certification biodynamique" width={80} height={24} />;
     }
     if (product.certification?.toLowerCase() === 'bio') {
       return <Image src="/images/logobio1.webp" alt="Certification bio" width={24} height={24} />;
