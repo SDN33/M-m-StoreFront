@@ -13,6 +13,7 @@ import Suggestion from '@/components/Suggestion';
 import MobileHome from '@/components/MobileHome';
 import Trust from '@/components/Trust';
 import PromoRappel from '@/components/PromoRappel';
+import HeroBanner from '@/components/HeroBanner';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -180,6 +181,7 @@ export default function Home() {
                 </section>
               </div>
               <br /><br />
+              <HeroBanner />
               <PromoRappel />
               <Trust />
               <Slogan />

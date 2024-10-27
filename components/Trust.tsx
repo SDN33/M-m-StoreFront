@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import HeroBanner from './HeroBanner';
 
 const MemeGeorgettePremium = () => {
   return (
@@ -17,28 +16,32 @@ const MemeGeorgettePremium = () => {
             height={400}
           />
           <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-white">
-            <h2 className="text-2xl font-bold mb-4">QUI SOMMES NOUS ?</h2>
-            <a href="https://memegeorgette.com" className="bg-primary text-white px-8 py-2 rounded hover:bg-gray-100 transition-colors">
-              DÉCOUVRIR
-            </a>
+            <Image
+              src="/images/memelogo2.png"
+              alt="Mémé Georgette"
+              className="object-contain -mt-4"
+              width={150}
+              height={150}
+            />
           </div>
         </div>
 
         <div className="relative overflow-hidden rounded-lg group">
           <div className="absolute inset-0 bg-black/40 z-10"></div>
           <img
-            src="/api/placeholder/800/400"
+            src="/images/winery.jpg"
             alt="Producteurs"
             className="w-full h-[300px] object-cover transform group-hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-white">
             <h2 className="text-2xl font-bold mb-4">VOUS ÊTES UN PRODUCTEUR ?</h2>
-            <button className="bg-white text-gray-800 px-8 py-2 rounded hover:bg-gray-100 transition-colors">
+            <a className="bg-white text-gray-800 px-8 py-2 rounded hover:bg-gray-100 transition-colors" href="https://portailpro-memegeorgette.com">
               DÉCOUVRIR NOTRE PORTAIL PRO
-            </button>
+            </a>
           </div>
         </div>
       </div>
+
       <br />
 
       {/* Caractéristiques */}

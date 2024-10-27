@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const slogans = [
@@ -30,15 +29,9 @@ const HeroBanner = () => {
             dangerouslySetInnerHTML={{ __html: slogans[currentSlogan] }}
           />
         </h1>
-        <div className='border-t-2 border-white w-16 mt-2'></div> {/* Réduit la largeur de la bordure et l'espacement */}
-        <Image
-          src="/images/memelogo2.png"
-          alt="Mémé Georgette"
-          className="mt-6 object-contain"
-          width={150}
-          height={150}
-        />
+        <div className='border-t-2 border-accent w-16 mt-2'></div> {/* Réduit la largeur de la bordure et l'espacement */}
       </div>
+      <br /><br />
     </div>
   );
 };

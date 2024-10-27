@@ -71,23 +71,6 @@ const getCertificationLogo = (certification?: string) => {
   }
 };
 
-const getCategoryColor = (categoryName: string) => {
-  switch (categoryName.toLowerCase()) {
-    case 'rouge':
-      return 'bg-red-800';
-    case 'blanc':
-      return 'bg-yellow-500';
-    case 'rosé':
-      return 'bg-pink-400';
-    case 'pétillant':
-      return 'bg-blue-400';
-    case 'liquoreux':
-      return 'bg-purple-400';
-    default:
-      return 'bg-primary';
-  }
-};
-
 // Fonction joinIfArray
 const joinIfArray = (value: string | string[], separator: string = ', ') => {
   if (Array.isArray(value)) {
@@ -162,7 +145,7 @@ const ProductPage: React.FC = () => {
 
   return (
     <div className="mt-20 px-12">
-
+      <br /><br /> <br /><br />
       <div className="relative top-0 left-0 w-full">
       </div>
       <br /><br /><br />
@@ -186,16 +169,7 @@ const ProductPage: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-8 justify-center items-center mx-auto">
           <div className="md:w-1/2">
             <div className="flex items-start z-10">
-              {product.categories.map((category) => (
-                <div
-                  key={category.id}
-                  className={`w-10 h-10 rounded-full flex items-center justify-center ${getCategoryColor(category.name)}`}
-                  title={category.name} // Affiche le nom de la catégorie au survol
-                >
-                  <span className="text-white font-semibold text-sm">{category.name.substring(0, 3)}</span>
-                </div>
-              ))}
-              <p className="ml-4 text-sm mb-4">
+              <p className="ml-4 text-sm">
                 {product.certification ? (
                   <Image
                     {...getCertificationLogo(product.certification)}
