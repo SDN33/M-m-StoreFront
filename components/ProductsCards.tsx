@@ -30,7 +30,7 @@ interface ProductsCardsProps {
     region__pays: string[];
     categories: string[];
   };
-  onAddToCart: (productId: number, quantity: number, variationId: number) => void; // Updated
+  onAddToCart: (productId: number, quantity: number, variationId: number) => void;
 }
 
 const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToCart }) => {
@@ -156,7 +156,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
         productsRef.current.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      setInitialLoad(false); // Ne pas faire défiler lors du chargement initial
+      setInitialLoad(false);
     }
   }, [selectedFilters]);
 
@@ -178,7 +178,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
         <div className="text-center p-4">Aucun produit trouvé.</div>
       ) : (
         <div className="space-y-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {filteredProducts.slice(0, visibleCount).map((product) => (
               <ProductCard key={product.id} product={product} onAddToCart={async () => await onAddToCart(product.id, 1, 0)} />
             ))}

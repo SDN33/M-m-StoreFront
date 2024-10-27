@@ -159,7 +159,7 @@ const VendorSlider = () => {
                         {vendor.region__pays && (
                           <div className="flex items-center text-white/90 text-sm gap-1.5">
                             <MapPin className="w-4 h-4" />
-                            <span>{vendor.region__pays.charAt(0).toUpperCase() + vendor.region__pays.slice(1)}</span>
+                            <span>{vendor.region__pays.toUpperCase()}</span>
                           </div>
                         )}
 
@@ -177,7 +177,7 @@ const VendorSlider = () => {
                     {/* Right side - Photos and button */}
                     <div className="flex flex-col items-center space-y-3">
                       {vendor.products.slice(0, 3).map((product, idx) => (
-                        <div key={idx} className="w-16 h-16 bg-gradient-to-r from-white/5 to-white/10 rounded-full overflow-hidden border-2 border-white/20 shadow-md transform hover:scale-110 transition-all duration-300">
+                        <div key={idx} className="w-16 h-16 bg-gradient-to-r from-white/5 to-white/10 rounded-full overflow-hidden border-2 border-white/20 shadow-md transform hover:scale-110 transition-all duration-300 hover:bg-accent">
                           <img
                             src={Array.isArray(product.images) && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
                             alt={product.name}
