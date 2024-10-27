@@ -4,7 +4,6 @@ import {
   ChevronLeft,
   ChevronRight,
   MapPin,
-  Wine,
   Grape
 } from 'lucide-react';
 
