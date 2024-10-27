@@ -4,46 +4,6 @@ import Image from 'next/image';
 const MemeGeorgettePremium = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 bg-white">
-      {/* Sections Découvrir */}
-      <div className="grid md:grid-cols-2 gap-8 mb-16">
-        <div className="relative overflow-hidden rounded-lg group">
-          <div className="absolute inset-0 bg-black/40 z-10"></div>
-          <Image
-            src="/images/meme-pas-contente.png"
-            alt="Dégustation"
-            className="w-full h-[300px] object-cover transform group-hover:scale-105 transition-transform duration-500"
-            width={800}
-            height={400}
-          />
-          <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-white">
-            <Image
-              src="/images/memelogo2.png"
-              alt="Mémé Georgette"
-              className="object-contain -mt-4"
-              width={250}
-              height={150}
-            />
-          </div>
-        </div>
-
-        <div className="relative overflow-hidden rounded-lg group">
-          <div className="absolute inset-0 bg-black/40 z-10"></div>
-          <img
-            src="/images/winery.jpg"
-            alt="Producteurs"
-            className="w-full h-[300px] object-cover transform group-hover:scale-105 transition-transform duration-500"
-          />
-          <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-white">
-            <h2 className="text-xl font-bold mb-4">VOUS ÊTES UN PRODUCTEUR ?</h2>
-            <a className="bg-white text-gray-800 px-8 py-2 rounded hover:bg-gray-100 transition-colors" href="https://portailpro-memegeorgette.com">
-              DÉCOUVRIR NOTRE PORTAIL PRO
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <br />
-
       {/* Caractéristiques */}
       <div className="grid md:grid-cols-4 gap-12 mb-16">
         <div className="text-center">
@@ -84,6 +44,43 @@ const MemeGeorgettePremium = () => {
           </div>
           <h3 className="text-xl font-semibold text-primary mb-2">Emballages</h3>
           <p className="text-gray-600">anti-casse</p>
+        </div>
+      </div>
+       {/* Sections Découvrir */}
+       <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div className="relative overflow-hidden rounded-lg group">
+          <div className="absolute inset-0 bg-black/40 z-10"></div>
+          <Image
+            src="/images/meme-pas-contente.png"
+            alt="Dégustation"
+            className="w-full h-[300px] object-cover transform group-hover:scale-105 transition-transform duration-500"
+            width={800}
+            height={400}
+          />
+          <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-white">
+            <Image
+              src="/images/memelogo2.png"
+              alt="Mémé Georgette"
+              className="object-contain -mt-4"
+              width={250}
+              height={150}
+            />
+          </div>
+        </div>
+
+        <div className="relative overflow-hidden rounded-lg group">
+          <div className="absolute inset-0 bg-black/40 z-10"></div>
+          <img
+            src="/images/winery.jpg"
+            alt="Producteurs"
+            className="w-full h-[300px] object-cover transform group-hover:scale-105 transition-transform duration-500"
+          />
+          <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-white">
+            <h2 className="text-xl font-bold mb-4">VOUS ÊTES UN PRODUCTEUR ?</h2>
+            <a className="bg-white text-gray-800 px-8 py-2 rounded hover:bg-gray-100 transition-colors" href="https://portailpro-memegeorgette.com">
+              DÉCOUVRIR NOTRE PORTAIL PRO
+            </a>
+          </div>
         </div>
       </div>
     </div>
