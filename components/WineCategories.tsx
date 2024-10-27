@@ -131,7 +131,7 @@ const VendorSlider = () => {
               >
                 <div className={`flex w-full h-full rounded-2xl shadow-xl overflow-hidden
                                 bg-gradient-to-br ${getCardColor(vendor.certifications)}
-                                hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300`}>
+                                hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 mx-auto`}>
                   <div className="p-6 h-full flex flex-col">
                     <div className="flex-grow flex flex-row items-center">
                       <div className="mr-4 flex-shrink-0">
@@ -158,12 +158,12 @@ const VendorSlider = () => {
                       </div>
                     </div>
 
-                    <div className="text-white text-sm">
+                    <div className="text-white text-sm text-center">
                       Vigneron de {vendor.region__pays}, {vendor.products.length} vins biologiques
                     </div>
                     <br />
 
-                    <div className="flex space-x-2 mb-2">
+                    <div className="flex space-x-2 mb-2 mx-auto">
                       {vendor.products.slice(0, 3).map((product, idx) => (
                         <div key={idx} className="relative w-16 h-16 bg-gradient-to-r from-accent to-white rounded-full overflow-hidden border-2 border-white shadow-md transform transition-all duration-300" style={{ zIndex: 3 - idx }}>
                           <img
@@ -176,7 +176,7 @@ const VendorSlider = () => {
                     </div>
 
                     <Link href={`/vendor/${vendor.id}`} passHref>
-                      <button className="mt-4 px-3 py-1 bg-white text-gray-800 rounded-full text-sm font-medium shadow-md hover:bg-gray-100 transition-colors">
+                      <button className="mt-4 mx-auto flex px-3 py-1 bg-white text-gray-800 rounded-full text-sm font-medium shadow-md hover:bg-gray-100 transition-colors">
                         Découvrir
                       </button>
                     </Link>
