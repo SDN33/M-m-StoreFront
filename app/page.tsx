@@ -18,7 +18,6 @@ import Trust from '@/components/Trust';
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [products, setProducts] = useState([]);
   const mainContentRef = useRef<HTMLDivElement>(null);
   const filterContentRef = useRef<HTMLDivElement>(null);
   const lastComponentRef = useRef<HTMLDivElement>(null);
@@ -44,7 +43,6 @@ export default function Home() {
     async function fetchProducts() {
       const response = await fetch('/api/products');
       const data = await response.json();
-      setProducts(data);
     }
     fetchProducts();
   }, []);
