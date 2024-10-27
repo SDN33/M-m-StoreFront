@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Heart } from 'lucide-react';
@@ -40,7 +40,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   };
 
   const formatRating = (rating?: number) => {
-    if (!rating || product.rating_count === 0) return "pas encore noté";
+    if (!rating || product.rating_count === 0) return "Pas encore noté";
     return (rating * 4).toFixed(1) + "/20";
   };
 
@@ -60,28 +60,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     if (product.average_rating && product.average_rating > 3.5) return `Coup De Coeur de Mémé`;
     if (product.certification?.toLowerCase().includes('biodynamie')) return `Vin Démeter qui respecte la nature`;
     if (product.categories.length > 0 && product.categories[0]?.name.toLowerCase().includes('pétillant')) {
-      if (product.categories[0]?.name.toLowerCase() === 'rosé') {
-        return `Des Bulles ${product.categories.map(category => category.name).filter(name => name.toLowerCase() !== 'pétillant').join(', ')} À Découvrir`;
-      }
-      if (product.categories[0]?.name.toLowerCase() === 'blanc') {
-        return `Un ${product.categories.map(category => category.name).filter(name => name.toLowerCase() !== 'pétillant').join(', ')} pétillant À Découvrir`;
-      }
-      return `Un ${product.categories.map(category => category.name).join(' et  ')} À Découvrir`;
+      const categoryName = product.categories.map(category => category.name).join(', ');
+      return `Un ${categoryName} À Découvrir`;
     }
-    if (product.categories[0]?.name.toLowerCase().includes('autres')) return `Un Vin Original pour Surprendre`;
     return `Un ${product.appelation?.toUpperCase() || 'Vin'} À Découvrir`;
   };
 
   return (
     <div className="w-full max-w-[400px] min-w-[300px] bg-white rounded-lg overflow-hidden shadow-md">
-      {/* Header - Slogan Banner */}
       <div className="bg-gradient-to-r from-black via-gray-800 to-black text-white py-1 px-2 text-center text-sm font-semibold">
         {generateSlogan()}
       </div>
 
-      {/* Main Content */}
       <div className="p-3">
-        {/* Title Section with Heart Icon */}
         <div className="flex items-start gap-1 mb-2">
           <div className="relative flex-grow">
             <div className="absolute -top-1 left-0">
@@ -96,7 +87,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           </div>
         </div>
 
-        {/* Product Image and Rating Badge */}
         <div className="relative">
           <div className="absolute top-0 left-0 z-10 bg-teal-500 rounded-full p-1.5 text-white">
             <div className="text-xs">NOTE</div>
@@ -115,7 +105,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           </div>
         </div>
 
-        {/* Certification and Rating */}
         <div className="flex justify-between items-center mb-2">
           <span className="text-xs text-primary font-semibold cursor-pointer hover:underline">
             {product.rating_count || 0} avis
@@ -123,7 +112,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           <div className="flex gap-2">{renderCertification()}</div>
         </div>
 
-        {/* Description */}
         <p className="text-xs mb-2 text-gray-700 h-8 overflow-hidden">
           {(() => {
             const region = product.region__pays
@@ -138,15 +126,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           })()}
         </p>
 
-        {/* Price Section */}
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <div className="bg-purple-100 text-purple-900 px-1.5 py-0.5 rounded text-sm">
               -10%
             </div>
             <div>
-              <div className="text-xl font-bold">
-                {Math.floor(product.price)}<sup className="text-xs">{(product.price % 1).toFixed(2).substring(2)}€</sup>
+              <div className="text-2xl font-bold">
+                {Math.floor(product.price)}<sup className="text-sm">{(product.price % 1).toFixed(2).substring(2)}€</sup>
               </div>
             </div>
           </div>
@@ -156,7 +143,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           </div>
         </div>
 
-        {/* Add to Cart Section */}
         <div className="flex items-center gap-2">
           <Heart className="w-5 h-5 text-gray-400 cursor-pointer hover:text-red-500" />
           <select

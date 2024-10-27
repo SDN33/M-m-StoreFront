@@ -12,15 +12,20 @@ import WineSelector from '@/components/WineSelector';
 import Slider from '@/components/Slider';
 import WineCategories from '@/components/WineCategories';
 import Suggestion from '@/components/Suggestion';
-import MobileHome from '@/components/MobileHome'; // Importez le composant MobileHome
+import MobileHome from '@/components/MobileHome';
+import Trust from '@/components/Trust';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [products, setProducts] = useState([]);
   const mainContentRef = useRef<HTMLDivElement>(null);
   const filterContentRef = useRef<HTMLDivElement>(null);
   const lastComponentRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
   const [isAtBottom, setIsAtBottom] = useState(false);
+  const [bottomDwellTime, setBottomDwellTime] = useState(0);
+  const lastScrollTime = useRef(Date.now());
 
   const [selectedFilters, setSelectedFilters] = useState({
     color: [],
@@ -36,6 +41,15 @@ export default function Home() {
   });
 
   useEffect(() => {
+    async function fetchProducts() {
+      const response = await fetch('/api/products');
+      const data = await response.json();
+      setProducts(data);
+    }
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
     setIsMobile(mediaQuery.matches);
 
@@ -49,45 +63,50 @@ export default function Home() {
     };
   }, []);
 
-  // Ce hook s'exécute toujours, peu importe la taille de l'écran
   useEffect(() => {
     const handleScroll = (e: WheelEvent) => {
       if (!isMobile) {
         const target = e.target as Node;
-        const filterContent = filterContentRef.current;
         const mainContent = mainContentRef.current;
-        const lastComponent = lastComponentRef.current;
-        const footer = document.querySelector('footer');
+        const footer = footerRef.current;
 
-        // Gérer le scroll indépendant des filtres
-        if (filterContent?.contains(target)) {
+        // Gérer le défilement du filtre séparément
+        if (filterContentRef.current?.contains(target)) {
           e.preventDefault();
-          filterContent.scrollTop += e.deltaY;
+          filterContentRef.current.scrollTop += e.deltaY;
           return;
         }
 
-        if (mainContent && lastComponent && footer) {
-          const mainRect = mainContent.getBoundingClientRect();
-          const lastComponentRect = lastComponent.getBoundingClientRect();
-          const footerRect = footer.getBoundingClientRect();
+        // Vérifier si l'événement provient du conteneur principal
+        if (mainContent?.contains(target) && footer) {
+          const mainScrollHeight = mainContent.scrollHeight;
+          const mainScrollTop = mainContent.scrollTop;
+          const mainClientHeight = mainContent.clientHeight;
 
-          // Scroll vers le bas
-          if (lastComponentRect.bottom <= mainRect.bottom && e.deltaY > 0 && !isAtBottom) {
-            e.preventDefault();
-            footer.scrollIntoView({ behavior: 'smooth' });
-            setIsAtBottom(true);
-          }
+          // Calculer si on est proche du bas du conteneur principal
+          const isNearBottom = mainScrollHeight - (mainScrollTop + mainClientHeight) < 10;
 
-          // Scroll vers le haut
-          if (isAtBottom && e.deltaY < 0) {
+          if (isNearBottom && e.deltaY > 0 && !isAtBottom) {
             e.preventDefault();
-            // Vérifier si le footer est visible
-            if (footerRect.top < window.innerHeight) {
-              lastComponent.scrollIntoView({ behavior: 'smooth' });
+            setBottomDwellTime((prev) => prev + (Date.now() - lastScrollTime.current));
+
+            // Si on a passé au moins 1 seconde en bas
+            if (bottomDwellTime > 1000) {
+              footer.scrollIntoView({ behavior: 'smooth' });
+              setIsAtBottom(true);
+              setBottomDwellTime(0);
+            }
+          } else {
+            // Gérer le scroll vers le haut depuis le footer
+            if (isAtBottom && e.deltaY < 0) {
+              e.preventDefault();
+              footer.scrollIntoView({ behavior: 'smooth' });
               setIsAtBottom(false);
             }
           }
         }
+
+        lastScrollTime.current = Date.now();
       }
     };
 
@@ -95,7 +114,7 @@ export default function Home() {
     return () => {
       window.removeEventListener('wheel', handleScroll);
     };
-  }, [isMobile, isAtBottom]);
+  }, [isMobile, isAtBottom, bottomDwellTime]);
 
   const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {
     setSelectedFilters((prev) => ({
@@ -119,7 +138,6 @@ export default function Home() {
     });
   };
 
-  // Rendu conditionnel à la fin pour éviter les erreurs de hook
   return (
     <>
       {isMobile ? (
@@ -158,24 +176,27 @@ export default function Home() {
               <Slider />
               <Suggestion />
               <WineSelector />
-
               <WineCategories />
               <br />
               <div className="max-w-7xl mx-auto px-4 space-y-8">
                 <section className="bg-white rounded-lg shadow">
-                  <ProductsCards selectedFilters={selectedFilters} />
+                  <ProductsCards selectedFilters={selectedFilters} onAddToCart={(product) => console.log('Add to cart:', product)} />
                 </section>
               </div>
               <br /><br />
               <HeroBanner />
               <Livraison />
               <Slogan />
+              <Trust />
               <div ref={lastComponentRef}>
                 <Newletter />
               </div>
               <br /><br />
             </div>
           </main>
+          <footer ref={footerRef}>
+            {/* Votre contenu de footer ici */}
+          </footer>
         </div>
       )}
       {isMobile && isFilterOpen && (

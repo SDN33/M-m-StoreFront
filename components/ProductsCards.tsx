@@ -1,4 +1,3 @@
-//
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
@@ -31,9 +30,10 @@ interface ProductsCardsProps {
     region__pays: string[];
     categories: string[];
   };
+  onAddToCart: (productId: number, quantity: number, variationId: number) => void; // Updated
 }
 
-const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
+const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToCart }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -65,46 +65,39 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
 
   const filterProducts = useCallback(
     (product: Product) => {
-      const isColorMatch =
-        selectedFilters.color.length === 0 ||
+      const isColorMatch = selectedFilters.color.length === 0 ||
         selectedFilters.color.some((selectedColor) =>
           product.categories?.some((category) =>
             category.name?.toLowerCase().trim() === selectedColor.toLowerCase().trim()
           )
         );
 
-      const isVintageMatch =
-        selectedFilters.vintage.length === 0 ||
+      const isVintageMatch = selectedFilters.vintage.length === 0 ||
         selectedFilters.vintage.includes(product.millesime || '');
 
-      const isRegionMatch =
-        selectedFilters.region.length === 0 ||
+      const isRegionMatch = selectedFilters.region.length === 0 ||
         selectedFilters.region.some(
           (region) =>
             region.toLowerCase().trim() === (product.region__pays || '').toLowerCase().trim()
         );
 
-      const isCertificationMatch =
-        selectedFilters.certification.length === 0 ||
+      const isCertificationMatch = selectedFilters.certification.length === 0 ||
         selectedFilters.certification.some(
           (certification) =>
             certification.toLowerCase().trim() === (product.certification || '').toLowerCase().trim()
         );
 
-      const isStyleMatch =
-        selectedFilters.style.length === 0 ||
+      const isStyleMatch = selectedFilters.style.length === 0 ||
         selectedFilters.style.some(
           (style) => style.toLowerCase().trim() === (product.style || '').toLowerCase().trim()
         );
 
-      const isVolumeMatch =
-        selectedFilters.volume.length === 0 ||
+      const isVolumeMatch = selectedFilters.volume.length === 0 ||
         selectedFilters.volume.some(
           (volume) => volume.toLowerCase().trim() === (product.volume || '').toLowerCase().trim()
         );
 
-      const isAccordMetsMatch =
-        selectedFilters.accord_mets.length === 0 ||
+      const isAccordMetsMatch = selectedFilters.accord_mets.length === 0 ||
         selectedFilters.accord_mets.some((accordMets) =>
           (product.accord_mets ?? []).some(
             (met) => met.toLowerCase().trim() === accordMets.toLowerCase().trim()
@@ -157,10 +150,6 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
     setVisibleCount(12);
   };
 
-  const onAddToCart = async (productId: number, quantity: number, variationId: number) => {
-    console.log(`Product added to cart: ${productId}, Quantity: ${quantity}, Variation ID: ${variationId}`);
-  };
-
   useEffect(() => {
     if (!initialLoad) {
       if (productsRef.current) {
@@ -191,7 +180,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters }) => {
         <div className="space-y-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-2">
             {filteredProducts.slice(0, visibleCount).map((product) => (
-              <ProductCard key={product.id} product={product} onAddToCart={() => onAddToCart(product.id, 1, 0)} />
+              <ProductCard key={product.id} product={product} onAddToCart={async () => await onAddToCart(product.id, 1, 0)} />
             ))}
           </div>
 

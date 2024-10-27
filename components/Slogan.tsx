@@ -113,7 +113,7 @@ const Slogan: React.FC = () => {
         >
           Avec Mémé Georgette, c&apos;est simple... <br />
           <span className="sloganhero font-light text-sm md:text-xl">
-            Du vin bio directement chez vous, pour pas plus cher ! *
+           L'achat de produits du terroir n'a jamais été aussi simple !
           </span>
         </h2>
 
@@ -135,7 +135,6 @@ const Slogan: React.FC = () => {
           ))}
         </div>
         <br />
-        <span className="text-white text-xs block mt-4">* en comparaison avec les vins non bio</span>
         <span className="text-white text-xs block">L&apos;abus d&apos;alcool est dangereux pour la santé, sachez consommer avec modération. Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.</span>
       </div>
     </div>
