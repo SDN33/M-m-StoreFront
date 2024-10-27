@@ -20,7 +20,7 @@ const MemeGeorgettePremium = () => {
               src="/images/memelogo2.png"
               alt="Mémé Georgette"
               className="object-contain -mt-4"
-              width={150}
+              width={250}
               height={150}
             />
           </div>

@@ -149,3 +149,12 @@ ul::-webkit-scrollbar {
   padding: 20px; /* Optionnel : Ajoute de l'espace autour du contenu */
 
 }
+
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
