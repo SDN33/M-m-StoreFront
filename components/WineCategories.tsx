@@ -6,7 +6,12 @@ const VendorSlider = () => {
   interface Vendor {
     id: number;
     store_name: string;
-    products: any[];
+    products: {
+      id: number;
+      name: string;
+      images: { src: string }[];
+      certification?: string;
+    }[];
     vendor_image: string;
     region__pays: string;
     certifications: {
