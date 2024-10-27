@@ -3,9 +3,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import ProductsCards from '@/components/ProductsCards';
 import ProductFilter from '@/components/ProductFilters';
-import HeroBanner from '@/components/HeroBanner';
 import Slogan from '@/components/Slogan';
-import Livraison from '@/components/Livraison';
 import Newletter from '@/components/Newletter';
 import ProductsIntro from '@/components/ProductIntro';
 import WineSelector from '@/components/WineSelector';
@@ -14,6 +12,7 @@ import WineCategories from '@/components/WineCategories';
 import Suggestion from '@/components/Suggestion';
 import MobileHome from '@/components/MobileHome';
 import Trust from '@/components/Trust';
+import PromoRappel from '@/components/PromoRappel';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -181,10 +180,9 @@ export default function Home() {
                 </section>
               </div>
               <br /><br />
-              <HeroBanner />
-              <Livraison />
-              <Slogan />
+              <PromoRappel />
               <Trust />
+              <Slogan />
               <div ref={lastComponentRef}>
                 <Newletter />
               </div>
@@ -192,7 +190,6 @@ export default function Home() {
             </div>
           </main>
           <footer ref={footerRef}>
-            {/* Votre contenu de footer ici */}
           </footer>
         </div>
       )}

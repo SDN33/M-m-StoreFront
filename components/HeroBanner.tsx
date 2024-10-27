@@ -32,7 +32,7 @@ const HeroBanner = () => {
         </h1>
         <div className='border-t-2 border-white w-16 mt-2'></div> {/* Réduit la largeur de la bordure et l'espacement */}
         <Image
-          src="/images/memelogo.png"
+          src="/images/memelogo2.png"
           alt="Mémé Georgette"
           className="mt-6 object-contain"
           width={150}

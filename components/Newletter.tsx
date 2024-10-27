@@ -12,7 +12,7 @@ const Newsletter = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden max-w-4xl mx-auto mt-8">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden mx-auto mt-8 w-full">
       <div className="flex flex-col md:flex-row items-center justify-center">
         {/* Image des verres de vin */}
         <div className="md:w-1/3 h-64 relative">
@@ -30,7 +30,7 @@ const Newsletter = () => {
         {/* Contenu de la newsletter */}
         <div className="md:w-2/3 p-6 text-center md:text-left">
           <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800">
-            La Newsletter <br />de Mémé Georgette !
+            Newsletter
           </h2>
           <p>Des offres exclusives, des nouveautés...</p>
           <p className="text-primary mb-4">Parole de Mémé, on ne spamme pas.</p>

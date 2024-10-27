@@ -1,4 +1,6 @@
 import React from 'react';
+import Image from 'next/image';
+import HeroBanner from './HeroBanner';
 
 const MemeGeorgettePremium = () => {
   return (
@@ -7,16 +9,18 @@ const MemeGeorgettePremium = () => {
       <div className="grid md:grid-cols-2 gap-8 mb-16">
         <div className="relative overflow-hidden rounded-lg group">
           <div className="absolute inset-0 bg-black/40 z-10"></div>
-          <img
-            src="/api/placeholder/800/400"
+          <Image
+            src="/images/meme-pas-contente.png"
             alt="Dégustation"
             className="w-full h-[300px] object-cover transform group-hover:scale-105 transition-transform duration-500"
+            width={800}
+            height={400}
           />
           <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-white">
             <h2 className="text-2xl font-bold mb-4">QUI SOMMES NOUS ?</h2>
-            <button className="bg-white text-gray-800 px-8 py-2 rounded hover:bg-gray-100 transition-colors">
+            <a href="https://memegeorgette.com" className="bg-primary text-white px-8 py-2 rounded hover:bg-gray-100 transition-colors">
               DÉCOUVRIR
-            </button>
+            </a>
           </div>
         </div>
 
@@ -35,6 +39,7 @@ const MemeGeorgettePremium = () => {
           </div>
         </div>
       </div>
+      <br />
 
       {/* Caractéristiques */}
       <div className="grid md:grid-cols-4 gap-12 mb-16">
@@ -77,16 +82,6 @@ const MemeGeorgettePremium = () => {
           <h3 className="text-xl font-semibold text-primary mb-2">Emballages</h3>
           <p className="text-gray-600">anti-casse</p>
         </div>
-      </div>
-
-      {/* Bannière promotionnelle */}
-      <div className="bg-black text-white p-4 text-center rounded-lg">
-        <p className="text-lg">
-          🌟 <span className='text-accent'>PROMOS DE MÉMÉ </span> {'>'} RETROUVEZ NOS PRODUITS PRÉFÉRÉS À PRIX CASSÉS
-          <button className="ml-4 bg-gradient-to-r from-red-500 to-rose-500 text-white px-4 py-1 rounded hover:from-red-500 hover:to-rose-600 transition-colors">
-            EN PROFITER &rsaquo;
-          </button>
-        </p>
       </div>
     </div>
   );
