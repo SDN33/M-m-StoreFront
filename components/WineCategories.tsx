@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
+import {
+  ChevronLeft,
+  ChevronRight,
+  MapPin,
+  Wine,
+  Grape
+} from 'lucide-react';
 
 const VendorSlider = () => {
   interface Vendor {
@@ -79,10 +85,10 @@ const VendorSlider = () => {
   }, []);
 
   const getCardColor = (certifications: { bio: number; biodynamie: number; conversion: number }) => {
-    if (certifications.biodynamie > 0) return 'from-purple-700 to-purple-900';
-    if (certifications.bio > 0) return 'from-gray-800 to-teal-700';
-    if (certifications.conversion > 0) return 'from-amber-600 to-amber-800';
-    return 'from-gray-700 to-gray-900';
+    if (certifications.biodynamie > 0) return 'from-primary to-red-900';
+    if (certifications.bio > 0) return 'from-teal-800 to-teal-950';
+    if (certifications.conversion > 0) return 'from-amber-700 to-amber-900';
+    return 'from-gray-800 to-gray-950';
   };
 
   const nextSlide = () => setActiveIndex((prev) => (prev + 1) % vendors.length);
@@ -97,10 +103,12 @@ const VendorSlider = () => {
   }
 
   return (
-    <div className="relative w-full max-w-7xl mx-auto px-4 overflow-hidden">
+    <div className="relative w-full max-w-6xl mx-auto px-4 overflow-hidden">
       <h2 className="flex items-center justify-center text-xl font-bold mb-6 text-center">
         <div className="border-t border-primary w-1/4" />
-        <span className="mx-4">Les Domaines & Vignerons</span>
+        <span className="mx-4 flex items-center gap-2">
+          Les Domaines & Vignerons
+        </span>
         <div className="border-t border-primary w-1/4" />
       </h2>
 
@@ -119,67 +127,73 @@ const VendorSlider = () => {
             return (
               <div
                 key={vendor.store_name}
-                className="relative w-80 h-[320px] flex cursor-pointer transform-gpu" // Increased height for better layout
+                className="relative w-80 h-[320px] flex cursor-pointer transform-gpu"
                 style={{
                   transform: `translateX(${translateX}%) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
                   opacity,
                   zIndex,
                   transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-                  marginLeft: index === 0 ? '0' : '-2rem', // Negative margin to bring cards closer
+                  marginLeft: index === 0 ? '0' : '-2rem',
                 }}
                 onClick={() => setActiveIndex(index)}
               >
                 <div className={`flex w-full h-full rounded-2xl shadow-xl overflow-hidden
                                 bg-gradient-to-br ${getCardColor(vendor.certifications)}
-                                hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 mx-auto`}>
-                  <div className="p-6 h-full flex flex-col">
-                    <div className="flex-grow flex flex-row items-center">
-                      <div className="mr-4 flex-shrink-0">
-                        <div className="w-24 h-24 bg-gray-200 rounded-full overflow-hidden border-spacing-3 border-primary shadow-lg transform hover:scale-105 transition-all duration-300">
-                          <img
-                            src={vendor.vendor_image || '/images/meme-pas-contente.png'}
-                            alt={vendor.store_name}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
+                                hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 mx-auto
+                                border border-white/10`}>
+                  <div className="p-6 h-full w-full flex flex-row justify-between">
+                    {/* Left side - Photo, Name, Region, Wine Count */}
+                    <div className="flex flex-col space-y-4">
+                      <div className="w-24 h-24 bg-gray-200 rounded-full overflow-hidden border-2 border-white/20 shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img
+                          src={vendor.vendor_image || '/images/meme-pas-contente.png'}
+                          alt={vendor.store_name}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
 
-                      <div className="flex-1 flex flex-col space-y-2">
+                      <div className="flex flex-col space-y-3">
                         <h3 className="text-sm font-bold text-white">
                           {vendor.store_name}
                         </h3>
 
                         {vendor.region__pays && (
-                          <div className="flex items-center text-white/90 text-sm">
-                            <MapPin className="w-4 h-4 " />
+                          <div className="flex items-center text-white/90 text-sm gap-1.5">
+                            <MapPin className="w-4 h-4" />
                             <span>{vendor.region__pays.charAt(0).toUpperCase() + vendor.region__pays.slice(1)}</span>
                           </div>
                         )}
+
+                        <div className="flex items-center text-white text-sm gap-1.5">
+                          <Grape className="w-4 h-4" />
+                          {vendor.certifications.bio > vendor.certifications.biodynamie && vendor.certifications.bio > vendor.certifications.conversion
+                            ? 'Bio'
+                            : vendor.certifications.biodynamie > vendor.certifications.conversion
+                            ? 'Biodynamie'
+                            : 'Conversion'}
+                        </div>
                       </div>
                     </div>
 
-                    <div className="text-white text-sm text-center">
-                      Vigneron de {vendor.region__pays}, {vendor.products.length} vins biologiques
-                    </div>
-                    <br />
-
-                    <div className="flex space-x-2 mb-2 mx-auto">
+                    {/* Right side - Photos and button */}
+                    <div className="flex flex-col items-center space-y-3">
                       {vendor.products.slice(0, 3).map((product, idx) => (
-                        <div key={idx} className="relative w-16 h-16 bg-gradient-to-r from-accent to-white rounded-full overflow-hidden border-2 border-white shadow-md transform transition-all duration-300" style={{ zIndex: 3 - idx }}>
+                        <div key={idx} className="w-16 h-16 bg-gradient-to-r from-white/5 to-white/10 rounded-full overflow-hidden border-2 border-white/20 shadow-md transform hover:scale-110 transition-all duration-300">
                           <img
                             src={Array.isArray(product.images) && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
                             alt={product.name}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 transform hover:scale-110"
+                            className="w-full h-full object-cover"
                           />
                         </div>
                       ))}
-                    </div>
 
-                    <Link href={`/vendor/${vendor.id}`} passHref>
-                      <button className="mt-4 mx-auto flex px-3 py-1 bg-white text-gray-800 rounded-full text-sm font-medium shadow-md hover:bg-gray-100 transition-colors">
-                        Découvrir
-                      </button>
-                    </Link>
+                      <Link href={`/vendor/${vendor.id}`} passHref>
+                        <button className="mt-4 flex px-4 py-1.5 bg-white/10 text-white rounded-full text-sm font-medium
+                                         shadow-md hover:bg-white/20 transition-all duration-300 border border-white/20">
+                          Découvrir
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -190,16 +204,16 @@ const VendorSlider = () => {
         <div className="absolute -bottom-12 left-0 right-0 flex justify-center space-x-3">
           <button
             onClick={prevSlide}
-            className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50 transition-colors"
+            className="p-2 rounded-full bg-white/10 shadow-md hover:bg-white/20 transition-colors border border-white/20"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-6 h-6 text-white" />
           </button>
 
           <button
             onClick={nextSlide}
-            className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50 transition-colors"
+            className="p-2 rounded-full bg-white/10 shadow-md hover:bg-white/20 transition-colors border border-white/20"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-6 h-6 text-white" />
           </button>
         </div>
       </div>
