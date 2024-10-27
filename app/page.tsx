@@ -180,8 +180,8 @@ export default function Home() {
               <HeroBanner />
               <PromoRappel />
               <Trust />
-              <Slogan />
               <Newletter />
+              <Slogan />
               <br /><br />
             </div>
           </main>

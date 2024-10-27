@@ -118,7 +118,7 @@ const Slogan: React.FC = () => {
         </h2>
 
         <div className="flex flex-col md:flex-row justify-around items-center mt-10 space-y-6 md:space-y-0 md:space-x-4">
-          {['Notre Engagement', 'Circuit Court', 'Élan Éco-Responsable'].map((title, index) => (
+          {['Notre Engagement', 'Circuit Court', 'Éco-Responsable'].map((title, index) => (
             <div key={index} ref={engagementRefs[index]} className={`relative w-full md:w-1/3 ${cardsVisible[index] ? 'fade-in-up' : ''}`}>
               <div className="bg-white text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
                 <h3 className="font-bold text-md md:text-lg">{title}</h3>
@@ -127,7 +127,7 @@ const Slogan: React.FC = () => {
                     ? 'Nous travaillons main dans la main avec des producteurs locaux pour offrir des vins de qualité.'
                     : index === 1
                     ? 'Nos vins sont livrés directement du producteur à votre table, sans intermédiaire.'
-                    : 'Nous nous engageons à respecter l\'environnement en choisissant des pratiques durables.'}
+                    : 'Engagé à respecter l\'environnement en choisissant des pratiques durables et non polluante.'}
                 </p>
               </div>
               <div className={`absolute ${index === 0 ? '-top-3 -right-3' : index === 1 ? '-top-3 -left-3' : '-bottom-3 -right-3'} w-8 h-8 md:w-10 md:h-10 bg-orange-${index === 1 ? '300' : '700'} rounded-full`}></div>
@@ -136,7 +136,6 @@ const Slogan: React.FC = () => {
         </div>
         <br />
         <span className="text-white text-xs block mt-4">* en comparaison avec les vins non bio</span>
-        <span className="text-white text-xs block">L&apos;abus d&apos;alcool est dangereux pour la santé, sachez consommer avec modération. Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.</span>
       </div>
     </div>
   );
