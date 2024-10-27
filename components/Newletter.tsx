@@ -12,7 +12,7 @@ const Newsletter = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden mx-auto mt-8 w-full">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden mx-auto mt-8 max-w-4xl w-full">
       <div className="flex flex-col md:flex-row items-center justify-center">
         {/* Image des verres de vin */}
         <div className="md:w-1/3 h-64 relative">
@@ -45,13 +45,13 @@ const Newsletter = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-fit p-3 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full sm:w-fit p-3 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>
               <button
                 type="submit"
-                className='mr-96 bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white py-2 px-4 rounded'
-                >
+                className='bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white py-2 px-4 rounded'
+              >
                 S&apos;inscrire
               </button>
             </div>

@@ -158,3 +158,4 @@ ul::-webkit-scrollbar {
 .scrollbar-hidden::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
+

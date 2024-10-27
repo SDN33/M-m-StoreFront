@@ -176,11 +176,13 @@ export default function Home() {
                   <ProductsCards selectedFilters={selectedFilters} onAddToCart={(product) => console.log('Add to cart:', product)} />
                 </section>
               </div>
+              <br /><br />
               <HeroBanner />
               <PromoRappel />
               <Trust />
               <Slogan />
               <Newletter />
+              <br /><br />
             </div>
           </main>
           <footer ref={footerRef}>
