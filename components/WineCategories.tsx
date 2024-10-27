@@ -145,7 +145,7 @@ const VendorSlider = () => {
                       </div>
 
                       <div className="flex-1 flex flex-col space-y-2">
-                        <h3 className="text-base font-bold text-white">
+                        <h3 className="text-sm font-bold text-white">
                           {vendor.store_name}
                         </h3>
 
@@ -158,6 +158,11 @@ const VendorSlider = () => {
                       </div>
                     </div>
 
+                    <div className="text-white text-sm">
+                      Vigneron de {vendor.region__pays}, {vendor.products.length} vins biologiques
+                    </div>
+                    <br />
+
                     <div className="flex space-x-2 mb-2">
                       {vendor.products.slice(0, 3).map((product, idx) => (
                         <div key={idx} className="relative w-16 h-16 bg-gradient-to-r from-accent to-white rounded-full overflow-hidden border-2 border-white shadow-md transform transition-all duration-300" style={{ zIndex: 3 - idx }}>
@@ -168,10 +173,6 @@ const VendorSlider = () => {
                           />
                         </div>
                       ))}
-                    </div>
-
-                    <div className="text-white text-sm">
-                      Vigneron de {vendor.region__pays} proposant {vendor.products.length} vins biologiques
                     </div>
 
                     <Link href={`/vendor/${vendor.id}`} passHref>
