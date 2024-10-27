@@ -15,7 +15,6 @@ interface ProductFilterProps {
   onFilterChange: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
   resetFilters: () => void;
   hideColorFilter?: boolean;
-
 }
 
 const getFilterTitle = (filterType: string) => {
@@ -101,7 +100,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     );
   };
 
-  const handleCheckboxChange = (filterType: keyof ProductFilterProps['selectedFilters'], option: { label: string, value: string }) => {
+  const handleCheckboxChange = (filterType: keyof ProductFilterProps['selectedFilters'], option: { label: string; value: string }) => {
     const currentOptions = selectedFilters[filterType] ?? [];
     const updatedOptions = currentOptions.includes(option.value)
       ? currentOptions.filter((item) => item !== option.value)
@@ -110,8 +109,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div className="hidden sm:block bg-transparent h-full w-56 ml-10 overflow-y-auto mt-56 bg-gray-200
-     bg-opacity-30">
+    <div className="hidden sm:block bg-transparent h-full w-56 ml-10 overflow-y-auto mt-56 bg-gray-200 bg-opacity-30">
       {Object.entries(filterOptions).map(([filterType, options]) => {
         if (hideColorFilter && filterType === 'color') return null;
         return (
@@ -126,15 +124,15 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
             {expandedSections.includes(filterType) && (
               <div className="p-4 space-y-2 bg-white">
                 {options.map((option) => (
-                  <label key={option.value} className="flex items-center justify-between cursor-pointer hover:bg-white p-2 rounded">
+                  <label key={option.value} className="flex items-center justify-between cursor-pointer hover:bg-gray-100 p-2 rounded transition-colors">
                     <div className="flex items-center">
                       <input
                         type="checkbox"
                         checked={selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']].includes(option.value)}
                         onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
-                        className="form-checkbox h-4 w-4 text-primary rounded border-gray-300"
+                        className="form-checkbox h-4 w-4 text-teal-500 focus:ring-teal-500 rounded border-gray-300 transition duration-200 ease-in-out"
                       />
-                      <span className="ml-2 text-sm">
+                      <span className="ml-2 text-sm text-gray-700 font-medium">
                         {option.label === 'Bio' ? (
                           <span className="flex items-center">
                             {option.label} <Image src="/images/logobio.webp" alt="Bio" width={16} height={16} className="ml-1" />
@@ -158,14 +156,12 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       })}
 
       <div className="p-4">
-      <button
-    onClick={() => {
-      resetFilters(); // Appelle la fonction de réinitialisation passée en props
-    }}
-    className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-2 rounded-md hover:bg-primary-dark transition-colors"
-  >
-    Réinitialiser
-  </button>
+        <button
+          onClick={resetFilters}
+          className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-2 rounded-md hover:bg-primary-dark transition-colors"
+        >
+          Réinitialiser
+        </button>
       </div>
     </div>
   );

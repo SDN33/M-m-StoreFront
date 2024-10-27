@@ -138,7 +138,7 @@ const WineSelector = () => {
           }}
           className="mt-8 text-center"
         >
-          <h2 className="text-base sm:text-xl font-serif text-primary">
+          <h2 className="text-base sm:text-xl font-serif">
             <strong>{getSlogan()}</strong>
           </h2>
         </motion.div>
