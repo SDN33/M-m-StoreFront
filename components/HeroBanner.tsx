@@ -22,8 +22,8 @@ const HeroBanner = () => {
   }, []);
 
   return (
-    <div className="relative container mx-auto px-4 flex flex-col justify-center items-center bg-primary py-4"> {/* Réduit le padding vertical */}
-      <div className="flex flex-col items-center text-center z-10 text-white relative max-w-md"> {/* Réduit la largeur maximale */}
+    <div className="relative container mx-auto px-4 flex flex-col justify-center items-center from-primary to-pink-600 py-4"> {/* Réduit le padding vertical */}
+      <div className="flex flex-col items-center text-center z-10 relative max-w-md"> {/* Réduit la largeur maximale */}
         <h1 className="text-2xl md:text-2xl leading-tight md:font-bold sloganhero font-semibold"> {/* Réduit la taille de la police */}
           <span
             className="block font-serif fade-in min-h-[3rem] md:min-h-[4rem]"

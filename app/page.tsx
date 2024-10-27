@@ -158,6 +158,7 @@ export default function Home() {
               <Slider />
               <Suggestion />
               <WineSelector />
+
               <WineCategories />
               <br />
               <div className="max-w-7xl mx-auto px-4 space-y-8">

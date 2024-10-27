@@ -56,7 +56,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
   const generateSlogan = () => {
     if (product.price < 9) return `Le qualité/prix IMBATTABLE !`;
-    if (product.price > 20) return `${product.appelation || 'Vin'} D'Exception`;
+    if (product.price > 20) return `${product.appelation || 'Vin'} Haut de Gamme`;
     if (product.average_rating && product.average_rating > 3.5) return `Coup De Coeur de Mémé`;
     if (product.certification?.toLowerCase().includes('biodynamie')) return `Vin Démeter qui respecte la nature`;
     if (product.categories.length > 0 && product.categories[0]?.name.toLowerCase().includes('pétillant')) {
@@ -133,7 +133,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
               : '';
             const millesime = product.millesime ? ` millésimé en ${product.millesime}` : '';
             const chateau = product.nom_chateau ? ` par ${product.nom_chateau}` : '';
-            return `Un ${product.categories[0]?.name || 'vin'} ${product.appelation || ''} ${region}${millesime}${chateau}`;
+            const appelation = product.appelation ? product.appelation.charAt(0).toUpperCase() + product.appelation.slice(1).toLowerCase() : '';
+            return `Un ${product.categories[0]?.name || 'vin'} ${appelation} ${region}${millesime}${chateau}`;
           })()}
         </p>
 

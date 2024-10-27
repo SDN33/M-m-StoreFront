@@ -109,20 +109,28 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div className="hidden sm:block bg-transparent h-full w-56 ml-10 overflow-y-auto mt-56 bg-gray-200 bg-opacity-30">
+    <div className="hidden sm:block bg-transparent h-full w-56 ml-10 overflow-y-auto mt-56 bg-gray-200 bg-opacity-30 shadow-lg rounded-lg">
+            <div className="p-4">
+        <button
+          onClick={resetFilters}
+          className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-2 rounded-md hover:bg-primary-dark transition-colors shadow-md"
+        >
+          Réinitialiser
+        </button>
+      </div>
       {Object.entries(filterOptions).map(([filterType, options]) => {
         if (hideColorFilter && filterType === 'color') return null;
         return (
-          <div key={filterType} className="border-b border-gray-200">
+          <div key={filterType} className="border-b border-gray-300">
             <button
               onClick={() => toggleSection(filterType)}
-              className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between"
+              className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between hover:bg-gray-100 transition-colors"
             >
-              <span>{getFilterTitle(filterType)}</span>
+              <span className="text-gray-800">{getFilterTitle(filterType)}</span>
               {expandedSections.includes(filterType) ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
             </button>
             {expandedSections.includes(filterType) && (
-              <div className="p-4 space-y-2 bg-white">
+              <div className="p-4 space-y-2 bg-white shadow-sm rounded-md">
                 {options.map((option) => (
                   <label key={option.value} className="flex items-center justify-between cursor-pointer hover:bg-gray-100 p-2 rounded transition-colors">
                     <div className="flex items-center">
@@ -158,7 +166,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       <div className="p-4">
         <button
           onClick={resetFilters}
-          className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-2 rounded-md hover:bg-primary-dark transition-colors"
+          className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-2 rounded-md hover:bg-primary-dark transition-colors shadow-md"
         >
           Réinitialiser
         </button>

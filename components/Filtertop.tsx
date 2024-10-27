@@ -1,11 +1,4 @@
-import React from 'react';
-
-// Extend the Window interface to include resetProductFilters
-declare global {
-  interface Window {
-    resetProductFilters?: () => void;
-  }
-}
+import React, { useState } from 'react';
 
 interface FiltertopProps {
   sortBy: string;
@@ -14,6 +7,13 @@ interface FiltertopProps {
 }
 
 const Filtertop: React.FC<FiltertopProps> = ({ sortBy = '', handleSortChange, resetFilters }) => {
+  const [priceRange, setPriceRange] = useState<string>(''); // État pour la plage de prix
+
+  const handlePriceRangeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setPriceRange(event.target.value);
+    // Vous pouvez ici appeler une fonction pour gérer le filtrage par prix, si nécessaire
+  };
+
   return (
     <div className="flex mx-auto text-center items-center justify-center mt-8 -mb-6">
       <label htmlFor="sortBySelect" className="mr-2 font-bold text-gray-800 hidden sm:inline">
@@ -27,23 +27,11 @@ const Filtertop: React.FC<FiltertopProps> = ({ sortBy = '', handleSortChange, re
         className="border rounded px-2 py-1"
         aria-label="Trier les produits par"
       >
-        <option value="">Choisir une option</option>
+        <option value="">{sortBy ? "Désactiver" : "Choisir une option"}</option>
         <option value="price-asc">Prix croissant</option>
         <option value="price-desc">Prix décroissant</option>
       </select>
 
-      <button
-        onClick={() => {
-          resetFilters();
-          // Assuming you have a reference or a method to reset the filters in the ProductFilter component
-          if (typeof window !== 'undefined' && window.resetProductFilters) {
-        window.resetProductFilters();
-          }
-        }}
-        className="ml-4 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white px-4 py-2 rounded transition duration-300"
-      >
-        Réinitialiser les filtres
-      </button>
     </div>
   );
 };
