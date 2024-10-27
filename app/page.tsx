@@ -174,7 +174,6 @@ export default function Home() {
               <Suggestion />
               <WineSelector />
               <WineCategories />
-              <br />
               <div className="max-w-7xl mx-auto px-4 space-y-8">
                 <section className="bg-white rounded-lg shadow">
                   <ProductsCards selectedFilters={selectedFilters} onAddToCart={(product) => console.log('Add to cart:', product)} />
