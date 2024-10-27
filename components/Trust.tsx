@@ -13,7 +13,7 @@ const MemeGeorgettePremium = () => {
             </svg>
           </div>
           <h3 className="text-xl font-semibold text-primary mb-2">Livraison en 48H</h3>
-          <p className="text-gray-600">Par UPS</p>
+          <p className="text-gray-600">Nos vins sont livrable partout en France</p>
         </div>
 
         <div className="text-center">
@@ -23,7 +23,7 @@ const MemeGeorgettePremium = () => {
             </svg>
           </div>
           <h3 className="text-xl font-semibold text-primary mb-2">+ de 2 500 références</h3>
-          <p className="text-gray-600">au meilleur prix</p>
+          <p className="text-gray-600">Nous travaillons pour vous proposer le meilleur catalogue de vins bio !</p>
         </div>
 
         <div className="text-center">
@@ -33,7 +33,7 @@ const MemeGeorgettePremium = () => {
             </svg>
           </div>
           <h3 className="text-xl font-semibold text-primary mb-2">Dégustés et approuvés</h3>
-          <p className="text-gray-600">nos experts valident 100% des produits</p>
+          <p className="text-gray-600">Nos vins sont sélectionnés et controler par nos experts</p>
         </div>
 
         <div className="text-center">
@@ -43,7 +43,7 @@ const MemeGeorgettePremium = () => {
             </svg>
           </div>
           <h3 className="text-xl font-semibold text-primary mb-2">Emballages</h3>
-          <p className="text-gray-600">anti-casse</p>
+          <p className="text-gray-600">Chez Mémé, pas de casse ! Nous emballons vos bouteilles avec soin</p>
         </div>
       </div>
 
