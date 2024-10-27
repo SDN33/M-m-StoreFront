@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    WC_API_DOMAIN: process.env.WC_API_DOMAIN,
+  },
   images: {
     remotePatterns: [
       {
