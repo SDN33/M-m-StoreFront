@@ -238,9 +238,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           return transformedProduct;
         }));
 
-        // Mise à jour du cache
-        productCache[url] = transformedProducts;
-        cacheTimestamp = Date.now();
 
         return res.status(200).json(transformedProducts);
       } else {

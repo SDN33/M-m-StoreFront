@@ -181,6 +181,7 @@ export default function Home() {
               <PromoRappel />
               <Trust />
               <Newletter />
+              <br /><br />
               <Slogan />
               <br /><br />
             </div>

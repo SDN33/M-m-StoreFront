@@ -23,33 +23,56 @@ interface Product {
   style?: string;
   cepages?: string[];
   short_description?: string;
+  rating?: number;
 }
 
 interface ProductCardProps {
   product: Product;
   onAddToCart: (productId: number, quantity: number, variationId: number) => Promise<void>;
+
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const router = useRouter();
   const [quantity, setQuantity] = useState<number>(1);
   const [variationId] = useState<number>(product.id);
+  const [imageError, setImageError] = useState<boolean>(false);
 
   const handleRedirect = () => {
     router.push(`/product/${product.id}`);
   };
 
-  const formatRating = (rating?: number) => {
-    if (!rating || product.rating_count === 0) return "Pas encore noté";
-    return (rating * 4).toFixed(1) + "/20";
+  const formatRating = (rating?: number, ratingCount?: number) => {
+    if (typeof rating !== 'number' || typeof ratingCount !== 'number' || ratingCount === 0) return <span className='text-xs'>Pas encore noté</span>;
+    return <span>{(rating * 4).toFixed(1)}/20</span>;
   };
 
   const renderCertification = () => {
     if (product.certification?.toLowerCase() === 'biodynamie') {
-      return <Image src="/images/biodemeter.png" alt="Certification biodynamique" width={80} height={24} />;
+      return (
+        <div className="relative w-20 h-6">
+          <Image
+            src="/images/biodemeter.png"
+            alt="Certification biodynamique"
+            fill
+            style={{ objectFit: 'contain' }}
+            onError={() => setImageError(true)}
+          />
+        </div>
+      );
     }
     if (product.certification?.toLowerCase() === 'bio') {
-      return <Image src="/images/logobio1.webp" alt="Certification bio" width={24} height={24} />;
+      return (
+        <div className="relative w-6 h-6">
+          <Image
+            src="/images/logobio1.webp"
+            alt="Certification bio"
+            fill
+            style={{ objectFit: 'contain' }}
+            onError={() => setImageError(true)}
+          />
+        </div>
+      );
     }
     return null;
   };
@@ -89,18 +112,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
         <div className="relative">
           <div className="absolute top-0 left-0 z-10 bg-teal-500 rounded-full p-1.5 text-white">
-            <div className="text-xs">NOTE</div>
-            <div className="text-sm font-bold">{formatRating(product.average_rating)}</div>
+            <div className="text-sm font-bold">{formatRating(product.average_rating ?? 0, product.rating_count ?? 0)}</div>
           </div>
           <div className="relative w-full h-52 mb-2">
             <Image
               src={product.images[0]?.src || '/images/vinmeme.png'}
               alt={product.name}
               fill
-              objectFit="contain"
+              style={{ objectFit: 'contain' }}
               priority
               onClick={handleRedirect}
               className="hover:scale-105 transition-transform cursor-pointer"
+              onError={(e) => {
+                const imgElement = e.target as HTMLImageElement;
+                imgElement.src = '/images/vinmeme.png';
+              }}
             />
           </div>
         </div>
@@ -109,10 +135,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           <span className="text-xs text-primary font-semibold cursor-pointer hover:underline">
             {product.rating_count || 0} avis
           </span>
-          <div className="flex gap-2">{renderCertification()}</div>
+          {!imageError && <div className="flex gap-2">{renderCertification()}</div>}
         </div>
 
-        <p className="text-xs mb-2 text-gray-700 h-8 overflow-hidden">
+        <p className="text-xs mb-2 text-gray-700 h-8 overflow-hidden text-center">
           {(() => {
             const region = product.region__pays
               ? product.region__pays.toLowerCase() === 'bordeaux'
@@ -122,7 +148,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             const millesime = product.millesime ? ` millésimé en ${product.millesime}` : '';
             const chateau = product.nom_chateau ? ` par ${product.nom_chateau}` : '';
             const appelation = product.appelation ? product.appelation.charAt(0).toUpperCase() + product.appelation.slice(1).toLowerCase() : '';
-            return `Un ${product.categories[0]?.name || 'vin'} ${appelation} ${region}${millesime}${chateau}`;
+            return `Un ${product.categories[0]?.name || 'vin'} ${appelation.toUpperCase()} ${region}${millesime}${chateau}`;
           })()}
         </p>
 
@@ -143,7 +169,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center gap-2 mx-auto">
           <Heart className="w-5 h-5 text-gray-400 cursor-pointer hover:text-red-500" />
           <select
             value={quantity}

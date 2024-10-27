@@ -143,7 +143,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                       <span className="ml-2 text-sm text-gray-700 font-medium">
                         {option.label === 'Bio' ? (
                           <span className="flex items-center">
-                            {option.label} <Image src="/images/logobio.webp" alt="Bio" width={16} height={16} className="ml-1" />
+                            {option.label} <Image src="/images/logobio1.webp" alt="Bio" width={16} height={16} className="ml-1" />
                           </span>
                         ) : option.label === 'Biodynamie' ? (
                           <span className="flex items-center">
