@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -23,8 +23,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // Send a success response
         res.status(200).json({ message: "Password reset successful." });
     } catch (error) {
-        const err = error as any;
-        const message = err.response?.data?.message || "Password reset failed.";
+        const err = error as AxiosError;
+        const message = (err.response?.data as { message?: string })?.message || "Password reset failed.";
         res.status(500).json({ message });
     }
 }
