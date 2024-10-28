@@ -27,6 +27,7 @@ export default function LoginPage() {
             router.push("/profile");
         }
     } catch (err) {
+        console.error("Login error:", err);
         setError("Invalid credentials. Please try again.");
     }
   };
