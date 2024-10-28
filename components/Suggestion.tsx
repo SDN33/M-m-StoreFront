@@ -11,8 +11,6 @@ interface CategoryBubbleProps {
   color?: ColorStyle;
 }
 
-
-
 const colorStyles: Record<ColorStyle, { active: string; inactive: string }> = {
   purple: {
     active: 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white',
@@ -39,20 +37,20 @@ const CategoryBubble = ({ icon: Icon, label, active = false, color = 'orange' }:
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`flex items-center gap-3 px-6 py-3 rounded-full cursor-pointer
+      className={`flex items-center gap-2 px-4 py-2 rounded-full cursor-pointer
         transition-all duration-300 transform hover:scale-105 active:scale-95
         ${active ? colorStyles[color].active : colorStyles[color].inactive}
         shadow-lg hover:shadow-xl
         border border-white`}
     >
       <div className={`transition-transform duration-300 ${isHovered ? 'rotate-12' : ''}`}>
-        <Icon size={20} className="w-5 h-5" />
+        <Icon size={18} className="w-4 h-4" />
       </div>
-      <span className="text-sm font-bold tracking-wide">{label}</span>
+      <span className="text-xs font-bold tracking-wide">{label}</span>
       {active && (
-        <span className="flex h-2 w-2 relative">
+        <span className="flex h-1.5 w-1.5 relative">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
         </span>
       )}
     </div>
@@ -62,12 +60,11 @@ const CategoryBubble = ({ icon: Icon, label, active = false, color = 'orange' }:
 const Suggestion = () => {
   return (
     <div className="relative max-w-5xl text-center mx-auto py-8 bg-transparent">
-      <div className="flex flex-wrap justify-center gap-4 ">
+      <div className="flex flex-wrap justify-center gap-4">
         <CategoryBubble icon={Wine} label="NOËL" color="purple" active={true} />
         <CategoryBubble icon={Gift} label="PROMO" active={true} color="orange" />
         <CategoryBubble icon={Grape} label="PRESTIGE" active={true} color="yellow" />
         <CategoryBubble icon={BadgeEuro} label="PETIT BUDGET" active={true} color="red" />
-
       </div>
 
       {/* Background decoration */}

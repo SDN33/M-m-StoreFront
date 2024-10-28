@@ -79,7 +79,7 @@ const MemeGeorgettePremium = () => {
           <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-white">
             <h2 className="text-sm md:text-base font-bold mb-4">VOUS ÊTES UN PRODUCTEUR ?</h2>
             <a className="text-base text-center bg-white text-gray-800 px-8 py-2 rounded hover:bg-gray-100 transition-colors" href="https://portailpro-memegeorgette.com">
-              DÉCOUVRIR NOTRE PORTAIL PRO
+              DÉCOUVRIR NOTRE <strong className='text-primary'>PORTAIL PRO</strong>
             </a>
           </div>
         </div>
