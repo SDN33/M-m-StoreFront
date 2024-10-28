@@ -39,7 +39,7 @@ interface AxiosErrorResponse {
 
 // Cache pour les produits
 const productCache: { [key: string]: Product[] } = {};
-let cacheTimestamp: number | null = null;
+const cacheTimestamp: number | null = null;
 
 const transformMetaData = (metaData: { key: string; value: string | string[] }[]): { [key: string]: unknown } => {
   const productData: { [key: string]: unknown } = {};
