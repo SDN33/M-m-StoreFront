@@ -17,18 +17,17 @@ export default function LoginPage() {
     setError("");
 
     try {
-      const response = await axios.post(`${process.env.WC_API_DOMAIN}/wp-json/les-vins-auth/v1/token`, {
-        username,
-        password,
-      });
-      // localStorage.setItem("jwtToken", response.data.token);
-      if(response.data.token){
-        login(response.data.token);
-      }
-      // localStorage.setItem("userData", JSON.stringify(response.data));
-      router.push("/profile");
+        // Call the Next.js API route instead of the WordPress API directly
+        const response = await axios.post('/api/login', { username, password });
+
+        if (response.data.token) {
+            // Save token to local storage
+            localStorage.setItem("jwtToken", response.data.token);
+            login(response.data.token); // Custom login function to update auth state
+            router.push("/profile");
+        }
     } catch (err) {
-      setError("Invalid credentials. Please try again.");
+        setError("Invalid credentials. Please try again.");
     }
   };
 

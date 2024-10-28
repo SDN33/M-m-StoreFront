@@ -15,13 +15,12 @@ export default function ResetPasswordPage() {
     setMessage("");
 
     try {
-      await axios.post(`${process.env.WC_API_DOMAIN}/wp-json/les-vins-auth/v1/reset-password`, {
-        token: resetToken,
-        password,
-      });
-      setMessage("Password reset successful.");
+        // Call the Next.js API route instead of the WordPress API directly
+        await axios.post('/api/reset-password', { token: resetToken, password });
+
+        setMessage("Password reset successful.");
     } catch (err) {
-      setMessage("Password reset failed.");
+        setMessage("Password reset failed. Please try again.");
     }
   };
 

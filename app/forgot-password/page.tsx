@@ -8,17 +8,17 @@ export default function ForgotPasswordPage() {
   const [message, setMessage] = useState("");
 
   const handleForgotPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setMessage("");
+      e.preventDefault();
+      setMessage("");
 
-    try {
-      await axios.post(`${process.env.WC_API_DOMAIN}/wp-json/les-vins-auth/v1/forgot-password`, {
-        email,
-      });
-      setMessage("Password reset link sent. Please check your email.");
-    } catch (err) {
-      setMessage("Failed to send reset link. Try again.");
-    }
+      try {
+          // Call the Next.js API route instead of the WordPress API directly
+          await axios.post('/api/forgot-password', { email });
+          
+          setMessage("Password reset link sent. Please check your email.");
+      } catch (err) {
+          setMessage("Failed to send reset link. Try again.");
+      }
   };
 
   return (

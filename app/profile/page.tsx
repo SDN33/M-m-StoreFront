@@ -13,41 +13,38 @@ export default function Profile() {
   useEffect(() => {
     const token = localStorage.getItem('jwtToken');
     if (!token) {
-      router.push('/login');
-      return;
+        router.push('/login');
+        return;
     }
 
     async function fetchUserData() {
-      try {
-        const response = await fetch(`${process.env.WC_API_DOMAIN}/wp-json/les-vins-auth/v1/profile`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        try {
+            // Fetch profile data via the Next.js API route
+            const response = await fetch('/api/profile', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
-        if (response.ok) {
-          const data = await response.json();
-          setUser(data);
-        } else {
-          console.log("Response Status:", response.status);
-          const errorText = await response.text();
-          console.error("Error response:", errorText);
-          router.push('/login');
+            if (response.ok) {
+                const data = await response.json();
+                setUser(data);
+            } else {
+                const errorText = await response.text();
+                router.push('/login');
+            }
+        } catch (error) {
+            router.push('/login');
+        } finally {
+            setLoading(false);
         }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-        router.push('/login');
-      } finally {
-        setLoading(false);
-      }
     }
 
     fetchUserData();
   }, [router]);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  if (loading) return <div>Loading...</div>;
+  if (!user) return null;
 
   return (
     <main style={{ maxWidth: '600px', margin: '14rem auto' }}>

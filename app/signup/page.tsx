@@ -12,19 +12,17 @@ export default function SignupPage() {
   const router = useRouter();
 
   const handleSignup = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
+      e.preventDefault();
+      setError("");
 
-    try {
-      await axios.post(`${process.env.WC_API_DOMAIN}/wp-json/les-vins-auth/v1/register`, {
-        username,
-        email,
-        password,
-      });
-      router.push("/login");
-    } catch (err) {
-      setError("Failed to register. Please try again.");
-    }
+      try {
+          // Call the Next.js API route instead of the WordPress API directly
+          await axios.post('/api/register', { username, email, password });
+
+          router.push("/login"); // Redirect to the login page after successful signup
+      } catch (err) {
+          setError("Failed to register. Please try again.");
+      }
   };
 
   return (
