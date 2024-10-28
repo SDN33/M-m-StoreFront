@@ -19,13 +19,13 @@ interface ProductFilterProps {
 
 const getFilterTitle = (filterType: string) => {
   const titles: { [key: string]: JSX.Element } = {
-    color: <>COULEUR <br /><Wine className="inline-block ml-1 text-teal-500" /></>,
-    region: <>RÉGIONS <br /><Locate className="inline-block ml-1 text-teal-500" /></>,
-    vintage: <>MILLÉSIME <br /><Calendar className="inline-block ml-1 text-teal-500" /></>,
-    certification: <>CERTIFICATION <br /><Medal className="inline-block ml-1 text-teal-500" /></>,
-    style: <>STYLE <br /><Grape className="inline-block ml-1 text-teal-500" /></>,
-    volume: <>VOLUME <br /><Ruler className="inline-block ml-1 text-teal-500" /></>,
-    accord_mets: <>ACCORD METS <br /><Utensils className="inline-block ml-1 text-teal-500" /></>,
+    color: <>COULEUR <br /><Wine className="inline-block ml-1 text-teal-800" /></>,
+    region: <>RÉGIONS <br /><Locate className="inline-block ml-1 text-teal-800" /></>,
+    vintage: <>MILLÉSIME <br /><Calendar className="inline-block ml-1 text-teal-800" /></>,
+    certification: <>CERTIFICATION <br /><Medal className="inline-block ml-1 text-teal-800" /></>,
+    style: <>STYLE <br /><Grape className="inline-block ml-1 text-teal-800" /></>,
+    volume: <>VOLUME <br /><Ruler className="inline-block ml-1 text-teal-800" /></>,
+    accord_mets: <>ACCORD METS <br /><Utensils className="inline-block ml-1 text-teal-800" /></>,
   };
   return titles[filterType] || <>{filterType}</>;
 };

@@ -1,32 +1,36 @@
 'use client';
-
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const AgeVerificationModal = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpening, setIsOpening] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    // Récupérer l'heure de validation dans localStorage
     const ageVerifiedTime = localStorage.getItem('ageVerifiedTime');
 
     if (ageVerifiedTime) {
       const currentTime = new Date().getTime();
       const verificationTime = parseInt(ageVerifiedTime);
 
-      // Vérifier si moins de 6 heures se sont écoulées
       if (currentTime - verificationTime < 6 * 60 * 60 * 1000) {
-        setIsOpen(false); // Moins de 6 heures, ne pas afficher le modal
+        setShouldRender(false);
       } else {
-        setIsOpen(true); // Plus de 6 heures, réafficher le modal
-        localStorage.removeItem('ageVerifiedTime'); // Supprimer la validation expirée
+        setShouldRender(true);
+        localStorage.removeItem('ageVerifiedTime');
       }
     } else {
-      setIsOpen(true); // Pas de validation, afficher le modal
+      setShouldRender(true);
     }
   }, []);
 
   useEffect(() => {
-    // Empêcher le défilement quand le modal est ouvert
+    if (shouldRender) {
+      setIsOpen(true);
+    }
+  }, [shouldRender]);
+
+  useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : 'unset';
     return () => {
       document.body.style.overflow = 'unset';
@@ -34,25 +38,68 @@ const AgeVerificationModal = () => {
   }, [isOpen]);
 
   const handleAccept = () => {
-    setIsOpen(false);
-    // Stocker l'heure actuelle en tant que "timestamp"
+    setIsOpening(true);
     localStorage.setItem('ageVerifiedTime', new Date().getTime().toString());
+    setTimeout(() => {
+      setIsOpen(false);
+      setIsOpening(false);
+      setShouldRender(false);
+    }, 2000); // Durée totale de l'animation
   };
 
   const handleReject = () => {
     window.location.href = 'https://www.google.com';
   };
 
-  if (!isOpen) return null;
+  if (!shouldRender) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl text-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden">
+      {/* Fond noir avec flou qui s'estompe */}
+      <div
+        className={`absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-1000
+          ${isOpening ? 'opacity-0' : 'opacity-100'}`}
+      />
+
+      {/* Conteneur principal avec les portes */}
+      <div className="absolute inset-0">
+        {/* Porte gauche */}
+        <div
+          className={`absolute top-0 bottom-0 w-1/2 left-0 bg-primary transition-transform duration-[1.5s] ease-in-out transform
+            ${isOpening ? '-translate-x-full' : 'translate-x-0'}`}
+          style={{
+            background: 'linear-gradient(to right, #1a1a1a, #333)'
+          }}
+        >
+          {/* Bordure décorative droite */}
+          <div className="absolute right-0 top-0 bottom-0 w-2 bg-gray-600"></div>
+        </div>
+
+        {/* Porte droite */}
+        <div
+          className={`absolute top-0 bottom-0 w-1/2 right-0 bg-primary transition-transform duration-[1.5s] ease-in-out transform
+            ${isOpening ? 'translate-x-full' : 'translate-x-0'}`}
+          style={{
+            background: 'linear-gradient(to left, #1a1a1a, #333)'
+          }}
+        >
+          {/* Bordure décorative gauche */}
+          <div className="absolute left-0 top-0 bottom-0 w-2 bg-gray-600"></div>
+        </div>
+      </div>
+
+      {/* Contenu du modal */}
+      <div
+        className={`relative bg-white rounded-lg max-w-md w-full p-6 shadow-xl text-center m-4
+          transition-all duration-500 ${isOpening ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}
+      >
         <h2 className="text-2xl font-bold text-gray-900 mb-4">
           Vérification de l&apos;âge
         </h2>
         <p className="text-gray-600 mb-6 font-serif">
-          Ce site est réservé aux personnes majeures.<br />En entrant sur ce site, vous certifiez<br /><span className='font-serif font-bold text-primary'>avoir 18 ans ou plus</span>.
+          Ce site est réservé aux personnes majeures.<br />
+          En entrant sur ce site, vous certifiez<br />
+          <span className="font-serif font-bold text-primary">avoir 18 ans ou plus</span>.
         </p>
         <div className="space-y-3">
           <button
@@ -69,7 +116,8 @@ const AgeVerificationModal = () => {
           </button>
         </div>
         <p className="mt-4 text-sm text-gray-500 font-serif">
-          L&apos;abus d&apos;alcool est dangereux pour la santé.<br />À consommer avec modération.
+          L&apos;abus d&apos;alcool est dangereux pour la santé.<br />
+          À consommer avec modération.
         </p>
       </div>
     </div>

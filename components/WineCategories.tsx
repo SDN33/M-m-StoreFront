@@ -105,12 +105,12 @@ const VendorSlider = () => {
     <div className="relative w-full max-w-6xl mx-auto px-4 overflow-hidden">
       <h2 className="flex items-center justify-center text-xl font-bold mb-6 text-center">
         <div className="border-t border-primary w-1/4" />
-        <span className="mx-4 flex items-center gap-2">Les Domaines & Vignerons</span>
+        <span className="mx-4 flex items-center gap-2 text-primary">Les Domaines & Vignerons</span>
         <div className="border-t border-primary w-1/4" />
       </h2>
 
       <p className='text-center text-sm font-extrabold -mt-4 mb-8' >
-          Chaque domaine est unique, et chaque vigneron est passionné. Nous avons sélectionné pour vous les meilleurs vins de France.
+      Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature..<br /> Nous avons sélectionné pour vous les meilleurs vins de France.
         </p>
 
 
