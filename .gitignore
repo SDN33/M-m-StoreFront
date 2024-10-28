@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+yarn.lock
+
 
 # testing
 /coverage
@@ -37,3 +39,5 @@ next-env.d.ts
 
 # .gitignore
 .env.local
+.env
+
