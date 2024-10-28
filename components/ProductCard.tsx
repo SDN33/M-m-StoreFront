@@ -111,7 +111,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
 
         <div className="relative">
-          <div className="absolute top-0 left-0 z-10 bg-teal-500 rounded-full p-1.5 text-white">
+          <div className="absolute top-0 left-0 z-10 bg-gradient-to-r from-teal-800 to-teal-950 rounded-full p-1.5 text-white">
             <div className="text-sm font-bold">{formatRating(product.average_rating ?? 0, product.rating_count ?? 0)}</div>
           </div>
           <div className="relative w-full h-52 mb-2">

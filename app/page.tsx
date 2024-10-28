@@ -8,12 +8,13 @@ import Newletter from '@/components/Newletter';
 import ProductsIntro from '@/components/ProductIntro';
 import WineSelector from '@/components/WineSelector';
 import Slider from '@/components/Slider';
-import WineCategories from '@/components/WineCategories';
 import Suggestion from '@/components/Suggestion';
 import MobileHome from '@/components/MobileHome';
 import Trust from '@/components/Trust';
 import PromoRappel from '@/components/PromoRappel';
 import HeroBanner from '@/components/HeroBanner';
+import CatSlider from '@/components/CatSlider';
+import WineCategories from '@/components/WineCategories';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -170,7 +171,8 @@ export default function Home() {
               <Slider />
               <Suggestion />
               <WineSelector />
-              <WineCategories />
+              <CatSlider />
+              <br /><br />
               <div className="max-w-7xl mx-auto px-4 space-y-8">
                 <section className="bg-white rounded-lg shadow">
                   <ProductsCards selectedFilters={selectedFilters} onAddToCart={(product) => console.log('Add to cart:', product)} />
@@ -179,6 +181,8 @@ export default function Home() {
               <br /><br />
               <HeroBanner />
               <PromoRappel />
+              <br /><br />
+              <WineCategories />
               <Trust />
               <Newletter />
               <br /><br />

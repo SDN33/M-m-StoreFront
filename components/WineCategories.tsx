@@ -109,6 +109,11 @@ const VendorSlider = () => {
         <div className="border-t border-primary w-1/4" />
       </h2>
 
+      <p className='text-center text-sm font-extrabold -mt-4 mb-8' >
+          Chaque domaine est unique, et chaque vigneron est passionné. Nous avons sélectionné pour vous les meilleurs vins de France.
+        </p>
+
+
       <div className="relative perspective-1000">
         <div className="relative flex h-[380px] overflow-x-scroll scrollbar-hidden justify-center">
           {vendors.map((vendor, index) => {
