@@ -97,7 +97,7 @@ const VendorList: React.FC = () => {
   const getCertificationLogo = (certification?: string) => {
     switch (certification?.toLowerCase()) {
       case 'bio':
-        return { src: "/images/logobio.webp", width: 15, height: 15 };
+        return { src: "/images/logobio1.webp", width: 15, height: 15 };
       case 'demeter':
       case 'biodynamie':
         return { src: "/images/biodemeter.png", width: 50, height: 50 };

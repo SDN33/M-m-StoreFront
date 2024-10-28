@@ -19,13 +19,13 @@ interface ProductFilterProps {
 
 const getFilterTitle = (filterType: string) => {
   const titles: { [key: string]: JSX.Element } = {
-    color: <>COULEUR <br /><Wine className="inline-block ml-1 text-teal-500" /></>,
-    region: <>RÉGIONS <br /><Locate className="inline-block ml-1 text-teal-500" /></>,
-    vintage: <>MILLÉSIME <br /><Calendar className="inline-block ml-1 text-teal-500" /></>,
-    certification: <>CERTIFICATION <br /><Medal className="inline-block ml-1 text-teal-500" /></>,
-    style: <>STYLE <br /><Grape className="inline-block ml-1 text-teal-500" /></>,
-    volume: <>VOLUME <br /><Ruler className="inline-block ml-1 text-teal-500" /></>,
-    accord_mets: <>ACCORD METS <br /><Utensils className="inline-block ml-1 text-teal-500" /></>,
+    color: <>COULEUR <br /><Wine className="inline-block ml-1 text-teal-800" /></>,
+    region: <>RÉGIONS <br /><Locate className="inline-block ml-1 text-teal-800" /></>,
+    vintage: <>MILLÉSIME <br /><Calendar className="inline-block ml-1 text-teal-800" /></>,
+    certification: <>CERTIFICATION <br /><Medal className="inline-block ml-1 text-teal-800" /></>,
+    style: <>STYLE <br /><Grape className="inline-block ml-1 text-teal-800" /></>,
+    volume: <>VOLUME <br /><Ruler className="inline-block ml-1 text-teal-800" /></>,
+    accord_mets: <>ACCORD METS <br /><Utensils className="inline-block ml-1 text-teal-800" /></>,
   };
   return titles[filterType] || <>{filterType}</>;
 };
@@ -110,7 +110,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
   return (
     <div className="hidden sm:block bg-transparent h-full w-56 ml-10 overflow-y-auto mt-56 bg-gray-200 bg-opacity-30 shadow-lg rounded-lg">
-            <div className="p-4">
+      <div className="p-4">
         <button
           onClick={resetFilters}
           className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-2 rounded-md hover:bg-primary-dark transition-colors shadow-md"
@@ -140,10 +140,10 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                         onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
                         className="form-checkbox h-4 w-4 text-teal-500 focus:ring-teal-500 rounded border-gray-300 transition duration-200 ease-in-out"
                       />
-                      <span className="ml-2 text-sm text-gray-700 font-medium">
+                      <span className="ml-2 text-sm text-gray-700 font-semibold">
                         {option.label === 'Bio' ? (
                           <span className="flex items-center">
-                            {option.label} <Image src="/images/logobio.webp" alt="Bio" width={16} height={16} className="ml-1" />
+                            {option.label} <Image src="/images/logobio1.webp" alt="Bio" width={16} height={16} className="ml-1" />
                           </span>
                         ) : option.label === 'Biodynamie' ? (
                           <span className="flex items-center">

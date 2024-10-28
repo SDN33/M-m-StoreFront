@@ -1,107 +1,65 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Image from 'next/image';
-import { FaMapMarkerAlt, FaWineBottle, FaLeaf, FaSeedling } from 'react-icons/fa';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { ChevronLeft, ChevronRight, MapPin, Grape } from 'lucide-react';
 
-interface Product {
-  id: number;
-  name: string;
-  price: string;
-  certification?: string;
-  region__pays?: string;
-  store_name?: string;
-  vendor_image?: string;
-  categories?: { name: string }[];
-}
+const VendorSlider = () => {
+  interface Vendor {
+    id: number;
+    store_name: string;
+    products: {
+      id: number;
+      name: string;
+      store_name: string;
+      vendor_id: number;
+      vendor_image: string;
+      region__pays: string;
+      images: { src: string }[];
+      price: number;
+      millesime: string;
+      degre: number;
+      certification?: string;
+      cepages: string[];
+    }[];
+    vendor_image: string;
+    region__pays: string;
+    certifications: {
+      bio: number;
+      biodynamie: number;
+      conversion: number;
+    };
+    images?: string;
+  }
 
-interface Vendor {
-  store_name: string;
-  products: Product[];
-  vendor_image?: string;
-  region__pays?: string;
-  certifications: {
-    bio: number;
-    biodynamie: number;
-    conversion: number;
-  };
-  categories: string[];
-}
-
-const VendorList: React.FC = () => {
   const [vendors, setVendors] = useState<Vendor[]>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
-
-  const getVendorBackground = (vendor: Vendor) => {
-    if (vendor.certifications.biodynamie > 0) {
-      return 'bg-gradient-to-br from-purple-700 to-purple-900';
-    }
-    if (vendor.certifications.bio > 0) {
-      return 'bg-gradient-to-r from-teal-500 to-teal-700';
-    }
-    if (vendor.certifications.conversion > 0) {
-      return 'bg-gradient-to-br from-amber-600 to-amber-800';
-    }
-    return 'bg-gradient-to-br from-gray-700 to-gray-900';
-  };
-
-  const getCertificationIcon = (vendor: Vendor) => {
-    if (vendor.certifications.biodynamie > 0) {
-      return <FaSeedling className="w-4 h-4" title="Biodynamie" />;
-    }
-    if (vendor.certifications.bio > 0) {
-      return <FaLeaf className="w-4 h-4" title="Bio" />;
-    }
-    if (vendor.certifications.conversion > 0) {
-      return <FaSeedling className="w-4 h-4 opacity-50" title="En conversion" />;
-    }
-    return null;
-  };
-
-  const getDominantCategory = (vendor: Vendor) => {
-    const categoryCount: { [key: string]: number } = {};
-
-    vendor.products.forEach(product => {
-      product.categories?.forEach(category => {
-        categoryCount[category.name] = (categoryCount[category.name] || 0) + 1;
-      });
-    });
-
-    const dominantCategory = Object.entries(categoryCount).reduce((a, b) => (b[1] > a[1] ? b : a), ["", 0]);
-
-    return dominantCategory[0] || "aucune catégorie"; // Renvoie la catégorie dominante ou une valeur par défaut
-  };
+  const [hoveredProduct, setHoveredProduct] = useState<Vendor['products'][0] | null>(null);
 
   useEffect(() => {
-    const fetchVendors = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get('/api/products');
-        const products: Product[] = response.data;
+        const response = await fetch('/api/products');
+        const products = await response.json();
 
         const vendorMap: { [key: string]: Vendor } = {};
-
-        products.forEach((product) => {
+        products.forEach((product: Vendor['products'][0]) => {
           const storeName = product.store_name || '@MéméGeorgette';
-
           if (!vendorMap[storeName]) {
             vendorMap[storeName] = {
+              id: product.vendor_id,
               store_name: storeName,
               products: [],
               vendor_image: product.vendor_image,
               region__pays: product.region__pays,
+              images: product.images[0]?.src,
               certifications: {
                 bio: 0,
                 biodynamie: 0,
-                conversion: 0
+                conversion: 0,
               },
-              categories: []
             };
           }
-
           vendorMap[storeName].products.push(product);
-
           if (product.certification) {
             const certLower = product.certification.toLowerCase();
             if (certLower.includes('biodynamie')) {
@@ -112,94 +70,167 @@ const VendorList: React.FC = () => {
               vendorMap[storeName].certifications.conversion++;
             }
           }
-
-          if (product.categories) {
-            vendorMap[storeName].categories.push(...product.categories.map(cat => cat.name));
-          }
         });
 
         setVendors(Object.values(vendorMap));
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Erreur lors de la récupération des vendeurs.');
+      } catch (error) {
+        console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchVendors();
+    fetchData();
   }, []);
 
-  // Gérer l'état de chargement et d'erreur
+  const getCardColor = (certifications: { bio: number; biodynamie: number; conversion: number }) => {
+    if (certifications.biodynamie > 0) return 'from-primary to-red-900';
+    if (certifications.bio > 0) return 'from-teal-800 to-teal-950';
+    if (certifications.conversion > 0) return 'from-amber-700 to-amber-900';
+    return 'from-gray-800 to-gray-950';
+  };
+
+  const nextSlide = () => setActiveIndex((prev) => (prev + 1) % vendors.length);
+  const prevSlide = () => setActiveIndex((prev) => (prev - 1 + vendors.length) % vendors.length);
+
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[200px]">
-        <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-primary rounded-full animate-bounce" />
-          <p className="font-semibold">Chargement des vignerons...</p>
-        </div>
+      <div className="flex items-center justify-center h-96">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
       </div>
     );
   }
 
-  if (error) {
-    return <div className="text-red-600 p-4 text-center">{error}</div>;
-  }
-
   return (
-    <div className="max-w-7xl mx-auto px-4 mb-8">
+    <div className="relative w-full max-w-6xl mx-auto px-4 overflow-hidden">
       <h2 className="flex items-center justify-center text-xl font-bold mb-6 text-center">
-        <div className="border-t border-black w-1/4" />
-        <span className="mx-4">Les Domaines & Vignerons</span>
-        <div className="border-t border-black w-1/4" />
+        <div className="border-t border-primary w-1/4" />
+        <span className="mx-4 flex items-center gap-2 text-primary">Les Domaines & Vignerons</span>
+        <div className="border-t border-primary w-1/4" />
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {vendors.map((vendor) => (
-          <div
-            key={vendor.store_name}
-            className="relative overflow-hidden rounded-xl group transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
-            onClick={() => router.push(`/vendor/${vendor.store_name}`)}
-          >
-            <div className={`relative h-80 p-4 md:p-6 ${getVendorBackground(vendor)}`}>
-              <div className="absolute top-4 right-4 text-white">
-                {getCertificationIcon(vendor)}
-              </div>
-              <div className="absolute top-4 left-4 text-white text-2xl">
-                <FaWineBottle />
-              </div>
-              <div className="mt-4 mb-4 flex flex-col items-center">
-                <div className="w-24 h-24 mb-4 relative rounded-full overflow-hidden border-4 border-white shadow-lg">
-                  <Image
-                    src={vendor.vendor_image || '/images/meme-pas-contente.png'}
-                    alt={vendor.store_name}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-full bg-white"
-                  />
+
+      <p className='text-center text-sm font-extrabold -mt-4 mb-8' >
+      Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature..<br /> Nous avons sélectionné pour vous les meilleurs vins de France.
+        </p>
+
+
+      <div className="relative perspective-1000">
+        <div className="relative flex h-[380px] overflow-x-scroll scrollbar-hidden justify-center">
+          {vendors.map((vendor, index) => {
+            const isActive = index === activeIndex;
+            const offset = index - activeIndex;
+            const translateX = offset * 10;
+            const translateZ = isActive ? 0 : -100 - Math.abs(offset) * 50;
+            const rotateY = offset * 15;
+            const opacity = Math.max(1 - Math.abs(offset) * 0.3, 0);
+            const scale = isActive ? 1 : 0.85;
+            const zIndex = vendors.length - Math.abs(offset);
+
+            return (
+              <div
+                key={vendor.store_name}
+                className="relative w-80 h-[320px] flex cursor-pointer transform-gpu"
+                style={{
+                  transform: `translateX(${translateX}%) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
+                  opacity,
+                  zIndex,
+                  transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                  marginLeft: index === 0 ? '0' : '-2rem',
+                }}
+                onClick={() => setActiveIndex(index)}
+              >
+                <div className={`flex w-full h-full rounded-2xl shadow-xl overflow-hidden
+                                bg-gradient-to-br ${getCardColor(vendor.certifications)}
+                                hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 mx-auto
+                                border border-white/10}`}>
+                  <div className="p-6 h-full w-full flex flex-row justify-between">
+                    {/* Left side - Photo, Name, Region, Wine Count */}
+                    <div className="flex flex-col space-y-4">
+                      <div className="w-24 h-24 bg-gray-200 rounded-full overflow-hidden border-2 border-white/20 shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img
+                          src={vendor.vendor_image || '/images/meme-pas-contente.png'}
+                          alt={vendor.store_name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+
+                      <div className="flex flex-col space-y-3">
+                        <h3 className="text-sm font-bold text-white">{vendor.store_name}</h3>
+
+                        {vendor.region__pays && (
+                          <div className="flex items-center text-white/90 text-sm gap-1.5">
+                            <MapPin className="w-4 h-4" />
+                            <span>{vendor.region__pays.toUpperCase()}</span>
+                          </div>
+                        )}
+
+                        <div className="flex items-center text-white text-sm gap-1.5">
+                          <Grape className="w-4 h-4" />
+                          {vendor.certifications.bio > vendor.certifications.biodynamie && vendor.certifications.bio > vendor.certifications.conversion
+                            ? 'Bio'
+                            : vendor.certifications.biodynamie > vendor.certifications.conversion
+                            ? 'Biodynamie'
+                            : 'Conversion'}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right side - Photos */}
+                    <div className="flex flex-col items-center space-y-3">
+                      {vendor.products.slice(0, 3).map((product, idx) => (
+                        <div key={idx} className="w-16 h-16 bg-gradient-to-r from-white/5 to-white/10 rounded-full overflow-hidden border-2 border-white/20 shadow-md transform hover:scale-110 transition-all duration-300 hover:bg-accent"
+                             onMouseEnter={() => setHoveredProduct(product)}
+                             onMouseLeave={() => setHoveredProduct(null)}
+                        >
+                          <img
+                            src={Array.isArray(product.images) && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
+                            alt={product.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  {/* Bouton "Voir plus" placé en bas à droite */}
+                  <Link href={`/vendor/${vendor.id}`} passHref>
+                    <button className="absolute bottom-4 right-4 px-4 py-1.5 bg-white/10 text-white rounded-full text-sm font-medium
+                                     shadow-md hover:bg-white/20 transition-all duration-300 border border-white/20">
+                      Découvrir
+                    </button>
+                  </Link>
                 </div>
-                <h3 className="text-lg md:text-2xl font-bold mb-2 text-white text-center">
-                  {vendor.store_name}
-                </h3>
-                {vendor.region__pays && (
-                  <p className="text-xs md:text-sm text-white flex items-center justify-center mb-2">
-                    <FaMapMarkerAlt className="mr-1" />
-                    {vendor.region__pays.charAt(0).toUpperCase() + vendor.region__pays.slice(1)}
-                  </p>
-                )}
-                <p className="text-xs md:text-sm text-white/90 text-center mb-2">
-                  {vendor.store_name}, vigneron de {vendor.region__pays ? vendor.region__pays.charAt(0).toUpperCase() + vendor.region__pays.slice(1) : 'région inconnue'}, propose majoritairement des vins {getDominantCategory(vendor)}.
-                </p>
-                <div className="text-center mt-auto">
-                  <span className="inline-block bg-white/90 text-gray-800 px-3 py-1 rounded-full text-xs md:text-sm font-medium shadow-lg">
-                    {vendor.products.length} vins disponibles
-                  </span>
-                </div>
               </div>
-            </div>
+            );
+          })}
+        </div>
+
+        {/* Navigation buttons */}
+        <button
+          className="absolute top-1/2 left-3 transform -translate-y-1/2 hidden rounded-full p-2 shadow-lg hover:bg-gray-300 transition"
+          onClick={prevSlide}
+        >
+          <ChevronLeft className="w-5 h-5 text-gray-700" />
+        </button>
+        <button
+          className="absolute top-1/2 right-3 transform -translate-y-1/2 hidden text-white bg-primary rounded-full p-2 shadow-lg hover:bg-gray-300 transition"
+          onClick={nextSlide}
+        >
+          <ChevronRight className="w-5 h-5 text-gray-700" />
+        </button>
+
+        {/* Affichage de la description pour le produit survolé */}
+        {hoveredProduct && (
+          <div className="absolute text-white bottom-10 left-1/2 transform -translate-x-1/2 bg-gray-800 opacity-90 p-4 rounded shadow-lg z-20">
+            <h4 className="font-bold text-lg">{hoveredProduct.name}</h4>
+            <p className="text-sm">Prix : {hoveredProduct.price}€</p>
+            <p className="text-sm">Millésime : {hoveredProduct.millesime}</p>
+            <p className="text-sm">Cépages : {hoveredProduct.cepages.join(', ')}</p>
+            <p className="text-sm">Degré : {hoveredProduct.degre}°</p>
           </div>
-        ))}
+        )}
       </div>
     </div>
   );
 };
 
-export default VendorList;
+export default VendorSlider;

@@ -111,7 +111,7 @@ body {
 .scroll-container {
   position: fixed; /* Position fixe */
   bottom: 50px; /* Bas de la page */
-  right: 1px; /* Droite de la page */
+  right: 10px; /* Droite de la page */
   z-index: 1000; /* Z-index */
   overflow: hidden;
 }
@@ -165,7 +165,7 @@ ul::-webkit-scrollbar {
   margin-bottom: 3rem;
 }
 
-input, button {
+.sx-container input, .sx-container button {
   width: 100%;
   padding: 0.75rem;
   margin-top: 1rem;
@@ -173,7 +173,7 @@ input, button {
   border: 1px solid #ddd;
 }
 
-button {
+.sx-container button {
   background-color: #0070f3;
   color: #fff;
   font-weight: bold;
@@ -181,10 +181,10 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
+.sx-container button:hover {
   background-color: #005bb5;
 }
-h2 {
+.sx-container h2 {
   text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
@@ -204,3 +204,11 @@ h2 {
 
 
 
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}

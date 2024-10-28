@@ -8,17 +8,7 @@ const Footer = () => {
   return (
     <footer className="bg-white shadow-lg text-white py-2 text-center">
 
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Section principale */}
-        <div className="mb-4 h-auto w-auto">
-          <Image
-            src="/images/logow.png"
-            alt="Logo Mémé Georgette"
-            className="mx-auto"
-            width={200}
-            height={60}
-          />
-        </div>
+      <div className="max-w-7xl mx-auto px-4 mt-8">
         {/* Logos de paiement */}
         <div className="flex justify-center items-center space-x-4 w-fit mx-auto mb-8 ">
           <a href="https://www.visa.fr">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 interface FiltertopProps {
   sortBy: string;
@@ -6,16 +6,9 @@ interface FiltertopProps {
   resetFilters: () => void;
 }
 
-const Filtertop: React.FC<FiltertopProps> = ({ sortBy = '', handleSortChange, resetFilters }) => {
-  const [priceRange, setPriceRange] = useState<string>(''); // État pour la plage de prix
-
-  const handlePriceRangeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setPriceRange(event.target.value);
-    // Vous pouvez ici appeler une fonction pour gérer le filtrage par prix, si nécessaire
-  };
-
+const Filtertop: React.FC<FiltertopProps> = ({ sortBy = '', handleSortChange }) => {
   return (
-    <div className="flex mx-auto text-center items-center justify-center mt-8 -mb-6">
+    <div className="flex mx-auto text-center items-center justify-center mt-10 -mb-6">
       <label htmlFor="sortBySelect" className="mr-2 font-bold text-gray-800 hidden sm:inline">
         Trier par :
       </label>

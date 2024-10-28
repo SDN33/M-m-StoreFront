@@ -254,7 +254,7 @@ const SearchInput = () => {
       )}
 
       {!searchTerm && recentSearches.length > 0 && showRecentSearches && (
-        <div ref={recentSearchesRef} className="absolute mt-2 w-full bg-white rounded-lg shadow-lg p-4 z-20">
+        <div ref={recentSearchesRef} className="absolute mt-2 w-full bg-gray-100 rounded-lg shadow-lg p-4 z-20">
           <h3 className="text-sm font-semibold text-gray-500 mb-2">Recherches récentes</h3>
           <div className="flex flex-wrap gap-2">
             {recentSearches.map((term, index) => (

@@ -7,10 +7,10 @@ import Slogan from '@/components/Slogan';
 import Livraison from '@/components/Livraison';
 import Newletter from '@/components/Newletter';
 import ProductsIntro from '@/components/ProductIntro';
-import Slider from '@/components/Slider';
 import WineCategories from '@/components/WineCategories';
 import Suggestion from '@/components/Suggestion';
 import MobileProductFilter from './MobileProductFilter';
+import Trust from '@/components/Trust';
 
 const MobileHome: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -26,6 +26,11 @@ const MobileHome: React.FC = () => {
     categories: []
   });
 
+  const handleAddToCart = (productId: number, quantity: number, variationId: number) => {
+    // Implement the logic to add the product to the cart
+    console.log(`Product ${productId} with quantity ${quantity} and variation ${variationId} added to cart`);
+  };
+
   const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {
     setSelectedFilters((prev) => ({
       ...prev,
@@ -38,17 +43,17 @@ const MobileHome: React.FC = () => {
     <div className="flex flex-col bg-gray-50 overflow-y-auto">
       <div className="space-y-8">
         <ProductsIntro />
-        <Slider />
         <Suggestion />
         <WineCategories />
         <div className="max-w-7xl mx-auto px-4 space-y-8">
           <section className="bg-white rounded-lg shadow">
-            <ProductsCards selectedFilters={selectedFilters} />
+            <ProductsCards selectedFilters={selectedFilters} onAddToCart={handleAddToCart} />
           </section>
         </div>
         <HeroBanner />
         <Livraison />
         <Slogan />
+        <Trust />
         <Newletter />
         <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} />
       </div>

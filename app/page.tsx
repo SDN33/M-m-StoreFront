@@ -3,24 +3,25 @@
 import React, { useEffect, useState, useRef } from 'react';
 import ProductsCards from '@/components/ProductsCards';
 import ProductFilter from '@/components/ProductFilters';
-import HeroBanner from '@/components/HeroBanner';
 import Slogan from '@/components/Slogan';
-import Livraison from '@/components/Livraison';
 import Newletter from '@/components/Newletter';
 import ProductsIntro from '@/components/ProductIntro';
 import WineSelector from '@/components/WineSelector';
 import Slider from '@/components/Slider';
-import WineCategories from '@/components/WineCategories';
 import Suggestion from '@/components/Suggestion';
-import MobileHome from '@/components/MobileHome'; // Importez le composant MobileHome
+import MobileHome from '@/components/MobileHome';
+import Trust from '@/components/Trust';
+import PromoRappel from '@/components/PromoRappel';
+import HeroBanner from '@/components/HeroBanner';
+import CatSlider from '@/components/CatSlider';
+import WineCategories from '@/components/WineCategories';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const mainContentRef = useRef<HTMLDivElement>(null);
   const filterContentRef = useRef<HTMLDivElement>(null);
-  const lastComponentRef = useRef<HTMLDivElement>(null);
-  const [isAtBottom, setIsAtBottom] = useState(false);
+  const footerRef = useRef<HTMLDivElement>(null);
 
   const [selectedFilters, setSelectedFilters] = useState({
     color: [],
@@ -34,6 +35,15 @@ export default function Home() {
     region__pays: [],
     categories: []
   });
+
+  const [isAtBottom, setIsAtBottom] = useState(false); // État pour suivre si on est en bas de la page
+
+  useEffect(() => {
+    async function fetchProducts() {
+      await fetch('/api/products');
+    }
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
@@ -49,44 +59,48 @@ export default function Home() {
     };
   }, []);
 
-  // Ce hook s'exécute toujours, peu importe la taille de l'écran
   useEffect(() => {
     const handleScroll = (e: WheelEvent) => {
-      if (!isMobile) {
-        const target = e.target as Node;
-        const filterContent = filterContentRef.current;
-        const mainContent = mainContentRef.current;
-        const lastComponent = lastComponentRef.current;
-        const footer = document.querySelector('footer');
+      const target = e.target as Node;
+      const mainContent = mainContentRef.current;
+      const footer = footerRef.current;
 
-        // Gérer le scroll indépendant des filtres
-        if (filterContent?.contains(target)) {
+      // Gérer le défilement du filtre séparément
+      if (filterContentRef.current?.contains(target)) {
+        e.preventDefault();
+        filterContentRef.current.scrollTop += e.deltaY;
+        return;
+      }
+
+      // Vérifier si l'événement provient du conteneur principal
+      if (mainContent?.contains(target) && footer) {
+        const mainScrollHeight = mainContent.scrollHeight;
+        const mainScrollTop = mainContent.scrollTop;
+        const mainClientHeight = mainContent.clientHeight;
+
+        // Calculer si on est proche du bas du conteneur principal
+        const isNearBottom = mainScrollHeight - (mainScrollTop + mainClientHeight) < 10;
+
+        // Mettre à jour l'état isAtBottom
+        setIsAtBottom(isNearBottom);
+
+        if (isNearBottom && e.deltaY > 0) {
           e.preventDefault();
-          filterContent.scrollTop += e.deltaY;
-          return;
+          // Défilement vers le footer
+          window.scrollTo({
+            top: document.body.scrollHeight, // Défiler vers le bas de la page
+            behavior: 'smooth'
+          });
         }
 
-        if (mainContent && lastComponent && footer) {
-          const mainRect = mainContent.getBoundingClientRect();
-          const lastComponentRect = lastComponent.getBoundingClientRect();
-          const footerRect = footer.getBoundingClientRect();
-
-          // Scroll vers le bas
-          if (lastComponentRect.bottom <= mainRect.bottom && e.deltaY > 0 && !isAtBottom) {
-            e.preventDefault();
-            footer.scrollIntoView({ behavior: 'smooth' });
-            setIsAtBottom(true);
-          }
-
-          // Scroll vers le haut
-          if (isAtBottom && e.deltaY < 0) {
-            e.preventDefault();
-            // Vérifier si le footer est visible
-            if (footerRect.top < window.innerHeight) {
-              lastComponent.scrollIntoView({ behavior: 'smooth' });
-              setIsAtBottom(false);
-            }
-          }
+        // Vérifier si on scroll vers le haut
+        if (e.deltaY < 0 && isAtBottom) {
+          e.preventDefault();
+          // Remonter vers le haut de la page
+          window.scrollTo({
+            top: 0, // Défilement vers le haut
+            behavior: 'smooth'
+          });
         }
       }
     };
@@ -95,7 +109,7 @@ export default function Home() {
     return () => {
       window.removeEventListener('wheel', handleScroll);
     };
-  }, [isMobile, isAtBottom]);
+  }, [isMobile, isAtBottom]); // Ajouter isAtBottom comme dépendance
 
   const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {
     setSelectedFilters((prev) => ({
@@ -119,7 +133,6 @@ export default function Home() {
     });
   };
 
-  // Rendu conditionnel à la fin pour éviter les erreurs de hook
   return (
     <>
       {isMobile ? (
@@ -158,24 +171,28 @@ export default function Home() {
               <Slider />
               <Suggestion />
               <WineSelector />
-
-              <WineCategories />
-              <br />
+              <CatSlider />
+              <br /><br />
               <div className="max-w-7xl mx-auto px-4 space-y-8">
                 <section className="bg-white rounded-lg shadow">
-                  <ProductsCards selectedFilters={selectedFilters} />
+                  <ProductsCards selectedFilters={selectedFilters} onAddToCart={(product) => console.log('Add to cart:', product)} />
                 </section>
               </div>
               <br /><br />
               <HeroBanner />
-              <Livraison />
+              <PromoRappel />
+              <br /><br />
+              <WineCategories />
+              <Trust />
+              <Newletter />
+              <br /><br />
               <Slogan />
-              <div ref={lastComponentRef}>
-                <Newletter />
-              </div>
               <br /><br />
             </div>
           </main>
+          <footer ref={footerRef}>
+            {/* Votre contenu de footer ici */}
+          </footer>
         </div>
       )}
       {isMobile && isFilterOpen && (

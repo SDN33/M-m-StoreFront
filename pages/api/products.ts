@@ -39,7 +39,7 @@ interface AxiosErrorResponse {
 
 // Cache pour les produits
 const productCache: { [key: string]: Product[] } = {};
-let cacheTimestamp: number | null = null;
+const cacheTimestamp: number | null = null;
 
 const transformMetaData = (metaData: { key: string; value: string | string[] }[]): { [key: string]: unknown } => {
   const productData: { [key: string]: unknown } = {};
@@ -238,9 +238,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           return transformedProduct;
         }));
 
-        // Mise à jour du cache
-        productCache[url] = transformedProducts;
-        cacheTimestamp = Date.now();
 
         return res.status(200).json(transformedProducts);
       } else {
