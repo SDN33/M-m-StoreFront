@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const categories = [
   { id: 1, title: "Vins de Fête de Fin d'Année", image: '/images/vins-fete.jpg' },
-  { id: 2, title: 'Les Fruitées', image: '/images/vins_fruitees.jpg' },
+  { id: 2, title: 'Les Fruitées', image: '/images/vins_fruitees.webp' },
   { id: 3, title: 'Les Perles Rares', image: '/images/perles_rares.jpg' },
   // Ajoutez d'autres catégories selon vos besoins
 ];
