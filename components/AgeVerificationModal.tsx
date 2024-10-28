@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const AgeVerificationModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,6 +94,13 @@ const AgeVerificationModal = () => {
         className={`relative bg-white rounded-lg max-w-md w-full p-6 shadow-xl text-center m-4
           transition-all duration-500 ${isOpening ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}
       >
+        <Image
+          src="/images/logow.png"
+          alt="Vérification de l'âge"
+          width={150}
+          height={150}
+          className="mx-auto mb-4"
+        />
         <h2 className="text-2xl font-bold text-gray-900 mb-4">
           Vérification de l&apos;âge
         </h2>
