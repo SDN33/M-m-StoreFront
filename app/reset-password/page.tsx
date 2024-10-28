@@ -20,6 +20,7 @@ export default function ResetPasswordPage() {
 
         setMessage("Password reset successful.");
     } catch (err) {
+        console.error("Reset password error:", err);
         setMessage("Password reset failed. Please try again.");
     }
   };
