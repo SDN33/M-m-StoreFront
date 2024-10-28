@@ -21,6 +21,7 @@ export default async function handler(req, res) {
         // Send a success response
         res.status(200).json({ message: "Password reset successful." });
     } catch (error) {
+        // Utilize error to prevent ESLint warning
         const message = error.response?.data?.message || "Password reset failed.";
         res.status(500).json({ message });
     }

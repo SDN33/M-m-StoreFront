@@ -4,40 +4,43 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
 
+interface User {
+  user_display_name: string;
+  user_email: string;
+}
+
 export default function Profile() {
   const { logout } = useAuth();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null); // Type user en User ou null
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem('jwtToken');
     if (!token) {
-        router.push('/login');
-        return;
+      router.push('/login');
+      return;
     }
 
     async function fetchUserData() {
-        try {
-            // Fetch profile data via the Next.js API route
-            const response = await fetch('/api/profile', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+      try {
+        const response = await fetch('/api/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-            if (response.ok) {
-                const data = await response.json();
-                setUser(data);
-            } else {
-                const errorText = await response.text();
-                router.push('/login');
-            }
-        } catch (error) {
-            router.push('/login');
-        } finally {
-            setLoading(false);
+        if (response.ok) {
+          const data: User = await response.json();
+          setUser(data);
+        } else {
+          router.push('/login');
         }
+      } catch {
+        router.push('/login');
+      } finally {
+        setLoading(false);
+      }
     }
 
     fetchUserData();
@@ -54,7 +57,6 @@ export default function Profile() {
           <p>Email: {user.user_email}</p>
           <button
             onClick={() => {
-              // localStorage.removeItem('jwtToken');
               logout();
               router.push('/login');
             }}
