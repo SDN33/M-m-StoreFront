@@ -140,7 +140,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                         onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
                         className="form-checkbox h-4 w-4 text-teal-500 focus:ring-teal-500 rounded border-gray-300 transition duration-200 ease-in-out"
                       />
-                      <span className="ml-2 text-sm text-gray-700 font-medium">
+                      <span className="ml-2 text-sm text-gray-700 font-semibold">
                         {option.label === 'Bio' ? (
                           <span className="flex items-center">
                             {option.label} <Image src="/images/logobio1.webp" alt="Bio" width={16} height={16} className="ml-1" />
