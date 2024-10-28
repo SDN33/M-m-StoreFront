@@ -8,7 +8,7 @@ export default function ResetPasswordPage() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const searchParams = useSearchParams();
-  const resetToken = searchParams.get("token");
+  const resetToken = searchParams ? searchParams.get("token") : null;
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
