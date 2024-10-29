@@ -12,11 +12,9 @@ export default function ForgotPasswordPage() {
       setMessage("");
 
       try {
-          // Call the Next.js API route instead of the WordPress API directly
           await axios.post('/api/forgot-password', { email });
-          
           setMessage("Password reset link sent. Please check your email.");
-      } catch (err) {
+      } catch {
           setMessage("Failed to send reset link. Try again.");
       }
   };

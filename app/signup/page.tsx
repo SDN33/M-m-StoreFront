@@ -21,6 +21,7 @@ export default function SignupPage() {
 
           router.push("/login"); // Redirect to the login page after successful signup
       } catch (err) {
+          console.error("Signup error:", err);
           setError("Failed to register. Please try again.");
       }
   };

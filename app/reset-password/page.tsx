@@ -1,32 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const searchParams = useSearchParams();
-  const resetToken = searchParams.get("token");
+  const resetToken = searchParams ? searchParams.get("token") : null;
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage("");
 
     try {
-        // Call the Next.js API route instead of the WordPress API directly
-        await axios.post('/api/reset-password', { token: resetToken, password });
+      // Call the Next.js API route instead of the WordPress API directly
+      await axios.post('/api/reset-password', { token: resetToken, password });
 
-        setMessage("Password reset successful.");
+      setMessage("Password reset successful.");
     } catch (err) {
-        setMessage("Password reset failed. Please try again.");
+      console.error("Reset password error:", err);
+      setMessage("Password reset failed. Please try again.");
     }
   };
 
   return (
-    <div className="sx-container">
-      <h2>Reset Password</h2>
+    <div>
       {message && <p>{message}</p>}
       <form onSubmit={handleResetPassword}>
         <input
@@ -39,6 +39,17 @@ export default function ResetPasswordPage() {
         <button type="submit">Reset Password</button>
       </form>
       <a href="/login" className="link">Back to Login</a>
+    </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <div className="sx-container">
+      <h2>Reset Password</h2>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ResetPasswordForm />
+      </Suspense>
     </div>
   );
 }

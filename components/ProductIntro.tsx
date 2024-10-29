@@ -58,7 +58,7 @@ const ProductsIntro: React.FC = () => {
       className={`flex flex-col md:flex-row justify-between items-center mb-4 ${isVisible ? 'slide-in-visible' : 'slide-in'}`}
     >
       {/* Texte au centre avec espacement */}
-      <div className="flex mx-auto mt-28 lg:mt-16 slide-in-right">
+      <div className="flex mx-auto mt-28 lg:mt-14 slide-in-right">
         <h1 className="text-lg md:text-3xl font-extrabold text-primary tracking-tight text-center">
           {counter.toLocaleString()} vins bio en direct des vignerons<span className="text-sm ">(nes)</span>
           <br />
