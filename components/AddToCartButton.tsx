@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
-// import { addToCart } from '../services/cart';
 
 interface AddToCartButtonProps {
   productId: number;
   product: object;
   quantity?: number;
+  onAddToCart: () => Promise<void>;
+
 }
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({
