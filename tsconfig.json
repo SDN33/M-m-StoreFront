@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "pages/api/fetchProducts.ts"
-  ],
+, "pages/api/forgot-password.js", "pages/api/login.js", "pages/api/profile.js", "pages/api/register.js", "pages/api/reset-password.js"  ],
   "exclude": [
     "node_modules"
   ]
