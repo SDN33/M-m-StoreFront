@@ -33,14 +33,14 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "pages/api/fetchProducts.ts", 
+    "pages/api/fetchProducts.ts",
     "context/CartContext.js",
-    "pages/api/forgot-password.js", 
-    "pages/api/login.js", 
-    "pages/api/profile.js", 
-    "pages/api/register.js", 
-    "pages/api/reset-password.js"  
-  ],
+    "pages/api/forgot-password.js",
+    "pages/api/login.js",
+    "pages/api/profile.js",
+    "pages/api/register.js",
+    "pages/api/reset-password.js"
+, "pages/api/cart.ts"  ],
   "exclude": [
     "node_modules"
   ]
