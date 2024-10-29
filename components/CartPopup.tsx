@@ -46,11 +46,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
 
   const handleEmptyCart = () => {
     deleteAllCartItems();
-<<<<<<< HEAD
     // emptyCart(); // For Api
-=======
-    emptyCart(); // Pour l'API
->>>>>>> 7ace04c8e00beff890705ceefcbfcb52df9550df
   };
 
   if (!isOpen) return null;
