@@ -1,13 +1,11 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-//import { viewCart } from '../../services/cart';
 import { createOrder } from '../../services/order';
 import { useCart } from '../../context/CartContext';
 
 const CheckoutPage = () => {
-  const { cartTotal: total, cartItems, deleteAllCartItems, viewAllCartItems } = useCart();
-  // const [cartDetails, setCartDetails] = useState({ total: 0, items: [] });
+  const { cartTotal, deleteAllCartItems, viewAllCartItems } = useCart();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -22,20 +20,7 @@ const CheckoutPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
-  let cartDetails = viewAllCartItems();
-
-  // useEffect(() => {
-  //   const fetchCartDetails = async () => {
-  //     try {
-  //       // const data = await viewCart();
-  //       const data = viewAllCartItems();
-  //       setCartDetails(data);
-  //     } catch (err) {
-  //       setError('Failed to load cart details');
-  //     }
-  //   };
-  //   fetchCartDetails();
-  // }, []);
+  const cartDetails = viewAllCartItems();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -44,8 +29,8 @@ const CheckoutPage = () => {
 
   const handleOrderSubmit = async (e) => {
     e.preventDefault();
-      // Check if any form field is empty
     const { firstName, lastName, address1, city, state, postcode, email, phone } = formData;
+
     if (!firstName || !lastName || !address1 || !city || !state || !postcode || !email || !phone) {
       setError('Please fill out all required fields.');
       return;
@@ -95,7 +80,7 @@ const CheckoutPage = () => {
       const orderResponse = await createOrder(orderData);
       deleteAllCartItems();
       router.push(`/thank-you?order_id=${orderResponse.id}`);
-    } catch (err) {
+    } catch (error) {
       setError('Order creation failed. Please try again.');
     } finally {
       setLoading(false);
@@ -133,7 +118,7 @@ const CheckoutPage = () => {
           </ul>
           <div className="flex justify-between font-semibold text-lg mb-2">
             <span>Subtotal:</span>
-            <span>{(cartDetails.total ).toFixed(2)}€</span>
+            <span>{cartDetails.total.toFixed(2)}€</span>
           </div>
           <div className="flex justify-between font-semibold text-lg mb-2">
             <span>Shipping:</span>
