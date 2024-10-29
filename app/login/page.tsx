@@ -26,7 +26,7 @@ export default function LoginPage() {
             login(response.data.token); // Custom login function to update auth state
             router.push("/profile");
         }
-    } catch (err) {
+    } catch (err: any) {
         console.error("Login error:", err);
         setError("Invalid credentials. Please try again.");
     }
@@ -34,7 +34,7 @@ export default function LoginPage() {
 
   return (
     <div className="sx-container">
-      <h2>Login</h2>
+      <h2>Se connecter</h2>
       {error && <p className="text-red-500 text-center">{error}</p>}
       <form onSubmit={handleLogin}>
         <input
