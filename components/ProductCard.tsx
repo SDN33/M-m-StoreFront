@@ -182,6 +182,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           </select>
           <AddToCart
             productId={product.id}
+            product={product}
             quantity={quantity}
             cart_item_data={{}}
             onAddToCart={async () => {

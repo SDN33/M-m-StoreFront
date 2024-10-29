@@ -1,144 +1,111 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { wcApi } from './wcApi'; // Assurez-vous que wcApi est correctement configuré pour interagir avec WooCommerce
+import axios from 'axios';
+import { wcApi } from './wcApi';
 
-// Fonction pour afficher le panier
-export const viewCart = async () => {
-  const response = await fetch('/api/cart', {
-    method: 'GET',
-  });
-  if (!response.ok) {
-    throw new Error('Failed to fetch cart');
-  }
-  return response.json();
-};
 
-// Fonction pour vider le panier
-export const emptyCart = async () => {
-  const response = await fetch(`${process.env.WC_API_URL}/cart/empty`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      // Vous devez fournir l'authentification ici si nécessaire
-    },
-  });
+export const getCartNonce = async () => {
+    try {
+      const response = await wcApi.get('cart/items', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      // Extracting all headers to find the nonce
+      const headers = response.headers;
+      const nonce = headers['x-wp-nonce'] || headers['woocommerce-store-api-nonce'] || headers['nonce'];
+  
+      if (!nonce) {
+        throw new Error("Nonce not found in headers.");
+      }
+  
+      return nonce;
+    } catch (error) {
+      throw error;
+    }
+  };
 
-  if (!response.ok) {
-    throw new Error('Failed to empty cart');
-  }
+const absint = (value: string | number): number => Math.abs(parseInt(value.toString(), 10)) || 0;
 
-  return response.json(); // Retourne les données si nécessaire
-};
-
-// Handler pour gérer les requêtes API
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
-  console.log(`Request method: ${method}`); // Log du type de requête
 
   switch (method) {
-    case 'GET':
+    case 'GET': // Fetch Cart
       try {
-        console.log('Tentative de récupération du panier...');
-        const cartData = await wcApi.get('cart');
-        console.log('Panier récupéré avec succès:', cartData.data);
-        return res.status(200).json(cartData.data);
+        const response = await wcApi.get('cart');
+        const items = response.data.items.map((item: any) => ({
+          product_id: item.id?.toString() || '',
+          name: item.name || 'Unknown Product',
+          quantity: item.quantity || 1,
+          price: parseFloat(item.prices.price) || 0.0,
+          image: item.images?.[0]?.src || '',
+          categories: Array.isArray(item.categories) ? item.categories.map((cat: any) => cat.name) : [],
+        }));
+        const total = parseFloat(response.data?.totals?.total_price) || 0;
+        return res.status(200).json({ total, items });
       } catch (error) {
-        console.error('Erreur lors de la récupération du panier:', error);
-        return res.status(500).json({ message: 'Erreur lors de la récupération du panier' });
+        return res.status(500).json({ message: 'Failed to fetch cart' });
       }
 
-    case 'POST':
-      // Vérifiez si la requête est pour vider le panier ou ajouter un article
-      if (req.body.action === 'empty') {
-        try {
-          console.log('Tentative de vidange du panier...');
-          await emptyCart(); // Appel à la fonction pour vider le panier
-          console.log('Panier vidé avec succès.');
-          return res.status(200).json({ message: 'Panier vidé avec succès.' });
-        } catch (error) {
-          console.error('Erreur lors de la vidange du panier:', error);
-          return res.status(500).json({ message: 'Erreur lors de la vidange du panier' });
+    case 'POST': // Add, Update, Remove Cart Item
+      const { action, product_id, quantity = 1, variation_id = 0, variation = {} } = req.body;
+
+      try {
+        const nonce = await getCartNonce();
+        const productId = absint(product_id);
+        const variationId = absint(variation_id);
+
+        switch (action) {
+          case 'add': {
+            const addItemResponse = await wcApi.post(
+              'cart/add-item',
+              { id: productId, quantity, variation_id: variationId, variation },
+              { headers: { 'Nonce': nonce } }
+            );
+            return res.status(200).json(addItemResponse.data);
+          }
+
+          case 'update': {
+            const updateItemResponse = await wcApi.post(
+              'cart/update-item',
+              { id: productId, quantity },
+              { headers: { 'Nonce': nonce } }
+            );
+            return res.status(200).json(updateItemResponse.data);
+          }
+
+          case 'remove': {
+            const removeItemResponse = await wcApi.post(
+              'cart/remove-item',
+              { id: productId },
+              { headers: { 'Nonce': nonce } }
+            );
+            return res.status(200).json(removeItemResponse.data);
+          }
+
+          default:
+            return res.status(400).json({ message: 'Invalid action' });
         }
-      } else {
-        try {
-          const { product_id, quantity = 1, variation_id = 0, variation = {}, cart_item_data = {} } = req.body;
+      } catch (error) {
+        const message = axios.isAxiosError(error) && error.response ? error.response.data : 'Error with cart action';
+        return res.status(500).json({ message });
+      }
 
-          // Log des données reçues
-          console.log('Données reçues pour ajouter au panier:', {
-            product_id,
-            quantity,
-            variation_id,
-            variation,
-            cart_item_data,
-          });
-
-          // Récupérer le nonce et le cart-token
-          console.log('Tentative de récupération du nonce et du cart-token...');
-          const response = await fetch(`${process.env.WC_API_URL}/cart/items`);
-          if (!response.ok) {
-            throw new Error('Erreur lors de la récupération du nonce');
-          }
-          const nonce = response.headers.get('nonce');
-          const cartToken = response.headers.get('cart-token');
-          console.log('Nonce récupéré:', nonce);
-          console.log('Cart-Token récupéré:', cartToken);
-
-          // Validation des IDs
-          const productId = absint(product_id);
-          const variationId = absint(variation_id);
-          console.log(`ID produit: ${productId}, ID variation: ${variationId}, Quantité: ${quantity}`);
-
-          // Récupérer le produit
-          const productData = await wcApi.get(`products/${productId}`);
-          if (!productData || !productData.data) {
-            throw new Error('Le produit spécifié n\'existe pas ou n\'est pas valide.');
-          }
-          console.log('Données du produit récupérées:', productData.data);
-
-          // Vérifier la quantité
-          if (quantity <= 0) {
-            throw new Error('La quantité doit être supérieure à zéro.');
-          }
-
-          // Gestion des variations
-          if (variationId) {
-            const variationData = await wcApi.get(`products/${productId}/variations/${variationId}`);
-            if (!variationData || !variationData.data) {
-              throw new Error('La variation spécifiée n\'existe pas.');
-            }
-            console.log('Données de la variation récupérées:', variationData.data);
-          }
-
-          // Ajouter l'article au panier
-          console.log('Tentative d\'ajout de l\'article au panier...');
-          const cartItemData = await wcApi.post('cart/add-item', {
-            product_id: productId,
-            quantity,
-            variation_id: variationId,
-            variation,
-            cart_item_data,
-          }, {
-            headers: {
-              'Nonce': nonce,
-              'Cart-Token': cartToken,
-            },
-          });
-
-          console.log('Article ajouté au panier avec succès:', cartItemData.data);
-          return res.status(200).json(cartItemData.data); // Retourner les données mises à jour du panier
-        } catch (error) {
-          console.error('Erreur lors de l\'ajout au panier:', error);
-          const errorMessage = (error instanceof Error) ? error.message : 'Erreur inconnue lors de l\'ajout au panier.';
-          return res.status(500).json({ message: errorMessage });
+    case 'DELETE': // Empty Cart
+      try {
+        const response = await wcApi.delete('cart/items');
+        if (response.status === 200) {
+          return res.status(200).json({ message: 'Cart emptied successfully' });
+        } else {
+          return res.status(response.status).json({ message: response.data.message || 'Failed to empty cart' });
         }
+      } catch (error) {
+        return res.status(500).json({ message: 'Failed to empty cart' });
       }
 
     default:
-      res.setHeader('Allow', ['GET', 'POST']);
+      res.setHeader('Allow', ['GET', 'POST', 'DELETE']);
       return res.status(405).end(`Method ${method} Not Allowed`);
   }
-}
-
-// Fonction utilitaire pour convertir en entier
-function absint(value: string | number): number {
-  return Math.abs(parseInt(value.toString(), 10)) || 0;
 }

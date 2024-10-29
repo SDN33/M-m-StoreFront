@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { viewCart } from '../pages/api/cart';
+import { emptyCart } from '../services/cart';
+import Link from 'next/link';
+import { useCart } from '../context/CartContext';
 
 interface CartPopupProps {
   isOpen: boolean;
@@ -7,29 +9,37 @@ interface CartPopupProps {
 }
 
 const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
-  interface CartItem {
-    product_id: string;
-    name: string;
-    quantity: number;
-    price: number;
-    image?: string; // URL de l'image du produit
-    categories?: string[]; // Catégories du produit
-  }
+  // interface CartItem {
+  //   product_id: string;
+  //   name: string;
+  //   quantity: number;
+  //   price: number;
+  //   prices: any;
+  //   images: any;
+  //   image?: string; // URL de l'image du produit
+  //   categories?: string[]; // Catégories du produit
+  // }
 
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  // const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  // const [total, setTotal] = useState<number>(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { cartTotal: total, cartItems, deleteAllCartItems, viewAllCartItems } = useCart();
 
   useEffect(() => {
+    // const cartData = viewAllCartItems();
+    // setTotal(cartData.total || 0);
     const fetchCart = async () => {
       if (isOpen) {
         setLoading(true);
         setError(null);
 
         try {
-          const cartData = await viewCart();
-          console.log('Données du panier récupérées:', cartData);
-          setCartItems(cartData.items || []);
+          await new Promise(resolve => setTimeout(resolve, 500));
+          // const cartData = await viewCart(); // For API
+          // console.log('Données du panier récupérées:', cartData);
+          // setCartItems(cartData.items || []);
+          // setTotal(cartData.total || 0);
         } catch (err) {
           console.error('Erreur lors de la récupération du panier:', err);
           setError('Échec de la récupération du panier. Veuillez réessayer.');
@@ -37,8 +47,6 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
           setLoading(false);
         }
       } else {
-        // Réinitialiser le panier si le pop-up est fermé
-        setCartItems([]);
         setLoading(true);
       }
     };
@@ -46,11 +54,9 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
     fetchCart();
   }, [isOpen]);
 
-  const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
-  const emptyCart = () => {
-    // Fonction pour vider le panier
-    setCartItems([]);
+  const handleEmptyCart = () => {
+    deleteAllCartItems();
+    emptyCart(); // For Api
   };
 
   if (!isOpen) return null;
@@ -78,7 +84,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
         ) : cartItems.length === 0 ? (
           <p className="text-gray-600 text-center">Votre panier est vide</p>
         ) : (
-          <div>
+          <div style={{maxHeight: '80vh', overflow: 'auto'}}>
             <table className="w-full border border-gray-200 mb-4">
               <thead>
                 <tr className="bg-gray-100">
@@ -91,13 +97,13 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
                 {cartItems.map((item) => (
                   <tr key={item.product_id} className="hover:bg-gray-50">
                     <td className="p-2 border-b border-gray-200 flex items-start">
-                      {item.image && (
+                      {item.image ? (
                         <img
                           src={item.image}
                           alt={item.name}
                           className="w-12 h-12 object-cover rounded mr-2"
                         />
-                      )}
+                      ): <></>}
                       <div>
                         <span className="font-medium">{item.name}</span>
                         <p className="text-gray-500 text-xs">
@@ -122,14 +128,14 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
 
             <button
               className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition mb-2"
-              onClick={emptyCart}
+              onClick={handleEmptyCart}
             >
               Vider le panier
             </button>
 
-            <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition">
+            <Link href="/checkout" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition" style={{display: 'block', textAlign: 'center'}}>
               Passer à la caisse
-            </button>
+            </Link>
           </div>
         )}
       </div>
@@ -142,6 +148,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
           width: 20px;
           height: 20px;
           animation: spin 1s ease-in-out infinite;
+          margin: 5px;
         }
         @keyframes spin {
           from {

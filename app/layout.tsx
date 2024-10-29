@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AgeVerificationModal from "@/components/AgeVerificationModal";
 import { AuthProvider } from '../context/AuthContext';
+import { CartProvider } from '../context/CartContext';
 
 export const metadata: Metadata = {
   title: "Les vins de Mémé Georgette | 2 500 vins bio en direct de vignerons et vigneronnes engagé(e)s | Vins Bio et Biodynamie Démeter",
@@ -52,10 +53,12 @@ export default function RootLayout({
     <html lang="fr">
       <body>
         <AuthProvider>
-          <Header />
-          <AgeVerificationModal />
-          {children}
-          <Footer />
+          <CartProvider>
+            <Header />
+            <AgeVerificationModal />
+            {children}
+            <Footer />
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>

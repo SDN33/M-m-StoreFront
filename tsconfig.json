@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "pages/api/fetchProducts.ts"
-  ],
+, "context/CartContext.js"  ],
   "exclude": [
     "node_modules"
   ]

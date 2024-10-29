@@ -27,11 +27,11 @@ export const addToCart = async (productId, qty = 1) => {
     });
 
     // Vérification de la réponse
-    console.log('Produit ajouté au panier avec succès:', res.data);
+    // console.log('Produit ajouté au panier avec succès:', res.data);
     return res.data; // Retourne les informations mises à jour du panier
 
   } catch (err) {
-    console.error('Erreur lors de l’ajout au panier:', err.message);
+    // console.error('Erreur lors de l’ajout au panier:', err.message);
     throw new Error(`Échec de l’ajout au panier: ${err.message}`); // Gestion d'erreur plus explicite
   }
 };
@@ -55,11 +55,11 @@ export const viewCart = async () => {
       }
     });
 
-    console.log('Panier récupéré:', cartResponse.data);
+    // console.log('Panier récupéré:', cartResponse.data);
     return cartResponse.data; // Retourne les informations du panier
 
   } catch (err) {
-    console.error('Erreur lors de la récupération du panier:', err.message);
+    // console.error('Erreur lors de la récupération du panier:', err.message);
     throw new Error(`Échec de la récupération du panier: ${err.message}`); // Gestion d'erreur plus explicite
   }
 };
