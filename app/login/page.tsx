@@ -17,17 +17,21 @@ export default function LoginPage() {
     setError("");
 
     try {
-        // Call the Next.js API route instead of the WordPress API directly
+        // Appel à la route API de Next.js
         const response = await axios.post('/api/login', { username, password });
 
         if (response.data.token) {
-            // Save token to local storage
+            // Enregistrer le token dans le stockage local
             localStorage.setItem("jwtToken", response.data.token);
-            login(response.data.token); // Custom login function to update auth state
+            login(response.data.token); // Fonction de connexion personnalisée pour mettre à jour l'état d'authentification
             router.push("/profile");
         }
-    } catch (err: any) {
-        console.error("Login error:", err);
+    } catch (err: unknown) {
+        if (axios.isAxiosError(err) && err.response) {
+            console.error("Login error:", err.response.data);
+        } else {
+            console.error("Unexpected error:", err);
+        }
         setError("Invalid credentials. Please try again.");
     }
   };
