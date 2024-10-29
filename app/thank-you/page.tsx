@@ -7,7 +7,7 @@ import { Order } from '../../services/types';
 const ThankYouPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const orderId = searchParams.get("order_id");
+  const orderId = searchParams ? searchParams.get("order_id") : null;
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -15,7 +15,7 @@ const ThankYouPage = () => {
     const fetchOrder = async () => {
       try {
         if (orderId) {
-          const orderData = await getOrder(orderId);
+          const orderData = await getOrder(Number(orderId));
           setOrder(orderData);
         }
       } catch (error) {
@@ -47,7 +47,7 @@ const ThankYouPage = () => {
                   <p className="font-medium text-lg">{item.name}</p>
                   <p className="text-gray-600 text-sm">Quantity: {item.quantity}</p>
                 </div>
-                <p className="font-medium text-lg">${(item.price * item.quantity).toFixed(2)}</p>
+                <p className="font-medium text-lg">${(Number(item.price) * Number(item.quantity)).toFixed(2)}</p>
               </div>
             ))}
           </div>
