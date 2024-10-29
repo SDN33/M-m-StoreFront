@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { emptyCart } from '../services/cart';
+// import { emptyCart } from '../services/cart';
 import Link from 'next/link';
 import { useCart } from '../context/CartContext';
 
@@ -56,7 +56,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
 
   const handleEmptyCart = () => {
     deleteAllCartItems();
-    emptyCart(); // For Api
+    // emptyCart(); // For Api
   };
 
   if (!isOpen) return null;

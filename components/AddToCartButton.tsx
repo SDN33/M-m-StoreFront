@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
-import { addToCart } from '../services/cart';
+// import { addToCart } from '../services/cart';
 
 interface AddToCartButtonProps {
   productId: number;
@@ -25,8 +25,8 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
     setLoading(true);
     setError(null);
     try {
-      const response = await addToCart(productId, quantity);
-      // await new Promise(resolve => setTimeout(resolve, 500));
+      // const response = await addToCart(productId, quantity);
+      await new Promise(resolve => setTimeout(resolve, 500));
       addNewCartItem(product, quantity)
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Une erreur inconnue s\'est produite');
