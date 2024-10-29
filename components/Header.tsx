@@ -52,10 +52,12 @@ const Header = () => {
             {/* Logo */}
             <a href="/" className="flex-shrink-0 ml-8">
               <Image
-                src="/images/logow.png"
+                src="/images/memelogo2.png"
                 alt="Logo"
-                width={140}
+                width={190}
                 height={50}
+                quality={100}
+                className="py-2"
               />
             </a>
 
