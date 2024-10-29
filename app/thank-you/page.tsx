@@ -1,8 +1,14 @@
-"use client";
+"use client"; // Assurez-vous que ce composant est un composant client
+
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { getOrder } from '../../services/order';
 import { Order } from '../../services/types';
+
+// Composant de chargement
+const Loading = () => (
+  <p className="text-center text-xl my-8">Loading order details...</p>
+);
 
 const ThankYouPage = () => {
   const router = useRouter();
@@ -27,10 +33,10 @@ const ThankYouPage = () => {
     fetchOrder();
   }, [orderId]);
 
-  if (loading) return <p className="text-center text-xl my-8">Loading order details...</p>;
+  if (loading) return <Loading />; // Utilisation du composant de chargement
 
   return (
-    <div className=" w-full max-w-4xl mx-auto px-4 mt-56 bg-white rounded-lg p-8">
+    <div className="w-full max-w-4xl mx-auto px-4 mt-56 bg-white rounded-lg p-8">
       <h2 className="text-3xl text-center font-bold mb-6 text-green-600">Thank You for Your Order!</h2>
       {order ? (
         <>
@@ -76,7 +82,7 @@ const ThankYouPage = () => {
       )}
       <button
         onClick={() => router.push('/')}
-        className=" bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white py-2 px-4 rounded"
+        className="bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white py-2 px-4 rounded"
       >
         Return to Home
       </button>
@@ -84,4 +90,11 @@ const ThankYouPage = () => {
   );
 };
 
-export default ThankYouPage;
+// Encapsulation du composant ThankYouPage dans Suspense
+const ThankYouPageWrapper = () => (
+  <React.Suspense fallback={<Loading />}>
+    <ThankYouPage />
+  </React.Suspense>
+);
+
+export default ThankYouPageWrapper;
