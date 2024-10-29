@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { emptyCart } from '../services/cart';
 import Link from 'next/link';
 import { useCart } from '../context/CartContext';
+import Image from 'next/image';
 
 interface CartPopupProps {
   isOpen: boolean;
@@ -12,9 +13,10 @@ interface CartItem {
   product_id: number;
   name: string;
   image: string;
-  price: number;
-  quantity: number;
+  images: string[]; // Ajout des images du produit
   categories: string[];
+  quantity: number;
+  price: number;
 }
 
 const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
@@ -29,15 +31,13 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
         setError(null);
 
         try {
-          await new Promise(resolve => setTimeout(resolve, 500));
+          await new Promise(resolve => setTimeout(resolve, 500)); // Simule le chargement
         } catch (err) {
           console.error('Erreur lors de la récupération du panier:', err);
           setError('Échec de la récupération du panier. Veuillez réessayer.');
         } finally {
           setLoading(false);
         }
-      } else {
-        setLoading(true);
       }
     };
 
@@ -46,7 +46,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
 
   const handleEmptyCart = () => {
     deleteAllCartItems();
-    emptyCart(); // For Api
+    emptyCart(); // Pour l'API
   };
 
   if (!isOpen) return null;
@@ -74,7 +74,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
         ) : cartItems.length === 0 ? (
           <p className="text-gray-600 text-center">Votre panier est vide</p>
         ) : (
-          <div style={{maxHeight: '80vh', overflow: 'auto'}}>
+          <div style={{ maxHeight: '80vh', overflowY: 'auto' }}>
             <table className="w-full border border-gray-200 mb-4">
               <thead>
                 <tr className="bg-gray-100">
@@ -87,13 +87,15 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
                 {cartItems.map((item: CartItem) => (
                   <tr key={item.product_id} className="hover:bg-gray-50">
                     <td className="p-2 border-b border-gray-200 flex items-start">
-                      {item.image ? (
-                        <img
+                      {item.image && (
+                        <Image
                           src={item.image}
                           alt={item.name}
-                          className="w-12 h-12 object-cover rounded mr-2"
+                          className="object-cover rounded mr-2"
+                          width={50}
+                          height={50}
                         />
-                      ) : null}
+                      )}
                       <div>
                         <span className="font-medium">{item.name}</span>
                         <p className="text-gray-500 text-xs">
@@ -123,8 +125,10 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
               Vider le panier
             </button>
 
-            <Link href="/checkout" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition" style={{display: 'block', textAlign: 'center'}}>
-              Passer à la caisse
+            <Link href="/checkout" legacyBehavior>
+              <a className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition text-center block">
+                Passer à la caisse
+              </a>
             </Link>
           </div>
         )}
