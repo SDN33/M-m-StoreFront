@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { viewCart } from '../../services/cart';
+//import { viewCart } from '../../services/cart';
 import { createOrder } from '../../services/order';
 import { useCart } from '../../context/CartContext';
 
