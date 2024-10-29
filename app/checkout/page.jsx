@@ -5,7 +5,7 @@ import { createOrder } from '../../services/order';
 import { useCart } from '../../context/CartContext';
 
 const CheckoutPage = () => {
-  const { cartItems, deleteAllCartItems, viewAllCartItems } = useCart();
+  const { deleteAllCartItems, viewAllCartItems } = useCart(); // Suppression de `cartItems`
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
