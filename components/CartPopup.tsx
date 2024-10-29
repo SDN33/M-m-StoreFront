@@ -8,27 +8,21 @@ interface CartPopupProps {
   onClose: () => void;
 }
 
-const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
-  // interface CartItem {
-  //   product_id: string;
-  //   name: string;
-  //   quantity: number;
-  //   price: number;
-  //   prices: any;
-  //   images: any;
-  //   image?: string; // URL de l'image du produit
-  //   categories?: string[]; // Catégories du produit
-  // }
+interface CartItem {
+  product_id: number;
+  name: string;
+  image: string;
+  price: number;
+  quantity: number;
+  categories: string[];
+}
 
-  // const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  // const [total, setTotal] = useState<number>(0);
+const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { cartTotal: total, cartItems, deleteAllCartItems, viewAllCartItems } = useCart();
+  const { cartTotal: total, cartItems, deleteAllCartItems } = useCart();
 
   useEffect(() => {
-    // const cartData = viewAllCartItems();
-    // setTotal(cartData.total || 0);
     const fetchCart = async () => {
       if (isOpen) {
         setLoading(true);
@@ -36,10 +30,6 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
 
         try {
           await new Promise(resolve => setTimeout(resolve, 500));
-          // const cartData = await viewCart(); // For API
-          // console.log('Données du panier récupérées:', cartData);
-          // setCartItems(cartData.items || []);
-          // setTotal(cartData.total || 0);
         } catch (err) {
           console.error('Erreur lors de la récupération du panier:', err);
           setError('Échec de la récupération du panier. Veuillez réessayer.');
@@ -94,7 +84,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
                 </tr>
               </thead>
               <tbody>
-                {cartItems.map((item) => (
+                {cartItems.map((item: CartItem) => (
                   <tr key={item.product_id} className="hover:bg-gray-50">
                     <td className="p-2 border-b border-gray-200 flex items-start">
                       {item.image ? (
@@ -103,7 +93,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
                           alt={item.name}
                           className="w-12 h-12 object-cover rounded mr-2"
                         />
-                      ): <></>}
+                      ) : null}
                       <div>
                         <span className="font-medium">{item.name}</span>
                         <p className="text-gray-500 text-xs">
