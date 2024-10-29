@@ -10,7 +10,6 @@ interface AddToCartButtonProps {
 }
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({
-  productId,
   product,
   quantity = 1,
 }) => {
