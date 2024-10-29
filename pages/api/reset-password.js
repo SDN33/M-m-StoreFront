@@ -1,7 +1,6 @@
-import axios, { AxiosError } from 'axios';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import axios from 'axios';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ message: 'Method not allowed' });
     }
@@ -22,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // Send a success response
         res.status(200).json({ message: "Password reset successful." });
     } catch (error) {
-        const message = (error as AxiosError<{ message: string }>).response?.data?.message || "Password reset failed.";
+        const message = error.response?.data?.message || "Password reset failed.";
         res.status(500).json({ message });
     }
 }
