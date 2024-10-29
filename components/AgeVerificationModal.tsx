@@ -58,7 +58,7 @@ const AgeVerificationModal = () => {
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden">
       {/* Fond noir avec flou qui s'estompe */}
       <div
-        className={`absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-1000
+        className={`absolute inset-0 bg-transient from-gray-800 to-black backdrop-blur-sm transition-opacity duration-1000
           ${isOpening ? 'opacity-0' : 'opacity-100'}`}
       />
 
@@ -66,26 +66,26 @@ const AgeVerificationModal = () => {
       <div className="absolute inset-0">
         {/* Porte gauche */}
         <div
-          className={`absolute top-0 bottom-0 w-1/2 left-0 bg-primary transition-transform duration-[1.5s] ease-in-out transform
+          className={`absolute top-0 bottom-0 w-1/2 left-0 bg-transient from-gray-800 to-black transition-transform duration-[1.5s] ease-in-out transform
             ${isOpening ? '-translate-x-full' : 'translate-x-0'}`}
           style={{
             background: 'linear-gradient(to right, #1a1a1a, #333)'
           }}
         >
           {/* Bordure décorative droite */}
-          <div className="absolute right-0 top-0 bottom-0 w-2 bg-gray-600"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-2 bg-gray-800"></div>
         </div>
 
         {/* Porte droite */}
         <div
-          className={`absolute top-0 bottom-0 w-1/2 right-0 bg-primary transition-transform duration-[1.5s] ease-in-out transform
+          className={`absolute top-0 bottom-0 w-1/2 right-0 bg-transient from-gray-800 to-black transition-transform duration-[1.5s] ease-in-out transform
             ${isOpening ? 'translate-x-full' : 'translate-x-0'}`}
           style={{
             background: 'linear-gradient(to left, #1a1a1a, #333)'
           }}
         >
           {/* Bordure décorative gauche */}
-          <div className="absolute left-0 top-0 bottom-0 w-2 bg-gray-600"></div>
+          <div className="absolute left-0 top-0 bottom-0 w-2 bg-gray-800"></div>
         </div>
       </div>
 
@@ -95,13 +95,13 @@ const AgeVerificationModal = () => {
           transition-all duration-500 ${isOpening ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}
       >
         <Image
-          src="/images/logow.png"
+          src="/images/logo-meme (2).svg"
           alt="Vérification de l'âge"
-          width={150}
-          height={150}
-          className="mx-auto mb-4"
+          width={250}
+          height={250}
+          className="mx-auto mb-8"
         />
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">
           Vérification de l&apos;âge
         </h2>
         <p className="text-gray-600 mb-6 font-serif">

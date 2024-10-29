@@ -6,16 +6,12 @@ interface AddToCartButtonProps {
   productId: number;
   product: object;
   quantity?: number;
-  onAddToCart?: (cartData: { product_id: number; quantity: number }[]) => void;
-  cart_item_data: { [key: string]: string };
 }
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   productId,
   product,
   quantity = 1,
-  onAddToCart,
-  cart_item_data,
 }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -25,9 +21,14 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
     setLoading(true);
     setError(null);
     try {
+<<<<<<< HEAD
       // const response = await addToCart(productId, quantity);
       await new Promise(resolve => setTimeout(resolve, 500));
       addNewCartItem(product, quantity)
+=======
+      await addToCart(productId, quantity);
+      addNewCartItem(product, quantity);
+>>>>>>> 7ace04c8e00beff890705ceefcbfcb52df9550df
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Une erreur inconnue s\'est produite');
       console.error(error);

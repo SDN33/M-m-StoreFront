@@ -1,6 +1,6 @@
 'use client';
 
-import { ShoppingCart, User, Menu as MenuIcon, X, ChevronDown, ChevronRight, ChevronLeft } from 'lucide-react';
+import { User, Menu as MenuIcon, X, ChevronDown, ChevronRight, ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import CartPopup from './CartPopup';
@@ -53,7 +53,7 @@ const Header = () => {
             {/* Logo */}
             <a href="/" className="flex-shrink-0 ml-8">
               <Image
-                src="/images/logo-meme (2).png"
+                src="/images/logo-meme (2).svg"
                 alt="Logo"
                 width={200}
                 height={250}

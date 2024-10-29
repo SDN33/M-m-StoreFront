@@ -2,30 +2,39 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 import { wcApi } from './wcApi';
 
-
 export const getCartNonce = async () => {
-    try {
-      const response = await wcApi.get('cart/items', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      // Extracting all headers to find the nonce
-      const headers = response.headers;
-      const nonce = headers['x-wp-nonce'] || headers['woocommerce-store-api-nonce'] || headers['nonce'];
-  
-      if (!nonce) {
-        throw new Error("Nonce not found in headers.");
-      }
-  
-      return nonce;
-    } catch (error) {
-      throw error;
+  try {
+    const response = await wcApi.get('cart/items', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    // Extraction des en-têtes pour trouver le nonce
+    const headers = response.headers;
+    const nonce = headers['x-wp-nonce'] || headers['woocommerce-store-api-nonce'] || headers['nonce'];
+
+    if (!nonce) {
+      throw new Error("Nonce not found in headers.");
     }
-  };
+
+    return nonce;
+  } catch (error) {
+    console.error('Error fetching cart nonce:', error);
+    throw error;
+  }
+};
 
 const absint = (value: string | number): number => Math.abs(parseInt(value.toString(), 10)) || 0;
+
+type CartItem = {
+  product_id: string;
+  name: string;
+  quantity: number;
+  price: number;
+  image: string;
+  categories: string[];
+};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
@@ -34,17 +43,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case 'GET': // Fetch Cart
       try {
         const response = await wcApi.get('cart');
-        const items = response.data.items.map((item: any) => ({
+        const items: CartItem[] = response.data.items.map((item: { id?: string; name?: string; quantity?: number; prices: { price: string }; images?: { src: string }[]; categories?: { name: string }[] }) => ({
           product_id: item.id?.toString() || '',
           name: item.name || 'Unknown Product',
           quantity: item.quantity || 1,
           price: parseFloat(item.prices.price) || 0.0,
           image: item.images?.[0]?.src || '',
-          categories: Array.isArray(item.categories) ? item.categories.map((cat: any) => cat.name) : [],
+          categories: Array.isArray(item.categories) ? item.categories.map((cat) => cat.name) : [],
         }));
         const total = parseFloat(response.data?.totals?.total_price) || 0;
         return res.status(200).json({ total, items });
       } catch (error) {
+        console.error('Failed to fetch cart:', error);
         return res.status(500).json({ message: 'Failed to fetch cart' });
       }
 
@@ -89,18 +99,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
       } catch (error) {
         const message = axios.isAxiosError(error) && error.response ? error.response.data : 'Error with cart action';
+        console.error('Cart action error:', message);
         return res.status(500).json({ message });
       }
 
     case 'DELETE': // Empty Cart
       try {
-        const response = await wcApi.delete('cart/items');
+        const nonce = await getCartNonce(); // Récupération du nonce pour sécuriser la requête
+        const response = await wcApi.delete('cart/items', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Nonce': nonce,  // Inclusion du nonce dans l'en-tête
+          },
+        });
+
         if (response.status === 200) {
           return res.status(200).json({ message: 'Cart emptied successfully' });
         } else {
+          console.error('Failed to empty cart:', response.data);
           return res.status(response.status).json({ message: response.data.message || 'Failed to empty cart' });
         }
       } catch (error) {
+        const message = axios.isAxiosError(error) && error.response ? error.response.data : 'Error emptying cart';
+        console.error('Error emptying cart:', message);
         return res.status(500).json({ message: 'Failed to empty cart' });
       }
 
