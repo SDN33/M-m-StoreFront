@@ -100,6 +100,7 @@ const AgeVerificationModal = () => {
           width={250}
           height={250}
           className="mx-auto mb-8"
+          priority={true}
         />
         <h2 className="text-xl font-bold text-gray-900 mb-4">
           Vérification de l&apos;âge

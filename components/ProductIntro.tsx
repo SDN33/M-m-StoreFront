@@ -68,26 +68,55 @@ const ProductsIntro: React.FC = () => {
         </h1>
         <br />
         <Image
-          src="/images/biodemeter.png"
-          alt="bio demeter"
-          width={80}
+          src="/images/logobio1.webp"
+          alt="bio logo"
+          width={30}
           height={20}
           className="rounded-lg object-contain ml-2 hidden md:block"
+          priority={true}
+        />
+        <Image
+          src="/images/Logobioeu.jpg"
+          alt="Bio euro logo"
+          width={40}
+          height={40}
+          className="rounded-lg object-contain ml-2 hidden md:block"
+          priority={true}
+        />
+        <Image
+          src="/images/déméter.png"
+          alt="demeter logo"
+          width={40}
+          height={40}
+          className="rounded-lg object-contain ml-2 hidden md:block"
+          priority={true}
         />
         <Image
           src="/images/logointro.jpg"
-          alt="bio demeter"
+          alt="biodynamie logo"
           width={40}
           height={20}
-          className="rounded-lg object-contain -ml-2 mt-2 md:block"
+          className="rounded-lg object-contain ml-2 mt-2 md:block"
+          priority={true}
+
         />
         <Image
           src="/images/logointro2.jpg"
-          alt="bio demeter"
-          width={20}
+          alt="nature et progrès"
+          width={24}
           height={20}
-          className="rounded-lg object-contain  mt-2 md:block "
+          className="rounded-lg object-contain ml-1 mt-2 md:block"
+          priority={true}
         />
+        <Image
+          src="/images/biodyvin.jpg"
+          alt="biodyvin logo"
+          width={50}
+          height={20}
+          className="rounded-lg object-contain ml-1 mt-2 md:block"
+          priority={true}
+        />
+
       </div>
     </div>
   );

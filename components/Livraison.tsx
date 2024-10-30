@@ -8,19 +8,19 @@ const Livraison: React.FC = () => {
       <div className="flex items-center justify-center md:justify-start">
         {/* Message de livraison */}
         <div className="flex flex-col text-center">
-          <h3 className="text-lg md:text-xl font-bold">Livraison sécurisée avec UPS</h3>
+          <h3 className="text-lg md:text-xl font-bold">Livraison sécurisée avec Chronopost</h3>
           <p className="text-sm md:text-base mt-1">
-            Nous collaborons avec <span className="font-semibold">UPS</span> pour assurer une livraison rapide et sécurisée de vos commandes.
+            Nous collaborons avec <span className="font-semibold">Chronopost</span> pour assurer une livraison rapide et sécurisée de vos commandes.
           </p>
         </div>
-        {/* Logo UPS */}
+        {/* Logo Chronopost */}
         <Image
-          src="/images/ups.png"
-          alt="Logo UPS"
-          width={120} // Ajustement de la taille
+          src="/images/chronopost.png" // Assurez-vous d'avoir le logo Chronopost à cet emplacement
+          alt="Logo Chronopost"
+          width={100} // Ajustement de la taille
           height={100} // Ajustement de la taille
           className="rounded-lg mr-2" // Ajout d'une marge à droite du logo
-          loading='lazy' // Ajout de l'attribut loading pour le chargement paresseux
+          loading="lazy" // Ajout de l'attribut loading pour le chargement paresseux
         />
       </div>
     </div>

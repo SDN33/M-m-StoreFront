@@ -11,6 +11,7 @@ import Trust from '@/components/Trust';
 import PromoRappel from '@/components/PromoRappel';
 import HeroBanner from '@/components/HeroBanner';
 import WineCategories from '@/components/WineCategories';
+import Livraison from '@/components/Livraison';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -173,6 +174,7 @@ export default function Home() {
               <br /><br />
               <HeroBanner />
               <PromoRappel />
+              <Livraison />
               <br /><br />
               <WineCategories />
               <Trust />
