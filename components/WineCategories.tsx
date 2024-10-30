@@ -110,7 +110,7 @@ const VendorSlider = () => {
       </h2>
 
       <p className='text-center text-sm font-extrabold -mt-4 mb-8' >
-      Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature..<br /> Nous avons sélectionné pour vous les meilleurs vins de France.
+      Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature
         </p>
 
 

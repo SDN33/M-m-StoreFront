@@ -28,7 +28,6 @@ const CheckoutPage = () => {
 
   useEffect(() => {
     // const fetchCartDetails = async () => {
-    //   try {
     //     // const data = await viewCart();
     //     const data = viewAllCartItems();
     //     setCartDetails(data);
@@ -45,13 +44,11 @@ const CheckoutPage = () => {
   }, []);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
   };
 
   const handleOrderSubmit222 = async (e) => {
     e.preventDefault();
-      // Check if any form field is empty
+
     const { firstName, lastName, address1, city, state, postcode, email, phone } = formData;
     if (!firstName || !lastName || !address1 || !city || !state || !postcode || !email || !phone) {
       setError('Please fill out all required fields.');
@@ -102,7 +99,7 @@ const CheckoutPage = () => {
       deleteAllCartItems();
       const orderResponse = await createOrder(orderData);
       router.push(`/thank-you?order_id=${orderResponse.id}`);
-    } catch (err) {
+    } catch {
       setError('Order creation failed. Please try again.');
     } finally {
       setLoading(false);
@@ -196,9 +193,8 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className=" mx-auto px-8 mt-56 max-w-4xl mx-auto">
+    <div className="px-8 mt-56 max-w-4xl mx-auto">
       <div className="flex flex-col md:flex-row gap-8">
-        {/* Left side: Checkout Form */}
         <div className="w-full md:w-1/2 bg-white rounded-lg p-8 px-4 py-4">
           <h2 className="text-2xl font-semibold mb-6">Checkout</h2>
           <form onSubmit={handleOrderSubmit} className="space-y-4">
@@ -213,7 +209,6 @@ const CheckoutPage = () => {
           </form>
         </div>
 
-        {/* Right side: Order Summary & Payment */}
         <div className="w-full md:w-1/2 bg-gray-50 rounded-lg p-8 px-4 py-4">
           <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
           <ul className="space-y-4 mb-4">
@@ -226,7 +221,7 @@ const CheckoutPage = () => {
           </ul>
           <div className="flex justify-between font-semibold text-lg mb-2">
             <span>Subtotal:</span>
-            <span>{(cartDetails.total ).toFixed(2)}€</span>
+            <span>{(cartDetails.total).toFixed(2)}€</span>
           </div>
           <div className="flex justify-between font-semibold text-lg mb-2">
             <span>Shipping:</span>
@@ -236,7 +231,6 @@ const CheckoutPage = () => {
             <span>Total:</span>
             <span>{(cartDetails.total + 10).toFixed(2)}€</span>
           </div>
-          {/* Payment and Order Button */}
           <div>
             <select name="paymentMethod" onChange={handleInputChange} className="w-full border p-2 rounded mb-4">
               <option value="cod">Cash on Delivery</option>

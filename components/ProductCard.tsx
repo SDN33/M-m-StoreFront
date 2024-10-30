@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Heart } from 'lucide-react';
-import AddToCart from './AddToCartButton';
+import AddToCartButton from './AddToCartButton';
 
 interface Product {
   id: number;
@@ -29,7 +29,6 @@ interface Product {
 interface ProductCardProps {
   product: Product;
   onAddToCart: (productId: number, quantity: number, variationId: number) => Promise<void>;
-
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
@@ -43,7 +42,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   };
 
   const formatRating = (rating?: number, ratingCount?: number) => {
-    if (typeof rating !== 'number' || typeof ratingCount !== 'number' || ratingCount === 0) return <span className='text-xs'>Pas encore noté</span>;
+    if (typeof rating !== 'number' || typeof ratingCount !== 'number' || ratingCount === 0)
+      return <span className='text-xs'>Pas encore noté</span>;
     return <span>{(rating * 4).toFixed(1)}/20</span>;
   };
 
@@ -176,15 +176,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             onChange={(e) => setQuantity(Number(e.target.value))}
             className="border rounded px-2 py-1 bg-white text-sm"
           >
-            {[1, 2, 3, 4, 5, 6].map(num => (
-              <option key={num} value={num}>{num}</option>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+              <option key={num} value={num}>
+                {num}
+              </option>
             ))}
           </select>
-          <AddToCart
+          <AddToCartButton
             productId={product.id}
             product={product}
             quantity={quantity}
-            cart_item_data={{}}
             onAddToCart={async () => {
               await onAddToCart(product.id, quantity, variationId);
             }}

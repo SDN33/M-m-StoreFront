@@ -19,13 +19,48 @@ interface ProductFilterProps {
 
 const getFilterTitle = (filterType: string) => {
   const titles: { [key: string]: JSX.Element } = {
-    color: <>COULEUR <br /><Wine className="inline-block ml-1 text-teal-800" /></>,
-    region: <>RÉGIONS <br /><Locate className="inline-block ml-1 text-teal-800" /></>,
-    vintage: <>MILLÉSIME <br /><Calendar className="inline-block ml-1 text-teal-800" /></>,
-    certification: <>CERTIFICATION <br /><Medal className="inline-block ml-1 text-teal-800" /></>,
-    style: <>STYLE <br /><Grape className="inline-block ml-1 text-teal-800" /></>,
-    volume: <>VOLUME <br /><Ruler className="inline-block ml-1 text-teal-800" /></>,
-    accord_mets: <>ACCORD METS <br /><Utensils className="inline-block ml-1 text-teal-800" /></>,
+    color: (
+      <>
+        <Wine className="inline-block ml-1 text-teal-800" />
+        <br /><>COULEUR </>
+      </>
+    ),
+    region: (
+      <>
+        <Locate className="inline-block ml-1 text-teal-800" />
+        <br /><>RÉGIONS</>
+      </>
+    ),
+    vintage: (
+      <>
+        <Calendar className="inline-block ml-1 text-teal-800" />
+        <>MILLÉSIME <br /></>
+      </>
+    ),
+    certification: (
+      <>
+        <Medal className="inline-block ml-1 text-teal-800" />
+        <br /><>CERTIFICATION</>
+      </>
+    ),
+    style: (
+      <>
+        <Grape className="inline-block ml-1 text-teal-800" />
+        <br /><>STYLE</>
+      </>
+    ),
+    volume: (
+      <>
+        <Ruler className="inline-block ml-1 text-teal-800" />
+        <br /><>VOLUME</>
+      </>
+    ),
+    accord_mets: (
+      <>
+        <Utensils className="inline-block ml-1 text-teal-800" />
+        <br /><>ACCORD METS </>
+      </>
+    ),
   };
   return titles[filterType] || <>{filterType}</>;
 };
@@ -126,7 +161,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
               onClick={() => toggleSection(filterType)}
               className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between hover:bg-gray-100 transition-colors"
             >
-              <span className="text-gray-800">{getFilterTitle(filterType)}</span>
+              <span className="text-gray-800 text-base">{getFilterTitle(filterType)}</span>
               {expandedSections.includes(filterType) ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
             </button>
             {expandedSections.includes(filterType) && (

@@ -18,10 +18,10 @@ function ResetPasswordForm() {
       // Call the Next.js API route instead of the WordPress API directly
       await axios.post('/api/reset-password', { token: resetToken, password });
 
-      setMessage("Password reset successful.");
+      setMessage("Mot de passe réinitialisé avec succès.");
     } catch (err) {
       console.error("Reset password error:", err);
-      setMessage("Password reset failed. Please try again.");
+      setMessage("Mot de passe non réinitialisé. Veuillez réessayer.");
     }
   };
 
@@ -31,14 +31,14 @@ function ResetPasswordForm() {
       <form onSubmit={handleResetPassword}>
         <input
           type="password"
-          placeholder="Enter new password"
+          placeholder="Entrez votre nouveau mot de passe"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Reset Password</button>
+        <button type="submit">Réinitialiser le mot de passe</button>
       </form>
-      <a href="/login" className="link">Back to Login</a>
+      <a href="/login" className="link">Retour à la page de connexion</a>
     </div>
   );
 }
@@ -46,8 +46,8 @@ function ResetPasswordForm() {
 export default function ResetPasswordPage() {
   return (
     <div className="sx-container">
-      <h2>Reset Password</h2>
-      <Suspense fallback={<div>Loading...</div>}>
+      <h2>Réinitialiser le mot de passe</h2>
+      <Suspense fallback={<div>Chargement...</div>}>
         <ResetPasswordForm />
       </Suspense>
     </div>

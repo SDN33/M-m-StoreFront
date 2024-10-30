@@ -14,7 +14,7 @@ interface CartItem {
   product_id: number;
   name: string;
   image: string;
-  images: string[]; // Ajout des images du produit
+  images: string[];
   categories: string[];
   quantity: number;
   price: number;
@@ -31,9 +31,8 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
       if (isOpen) {
         setLoading(true);
         setError(null);
-
         try {
-          await new Promise(resolve => setTimeout(resolve, 500)); // Simule le chargement
+          await new Promise(resolve => setTimeout(resolve, 500));
         } catch (err) {
           console.error('Erreur lors de la récupération du panier:', err);
           setError('Échec de la récupération du panier. Veuillez réessayer.');
@@ -61,101 +60,103 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">Votre Panier</h2>
+      <div className="bg-white rounded-lg shadow-lg w-full max-w-lg relative">
+        <div className="bg-black text-white p-4 rounded-t-lg flex justify-between items-center">
+          <h2 className="text-xl font-semibold">Mon Panier</h2>
           <button
             onClick={onClose}
-            className="text-red-500 hover:text-red-700"
+            className="text-white hover:text-gray-200 text-2xl"
             aria-label="Fermer le panier"
           >
-            &times;
+            ×
           </button>
         </div>
 
-        {loading ? (
-          <div className="flex justify-center items-center">
-            <span className="loader mr-2"></span> Chargement...
-          </div>
-        ) : error ? (
-          <p className="text-red-500 text-center">{error}</p>
-        ) : cartItems.length === 0 ? (
-          <p className="text-gray-600 text-center">Votre panier est vide</p>
-        ) : (
-          <div style={{ maxHeight: '80vh', overflowY: 'auto' }}>
-            <table className="w-full border border-gray-200 mb-4">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="p-2 border-b border-gray-200 text-left">Produit</th>
-                  <th className="p-2 border-b border-gray-200 text-center">Quantité</th>
-                  <th className="p-2 border-b border-gray-200 text-right">Prix</th>
-                </tr>
-              </thead>
-              <tbody>
+        <div className="p-6">
+          {loading ? (
+            <div className="flex justify-center items-center p-8">
+              <div className="loader"></div>
+            </div>
+          ) : error ? (
+            <p className="text-red-500 text-center p-4">{error}</p>
+          ) : cartItems.length === 0 ? (
+            <div className="text-center p-8">
+              <p className="text-gray-600 mb-4">Votre panier est vide</p>
+              <p className="text-sm text-gray-500">Découvrez nos vins bio en direct des vignerons !</p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <div className="max-h-[50vh] overflow-y-auto">
                 {cartItems.map((item: CartItem) => (
-                  <tr key={item.product_id} className="hover:bg-gray-50">
-                    <td className="p-2 border-b border-gray-200 flex items-start">
+                  <div key={item.product_id} className="flex items-start py-4 border-b border-gray-200">
+                    <div className="flex-shrink-0 w-20 h-20 relative">
                       {item.image && (
                         <Image
                           src={item.image}
                           alt={item.name}
-                          className="object-cover rounded mr-2"
-                          width={50}
-                          height={50}
+                          fill
+                          className="object-cover rounded"
                         />
                       )}
-                      <div>
-                        <span className="font-medium">{item.name}</span>
-                        <p className="text-gray-500 text-xs">
-                          {item.categories ? item.categories.join(', ') : 'Sans catégorie'}
-                        </p>
+                    </div>
+                    <div className="ml-4 flex-grow">
+                      <h3 className="font-medium text-gray-800">{item.name}</h3>
+                      <p className="text-sm text-gray-500">
+                        Vin {item.categories?.join(', ') || 'Vin'}
+                      </p>
+                      <div className="flex justify-between items-center mt-2">
+                        <span className="text-sm">Quantité: {item.quantity}</span>
+                        <span className="font-medium text-[#FF6B4A]">
+                          {(item.price * item.quantity).toFixed(2)} €
+                        </span>
                       </div>
-                    </td>
-                    <td className="p-2 border-b border-gray-200 text-center">{item.quantity}</td>
-                    <td className="p-2 border-b border-gray-200 text-right">
-                      {(item.price * item.quantity).toFixed(2)} €
-                    </td>
-                  </tr>
+                      {item.quantity > 1 && (
+                        <div className="flex justify-between items-center">
+                          <span className='text-xs'>Prix à l&apos;unité : {item.price} €</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 ))}
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colSpan={2} className="p-2 text-right font-semibold">Total :</td>
-                  <td className="p-2 text-right font-semibold">{total.toFixed(2)} €</td>
-                </tr>
-              </tfoot>
-            </table>
+              </div>
 
-            <button
-              className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition mb-2"
-              onClick={handleEmptyCart}
-            >
-              Vider le panier
-            </button>
+              <div className="border-t border-gray-200 pt-4">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="font-medium text-lg">Total</span>
+                  <span className="font-bold text-xl text-[#FF6B4A]">{total.toFixed(2)} €</span>
+                </div>
 
-            {/* <Link href="/checkout" legacyBehavior> */}
-              <button onClick={handleCheckout} className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition text-center block">
-                Passer à la caisse
-              </button>
-            {/* </Link> */}
-          </div>
-        )}
+                <div className="space-y-2">
+                  <button
+                    onClick={handleEmptyCart}
+                    className="w-full py-2 px-4 border border-gray-300 rounded text-gray-600 hover:bg-gray-50 transition"
+                  >
+                    Vider le panier
+                  </button>
+
+                  <button
+                    onClick={handleCheckout}
+                    className="w-full py-3 px-4 bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white rounded transition font-medium text-center block"
+                  >
+                    Passer la commande
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       <style jsx>{`
         .loader {
-          border: 4px solid rgba(0, 0, 0, 0.1);
+          border: 3px solid rgba(255, 107, 74, 0.1);
           border-radius: 50%;
-          border-top-color: #3498db;
-          width: 20px;
-          height: 20px;
-          animation: spin 1s ease-in-out infinite;
-          margin: 5px;
+          border-top-color: #FF6B4A;
+          width: 40px;
+          height: 40px;
+          animation: spin 1s linear infinite;
         }
         @keyframes spin {
-          from {
-            transform: rotate(0deg);
-          }
           to {
             transform: rotate(360deg);
           }

@@ -13,27 +13,27 @@ export default function ForgotPasswordPage() {
 
       try {
           await axios.post('/api/forgot-password', { email });
-          setMessage("Password reset link sent. Please check your email.");
+          setMessage("Le lien de réinitialisation a été envoyé à votre adresse e-mail.");
       } catch {
-          setMessage("Failed to send reset link. Try again.");
+          setMessage("Une erreur s'est produite. Veuillez réessayer.");
       }
   };
 
   return (
     <div className="sx-container">
-      <h2>Forgot Password</h2>
+      <h2 className="text-primary">Mot de passe oublié</h2>
       {message && <p>{message}</p>}
       <form onSubmit={handleForgotPassword}>
         <input
           type="email"
-          placeholder="Enter your email"
+          placeholder="Entrer votre adresse e-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <button type="submit">Send Reset Link</button>
+        <button className="bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white" type="submit">Envoyer le lien de réinitialisation</button>
       </form>
-      <a href="/login" className="link">Back to Login</a>
+      <a href="/login" className="link">Retour à la page de connexion</a>
     </div>
   );
 }

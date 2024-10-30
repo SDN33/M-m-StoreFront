@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { method, query } = req;
 
   switch (method) {
-    case 'GET':
+    case 'GET': {
       const { id } = query;
       if (!id) {
         return res.status(400).json({ message: 'Order ID is required' });
@@ -19,20 +19,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         console.error('Error retrieving order:', error);
         return res.status(500).json({ message: 'Failed to retrieve order' });
       }
-    
-    case 'POST':
+    }
+
+    case 'POST': {
       try {
         const orderData = req.body;
         const response = await wcOrderApi.post('/', orderData);
-        res.status(200).json(response.data);
+        return res.status(200).json(response.data);
       } catch (error) {
         console.error('Order creation error:', error);
-        res.status(500).json({ message: 'Order creation failed' });
+        return res.status(500).json({ message: 'Order creation failed' });
       }
-
+    }
     default:
       res.setHeader('Allow', ['GET', 'POST']);
       return res.status(405).end(`Method ${method} Not Allowed`);
   }
-
 }
