@@ -135,7 +135,7 @@ const Slogan: React.FC = () => {
           ))}
         </div>
         <br />
-        <span className="text-white text-xs block mt-4">* en comparaison avec les vins non bio</span>
+        <span className="text-white text-xs block mt-4">* en comparaison avec les vins non biologiques</span>
       </div>
     </div>
   );
