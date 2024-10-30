@@ -52,7 +52,7 @@ export default function SignupPage() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button className="bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white" type="submit">S&apos;inscrire</button>'
+        <button className="bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white" type="submit">S&apos;inscrire</button>
       </form>
       <a href="/login" className="link">Vous avez déjà un compte? Connectez-vous</a>
     </div>
