@@ -12,7 +12,6 @@ const CheckoutPage = () => {
     lastName: '',
     address1: '',
     city: '',
-    state: '',
     postcode: '',
     email: '',
     phone: '',
@@ -46,8 +45,8 @@ const CheckoutPage = () => {
     e.preventDefault();
 
     // Validation des champs du formulaire
-    const { firstName, lastName, address1, city, state, postcode, email, phone } = formData;
-    if (!firstName || !lastName || !address1 || !city || !state || !postcode || !email || !phone) {
+    const { firstName, lastName, address1, city, postcode, email, phone } = formData;
+    if (!firstName || !lastName || !address1 || !city || !postcode || !email || !phone) {
       setError('Veuillez remplir tous les champs requis.');
       return;
     }
@@ -80,7 +79,6 @@ const CheckoutPage = () => {
                 last_name: formData.lastName,
                 address_1: formData.address1,
                 city: formData.city,
-                state: formData.state,
                 postcode: formData.postcode,
                 country: 'FR',
                 email: formData.email,
@@ -91,7 +89,6 @@ const CheckoutPage = () => {
                 last_name: formData.lastName,
                 address_1: formData.address1,
                 city: formData.city,
-                state: formData.state,
                 postcode: formData.postcode,
                 country: 'FR',
               },
@@ -111,7 +108,7 @@ const CheckoutPage = () => {
             try {
               const orderResponse = await createOrder(orderData);
               router.push(`/merci?order_id=${orderResponse.id}`);
-            } catch (error) {
+            } catch {
               setError('La création de la commande a échoué. Veuillez réessayer.');
             } finally {
               setLoading(false);
@@ -134,7 +131,6 @@ const CheckoutPage = () => {
           last_name: formData.lastName,
           address_1: formData.address1,
           city: formData.city,
-          state: formData.state,
           postcode: formData.postcode,
           country: 'FR',
           email: formData.email,
@@ -145,7 +141,6 @@ const CheckoutPage = () => {
           last_name: formData.lastName,
           address_1: formData.address1,
           city: formData.city,
-          state: formData.state,
           postcode: formData.postcode,
           country: 'FR',
         },
@@ -165,7 +160,7 @@ const CheckoutPage = () => {
       try {
         const orderResponse = await createOrder(orderData);
         router.push(`/merci?order_id=${orderResponse.id}`);
-      } catch (error) {
+      } catch {
         setError('La création de la commande a échoué. Veuillez réessayer.');
       } finally {
         setLoading(false);
@@ -183,7 +178,6 @@ const CheckoutPage = () => {
             <input name="lastName" placeholder="Nom" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="address1" placeholder="Adresse" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="city" placeholder="Ville" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
-            <input name="state" placeholder="État / Région (optionnel)" onChange={handleInputChange} className="w-full border p-2 rounded"/>
             <input name="postcode" placeholder="Code postal" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="email" placeholder="E-mail" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="phone" placeholder="Téléphone" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
