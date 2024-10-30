@@ -27,7 +27,7 @@ const CheckoutPage = () => {
   let cartDetails = viewAllCartItems();
 
   useEffect(() => {
-    loadScript({ "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID })
+    loadScript({ "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "" })
       .then(() => console.log("PayPal SDK loaded successfully"))
       .catch((err) => console.error("Failed to load PayPal SDK", err));
   }, []);
