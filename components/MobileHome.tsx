@@ -8,7 +8,6 @@ import ProductsIntro from '@/components/ProductIntro';
 import WineCategories from '@/components/WineCategories';
 import MobileProductFilter from './MobileProductFilter';
 import Trust from '@/components/Trust';
-import PromoRappel from '@/components/PromoRappel';
 import Slider from '@/components/Slider';
 import Livraison from './Livraison';
 
@@ -25,11 +24,6 @@ const MobileHome: React.FC = () => {
     region__pays: [],
     categories: []
   });
-
-  const handleAddToCart = (productId: number, quantity: number, variationId: number) => {
-    // Implement the logic to add the product to the cart
-    console.log(`Product ${productId} with quantity ${quantity} and variation ${variationId} added to cart`);
-  };
 
   const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {
     setSelectedFilters((prev) => ({

@@ -8,7 +8,6 @@ import ProductsIntro from '@/components/ProductIntro';
 import Slider from '@/components/Slider';
 import MobileHome from '@/components/MobileHome';
 import Trust from '@/components/Trust';
-import PromoRappel from '@/components/PromoRappel';
 import HeroBanner from '@/components/HeroBanner';
 import WineCategories from '@/components/WineCategories';
 import Livraison from '@/components/Livraison';
