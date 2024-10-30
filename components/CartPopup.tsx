@@ -102,7 +102,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
                       </div>
                       {item.quantity > 1 && (
                         <div className="flex justify-between items-center">
-                          <span className='text-xs'>Prix à l'unité : {item.price} €</span>
+                          <span className='text-xs'>Prix à l&apos;unité : {item.price} €</span>
                         </div>
                       )}
                     </div>
