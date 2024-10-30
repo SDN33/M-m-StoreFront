@@ -27,84 +27,17 @@ const CheckoutPage = () => {
   let cartDetails = viewAllCartItems();
 
   useEffect(() => {
-    // const fetchCartDetails = async () => {
-    //     // const data = await viewCart();
-    //     const data = viewAllCartItems();
-    //     setCartDetails(data);
-    //   } catch (err) {
-    //     setError('Failed to load cart details');
-    //   }
-    // };
-    // fetchCartDetails();
-    // Load PayPal SDK
-
     loadScript({ "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID })
       .then(() => console.log("PayPal SDK loaded successfully"))
       .catch((err) => console.error("Failed to load PayPal SDK", err));
   }, []);
 
+  // Handle form input changes
   const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handleOrderSubmit222 = async (e) => {
-    e.preventDefault();
-
-    const { firstName, lastName, address1, city, state, postcode, email, phone } = formData;
-    if (!firstName || !lastName || !address1 || !city || !state || !postcode || !email || !phone) {
-      setError('Please fill out all required fields.');
-      return;
-    }
-
-    setLoading(true);
-    setError('');
-
-    const orderData = {
-      payment_method: formData.paymentMethod,
-      payment_method_title: formData.paymentMethod === 'cod' ? 'Cash on Delivery' : 'Direct Bank Transfer',
-      set_paid: true,
-      billing: {
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        address_1: formData.address1,
-        city: formData.city,
-        state: formData.state,
-        postcode: formData.postcode,
-        country: 'US',
-        email: formData.email,
-        phone: formData.phone,
-      },
-      shipping: {
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        address_1: formData.address1,
-        city: formData.city,
-        state: formData.state,
-        postcode: formData.postcode,
-        country: 'US',
-      },
-      line_items: cartDetails.items.map((item) => ({
-        product_id: item.product_id,
-        quantity: item.quantity,
-      })),
-      shipping_lines: [
-        {
-          method_id: 'flat_rate',
-          method_title: 'Flat Rate',
-          total: '10.00',
-        },
-      ],
-    };
-
-    try {
-      deleteAllCartItems();
-      const orderResponse = await createOrder(orderData);
-      router.push(`/thank-you?order_id=${orderResponse.id}`);
-    } catch {
-      setError('Order creation failed. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   // Handle PayPal Payment and Order Submission
   const handleOrderSubmit = async (e) => {
@@ -193,7 +126,7 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="px-8 mt-56 max-w-4xl mx-auto">
+    <div className="mx-auto px-8 mt-56 max-w-4xl mx-auto">
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2 bg-white rounded-lg p-8 px-4 py-4">
           <h2 className="text-2xl font-semibold mb-6">Checkout</h2>
