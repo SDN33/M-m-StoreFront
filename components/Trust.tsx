@@ -26,8 +26,8 @@ const Newsletter = () => {
         <h2 className="text-2xl md:text-3xl font-bold mb-2">
           Newsletter
         </h2>
-        <p className="text-lg mb-1">Des offres exclusives, des nouveautés...</p>
-        <p className="font-semibold mb-4">Parole de Mémé, on ne spamme pas.</p>
+        <p className="text-lg mb-1 text-center">Des offres exclusives, des nouveautés...</p>
+        <p className="font-semibold mb-4 text-center">Parole de Mémé, on ne spamme pas !</p>
         <form onSubmit={handleSubscribe} className="w-full max-w-md">
           <div className="flex flex-col sm:flex-row gap-2 items-center">
             <div className="relative flex-grow">

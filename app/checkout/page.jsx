@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { createOrder } from '../../services/order';
 import { useCart } from '../../context/CartContext';
 import { loadScript } from "@paypal/paypal-js";
+import Image from 'next/image';
 
 const CheckoutPage = () => {
   const { deleteAllCartItems, viewAllCartItems } = useCart();
@@ -172,7 +173,7 @@ const CheckoutPage = () => {
     <div className="mx-auto px-8 mt-56 max-w-4xl">
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2 bg-white rounded-lg p-8 px-4 py-4">
-          <h2 className="text-2xl font-semibold mb-6">Commande</h2>
+          <h2 className="text-2xl font-semibold mb-6">Adresse de livraison</h2>
           <form onSubmit={handleOrderSubmit} className="space-y-4">
             <input name="firstName" placeholder="Prénom" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="lastName" placeholder="Nom" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
@@ -199,7 +200,7 @@ const CheckoutPage = () => {
             <span>{(cartDetails.total).toFixed(2)}€</span>
           </div>
           <div className="flex justify-between font-semibold text-lg mb-2">
-            <span>Frais de livraison :</span>
+            <span>Livraison 24H : <Image className='flex' src="/images/chronopost.png" alt="Chronopost" width="60" height="10" /></span>
             <span>10.00€</span>
           </div>
           <div className="flex justify-between font-bold text-xl mb-4">

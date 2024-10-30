@@ -23,7 +23,6 @@ const Header = () => {
     { name: '⚡ VENTES FLASH', href: '/ventes-flash', className: 'text-primary font-semibold' },
     { name: 'Nos Vins', onClick: toggleNosVinsPopup, icon: <ChevronDown className="inline-block ml-1" /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com' },
-    { name: 'La Sélection de Mémé', href: '/selection-meme' },
     { name: 'Nos Vignerons.nes', href: '/vendors' },
     { name: 'Vins du Monde', href: '/vins-du-monde' },
     { name: 'Contactez-nous', href: '/contact' },

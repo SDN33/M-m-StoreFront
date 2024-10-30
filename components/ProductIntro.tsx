@@ -5,20 +5,19 @@ import Image from 'next/image';
 
 const ProductsIntro: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [counter, setCounter] = useState(0); // État pour le compteur
+  const [counter, setCounter] = useState(0);
   const introRef = useRef<HTMLDivElement | null>(null);
-  const targetCount = 2500; // Nombre total de produits
+  const targetCount = 2500;
 
   useEffect(() => {
-    // Intersection observer pour détecter la visibilité du composant
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.disconnect(); // Arrêter l'observation une fois visible
+          observer.disconnect();
         }
       },
-      { threshold: 0.1 } // Déclenchement lorsque 10% du composant est visible
+      { threshold: 0.1 }
     );
 
     const currentIntroRef = introRef.current;
@@ -34,89 +33,47 @@ const ProductsIntro: React.FC = () => {
     };
   }, []);
 
-  // Effet pour animer le compteur
   useEffect(() => {
     if (isVisible && counter < targetCount) {
       const interval = setInterval(() => {
         setCounter((prevCounter) => {
           if (prevCounter < targetCount) {
-            return prevCounter + 50; // Ajuster la vitesse d'incrémentation ici
+            return prevCounter + 50;
           } else {
             clearInterval(interval);
-            return targetCount; // Assurer que le compteur atteigne la valeur cible
+            return targetCount;
           }
         });
-      }, 50); // Mise à jour toutes les 50ms pour une animation fluide
+      }, 50);
 
       return () => clearInterval(interval);
     }
   }, [isVisible, counter, targetCount]);
 
   return (
-    <div
-      ref={introRef}
-      className={`flex flex-col md:flex-row justify-between items-center mb-4 ${isVisible ? 'slide-in-visible' : 'slide-in'}`}
-    >
-      {/* Texte au centre avec espacement */}
-      <div className="flex mx-auto mt-28 lg:mt-14 slide-in-right">
-        <h1 className="text-lg md:text-3xl font-extrabold text-primary tracking-tight text-center">
+    <div ref={introRef} className={`flex flex-col md:flex-row justify-between items-center mb-4 ${isVisible ? 'slide-in-visible' : 'slide-in'}`}>
+      {/* Logos à gauche */}
+      <div className="space-x-2 slide-in-right hidden md:flex mt-12 ml-28">
+        <Image src="/images/logobio1.webp" alt="bio logo" width={30} height={20} className="rounded-lg object-contain" priority={true} />
+        <Image src="/images/Logobioeu.jpg" alt="Bio euro logo" width={40} height={40} className="rounded-lg object-contain" priority={true} />
+        <Image src="/images/déméter.png" alt="demeter logo" width={40} height={40} className="rounded-lg object-contain" priority={true} />
+      </div>
+
+      {/* Texte central avec compteur */}
+      <div className="flex flex-col items-center mx-auto mt-28 lg:mt-14 slide-in-right">
+        <h1 className="text-lg md:text-3xl font-extrabold text-primary tracking-tight text-center leading-tight">
           {counter.toLocaleString()} vins bio en direct des vignerons(nes)
-          <br />
-          <div className="text-black text-sm">
+          <span className="block text-black text-sm ">
             Tu sais, celles et ceux qui respectent la terre, ses locataires...
-          </div>
+          </span>
         </h1>
-        <br />
-        <Image
-          src="/images/logobio1.webp"
-          alt="bio logo"
-          width={30}
-          height={20}
-          className="rounded-lg object-contain ml-2 hidden md:block"
-          priority={true}
-        />
-        <Image
-          src="/images/Logobioeu.jpg"
-          alt="Bio euro logo"
-          width={40}
-          height={40}
-          className="rounded-lg object-contain ml-2 hidden md:block"
-          priority={true}
-        />
-        <Image
-          src="/images/déméter.png"
-          alt="demeter logo"
-          width={40}
-          height={40}
-          className="rounded-lg object-contain ml-2 hidden md:block"
-          priority={true}
-        />
-        <Image
-          src="/images/logointro.jpg"
-          alt="biodynamie logo"
-          width={40}
-          height={20}
-          className="rounded-lg object-contain ml-2 mt-2 md:block"
-          priority={true}
+      </div>
 
-        />
-        <Image
-          src="/images/logointro2.jpg"
-          alt="nature et progrès"
-          width={24}
-          height={20}
-          className="rounded-lg object-contain ml-1 mt-2 md:block"
-          priority={true}
-        />
-        <Image
-          src="/images/biodyvin.jpg"
-          alt="biodyvin logo"
-          width={50}
-          height={20}
-          className="rounded-lg object-contain ml-1 mt-2 md:block"
-          priority={true}
-        />
-
+      {/* Logos à droite */}
+      <div className="space-x-2 slide-in-right hidden md:flex mt-12 mr-28">
+        <Image src="/images/logointro.jpg" alt="biodynamie logo" width={40} height={20} className="rounded-lg object-contain" priority={true} />
+        <Image src="/images/logointro2.jpg" alt="nature et progrès" width={24} height={20} className="rounded-lg object-contain" priority={true} />
+        <Image src="/images/biodyvin.jpg" alt="biodyvin logo" width={50} height={20} className="rounded-lg object-contain" priority={true} />
       </div>
     </div>
   );

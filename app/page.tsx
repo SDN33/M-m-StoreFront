@@ -173,7 +173,6 @@ export default function Home() {
               </div>
               <br /><br />
               <HeroBanner />
-              <PromoRappel />
               <Livraison />
               <br /><br />
               <WineCategories />

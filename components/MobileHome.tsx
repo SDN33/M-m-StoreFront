@@ -10,6 +10,7 @@ import MobileProductFilter from './MobileProductFilter';
 import Trust from '@/components/Trust';
 import PromoRappel from '@/components/PromoRappel';
 import Slider from '@/components/Slider';
+import Livraison from './Livraison';
 
 const MobileHome: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -50,8 +51,7 @@ const MobileHome: React.FC = () => {
               </div>
               <br /><br />
               <HeroBanner />
-              <PromoRappel />
-              <br /><br />
+              <Livraison />
               <WineCategories />
               <Trust />
               <Slogan />
