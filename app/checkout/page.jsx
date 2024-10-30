@@ -1,15 +1,12 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-// import { viewCart } from '../../services/cart';
 import { createOrder } from '../../services/order';
 import { useCart } from '../../context/CartContext';
 import { loadScript } from "@paypal/paypal-js";
-// import { Order } from '../../services/types';
 
 const CheckoutPage = () => {
   const { deleteAllCartItems, viewAllCartItems } = useCart();
-  // const [cartDetails, setCartDetails] = useState({ total: 0, items: [] });
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -30,30 +27,28 @@ const CheckoutPage = () => {
     const loadPayPalScript = async () => {
       try {
         await loadScript({ "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "" });
-        console.log("PayPal SDK loaded successfully");
+        console.log("SDK PayPal chargé avec succès");
       } catch (err) {
-        console.error("Failed to load PayPal SDK", err);
+        console.error("Échec du chargement du SDK PayPal", err);
       }
     };
-
     loadPayPalScript();
   }, []);
 
-  // Handle form input changes
+  // Gestion des changements de saisie de formulaire
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-
-  // Handle PayPal Payment and Order Submission
+  // Soumission de la commande et traitement du paiement PayPal
   const handleOrderSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate form data
+    // Validation des champs du formulaire
     const { firstName, lastName, address1, city, state, postcode, email, phone } = formData;
     if (!firstName || !lastName || !address1 || !city || !state || !postcode || !email || !phone) {
-      setError('Please fill out all required fields.');
+      setError('Veuillez remplir tous les champs requis.');
       return;
     }
 
@@ -61,13 +56,12 @@ const CheckoutPage = () => {
     setError('');
 
     if (formData.paymentMethod === 'paypal') {
-      // Configure the PayPal button to capture payment
       window.paypal.Buttons({
         createOrder: (data, actions) => {
           return actions.order.create({
             purchase_units: [{
               amount: {
-                value: (cartDetails.total+10).toFixed(2), // PayPal amount as a string
+                value: (cartDetails.total + 10).toFixed(2),
               }
             }]
           });
@@ -75,9 +69,8 @@ const CheckoutPage = () => {
         onApprove: async (data, actions) => {
           deleteAllCartItems();
           return actions.order.capture().then(async (details) => {
-            // console.log("Payment successful:", details);
+            console.log("Paiement réussi:", details);
 
-            // Construct order payload
             const orderData = {
               payment_method: "paypal",
               payment_method_title: "PayPal",
@@ -109,7 +102,7 @@ const CheckoutPage = () => {
               shipping_lines: [
                 {
                   method_id: 'flat_rate',
-                  method_title: 'Flat Rate',
+                  method_title: 'Tarif forfaitaire',
                   total: '10.00',
                 },
               ],
@@ -117,25 +110,24 @@ const CheckoutPage = () => {
 
             try {
               const orderResponse = await createOrder(orderData);
-              router.push(`/thank-you?order_id=${orderResponse.id}`);
-            } catch (err) {
-              setError('Order creation failed. Please try again.');
+              router.push(`/merci?order_id=${orderResponse.id}`);
+            } catch (error) {
+              setError('La création de la commande a échoué. Veuillez réessayer.');
             } finally {
               setLoading(false);
             }
           });
         },
-        onError: (err) => {
-          console.error("PayPal Checkout error:", err);
-          setError("Payment failed. Please try again.");
+        onError: (error) => {
+          console.error("Erreur PayPal Checkout:", error);
+          setError("Le paiement a échoué. Veuillez réessayer.");
           setLoading(false);
         },
       }).render('#paypal-button-container');
     } else {
-      // Handle other payment methods
       const orderData = {
         payment_method: formData.paymentMethod,
-        payment_method_title: formData.paymentMethod === 'cod' ? 'Cash on Delivery' : 'Direct Bank Transfer',
+        payment_method_title: formData.paymentMethod === 'cod' ? 'Paiement à la livraison' : 'Virement bancaire',
         set_paid: false,
         billing: {
           first_name: formData.firstName,
@@ -164,7 +156,7 @@ const CheckoutPage = () => {
         shipping_lines: [
           {
             method_id: 'flat_rate',
-            method_title: 'Flat Rate',
+            method_title: 'Tarif forfaitaire',
             total: '10.00',
           },
         ],
@@ -172,9 +164,9 @@ const CheckoutPage = () => {
 
       try {
         const orderResponse = await createOrder(orderData);
-        router.push(`/thank-you?order_id=${orderResponse.id}`);
-      } catch (err) {
-        setError('Order creation failed. Please try again.');
+        router.push(`/merci?order_id=${orderResponse.id}`);
+      } catch (error) {
+        setError('La création de la commande a échoué. Veuillez réessayer.');
       } finally {
         setLoading(false);
       }
@@ -185,21 +177,21 @@ const CheckoutPage = () => {
     <div className="mx-auto px-8 mt-56 max-w-4xl">
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2 bg-white rounded-lg p-8 px-4 py-4">
-          <h2 className="text-2xl font-semibold mb-6">Checkout</h2>
+          <h2 className="text-2xl font-semibold mb-6">Commande</h2>
           <form onSubmit={handleOrderSubmit} className="space-y-4">
-            <input name="firstName" placeholder="First Name" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
-            <input name="lastName" placeholder="Last Name" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
-            <input name="address1" placeholder="Address" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
-            <input name="city" placeholder="City" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
-            <input name="state" placeholder="State" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
-            <input name="postcode" placeholder="Postcode" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
-            <input name="email" placeholder="Email" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
-            <input name="phone" placeholder="Phone" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
+            <input name="firstName" placeholder="Prénom" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
+            <input name="lastName" placeholder="Nom" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
+            <input name="address1" placeholder="Adresse" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
+            <input name="city" placeholder="Ville" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
+            <input name="state" placeholder="État / Région (optionnel)" onChange={handleInputChange} className="w-full border p-2 rounded"/>
+            <input name="postcode" placeholder="Code postal" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
+            <input name="email" placeholder="E-mail" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
+            <input name="phone" placeholder="Téléphone" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
           </form>
         </div>
 
         <div className="w-full md:w-1/2 bg-gray-50 rounded-lg p-8 px-4 py-4">
-          <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
+          <h3 className="text-xl font-semibold mb-4">Résumé de la commande</h3>
           <ul className="space-y-4 mb-4">
             {cartDetails.items.map((item) => (
               <li key={item.product_id} className="flex justify-between items-center border-b pb-2">
@@ -209,32 +201,34 @@ const CheckoutPage = () => {
             ))}
           </ul>
           <div className="flex justify-between font-semibold text-lg mb-2">
-            <span>Subtotal:</span>
+            <span>Sous-total :</span>
             <span>{(cartDetails.total).toFixed(2)}€</span>
           </div>
           <div className="flex justify-between font-semibold text-lg mb-2">
-            <span>Shipping:</span>
+            <span>Frais de livraison :</span>
             <span>10.00€</span>
           </div>
           <div className="flex justify-between font-bold text-xl mb-4">
-            <span>Total:</span>
+            <span>Total :</span>
             <span>{(cartDetails.total + 10).toFixed(2)}€</span>
           </div>
           <div>
             <select name="paymentMethod" onChange={handleInputChange} className="w-full border p-2 rounded mb-4">
-              <option value="cod">Cash on Delivery</option>
-              <option value="bacs">Direct Bank Transfer</option>
+              <option value="cod">Paiement à la livraison</option>
+              <option value="bacs">Virement bancaire</option>
             </select>
             <button
               onClick={handleOrderSubmit}
               disabled={loading}
-              className="w-full bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white py-2 px-4 rounded"
+              className="w-full bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-primary-light py-2 rounded"
             >
-              {loading ? 'Processing...' : 'Place Order'}
+              {loading ? "Traitement..." : "Payer"}
             </button>
-            <div className="mt-4" id="paypal-button-container"></div>
-            {error && <p className="text-red-600 mt-2">{error}</p>}
           </div>
+          {formData.paymentMethod === "paypal" && (
+            <div id="paypal-button-container" className="mt-6"></div>
+          )}
+          {error && <p className="text-red-500 mt-4">{error}</p>}
         </div>
       </div>
     </div>
