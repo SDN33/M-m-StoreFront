@@ -193,7 +193,7 @@ ul::-webkit-scrollbar {
 .link {
   display: block;
   margin-top: 1rem;
-  color: #0070f3;
+  color: "accent";
   text-decoration: none;
   text-align: center;
 }

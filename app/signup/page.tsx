@@ -22,18 +22,18 @@ export default function SignupPage() {
           router.push("/login"); // Redirect to the login page after successful signup
       } catch (err) {
           console.error("Signup error:", err);
-          setError("Failed to register. Please try again.");
+          setError("Inscription échouée. Veuillez réessayer.");
       }
   };
 
   return (
     <div className="sx-container">
-      <h2>Signup</h2>
+      <h2 className="text-primary">S'inscrire</h2>
       {error && <p className="text-red-500 text-center">{error}</p>}
       <form onSubmit={handleSignup}>
         <input
           type="text"
-          placeholder="Username"
+          placeholder="Nom d'utilisateur"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
@@ -47,14 +47,14 @@ export default function SignupPage() {
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Mot de passe"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Signup</button>
+        <button className="bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white" type="submit">S'inscrire</button>'
       </form>
-      <a href="/login" className="link">Already have an account? Login</a>
+      <a href="/login" className="link">Vous avez déjà un compte? Connectez-vous</a>
     </div>
   );
 }
