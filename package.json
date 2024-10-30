@@ -11,6 +11,7 @@
   "dependencies": {
     "@apollo/client": "^3.11.8",
     "@heroicons/react": "^2.1.5",
+    "@paypal/paypal-js": "^8.1.2",
     "axios": "^1.7.7",
     "classnames": "^2.5.1",
     "framer-motion": "^11.11.10",

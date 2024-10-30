@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 // import { emptyCart } from '../services/cart';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { useCart } from '../context/CartContext';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface CartPopupProps {
   isOpen: boolean;
@@ -23,6 +24,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { cartTotal: total, cartItems, deleteAllCartItems } = useCart();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -46,7 +48,13 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
 
   const handleEmptyCart = () => {
     deleteAllCartItems();
+    onClose();
     // emptyCart(); // For Api
+  };
+  const handleCheckout = async () => {
+    router.push(`/checkout`);
+    await new Promise(resolve => setTimeout(resolve, 500));
+    onClose();
   };
 
   if (!isOpen) return null;
@@ -125,11 +133,11 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
               Vider le panier
             </button>
 
-            <Link href="/checkout" legacyBehavior>
-              <a className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition text-center block">
+            {/* <Link href="/checkout" legacyBehavior> */}
+              <button onClick={handleCheckout} className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition text-center block">
                 Passer à la caisse
-              </a>
-            </Link>
+              </button>
+            {/* </Link> */}
           </div>
         )}
       </div>
