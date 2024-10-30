@@ -60,7 +60,7 @@ const ProductsIntro: React.FC = () => {
       {/* Texte au centre avec espacement */}
       <div className="flex mx-auto mt-28 lg:mt-14 slide-in-right">
         <h1 className="text-lg md:text-3xl font-extrabold text-primary tracking-tight text-center">
-          {counter.toLocaleString()} vins bio en direct des vignerons<span className="text-sm ">(nes)</span>
+          {counter.toLocaleString()} vins bio en direct des vignerons(nes)
           <br />
           <div className="text-black text-sm">
             Tu sais, celles et ceux qui respectent la terre, ses locataires...
@@ -74,14 +74,21 @@ const ProductsIntro: React.FC = () => {
           height={20}
           className="rounded-lg object-contain ml-2 hidden md:block"
         />
-      </div>
-      <Image
-          src="/images/biodemeter.png"
+        <Image
+          src="/images/logointro.jpg"
           alt="bio demeter"
-          width={80}
+          width={40}
           height={20}
-          className="rounded-lg object-contain ml-2 mt-2 md:hidden -mb-10"
+          className="rounded-lg object-contain -ml-2 mt-2 md:block"
         />
+        <Image
+          src="/images/logointro2.jpg"
+          alt="bio demeter"
+          width={20}
+          height={20}
+          className="rounded-lg object-contain  mt-2 md:block "
+        />
+      </div>
     </div>
   );
 };

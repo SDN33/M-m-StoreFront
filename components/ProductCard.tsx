@@ -43,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
   const formatRating = (rating?: number, ratingCount?: number) => {
     if (typeof rating !== 'number' || typeof ratingCount !== 'number' || ratingCount === 0)
-      return <span className='text-xs'>Pas encore noté</span>;
+      return <span className='text-xs'>Non noté</span>;
     return <span>{(rating * 4).toFixed(1)}/20</span>;
   };
 

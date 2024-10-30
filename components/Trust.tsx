@@ -1,5 +1,58 @@
 import React from 'react';
 import Image from 'next/image';
+import { Mail } from "lucide-react";
+
+const Newsletter = () => {
+  const [email, setEmail] = React.useState("");
+
+  const handleSubscribe = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setEmail("");
+  };
+
+  return (
+    <div className="bg-white rounded-lg overflow-hidden h-[300px] relative">
+      <video
+        src="/videos/newslettervid.mp4"
+        className="w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+      />
+      <div className="absolute inset-0 bg-black/70 z-10" />
+      <div className="absolute inset-0 z-20 p-6 flex flex-col justify-center items-center text-white">
+        <h2 className="text-2xl md:text-3xl font-bold mb-2">
+          Newsletter
+        </h2>
+        <p className="text-lg mb-1">Des offres exclusives, des nouveautés...</p>
+        <p className="font-semibold mb-4">Parole de Mémé, on ne spamme pas.</p>
+        <form onSubmit={handleSubscribe} className="w-full max-w-md">
+          <div className="flex flex-col sm:flex-row gap-2 items-center">
+            <div className="relative flex-grow">
+              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="email"
+                placeholder="Votre adresse e-mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full p-3 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white/90 text-gray-800 placeholder-gray-500"
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white py-3 px-6 rounded whitespace-nowrap"
+            >
+              S&apos;inscrire
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
 
 const MemeGeorgettePremium = () => {
   return (
@@ -49,37 +102,23 @@ const MemeGeorgettePremium = () => {
 
       {/* Sections Découvrir */}
       <div className="grid md:grid-cols-2 gap-8 mb-16">
-        <div className="relative overflow-hidden rounded-lg group">
-          <div className="absolute inset-0 bg-black/40 z-10"></div>
-          <Image
-            src="/images/meme-pas-contente.png"
-            alt="Dégustation"
-            className="w-full h-[300px] object-cover transform group-hover:scale-105 transition-transform duration-500"
-            width={800}
-            height={400}
-          />
-          <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-white">
-            <Image
-              src="/images/memelogo2.png"
-              alt="Mémé Georgette"
-              className="object-contain -mt-4"
-              width={250}
-              height={150}
-            />
-          </div>
+        <div className="relative overflow-hidden rounded-lg">
+          <Newsletter />
         </div>
 
         <div className="relative overflow-hidden rounded-lg group">
           <div className="absolute inset-0 bg-black/40 z-10"></div>
-          <img
+          <Image
             src="/images/winery.jpg"
             alt="Producteurs"
             className="w-full h-[300px] object-cover transform group-hover:scale-105 transition-transform duration-500"
+            width={800}
+            height={300}
           />
           <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-white">
             <h2 className="text-sm md:text-base font-bold mb-4">VOUS ÊTES UN VIGNERON ?</h2>
             <a className="text-base text-center bg-white text-gray-800 px-8 py-2 rounded hover:bg-gray-100 transition-colors" href="https://portailpro-memegeorgette.com">
-              DÉCOUVRIR NOTRE <strong className='text-primary'>PORTAIL PRO</strong>
+              DÉCOUVRIR NOTRE <strong className="text-primary">PORTAIL PRO</strong>
             </a>
           </div>
         </div>

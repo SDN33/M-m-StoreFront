@@ -63,7 +63,7 @@ const Slogan: React.FC = () => {
   }, []); // Ajout de la dépendance fermante ici
 
   return (
-    <div className="relative bg-orange-600 py-10 md:py-20 min-h-[700px] md:min-h-[200px] overflow-hidden">
+    <div className="relative bg-orange-600 py-10 md:py-10 -mt-4 min-h-[700px] md:min-h-[200px] overflow-hidden">
       {/* SVG Background */}
       <svg
         xmlns="http://www.w3.org/2000/svg"

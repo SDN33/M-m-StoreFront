@@ -4,7 +4,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import ProductsCards from '@/components/ProductsCards';
 import ProductFilter from '@/components/ProductFilters';
 import Slogan from '@/components/Slogan';
-import Newletter from '@/components/Newletter';
 import ProductsIntro from '@/components/ProductIntro';
 import Slider from '@/components/Slider';
 import MobileHome from '@/components/MobileHome';
@@ -166,6 +165,7 @@ export default function Home() {
               <br />
               <ProductsIntro />
               <Slider />
+              <br /><br />
               <div className="max-w-7xl mx-auto px-4 space-y-8">
                 <section className="bg-white rounded-lg shadow">
                   <ProductsCards selectedFilters={selectedFilters} onAddToCart={(product) => console.log('Add to cart:', product)} />
@@ -177,8 +177,6 @@ export default function Home() {
               <br /><br />
               <WineCategories />
               <Trust />
-              <Newletter />
-              <br /><br />
               <Slogan />
               <br /><br />
             </div>

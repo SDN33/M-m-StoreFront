@@ -144,15 +144,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div className="hidden sm:block bg-transparent h-full w-56 ml-10 overflow-y-auto mt-56 bg-gray-200 bg-opacity-30 shadow-lg rounded-lg">
-      <div className="p-4">
-        <button
-          onClick={resetFilters}
-          className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-2 rounded-md hover:bg-primary-dark transition-colors shadow-md"
-        >
-          Réinitialiser
-        </button>
-      </div>
+    <div className="hidden sm:block bg-transparent h-full w-56 ml-10 overflow-y-auto mt-56 bg-gray-400 bg-opacity-30 shadow-lg rounded-lg">
       {Object.entries(filterOptions).map(([filterType, options]) => {
         if (hideColorFilter && filterType === 'color') return null;
         return (
@@ -161,7 +153,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
               onClick={() => toggleSection(filterType)}
               className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between hover:bg-gray-100 transition-colors"
             >
-              <span className="text-gray-800 text-base">{getFilterTitle(filterType)}</span>
+              <span className="text-gray-800 text-base ">{getFilterTitle(filterType)}</span>
               {expandedSections.includes(filterType) ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
             </button>
             {expandedSections.includes(filterType) && (
