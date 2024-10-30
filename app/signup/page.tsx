@@ -28,7 +28,7 @@ export default function SignupPage() {
 
   return (
     <div className="sx-container">
-      <h2 className="text-primary">S'inscrire</h2>
+      <h2 className="text-primary">S&apos;inscrire</h2>
       {error && <p className="text-red-500 text-center">{error}</p>}
       <form onSubmit={handleSignup}>
         <input
@@ -52,7 +52,7 @@ export default function SignupPage() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button className="bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white" type="submit">S'inscrire</button>'
+        <button className="bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white" type="submit">S&apos;inscrire</button>'
       </form>
       <a href="/login" className="link">Vous avez déjà un compte? Connectez-vous</a>
     </div>
