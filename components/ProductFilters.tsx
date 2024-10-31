@@ -148,7 +148,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       {Object.entries(filterOptions).map(([filterType, options]) => {
         if (hideColorFilter && filterType === 'color') return null;
         return (
-          <div key={filterType} className="border-b border-gray-300">
+          <div key={filterType} className="border-b border-gray-300 bg-slate-100">
             <button
               onClick={() => toggleSection(filterType)}
               className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between hover:bg-gray-100 transition-colors"

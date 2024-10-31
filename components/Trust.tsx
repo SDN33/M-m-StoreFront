@@ -85,7 +85,7 @@ const MemeGeorgettePremium = () => {
               <path d="M12 15.39l-3.76 2.27.99-4.28-3.32-2.88 4.38-.37L12 6.09l1.71 4.04 4.38.37-3.32 2.88.99 4.28z"/>
             </svg>
           </div>
-          <h3 className="text-xl font-semibold text-primary mb-2">Dégustés et approuvés</h3>
+          <h3 className="text-xl font-semibold text-primary mb-2">Sélection de qualité</h3>
           <p className="text-gray-600">Nos vins sont sélectionnés et controler par nos experts</p>
         </div>
 
