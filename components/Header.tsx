@@ -52,7 +52,7 @@ const Header = () => {
             {/* Logo */}
             <a href="/" className="flex-shrink-0 ml-8">
               <Image
-                src="/images/logo-meme (2).svg"
+                src="/images/memelogo2.png"
                 alt="Logo"
                 width={200}
                 height={250}
