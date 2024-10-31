@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
-const ProductsIntro: React.FC = () => {
+const MobileProductsIntro: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [counter, setCounter] = useState(0);
   const introRef = useRef<HTMLDivElement | null>(null);
@@ -53,35 +53,33 @@ const ProductsIntro: React.FC = () => {
   return (
     <div
       ref={introRef}
-      className={`flex flex-col md:flex-row justify-center items-center text-center mb-4 ${
-        isVisible ? 'slide-in-visible' : 'slide-in'
-      }`}
+      className="flex flex-col items-center text-center mb-4 md:hidden"
     >
-      {/* Logos à gauche et à droite (affichés uniquement sur tablette et plus grand) */}
-      <div className="space-x-2 hidden lg:flex mt-12 md:ml-8 lg:ml-28">
+      {/* Logos en haut pour la version mobile */}
+      <div className="flex space-x-2 mt-4">
         <Image src="/images/logobio1.webp" alt="bio logo" width={30} height={20} className="object-contain" priority={true} />
-        <Image src="/images/Logobioeu.jpg" alt="Bio euro logo" width={40} height={40} className="object-contain" priority={true} />
-        <Image src="/images/déméter.png" alt="demeter logo" width={40} height={40} className="object-contain" priority={true} />
+        <Image src="/images/Logobioeu.jpg" alt="Bio euro logo" width={35} height={35} className="object-contain" priority={true} />
+        <Image src="/images/déméter.png" alt="demeter logo" width={35} height={35} className="object-contain" priority={true} />
       </div>
 
       {/* Texte central avec compteur */}
-      <div className="flex flex-col items-center mx-auto mt-8 md:mt-28 lg:mt-14 slide-in-right">
-        <h1 className="text-base md:text-3xl font-extrabold text-primary tracking-tight text-center leading-tight">
+      <div className="flex flex-col items-center mx-auto mt-4 slide-in-right">
+        <h1 className="text-lg font-extrabold text-primary tracking-tight text-center leading-tight">
           {counter.toLocaleString()} vins bio en direct des vignerons(nes)
-          <span className="block text-black text-xs md:text-sm">
+          <span className="block text-black text-xs">
             Tu sais, celles et ceux qui respectent la terre, ses locataires...
           </span>
         </h1>
       </div>
 
-      {/* Logos à droite */}
-      <div className="space-x-2 hidden lg:flex mt-12 md:mr-8 lg:mr-28">
-        <Image src="/images/logointro.jpg" alt="biodynamie logo" width={40} height={20} className="object-contain" priority={true} />
-        <Image src="/images/logointro2.jpg" alt="nature et progrès" width={24} height={20} className="object-contain" priority={true} />
-        <Image src="/images/biodyvin.jpg" alt="biodyvin logo" width={50} height={20} className="object-contain" priority={true} />
+      {/* Logos en bas pour la version mobile */}
+      <div className="flex space-x-2 mt-4">
+        <Image src="/images/logointro.jpg" alt="biodynamie logo" width={35} height={20} className="object-contain" priority={true} />
+        <Image src="/images/logointro2.jpg" alt="nature et progrès" width={30} height={20} className="object-contain" priority={true} />
+        <Image src="/images/biodyvin.jpg" alt="biodyvin logo" width={35} height={20} className="object-contain" priority={true} />
       </div>
     </div>
   );
 };
 
-export default ProductsIntro;
+export default MobileProductsIntro;

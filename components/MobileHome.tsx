@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 import ProductsCards from '@/components/ProductsCards';
 import HeroBanner from '@/components/HeroBanner';
 import Slogan from '@/components/Slogan';
-import ProductsIntro from '@/components/ProductIntro';
 import WineCategories from '@/components/WineCategories';
 import MobileProductFilter from './MobileProductFilter';
 import Trust from '@/components/Trust';
 import Slider from '@/components/Slider';
 import Livraison from './Livraison';
+import MobileProductsIntro from './MobileProductIntro';
 
 const MobileHome: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -36,20 +36,20 @@ const MobileHome: React.FC = () => {
   return (
     <div className="flex flex-col bg-gray-50 overflow-y-auto">
       <div className="space-y-8">
-      <ProductsIntro />
-              <Slider />
-              <div className="max-w-7xl mx-auto px-4 space-y-8">
-                <section className="bg-white rounded-lg shadow">
-                  <ProductsCards selectedFilters={selectedFilters} onAddToCart={(product) => console.log('Add to cart:', product)} />
-                </section>
-              </div>
-              <br /><br />
-              <HeroBanner />
-              <Livraison />
-              <WineCategories />
-              <Trust />
-              <Slogan />
-              <br /><br />
+        <Slider />
+        <MobileProductsIntro />
+        <div className="max-w-7xl mx-auto px-4 space-y-8">
+          <section className="bg-white rounded-lg shadow">
+            <ProductsCards selectedFilters={selectedFilters} onAddToCart={(product) => console.log('Add to cart:', product)} />
+          </section>
+        </div>
+        <br /><br />
+        <HeroBanner />
+        <Livraison />
+        <WineCategories />
+        <Trust />
+        <Slogan />
+        <br /><br />
         <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} />
       </div>
     </div>

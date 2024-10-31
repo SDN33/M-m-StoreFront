@@ -179,6 +179,7 @@ const CheckoutPage = () => {
             <input name="lastName" placeholder="Nom" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="address1" placeholder="Adresse" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="city" placeholder="Ville" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
+            <input name="state" placeholder="Département" onChange={handleInputChange} className="w-full border p-2 rounded"/>
             <input name="postcode" placeholder="Code postal" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="email" placeholder="E-mail" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="phone" placeholder="Téléphone" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
@@ -203,6 +204,7 @@ const CheckoutPage = () => {
             <span>Livraison 24H : <Image className='flex' src="/images/chronopost.png" alt="Chronopost" width="60" height="10" /></span>
             <span>10.00€</span>
           </div>
+          <br />
           <div className="flex justify-between font-bold text-xl mb-4">
             <span>Total :</span>
             <span>{(cartDetails.total + 10).toFixed(2)}€</span>

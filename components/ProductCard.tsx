@@ -23,6 +23,7 @@ interface Product {
   style?: string;
   cepages?: string[];
   short_description?: string;
+  description?: string;
   rating?: number;
 }
 
@@ -76,6 +77,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     }
     return null;
   };
+
+  function stripHtmlAndTruncate(text: string = '', maxLength: number): string {
+      // Supprime les balises HTML
+      const plainText = text.replace(/<\/?[^>]+(>|$)/g, "");
+
+      // Coupe le texte à maxLength sans couper les mots et ajoute "..." si nécessaire
+      if (plainText.length > maxLength) {
+        return plainText.substring(0, plainText.lastIndexOf(" ", maxLength)) + "...";
+      }
+
+      return plainText;
+    }
 
   const generateSlogan = () => {
     if (product.price < 9) return `Le qualité/prix IMBATTABLE !`;
@@ -139,17 +152,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
 
         <p className="text-xs mb-2 text-gray-700 h-8 overflow-hidden text-center">
-          {(() => {
-            const region = product.region__pays
-              ? product.region__pays.toLowerCase() === 'bordeaux'
-                ? 'du Sud-Ouest'
-                : 'de ' + product.region__pays.charAt(0).toUpperCase() + product.region__pays.slice(1).toLowerCase()
-              : '';
-            const millesime = product.millesime ? ` millésimé en ${product.millesime}` : '';
-            const chateau = product.nom_chateau ? ` par ${product.nom_chateau}` : '';
-            const appelation = product.appelation ? product.appelation.charAt(0).toUpperCase() + product.appelation.slice(1).toLowerCase() : '';
-            return `Un ${product.categories[0]?.name || 'vin'} ${appelation.toUpperCase()} ${region}${millesime}${chateau}`;
-          })()}
+          {product.short_description ? (
+            <span>
+              {stripHtmlAndTruncate(product.short_description, 110)}
+            </span>
+          ) : (
+            <span>
+              {stripHtmlAndTruncate(product.description, 110)}
+            </span>
+          )}
         </p>
 
         <div className="flex items-center justify-between mb-2">
