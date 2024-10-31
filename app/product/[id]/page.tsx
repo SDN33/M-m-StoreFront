@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Star, Package } from 'lucide-react';
 import Livraison from '@/components/Livraison';
 import SocialShare from '@/components/Socialshare';
+import AddToCartButton from '@/components/AddToCartButton';
 
 
 
@@ -17,6 +18,7 @@ interface Product {
   region__pays?: string;
   appelation?: string;
   description?: string;
+  short_description?: string;
   images: { src: string }[];
   rating?: number;
   average_rating?: number;
@@ -145,7 +147,7 @@ const ProductPage: React.FC = () => {
 
   return (
     <div className="mt-20 px-12">
-      <br /><br /> <br /><br />
+      <br /><br /> <br />
       <div className="relative top-0 left-0 w-full">
       </div>
       <br /><br /><br />
@@ -195,8 +197,11 @@ const ProductPage: React.FC = () => {
           </div>
 
           <div className="md:w-1/2">
-            <p className="text-sm font-bold shadow-sm flex">Vin {product.categories.map(category => category.name).join(', ')} | {product.nom_chateau || 'Château inconnu'} | {product.millesime}</p>
+            <p className="text-sm font-bold flex">{product.nom_chateau || 'Château inconnu'}</p>
             <h1 className="text-3xl font-bold">{product.name}</h1>
+            <p className="text-sm font-bold flex mt-1">
+              {product.appelation?.toUpperCase()} | {product.region__pays?.toUpperCase()} | {product.millesime}
+            </p>
             <div className="flex items-center -mb-6 mx-auto">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className={`w-4 h-4 ${i < Math.floor(product.average_rating || 0) ? 'text-yellow-500' : 'text-gray-300'}`} />
@@ -206,22 +211,20 @@ const ProductPage: React.FC = () => {
 
 
             <br />
-            <p className="text-4xl font-bold !mb-7">
+            <p className="text-5xl font-bold !mb-7 mt-2">
               <span className="flex items-start z-10">
-                <span className="text-4xl font-bold">{Math.floor(product.price)}</span>
+                <span className="text-xl font-bold">{Math.floor(product.price)}</span>
                 <span className="text-xl font-bold align-top mt-1">
                   <sup>€{(product.price % 1).toFixed(2).substring(2)}</sup>
                 </span>
               </span>
             </p>
             <span className="text-xs font-normal">Bouteille de {product.volume}</span>
-            <p>
-              {product.appelation?.toUpperCase()} | {product.region__pays?.toUpperCase()}
-            </p>
+            <br />
             <p className="text-sm font-normal">
               Vendu par
-              <a onClick={() => handleVendorClick(product.store_name)} className="cursor-pointer text-green-600 hover:text-gray-700">
-                 {product.store_name || ' @MéméGeorgette'}
+              <a onClick={() => handleVendorClick(product.store_name)} className="cursor-pointer text-accent hover:text-gray-700">
+                 <br />{product.store_name || ' @MéméGeorgette'}
               </a>
             </p>
 
@@ -229,8 +232,8 @@ const ProductPage: React.FC = () => {
             <br />
             <SocialShare url={window.location.href} title={product.name} />
             <div className="items-center mt-6 flex gap-2">
-              <Package className="h-6 w-6 text-yellow-500" />
-              <span className="font-bold text-xs">Livraison offerte dès 6 bouteilles achetées sur un domaine</span>
+              <Package className="h-6 w-6 text-yellow-500 mb-6" />
+              <span className="font-bold text-xs mb-6">Livraison offerte dès 6 bouteilles achetées sur un domaine</span>
             </div>
             <div className="flex items-center mt-1">
               <select
@@ -242,21 +245,30 @@ const ProductPage: React.FC = () => {
                   <option key={num} value={num}>{num}</option>
                 ))}
               </select>
-              <button
-                onClick={() => console.log(`Ajouté ${quantity} ${product.name} au panier`)}
-                className="bg-primary hover:bg-primary text-white py-2 px-4 rounded"
-              >
-                Ajouter au panier
-              </button>
+              <AddToCartButton
+                product={product}
+                quantity={quantity}
+                productId={product.id}
+                onAddToCart={() => {
+                  return new Promise<void>((resolve) => {
+                    console.log(`Added ${quantity} of product ${product.id} to cart`);
+                    resolve();
+                  });
+                }}
+              />
             </div>
           </div>
         </div>
-
+        <br /><br />
+        <Livraison />
+        <br />
         <div className="mt-8">
           <h2 className="text-2xl font-bold !-mb-2 text-center">Description du produit</h2>
           <div className="border-b-4 border-primary w-[20rem] md:w-[50rem] my-2 md:my-2 slide-in-right"></div>
-          <p className='font-bold text-center'>
-            {product.description ? formatDescription(product.description) : 'Pas de description disponible.'}
+          <p className='font-bold text-center mt-8'>
+            {product.description && product.short_description
+              ? formatDescription(product.description.length > product.short_description.length ? product.description : product.short_description)
+              : formatDescription(product.description || product.short_description || '')}
           </p>
           <br />
           {/* Grille de 2 colonnes plus compact */}
@@ -341,7 +353,6 @@ const ProductPage: React.FC = () => {
             className="w-fit h-[400px] object-cover" // Ajuste la hauteur si nécessaire
           />
 
-          <Livraison />
           <br /><br />
         </div>
       </div>
