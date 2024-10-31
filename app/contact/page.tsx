@@ -23,7 +23,7 @@ const ContactPage = () => {
     <div className="w-full max-w-md mx-auto px-4 py-32 pb-10" style={{ paddingTop: '200px' }}> {/* Augmenté padding-top et réduit la largeur max */}
       <div className="rounded-lg shadow-lg p-6 !bg-accent">
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold mb-2">Contactez-nous</h2>
+          <h2 className="text-2xl font-bold mb-2 text-primary">Contactez-nous</h2>
           <p className="text-gray-600">
             Vous avez une question ?<br />Nous serions ravis de vous aider !
           </p>
