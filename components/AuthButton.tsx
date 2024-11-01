@@ -17,7 +17,7 @@ const AuthButton = () => {
     return (
         <span
             onClick={isAuthenticated ? handleLogout : () => router.push('/login')}
-            className="text-sm text-white font-semibold hover:text-primary cursor-pointer"
+            className="text-sm text-white font-semibold hover:text-gray-800 cursor-pointer"
         >
             {isAuthenticated ? "Se déconnecter" : "Se connecter"}
         </span>
