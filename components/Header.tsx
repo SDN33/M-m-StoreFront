@@ -121,13 +121,6 @@ const Header = () => {
                 className="h-12 w-auto"
               />
             </a>
-
-            {/* <a href="/cart" className="relative p-2">
-              <ShoppingCart className="w-6 h-6 text-black" />
-              <span className="absolute -top-1 -right-1 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                0
-              </span>
-            </a> */}
             <CartIcon onClick={toggleCartPopup}/>
           </div>
         </div>
@@ -181,7 +174,7 @@ const Header = () => {
           <div
             className="fixed z-50 inset-0 flex items-center justify-center p-4"
           >
-            <div className="relative bg-slate-200 p-6 rounded-lg shadow-xl w-96 max-h-180 overflow-y-auto">
+            <div className="relative bg-slate-200 p-6 rounded-lg shadow-xl w-[40rem] max-h-180 overflow-y-auto">
               <button className="absolute top-2 right-2" onClick={toggleNosVinsPopup}>
                 <X className="w-6 h-6 text-gray-600" />
               </button>
@@ -195,14 +188,14 @@ const Header = () => {
                     className="relative rounded-lg overflow-hidden shadow-md cursor-pointer"
                     style={{
                       backgroundImage: `url(${subcategory.backgroundImage})`,
-                      backgroundSize: 'fill',
+                      backgroundSize: 'cover', // Taille des vignettes
                       backgroundPosition: 'center',
-                      height: '150px', // Hauteur des vignettes
+                      height: '160px', // Hauteur des vignettes
 
                     }}
                   >
-                    <a href={`/products/category/${subcategory.name.toLowerCase()}`} className="absolute inset-0 flex items-center justify-center text-white border-2 border-black border-opacity-90 text-lg font-black bg-black bg-opacity-30 hover:bg-opacity-40 transition duration-300">
-                      {subcategory.name}
+                    <a href={`/products/category/${subcategory.name.toLowerCase()}`} className="absolute inset-0 flex items-center justify-center text-white border-2 border-black border-opacity-90 text-lg font-black bg-black bg-opacity-30 hover:bg-primary hover:bg-opacity-40 transition duration-300 hover:text-opacity-100">
+                        <span style={{ transform: 'scale(1.5)' }}>{subcategory.name}</span>
                     </a>
                   </div>
                 ))}
