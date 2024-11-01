@@ -56,21 +56,23 @@ const AgeVerificationModal = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden">
-      {/* Fond noir avec flou qui s'estompe */}
-      <div
-        className={`absolute inset-0 bg-transient from-gray-800 to-black backdrop-blur-sm transition-opacity duration-1000
-          ${isOpening ? 'opacity-0' : 'opacity-100'}`}
-      />
+      {/* Vidéo de fond */}
+      <video
+        className="absolute inset-0 object-cover w-full h-full overflow-auto"
+        autoPlay
+        loop
+        muted
+      >
+        <source src="./videos/newslettervid.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
       {/* Conteneur principal avec les portes */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 flex">
         {/* Porte gauche */}
         <div
-          className={`absolute top-0 bottom-0 w-1/2 left-0 bg-transient from-gray-800 to-black transition-transform duration-[1.5s] ease-in-out transform
+          className={`absolute top-0 bottom-0 w-1/2 left-0 bg-transparent transition-transform duration-[1.5s] ease-in-out transform
             ${isOpening ? '-translate-x-full' : 'translate-x-0'}`}
-          style={{
-            background: 'linear-gradient(to right, #1a1a1a, #333)'
-          }}
         >
           {/* Bordure décorative droite */}
           <div className="absolute right-0 top-0 bottom-0 w-2 bg-gray-800"></div>
@@ -78,11 +80,8 @@ const AgeVerificationModal = () => {
 
         {/* Porte droite */}
         <div
-          className={`absolute top-0 bottom-0 w-1/2 right-0 bg-transient from-gray-800 to-black transition-transform duration-[1.5s] ease-in-out transform
+          className={`absolute top-0 bottom-0 w-1/2 right-0 bg-transparent transition-transform duration-[1.5s] ease-in-out transform
             ${isOpening ? 'translate-x-full' : 'translate-x-0'}`}
-          style={{
-            background: 'linear-gradient(to left, #1a1a1a, #333)'
-          }}
         >
           {/* Bordure décorative gauche */}
           <div className="absolute left-0 top-0 bottom-0 w-2 bg-gray-800"></div>
