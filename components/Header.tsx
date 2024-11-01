@@ -80,7 +80,7 @@ const Header = () => {
               </div>
 
               <a href="https://portailpro-memegeorgette.com" className="hidden lg:flex items-center text-sm hover:text-primary">
-                <User className="w-5 h-5 mr-1 font-semibold" />
+                <User className="w-5 h-5 -mt-1 font-semibold" />
                 <span className="font-semibold ml-1">Portail Pro</span>
               </a>
 

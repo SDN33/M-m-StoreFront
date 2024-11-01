@@ -35,6 +35,7 @@ const MobileHome: React.FC = () => {
 
   return (
     <div className="flex flex-col bg-gray-50 overflow-y-auto">
+      <br /><br /><br /><br />
       <div className="space-y-8">
         <Slider />
         <MobileProductsIntro />
