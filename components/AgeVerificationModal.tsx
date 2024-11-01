@@ -95,12 +95,13 @@ const AgeVerificationModal = () => {
           transition-all duration-500 ${isOpening ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}
       >
         <Image
-          src="/images/logo-meme (2).svg"
+          src="/images/memelogo2.png"
           alt="Vérification de l'âge"
-          width={250}
-          height={250}
-          className="mx-auto mb-8"
+          width={150}
+          height={150}
+          className="mx-auto mb-4"
           priority={true}
+          quality={100}
         />
         <h2 className="text-xl font-bold text-gray-900 mb-4">
           Vérification de l&apos;âge
