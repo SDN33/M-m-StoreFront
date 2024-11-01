@@ -58,7 +58,7 @@ const ProductsIntro: React.FC = () => {
       }`}
     >
       {/* Logos à gauche et à droite (affichés uniquement sur tablette et plus grand) */}
-      <div className="space-x-2 hidden lg:flex mt-12 md:ml-8 lg:ml-28">
+      <div className="space-x-2 hidden lg:flex mt-12 md:ml-8 lg:ml-28 slide-in-right">
         <Image src="/images/logobio1.webp" alt="bio logo" width={30} height={20} className="object-contain" priority={true} />
         <Image src="/images/Logobioeu.jpg" alt="Bio euro logo" width={40} height={40} className="object-contain" priority={true} />
         <Image src="/images/déméter.png" alt="demeter logo" width={40} height={40} className="object-contain" priority={true} />
@@ -75,7 +75,7 @@ const ProductsIntro: React.FC = () => {
       </div>
 
       {/* Logos à droite */}
-      <div className="space-x-2 hidden lg:flex mt-12 md:mr-8 lg:mr-28">
+      <div className="space-x-2 hidden lg:flex mt-12 md:mr-8 lg:mr-28 slide-in-right">
         <Image src="/images/logointro.jpg" alt="biodynamie logo" width={40} height={20} className="object-contain" priority={true} />
         <Image src="/images/logointro2.jpg" alt="nature et progrès" width={24} height={20} className="object-contain" priority={true} />
         <Image src="/images/biodyvin.jpg" alt="biodyvin logo" width={50} height={20} className="object-contain" priority={true} />
