@@ -1,64 +1,38 @@
-// pages/api/vendors.ts
+// pages/api/order.ts
 import { NextApiRequest, NextApiResponse } from 'next';
-import axios, { AxiosError } from 'axios';
-
-interface Vendor {
-  id: number;
-  store_name: string;
-  avatar: string;
-}
-
-interface Product {
-  id: number;
-  name: string;
-  price: string;
-  stock_status: string;
-  vendor_id: number;
-}
-
-const fetchVendors = async (consumerKey: string, consumerSecret: string): Promise<Vendor[]> => {
-  const url = `https://portailpro-memegeorgette.com/wp-json/mvx/v1/vendors?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`;
-  const response = await axios.get<Vendor[]>(url);
-  return response.data;
-};
-
-const fetchProductsByVendor = async (vendorId: number, consumerKey: string, consumerSecret: string): Promise<Product[]> => {
-  const url = `https://portailpro-memegeorgette.com/wp-json/mvx/v1/vendors/${vendorId}/products?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`;
-  const response = await axios.get<Product[]>(url);
-  return response.data;
-};
+import { wcOrderApi } from './wcApi';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const consumerKey = process.env.WC_CONSUMER_KEY!;
-  const consumerSecret = process.env.WC_CONSUMER_SECRET!;
-
-  const { method } = req;
+  const { method, query } = req;
 
   switch (method) {
     case 'GET': {
+      const { id } = query;
+      if (!id) {
+        return res.status(400).json({ message: 'Order ID is required' });
+      }
+
       try {
-        // Étape 1: Récupérer la liste des vendeurs
-        const vendors = await fetchVendors(consumerKey, consumerSecret);
-
-        // Étape 2: Récupérer les produits pour chaque vendeur
-        const vendorsWithProducts = await Promise.all(
-          vendors.map(async (vendor) => {
-            const products = await fetchProductsByVendor(vendor.id, consumerKey, consumerSecret);
-            return { ...vendor, products };
-          })
-        );
-
-        return res.status(200).json(vendorsWithProducts);
+        const response = await wcOrderApi.get(`/${id}`);
+        return res.status(200).json(response.data);
       } catch (error) {
-        const axiosError = error as AxiosError;
-        const errorMessage = (axiosError?.response?.data as { message?: string })?.message || 'Erreur lors de la récupération des vendeurs';
-        console.error('Error retrieving vendors:', errorMessage);
-        return res.status(500).json({ message: errorMessage });
+        console.error('Error retrieving order:', error);
+        return res.status(500).json({ message: 'Failed to retrieve order' });
       }
     }
 
+    case 'POST': {
+      try {
+        const orderData = req.body;
+        const response = await wcOrderApi.post('/', orderData);
+        return res.status(200).json(response.data);
+      } catch (error) {
+        console.error('Order creation error:', error);
+        return res.status(500).json({ message: 'Order creation failed' });
+      }
+    }
     default:
-      res.setHeader('Allow', ['GET']);
+      res.setHeader('Allow', ['GET', 'POST']);
       return res.status(405).end(`Method ${method} Not Allowed`);
   }
 }
