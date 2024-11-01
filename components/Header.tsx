@@ -74,13 +74,13 @@ const Header = () => {
               <div className="hidden lg:flex items-center space-x-1 text-sm">
                 <span className='text-white'>Livraison en</span>
                 <Image
-                  src="/images/fr.png"
+                  src="/images/euro.png"
                   alt="France"
-                  width={20}
+                  width={30}
                   height={14}
                   className="mx-1"
                 />
-                <span className="font-bold text-white">France</span>
+                <span className="font-bold text-white -ml-1">Europe</span>
               </div>
 
               <a href="https://portailpro-memegeorgette.com" className="hidden lg:flex items-center text-sm hover:text-gray-800">

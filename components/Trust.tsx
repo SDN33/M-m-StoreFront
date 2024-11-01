@@ -91,9 +91,13 @@ const MemeGeorgettePremium = () => {
 
         <div className="text-center">
           <div className="w-16 h-16 mx-auto mb-4 animate-pulse">
-            <svg viewBox="0 0 24 24" className="w-full h-full fill-primary">
-              <path d="M19 3H5c-1.11 0-2 .89-2 2v14c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 16H5V5h14v14z"/>
-            </svg>
+            <Image
+              src="/images/livraison-de-colis.png"
+              alt="Livraison de colis"
+              width={64}
+              height={64}
+              color='primary'
+            />
           </div>
           <h3 className="text-xl font-semibold text-primary mb-2">Emballages</h3>
           <p className="text-gray-600">Chez Mémé, pas de casse ! Nous emballons vos bouteilles avec soin</p>
