@@ -153,7 +153,7 @@ export default function Home() {
 
           <main
             ref={mainContentRef}
-            className="flex-1 bg-gray-50 overflow-y-auto"
+            className="flex-1 bg-white overflow-y-auto"
             style={{
               overscrollBehavior: 'contain',
               height: '100vh'
@@ -164,6 +164,7 @@ export default function Home() {
               <br /><br />
               <br />
               <ProductsIntro />
+
               <Slider />
               <div className="max-w-7xl mx-auto px-4 space-y-8">
                 <section className="bg-white rounded-lg shadow">

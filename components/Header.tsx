@@ -204,9 +204,10 @@ const Header = () => {
                       backgroundSize: 'fill',
                       backgroundPosition: 'center',
                       height: '150px', // Hauteur des vignettes
+
                     }}
                   >
-                    <a href={`/products/category/${subcategory.name.toLowerCase()}`} className="absolute inset-0 flex items-center justify-center text-white border-2 border-primary font-bold bg-black bg-opacity-30 hover:bg-opacity-40 transition duration-300">
+                    <a href={`/products/category/${subcategory.name.toLowerCase()}`} className="absolute inset-0 flex items-center justify-center text-white border-2 border-black border-opacity-90 text-lg font-black bg-black bg-opacity-30 hover:bg-opacity-40 transition duration-300">
                       {subcategory.name}
                     </a>
                   </div>

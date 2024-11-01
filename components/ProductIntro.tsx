@@ -53,7 +53,7 @@ const ProductsIntro: React.FC = () => {
   return (
     <div
       ref={introRef}
-      className={`flex flex-col md:flex-row justify-center items-center text-center mb-4 ${
+      className={`mt-4 flex flex-col md:flex-row justify-center bg-white items-center text-center mb-4 ${
         isVisible ? 'slide-in-visible' : 'slide-in'
       }`}
     >
