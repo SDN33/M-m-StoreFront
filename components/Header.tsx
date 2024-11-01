@@ -28,13 +28,17 @@ const Header = () => {
     { name: 'Contactez-nous', href: '/contact' },
   ];
 
+
+
   const vinsSubCategories = [
-    { name: 'Vins rouges', href: '/products/category/rouge' },
-    { name: 'Vins blancs', href: '/products/category/blanc' },
-    { name: 'Vins rosés', href: '/products/category/rose' },
-    { name: 'Vins pétillants', href: '/products/category/petillant' },
-    { name: 'Vins liquoreux', href: '/products/category/liquoreux' },
+    { name: 'Rouge', href: '/vins/rouge', backgroundImage: '/images/red-wine-bg.jpg' },
+    { name: 'Blanc', href: '/vins/blanc', backgroundImage: '/images/white-wine-bg.jpg' },
+    { name: 'Rosé', href: '/vins/rose', backgroundImage: '/images/rose-wine-bg.jpg' },
+    { name: 'Pétillant', href: '/vins/petillant', backgroundImage: '/images/sparkling-wine-bg.jpg' },
+    { name: 'Liquoreux', href: '/vins/liquoreux', backgroundImage: '/images/dessert-wine-bg.jpg' },
+    { name: 'Autres', href: '/vins/autres', backgroundImage: '/images/other-wine-bg.jpg' },
   ];
+
 
   const toggleCartPopup = () => {
     setIsCartOpen(!isCartOpen);
@@ -183,24 +187,36 @@ const Header = () => {
           <div
             className="fixed z-50 inset-0 flex items-center justify-center p-4"
           >
-            <div className="relative bg-white p-6 rounded-lg shadow-xl w-96 max-h-80 overflow-y-auto">
+            <div className="relative bg-white p-6 rounded-lg shadow-xl w-96 max-h-180 overflow-y-auto">
               <button className="absolute top-2 right-2" onClick={toggleNosVinsPopup}>
                 <X className="w-6 h-6 text-gray-600" />
               </button>
               <h2 className="text-lg font-bold mb-4 text-primary">Nos Vins</h2>
-              <ul>
+
+              {/* Vignettes des catégories de vin */}
+              <div className="grid grid-cols-2 gap-4">
                 {vinsSubCategories.map((subcategory) => (
-                  <li key={subcategory.name} className="py-2">
-                    <a href={subcategory.href} className="text-gray-700 hover:text-primary">
+                  <div
+                    key={subcategory.name}
+                    className="relative rounded-lg overflow-hidden shadow-md cursor-pointer"
+                    style={{
+                      backgroundImage: `url(${subcategory.backgroundImage})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      height: '100px', // Hauteur des vignettes
+                    }}
+                  >
+                    <a href={`/products/category/${subcategory.name.toLowerCase()}`} className="absolute inset-0 flex items-center justify-center text-white font-bold bg-black bg-opacity-30 hover:bg-opacity-40 transition duration-300">
                       {subcategory.name}
                     </a>
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
         </>
       )}
+
 
       {/* Popup Panier */}
       {isCartOpen && <CartPopup isOpen={isCartOpen} onClose={toggleCartPopup} />}
