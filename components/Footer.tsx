@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="bg-white shadow-lg text-white py-2 text-center">
+    <footer className="bg-slate-100 shadow-lg text-white py-2 text-center">
 
       <div className="max-w-7xl mx-auto px-4 mt-8">
         {/* Logos de paiement */}
@@ -67,7 +67,7 @@ const Footer = () => {
             Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.
             <br />Éthylotest, en vente <a className="underline" href="https://www.norauto.fr/c/47996-ethylotest.html">ici</a>
           </p>
-          <p className="text-xs text-black mb-4 font-normal">Participer à notre cagnotte litchee <a className="underline" href="https://www.norauto.fr/c/47996-ethylotest.html">&quotVignerons En Difficulté&quot</a></p>
+          <p className="text-xs text-black mb-4 font-normal">Participer à notre cagnotte litchee <a className="underline" href="https://www.norauto.fr/c/47996-ethylotest.html">"Vignerons En Difficulté"</a></p>
           <p className="font-normal text-black text-xs">
             © 2024 Les Vins de Mémé Georgette, © Mémé Georgette, tous droits réservés
             <br />Création de <a className="font-bold text-primary" href="https://stillinov.com">Still-inov Agency</a>

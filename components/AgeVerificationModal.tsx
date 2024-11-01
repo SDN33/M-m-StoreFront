@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const AgeVerificationModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpening, setIsOpening] = useState(false);
+  const [isFading, setIsFading] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
@@ -39,13 +39,12 @@ const AgeVerificationModal = () => {
   }, [isOpen]);
 
   const handleAccept = () => {
-    setIsOpening(true);
+    setIsFading(true);
     localStorage.setItem('ageVerifiedTime', new Date().getTime().toString());
     setTimeout(() => {
       setIsOpen(false);
-      setIsOpening(false);
       setShouldRender(false);
-    }, 2000); // Durée totale de l'animation
+    }, 2000); // Durée du fondu de la vidéo
   };
 
   const handleReject = () => {
@@ -58,7 +57,7 @@ const AgeVerificationModal = () => {
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden">
       {/* Vidéo de fond */}
       <video
-        className="absolute inset-0 object-cover w-full h-full overflow-auto"
+        className={`absolute inset-0 object-cover w-full h-full transition-opacity duration-2000 ${isFading ? 'opacity-0' : 'opacity-100'}`}
         autoPlay
         loop
         muted
@@ -67,31 +66,10 @@ const AgeVerificationModal = () => {
         Your browser does not support the video tag.
       </video>
 
-      {/* Conteneur principal avec les portes */}
-      <div className="absolute inset-0 flex">
-        {/* Porte gauche */}
-        <div
-          className={`absolute top-0 bottom-0 w-1/2 left-0 bg-transparent transition-transform duration-[1.5s] ease-in-out transform
-            ${isOpening ? '-translate-x-full' : 'translate-x-0'}`}
-        >
-          {/* Bordure décorative droite */}
-          <div className="absolute right-0 top-0 bottom-0 w-2 bg-gray-800"></div>
-        </div>
-
-        {/* Porte droite */}
-        <div
-          className={`absolute top-0 bottom-0 w-1/2 right-0 bg-transparent transition-transform duration-[1.5s] ease-in-out transform
-            ${isOpening ? 'translate-x-full' : 'translate-x-0'}`}
-        >
-          {/* Bordure décorative gauche */}
-          <div className="absolute left-0 top-0 bottom-0 w-2 bg-gray-800"></div>
-        </div>
-      </div>
-
       {/* Contenu du modal */}
       <div
         className={`relative bg-white rounded-lg max-w-md w-full p-6 shadow-xl text-center m-4
-          transition-all duration-500 ${isOpening ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}
+          transition-all duration-500 ${isFading ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}
       >
         <Image
           src="/images/memelogo2.png"
