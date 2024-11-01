@@ -8,6 +8,7 @@ export const wcApi = axios.create({
     password: process.env.WC_CONSUMER_SECRET || '' // Secret Client
   }
 });
+
 export const wcOrderApi = axios.create({
   baseURL: `${process.env.WC_API_DOMAIN}/wp-json/wc/v3/orders`,
   auth: {

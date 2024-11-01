@@ -116,7 +116,7 @@ const Header = () => {
 
             <a href="/" className="flex-shrink-0">
               <Image
-                src="/images/logow.png"
+                src="/images/logomemeg2.png"
                 alt="Logo"
                 width={100}
                 height={32}
