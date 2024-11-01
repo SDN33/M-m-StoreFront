@@ -57,6 +57,7 @@ const ProductsIntro: React.FC = () => {
         isVisible ? 'slide-in-visible' : 'slide-in'
       }`}
     >
+      <br /><br />
       {/* Logos à gauche et à droite (affichés uniquement sur tablette et plus grand) */}
       <div className="space-x-2 hidden lg:flex mt-12 md:ml-8 lg:ml-28 slide-in-right">
         <Image src="/images/logobio1.webp" alt="bio logo" width={30} height={20} className="object-contain" priority={true} />

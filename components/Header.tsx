@@ -31,12 +31,12 @@ const Header = () => {
 
 
   const vinsSubCategories = [
-    { name: 'Rouge', href: '/vins/rouge', backgroundImage: '/images/red-wine-bg.jpg' },
-    { name: 'Blanc', href: '/vins/blanc', backgroundImage: '/images/white-wine-bg.jpg' },
-    { name: 'Rosé', href: '/vins/rose', backgroundImage: '/images/rose-wine-bg.jpg' },
-    { name: 'Pétillant', href: '/vins/petillant', backgroundImage: '/images/sparkling-wine-bg.jpg' },
-    { name: 'Liquoreux', href: '/vins/liquoreux', backgroundImage: '/images/dessert-wine-bg.jpg' },
-    { name: 'Autres', href: '/vins/autres', backgroundImage: '/images/other-wine-bg.jpg' },
+    { name: 'Rouge', href: '/vins/rouge', backgroundImage: '/images/cat1.png' },
+    { name: 'Blanc', href: '/vins/blanc', backgroundImage: '/images/cat2.png' },
+    { name: 'Rosé', href: '/vins/rose', backgroundImage: '/images/cat3.png' },
+    { name: 'Pétillant', href: '/vins/petillant', backgroundImage: '/images/cat4.png' },
+    { name: 'Liquoreux', href: '/vins/liquoreux', backgroundImage: '/images/cat5.png' },
+    { name: 'Autres', href: '/vins/autres', backgroundImage: '/images/cat6.png' },
   ];
 
 
@@ -45,7 +45,7 @@ const Header = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 w-full bg-white shadow-xl">
+    <div className="fixed top-0 left-0 right-0 z-50 w-full bg-primary shadow-sm">
       <PromotionSection />
 
       {/* Top Header */}
@@ -56,12 +56,12 @@ const Header = () => {
             {/* Logo */}
             <a href="/" className="flex-shrink-0 ml-8">
               <Image
-                src="/images/memelogo2.png"
+                src="/images/memelogo.png"
                 alt="Logo"
                 width={200}
                 height={250}
                 quality={100}
-                className="py-2"
+                className="py-2 -ml-4"
 
               />
             </a>
@@ -72,7 +72,7 @@ const Header = () => {
             {/* Right Actions */}
             <div className="flex items-center space-x-6 mr-3">
               <div className="hidden lg:flex items-center space-x-1 text-sm">
-                <span className='text-black'>Livraison en</span>
+                <span className='text-white'>Livraison en</span>
                 <Image
                   src="/images/fr.png"
                   alt="France"
@@ -80,15 +80,15 @@ const Header = () => {
                   height={14}
                   className="mx-1"
                 />
-                <span className="font-bold text-black">France</span>
+                <span className="font-bold text-white">France</span>
               </div>
 
               <a href="https://portailpro-memegeorgette.com" className="hidden lg:flex items-center text-sm hover:text-primary">
-                <User className="w-5 h-5 -mt-1 font-semibold" />
-                <span className="font-semibold ml-1">Portail Pro</span>
+                <User className="w-5 h-5 -mt-1 font-semibold text-white" />
+                <span className="font-semibold ml-1 text-white">Portail Pro</span>
               </a>
 
-              <a href="/faq" className="hidden lg:block text-sm font-semibold hover:text-primary">
+              <a href="/faq" className="text-white hidden lg:block text-sm font-semibold hover:text-primary">
                 Aide
               </a>
 
@@ -143,7 +143,7 @@ const Header = () => {
       <nav className="hidden md:block bg-white shadow-xl relative">
         <div className="container mx-auto px-4 flex items-center justify-between">
           {/* Icone de gauche */}
-          <ChevronLeft className="w-6 h-6 text-primary cursor-pointer hover-animate" onClick={() => {
+          <ChevronLeft className="w-6 h-6 text-black cursor-pointer hover-animate" onClick={() => {
             const scrollContainer = document.querySelector('.scrollable-menu');
             if (scrollContainer) {
               scrollContainer.scrollBy({ left: -150, behavior: 'smooth' });
@@ -168,7 +168,7 @@ const Header = () => {
             ))}
           </ul>
 
-          <ChevronRight className="w-6 h-6 text-primary cursor-pointer hover-animate" onClick={() => {
+          <ChevronRight className="w-6 h-6 text-black cursor-pointer hover-animate" onClick={() => {
             const scrollContainer = document.querySelector('.scrollable-menu');
             if (scrollContainer) {
               scrollContainer.scrollBy({ left: 150, behavior: 'smooth' });
@@ -201,7 +201,7 @@ const Header = () => {
                     className="relative rounded-lg overflow-hidden shadow-md cursor-pointer"
                     style={{
                       backgroundImage: `url(${subcategory.backgroundImage})`,
-                      backgroundSize: 'cover',
+                      backgroundSize: 'fill',
                       backgroundPosition: 'center',
                       height: '100px', // Hauteur des vignettes
                     }}
