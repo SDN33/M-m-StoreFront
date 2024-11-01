@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import AgeVerificationModal from "@/components/AgeVerificationModal";
 import { AuthProvider } from '../context/AuthContext';
 import { CartProvider } from '../context/CartContext';
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: "Les vins de Mémé Georgette | 2 500 vins bio en direct de vignerons et vigneronnes engagé(e)s | Vins Bio et Biodynamie Démeter",
@@ -60,6 +61,7 @@ export default function RootLayout({
             <Footer />
           </CartProvider>
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   );

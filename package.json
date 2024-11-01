@@ -14,6 +14,7 @@
     "@eslint/object-schema": "^2.1.4",
     "@heroicons/react": "^2.1.5",
     "@paypal/paypal-js": "^8.1.2",
+    "@vercel/analytics": "^1.3.2",
     "axios": "^1.7.7",
     "classnames": "^2.5.1",
     "framer-motion": "^11.11.10",
