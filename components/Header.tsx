@@ -84,7 +84,6 @@ const Header = () => {
               </div>
 
               <a href="https://portailpro-memegeorgette.com" className="hidden lg:flex items-center text-sm hover:text-gray-800">
-                <User className="w-5 h-5 -mt-1 font-semibold text-white" />
                 <span className="font-semibold ml-1 text-white hover:text-gray-800">Portail Pro</span>
               </a>
 
