@@ -201,7 +201,7 @@ const CheckoutPage = () => {
             <span>{(cartDetails.total).toFixed(2)}€</span>
           </div>
           <div className="flex justify-between font-semibold text-lg mb-2">
-            <span>Livraison 24H : <Image className='flex' src="/images/chronopost.png" alt="Chronopost" width="60" height="10" /></span>
+            <span>Livraison 24H : <Image className='flex' src="/images/boxtal.png" alt="Chronopost" width="60" height="10" /></span>
             <span>10.00€</span>
           </div>
           <br />
