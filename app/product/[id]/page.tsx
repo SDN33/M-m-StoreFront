@@ -223,7 +223,7 @@ const ProductPage: React.FC = () => {
             <br />
             <p className="text-sm font-normal">
               Vendu par
-              <a onClick={() => handleVendorClick(product.store_name)} className="cursor-pointer text-accent hover:text-gray-700">
+              <a onClick={() => handleVendorClick(product.store_name)} className="cursor-pointer text-teal-500 hover:text-gray-700">
                  <br />{product.store_name || ' @MéméGeorgette'}
               </a>
             </p>
@@ -232,7 +232,7 @@ const ProductPage: React.FC = () => {
             <br />
             <SocialShare url={window.location.href} title={product.name} />
             <div className="items-center mt-6 flex gap-2">
-              <Package className="h-6 w-6 text-yellow-500 mb-6" />
+              <Package className="h-6 w-6 mb-6" />
               <span className="font-bold text-xs mb-6">Livraison offerte dès 6 bouteilles achetées sur un domaine</span>
             </div>
             <div className="flex items-center mt-1">
@@ -263,7 +263,7 @@ const ProductPage: React.FC = () => {
         <Livraison />
         <br />
         <div className="mt-8">
-          <h2 className="text-2xl font-bold !-mb-2 text-center">Description du produit</h2>
+          <h2 className="text-2xl font-bold !-mb-2 text-center text-primary">Description du produit</h2>
           <div className="border-b-4 border-primary w-[20rem] md:w-[50rem] my-2 md:my-2 slide-in-right"></div>
           <p className='font-bold text-center mt-8'>
             {product.description && product.short_description

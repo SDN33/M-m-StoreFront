@@ -169,7 +169,7 @@ const RougeProductsCards: React.FC = () => {
     <div className="flex flex-col mr-4 lg:mr-16 md:-mt-8">
       <FilterTop sortBy={sortBy} handleSortChange={handleSortChange} resetFilters={resetFilters} />
       <div className="flex flex-col md:flex-row mt-4">
-        <div className="hidden md:block md:w-1/4 ml-1">
+        <div className="hidden md:block md:w-1/4 -ml-6 -mt-52">
           <ProductFilter
               selectedFilters={selectedFilters}
               onFilterChange={handleCheckboxChange}
