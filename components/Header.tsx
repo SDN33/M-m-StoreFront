@@ -19,8 +19,8 @@ const Header = () => {
   };
 
   const categories = [
-    { name: '⚡PROMOS', href: '/promos', className: 'text-red-500  font-semibold' },
-    { name: '⚡VENTES FLASH', href: '/ventes-flash', className: 'text-green-500 font-semibold' },
+    { name: 'PROMOS', href: '/promos', className: 'text-primary font-semibold' },
+    { name: '⚡ VENTES FLASH', href: '/ventes-flash', className: 'text-primary font-semibold' },
     { name: 'Nos Vins', onClick: toggleNosVinsPopup, icon: <ChevronDown className="inline-block ml-1" /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com' },
     { name: 'Nos Vignerons.nes', href: '/vendors' },
