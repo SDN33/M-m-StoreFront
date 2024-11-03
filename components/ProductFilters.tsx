@@ -145,6 +145,14 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
   return (
     <div className="hidden sm:block bg-transparent h-full w-56 ml-10 overflow-y-auto mt-56 bg-gray-400 bg-opacity-30 shadow-lg rounded-lg">
+      <div className="p-4">
+        <button
+          onClick={resetFilters}
+          className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-2 rounded-md hover:bg-primary-dark transition-colors shadow-md"
+        >
+          Réinitialiser
+        </button>
+      </div>
       {Object.entries(filterOptions).map(([filterType, options]) => {
         if (hideColorFilter && filterType === 'color') return null;
         return (
