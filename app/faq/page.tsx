@@ -49,14 +49,13 @@ const faqData = [
 ];
 
 export default function Faq() {
-  const [searchTerm, setSearchTerm] = useState<string>(''); // État pour la recherche
-  const [filteredAnswer, setFilteredAnswer] = useState<string | null>(null); // Réponse filtrée
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredAnswer, setFilteredAnswer] = useState<string | null>(null);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value.toLowerCase();
     setSearchTerm(query);
 
-    // Recherche de la réponse qui correspond à la question
     const foundFaq = faqData.find(faq =>
       faq.question.toLowerCase().includes(query)
     );
@@ -69,38 +68,63 @@ export default function Faq() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-primary px-4">
-      <div className="max-w-md w-full bg-white p-6 sm:p-8 shadow-lg rounded-lg mt-12">
-        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-6 text-primary">Foire Aux Questions (FAQ)</h1>
+    <div className="w-full bg-primary pt-4 pb-8">
+      <div className='h-20 w-auto'></div>
+      <div className='min-h-2 w-auto'></div>
 
-        {/* Input de recherche */}
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={handleSearch}
-          placeholder="Entrez votre question..."
-          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-        />
+      <div className="container mx-auto px-4">
+        <br /><br /><br /><br />
+        <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg mt-40">
+          <div className="p-4">
+            <h1 className="text-xl font-bold text-center mb-3 text-primary">
+              Foire Aux Questions (FAQ)
+            </h1>
 
-        {/* Affichage de la réponse filtrée */}
-        <div className="mt-4">
-          {filteredAnswer ? (
-            <p className="text-gray-700 text-base leading-relaxed">{filteredAnswer}</p>
-          ) : (
-            <p className="text-gray-500">Veuillez entrer une question dans le champ ci-dessus.</p>
-          )}
-        </div>
+            <div className="mb-3">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={handleSearch}
+                placeholder="Entrez votre question..."
+                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent"
+              />
+            </div>
 
-        {/* Liste des FAQ pour un aperçu */}
-        <div className="mt-8">
-          <h2 className="text-lg font-semibold text-gray-700 mb-2">Questions fréquentes :</h2>
-          <ul className="list-disc list-inside text-gray-700">
-            {faqData.slice(0, 4).map((faq, index) => (
-              <li key={index} className="mb-2">{faq.question}</li>
-            ))}
-          </ul>
+            <div className="bg-gray-50 rounded-lg p-3 mb-3 h-16 overflow-y-auto">
+              {filteredAnswer ? (
+                <p className="text-gray-700 text-xs leading-relaxed">
+                  {filteredAnswer}
+                </p>
+              ) : (
+                <p className="text-gray-500 text-xs text-center">
+                  Veuillez entrer une question dans le champ ci-dessus.
+                </p>
+              )}
+            </div>
+            
+            <div>
+              <h2 className="text-sm font-semibold text-gray-800 mb-2">
+                Questions fréquentes :
+              </h2>
+              <div className="grid gap-2 grid-cols-2">
+                {faqData.slice(0, 6).map((faq, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setSearchTerm(faq.question);
+                      setFilteredAnswer(faq.answer);
+                    }}
+                    className="text-left p-1.5 bg-white border border-gray-200 rounded hover:bg-gray-50 transition-colors duration-200"
+                  >
+                    <p className="text-gray-700 text-xs line-clamp-2">{faq.question}</p>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <br /><br /><br />
     </div>
   );
 }

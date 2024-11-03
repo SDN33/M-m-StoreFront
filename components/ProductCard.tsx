@@ -141,6 +141,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
                 imgElement.src = '/images/vinmeme.png';
               }}
             />
+            <div>
+              <div className="absolute bottom-0 right-0 bg-black bg-opacity-50 text-white px-1 py-1 rounded-xl">
+                <span className="text-3xl text-black text-opacity-50 w-14"></span>
+              </div>
+            </div>
           </div>
         </div>
 
