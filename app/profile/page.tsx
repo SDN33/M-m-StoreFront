@@ -72,7 +72,7 @@ export default function Profile() {
   return (
     <main style={{ maxWidth: '600px', margin: '14rem auto' }}>
       <div style={{ textAlign: 'center' }}>
-        <h1>Welcome, {user.user_display_name}!</h1>
+        <h1>Bienvenue, {user.user_display_name}!</h1>
         <p>Email: {user.user_email}</p>
         <button
           onClick={() => {
@@ -89,12 +89,12 @@ export default function Profile() {
             marginTop: '20px',
           }}
         >
-          Logout
+          Déconnexion
         </button>
       </div>
 
       {/* Section des commandes récentes */}
-      <section style={{ marginTop: '30px' }}>
+      <section className="text-center" style={{ marginTop: '30px' }}>
         <h2>Vos dernières commandes</h2>
         {orders.length > 0 ? (
           <ul style={{ listStyle: 'none', padding: 0 }}>
