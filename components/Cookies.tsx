@@ -165,7 +165,7 @@ const CookieConsent = () => {
           <div className="flex justify-center gap-4">
             <button
               onClick={acceptAll}
-              className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-100 transition-colors text-sm font-medium"
+              className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-600 transition-colors text-sm font-medium"
             >
               Tout accepter
             </button>
