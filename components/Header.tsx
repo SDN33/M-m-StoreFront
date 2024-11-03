@@ -1,6 +1,6 @@
 'use client';
 
-import { User, Menu as MenuIcon, X, ChevronDown, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Menu as MenuIcon, X, ChevronDown, ChevronRight, ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import CartPopup from './CartPopup';

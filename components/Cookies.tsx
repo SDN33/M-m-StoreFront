@@ -21,6 +21,7 @@ const CookieConsent = () => {
           ...savedPreferences
         }));
       } catch (e) {
+        console.error('Failed to parse cookie consent:', e);
         setIsVisible(true);
       }
     } else {
@@ -98,7 +99,7 @@ const CookieConsent = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-medium text-gray-700">Cookies analytiques</p>
-                    <p className="text-sm text-gray-600">Mesure d'audience et statistiques</p>
+                    <p className="text-sm text-gray-600">Mesure d&apos;audience et statistiques</p>
                   </div>
                   <button
                     onClick={() => handleToggle('analytics')}
