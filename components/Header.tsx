@@ -58,10 +58,10 @@ const Header = () => {
               <Image
                 src="/images/memelogo.png"
                 alt="Logo"
-                width={200}
+                width={210}
                 height={250}
                 quality={100}
-                className="py-2 -ml-4"
+                className="py-2 -ml-5 scale-110"
 
               />
             </a>
