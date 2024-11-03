@@ -8,7 +8,7 @@ interface FiltertopProps {
 
 const Filtertop: React.FC<FiltertopProps> = ({ sortBy = '', handleSortChange }) => {
   return (
-    <div className="flex mx-auto text-center items-center justify-center mt-10 -mb-6">
+    <div className="flex mx-auto text-center items-center justify-center pt-4 mt-4 -mb-6">
       <label htmlFor="sortBySelect" className="mr-2 font-bold text-gray-800 hidden sm:inline">
         Trier par :
       </label>
