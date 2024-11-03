@@ -68,7 +68,7 @@ export default function Faq() {
   };
 
   return (
-    <div className="w-full bg-primary pt-4 pb-8">
+    <div className="w-full bg-accent pt-4 pb-8">
       <div className='h-20 w-auto'></div>
       <div className='min-h-2 w-auto'></div>
 
@@ -101,7 +101,7 @@ export default function Faq() {
                 </p>
               )}
             </div>
-            
+
             <div>
               <h2 className="text-sm font-semibold text-gray-800 mb-2">
                 Questions fréquentes :
