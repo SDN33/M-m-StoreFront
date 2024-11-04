@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Heart } from 'lucide-react';
+import { Heart, Info } from 'lucide-react';
 import AddToCartButton from './AddToCartButton';
 
 interface Product {
@@ -37,14 +37,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const [quantity, setQuantity] = useState<number>(1);
   const [variationId] = useState<number>(product.id);
   const [imageError, setImageError] = useState<boolean>(false);
+  const [isTruncated, setIsTruncated] = useState<boolean>(false);
 
   const handleRedirect = () => {
     router.push(`/product/${product.id}`);
   };
 
   const formatRating = (rating?: number, ratingCount?: number) => {
-    if (typeof rating !== 'number' || typeof ratingCount !== 'number' || ratingCount === 0)
-      return <span className='text-xs'>Non noté</span>;
+    if (!rating || !ratingCount || ratingCount === 0) return <span className='text-xs'>Non noté</span>;
     return <span>{(rating * 4).toFixed(1)}/20</span>;
   };
 
@@ -79,16 +79,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   };
 
   function stripHtmlAndTruncate(text: string = '', maxLength: number): string {
-      // Supprime les balises HTML
-      const plainText = text.replace(/<\/?[^>]+(>|$)/g, "");
-
-      // Coupe le texte à maxLength sans couper les mots et ajoute "..." si nécessaire
-      if (plainText.length > maxLength) {
-        return plainText.substring(0, plainText.lastIndexOf(" ", maxLength)) + "...";
-      }
-
-      return plainText;
+    const plainText = text.replace(/<\/?[^>]+(>|$)/g, '');
+    if (plainText.length > maxLength) {
+      return plainText.substring(0, plainText.lastIndexOf(' ', maxLength)) + '...';
     }
+    return plainText;
+  }
+
+  // Utilisation de useMemo pour calculer truncatedName sans appel à setIsTruncated
+  const truncatedName = useMemo(() => stripHtmlAndTruncate(product.name, 36), [product.name]);
+
+  // Utilisation de useEffect pour mettre à jour isTruncated après calcul de truncatedName
+  useEffect(() => {
+    setIsTruncated(product.name.length > 38);
+  }, [product.name]);
 
   const generateSlogan = () => {
     if (product.price < 9) return `Le qualité/prix IMBATTABLE !`;
@@ -114,18 +118,30 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             <div className="absolute -top-1 left-0">
               <Heart className="text-red-500 w-5 h-5 fill-current" />
             </div>
-            <h3 className="text-base font-bold pl-6 cursor-pointer hover:underline truncate" onClick={handleRedirect}>
-              {product.name}
-            </h3>
+            <div className="flex items-center pl-6">
+              <h3
+                className="text-base font-bold cursor-pointer hover:underline truncate"
+                onClick={handleRedirect}
+                title={isTruncated ? product.name : undefined}
+              >
+                {truncatedName}
+              </h3>
+              {isTruncated && (
+                <div className="relative group" title={product.name}>
+                  <Info className="w-4 h-4 text-gray-500 ml-1 cursor-pointer" />
+                </div>
+
+              )}
+            </div>
             <p className="text-xs text-gray-500 pl-6 truncate">
-              {product.categories.map(category => category.name).join(', ')} · {product.volume} - {product.millesime}
+              {product.categories.map((category) => category.name).join(" et ")} · {product.volume} - {product.millesime}
             </p>
           </div>
         </div>
 
         <div className="relative">
           <div className="absolute top-0 left-0 z-10 bg-gradient-to-r from-teal-800 to-teal-950 rounded-full p-1.5 text-white">
-            <div className="text-sm font-bold">{formatRating(product.average_rating ?? 0, product.rating_count ?? 0)}</div>
+            <div className="text-sm font-bold">{formatRating(product.average_rating, product.rating_count)}</div>
           </div>
           <div className="relative w-full h-52 mb-2">
             <Image
@@ -141,11 +157,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
                 imgElement.src = '/images/vinmeme.png';
               }}
             />
-            <div>
-              <div className="absolute bottom-0 right-0 bg-black bg-opacity-50 text-white px-1 py-1 rounded-xl">
-                <span className="text-3xl text-black text-opacity-50 w-14"></span>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -157,15 +168,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
 
         <p className="text-xs mb-2 text-gray-700 h-8 overflow-hidden text-center">
-          {product.short_description ? (
-            <span>
-              {stripHtmlAndTruncate(product.short_description, 110)}
-            </span>
-          ) : (
-            <span>
-              {stripHtmlAndTruncate(product.description, 110)}
-            </span>
-          )}
+          {stripHtmlAndTruncate(product.short_description || product.description || '', 110)}
         </p>
 
         <div className="flex items-center justify-between mb-2">
@@ -180,7 +183,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             </div>
           </div>
           <div className="text-gray-500 text-right">
-            <div className="text-xs">à l&apos;unité</div>
+            <div className="text-xs">avant remise</div>
             <div className="text-sm">{(product.price * 1.2).toFixed(2)}€</div>
           </div>
         </div>
@@ -190,11 +193,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           <select
             value={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}
-            className="border rounded px-2 py-1 bg-white text-sm"
+            className="border rounded-md p-1 text-sm"
           >
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-              <option key={num} value={num}>
-                {num}
+            {[...Array(10)].map((_, i) => (
+              <option key={i} value={i + 1}>
+                {i + 1}
               </option>
             ))}
           </select>
