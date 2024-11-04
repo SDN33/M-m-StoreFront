@@ -33,10 +33,10 @@ const VendorSlider = () => {
   const [vendors, setVendors] = useState<Vendor[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [hoveredProduct, setHoveredProduct] = useState<Vendor['products'][0] | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<string>('all');
   const [isListExpanded, setIsListExpanded] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [hoveredProduct, setHoveredProduct] = useState<Vendor['products'][0] | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
