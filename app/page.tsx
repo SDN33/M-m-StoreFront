@@ -174,8 +174,9 @@ export default function Home() {
               <br /><br />
               <HeroBanner />
               <Livraison />
-              <br /><br />
+              <br /><br /><br />
               <WineCategories />
+              <br />
               <Trust />
               <Slogan />
               <br /><br />
