@@ -33,10 +33,10 @@ const VendorSlider = () => {
   const [vendors, setVendors] = useState<Vendor[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [hoveredProduct, setHoveredProduct] = useState<Vendor['products'][0] | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<string>('all');
   const [isListExpanded, setIsListExpanded] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [hoveredProduct, setHoveredProduct] = useState<Vendor['products'][0] | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -254,11 +254,11 @@ const VendorSlider = () => {
       </div>
 
       <p className="text-center text-teal-500 text-xl font-extrabold -mt-4 mb-4">
-        "Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature"
+        &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
       </p>
       {/* Bio Winemakers Description */}
       <p className="text-center text-sm font-extrabold -mt-4 mb-16">
-        Nos vignerons bio s'engagent pour une agriculture respectueuse de l'environnement,
+        Nos vignerons bio s&apos;engagent pour une agriculture respectueuse de l&apos;environnement,
         garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
         Choisir leurs vins, c'est soutenir une viticulture durable et éthique.
       </p>
