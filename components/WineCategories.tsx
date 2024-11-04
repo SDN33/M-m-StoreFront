@@ -227,7 +227,7 @@ const VendorSlider = () => {
 
                   {/* View More Button */}
                   <Link href={`/vendor/${vendor.id}`} passHref>
-                    <button className="absolute bottom-4 right-4 bg-white text-primary font-bold py-2 px-4 rounded-md shadow-lg transition-transform duration-300 transform hover:scale-105">
+                    <button className="absolute bottom-4 right-4 bg-transparent text-white font-bold py-2 px-4 rounded-md shadow-lg transition-transform duration-300 transform hover:scale-105">
                       Voir plus
                     </button>
                   </Link>
@@ -252,22 +252,30 @@ const VendorSlider = () => {
         </button>
       </div>
 
-      <p className="text-center text-teal-500 text-xl font-extrabold -mt-4 mb-4">
-        &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
-      </p>
-      {/* Bio Winemakers Description */}
-      <p className="text-center text-sm font-extrabold -mt-4 mb-16">
-        Nos vignerons bio s&apos;engagent pour une agriculture respectueuse de l&apos;environnement,
-        garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
-        Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique.
-      </p>
+      <br />
+
+      <div>
+        <p className="text-center text-xl font-extrabold -mt-4 mb-4 slide-in-right text-teal-500">
+          &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
+        </p>
+        {/* Bio Winemakers Description */}
+        <p className="text-center text-sm font-extrabold -mt-2 mb-16 slide-in-right">
+          Nos vignerons s&apos;engagent pour une agriculture respectueuse de l&apos;environnement,
+          garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
+          Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique.
+          <div className='border-t-2 border-primary w-16 mt-4 flex mx-auto'></div> {/* Réduit la largeur de la bordure et l'espacement */}
+        </p>
+        <br />
+      </div>
+
+      <br />
 
       {/* Enhanced Winemakers List */}
-      <div className="mb-8 bg-white rounded-lg shadow-lg p-6 -mt-8">
+      <div className="mb-8 bg-slate-100 rounded-lg shadow-lg p-6 -mt-8">
         <div className="flex flex-col space-y-4">
           {/* Header and Expand Button */}
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-bold text-primary">
+            <h3 className="text-xl font-bold">
             A la rencontre de nos vignerons et domaines partenaires
             </h3>
             <button
