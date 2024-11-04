@@ -29,11 +29,12 @@ interface Vendor {
   images?: string;
 }
 
+
+
 const VendorSlider = () => {
   const [vendors, setVendors] = useState<Vendor[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [hoveredProduct, setHoveredProduct] = useState<Vendor['products'][0] | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<string>('all');
   const [isListExpanded, setIsListExpanded] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -213,8 +214,6 @@ const VendorSlider = () => {
                         <div
                           key={idx}
                           className="w-16 h-16 bg-gradient-to-r from-white/5 to-white/10 rounded-full overflow-hidden border-2 border-white/20 shadow-md transform hover:scale-110 transition-all duration-300 hover:bg-accent"
-                          onMouseEnter={() => setHoveredProduct(product)}
-                          onMouseLeave={() => setHoveredProduct(null)}
                         >
                           <img
                             src={Array.isArray(product.images) && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
@@ -260,7 +259,7 @@ const VendorSlider = () => {
       <p className="text-center text-sm font-extrabold -mt-4 mb-16">
         Nos vignerons bio s&apos;engagent pour une agriculture respectueuse de l&apos;environnement,
         garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
-        Choisir leurs vins, c'est soutenir une viticulture durable et éthique.
+        Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique.
       </p>
 
       {/* Enhanced Winemakers List */}
