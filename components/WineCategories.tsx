@@ -141,18 +141,7 @@ const VendorSlider = () => {
         <div className="border-t border-primary w-1/4" />
       </h2>
 
-      {/* Bio Winemakers Description */}
-      <p className="text-center text-sm font-extrabold -mt-4 mb-8">
-        Nos vignerons bio s'engagent pour une agriculture respectueuse de l'environnement,
-        garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
-        Choisir leurs vins, c'est soutenir une viticulture durable et éthique.
-      </p>
-
       <br />
-      <p className="text-center text-teal-500 text-xl font-extrabold -mt-4 mb-8">
-        "Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature"
-      </p>
-
       {/* Slider Section */}
       <div className="relative perspective-1000">
         <div className="relative flex h-[380px] overflow-x-scroll scrollbar-hidden justify-center">
@@ -263,6 +252,16 @@ const VendorSlider = () => {
           <ChevronRight className="w-5 h-5 text-primary" />
         </button>
       </div>
+
+      <p className="text-center text-teal-500 text-xl font-extrabold -mt-4 mb-4">
+        "Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature"
+      </p>
+      {/* Bio Winemakers Description */}
+      <p className="text-center text-sm font-extrabold -mt-4 mb-16">
+        Nos vignerons bio s'engagent pour une agriculture respectueuse de l'environnement,
+        garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
+        Choisir leurs vins, c'est soutenir une viticulture durable et éthique.
+      </p>
 
       {/* Enhanced Winemakers List */}
       <div className="mb-8 bg-white rounded-lg shadow-lg p-6 -mt-8">
