@@ -13,9 +13,18 @@ const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNosVinsOpen, setIsNosVinsOpen] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false); // Nouveau état pour le menu déroulant
 
   const toggleNosVinsPopup = () => {
     setIsNosVinsOpen((prev) => !prev);
+  };
+
+  const toggleCartPopup = () => {
+    setIsCartOpen(!isCartOpen);
+  };
+
+  const toggleLanguageMenu = () => {
+    setIsLanguageMenuOpen((prev) => !prev); // Toggle l'état du menu des langues
   };
 
   const categories = [
@@ -26,9 +35,8 @@ const Header = () => {
     { name: 'Nos Vignerons.nes', href: '/vendors' },
     { name: 'Vins du Monde', href: '/vins-du-monde' },
     { name: 'Contactez-nous', href: '/contact' },
+    { name: 'Blog', href: '/blog' },
   ];
-
-
 
   const vinsSubCategories = [
     { name: 'Rouge', href: '/vins/rouge', backgroundImage: '/images/cat1.png' },
@@ -38,11 +46,6 @@ const Header = () => {
     { name: 'Liquoreux', href: '/vins/liquoreux', backgroundImage: '/images/cat5.png' },
     { name: 'Autres', href: '/vins/autres', backgroundImage: '/images/cat6.png' },
   ];
-
-
-  const toggleCartPopup = () => {
-    setIsCartOpen(!isCartOpen);
-  };
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 w-full bg-primary shadow-sm">
@@ -54,6 +57,17 @@ const Header = () => {
           {/* Desktop and Tablet View */}
           <div className="hidden md:flex items-center justify-between">
             {/* Logo */}
+            <a href="/" className="flex-shrink-0">
+              <Image
+                src="/images/meme-pas-contente.png"
+                alt="Logo"
+                width={71}
+                height={90}
+                quality={100}
+                className="absolute left-0 top-12 transform scale-x-[-1]"
+              />
+            </a>
+
             <a href="/" className="flex-shrink-0 ml-8">
               <Image
                 src="/images/memelogo.png"
@@ -61,8 +75,7 @@ const Header = () => {
                 width={210}
                 height={250}
                 quality={100}
-                className="py-2 -ml-5 scale-110"
-
+                className="py-2 -ml-8 scale-110"
               />
             </a>
 
@@ -73,14 +86,35 @@ const Header = () => {
             <div className="flex items-center space-x-6 mr-3">
               <div className="hidden lg:flex items-center space-x-1 text-sm">
                 <span className='text-white'>Livraison en</span>
-                <Image
-                  src="/images/euro.png"
-                  alt="France"
-                  width={30}
-                  height={14}
-                  className="mx-1"
-                />
-                <span className="font-bold text-white -ml-1">Europe</span>
+
+                <div className="flex items-center space-x-1">
+                  <ChevronDown className="w-4 h-4 text-white cursor-pointer" onClick={toggleLanguageMenu} />
+                </div>
+                {/* Menu déroulant pour les langues */}
+                {isLanguageMenuOpen && (
+                  <ul className="absolute mt-32 bg-white border border-gray-300 rounded-md shadow-lg z-40">
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex">
+                      France
+                      <Image
+                        src="/images/fr.png"
+                        alt="France"
+                        width={30}
+                        height={14}
+                        className="mx-1 -mt-1 flex-shrink-0"
+                      />
+                    </li>
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex">
+                      Europe
+                      <Image
+                        src="/images/euro.png"
+                        alt="France"
+                        width={30}
+                        height={14}
+                        className="mx-1 -mt-1 flex-shrink-0"
+                      />
+                    </li>
+                  </ul>
+                )}
               </div>
 
               <a href="https://portailpro-memegeorgette.com" className="hidden lg:flex items-center text-sm hover:text-gray-800">
@@ -92,8 +126,8 @@ const Header = () => {
               </a>
 
               <div className="flex items-center space-x-4">
-                <AuthButton/>
-                <CartIcon onClick={toggleCartPopup}/>
+                <AuthButton />
+                <CartIcon onClick={toggleCartPopup} />
               </div>
             </div>
           </div>
@@ -120,7 +154,7 @@ const Header = () => {
                 className="h-12 w-auto"
               />
             </a>
-            <CartIcon onClick={toggleCartPopup}/>
+            <CartIcon onClick={toggleCartPopup} />
           </div>
         </div>
       </div>
@@ -190,7 +224,6 @@ const Header = () => {
                       backgroundSize: 'cover', // Taille des vignettes
                       backgroundPosition: 'center',
                       height: '160px', // Hauteur des vignettes
-
                     }}
                   >
                     <a href={`/products/category/${subcategory.name.toLowerCase()}`} className="absolute inset-0 flex items-center justify-center text-white border-2 border-black border-opacity-90 text-lg font-black bg-black bg-opacity-30 hover:bg-primary hover:bg-opacity-40 transition duration-300 hover:text-opacity-100">
@@ -203,7 +236,6 @@ const Header = () => {
           </div>
         </>
       )}
-
 
       {/* Popup Panier */}
       {isCartOpen && <CartPopup isOpen={isCartOpen} onClose={toggleCartPopup} />}

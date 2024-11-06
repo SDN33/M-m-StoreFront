@@ -67,11 +67,11 @@ const getFilterTitle = (filterType: string) => {
 
 const filterOptions = {
   color: [
-    { label: 'Rouge 🔴', value: 'Rouge' },
-    { label: 'Blanc 🟡', value: 'Blanc' },
-    { label: 'Rosé ⭕', value: 'Rosé' },
-    { label: 'Pétillant 🫧', value: 'Pétillant' },
-    { label: 'Liquoreux 🟠', value: 'Liquoreux' },
+    { label: 'Rouge', value: 'Rouge' },
+    { label: 'Blanc', value: 'Blanc' },
+    { label: 'Rosé', value: 'Rosé' },
+    { label: 'Pétillant', value: 'Pétillant' },
+    { label: 'Liquoreux', value: 'Liquoreux' },
     { label: 'Autres', value: 'Autres' },
   ],
   region: [

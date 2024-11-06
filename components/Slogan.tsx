@@ -100,11 +100,11 @@ const Slogan: React.FC = () => {
       <div className="absolute bottom-0 right-0 w-[100px] md:w-[200px] h-[100px] md:h-[200px] bg-white opacity-10 rounded-tl-full"></div>
       <div className="absolute right-0 bottom-0 w-[150px] md:w-[350px]">
         <Image
-          src="/images/meme-georgette.png"
+          src="/images/meme-pas-contente.png"
           alt="Mémé Newsletter"
-          className="w-full h-auto object-cover"
-          width={500}
-          height={300}
+          className="object-cover absolute right-0 bottom-0"
+          width={200}
+          height={100}
           loading='lazy'
         />
       </div>

@@ -7,6 +7,7 @@ import { Star, Package } from 'lucide-react';
 import Livraison from '@/components/Livraison';
 import SocialShare from '@/components/Socialshare';
 import AddToCartButton from '@/components/AddToCartButton';
+import ProductReviews from '@/components/ProductReviews';
 
 
 
@@ -327,23 +328,14 @@ const ProductPage: React.FC = () => {
           </div>
 
           <br />
+          <br /><br />
+          <h2 className="text-2xl font-bold !-mb-2 text-center text-primary">Avis clients</h2>
+          <br /><br />
+          <ProductReviews productId={product.id.toString()} />
+
+
           <br />
-
-          <video
-            src="/videos/minibanner.mp4"
-            width={1920}
-            height={400}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className={`hidden md:block w-full h-[400px] object-fit`}
-
-          >
-            Your browser does not support the video tag.
-          </video>
-
+          <br />
           <Image
             src="/images/bannereco2.png"
             alt="Bannière écologique"

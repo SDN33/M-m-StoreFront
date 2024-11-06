@@ -275,9 +275,6 @@ const VendorSlider = () => {
         <div className="flex flex-col space-y-4">
           {/* Header and Expand Button */}
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-bold">
-            A la rencontre de nos vignerons et domaines partenaires
-            </h3>
             <button
               onClick={() => setIsListExpanded(!isListExpanded)}
               className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-primary transition-colors"
