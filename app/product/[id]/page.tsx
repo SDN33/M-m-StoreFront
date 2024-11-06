@@ -37,6 +37,7 @@ interface Product {
   certification?: string;
   degre?: number;
   millesime?: string;
+  degustation?: string;
 }
 
 const formatDescription = (description: string, maxChars = 90) => {
@@ -306,12 +307,12 @@ const ProductPage: React.FC = () => {
                 </div>
             </div>
 
-            {/* Conservation */}
+            {/* Dégustation */}
             <div className="bg-white p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-primary text-left">Conservation</h3>
+                <h3 className="text-lg font-bold text-primary text-left">Dégustation</h3>
                 <p className="text-sm text-right">
-                  {product.conservation ? product.conservation : 'Pas d\'informations de conservation'}
+                  {product.degustation ? product.degustation : 'Pas d\'informations de dégustation'}
                 </p>
               </div>
             </div>
