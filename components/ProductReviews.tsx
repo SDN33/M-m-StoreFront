@@ -31,7 +31,7 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => {
         } else {
           setError('Aucune critique trouvée.');
         }
-      } catch (err) {
+      } catch (err: any) {
         setError('Erreur lors de la récupération des avis.');
       } finally {
         setLoading(false);
