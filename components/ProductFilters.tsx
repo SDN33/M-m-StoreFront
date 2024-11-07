@@ -111,13 +111,13 @@ const filterOptions = {
     { label: 'Autres', value: 'Autres' },
   ],
   accord_mets: [
-    { label: 'Viandes rouges 🥩', value: 'Viandes rouges' },
-    { label: 'Viandes blanches 🍗', value: 'Viandes blanches' },
-    { label: 'Poissons 🐟', value: 'Poissons' },
-    { label: 'Fruits de mer 🦪', value: 'Fruits de mer' },
-    { label: 'Fromages 🧀', value: 'Fromages' },
-    { label: 'Desserts / Sucré 🍰', value: 'Desserts / Sucré' },
-    { label: 'Plats végétariens 🥗', value: 'Plats végétariens' },
+    { label: 'Viandes rouges', value: 'Viandes rouges' },
+    { label: 'Viandes blanches', value: 'Viandes blanches' },
+    { label: 'Poissons', value: 'Poissons' },
+    { label: 'Fruits de mer', value: 'Fruits de mer' },
+    { label: 'Fromages', value: 'Fromages' },
+    { label: 'Desserts / Sucré', value: 'Desserts / Sucré' },
+    { label: 'Plats végétariens', value: 'Plats végétariens' },
   ],
 };
 

@@ -35,86 +35,122 @@ const SearchInput = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [showRecentSearches, setShowRecentSearches] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const resultsRef = useRef<HTMLDivElement>(null);
   const recentSearchesRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Fonction pour extraire les métadonnées
+  // Fonction améliorée pour extraire les métadonnées
   const extractMetaData = (product: Product): FilteredProduct => {
     const metaDataMap: { [key: string]: string } = {};
+    const metaKeys = {
+      '_nom_chateau': 'nom_chateau',
+      '_appellation': 'appellation',
+      '_millesime': 'millesime',
+      '_region': 'region__pays',
+      '_couleur': 'categorie'
+    };
 
     product.meta_data.forEach(meta => {
-      switch (meta.key) {
-        case '_nom_chateau':
-          metaDataMap.nom_chateau = meta.value;
-          break;
-        case '_appellation':
-          metaDataMap.appellation = meta.value;
-          break;
-        case '_millesime':
-          metaDataMap.millesime = meta.value;
-          break;
-        case '_region':
-          metaDataMap.region__pays = meta.value;
-          break;
-        case '_couleur':
-          metaDataMap.categorie = meta.value;
-          break;
+      const mappedKey = metaKeys[meta.key as keyof typeof metaKeys];
+      if (mappedKey) {
+        metaDataMap[mappedKey] = meta.value;
       }
     });
 
     return { ...product, ...metaDataMap };
   };
 
-  // Normalisation des chaînes pour une comparaison simplifiée
+  // Normalisation améliorée des chaînes
   const normalizeString = (str: string) => {
+    if (!str) return '';
     return str
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^a-z0-9]/g, " ")
+      .replace(/[^\w\s]/g, " ")
+      .replace(/\s+/g, " ")
       .trim();
   };
 
-  // Calcul du score de similarité
-  const getSimilarityScore = (input: string, text: string) => {
+  // Calcul du score de similarité amélioré
+  const getSimilarityScore = (input: string, product: FilteredProduct): number => {
     const normalizedInput = normalizeString(input);
-    const normalizedText = normalizeString(text);
+    const searchWords = normalizedInput.split(' ').filter(word => word.length > 1);
 
-    const inputWords = normalizedInput.split(' ');
-    const textWords = normalizedText.split(' ');
+    if (searchWords.length === 0) return 0;
 
-    const matches = inputWords.filter(word => textWords.includes(word)).length;
-    return matches / inputWords.length;
+    const fieldsToSearch = [
+      product.name,
+      product.nom_chateau,
+      product.appellation,
+      product.millesime,
+      product.region__pays,
+      product.categorie
+    ].filter(Boolean).map(str => normalizeString(str as string));
+
+    let totalScore = 0;
+    let matches = 0;
+
+    searchWords.forEach(word => {
+      fieldsToSearch.forEach(field => {
+        if (field.includes(word)) {
+          matches++;
+          // Bonus pour les correspondances exactes
+          if (field === word) matches += 0.5;
+        }
+      });
+    });
+
+    totalScore = matches / (searchWords.length * fieldsToSearch.length);
+    return totalScore;
   };
 
-  // Déclenchement de la recherche avec un délai (debounce)
+  // Recherche améliorée avec gestion d'erreur
   const debouncedSearch = useMemo(
     () =>
       debounce(async (term: string) => {
-        if (term.length < 1) return;
+        if (term.length < 2) {
+          setResults([]);
+          return;
+        }
 
         setIsLoading(true);
+        setError(null);
+
         try {
           const response = await axios.get('/api/products', {
             params: {
               search: term,
-              per_page: 10,
-              status: 'publish'
+              per_page: 20, // Augmenté pour plus de résultats
+              status: 'publish',
+              orderby: 'relevance'
             }
           });
 
-          const processedResults = response.data.map(extractMetaData);
-          setResults(processedResults);
+          if (response.data.length === 0) {
+            setError('Aucun résultat trouvé');
+            setResults([]);
+            return;
+          }
 
-          setRecentSearches(prev => {
-            const updated = [term, ...prev.filter(s => s !== term)].slice(0, 5);
-            localStorage.setItem('recentSearches', JSON.stringify(updated));
-            return updated;
-          });
+          const processedResults = response.data.map(extractMetaData);
+          const filteredResults = filterResults(processedResults, term);
+          setResults(filteredResults);
+
+          // Mise à jour des recherches récentes
+          if (term.trim()) {
+            setRecentSearches(prev => {
+              const updated = [term, ...prev.filter(s => s !== term)].slice(0, 5);
+              localStorage.setItem('recentSearches', JSON.stringify(updated));
+              return updated;
+            });
+          }
         } catch (error) {
           console.error('Erreur de recherche:', error);
+          setError('Une erreur est survenue lors de la recherche');
+          setResults([]);
         } finally {
           setIsLoading(false);
         }
@@ -122,46 +158,37 @@ const SearchInput = () => {
     []
   );
 
+  // Filtrage amélioré des résultats
   const filterResults = (products: FilteredProduct[], term: string): FilteredProduct[] => {
-    const normalizedTerm = normalizeString(term);
-    const scoredResults = products
+    return products
       .map(product => ({
         product,
-        score: getSimilarityScore(normalizedTerm, product.name)
+        score: getSimilarityScore(term, product)
       }))
-      .filter(({ score }) => score > 0)
-      .sort((a, b) => b.score - a.score);
-
-    return scoredResults.map(({ product }) => product);
+      .filter(({ score }) => score > 0.1) // Seuil minimum de pertinence
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 10) // Limite le nombre de résultats
+      .map(({ product }) => product);
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const term = event.target.value;
     setSearchTerm(term);
-    if (term) {
-      debouncedSearch(term);
-    } else {
-      setResults([]);
+    setError(null);
+    debouncedSearch(term);
+  };
+
+  const clearSearch = () => {
+    setSearchTerm('');
+    setResults([]);
+    setShowRecentSearches(false);
+    setError(null);
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
   };
 
-  // Chargement des recherches récentes depuis localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('recentSearches');
-    if (saved) {
-      setRecentSearches(JSON.parse(saved));
-    }
-  }, []);
-
-  // Filtrage des résultats
-  useEffect(() => {
-    if (searchTerm.length >= 2 && results.length) {
-      const filtered = filterResults(results, searchTerm);
-      setResults(filtered);
-    }
-  }, [results, searchTerm]);
-
-  // Gestion des clics en dehors des fenêtres pour fermer les résultats
+  // Gestion des clics à l'extérieur
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -178,17 +205,20 @@ const SearchInput = () => {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Méthode pour effacer la recherche
-  const clearSearch = () => {
-    setSearchTerm('');
-    setResults([]);
-    setShowRecentSearches(false);
-  };
+  // Chargement initial des recherches récentes
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('recentSearches');
+      if (saved) {
+        setRecentSearches(JSON.parse(saved));
+      }
+    } catch (error) {
+      console.error('Erreur lors du chargement des recherches récentes:', error);
+    }
+  }, []);
 
   return (
     <div className="relative flex-grow mx-8 max-w-xl">
@@ -211,7 +241,7 @@ const SearchInput = () => {
           )}
           {searchTerm && (
             <button
-              onClick={clearSearch} // Utiliser la méthode clearSearch ici
+              onClick={clearSearch}
               className="p-1 hover:bg-white rounded-full"
             >
               <X className="w-4 h-4 text-gray-400" />
@@ -220,8 +250,14 @@ const SearchInput = () => {
         </div>
       </div>
 
+      {error && searchTerm && (
+        <div className="absolute mt-2 w-full bg-white rounded-lg shadow-lg p-4 z-20">
+          <p className="text-red-500 text-sm">{error}</p>
+        </div>
+      )}
+
       {results.length > 0 && (
-        <div ref={resultsRef} className="absolute mt-2 w-full bg-white rounded-lg shadow-lg overflow-hidden z-20">
+        <div ref={resultsRef} className="absolute mt-2 w-full bg-white rounded-lg shadow-lg overflow-hidden z-20 max-h-96 overflow-y-auto">
           {results.map((product, index) => (
             <a
               key={product.id}
@@ -260,7 +296,10 @@ const SearchInput = () => {
             {recentSearches.map((term, index) => (
               <button
                 key={index}
-                onClick={() => setSearchTerm(term)}
+                onClick={() => {
+                  setSearchTerm(term);
+                  debouncedSearch(term);
+                }}
                 className="px-3 py-1 bg-white rounded-full text-sm hover:bg-gray-200"
               >
                 {term}
