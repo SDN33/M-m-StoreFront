@@ -191,7 +191,7 @@ const SearchInput = () => {
   };
 
   return (
-    <div className="relative flex-grow mx-8 max-w-2xl">
+    <div className="relative flex-grow mx-8 max-w-xl">
       <div className="relative">
         <input
           ref={inputRef}

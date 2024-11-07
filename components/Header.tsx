@@ -9,22 +9,36 @@ import PromotionSection from './PromotionSection';
 import AuthButton from './AuthButton';
 import CartIcon from './CartIcon';
 
-const Header = () => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isNosVinsOpen, setIsNosVinsOpen] = useState(false);
-  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false); // Nouveau état pour le menu déroulant
+interface Country {
+  name: string;
+  imgSrc: string;
+}
+
+const Header: React.FC = () => {
+  const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isNosVinsOpen, setIsNosVinsOpen] = useState<boolean>(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState<boolean>(false);
+  const [selectedCountry, setSelectedCountry] = useState<Country>({
+    name: 'France',
+    imgSrc: '/images/fr.png',
+  });
 
   const toggleNosVinsPopup = () => {
     setIsNosVinsOpen((prev) => !prev);
   };
 
   const toggleCartPopup = () => {
-    setIsCartOpen(!isCartOpen);
+    setIsCartOpen((prev) => !prev);
   };
 
   const toggleLanguageMenu = () => {
-    setIsLanguageMenuOpen((prev) => !prev); // Toggle l'état du menu des langues
+    setIsLanguageMenuOpen((prev) => !prev);
+  };
+
+  const handleCountrySelect = (name: string, imgSrc: string) => {
+    setSelectedCountry({ name, imgSrc });
+    setIsLanguageMenuOpen(false);
   };
 
   const categories = [
@@ -80,52 +94,84 @@ const Header = () => {
             </a>
 
             {/* Search Bar */}
-            <SearchInput />
+            <div className="flex-grow max-w-2xl mx-8">
+              <SearchInput />
+            </div>
 
-            {/* Right Actions */}
-            <div className="flex items-center space-x-6 mr-3">
-              <div className="hidden lg:flex items-center space-x-1 text-sm">
-                <span className='text-white'>Livraison en</span>
+            {/* Right Actions - Updated spacing */}
+            <div className="hidden lg:flex items-center space-x-8 text-sm px-6">
+              {/* Delivery section */}
+              <div className="flex items-center space-x-3">
+                <span className="text-white">Livraison en</span>
 
-                <div className="flex items-center space-x-1">
-                  <ChevronDown className="w-4 h-4 text-white cursor-pointer" onClick={toggleLanguageMenu} />
+                <div className="flex items-center space-x-2">
+                  <span className="flex items-center space-x-1 text-white">
+                    {selectedCountry.name}
+                    <Image
+                      src={selectedCountry.imgSrc}
+                      alt={selectedCountry.name}
+                      width={30}
+                      height={14}
+                      className="ml-2 flex-shrink-0"
+                    />
+                  </span>
+                  <ChevronDown
+                    className="w-4 h-4 text-white cursor-pointer hover:text-gray-200"
+                    onClick={toggleLanguageMenu}
+                  />
                 </div>
-                {/* Menu déroulant pour les langues */}
-                {isLanguageMenuOpen && (
-                  <ul className="absolute mt-32 bg-white border border-gray-300 rounded-md shadow-lg z-40">
-                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex">
-                      France
-                      <Image
-                        src="/images/fr.png"
-                        alt="France"
-                        width={30}
-                        height={14}
-                        className="mx-1 -mt-1 flex-shrink-0"
-                      />
-                    </li>
-                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex">
-                      Europe
-                      <Image
-                        src="/images/euro.png"
-                        alt="France"
-                        width={30}
-                        height={14}
-                        className="mx-1 -mt-1 flex-shrink-0"
-                      />
-                    </li>
-                  </ul>
-                )}
               </div>
 
-              <a href="https://portailpro-memegeorgette.com" className="hidden lg:flex items-center text-sm hover:text-gray-800">
-                <span className="font-semibold ml-1 text-white hover:text-gray-800">Portail Pro</span>
+              {/* Language Menu */}
+              {isLanguageMenuOpen && (
+                <ul className="absolute mt-32 bg-white border border-gray-300 rounded-md shadow-lg z-40">
+                  <li
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center space-x-2"
+                    onClick={() => handleCountrySelect('France', '/images/fr.png')}
+                  >
+                    <span>France</span>
+                    <Image
+                      src="/images/fr.png"
+                      alt="France"
+                      width={30}
+                      height={14}
+                      className="flex-shrink-0"
+                    />
+                  </li>
+                  <li
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center space-x-2"
+                    onClick={() => handleCountrySelect('Europe', '/images/euro.png')}
+                  >
+                    <span>Europe</span>
+                    <Image
+                      src="/images/euro.png"
+                      alt="Europe"
+                      width={30}
+                      height={14}
+                      className="flex-shrink-0"
+                    />
+                  </li>
+                </ul>
+              )}
+
+              {/* Pro Portal Link */}
+              <a
+                href="https://portailpro-memegeorgette.com"
+                className="hidden lg:flex items-center text-sm hover:text-gray-200 transition-colors"
+              >
+                <span className="font-semibold text-white">Portail Pro</span>
               </a>
 
-              <a href="/faq" className="text-white hidden lg:block text-sm font-semibold hover:text-gray-800">
+              {/* Help Link */}
+              <a
+                href="/faq"
+                className="text-white hidden lg:block text-sm font-semibold hover:text-gray-200 transition-colors"
+              >
                 Aide
               </a>
 
-              <div className="flex items-center space-x-4">
+              {/* Auth and Cart */}
+              <div className="flex items-center space-x-6">
                 <AuthButton />
                 <CartIcon onClick={toggleCartPopup} />
               </div>
@@ -162,13 +208,15 @@ const Header = () => {
       {/* Navigation Bar - Desktop and Tablet */}
       <nav className="hidden md:block bg-white shadow-xl relative">
         <div className="container mx-auto px-4 flex items-center justify-between">
-          {/* Icone de gauche */}
-          <ChevronLeft className="w-6 h-6 text-black cursor-pointer hover-animate" onClick={() => {
-            const scrollContainer = document.querySelector('.scrollable-menu');
-            if (scrollContainer) {
-              scrollContainer.scrollBy({ left: -150, behavior: 'smooth' });
-            }
-          }} />
+          <ChevronLeft
+            className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors"
+            onClick={() => {
+              const scrollContainer = document.querySelector('.scrollable-menu');
+              if (scrollContainer) {
+                scrollContainer.scrollBy({ left: -150, behavior: 'smooth' });
+              }
+            }}
+          />
 
           <ul className="scrollable-menu flex items-center space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar">
             {categories.map((category) => (
@@ -178,7 +226,7 @@ const Header = () => {
               >
                 <a
                   href={category.href}
-                  className={`px-3 py-4 text-gray-900 hover:text-primary block ${category.className || ''}`}
+                  className={`px-3 py-4 text-gray-900 hover:text-primary transition-colors block ${category.className || ''}`}
                   onClick={category.onClick}
                 >
                   {category.name}
@@ -188,56 +236,51 @@ const Header = () => {
             ))}
           </ul>
 
-          <ChevronRight className="w-6 h-6 text-black cursor-pointer hover-animate" onClick={() => {
-            const scrollContainer = document.querySelector('.scrollable-menu');
-            if (scrollContainer) {
-              scrollContainer.scrollBy({ left: 150, behavior: 'smooth' });
-            }
-          }} />
+          <ChevronRight
+            className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors"
+            onClick={() => {
+              const scrollContainer = document.querySelector('.scrollable-menu');
+              if (scrollContainer) {
+                scrollContainer.scrollBy({ left: 150, behavior: 'smooth' });
+              }
+            }}
+          />
         </div>
       </nav>
 
-      {/* Overlay et Popup modale pour Nos Vins */}
+      {/* Nos Vins Popup */}
       {isNosVinsOpen && (
         <>
           <div
-            className="fixed inset-0 bg-black opacity-50 z-40"
-            onClick={toggleNosVinsPopup}
-          ></div>
-          <div
-            className="fixed z-50 inset-0 flex items-center justify-center p-4"
-          >
-            <div className="relative bg-slate-200 p-6 rounded-lg shadow-xl w-[40rem] max-h-180 overflow-y-auto">
-              <button className="absolute top-2 right-2" onClick={toggleNosVinsPopup}>
-                <X className="w-6 h-6 text-gray-600" />
-              </button>
-              <h2 className="text-lg font-bold mb-4">Nos Vins</h2>
-
-              {/* Vignettes des catégories de vin */}
-              <div className="grid grid-cols-2 gap-4">
-                {vinsSubCategories.map((subcategory) => (
-                  <div
-                    key={subcategory.name}
-                    className="relative rounded-lg overflow-hidden shadow-md cursor-pointer"
-                    style={{
-                      backgroundImage: `url(${subcategory.backgroundImage})`,
-                      backgroundSize: 'cover', // Taille des vignettes
-                      backgroundPosition: 'center',
-                      height: '160px', // Hauteur des vignettes
-                    }}
-                  >
-                    <a href={`/products/category/${subcategory.name.toLowerCase()}`} className="absolute inset-0 flex items-center justify-center text-white border-2 border-black border-opacity-90 text-lg font-black bg-black bg-opacity-30 hover:bg-primary hover:bg-opacity-40 transition duration-300 hover:text-opacity-100">
-                        <span style={{ transform: 'scale(1.5)' }}>{subcategory.name}</span>
+            className="fixed inset-0 bg-gray-800 bg-opacity-50 z-50"
+            onClick={() => setIsNosVinsOpen(false)}
+          />
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg shadow-lg p-8 mx-4 lg:w-3/4 lg:mx-auto">
+              <h2 className="text-xl font-bold mb-4">Nos Vins</h2>
+              <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {vinsSubCategories.map((subCategory) => (
+                  <li key={subCategory.name}>
+                    <a href={subCategory.href} className="block relative rounded-md overflow-hidden aspect-video">
+                      <Image
+                        src={subCategory.backgroundImage}
+                        alt={subCategory.name}
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                      <span className="absolute inset-0 bg-black bg-opacity-25 flex items-center justify-center text-white font-semibold text-lg">
+                        {subCategory.name}
+                      </span>
                     </a>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
         </>
       )}
 
-      {/* Popup Panier */}
+      {/* Cart Popup */}
       {isCartOpen && <CartPopup isOpen={isCartOpen} onClose={toggleCartPopup} />}
     </div>
   );
