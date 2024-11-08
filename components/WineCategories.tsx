@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, MapPin, Grape, ChevronDown, Filter, Search } from 'lucide-react';
+import { lastIndexOf } from 'lodash';
 
 interface Vendor {
   id: number;
@@ -134,7 +135,7 @@ const VendorSlider = () => {
   }
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto px-4 overflow-hidden">
+    <div key={`vendor-${Math.floor(Math.random() * 105560)}`} className="relative w-full max-w-6xl mx-auto px-4 overflow-hidden">
       {/* Header Section */}
       <h2 className="flex items-center justify-center text-xl font-bold mb-6 text-center">
         <div className="border-t border-primary w-1/4" />
@@ -326,7 +327,7 @@ const VendorSlider = () => {
             Your browser does not support the video tag.
           </video>
 
-          <div className={`grid gap-4 transition-all duration-300 ${isListExpanded ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 md:grid-cols-2'}`}>
+          <div key={`vendor-${Math.floor(Math.random() * 100)}`} className={`grid gap-4 transition-all duration-300 ${isListExpanded ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 md:grid-cols-2'}`}>
             {filteredVendors.slice(0, isListExpanded ? undefined : 6).map(vendor => (
               <Link href={`/vendor/${vendor.id}`} key={vendor.id} className="group">
                 <div className="flex items-center gap-4 p-4 rounded-lg border hover:shadow-md transition-all duration-300 hover:border-primary bg-gradient-to-br from-gray-50 to-white">

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createOrder } from '../../services/order';
 import { useCart } from '../../context/CartContext';
+import StripePayment from '../../components/StripePayment';
 import { loadScript } from "@paypal/paypal-js";
 import Image from 'next/image';
 
@@ -19,155 +20,54 @@ const CheckoutPage = () => {
     paymentMethod: 'cod',
   });
   const [loading, setLoading] = useState(false);
+  const [disable, setDisable] = useState(true);
   const [error, setError] = useState('');
   const router = useRouter();
   let cartDetails = viewAllCartItems();
+  const totalPrice = (cartDetails.total + 10).toFixed(2);
 
-  useEffect(() => {
-    const loadPayPalScript = async () => {
-      try {
-        await loadScript({ "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "" });
-        console.log("SDK PayPal chargé avec succès");
-      } catch (err) {
-        console.error("Échec du chargement du SDK PayPal", err);
-      }
-    };
-    loadPayPalScript();
-  }, []);
 
   // Gestion des changements de saisie de formulaire
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
-
-  // Soumission de la commande et traitement du paiement PayPal
-  const handleOrderSubmit = async (e) => {
-    e.preventDefault();
-
-    // Validation des champs du formulaire
     const { firstName, lastName, address1, city, postcode, email, phone } = formData;
     if (!firstName || !lastName || !address1 || !city || !postcode || !email || !phone) {
-      setError('Veuillez remplir tous les champs requis.');
-      return;
+      // setError('Veuillez remplir tous les champs requis.');
+      setDisable(true)
+    }else{
+      setDisable(false)
     }
+  };
 
+  const handleOrderSubmit = async () => {
     setLoading(true);
-    setError('');
 
-    if (formData.paymentMethod === 'paypal') {
-      window.paypal.Buttons({
-        createOrder: (data, actions) => {
-          return actions.order.create({
-            purchase_units: [{
-              amount: {
-                value: (cartDetails.total + 10).toFixed(2),
-              }
-            }]
-          });
-        },
-        onApprove: async (data, actions) => {
-          deleteAllCartItems();
-          return actions.order.capture().then(async (details) => {
-            console.log("Paiement réussi:", details);
-
-            const orderData = {
-              payment_method: "paypal",
-              payment_method_title: "PayPal",
-              set_paid: true,
-              billing: {
-                first_name: formData.firstName,
-                last_name: formData.lastName,
-                address_1: formData.address1,
-                city: formData.city,
-                postcode: formData.postcode,
-                country: 'FR',
-                email: formData.email,
-                phone: formData.phone,
-              },
-              shipping: {
-                first_name: formData.firstName,
-                last_name: formData.lastName,
-                address_1: formData.address1,
-                city: formData.city,
-                postcode: formData.postcode,
-                country: 'FR',
-              },
-              line_items: cartDetails.items.map((item) => ({
-                product_id: item.product_id,
-                quantity: item.quantity,
-              })),
-              shipping_lines: [
-                {
-                  method_id: 'flat_rate',
-                  method_title: 'Tarif forfaitaire',
-                  total: '10.00',
-                },
-              ],
-            };
-
-            try {
-              const orderResponse = await createOrder(orderData);
-              router.push(`/merci?order_id=${orderResponse.id}`);
-            } catch {
-              setError('La création de la commande a échoué. Veuillez réessayer.');
-            } finally {
-              setLoading(false);
-            }
-          });
-        },
-        onError: (error) => {
-          console.error("Erreur PayPal Checkout:", error);
-          setError("Le paiement a échoué. Veuillez réessayer.");
-          setLoading(false);
-        },
-      }).render('#paypal-button-container');
-    } else {
+    try {
       const orderData = {
-        payment_method: formData.paymentMethod,
-        payment_method_title: formData.paymentMethod === 'cod' ? 'Paiement à la livraison' : 'Virement bancaire',
-        set_paid: false,
-        billing: {
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          address_1: formData.address1,
-          city: formData.city,
-          postcode: formData.postcode,
-          country: 'FR',
-          email: formData.email,
-          phone: formData.phone,
-        },
-        shipping: {
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          address_1: formData.address1,
-          city: formData.city,
-          postcode: formData.postcode,
-          country: 'FR',
-        },
+        payment_method: "stripe",
+        payment_method_title: "Stripe",
+        set_paid: true,
+        billing: { /* Populate billing info */ },
+        shipping: { /* Populate shipping info */ },
         line_items: cartDetails.items.map((item) => ({
           product_id: item.product_id,
           quantity: item.quantity,
         })),
-        shipping_lines: [
-          {
-            method_id: 'flat_rate',
-            method_title: 'Tarif forfaitaire',
-            total: '10.00',
-          },
-        ],
+        shipping_lines: [{ method_id: 'flat_rate', method_title: 'Flat Rate', total: '10.00' }],
       };
 
-      try {
-        const orderResponse = await createOrder(orderData);
-        router.push(`/merci?order_id=${orderResponse.id}`);
-      } catch {
-        setError('La création de la commande a échoué. Veuillez réessayer.');
-      } finally {
-        setLoading(false);
-      }
+      const orderResponse = await createOrder(orderData);
+      deleteAllCartItems();
+      router.push(`/thank-you?order_id=${orderResponse.id}`);
+    } catch (error) {
+      setError('Order creation failed. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
+
+  
 
   return (
     <div className="mx-auto px-8 mt-56 max-w-4xl">
@@ -209,22 +109,13 @@ const CheckoutPage = () => {
             <span>Total :</span>
             <span>{(cartDetails.total + 10).toFixed(2)}€</span>
           </div>
-          <div>
-            <select name="paymentMethod" onChange={handleInputChange} className="w-full border p-2 rounded mb-4">
-              <option value="cod">Paiement à la livraison</option>
-              <option value="bacs">Virement bancaire</option>
-            </select>
-            <button
-              onClick={handleOrderSubmit}
-              disabled={loading}
-              className="w-full bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-primary-light py-2 rounded"
-            >
-              {loading ? "Traitement..." : "Payer"}
-            </button>
-          </div>
-          {formData.paymentMethod === "paypal" && (
-            <div id="paypal-button-container" className="mt-6"></div>
-          )}
+          <StripePayment
+            totalPrice={totalPrice}
+            formData={formData}
+            setError={setError}
+            onComplete={handleOrderSubmit}
+            disable={disable}
+          />
           {error && <p className="text-red-500 mt-4">{error}</p>}
         </div>
       </div>
