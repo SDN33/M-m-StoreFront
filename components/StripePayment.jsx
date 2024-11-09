@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-const StripePayment = ({ totalPrice, formData, setError, onComplete, title = "Confirmer le paiement", disable=true }) => {
+const StripePayment = ({ totalPrice, formData, setError, onComplete, title = "Confirmer le paiement", disable = true }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
@@ -22,8 +22,7 @@ const StripePayment = ({ totalPrice, formData, setError, onComplete, title = "Co
       return;
     }
 
-    const cardEmpty = cardElement._empty;
-    if (cardEmpty) {
+    if (cardElement._empty) {
       setError('Please complete the card information.');
       return;
     }
@@ -53,7 +52,7 @@ const StripePayment = ({ totalPrice, formData, setError, onComplete, title = "Co
       } else if (paymentResult.paymentIntent.status === 'succeeded') {
         onComplete();
       }
-    } catch (error) {
+    } catch {
       setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);
