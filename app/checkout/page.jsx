@@ -4,10 +4,17 @@ import { useRouter } from 'next/navigation';
 import { createOrder } from '../../services/order';
 import { useCart } from '../../context/CartContext';
 import StripePayment from '../../components/StripePayment';
+import BoxtalMap from '../../components/BoxtalMap';
 import Image from 'next/image';
 
 const CheckoutPage = () => {
   const { deleteAllCartItems, viewAllCartItems } = useCart();
+  const [selectedPoint, setSelectedPoint] = useState(null);
+
+  const handlePointSelect = (point) => {
+    console.log('Selected point:', point);
+    setSelectedPoint(point);
+  };
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -97,8 +104,17 @@ const CheckoutPage = () => {
           </div>
           <div className="flex justify-between font-semibold text-lg mb-2">
             <span>Livraison 24H : <Image className='flex' src="/images/boxtal.png" alt="Chronopost" width="60" height="10" /></span>
+            
             <span>10.00€</span>
           </div>
+          <BoxtalMap onSelectPoint={handlePointSelect} />
+
+            {selectedPoint && (
+              <div>
+                <h2>Selected Point Details</h2>
+                <pre>{JSON.stringify(selectedPoint, null, 2)}</pre>
+              </div>
+            )}
           <br />
           <div className="flex justify-between font-bold text-xl mb-4">
             <span>Total :</span>
