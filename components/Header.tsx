@@ -156,7 +156,7 @@ const Header: React.FC = () => {
 
               {/* Pro Portal Link */}
               <a
-                href="https://portailpro-memegeorgette.com"
+                href="/portailpro"
                 className="hidden lg:flex items-center text-sm hover:text-gray-200 transition-colors"
               >
                 <span className="font-semibold text-white">Portail Pro</span>

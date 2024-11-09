@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createOrder } from '../../services/order';
 import { useCart } from '../../context/CartContext';
@@ -25,30 +25,26 @@ const CheckoutPage = () => {
     phone: '',
     paymentMethod: 'cod',
   });
-  const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(true);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false); // Conserver loading
   const router = useRouter();
   let cartDetails = viewAllCartItems();
   const totalPrice = (cartDetails.total + 10).toFixed(2);
 
-
-
-  // Gestion des changements de saisie de formulaire
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
     const { firstName, lastName, address1, city, postcode, email, phone } = formData;
     if (!firstName || !lastName || !address1 || !city || !postcode || !email || !phone) {
-      // setError('Veuillez remplir tous les champs requis.');
-      setDisable(true)
-    }else{
-      setDisable(false)
+      setDisable(true);
+    } else {
+      setDisable(false);
     }
   };
 
   const handleOrderSubmit = async () => {
-    setLoading(true);
+    setLoading(true); // Utilisation de loading
 
     try {
       const orderData = {
@@ -68,13 +64,12 @@ const CheckoutPage = () => {
       deleteAllCartItems();
       router.push(`/thank-you?order_id=${orderResponse.id}`);
     } catch (error) {
-      setError('Order creation failed. Please try again.');
+      console.error(error); // Utilisation explicite de 'error'
+      setError('La création de la commande a échoué. Veuillez réessayer.');
     } finally {
       setLoading(false);
     }
   };
-
-  
 
   return (
     <div className="mx-auto px-8 mt-56 max-w-4xl">
@@ -86,7 +81,7 @@ const CheckoutPage = () => {
             <input name="lastName" placeholder="Nom" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="address1" placeholder="Adresse" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="city" placeholder="Ville" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
-            <input name="state" placeholder="Département" onChange={handleInputChange} className="w-full border p-2 rounded"/>
+            <input name="state" placeholder="Région" onChange={handleInputChange} className="w-full border p-2 rounded"/>
             <input name="postcode" placeholder="Code postal" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="email" placeholder="E-mail" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="phone" placeholder="Téléphone" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
@@ -125,6 +120,7 @@ const CheckoutPage = () => {
             <span>Total :</span>
             <span>{(cartDetails.total + 10).toFixed(2)}€</span>
           </div>
+          {loading && <p className="text-blue-500 mb-4">Création de la commande en cours...</p>} {/* Afficher un message de chargement */}
           <StripePayment
             totalPrice={totalPrice}
             formData={formData}

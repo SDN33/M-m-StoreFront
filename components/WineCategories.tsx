@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, MapPin, Grape, ChevronDown, Filter, Search } from 'lucide-react';
-import { lastIndexOf } from 'lodash';
 
 interface Vendor {
   id: number;

@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createOrder } from '../../services/order';
 import { useCart } from '../../context/CartContext';
-import StripePayment from '../../components/StripePayment';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
@@ -25,7 +24,6 @@ const CheckoutForm = ({ totalPrice, formData, setError, onComplete }) => {
       });
 
       const { clientSecret } = data;
-
       const cardElement = elements.getElement(CardElement);
 
       const paymentResult = await stripe.confirmCardPayment(clientSecret, {
@@ -41,9 +39,9 @@ const CheckoutForm = ({ totalPrice, formData, setError, onComplete }) => {
       if (paymentResult.error) {
         setError(paymentResult.error.message);
       } else if (paymentResult.paymentIntent.status === 'succeeded') {
-        onComplete(); // proceed to create order after successful payment
+        onComplete(); // Proceed to create order after successful payment
       }
-    } catch (error) {
+    } catch {
       setError('An error occurred. Please try again.');
     }
   };
@@ -73,15 +71,12 @@ const CheckoutPage = () => {
     email: '',
     phone: '',
   });
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
   const cartDetails = viewAllCartItems();
   const totalPrice = (cartDetails.total + 10).toFixed(2);
 
   const handleOrderSubmit = async () => {
-    setLoading(true);
-
     try {
       const orderData = {
         payment_method: "stripe",
@@ -99,10 +94,8 @@ const CheckoutPage = () => {
       const orderResponse = await createOrder(orderData);
       deleteAllCartItems();
       router.push(`/thank-you?order_id=${orderResponse.id}`);
-    } catch (error) {
+    } catch {
       setError('Order creation failed. Please try again.');
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -124,7 +117,7 @@ const CheckoutPage = () => {
           <input name="email" placeholder="Email" onChange={handleInputChange} required />
           <input name="phone" placeholder="Phone" onChange={handleInputChange} required />
         </div>
-        <StripePayment
+        <CheckoutForm
           totalPrice={totalPrice}
           formData={formData}
           setError={setError}
