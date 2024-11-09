@@ -41,7 +41,7 @@ export default function PortailPro() {
               Portail Pro
             </h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Une solution complète pour les vignerons qui souhaitent développer leur présence en ligne, sans contraintes de logistique ni d'engagement
+              Une solution complète pour les vignerons qui souhaitent développer leur présence en ligne, sans contraintes de logistique ni d&apos;engagement
             </p>
           </div>
           <br /><br />

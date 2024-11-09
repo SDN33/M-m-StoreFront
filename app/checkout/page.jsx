@@ -57,6 +57,7 @@ const CheckoutPage = () => {
       deleteAllCartItems();
       router.push(`/thank-you?order_id=${orderResponse.id}`);
     } catch (error) {
+      console.error(error); // Utilisation explicite de 'error'
       setError('La création de la commande a échoué. Veuillez réessayer.');
     } finally {
       setLoading(false);
