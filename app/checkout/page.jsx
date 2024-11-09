@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import { createOrder } from '../../services/order';
 import { useCart } from '../../context/CartContext';
 import StripePayment from '../../components/StripePayment';
-import { loadScript } from "@paypal/paypal-js";
 import Image from 'next/image';
 
 const CheckoutPage = () => {
@@ -67,7 +66,7 @@ const CheckoutPage = () => {
     }
   };
 
-  
+
 
   return (
     <div className="mx-auto px-8 mt-56 max-w-4xl">
