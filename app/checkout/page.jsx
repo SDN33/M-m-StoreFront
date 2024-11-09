@@ -20,7 +20,7 @@ const CheckoutPage = () => {
   });
   const [disable, setDisable] = useState(true);
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // Conserver loading
   const router = useRouter();
   let cartDetails = viewAllCartItems();
   const totalPrice = (cartDetails.total + 10).toFixed(2);
@@ -37,7 +37,7 @@ const CheckoutPage = () => {
   };
 
   const handleOrderSubmit = async () => {
-    setLoading(true);
+    setLoading(true); // Utilisation de loading
 
     try {
       const orderData = {
@@ -103,6 +103,7 @@ const CheckoutPage = () => {
             <span>Total :</span>
             <span>{(cartDetails.total + 10).toFixed(2)}€</span>
           </div>
+          {loading && <p className="text-blue-500 mb-4">Création de la commande en cours...</p>} {/* Afficher un message de chargement */}
           <StripePayment
             totalPrice={totalPrice}
             formData={formData}
