@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createOrder } from '../../services/order';
 import { useCart } from '../../context/CartContext';
@@ -18,7 +18,6 @@ const CheckoutPage = () => {
     phone: '',
     paymentMethod: 'cod',
   });
-  const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(true);
   const [error, setError] = useState('');
   const router = useRouter();
@@ -78,7 +77,7 @@ const CheckoutPage = () => {
             <input name="lastName" placeholder="Nom" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="address1" placeholder="Adresse" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="city" placeholder="Ville" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
-            <input name="state" placeholder="Département" onChange={handleInputChange} className="w-full border p-2 rounded"/>
+            <input name="state" placeholder="Région" onChange={handleInputChange} className="w-full border p-2 rounded"/>
             <input name="postcode" placeholder="Code postal" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="email" placeholder="E-mail" onChange={handleInputChange} required className="w-full border p-2 rounded"/>
             <input name="phone" placeholder="Téléphone" onChange={handleInputChange} required className="w-full border p-2 rounded"/>

@@ -1,6 +1,5 @@
 'use client'
-import Image from 'next/image'
-import { ArrowRight, Globe, Lock, Box, Phone } from 'lucide-react'
+import { Globe, Lock, Box, Phone } from 'lucide-react'
 
 export default function PortailPro() {
   const features = [
@@ -70,7 +69,7 @@ export default function PortailPro() {
         >
           <div className="bg-white rounded-3xl shadow-xl shadow-orange-100/50 overflow-hidden">
             <div className="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-8 text-center">
-              <h3 className="text-2xl font-bold mb-2">Frais D'inscription</h3>
+              <h3 className="text-2xl font-bold mb-2">Frais D&apos;inscription</h3>
               <div className="flex items-center justify-center">
                 <span className="text-xl font-bold text-primary">240€</span>
                 <span className="text-primary ml-2">ht</span>
