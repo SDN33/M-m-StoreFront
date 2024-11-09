@@ -1,18 +1,18 @@
 module.exports = {
   content: [
+    './app/**/*.{js,ts,jsx,tsx}',  
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
   ],
 
-
   theme: {
     extend: {
       colors: {
-        primary: '#FF6B4A', // Orange principal
-        secondary: '#6B7280', // Gris
-        accent: '#F6BC9B', // Orange clair
-        background: '#FFFFFF', // Blanc
-        foreground: '#171717', // Noir
+        primary: '#FF6B4A',      // Orange principal
+        secondary: '#6B7280',    // Gris
+        accent: '#F6BC9B',       // Orange clair
+        background: '#FFFFFF',   // Blanc
+        foreground: '#171717',   // Noir
         // Ajoutez d'autres couleurs si nécessaire
       },
       fontSize: {
@@ -29,11 +29,10 @@ module.exports = {
         '7xl': ['4.5rem', { lineHeight: '1' }],
         '8xl': ['6rem', { lineHeight: '1' }],
       },
-
     },
   },
+
   plugins: [
     require('tailwind-scrollbar-hide'),
-
   ],
 };
