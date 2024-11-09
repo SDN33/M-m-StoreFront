@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-const StripePayment = ({ totalPrice, formData, setError, onComplete, title = "Confirm Payment", disable=true }) => {
+const StripePayment = ({ totalPrice, formData, setError, onComplete, title = "Confirmer le paiement", disable=true }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);

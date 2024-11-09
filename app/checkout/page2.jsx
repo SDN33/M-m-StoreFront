@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createOrder } from '../../services/order';
 import { useCart } from '../../context/CartContext';
-import StripePayment from '../../components/StripePayment';
+// import StripePayment from '../../components/StripePayment';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
@@ -124,7 +124,7 @@ const CheckoutPage = () => {
           <input name="email" placeholder="Email" onChange={handleInputChange} required />
           <input name="phone" placeholder="Phone" onChange={handleInputChange} required />
         </div>
-        <StripePayment
+        <CheckoutForm
           totalPrice={totalPrice}
           formData={formData}
           setError={setError}
