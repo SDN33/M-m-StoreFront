@@ -216,7 +216,7 @@ const ProductPage: React.FC = () => {
 
 
             <br />
-            <p className="text-5xl font-bold !mb-7 mt-2">
+            <p className="text-5xl font-bold !mb-2 mt-2">
               <span className="flex items-start z-10">
                 <span className="text-3xl font-bold">{Math.floor(product.price)}</span>
                 <span className="text-xl font-bold align-top mt-1">
