@@ -49,7 +49,7 @@ const SuccessPage = ({ searchParams }: { searchParams: SearchParams }) => {
               href="mailto:contact@votresite.com"
               className="text-blue-500 hover:text-blue-600 font-semibold transition-colors"
             >
-              contact@votresite.com
+              contact@memegeorgette.com
             </a>{' '}
             pour activer votre compte vendeur.
           </p>
