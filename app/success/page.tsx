@@ -1,8 +1,8 @@
-'use client'; // Assurez-vous que ce fichier est un composant client
+'use client'; // Marque ce fichier comme un composant client
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { CheckCircle2, Home } from 'lucide-react';
-import { useSearchParams } from 'next/navigation'; // Utiliser useSearchParams depuis next/navigation
+import { useSearchParams } from 'next/navigation'; // Utiliser useSearchParams de next/navigation ici
 
 const SuccessPage = () => {
   const [loading, setLoading] = useState(true);
