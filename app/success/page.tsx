@@ -1,6 +1,6 @@
-'use client'; // Marque ce fichier comme un composant client
+'use client'; // Marquer ce fichier comme un composant client
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { CheckCircle2, Home } from 'lucide-react';
 import { useSearchParams } from 'next/navigation'; // Utiliser useSearchParams de next/navigation ici
 
@@ -11,12 +11,14 @@ const SuccessPage = () => {
   const session_id = searchParams ? searchParams.get('session_id') : null; // session_id sera une chaîne ou null
 
   useEffect(() => {
+    // Attendre que le paramètre session_id soit disponible
     if (session_id) {
       setLoading(false);
     }
   }, [session_id]);
 
   if (loading) {
+    // Écran de chargement pendant que les paramètres sont récupérés
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
         <div className="animate-spin rounded-full h-12 w-12 border-4 border-gray-200 border-t-blue-500" />
@@ -78,4 +80,11 @@ const SuccessPage = () => {
   );
 };
 
-export default SuccessPage;
+// Utiliser Suspense si nécessaire pour d'autres composants asynchrones.
+const SuccessPageWithSuspense = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <SuccessPage />
+  </Suspense>
+);
+
+export default SuccessPageWithSuspense;
