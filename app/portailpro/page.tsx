@@ -1,6 +1,9 @@
 'use client'
 import { Globe, Lock, Box, Phone, CreditCard, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { loadStripe } from '@stripe/stripe-js'
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 export default function PortailPro() {
   const [cguAccepted, setCguAccepted] = useState(false)
@@ -37,6 +40,27 @@ export default function PortailPro() {
     }
   ]
 
+  const handlePayment = async () => {
+    if (!cguAccepted) {
+      setShowError(true);
+      return;
+    }
+
+    const stripe = await stripePromise;
+    const response = await fetch('/api/create-checkout-session', {
+      method: 'POST',
+    });
+
+    const session = await response.json();
+
+    if (session.id) {
+      stripe?.redirectToCheckout({ sessionId: session.id });
+    } else {
+      console.error("Erreur lors de la création de la session de paiement.");
+    }
+  };
+
+
   const pricingFeatures = [
     "Gestion simplifiée depuis votre tableau de bord",
     "Logistique prise en charge par nos équipes",
@@ -44,14 +68,6 @@ export default function PortailPro() {
     "Accès à notre réseau de distribution"
   ]
 
-  const handlePayment = () => {
-    if (!cguAccepted) {
-      setShowError(true)
-      return
-    }
-    // Ici vous pouvez ajouter la logique de paiement
-    console.log('Lancement du paiement...')
-  }
 
   // Custom Checkbox component
   const Checkbox = ({ checked, onChange, id, label }: { checked: boolean, onChange: (checked: boolean) => void, id: string, label: React.ReactNode }) => {
@@ -156,7 +172,7 @@ export default function PortailPro() {
             <div className="bg-primary text-white p-8 text-center">
               <h3 className="text-2xl font-bold mb-2">Frais D&apos;inscription</h3>
               <div className="flex items-center justify-center">
-                <span className="text-xl font-bold">240€</span>
+                <span className="text-3xl font-bold">240€</span>
                 <span className="ml-1 text-sm"><em>hors taxe</em></span>
               </div>
             </div>
@@ -830,8 +846,71 @@ export default function PortailPro() {
               </div>
               <div>
                 <h4 className="font-bold mb-2">Article 13. Cas de force majeure</h4>
-                
+                <p className="text-gray-600">
+                  Un cas de force majeure la responsabilité de Biolibairterre SAS ne pourra pas être mise en oeuvre si la
+                  non-exécution ou le retard dans l&apos;exécution de l&apos;une de ses obligations décrites dans les présentes
+                  conditions générales de vente découle d&apos;un cas de force majeure. À ce titre, la force majeure s&apos;entend
+                  de tout événement extérieur, imprévisible et irrésistible au sens de l&apos;article 1148 du Code civil. Tout autre
+                  cas est expressément exclu. La Partie victime de la Force Majeure informe immédiatement - par LRAR -
+                  l&apos;autre Partie de sa survenance, de sa durée et de ses conséquences prévisibles. Les obligations des
+                  Parties seront suspendues pendant toute la durée du cas de Force Majeure. Dans l&apos;hypothèse où cette
+                  suspension durerait plus de trente (30) jours à compter de sa date de notification (date de réception
+                  ou de première présentation de la LRAR), la Partie la plus diligente pourra notifier par LRAR à l&apos;autre
+                  Partie la résiliation immédiate du Contrat, sans qu&apos;il y ait lieu à une indemnisation quelconque
+                  En cas de force majeure, le Vendeur ne facturera pas de frais et procèdera au remboursement (dans
+                  l&apos;éventualité où ceux-ci sont applicables) des Acheteurs affectés par ledit cas de force majeure. Les
 
+                  remboursements s&apos;appliquent à tous les frais, dépenses et divers montants engagés, notamment aux
+                  tarifs (non-remboursables) ou aux défections, aux frais d&apos;annulation ou de (modification de)
+                  réservation, ainsi qu&apos;aux frais engagés pour (i) toute annulation ou modification de réservation
+                  effectuée à l&apos;initiative du Acheteur, ou (ii) concernant la partie de réservation non consommée du fait
+                  de la survenance d&apos;un cas de force majeure.
+                  En cas de doute raisonnable et justifié, le Vendeur est en mesure d&apos;exiger de l&apos;Acheteur l&apos;apport d&apos;une
+                  preuve raisonnable du lien de causalité entre le cas de force majeure et l&apos;annulation, la défection ou la
+                  modification de réservation (et, le cas échéant, la présentation à Biolibairterre SAS du justificatif y
+                  correspondant). Le Vendeur doit communiquer à Biolibairterre SAS les détails afférents au Produit
+                  touché par le cas de force majeure de façon à ce que Biolibairterre SAS puisse prendre acte de toute
+                  annulation, défection ou modification de réservation relative à un cas de force majeure. Biolibairterre
+                  SAS ne facturera pas de frais de commission sur les défections, annulations et parties de réservations
+                  non consommées résultant dudit cas de force majeure.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-bold mb-2">Article 14. Durée - Résiliation - Cessation du contrat</h4>
+                <p className="text-gray-600">
+                  Le présent Contrat est conclu pour une durée minimum d&apos;un (1) an, renouvelable par tacite
+                  reconduction à chaque fois pour une même période d&apos;un (1) an.
+                  A l&apos;expiration de chaque période d&apos;un (1) ans, il pourra être résilié par l&apos;une ou l&apos;autre Partie, sous réserve
+                  d&apos;un préavis minimal de six (6) mois avant l&apos;expiration de la période d&apos;un (1) an en cours et à compter
+                  de la réception de la notification qui sera faite à Biolibairterre SAS par lettre recommandée avec accusé
+                  de réception.
+                  Un Vendeur sélectionné par Biolibairterre SAS respectera un préavis de 6 mois pour sortir de la
+                  plateforme et des plateformes partenaires de Biolibairterre SAS. Il est ici précisé en tant que de besoin
+                  que l&apos;écoulement des stocks par les clients de Biolibairterre SAS sera quant à lui non limité par un
+                  quelconque délai. Un vigneron reste engagé par le présent accord tant que la totalité des échéances et
+                  factures restant dues, jusqu&apos;au terme de la période d&apos;engagement, ne sont pas réglés à Biolibairterre
+                  SAS.
+                  En cas d&apos;inexécution et/ou de mauvaise exécution du Contrat par le Vendeur, le Contrat pourra être
+                  résilié de plein droit à la demande de Biolibairterre SAS quinze (15) jours après une mise en demeure,
+                  par email ou lettre recommandée avec accusé de réception restée sans effet et précisant la ou les
+                  obligations en souffrance, et selon la gravité de la situation avec préjudice de toute demande de
+                  dommages et intérêts.
+                  Les éléments qui amènerait Biolibairterre SAS à résilier de plein droit le contrat et formuler une
+                  demande de dommages et intérêts sont:
+                  La constatation de mauvaise application de prix de vente
+                  Le passage en direct du Vendeur auprès de l&apos;Acheteur et prospect de Biolibairterre SAS
+                  Le non-respect ou l&apos;accumulation de non-respect de commandes donnant suite à une insatisfaction
+                  des Acheteurs ou des équipes Biolibairterre SAS
+                  Le manquement caractérisé d&apos;application de la charte fournisseur Biolibairterre SAS
+                </p>
+              </div>
+              <div>
+                <h4 className="font-bold mb-2">Article 15. Tribunal compétent</h4>
+                <p className="text-gray-600">
+                  Tout litige relatif à l&apos;interprétation et à l&apos;exécution des présentes conditions générales de vente est
+                  soumis au droit français.
+                  À défaut de résolution amiable, le litige sera porté devant le Tribunal de commerce de Libourne.
+                </p>
               </div>
             </div>
           </div>

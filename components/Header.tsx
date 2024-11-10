@@ -26,6 +26,7 @@ const Header: React.FC = () => {
 
   const toggleNosVinsPopup = () => {
     setIsNosVinsOpen((prev) => !prev);
+    setIsMenuOpen(false); // Ferme le menu mobile si ouvert
   };
 
   const toggleCartPopup = () => {
@@ -66,12 +67,12 @@ const Header: React.FC = () => {
       <PromotionSection />
 
       {/* Top Header */}
-      <div className="border-b">
+      <div className="border-b border-primary-dark">
         <div className="container mx-auto px-4 py-1">
           {/* Desktop and Tablet View */}
           <div className="hidden md:flex items-center justify-between">
             {/* Logo */}
-            <a href="/" className="flex-shrink-0">
+            <a href="/" className="flex-shrink-0 relative">
               <Image
                 src="/images/meme-pas-contente.png"
                 alt="Logo"
@@ -98,91 +99,69 @@ const Header: React.FC = () => {
               <SearchInput />
             </div>
 
-            {/* Right Actions - Updated spacing */}
+            {/* Right Actions */}
             <div className="hidden lg:flex items-center space-x-8 text-sm px-6">
-              {/* Delivery section */}
               <div className="flex items-center space-x-3">
                 <span className="text-white">Livraison en</span>
-
-                <div className="flex items-center space-x-2">
-                  <span className="flex items-center space-x-1 text-white">
-                    {selectedCountry.name}
+                <div className="relative">
+                  <button
+                    onClick={toggleLanguageMenu}
+                    className="flex items-center space-x-2 text-white hover:text-gray-200"
+                  >
                     <Image
                       src={selectedCountry.imgSrc}
                       alt={selectedCountry.name}
                       width={30}
                       height={14}
-                      className="ml-2 flex-shrink-0"
+                      className="inline-block"
                     />
-                  </span>
-                  <ChevronDown
-                    className="w-4 h-4 text-white cursor-pointer hover:text-gray-200"
-                    onClick={toggleLanguageMenu}
-                  />
+                    <span>{selectedCountry.name}</span>
+                    <ChevronDown className="w-4 h-4" />
+                  </button>
+
+                  {/* Dropdown amélioré */}
+                  {isLanguageMenuOpen && (
+                    <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-100 py-1 w-48 z-50">
+                      {[
+                        { name: 'France', imgSrc: '/images/fr.png' },
+                        { name: 'Europe', imgSrc: '/images/euro.png' }
+                      ].map((country) => (
+                        <button
+                          key={country.name}
+                          onClick={() => handleCountrySelect(country.name, country.imgSrc)}
+                          className="w-full px-4 py-2 flex items-center space-x-3 hover:bg-gray-50 transition-colors"
+                        >
+                          <Image
+                            src={country.imgSrc}
+                            alt={country.name}
+                            width={30}
+                            height={14}
+                          />
+                          <span>{country.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
 
-              {/* Language Menu */}
-              {isLanguageMenuOpen && (
-                <ul className="absolute mt-32 bg-white border border-gray-300 rounded-md shadow-lg z-40">
-                  <li
-                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center space-x-2"
-                    onClick={() => handleCountrySelect('France', '/images/fr.png')}
-                  >
-                    <span>France</span>
-                    <Image
-                      src="/images/fr.png"
-                      alt="France"
-                      width={30}
-                      height={14}
-                      className="flex-shrink-0"
-                    />
-                  </li>
-                  <li
-                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center space-x-2"
-                    onClick={() => handleCountrySelect('Europe', '/images/euro.png')}
-                  >
-                    <span>Europe</span>
-                    <Image
-                      src="/images/euro.png"
-                      alt="Europe"
-                      width={30}
-                      height={14}
-                      className="flex-shrink-0"
-                    />
-                  </li>
-                </ul>
-              )}
-
-              {/* Pro Portal Link */}
-              <a
-                href="/portailpro"
-                className="hidden lg:flex items-center text-sm hover:text-gray-200 transition-colors"
-              >
-                <span className="font-semibold text-white">Portail Pro</span>
+              <a href="/portailpro" className="text-white hover:text-gray-200 font-semibold">
+                Portail Pro
               </a>
-
-              {/* Help Link */}
-              <a
-                href="/faq"
-                className="text-white hidden lg:block text-sm font-semibold hover:text-gray-200 transition-colors"
-              >
+              <a href="/faq" className="text-white hover:text-gray-200 font-semibold">
                 Aide
               </a>
-
-              {/* Auth and Cart */}
-              <div className="flex items-center space-x-6">
-                <AuthButton />
-                <CartIcon onClick={toggleCartPopup} />
-              </div>
+              <AuthButton />
+              <CartIcon onClick={toggleCartPopup} />
             </div>
           </div>
 
-          {/* Mobile View */}
-          <div className="flex md:hidden items-center justify-between">
+          {/* Mobile View - Amélioré */}
+          <div className="flex md:hidden items-center justify-between py-2">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 text-gray-600"
+              className="p-2 text-white hover:text-gray-200"
+              aria-label="Menu"
             >
               {isMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -200,8 +179,65 @@ const Header: React.FC = () => {
                 className="h-12 w-auto"
               />
             </a>
-            <CartIcon onClick={toggleCartPopup} />
+
+            <div className="flex items-center space-x-2">
+              <AuthButton />
+              <CartIcon onClick={toggleCartPopup} />
+            </div>
           </div>
+
+          {/* Mobile Menu - Amélioré */}
+          {isMenuOpen && (
+            <div className="md:hidden bg-white absolute left-0 right-0 top-full border-t border-gray-100 shadow-xl">
+              <div className="p-4">
+                <SearchInput />
+              </div>
+
+              <div className="px-4 py-2 border-t border-gray-100">
+                <div className="flex items-center justify-between">
+                  <span>Livraison en</span>
+                  <button
+                    onClick={toggleLanguageMenu}
+                    className="flex items-center space-x-2"
+                  >
+                    <Image
+                      src={selectedCountry.imgSrc}
+                      alt={selectedCountry.name}
+                      width={30}
+                      height={14}
+                    />
+                    <span>{selectedCountry.name}</span>
+                    <ChevronDown className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              <nav className="border-t border-gray-100">
+                {categories.map((category) => (
+                  <a
+                    key={category.name}
+                    href={category.href}
+                    onClick={category.onClick}
+                    className={`block px-4 py-3 text-gray-900 hover:bg-gray-50 transition-colors ${
+                      category.className || ''
+                    }`}
+                  >
+                    {category.name}
+                    {category.icon}
+                  </a>
+                ))}
+              </nav>
+
+              <div className="border-t border-gray-100 p-4 space-y-2">
+                <a href="/portailpro" className="block py-2 text-gray-900 hover:text-primary">
+                  Portail Pro
+                </a>
+                <a href="/faq" className="block py-2 text-gray-900 hover:text-primary">
+                  Aide
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -218,7 +254,7 @@ const Header: React.FC = () => {
             }}
           />
 
-          <ul className="scrollable-menu flex items-center space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar">
+          <ul className="scrollable-menu flex items-center space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar py-2">
             {categories.map((category) => (
               <li
                 key={category.name}
@@ -226,11 +262,13 @@ const Header: React.FC = () => {
               >
                 <a
                   href={category.href}
-                  className={`px-3 py-4 text-gray-900 hover:text-primary transition-colors block ${category.className || ''}`}
                   onClick={category.onClick}
+                  className={`px-3 py-4 text-gray-900 hover:text-primary transition-colors block ${
+                    category.className || ''
+                  }`}
                 >
                   {category.name}
-                  {category.icon && category.icon}
+                  {category.icon}
                 </a>
               </li>
             ))}
@@ -252,29 +290,48 @@ const Header: React.FC = () => {
       {isNosVinsOpen && (
         <>
           <div
-            className="fixed inset-0 bg-gray-800 bg-opacity-50 z-50"
+            className="fixed inset-0 bg-gray-800 bg-opacity-50 backdrop-blur-sm z-50"
             onClick={() => setIsNosVinsOpen(false)}
           />
-          <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg shadow-lg p-8 mx-4 lg:w-3/4 lg:mx-auto">
-              <h2 className="text-xl font-bold mb-4">Nos Vins</h2>
-              <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {vinsSubCategories.map((subCategory) => (
-                  <li key={subCategory.name}>
-                    <a href={subCategory.href} className="block relative rounded-md overflow-hidden aspect-video">
-                      <Image
-                        src={subCategory.backgroundImage}
-                        alt={subCategory.name}
-                        layout="fill"
-                        objectFit="cover"
-                      />
-                      <span className="absolute inset-0 bg-black bg-opacity-25 flex items-center justify-center text-white font-semibold text-lg">
-                        {subCategory.name}
-                      </span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+          <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-xl shadow-2xl mx-4 lg:w-3/4 lg:mx-auto relative max-h-[90vh] overflow-y-auto">
+              <div className="p-8">
+                <button
+                  onClick={() => setIsNosVinsOpen(false)}
+                  className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
+                  aria-label="Fermer"
+                >
+                  <X className="w-6 h-6 text-gray-500" />
+                </button>
+
+                <h2 className="text-2xl font-bold mb-6">Nos Vins</h2>
+
+                <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {vinsSubCategories.map((subCategory) => (
+                    <li key={subCategory.name} className="transform transition-transform duration-200 hover:scale-105">
+                      <a
+                        href={subCategory.href}
+                        className="block relative rounded-lg overflow-hidden aspect-video group"
+                      >
+                        <Image
+                          src={subCategory.backgroundImage}
+                          alt={subCategory.name}
+                          layout="fill"
+                          objectFit="cover"
+                          className="transition-transform duration-300 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20 group-hover:from-black/70 group-hover:to-black/30 transition-all duration-300">
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-white font-semibold text-lg text-center px-4 transform transition-transform duration-300 group-hover:scale-105">
+                              {subCategory.name}
+                            </span>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </>
