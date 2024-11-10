@@ -6,7 +6,11 @@ interface SearchParams {
   session_id?: string;
 }
 
-const SuccessPage = ({ searchParams }: { searchParams: SearchParams }) => {
+interface PageProps {
+  searchParams: SearchParams;
+}
+
+const SuccessPage = ({ searchParams }: PageProps) => {
   const [loading, setLoading] = useState(true);
 
   // Correct way to access session_id in this context
