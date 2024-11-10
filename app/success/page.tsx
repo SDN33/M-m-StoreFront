@@ -1,20 +1,14 @@
-'use client';
+'use client'; // Assurez-vous que ce fichier est un composant client
+
 import { useEffect, useState } from 'react';
 import { CheckCircle2, Home } from 'lucide-react';
+import { useSearchParams } from 'next/navigation'; // Utiliser useSearchParams depuis next/navigation
 
-interface SearchParams {
-  session_id?: string;
-}
-
-interface PageProps {
-  searchParams: SearchParams;
-}
-
-const SuccessPage = ({ searchParams }: PageProps) => {
+const SuccessPage = () => {
   const [loading, setLoading] = useState(true);
+  const searchParams = useSearchParams(); // Utiliser useSearchParams de next/navigation ici
 
-  // Correct way to access session_id in this context
-  const session_id = searchParams?.session_id;
+  const session_id = searchParams ? searchParams.get('session_id') : null; // session_id sera une chaîne ou null
 
   useEffect(() => {
     if (session_id) {
