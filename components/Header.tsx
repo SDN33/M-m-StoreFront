@@ -177,9 +177,10 @@ const Header: React.FC = () => {
                 src="/images/meme-pas-contente.png"
                 alt="Logo"
                 width={71}
-                height={90}
+                height={71}
                 quality={100}
                 className="absolute left-0 top-12 transform scale-x-[-1]"
+                layout="intrinsic" // ou "responsive" si tu veux que l'image soit redimensionnée dynamiquement
               />
             </a>
 
@@ -187,9 +188,10 @@ const Header: React.FC = () => {
               <Image
                 src="/images/logomemeg2.png"
                 alt="Logo"
-                width={100}
+                width={32}
                 height={32}
-                className="h-12 w-auto"
+                layout="intrinsic" // ou "responsive" si tu veux que l'image soit redimensionnée dynamiquement
+
               />
             </a>
 
