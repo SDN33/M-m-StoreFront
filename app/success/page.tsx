@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import { CheckCircle2, Home } from 'lucide-react';
 
@@ -6,13 +7,14 @@ interface SearchParams {
   session_id?: string;
 }
 
-const SuccessPage = ({ searchParams = {} as SearchParams }) => {
+const SuccessPage = ({ searchParams }: { searchParams: SearchParams }) => {
   const [loading, setLoading] = useState(true);
-  const session_id = searchParams.session_id;
+
+  // Correct way to access session_id in this context
+  const session_id = searchParams?.session_id;
 
   useEffect(() => {
     if (session_id) {
-      // Si besoin, vous pouvez ajouter ici une vérification du statut de paiement
       setLoading(false);
     }
   }, [session_id]);

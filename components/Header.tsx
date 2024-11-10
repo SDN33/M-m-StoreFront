@@ -66,13 +66,13 @@ const Header: React.FC = () => {
     <div className="fixed top-0 left-0 right-0 z-50 w-full bg-primary shadow-sm">
       <PromotionSection />
 
-      {/* Top Header */}
-      <div className="border-b border-primary-dark">
+       {/* Top Header */}
+       <div className="border-b">
         <div className="container mx-auto px-4 py-1">
           {/* Desktop and Tablet View */}
           <div className="hidden md:flex items-center justify-between">
             {/* Logo */}
-            <a href="/" className="flex-shrink-0 relative">
+            <a href="/" className="flex-shrink-0">
               <Image
                 src="/images/meme-pas-contente.png"
                 alt="Logo"
@@ -93,6 +93,7 @@ const Header: React.FC = () => {
                 className="py-2 -ml-8 scale-110"
               />
             </a>
+
 
             {/* Search Bar */}
             <div className="flex-grow max-w-2xl mx-8">
@@ -169,6 +170,18 @@ const Header: React.FC = () => {
                 <MenuIcon className="w-6 h-6" />
               )}
             </button>
+
+            {/* Logo */}
+            <a href="/" className="flex-shrink-0">
+              <Image
+                src="/images/meme-pas-contente.png"
+                alt="Logo"
+                width={71}
+                height={90}
+                quality={100}
+                className="absolute left-0 top-12 transform scale-x-[-1]"
+              />
+            </a>
 
             <a href="/" className="flex-shrink-0">
               <Image
@@ -306,7 +319,7 @@ const Header: React.FC = () => {
 
                 <h2 className="text-2xl font-bold mb-6">Nos Vins</h2>
 
-                <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
                   {vinsSubCategories.map((subCategory) => (
                     <li key={subCategory.name} className="transform transition-transform duration-200 hover:scale-105">
                       <a
