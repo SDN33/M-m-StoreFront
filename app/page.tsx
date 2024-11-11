@@ -162,12 +162,12 @@ export default function Home() {
               height: '100vh'
             }}
           >
-            <div className="space-y-4">
+            <div>
               <div className="pt-24" />
               <ProductsIntro />
               <Slider />
 
-              <div className="max-w-7xl mx-auto px-4">
+              <div className="max-w-7xl mx-auto px-4 mb-8">
                 <section className="bg-white rounded-lg shadow">
                   <ProductsCards
                     selectedFilters={selectedFilters}

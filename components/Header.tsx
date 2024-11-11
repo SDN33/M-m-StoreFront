@@ -66,7 +66,7 @@ const Header: React.FC = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full bg-primary shadow-sm">
       {/* PromotionSection avec hauteur fixe */}
-      <div className="h-[40px]">
+      <div className="h-[37px]">
         <PromotionSection />
       </div>
 
@@ -131,7 +131,7 @@ const Header: React.FC = () => {
                   </button>
 
                   {isLanguageMenuOpen && (
-                    <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-100 py-1 w-48 z-50">
+                    <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-100 py-1 w-52 z-50">
                       {[
                         { name: 'France', imgSrc: '/images/fr.png' },
                         { name: 'Europe', imgSrc: '/images/euro.png' }
@@ -141,7 +141,7 @@ const Header: React.FC = () => {
                           onClick={() => handleCountrySelect(country.name, country.imgSrc)}
                           className="w-full px-4 py-2 flex items-center space-x-3 hover:bg-gray-50 transition-colors"
                         >
-                          <div className="relative w-[30px] h-[14px]">
+                          <div className="relative w-[30px] h-[30px]">
                             <Image
                               src={country.imgSrc}
                               alt={country.name}
