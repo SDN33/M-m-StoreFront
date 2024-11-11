@@ -152,7 +152,7 @@ const ProductPage: React.FC = () => {
 
   return (
     <div className="mt-20 px-12 min-h-screen flex flex-col justify-between">
-      <br /><br /> <br />
+
       <div className="relative top-0 left-0 w-full">
       </div>
       <br /><br /><br />
@@ -216,7 +216,7 @@ const ProductPage: React.FC = () => {
 
 
             <br />
-            <p className="text-5xl font-bold !mb-7 mt-2">
+            <p className="text-5xl font-bold !mb-2 mt-2">
               <span className="flex items-start z-10">
                 <span className="text-3xl font-bold">{Math.floor(product.price)}</span>
                 <span className="text-xl font-bold align-top mt-1">
@@ -269,7 +269,7 @@ const ProductPage: React.FC = () => {
         <br />
         <div className="mt-8">
           <h2 className="text-2xl font-bold !-mb-2 text-center text-primary">Description du produit</h2>
-          <div className="border-b-4 border-primary w-[20rem] md:w-[50rem] my-2 md:my-2 slide-in-right"></div>
+          <div className="border-b-4 border-primary w-[20rem] md:w-[50rem] my-2 md:my-2 slide-in-right flex mx-auto"></div>
           <p className='font-bold text-center mt-8'>
             {product.description && product.short_description
               ? formatDescription(product.description.length > product.short_description.length ? product.description : product.short_description)
@@ -346,7 +346,7 @@ const ProductPage: React.FC = () => {
             width={1920}
             height={400}
             objectFit="cover"
-            className="w-fit h-[400px] object-cover flex mx-auto" // Ajuste la hauteur si nécessaire
+            className="w-fit flex mx-auto" // Ajuste la hauteur si nécessaire
           />
 
           <br /><br />

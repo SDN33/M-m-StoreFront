@@ -68,12 +68,11 @@ export default function Faq() {
   };
 
   return (
-    <div className="w-full bg-accent pt-4 pb-8">
+    <div className="w-full bg-gradient-to-b from-white to-orange-50 pt-4 pb-8">
       <div className='h-20 w-auto'></div>
       <div className='min-h-2 w-auto'></div>
 
       <div className="container mx-auto px-4">
-        <br /><br /><br /><br />
         <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg mt-40">
           <div className="p-4">
             <h1 className="text-xl font-bold text-center mb-3 text-primary">

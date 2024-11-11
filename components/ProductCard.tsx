@@ -142,6 +142,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         <div className="relative">
           <div className="absolute top-0 left-0 z-10 bg-gradient-to-r from-teal-800 to-teal-950 rounded-full p-1.5 text-white">
             <div className="text-sm font-bold">{formatRating(product.average_rating, product.rating_count)}</div>
+          {product.rating_count === 0 && (
+            <div className="absolute top-0 left-0 z-10 bg-gradient-to-r from-teal-800 to-teal-950 rounded-full p-1.5 text-white">
+              <div className="text-sm font-bold">Non noté</div>
+            </div>
+          )}
           </div>
           <div className="relative w-full h-52 mb-2">
             <Image
