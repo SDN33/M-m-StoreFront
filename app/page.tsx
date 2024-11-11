@@ -32,12 +32,16 @@ export default function Home() {
     categories: []
   });
 
-  const [isAtBottom, setIsAtBottom] = useState(false); // État pour suivre si on est en bas de la page
+  const [isAtBottom, setIsAtBottom] = useState(false);
 
   useEffect(() => {
-    async function fetchProducts() {
-      await fetch('/api/products');
-    }
+    const fetchProducts = async () => {
+      try {
+        await fetch('/api/products');
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+      }
+    };
     fetchProducts();
   }, []);
 
@@ -61,40 +65,33 @@ export default function Home() {
       const mainContent = mainContentRef.current;
       const footer = footerRef.current;
 
-      // Gérer le défilement du filtre séparément
       if (filterContentRef.current?.contains(target)) {
         e.preventDefault();
         filterContentRef.current.scrollTop += e.deltaY;
         return;
       }
 
-      // Vérifier si l'événement provient du conteneur principal
       if (mainContent?.contains(target) && footer) {
         const mainScrollHeight = mainContent.scrollHeight;
         const mainScrollTop = mainContent.scrollTop;
         const mainClientHeight = mainContent.clientHeight;
 
-        // Calculer si on est proche du bas du conteneur principal
         const isNearBottom = mainScrollHeight - (mainScrollTop + mainClientHeight) < 10;
 
-        // Mettre à jour l'état isAtBottom
         setIsAtBottom(isNearBottom);
 
         if (isNearBottom && e.deltaY > 0) {
           e.preventDefault();
-          // Défilement vers le footer
           window.scrollTo({
-            top: document.body.scrollHeight, // Défiler vers le bas de la page
+            top: document.body.scrollHeight,
             behavior: 'smooth'
           });
         }
 
-        // Vérifier si on scroll vers le haut
         if (e.deltaY < 0 && isAtBottom) {
           e.preventDefault();
-          // Remonter vers le haut de la page
           window.scrollTo({
-            top: 0, // Défilement vers le haut
+            top: 0,
             behavior: 'smooth'
           });
         }
@@ -105,7 +102,7 @@ export default function Home() {
     return () => {
       window.removeEventListener('wheel', handleScroll);
     };
-  }, [isMobile, isAtBottom]); // Ajouter isAtBottom comme dépendance
+  }, [isMobile, isAtBottom]);
 
   const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {
     setSelectedFilters((prev) => ({
@@ -136,7 +133,9 @@ export default function Home() {
       ) : (
         <div className="flex flex-1">
           <aside
-            className={`w-64 bg-white border-r border-gray-200 ${isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out' : 'relative'} ${isMobile && !isFilterOpen ? '-translate-x-full' : 'translate-x-0'}`}
+            className={`w-64 bg-white border-r border-gray-200 ${
+              isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out' : 'relative'
+            } ${isMobile && !isFilterOpen ? '-translate-x-full' : 'translate-x-0'}`}
           >
             <div
               ref={filterContentRef}
@@ -147,7 +146,11 @@ export default function Home() {
                 scrollbarWidth: 'thin'
               }}
             >
-              <ProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} resetFilters={resetAllFilters} />
+              <ProductFilter
+                selectedFilters={selectedFilters}
+                onFilterChange={handleFilterChange}
+                resetFilters={resetAllFilters}
+              />
             </div>
           </aside>
 
@@ -159,34 +162,35 @@ export default function Home() {
               height: '100vh'
             }}
           >
-            <div className="">
-              <br /><br />
-              <br /><br />
-              <br />
+            <div className="space-y-4">
+              <div className="pt-24" />
               <ProductsIntro />
-
               <Slider />
-              <div className="max-w-7xl mx-auto px-4 space-y-8">
+
+              <div className="max-w-7xl mx-auto px-4">
                 <section className="bg-white rounded-lg shadow">
-                  <ProductsCards selectedFilters={selectedFilters} onAddToCart={(product) => console.log('Add to cart:', product)} />
+                  <ProductsCards
+                    selectedFilters={selectedFilters}
+                    onAddToCart={(product) => console.log('Add to cart:', product)}
+                  />
                 </section>
               </div>
-              <br /><br />
+
               <HeroBanner />
               <Livraison />
-              <br /><br /><br />
+              <div className="py-8" />
               <WineCategories />
-              <br />
               <Trust />
               <Slogan />
-              <br /><br />
+              <div className="py-8" />
             </div>
           </main>
+
           <footer ref={footerRef}>
-            {/* Votre contenu de footer ici */}
           </footer>
         </div>
       )}
+
       {isMobile && isFilterOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-30"

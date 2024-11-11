@@ -8,6 +8,7 @@ import SearchInput from './SearchInput';
 import PromotionSection from './PromotionSection';
 import AuthButton from './AuthButton';
 import CartIcon from './CartIcon';
+import Link from 'next/link';
 
 interface Country {
   name: string;
@@ -26,7 +27,7 @@ const Header: React.FC = () => {
 
   const toggleNosVinsPopup = () => {
     setIsNosVinsOpen((prev) => !prev);
-    setIsMenuOpen(false); // Ferme le menu mobile si ouvert
+    setIsMenuOpen(false);
   };
 
   const toggleCartPopup = () => {
@@ -63,64 +64,72 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 w-full bg-primary shadow-sm">
-      <PromotionSection />
+    <header className="fixed top-0 left-0 right-0 z-50 w-full bg-primary shadow-sm">
+      {/* PromotionSection avec hauteur fixe */}
+      <div className="h-[40px]">
+        <PromotionSection />
+      </div>
 
-       {/* Top Header */}
-       <div className="border-b">
-        <div className="container mx-auto px-4 py-1">
-          {/* Desktop and Tablet View */}
-          <div className="hidden md:flex items-center justify-between">
-            {/* Logo */}
-            <a href="/" className="flex-shrink-0">
-              <Image
-                src="/images/meme-pas-contente.png"
-                alt="Logo"
-                width={71}
-                height={90}
-                quality={100}
-                className="absolute left-0 top-12 transform scale-x-[-1]"
-              />
-            </a>
+      {/* Top Header - Hauteur fixe */}
+      <div className="border-b bg-primary">
+        <div className="container mx-auto px-4">
+          {/* Desktop and Tablet View - Hauteur fixe */}
+          <div className="hidden md:flex items-center justify-between h-16 relative">
+            {/* Container des logos avec dimensions fixes */}
+            <div className="relative w-[280px] h-24 flex items-center">
+              <div className="absolute left-0 top-0 h-full w-[71px] flex items-center justify-center">
+                <Link href="/">
+                  <Image
+                    src="/images/meme-pas-contente.png"
+                    alt="Logo"
+                    width={71}
+                    height={90}
+                    className="transform scale-x-[-1] object-contain"
+                    priority
+                  />
+                </Link>
+              </div>
 
-            <a href="/" className="flex-shrink-0 ml-8">
-              <Image
-                src="/images/memelogo.png"
-                alt="Logo"
-                width={210}
-                height={250}
-                quality={100}
-                className="py-2 -ml-8 scale-110"
-              />
-            </a>
+              <div className="absolute left-16 h-full w-[210px] flex items-center justify-center">
+                <Link href="/">
+                  <Image
+                    src="/images/memelogo.png"
+                    alt="Logo"
+                    width={210}
+                    height={90}
+                    className="object-contain"
+                    priority
+                  />
+                </Link>
+              </div>
+            </div>
 
-
-            {/* Search Bar */}
+            {/* Search Bar - Largeur fixe */}
             <div className="flex-grow max-w-2xl mx-8">
               <SearchInput />
             </div>
 
-            {/* Right Actions */}
-            <div className="hidden lg:flex items-center space-x-8 text-sm px-6">
+            {/* Right Actions - Largeur fixe */}
+            <div className="hidden lg:flex items-center space-x-8 text-sm px-6 min-w-[400px] justify-end">
               <div className="flex items-center space-x-3">
-                <span className="text-white">Livraison en</span>
+                <span className="text-white whitespace-nowrap">Livraison en</span>
                 <div className="relative">
                   <button
                     onClick={toggleLanguageMenu}
                     className="flex items-center space-x-2 text-white hover:text-gray-200"
                   >
-                    <Image
-                      src={selectedCountry.imgSrc}
-                      alt={selectedCountry.name}
-                      width={30}
-                      height={14}
-                      className="inline-block"
-                    />
+                    <div className="w-[30px] h-[14px] relative">
+                      <Image
+                        src={selectedCountry.imgSrc}
+                        alt={selectedCountry.name}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
                     <span>{selectedCountry.name}</span>
                     <ChevronDown className="w-4 h-4" />
                   </button>
 
-                  {/* Dropdown amélioré */}
                   {isLanguageMenuOpen && (
                     <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-100 py-1 w-48 z-50">
                       {[
@@ -132,12 +141,14 @@ const Header: React.FC = () => {
                           onClick={() => handleCountrySelect(country.name, country.imgSrc)}
                           className="w-full px-4 py-2 flex items-center space-x-3 hover:bg-gray-50 transition-colors"
                         >
-                          <Image
-                            src={country.imgSrc}
-                            alt={country.name}
-                            width={30}
-                            height={14}
-                          />
+                          <div className="relative w-[30px] h-[14px]">
+                            <Image
+                              src={country.imgSrc}
+                              alt={country.name}
+                              fill
+                              className="object-contain"
+                            />
+                          </div>
                           <span>{country.name}</span>
                         </button>
                       ))}
@@ -146,10 +157,10 @@ const Header: React.FC = () => {
                 </div>
               </div>
 
-              <a href="/portailpro" className="text-white hover:text-gray-200 font-semibold">
+              <a href="/portailpro" className="text-white hover:text-gray-200 font-semibold whitespace-nowrap">
                 Portail Pro
               </a>
-              <a href="/faq" className="text-white hover:text-gray-200 font-semibold">
+              <a href="/faq" className="text-white hover:text-gray-200 font-semibold whitespace-nowrap">
                 Aide
               </a>
               <AuthButton />
@@ -157,43 +168,28 @@ const Header: React.FC = () => {
             </div>
           </div>
 
-          {/* Mobile View - Amélioré */}
-          <div className="flex md:hidden items-center justify-between py-2">
+          {/* Mobile View - Hauteur fixe */}
+          <div className="flex md:hidden items-center justify-between h-16">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 text-white hover:text-gray-200"
               aria-label="Menu"
             >
-              {isMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <MenuIcon className="w-6 h-6" />
-              )}
+              {isMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
             </button>
 
-            {/* Logo */}
-            <a href="/" className="flex-shrink-0">
-              <Image
-                src="/images/meme-pas-contente.png"
-                alt="Logo"
-                width={71}
-                height={71}
-                quality={100}
-                className="absolute left-0 top-12 transform scale-x-[-1]"
-                layout="intrinsic" // ou "responsive" si tu veux que l'image soit redimensionnée dynamiquement
-              />
-            </a>
-
-            <a href="/" className="flex-shrink-0">
-              <Image
-                src="/images/logomemeg2.png"
-                alt="Logo"
-                width={32}
-                height={32}
-                layout="intrinsic" // ou "responsive" si tu veux que l'image soit redimensionnée dynamiquement
-
-              />
-            </a>
+            <div className="relative h-16 w-32 flex items-center justify-center">
+              <Link href="/">
+                <Image
+                  src="/images/memelogo.png"
+                  alt="Logo"
+                  width={32}
+                  height={32}
+                  className="object-contain"
+                  priority
+                />
+              </Link>
+            </div>
 
             <div className="flex items-center space-x-2">
               <AuthButton />
@@ -201,9 +197,9 @@ const Header: React.FC = () => {
             </div>
           </div>
 
-          {/* Mobile Menu - Amélioré */}
+          {/* Mobile Menu - Position absolue pour ne pas affecter la hauteur du header */}
           {isMenuOpen && (
-            <div className="md:hidden bg-white absolute left-0 right-0 top-full border-t border-gray-100 shadow-xl">
+            <div className="md:hidden absolute left-0 right-0 top-full bg-white border-t border-gray-100 shadow-xl">
               <div className="p-4">
                 <SearchInput />
               </div>
@@ -215,12 +211,14 @@ const Header: React.FC = () => {
                     onClick={toggleLanguageMenu}
                     className="flex items-center space-x-2"
                   >
-                    <Image
-                      src={selectedCountry.imgSrc}
-                      alt={selectedCountry.name}
-                      width={30}
-                      height={14}
-                    />
+                    <div className="relative w-[30px] h-[14px]">
+                      <Image
+                        src={selectedCountry.imgSrc}
+                        alt={selectedCountry.name}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
                     <span>{selectedCountry.name}</span>
                     <ChevronDown className="w-4 h-4" />
                   </button>
@@ -256,11 +254,11 @@ const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Navigation Bar - Desktop and Tablet */}
-      <nav className="hidden md:block bg-white shadow-xl relative">
-        <div className="container mx-auto px-4 flex items-center justify-between">
+      {/* Navigation Bar - Desktop and Tablet - Hauteur fixe */}
+      <nav className="hidden md:block bg-white shadow-xl relative h-12">
+        <div className="container mx-auto px-4 h-full flex items-center justify-between">
           <ChevronLeft
-            className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors"
+            className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors flex-shrink-0"
             onClick={() => {
               const scrollContainer = document.querySelector('.scrollable-menu');
               if (scrollContainer) {
@@ -269,16 +267,16 @@ const Header: React.FC = () => {
             }}
           />
 
-          <ul className="scrollable-menu flex items-center space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar py-2">
+          <ul className="scrollable-menu flex items-center space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar h-full mx-4 flex-grow">
             {categories.map((category) => (
               <li
                 key={category.name}
-                className="whitespace-nowrap font-bold hover-animate text-sm"
+                className="whitespace-nowrap font-bold hover-animate text-sm h-full flex items-center"
               >
                 <a
                   href={category.href}
                   onClick={category.onClick}
-                  className={`px-3 py-4 text-gray-900 hover:text-primary transition-colors block ${
+                  className={`px-3 text-gray-900 hover:text-primary transition-colors flex items-center h-full ${
                     category.className || ''
                   }`}
                 >
@@ -290,7 +288,7 @@ const Header: React.FC = () => {
           </ul>
 
           <ChevronRight
-            className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors"
+            className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors flex-shrink-0"
             onClick={() => {
               const scrollContainer = document.querySelector('.scrollable-menu');
               if (scrollContainer) {
@@ -328,13 +326,14 @@ const Header: React.FC = () => {
                         href={subCategory.href}
                         className="block relative rounded-lg overflow-hidden aspect-video group"
                       >
-                        <Image
-                          src={subCategory.backgroundImage}
-                          alt={subCategory.name}
-                          layout="fill"
-                          objectFit="cover"
-                          className="transition-transform duration-300 group-hover:scale-110"
-                        />
+                        <div className="relative w-full h-full">
+                          <Image
+                            src={subCategory.backgroundImage}
+                            alt={subCategory.name}
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-110"
+                          />
+                        </div>
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20 group-hover:from-black/70 group-hover:to-black/30 transition-all duration-300">
                           <div className="absolute inset-0 flex items-center justify-center">
                             <span className="text-white font-semibold text-lg text-center px-4 transform transition-transform duration-300 group-hover:scale-105">
@@ -354,7 +353,7 @@ const Header: React.FC = () => {
 
       {/* Cart Popup */}
       {isCartOpen && <CartPopup isOpen={isCartOpen} onClose={toggleCartPopup} />}
-    </div>
+    </header>
   );
 };
 

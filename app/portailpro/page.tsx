@@ -142,7 +142,7 @@ export default function PortailPro() {
         <div className="space-y-16">
           <div className="text-center space-y-4">
             <h3 className="text-4xl font-bold text-primary tracking-tight">
-              Découvrez notre Portail Pro
+              PORTAIL PRO
             </h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Une solution complète pour les vignerons qui souhaitent développer leur présence en ligne, sans contraintes de logistique ni d&apos;engagement
