@@ -86,7 +86,6 @@ const joinIfArray = (value: string | string[], separator: string = ', ') => {
 
 const ProductPage: React.FC = () => {
   const { id } = useParams() as { id: string };
-  const router = useRouter();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -315,7 +314,7 @@ const ProductPage: React.FC = () => {
             {/* Degré d'alcool */}
             <div className="bg-white p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-teal-500 text-left">Degré d'alcool</h3>
+                <h3 className="text-lg font-bold text-teal-500 text-left">Degré d&apos;alcool</h3>
                 <p className="text-sm text-right">
                   {product.degre ? `${product.degre}%` : 'Pas de degré renseigné'}
                 </p>

@@ -10,6 +10,7 @@ type VendorDetails = {
   social: Record<string, string>;
   picture: string;
   avatar_id: string;
+  display_name: string; // Add display_name property
   banner: string;
   shop: {
     title: string;

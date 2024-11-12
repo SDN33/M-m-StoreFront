@@ -35,7 +35,8 @@ export default async function handler(
           return res.status(response.status).json({ message: 'Failed to fetch vendors' });
         }
 
-        res.status(200).json(response.data);
+        const vendors: Vendor[] = Array.isArray(response.data) ? response.data : [response.data];
+        res.status(200).json(vendors);
       } else {
         res.status(302).json({ message: 'ID not Found' });
       }
