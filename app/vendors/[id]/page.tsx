@@ -9,7 +9,12 @@ type VendorDetails = {
   description: string;
   social: Record<string, string>;
   picture: string;
+  avatar_id: string;
   banner: string;
+  shop: {
+    title: string;
+    image: string;
+  };
 };
 
 export default function VendorDetailsPage() {

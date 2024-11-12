@@ -1,109 +1,49 @@
-import { useState, useMemo, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { Heart, Info } from 'lucide-react';
-import AddToCartButton from './AddToCartButton';
+import AddToCartButton from './AddToCartButton'; // Assurez-vous d'importer correctement ce composant
 
 interface Product {
   id: number;
   name: string;
-  price: number;
-  categories: { id: number; name: string }[];
-  certification?: string;
-  images: { src: string }[];
-  vendor?: { vendorPhotoUrl?: string; name?: string };
-  store_name?: string;
-  nom_chateau?: string;
   appelation?: string;
-  millesime?: string;
-  region__pays?: string;
-  volume?: string;
-  rating_count?: number;
-  average_rating?: number;
-  style?: string;
-  cepages?: string[];
-  short_description?: string;
-  description?: string;
-  rating?: number;
+  categories: { name: string }[];
+  volume: string;
+  millesime: string;
+  average_rating: number;
+  rating_count: number;
+  images: { src: string }[];
+  short_description: string;
+  description: string;
+  price: number;
 }
 
-interface ProductCardProps {
-  product: Product;
-  onAddToCart: (productId: number, quantity: number, variationId: number) => Promise<void>;
-}
-
-const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
-  const router = useRouter();
-  const [quantity, setQuantity] = useState<number>(1);
-  const [variationId] = useState<number>(product.id);
-  const [imageError, setImageError] = useState<boolean>(false);
-  const [isTruncated, setIsTruncated] = useState<boolean>(false);
-
-  const handleRedirect = () => {
-    router.push(`/product/${product.id}`);
-  };
-
-  const formatRating = (rating?: number, ratingCount?: number) => {
-    if (!rating || !ratingCount || ratingCount === 0) return <span className='text-xs'>Non noté</span>;
-    return <span>{(rating * 4).toFixed(1)}/20</span>;
-  };
-
-  const renderCertification = () => {
-    if (product.certification?.toLowerCase() === 'biodynamie') {
-      return (
-        <div className="relative w-20 h-6">
-          <Image
-            src="/images/biodemeter.png"
-            alt="Certification biodynamique"
-            fill
-            style={{ objectFit: 'contain' }}
-            onError={() => setImageError(true)}
-          />
-        </div>
-      );
-    }
-    if (product.certification?.toLowerCase() === 'bio') {
-      return (
-        <div className="relative w-6 h-6">
-          <Image
-            src="/images/logobio1.webp"
-            alt="Certification bio"
-            fill
-            style={{ objectFit: 'contain' }}
-            onError={() => setImageError(true)}
-          />
-        </div>
-      );
-    }
-    return null;
-  };
-
-  function stripHtmlAndTruncate(text: string = '', maxLength: number): string {
-    const plainText = text.replace(/<\/?[^>]+(>|$)/g, '');
-    if (plainText.length > maxLength) {
-      return plainText.substring(0, plainText.lastIndexOf(' ', maxLength)) + '...';
-    }
-    return plainText;
-  }
-
-  // Utilisation de useMemo pour calculer truncatedName sans appel à setIsTruncated
-  const truncatedName = useMemo(() => stripHtmlAndTruncate(product.name, 36), [product.name]);
-
-  // Utilisation de useEffect pour mettre à jour isTruncated après calcul de truncatedName
-  useEffect(() => {
-    setIsTruncated(product.name.length > 38);
-  }, [product.name]);
+const ProductCard: React.FC<{ product: Product; onAddToCart: (id: number, qty: number, varId: number) => void }> = ({ product, onAddToCart }) => {
+  const [quantity, setQuantity] = useState(1);
+  const [imageError, setImageError] = useState(false);
+  const [vendorImage, setVendorImage] = useState<string | null>(null);
 
   const generateSlogan = () => {
-    if (product.price < 9) return `Le qualité/prix IMBATTABLE !`;
-    if (product.price > 20) return `${product.appelation?.toUpperCase() || 'Vin'} Haut de Gamme`;
-    if (product.average_rating && product.average_rating > 3.5) return `Coup De Coeur de Mémé`;
-    if (product.certification?.toLowerCase().includes('biodynamie')) return `Vin Démeter qui respecte la nature`;
-    if (product.categories.length > 0 && product.categories[0]?.name.toLowerCase().includes('pétillant')) {
-      const categoryName = product.categories.map(category => category.name).join(', ');
-      return `Un ${categoryName} À Découvrir`;
-    }
     return `Un ${product.appelation?.toUpperCase() || 'Vin'} À Découvrir`;
+  };
+
+  const formatRating = (rating: number, count: number) => {
+    // Si le rating n'est pas un nombre valide, retourner une valeur par défaut
+    if (typeof rating !== 'number' || isNaN(rating)) {
+      return `Non noté `;
+    }
+
+    // Si rating est un nombre valide, utiliser toFixed
+    return `${rating.toFixed(1)} (${count} avis)`;
+  };
+
+  const handleRedirect = () => {
+    // Ajoutez la logique de redirection ici
+  };
+
+  const stripHtmlAndTruncate = (text: string, length: number) => {
+    const strippedText = text.replace(/<\/?[^>]+(>|$)/g, ''); // Suppression des balises HTML
+    return strippedText.length > length ? strippedText.substring(0, length) + '...' : strippedText;
   };
 
   return (
@@ -122,16 +62,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
               <h3
                 className="text-base font-bold cursor-pointer hover:underline truncate"
                 onClick={handleRedirect}
-                title={isTruncated ? product.name : undefined}
+                title={product.name}
               >
-                {truncatedName}
+                {product.name}
               </h3>
-              {isTruncated && (
-                <div className="relative group" title={product.name}>
-                  <Info className="w-4 h-4 text-gray-500 ml-1 cursor-pointer" />
-                </div>
-
-              )}
+              <div className="relative group" title={product.name}>
+                <Info className="w-4 h-4 text-gray-500 ml-1 cursor-pointer" />
+              </div>
             </div>
             <p className="text-xs text-gray-500 pl-6 truncate">
               {product.categories.map((category) => category.name).join(" et ")} · {product.volume} - {product.millesime}
@@ -142,11 +79,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         <div className="relative">
           <div className="absolute top-0 left-0 z-10 bg-gradient-to-r from-teal-800 to-teal-950 rounded-full p-1.5 text-white">
             <div className="text-sm font-bold">{formatRating(product.average_rating, product.rating_count)}</div>
-          {product.rating_count === 0 && (
-            <div className="absolute top-0 left-0 z-10 bg-gradient-to-r from-teal-800 to-teal-950 rounded-full p-1.5 text-white">
-              <div className="text-sm font-bold">Non noté</div>
-            </div>
-          )}
+            {product.rating_count === 0 && (
+              <div className="absolute top-0 left-0 z-10 bg-gradient-to-r from-teal-800 to-teal-950 rounded-full p-1.5 text-white">
+                <div className="text-sm font-bold">Non noté</div>
+              </div>
+            )}
           </div>
           <div className="relative w-full h-52 mb-2">
             <Image
@@ -157,11 +94,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
               priority
               onClick={handleRedirect}
               className="hover:scale-105 transition-transform cursor-pointer"
-              onError={(e) => {
-                const imgElement = e.target as HTMLImageElement;
-                imgElement.src = '/images/vinmeme.png';
-              }}
+              onError={() => setImageError(true)}
             />
+            {/* Vendor Avatar */}
+            {vendorImage && (
+              <div className="absolute bottom-2 right-2 w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-lg">
+                <Image src={vendorImage} alt="Vendor Avatar" width={40} height={40} objectFit="cover" />
+              </div>
+            )}
           </div>
         </div>
 
@@ -169,7 +109,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           <span className="text-xs text-primary font-semibold cursor-pointer hover:underline">
             {product.rating_count || 0} avis
           </span>
-          {!imageError && <div className="flex gap-2">{renderCertification()}</div>}
+          {!imageError && <div className="flex gap-2">{/* Render Certifications Here */}</div>}
         </div>
 
         <p className="text-xs mb-2 text-gray-700 h-8 overflow-hidden text-center">
@@ -211,7 +151,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             product={product}
             quantity={quantity}
             onAddToCart={async () => {
-              await onAddToCart(product.id, quantity, variationId);
+              await onAddToCart(product.id, quantity, 0); // Assurez-vous d'ajouter `variationId` ou une valeur appropriée ici
             }}
           />
         </div>

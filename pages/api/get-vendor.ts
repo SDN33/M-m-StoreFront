@@ -1,3 +1,4 @@
+//path: pages/api/get-vendor.ts
 import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -29,27 +30,27 @@ export default async function handler(
             'Authorization': `Basic ${Buffer.from(`${process.env.WC_CONSUMER_KEY}:${process.env.WC_CONSUMER_SECRET}`).toString('base64')}`
           }
         });
-    
+
         if (response.status !== 200) {
           return res.status(response.status).json({ message: 'Failed to fetch vendors' });
         }
-    
+
         res.status(200).json(response.data);
       } else {
         res.status(302).json({ message: 'ID not Found' });
       }
     } else {
-      
+
       const response = await axios.get(`${process.env.WC_API_DOMAIN}/wp-json/mvx/v1/vendors`, {
         headers: {
           'Authorization': `Basic ${Buffer.from(`${process.env.WC_CONSUMER_KEY}:${process.env.WC_CONSUMER_SECRET}`).toString('base64')}`
         }
       });
-  
+
       if (response.status !== 200) {
         return res.status(response.status).json({ message: 'Failed to fetch vendors' });
       }
-  
+
       res.status(200).json(response.data);
     }
   } catch (error: any) {

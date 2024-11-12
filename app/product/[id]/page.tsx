@@ -25,6 +25,7 @@ interface Product {
   average_rating?: number;
   rating_count?: number;
   vendor?: {
+    id?: number;
     vendorPhotoUrl?: string;
   };
   conservation?: string;
@@ -112,14 +113,13 @@ const ProductPage: React.FC = () => {
     if (id) fetchProduct();
   }, [id]);
 
-  const handleVendorClick = (vendorName: string | undefined) => {
-    if (vendorName) {
-      router.push(`/vendor/${vendorName}`);
-    } else {
-      // Rediriger vers la page par défaut si store_name est vide
-      router.push('/vendor/mémégeorgette');
-    }
-  };
+
+  const [currentUrl, setCurrentUrl] = useState('');
+
+  useEffect(() => {
+    setCurrentUrl(window.location.href);
+  }, []);
+
 
 
   if (loading) {
@@ -164,8 +164,10 @@ const ProductPage: React.FC = () => {
               <span className="mx-2 text-gray-500">&gt;</span>
             </li>
             <li className="flex items-center">
-              <a onClick={() => product.store_name && handleVendorClick(product.store_name)} className="cursor-pointer text-green-600 hover:text-gray-700">{product.store_name}</a>
-              <span className="mx-2 text-gray-500">&gt;</span>
+            <a className="cursor-pointer text-teal-500 hover:text-gray-700">
+              {product.store_name || ' @MéméGeorgette'}
+            </a>
+            <span className="mx-2 text-gray-500">&gt;</span>
             </li>
             <li className="flex items-center">
               <span className="text-primary" aria-current="page">{product.name}</span>
@@ -228,14 +230,14 @@ const ProductPage: React.FC = () => {
             <br />
             <p className="text-sm font-normal">
               Vendu par
-              <a onClick={() => handleVendorClick(product.store_name)} className="cursor-pointer text-teal-500 hover:text-gray-700">
+              <a className="cursor-pointer text-teal-500 hover:text-gray-700">
                  <br />{product.store_name || ' @MéméGeorgette'}
               </a>
             </p>
 
 
             <br />
-            <SocialShare url={window.location.href} title={product.name} />
+            <SocialShare url={currentUrl} title={product.name} />
             <div className="items-center mt-6 flex gap-2">
               <Package className="h-6 w-6 mb-6" />
               <span className="font-bold text-xs mb-6">Livraison offerte dès 6 bouteilles achetées sur un domaine</span>
@@ -280,7 +282,7 @@ const ProductPage: React.FC = () => {
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 mx-auto px-10">
             {/* Cépages */}
             <div className="bg-white p-4 rounded-lg shadow-md">
-              <div className="flex justify-between items-center px-10">
+              <div className="flex justify-between items-center">
                 <h3 className="text-lg font-bold text-teal-500 text-left">Cépages</h3>
                 <p className="text-sm text-right">
                   {product.cepages ? joinIfArray(product.cepages) : 'Pas de cépages renseignés'}
@@ -302,20 +304,10 @@ const ProductPage: React.FC = () => {
 
             {/* Accords mets et vins */}
             <div className="bg-white p-4 rounded-lg shadow-md">
-                <div className="flex justify-between items-center">
-                    <h3 className="text-lg font-bold text-teal-500 text-left">Accords mets</h3>
-                    <p className="text-sm text-right">
-                        {product.accord_mets ? joinIfArray(product.accord_mets) : 'Pas d\'accords mets renseignés'}
-                    </p>
-                </div>
-            </div>
-
-            {/* Dégustation */}
-            <div className="bg-white p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-teal-500 text-left">Dégustation</h3>
+                <h3 className="text-lg font-bold text-teal-500 text-left">Accords mets et vins</h3>
                 <p className="text-sm text-right">
-                  {product.degustation ? product.degustation : 'Pas d\'informations de dégustation'}
+                  {product.accord_mets ? joinIfArray(product.accord_mets) : 'Pas d\'accords renseignés'}
                 </p>
               </div>
             </div>
@@ -323,19 +315,29 @@ const ProductPage: React.FC = () => {
             {/* Degré d'alcool */}
             <div className="bg-white p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-teal-500 text-left">Degré d&apos;alcool</h3>
+                <h3 className="text-lg font-bold text-teal-500 text-left">Degré d'alcool</h3>
                 <p className="text-sm text-right">
-                  {product.degre ? product.degre : 'Pas d\'informations de conservation'}% alc. / vol.
+                  {product.degre ? `${product.degre}%` : 'Pas de degré renseigné'}
+                </p>
+              </div>
+            </div>
+
+            {/* Dégustation */}
+            <div className="bg-white p-4 rounded-lg shadow-md">
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-bold text-teal-500 text-left">Dégustation</h3>
+                <p className="text-sm text-right">
+                  {product.degustation || 'Pas de note de dégustation'}
                 </p>
               </div>
             </div>
           </div>
-
           <br />
           <br /><br />
           <h2 className="text-2xl font-bold !-mb-2 text-center text-primary">Avis clients</h2>
           <br /><br />
           <ProductReviews productId={product.id.toString()} />
+
 
 
           <br />

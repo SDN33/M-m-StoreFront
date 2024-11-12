@@ -116,9 +116,9 @@ const Header: React.FC = () => {
                 <div className="relative">
                   <button
                     onClick={toggleLanguageMenu}
-                    className="flex items-center space-x-2 text-white hover:text-gray-200"
+                    className="flex items-center text-white hover:text-gray-200"
                   >
-                    <div className="w-[30px] h-[14px] relative">
+                    <div className="w-[40px] h-[20px] relative">
                       <Image
                         src={selectedCountry.imgSrc}
                         alt={selectedCountry.name}
