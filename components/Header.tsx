@@ -84,7 +84,7 @@ const Header: React.FC = () => {
                     alt="Logo"
                     width={71}
                     height={90}
-                    className="transform scale-x-[-1] object-contain"
+                    className="transform scale-x-[-1] scale-110 object-contain"
                     priority
                   />
                 </Link>

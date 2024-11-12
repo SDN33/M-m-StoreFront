@@ -1,6 +1,6 @@
 module.exports = {
   content: [
-    './app/**/*.{js,ts,jsx,tsx}',  
+    './app/**/*.{js,ts,jsx,tsx}',
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
   ],
@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#FF6B4A',      // Orange principal
+        primary: '#EC641D',      // Orange principal
         secondary: '#6B7280',    // Gris
         accent: '#F6BC9B',       // Orange clair
         background: '#FFFFFF',   // Blanc

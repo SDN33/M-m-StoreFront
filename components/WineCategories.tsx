@@ -104,12 +104,6 @@ const VendorSlider = () => {
       .join(' ');
   };
 
-  const getCardColor = (certifications: { bio: number; biodynamie: number; conversion: number }) => {
-    if (certifications.biodynamie > 0) return 'from-primary to-red-900';
-    if (certifications.bio > 0) return 'from-teal-800 to-teal-950';
-    if (certifications.conversion > 0) return 'from-amber-700 to-amber-900';
-    return 'from-gray-800 to-gray-950';
-  };
 
   const nextSlide = () => setActiveIndex((prev) => (prev + 1) % vendors.length);
   const prevSlide = () => setActiveIndex((prev) => (prev - 1 + vendors.length) % vendors.length);
@@ -171,7 +165,7 @@ const VendorSlider = () => {
               >
                 <div
                   className={`flex w-full h-full rounded-2xl shadow-xl overflow-hidden
-                           bg-gradient-to-br ${getCardColor(vendor.certifications)}
+                           bg-gradient-to-r from-primary to-orange-800
                            hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 mx-auto
                            border border-white/10`}
                 >
@@ -273,6 +267,7 @@ const VendorSlider = () => {
       {/* Enhanced Winemakers List */}
       <div className="mb-8 bg-slate-100 rounded-lg shadow-lg p-6 -mt-8">
         <div className="flex flex-col space-y-4">
+          <p className='text-xl'><strong>Rechercher nos vignerons par régions</strong></p>
           {/* Header and Expand Button */}
           <div className="flex items-center justify-between">
             <button
@@ -290,7 +285,7 @@ const VendorSlider = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Rechercher un vigneron ou une région..."
+                placeholder="ex: Bordeaux"
                 className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
