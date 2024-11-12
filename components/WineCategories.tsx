@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, MapPin, Grape, ChevronDown, Filter, Search } from 'lucide-react';
+import Image from 'next/image';
 
 interface Vendor {
   id: number;
@@ -194,10 +195,15 @@ const VendorSlider = () => {
 
                         <div className="flex items-center text-white text-sm gap-1.5">
                           <Grape className="w-4 h-4" />
-                          {vendor.certifications.biodynamie > 0 ? 'Biodynamie' :
-                           vendor.certifications.bio > 0 ? 'Bio' :
-                           vendor.certifications.conversion > 0 ? 'En conversion' :
-                           'Traditionnel'}
+                            {vendor.certifications.biodynamie > 0 ? (
+                              <Image width={40} height={40} src='/images/déméter.png' alt='Logo Démeter' />
+                            ) : vendor.certifications.bio > 0 ? (
+                              <Image width={20} height={10} src='/images/logobio1.webp' alt='Logo Bio' />
+                            ) : vendor.certifications.conversion > 0 ? (
+                              'En conversion 🔄'
+                            ) : (
+                              'Traditionnel'
+                            )}
                         </div>
                       </div>
                     </div>
