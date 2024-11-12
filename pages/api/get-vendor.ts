@@ -54,14 +54,18 @@ export default async function handler(
 
       res.status(200).json(response.data);
     }
-  } catch (error: any) {
-    console.error('Error fetching vendors:', error.message);
-    if (error.response) {
-      res.status(error.response.status).json({ message: error.response.data.message || 'Error fetching vendors' });
-    } else if (error.request) {
-      res.status(500).json({ message: 'No response from server' });
+  } catch (error: unknown) {
+    console.error('Error fetching vendors:', (error as Error).message);
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        res.status(error.response.status).json({ message: error.response.data.message || 'Error fetching vendors' });
+      } else if (error.request) {
+        res.status(500).json({ message: 'No response from server' });
+      } else {
+        res.status(500).json({ message: 'Server error' });
+      }
     } else {
-      res.status(500).json({ message: 'Server error' });
+      res.status(500).json({ message: 'Unexpected error' });
     }
   }
 }
