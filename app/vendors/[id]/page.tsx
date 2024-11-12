@@ -34,8 +34,12 @@ export default function VendorDetailsPage() {
           const response = await axios.post(`/api/get-vendor`, { id });
           console.log('response', response.data);
           setVendor(response.data);
-        } catch (err: any) {
-          console.error('Error fetching vendor details:', err.message);
+        } catch (error) {
+          if (axios.isAxiosError(error)) {
+            console.error('Error fetching vendor details:', error.message);
+          } else {
+            console.error('Error fetching vendor details:', error);
+          }
           setError('Failed to fetch vendor details');
         } finally {
           setLoading(false);

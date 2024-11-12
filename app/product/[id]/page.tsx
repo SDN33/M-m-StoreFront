@@ -1,7 +1,7 @@
 'use client'; // Ajoutez cette ligne en haut du fichier
 
 import React, { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { Star, Package } from 'lucide-react';
 import Livraison from '@/components/Livraison';
