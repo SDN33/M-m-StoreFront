@@ -30,7 +30,7 @@ export default function VendorDetailsPage() {
         try {
           const response = await axios.post(`/api/get-vendor`, { id });
           setVendor(response.data);
-        } catch (err: any) {
+        } catch (err) {
           console.error('Error fetching vendor details:', err.message);
           setError('Failed to fetch vendor details');
         } finally {
@@ -80,7 +80,7 @@ export default function VendorDetailsPage() {
       <h3>Visit Shop</h3>
       {shop?.url ? (
         <a href={shop.url} target="_blank" rel="noopener noreferrer">
-          Go to {shop.title}'s store
+          Go to {shop.title}&apos;s store
         </a>
       ) : (
         <p>Shop URL is not available.</p>
