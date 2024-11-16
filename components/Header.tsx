@@ -266,8 +266,8 @@ const Header: React.FC = () => {
               }
             }}
           />
-
-          <ul className="scrollable-menu flex items-center space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar h-full mx-4 flex-grow">
+      
+          <ul className="scrollable-menu flex items-center justify-center space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar h-full mx-4 flex-grow">
             {categories.map((category) => (
               <li
                 key={category.name}
@@ -286,7 +286,7 @@ const Header: React.FC = () => {
               </li>
             ))}
           </ul>
-
+      
           <ChevronRight
             className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors flex-shrink-0"
             onClick={() => {
@@ -298,6 +298,7 @@ const Header: React.FC = () => {
           />
         </div>
       </nav>
+      
 
       {/* Nos Vins Popup */}
       {isNosVinsOpen && (

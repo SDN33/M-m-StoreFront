@@ -156,7 +156,7 @@ const CookieConsent = () => {
 
   return (
     <div className="fixed bottom-4 left-4 right-4 z-50 md:max-w-lg mx-auto">
-      <div className="bg-white rounded-lg shadow-lg border border-gray-100 p-4 text-sm bg-opacity-90">
+      <div className="bg-accent rounded-lg shadow-lg border border-gray-100 p-4 text-sm bg-opacity-90">
         <div className="space-y-3">
           <p className="text-black text-center">
             <span className='text-3xl'>🍪</span>Nous utilisons des cookies pour améliorer votre expérience client.<br />Veuillez accepter nos cookies pour continuer.
