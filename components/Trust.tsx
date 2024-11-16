@@ -65,8 +65,8 @@ const MemeGeorgettePremium = () => {
               <path d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1zm8-4v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4a1 1 0 011-1h4a1 1 0 011 1z"/>
             </svg>
           </div>
-          <h3 className="text-xl font-semibold text-primary mb-2">Livraison en 48H</h3>
-          <p className="text-gray-600">Nos vins sont livrable partout en France</p>
+          <h3 className="text-xl font-semibold text-primary mb-2">Livraison éco-responsable</h3>
+          <p className="text-gray-600">Un délai un peu plus long pour un impact moindre sur notre planète</p>
         </div>
 
         <div className="text-center">
