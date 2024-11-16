@@ -332,9 +332,11 @@ const VendorSlider = () => {
               <Link href={`/vendor/${vendor.id}`} key={vendor.id} className="group">
                 <div className="flex items-center gap-4 p-4 rounded-lg border hover:shadow-md transition-all duration-300 hover:border-primary bg-gradient-to-br from-gray-50 to-white">
                   <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200 group-hover:border-primary transition-colors">
-                    <img
+                    <Image
                       src={vendor.vendor_image || '/images/meme-pas-contente.png'}
                       alt={vendor.store_name}
+                      width={64}
+                      height={64}
                       className="w-full h-full object-cover"
                     />
                   </div>

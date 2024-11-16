@@ -65,7 +65,7 @@ const Slogan: React.FC = () => {
   return (
     <div
       className="relative py-10 md:py-10 -mt-4 min-h-[700px] md:min-h-[200px] overflow-hidden"
-      style={{ backgroundColor: '#FF6B4A' }}
+      style={{ backgroundColor: '#EC641D' }}
     >
       {/* SVG Background with brand color */}
       <svg

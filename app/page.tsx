@@ -9,7 +9,6 @@ import Slider from '@/components/Slider';
 import MobileHome from '@/components/MobileHome';
 import Trust from '@/components/Trust';
 import HeroBanner from '@/components/HeroBanner';
-import WineCategories from '@/components/WineCategories';
 import Livraison from '@/components/Livraison';
 
 export default function Home() {
@@ -179,7 +178,6 @@ export default function Home() {
               <HeroBanner />
               <Livraison />
               <div className="py-8" />
-              <WineCategories />
               <Trust />
               <Slogan />
               <div className="py-8" />

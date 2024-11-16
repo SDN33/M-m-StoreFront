@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const VendorsPage = () => {
   const [vendors, setVendors] = useState([]);
@@ -112,10 +113,12 @@ const VendorsPage = () => {
                   <div className="flex justify-between items-start">
                     <div className="space-y-2 flex items-center">
                       {avatar && (
-                        <img
+                        <Image
                           src={avatar.startsWith('//') ? `https:${avatar}` : avatar}
                           alt={vendor.shop?.title || 'Vendor Avatar'}
                           className="w-16 h-16 rounded-full object-cover"
+                          width={64}
+                          height={64}
                         />
                       )}
                       <div className="ml-4">
