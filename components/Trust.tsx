@@ -61,8 +61,24 @@ const MemeGeorgettePremium = () => {
       <div className="grid md:grid-cols-4 gap-12 mb-16">
         <div className="text-center">
           <div className="w-16 h-16 mx-auto mb-4 animate-bounce">
-            <svg viewBox="0 0 24 24" className="w-full h-full fill-primary">
-              <path d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1zm8-4v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4a1 1 0 011-1h4a1 1 0 011 1z"/>
+            <svg viewBox="0 0 100 100" className="w-full h-full fill-primary">
+              {/* Planète */}
+              <circle cx="50" cy="50" r="35" fillOpacity="0.9" />
+              {/* Grande feuille verte */}
+              <path
+                d="M60,25
+                   C75,15 85,25 85,40
+                   C85,55 75,65 60,55
+                   C65,45 65,35 60,25 Z"
+                fill="#4CAF50"
+              />
+              {/* Tige */}
+              <path
+                d="M60,55 L55,65"
+                stroke="#4CAF50"
+                strokeWidth="3"
+                fill="none"
+              />
             </svg>
           </div>
           <h3 className="text-xl font-semibold text-primary mb-2">Livraison éco-responsable</h3>
@@ -81,8 +97,14 @@ const MemeGeorgettePremium = () => {
 
         <div className="text-center">
           <div className="w-16 h-16 mx-auto mb-4 animate-bounce">
-            <svg viewBox="0 0 24 24" className="w-full h-full fill-primary">
-              <path d="M12 15.39l-3.76 2.27.99-4.28-3.32-2.88 4.38-.37L12 6.09l1.71 4.04 4.38.37-3.32 2.88.99 4.28z"/>
+            <svg viewBox="0 0 100 100" className="w-full h-full fill-primary">
+              {/* Verre de dégustation */}
+              <path d="M40,20 C40,20 30,35 30,50 C30,65 45,70 50,70 C55,70 70,65 70,50 C70,35 60,20 60,20 Z" />
+              <rect x="48" y="70" width="4" height="10" />
+              <path d="M40,80 L60,80 L55,85 L45,85 Z" />
+              <path d="M35,45 C35,45 45,50 65,45" fill="none" stroke="currentColor" strokeWidth="2" />
+              <circle cx="70" cy="30" r="8" fillOpacity="0.2" />
+              <text x="70" y="33" fontSize="10" fill="currentColor" textAnchor="middle">A+</text>
             </svg>
           </div>
           <h3 className="text-xl font-semibold text-primary mb-2">Sélection de qualité</h3>
