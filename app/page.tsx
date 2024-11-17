@@ -14,6 +14,8 @@ import Livraison from '@/components/Livraison';
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [scrollEnabled, setScrollEnabled] = useState(false); // Contrôle du défilement
+
   const mainContentRef = useRef<HTMLDivElement>(null);
   const filterContentRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
@@ -59,6 +61,8 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    if (!scrollEnabled) return; // Désactiver le défilement si `scrollEnabled` est `false`
+
     const handleScroll = (e: WheelEvent) => {
       const target = e.target as Node;
       const mainContent = mainContentRef.current;
@@ -101,13 +105,14 @@ export default function Home() {
     return () => {
       window.removeEventListener('wheel', handleScroll);
     };
-  }, [isMobile, isAtBottom]);
+  }, [isMobile, isAtBottom, scrollEnabled]);
 
   const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {
     setSelectedFilters((prev) => ({
       ...prev,
       [category]: filters
     }));
+    setScrollEnabled(true); // Activer le défilement uniquement après une modification des filtres
   };
 
   const resetAllFilters = () => {

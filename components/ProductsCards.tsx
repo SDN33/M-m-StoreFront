@@ -151,14 +151,18 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
   };
 
   useEffect(() => {
-    if (!initialLoad) {
+    // N'exécuter le défilement qu'après le premier chargement et lorsque les filtres sont modifiés
+    if (!initialLoad && Object.values(selectedFilters).some(filter => filter.length > 0)) {
       if (productsRef.current) {
+        console.log('Défilement vers le produit');
         productsRef.current.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      setInitialLoad(false);
+      setInitialLoad(false); // Une seule fois, après le premier chargement
     }
   }, [selectedFilters, initialLoad]);
+
+
 
   return (
     <div ref={productsRef} className="flex-1 px-4 lg:px-8">

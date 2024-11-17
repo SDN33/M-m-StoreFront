@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Heart, Info } from 'lucide-react';
 import AddToCartButton from './AddToCartButton';
+import { MapPin } from 'lucide-react';
 
 interface Product {
   id: number;
@@ -26,7 +27,6 @@ interface Product {
   description?: string;
   rating?: number;
 }
-
 
 interface ProductCardProps {
   product: Product;
@@ -135,7 +135,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
               )}
             </div>
             <p className="text-xs text-gray-500 pl-6 truncate">
-              {product.categories.map((category) => category.name).join(" et ")} · {product.volume} - {product.millesime}
+              {product.categories.map((category) => category.name).join(" et ")} - {product.appelation?.split(/[\s-]/).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} · {product.millesime} · {product.volume}
             </p>
           </div>
         </div>
@@ -164,14 +164,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
               }}
             />
           </div>
-          <Image
-            src={product.vendor?.vendorPhotoUrl || '/images/memelogo2.png'}
-            alt={product.vendor?.name || 'Mémé Georgette'}
-            width={50}
-            height={50}
-            className="rounded-full"
-          />
-          <p className='text-xs text-teal-800 font-semibold'>{product.store_name ? `${product.store_name} - ` : ''}{product.region__pays ? product.region__pays.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : ''}</p>
+          <p className='text-teal-800 font-semibold text-xs'>{product.store_name}<span className='text-xs font-semibold text-gray-800 flex items-center'><MapPin className="w-3 h-3 mr-1" />{product.region__pays ? product.region__pays.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : ''}</span></p>
         </div>
 
         <div className="flex justify-between items-center mb-2">

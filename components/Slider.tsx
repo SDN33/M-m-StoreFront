@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 
 const Slider = () => {
@@ -7,7 +7,7 @@ const Slider = () => {
   const slides = [
     {
       id: 1,
-      imageUrl: '/images/slider1.png',
+      imageUrl: '/images/slider3.png',
       link: '/vendor/mémégeorgette',
     },
     {
@@ -15,16 +15,21 @@ const Slider = () => {
       imageUrl: '/images/slider2.png',
       link: '/vendor/mémégeorgette',
     },
+    {
+      id: 3,
+      imageUrl: '/images/slider1.png',
+      link: '/vendor/mémégeorgette',
+    },
   ];
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-  };
+  }, [slides.length]);
 
   useEffect(() => {
     const timer = setInterval(nextSlide, 12000);
     return () => clearInterval(timer);
-  }, []);
+  }, [nextSlide]);
 
   return (
     <div className="relative w-full h-[20vh] sm:h-[20vh] md:h-[50vh] max-h-[300px] overflow-hidden bg-white">

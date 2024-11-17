@@ -7,7 +7,6 @@ import Slogan from '@/components/Slogan';
 import WineCategories from '@/components/WineCategories';
 import MobileProductFilter from './MobileProductFilter';
 import Trust from '@/components/Trust';
-import Slider from '@/components/Slider';
 import Livraison from './Livraison';
 import MobileProductsIntro from './MobileProductIntro';
 
@@ -37,7 +36,6 @@ const MobileHome: React.FC = () => {
     <div className="flex flex-col bg-gray-50 overflow-y-auto">
       <br /><br /><br /><br />
       <div className="space-y-8">
-        <Slider />
         <MobileProductsIntro />
         <div className="max-w-7xl mx-auto px-4 space-y-8">
           <section className="bg-white rounded-lg shadow">
