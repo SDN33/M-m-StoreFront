@@ -133,7 +133,7 @@ const VendorsPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-5xl mx-auto p-6">
-        <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">Nos vignerons partenaires</h1>
+        <Image src="/images/vignerons.png" alt="Vineyard" width={1920} height={1080} className="rounded-lg mb-8" />
 
         <div>
           <p className="text-center text-xl font-extrabold -mt-4 mb-4 slide-in-right text-primary">
@@ -147,7 +147,7 @@ const VendorsPage = () => {
           <div className='border-t-2 border-primary w-16 mt-4 flex mx-auto'></div>
           <br /><br />
         </div>
-        
+
 
         {vendors.length === 0 ? (
           <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
@@ -193,7 +193,7 @@ const VendorsPage = () => {
                   </div>
 
                   {vendor.shop?.description && (
-                    <p className="text-gray-600 mt-2">
+                    <p className="text-center mt-2">
                       {vendor.shop.description}
                     </p>
                   )}
