@@ -10,6 +10,7 @@ import MobileHome from '@/components/MobileHome';
 import Trust from '@/components/Trust';
 import HeroBanner from '@/components/HeroBanner';
 import Livraison from '@/components/Livraison';
+import WineCategories from '@/components/WineCategories';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -181,6 +182,7 @@ export default function Home() {
               </div>
 
               <HeroBanner />
+              <WineCategories />
               <Livraison />
               <div className="py-8" />
               <Trust />
