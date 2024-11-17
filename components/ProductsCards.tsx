@@ -158,7 +158,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
     } else {
       setInitialLoad(false);
     }
-  }, [selectedFilters]);
+  }, [selectedFilters, initialLoad]);
 
   return (
     <div ref={productsRef} className="flex-1 px-4 lg:px-8">

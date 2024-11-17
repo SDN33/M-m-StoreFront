@@ -27,6 +27,7 @@ interface Product {
   rating?: number;
 }
 
+
 interface ProductCardProps {
   product: Product;
   onAddToCart: (productId: number, quantity: number, variationId: number) => Promise<void>;
@@ -163,6 +164,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
               }}
             />
           </div>
+          <Image
+            src={product.vendor?.vendorPhotoUrl || '/images/memelogo2.png'}
+            alt={product.vendor?.name || 'Mémé Georgette'}
+            width={50}
+            height={50}
+            className="rounded-full"
+          />
+          <p className='text-xs text-teal-800 font-semibold'>{product.store_name ? `${product.store_name} - ` : ''}{product.region__pays ? product.region__pays.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : ''}</p>
         </div>
 
         <div className="flex justify-between items-center mb-2">
