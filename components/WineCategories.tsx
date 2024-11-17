@@ -1,382 +1,181 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight, MapPin, Grape, ChevronDown, Filter, Search } from 'lucide-react';
 import Image from 'next/image';
 
-interface Vendor {
-  id: number;
-  store_name: string;
-  products: {
-    id: number;
-    name: string;
-    store_name: string;
-    vendor_id: number;
-    vendor_image: string;
-    region__pays: string;
-    images: { src: string }[];
-    price: number;
-    millesime: string;
-    degre: number;
-    certification?: string;
-    cepages: string[];
-  }[];
-  vendor_image: string;
-  region__pays: string;
-  certifications: {
-    bio: number;
-    biodynamie: number;
-    conversion: number;
-  };
-  images?: string;
-}
-
-
-
-const VendorSlider = () => {
-  const [vendors, setVendors] = useState<Vendor[]>([]);
-  const [activeIndex, setActiveIndex] = useState(0);
+const VendorsPage = () => {
+  const [vendors, setVendors] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedRegion, setSelectedRegion] = useState<string>('all');
-  const [isListExpanded, setIsListExpanded] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchVendorsAndProducts = async () => {
       try {
-        const response = await fetch('/api/products');
-        const products = await response.json();
+        // Fetch vendors
+        const vendorResponse = await fetch('/api/get-vendor');
+        if (!vendorResponse.ok) {
+          throw new Error(`Error fetching vendors: ${vendorResponse.status}`);
+        }
+        const vendorData = await vendorResponse.json();
 
-        const vendorMap: { [key: string]: Vendor } = {};
-        products.forEach((product: Vendor['products'][0]) => {
-          const storeName = product.store_name || '@MéméGeorgette';
-          if (!vendorMap[storeName]) {
-            vendorMap[storeName] = {
-              id: product.vendor_id,
-              store_name: storeName,
-              products: [],
-              vendor_image: product.vendor_image,
-              region__pays: product.region__pays,
-              images: product.images[0]?.src,
-              certifications: {
-                bio: 0,
-                biodynamie: 0,
-                conversion: 0,
-              },
-            };
-          }
-          vendorMap[storeName].products.push(product);
-          if (product.certification) {
-            const certLower = product.certification.toLowerCase();
-            if (certLower.includes('biodynamie')) {
-              vendorMap[storeName].certifications.biodynamie++;
-            } else if (certLower.includes('bio')) {
-              vendorMap[storeName].certifications.bio++;
-            } else if (certLower.includes('conversion')) {
-              vendorMap[storeName].certifications.conversion++;
-            }
-          }
+        // Fetch products
+        const productResponse = await fetch('/api/products');
+        if (!productResponse.ok) {
+          throw new Error(`Error fetching products: ${productResponse.status}`);
+        }
+        const productData = await productResponse.json();
+
+        // Associate products with vendors
+        const vendorsWithProducts = vendorData.map((vendor: { id: string; shop: { display_name: string; image?: string; banner?: string; title?: string }; name?: string; description?: string; social?: Record<string, string> }) => {
+          const vendorProducts = productData.filter(
+            (product: { store_name: string }) => product.store_name === vendor.shop.display_name
+          );
+          return { ...vendor, products: vendorProducts };
         });
 
-        setVendors(Object.values(vendorMap));
+        setVendors(vendorsWithProducts);
+        setError('');
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Fetch error:', error);
+        setError('Unable to load vendors and products. Please try again later.');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    fetchVendorsAndProducts();
   }, []);
-
-  const formatRegion = (region: string) => {
-    return region
-      .split('_')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(' ');
-  };
-
-  const formatStoreName = (name: string) => {
-    if (name.startsWith('@')) {
-      return name;
-    }
-    return name
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(' ');
-  };
-
-
-  const nextSlide = () => setActiveIndex((prev) => (prev + 1) % vendors.length);
-  const prevSlide = () => setActiveIndex((prev) => (prev - 1 + vendors.length) % vendors.length);
-
-  const regions = ['all', ...new Set(vendors.map(v => v.region__pays))].sort();
-
-  const filteredVendors = vendors
-    .filter(vendor =>
-      (selectedRegion === 'all' || vendor.region__pays === selectedRegion) &&
-      (searchTerm === '' ||
-        formatStoreName(vendor.store_name).toLowerCase().includes(searchTerm.toLowerCase()) ||
-        formatRegion(vendor.region__pays).toLowerCase().includes(searchTerm.toLowerCase()))
-    )
-    .sort((a, b) => formatStoreName(a.store_name).localeCompare(formatStoreName(b.store_name)));
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+      <div className="min-h-screen bg-gray-50 py-12 mt-28">
+
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 py-12">
+        <div className="max-w-5xl mx-auto p-6">
+          <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-lg">
+            <p className="text-red-700">{error}</p>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div key={`vendor-${Math.floor(Math.random() * 105560)}`} className="relative w-full max-w-6xl mx-auto px-4 overflow-hidden">
-      {/* Header Section */}
-      <h2 className="flex items-center justify-center text-xl font-bold mb-6 text-center">
-        <div className="border-t border-primary w-1/4" />
-        <span className="mx-4 flex items-center gap-2 text-primary text-2xl">Les Domaines & Vignerons</span>
-        <div className="border-t border-primary w-1/4" />
-      </h2>
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-5xl mx-auto p-6">
+        <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">Nos vignerons partenaires</h1>
 
-      <br />
-      {/* Slider Section */}
-      <div className="relative perspective-1000">
-        <div className="relative flex h-[380px] overflow-x-scroll scrollbar-hidden justify-center">
-          {vendors.map((vendor, index) => {
-            const isActive = index === activeIndex;
-            const offset = index - activeIndex;
-            const translateX = offset * 10;
-            const translateZ = isActive ? 0 : -100 - Math.abs(offset) * 50;
-            const rotateY = offset * 15;
-            const opacity = Math.max(1 - Math.abs(offset) * 0.3, 0);
-            const scale = isActive ? 1 : 0.85;
-            const zIndex = vendors.length - Math.abs(offset);
-
-            return (
-              <div
-                key={vendor.store_name}
-                className="relative w-80 h-[320px] flex cursor-pointer transform-gpu"
-                style={{
-                  transform: `translateX(${translateX}%) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
-                  opacity,
-                  zIndex,
-                  transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-                  marginLeft: index === 0 ? '0' : '-2rem',
-                }}
-                onClick={() => setActiveIndex(index)}
-              >
-                <div
-                  className={`flex w-full h-full rounded-2xl shadow-xl overflow-hidden
-                           bg-gradient-to-r from-primary to-orange-800
-                           hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 mx-auto
-                           border border-white/10`}
-                >
-                  <div className="p-6 h-full w-full flex flex-row justify-between">
-                    {/* Left side - Photo, Name, Region, Wine Count */}
-                    <div className="flex flex-col space-y-4">
-                      <div className="w-24 h-24 bg-gray-200 rounded-full overflow-hidden border-2 border-white/20 shadow-lg transform hover:scale-105 transition-all duration-300">
-                        <img
-                          src={vendor.vendor_image || '/images/meme-pas-contente.png'}
-                          alt={formatStoreName(vendor.store_name)}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-
-                      <div className="flex flex-col space-y-3">
-                        <h3 className="text-sm font-bold text-white">
-                          {formatStoreName(vendor.store_name)}
-                        </h3>
-
-                        {vendor.region__pays && (
-                          <div className="flex items-center text-white/90 text-sm gap-1.5">
-                            <MapPin className="w-4 h-4" />
-                            <span>{formatRegion(vendor.region__pays)}</span>
-                          </div>
-                        )}
-
-                        <div className="flex items-center text-white text-sm gap-1.5">
-                          <Grape className="w-4 h-4" />
-                            {vendor.certifications.biodynamie > 0 ? (
-                              <Image width={40} height={40} src='/images/déméter.png' alt='Logo Démeter' />
-                            ) : vendor.certifications.bio > 0 ? (
-                              <Image width={20} height={10} src='/images/logobio1.webp' alt='Logo Bio' />
-                            ) : vendor.certifications.conversion > 0 ? (
-                              'En conversion 🔄'
-                            ) : (
-                              'Traditionnel'
-                            )}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Right side - Product Photos */}
-                    <div className="flex flex-col items-center space-y-3">
-                      {vendor.products.slice(0, 3).map((product, idx) => (
-                        <div
-                          key={idx}
-                          className="w-16 h-16 bg-gradient-to-r from-white/5 to-white/10 rounded-full overflow-hidden border-2 border-white/20 shadow-md transform hover:scale-110 transition-all duration-300 hover:bg-accent"
-                        >
-                          <img
-                            src={Array.isArray(product.images) && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
-                            alt={product.name}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* View More Button */}
-                  <Link href={`/vendor/${vendor.id}`} passHref>
-                    <button className="absolute bottom-4 right-4 bg-transparent text-white font-bold py-2 px-4 rounded-md shadow-lg transition-transform duration-300 transform hover:scale-105">
-                      Voir plus
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Navigation Buttons */}
-        <button
-          className="absolute top-1/2 -translate-y-1/2 left-4 z-10 p-2 rounded-full bg-white shadow-lg hover:bg-gray-100 transition"
-          onClick={prevSlide}
-        >
-          <ChevronLeft className="w-5 h-5 text-primary" />
-        </button>
-        <button
-          className="absolute top-1/2 -translate-y-1/2 right-4 z-10 p-2 rounded-full bg-white shadow-lg hover:bg-gray-100 transition"
-          onClick={nextSlide}
-        >
-          <ChevronRight className="w-5 h-5 text-primary" />
-        </button>
-      </div>
-
-      <br />
-
-      <div>
-        <p className="text-center text-xl font-extrabold -mt-4 mb-4 slide-in-right text-teal-500">
+        <div>
+        <p className="text-center text-xl font-extrabold -mt-4 mb-4 slide-in-right text-primary">
           &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
         </p>
         {/* Bio Winemakers Description */}
-        <p className="text-center text-sm font-extrabold -mt-2 mb-16 slide-in-right">
+        <p className="text-center text-sm font-extrabold -mt-2 slide-in-right">
           Nos vignerons s&apos;engagent pour une agriculture respectueuse de l&apos;environnement,
           garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
           Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique.
           <div className='border-t-2 border-primary w-16 mt-4 flex mx-auto'></div> {/* Réduit la largeur de la bordure et l'espacement */}
         </p>
-        <br />
+        <br /><br />
       </div>
 
-      <br />
 
-      {/* Enhanced Winemakers List */}
-      <div className="mb-8 bg-slate-100 rounded-lg shadow-lg p-6 -mt-8">
-        <div className="flex flex-col space-y-4">
-          <p className='text-xl'><strong>Rechercher nos vignerons par régions</strong></p>
-          {/* Header and Expand Button */}
-          <div className="flex items-center justify-between">
-            <button
-              onClick={() => setIsListExpanded(!isListExpanded)}
-              className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-primary transition-colors"
-            >
-              {isListExpanded ? 'Réduire' : 'Voir tout'}
-              <ChevronDown className={`w-4 h-4 transform transition-transform ${isListExpanded ? 'rotate-180' : ''}`} />
-            </button>
+
+        {vendors.length === 0 ? (
+          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
+            <p className="text-yellow-700">Aucun vignerons trouvés.</p>
           </div>
-
-          {/* Search and Filter Controls */}
-          <div className="flex flex-wrap gap-4 items-center">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-              <input
-                type="text"
-                placeholder="ex: Bordeaux"
-                className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-            <div className="relative">
-              <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-              <select
-                className="pl-10 pr-4 py-2 border rounded-lg appearance-none bg-white focus:ring-2 focus:ring-primary focus:border-transparent"
-                value={selectedRegion}
-                onChange={(e) => setSelectedRegion(e.target.value)}
-              >
-                {regions.map(region => (
-                  <option key={region} value={region}>
-                    {region === 'all' ? 'Toutes les régions' : formatRegion(region)}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <video
-            src="/videos/minibanner.mp4"
-            width={1920}
-            height={400}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className={`hidden md:block w-full h-[78px] object-fit rounded-xl shadow-xl transition-all duration-300 ${isListExpanded ? 'block' : 'hidden'}`}
-          >
-            Your browser does not support the video tag.
-          </video>
-
-          <div key={`vendor-${Math.floor(Math.random() * 100)}`} className={`grid gap-4 transition-all duration-300 ${isListExpanded ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 md:grid-cols-2'}`}>
-            {filteredVendors.slice(0, isListExpanded ? undefined : 6).map(vendor => (
-              <Link href={`/vendor/${vendor.id}`} key={vendor.id} className="group">
-                <div className="flex items-center gap-4 p-4 rounded-lg border hover:shadow-md transition-all duration-300 hover:border-primary bg-gradient-to-br from-gray-50 to-white">
-                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200 group-hover:border-primary transition-colors">
-                    <Image
-                      src={vendor.vendor_image || '/images/meme-pas-contente.png'}
-                      alt={vendor.store_name}
-                      width={64}
-                      height={64}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-bold text-gray-900 group-hover:text-primary transition-colors">
-                      {formatStoreName(vendor.store_name)}
-                    </h4>
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <MapPin className="w-4 h-4" />
-                      <span>{vendor.region__pays.toUpperCase()}</span>
+        ) : (
+          <div className="space-y-6">
+            {vendors.map((vendor: { id: string; shop: { display_name: string; image?: string; banner?: string; title?: string }; name?: string; description?: string; social?: Record<string, string>; products?: { id: string; name: string; description: string; price: number }[] }) => {
+              const avatar = vendor.shop?.image || vendor.shop?.banner;
+              return (
+                <div
+                  key={vendor.id}
+                  className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
+                >
+                  <div className="flex justify-between items-start">
+                    <div className="space-y-2 flex items-center">
+                      {avatar && (
+                        <Image
+                          src={avatar.startsWith('//') ? `https:${avatar}` : avatar}
+                          alt={vendor.shop?.title || 'Vendor Avatar'}
+                          className="w-16 h-16 rounded-full object-cover"
+                          width={64}
+                          height={64}
+                        />
+                      )}
+                      <div className="ml-4">
+                        <h2 className="text-2xl font-semibold text-gray-800">
+                          {vendor.shop?.title || 'Unknown Vendor'}
+                        </h2>
+                        <p className="text-gray-600 text-lg">{vendor.name || ''}</p>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Grape className="w-4 h-4" />
-                      <span>
-                        {vendor.certifications.biodynamie > 0 ? 'Biodynamie' :
-                         vendor.certifications.bio > 0 ? 'Bio' :
-                         vendor.certifications.conversion > 0 ? 'En conversion' : 'Traditionnel'}
-                      </span>
-                    </div>
+                    <Link
+                      href={`/vendors/${vendor.id}`}
+                      className="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors duration-200"
+                    >
+                      Voir plus →
+                    </Link>
                   </div>
+
+                  {vendor.description && (
+                    <p className="text-gray-600 mt-4 leading-relaxed">
+                      {vendor.description.substring(0, 150)}
+                      {vendor.description.length > 150 ? '...' : ''}
+                    </p>
+                  )}
+
+                  {vendor.products && vendor.products.length > 0 && (
+                    <div className="mt-6 pt-4 border-t border-gray-100">
+                      <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">Nos vignerons partenaires</h1>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+                        {vendor.products.map((product) => (
+                          <div key={product.id} className="bg-gray-100 p-4 rounded-lg shadow-sm">
+                            <h4 className="font-semibold text-gray-800">{product.name}</h4>
+                            <p className="text-gray-600">{product.description.substring(0, 80)}...</p>
+                            <p className="font-semibold text-gray-800">{product.price} €</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {vendor.social && Object.keys(vendor.social).length > 0 && (
+                    <div className="mt-6 pt-4 border-t border-gray-100">
+                      <div className="flex gap-4">
+                        {Object.entries(vendor.social).map(([platform, url]) => (
+                          url ? (
+                            <a
+                              key={platform}
+                              href={url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors duration-200"
+                            >
+                              {platform}
+                            </a>
+                          ) : null
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </Link>
-            ))}
+              );
+            })}
           </div>
-
-          {!isListExpanded && filteredVendors.length > 6 && (
-            <div className="text-center mt-4">
-              <button
-                onClick={() => setIsListExpanded(true)}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
-              >
-                Voir plus de vignerons
-                <ChevronDown className="w-4 h-4" />
-              </button>
-            </div>
-          )}
-        </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default VendorSlider;
+export default VendorsPage;

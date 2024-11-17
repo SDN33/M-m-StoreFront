@@ -40,7 +40,7 @@
     "pages/api/profile.js",
     "pages/api/register.js",
     "pages/api/reset-password.js"
-, "pages/api/cart.ts", "components/CartPopup.tsx", "app/checkout/page.jsx", "app/thank-you/page.tsx", "app/vendors/[id]/page.tsx"  ],
+, "pages/api/cart.ts", "components/CartPopup.tsx", "app/checkout/page.jsx", "app/thank-you/page.tsx", "app/vendors/[id]/page.tsx", "components/WineCategories.tsx"  ],
   "exclude": [
     "node_modules"
   ]
