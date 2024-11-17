@@ -72,7 +72,7 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="mx-auto px-8 mt-56 max-w-4xl">
+    <div className="mx-auto px-8 mt-48 max-w-4xl">
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2 bg-white rounded-lg p-8 px-4 py-4">
           <h2 className="text-2xl font-semibold mb-6">Adresse de livraison</h2>
@@ -99,11 +99,11 @@ const CheckoutPage = () => {
             ))}
           </ul>
           <div className="flex justify-between font-semibold text-lg mb-2">
-            <span>Sous-total :</span>
+            <span>Sous-total</span>
             <span>{(cartDetails.total).toFixed(2)}€</span>
           </div>
           <div className="flex justify-between font-semibold text-lg mb-2">
-            <span>Livraison 24H : <Image className='flex' src="/images/boxtal.png" alt="Chronopost" width="60" height="10" /></span>
+            <span>Livraison standard <span className='text-xs'>(3-5 jours)</span> <Image className='flex' src="/images/boxtal.png" alt="Chronopost" width="60" height="10" /></span>
 
             <span>10.00€</span>
           </div>
@@ -111,7 +111,7 @@ const CheckoutPage = () => {
 
             {selectedPoint && (
               <div>
-                <h2>Selected Point Details</h2>
+                <h2>Point de retrait sélectionné :</h2>
                 <pre>{JSON.stringify(selectedPoint, null, 2)}</pre>
               </div>
             )}
