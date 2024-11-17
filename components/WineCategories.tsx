@@ -50,37 +50,6 @@ const VendorsPage = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <div className="max-w-5xl mx-auto p-6">
-          <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">Nos vignerons partenaires</h1>
-          <div className="space-y-6">
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <div className="flex justify-between items-start">
-                  <div className="space-y-2 flex items-center">
-                    <div className="w-16 h-16 rounded-full bg-gray-200 animate-pulse"></div>
-                    <div className="ml-4 space-y-2">
-                      <div className="h-7 bg-gray-200 rounded w-48 animate-pulse"></div>
-                      <div className="h-5 bg-gray-200 rounded w-32 animate-pulse"></div>
-                    </div>
-                  </div>
-                  <div className="w-24 h-10 bg-gray-200 rounded-lg animate-pulse"></div>
-                </div>
-                <div className="mt-4 space-y-2">
-                  <div className="h-4 bg-gray-200 rounded w-full animate-pulse"></div>
-                  <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse"></div>
-                  <div className="h-4 bg-gray-200 rounded w-1/2 animate-pulse"></div>
-                </div>
-                <div className="mt-6 pt-4 border-t border-gray-100">
-                  <div className="flex gap-4">
-                    {[...Array(3)].map((_, i) => (
-                      <div key={i} className="w-16 h-7 bg-gray-200 rounded-full animate-pulse"></div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     );
   }
@@ -124,7 +93,7 @@ const VendorsPage = () => {
           </div>
         ) : (
           <div className="space-y-6">
-            {vendors.map((vendor: { id: string; shop: { display_name: string; image?: string; banner?: string; title?: string }; name?: string; description?: string; social?: Record<string, string>; products?: { id: string; name: string; description: string; price: number }[] }) => {
+            {vendors.map((vendor: { id: string; shop: { display_name: string; image?: string; banner?: string; title?: string; description?: string }; name?: string; description?: string; address?: {city?: string;}; social?: Record<string, string>; products?: { id: string; name: string; description: string; price: number }[] }) => {
               const avatar = vendor.shop?.image || vendor.shop?.banner;
               return (
                 <div
@@ -146,7 +115,6 @@ const VendorsPage = () => {
                         <h2 className="text-2xl font-semibold text-gray-800">
                           {vendor.shop?.title || 'Unknown Vendor'}
                         </h2>
-                        <p className="text-gray-600 text-lg">{vendor.description || 'null'}</p>
                       </div>
                     </div>
                     <Link
@@ -157,10 +125,9 @@ const VendorsPage = () => {
                     </Link>
                   </div>
 
-                  {vendor.description && (
-                    <p className="text-gray-600 mt-4 leading-relaxed">
-                      {vendor.description.substring(0, 150)}
-                      {vendor.description.length > 150 ? '...' : ''}
+                  {vendor.shop?.description && (
+                    <p className="text-gray-600 mt-2">
+                      {vendor.shop.description}
                     </p>
                   )}
 
