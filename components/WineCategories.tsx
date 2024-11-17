@@ -3,36 +3,99 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { MapPin, Facebook, Instagram, Twitter, Linkedin, Youtube, Globe } from 'lucide-react';
 
 const VendorsPage = () => {
-  const [vendors, setVendors] = useState([]);
+  interface Vendor {
+    id: string;
+    shop: {
+      display_name: string;
+      image?: string;
+      banner?: string;
+      title?: string;
+      description?: string;
+    };
+    name?: string;
+    description?: string;
+    address?: {
+      city?: string;
+    };
+    social?: Record<string, string>;
+    products?: {
+      id: string;
+      name: string;
+      description: string;
+      price: number;
+    }[];
+  }
+
+  const [vendors, setVendors] = useState<Vendor[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  const getSocialIcon = (platform: string) => {
+    const iconProps = {
+      size: 20,
+      className: "text-gray-600"
+    };
+
+    switch (platform.toLowerCase()) {
+      case 'facebook':
+        return <Facebook {...iconProps} />;
+      case 'instagram':
+        return <Instagram {...iconProps} />;
+      case 'twitter':
+        return <Twitter {...iconProps} />;
+      case 'linkedin':
+        return <Linkedin {...iconProps} />;
+      case 'youtube':
+        return <Youtube {...iconProps} />;
+      default:
+        return <Globe {...iconProps} />;
+    }
+  }
+
   useEffect(() => {
-    const fetchVendorsAndProducts = async () => {
+    const fetchVendors = async () => {
       try {
-        // Fetch vendors
-        const vendorResponse = await fetch('/api/get-vendor');
-        if (!vendorResponse.ok) {
-          throw new Error(`Error fetching vendors: ${vendorResponse.status}`);
+        const response = await fetch('/api/get-vendor');
+        if (!response.ok) {
+          throw new Error(`Error fetching vendors: ${response.status}`);
         }
-        const vendorData = await vendorResponse.json();
+        const data = await response.json();
+        return data;
+      } catch {
+        throw new Error('Failed to fetch vendors');
+      }
+    };
 
-        // Fetch products
-        const productResponse = await fetch('/api/products');
-        if (!productResponse.ok) {
-          throw new Error(`Error fetching products: ${productResponse.status}`);
+    const fetchProductsForVendor = async (displayName: string) => {
+      try {
+        const response = await fetch(`/api/products?store_name=${encodeURIComponent(displayName)}`);
+        if (!response.ok) {
+          throw new Error(`Error fetching products: ${response.status}`);
         }
-        const productData = await productResponse.json();
+        const products = await response.json();
+        return products.filter((product: { store_name: string }) =>
+          product.store_name === displayName
+        );
+      } catch (error) {
+        console.error(`Error fetching products for ${displayName}:`, error);
+        return [];
+      }
+    };
 
-        // Associate products with vendors
-        const vendorsWithProducts = vendorData.map((vendor: { id: string; shop: { display_name: string; image?: string; banner?: string; title?: string }; name?: string; description?: string; social?: Record<string, string> }) => {
-          const vendorProducts = productData.filter(
-            (product: { store_name: string }) => product.store_name === vendor.shop.display_name
-          );
-          return { ...vendor, products: vendorProducts };
-        });
+    const fetchAllData = async () => {
+      try {
+        const vendorData = await fetchVendors();
+
+        // Fetch products for each vendor
+        const vendorsWithProducts = await Promise.all(
+          vendorData.map(async (vendor: { shop: { display_name: string } }) => {
+            const products = await fetchProductsForVendor(vendor.shop.display_name);
+            return { ...vendor, products };
+          })
+        );
 
         setVendors(vendorsWithProducts);
         setError('');
@@ -44,12 +107,13 @@ const VendorsPage = () => {
       }
     };
 
-    fetchVendorsAndProducts();
+    fetchAllData();
   }, []);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-primary border-opacity-75"></div>
       </div>
     );
   }
@@ -72,20 +136,18 @@ const VendorsPage = () => {
         <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">Nos vignerons partenaires</h1>
 
         <div>
-        <p className="text-center text-xl font-extrabold -mt-4 mb-4 slide-in-right text-primary">
-          &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
-        </p>
-        {/* Bio Winemakers Description */}
-        <p className="text-center text-sm font-extrabold -mt-2 slide-in-right">
-          Nos vignerons s&apos;engagent pour une agriculture respectueuse de l&apos;environnement,
-          garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
-          Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique.
-          <div className='border-t-2 border-primary w-16 mt-4 flex mx-auto'></div> {/* Réduit la largeur de la bordure et l'espacement */}
-        </p>
-        <br /><br />
-      </div>
-
-
+          <p className="text-center text-xl font-extrabold -mt-4 mb-4 slide-in-right text-primary">
+            &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
+          </p>
+          <p className="text-center text-sm font-extrabold -mt-2 slide-in-right">
+            Nos vignerons s&apos;engagent pour une agriculture respectueuse de l&apos;environnement,
+            garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
+            Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique.
+          </p>
+          <div className='border-t-2 border-primary w-16 mt-4 flex mx-auto'></div>
+          <br /><br />
+        </div>
+        
 
         {vendors.length === 0 ? (
           <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
@@ -115,11 +177,16 @@ const VendorsPage = () => {
                         <h2 className="text-2xl font-semibold text-gray-800">
                           {vendor.shop?.title || 'Unknown Vendor'}
                         </h2>
+                        {vendor.address?.city && (
+                          <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full flex items-center">
+                            <MapPin className="w-4 h-4 mr-1"/>{vendor.address.city}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <Link
                       href={`/vendors/${vendor.id}`}
-                      className="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors duration-200"
+                      className="inline-flex items-center px-4 py-2 bg-blue-50 text-teal-800 rounded-lg hover:bg-blue-100 transition-colors duration-200"
                     >
                       Voir plus →
                     </Link>
@@ -156,9 +223,9 @@ const VendorsPage = () => {
                               href={url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors duration-200"
+                              className="px-3 py-1 text-sm bg-gray-100 text-primary rounded-full hover:bg-gray-200 transition-colors duration-200"
                             >
-                              {platform}
+                              {getSocialIcon(platform)}
                             </a>
                           ) : null
                         ))}

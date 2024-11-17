@@ -3,12 +3,34 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { MapPin, Facebook, Instagram, Twitter, Linkedin, Youtube, Globe } from 'lucide-react';
 
 const VendorsPage = () => {
   const [vendors, setVendors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  const getSocialIcon = (platform: string) => {
+    const iconProps = {
+      size: 20,
+      className: "text-gray-600"
+    };
+
+    switch (platform.toLowerCase()) {
+      case 'facebook':
+        return <Facebook {...iconProps} />;
+      case 'instagram':
+        return <Instagram {...iconProps} />;
+      case 'twitter':
+        return <Twitter {...iconProps} />;
+      case 'linkedin':
+        return <Linkedin {...iconProps} />;
+      case 'youtube':
+        return <Youtube {...iconProps} />;
+      default:
+        return <Globe {...iconProps} />;
+    }
+  }
   useEffect(() => {
     const fetchVendorsAndProducts = async () => {
       try {
@@ -49,41 +71,12 @@ const VendorsPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 mt-48">
-        <div className="max-w-5xl mx-auto p-6">
-          <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">Nos vignerons partenaires</h1>
-          <div className="space-y-6">
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <div className="flex justify-between items-start">
-                  <div className="space-y-2 flex items-center">
-                    <div className="w-16 h-16 rounded-full bg-gray-200 animate-pulse"></div>
-                    <div className="ml-4 space-y-2">
-                      <div className="h-7 bg-gray-200 rounded w-48 animate-pulse"></div>
-                      <div className="h-5 bg-gray-200 rounded w-32 animate-pulse"></div>
-                    </div>
-                  </div>
-                  <div className="w-24 h-10 bg-gray-200 rounded-lg animate-pulse"></div>
-                </div>
-                <div className="mt-4 space-y-2">
-                  <div className="h-4 bg-gray-200 rounded w-full animate-pulse"></div>
-                  <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse"></div>
-                  <div className="h-4 bg-gray-200 rounded w-1/2 animate-pulse"></div>
-                </div>
-                <div className="mt-6 pt-4 border-t border-gray-100">
-                  <div className="flex gap-4">
-                    {[...Array(3)].map((_, i) => (
-                      <div key={i} className="w-16 h-7 bg-gray-200 rounded-full animate-pulse"></div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-primary border-opacity-75"></div>
       </div>
     );
   }
+
 
   if (error) {
     return (
@@ -98,23 +91,23 @@ const VendorsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 mt-48">
+    <div className="min-h-screen bg-gray-50 mt-44">
       <div className="max-w-5xl mx-auto p-6">
         <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">Nos vignerons partenaires</h1>
 
         <div>
-        <p className="text-center text-xl font-extrabold -mt-4 mb-4 slide-in-right text-primary">
-          &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
-        </p>
-        {/* Bio Winemakers Description */}
-        <p className="text-center text-sm font-extrabold -mt-2 slide-in-right">
-          Nos vignerons s&apos;engagent pour une agriculture respectueuse de l&apos;environnement,
-          garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
-          Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique.
-          <div className='border-t-2 border-primary w-16 mt-4 flex mx-auto'></div> {/* Réduit la largeur de la bordure et l'espacement */}
-        </p>
-        <br /><br />
-      </div>
+          <p className="text-center text-xl font-extrabold -mt-4 mb-4 slide-in-right text-primary">
+            &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
+          </p>
+          <p className="text-center text-sm font-extrabold -mt-2 slide-in-right">
+            Nos vignerons s&apos;engagent pour une agriculture respectueuse de l&apos;environnement,
+            garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
+            Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique.
+          </p>
+          <div className='border-t-2 border-primary w-16 mt-4 flex mx-auto'></div>
+          <br /><br />
+        </div>
+        
 
 
 
@@ -124,7 +117,7 @@ const VendorsPage = () => {
           </div>
         ) : (
           <div className="space-y-6">
-            {vendors.map((vendor: { id: string; shop: { display_name: string; image?: string; banner?: string; title?: string }; name?: string; description?: string; social?: Record<string, string>; products?: { id: string; name: string; description: string; price: number }[] }) => {
+            {vendors.map((vendor: { id: string; shop: { display_name: string; image?: string; banner?: string; title?: string; description?: string }; name?: string; description?: string; address?: {city?: string;}; social?: Record<string, string>; products?: { id: string; name: string; description: string; price: number }[] }) => {
               const avatar = vendor.shop?.image || vendor.shop?.banner;
               return (
                 <div
@@ -146,21 +139,24 @@ const VendorsPage = () => {
                         <h2 className="text-2xl font-semibold text-gray-800">
                           {vendor.shop?.title || 'Unknown Vendor'}
                         </h2>
-                        <p className="text-gray-600 text-lg">{vendor.name || 'Anonymous'}</p>
+                        {vendor.address?.city && (
+                            <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full flex items-center">
+                            <MapPin className="w-4 h-4 mr-1"/>{vendor.address.city}
+                            </span>
+                        )}
                       </div>
                     </div>
                     <Link
                       href={`/vendors/${vendor.id}`}
-                      className="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors duration-200"
+                      className="inline-flex items-center px-4 py-2 bg-blue-50 text-teal-800 rounded-lg hover:bg-blue-100 transition-colors duration-200"
                     >
                       Voir plus →
                     </Link>
                   </div>
 
-                  {vendor.description && (
-                    <p className="text-gray-600 mt-4 leading-relaxed">
-                      {vendor.description.substring(0, 150)}
-                      {vendor.description.length > 150 ? '...' : ''}
+                  {vendor.shop?.description && (
+                    <p className="text-gray-600 mt-2">
+                      {vendor.shop.description}
                     </p>
                   )}
 
@@ -189,9 +185,9 @@ const VendorsPage = () => {
                               href={url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors duration-200"
+                              className="px-3 py-1 text-sm bg-gray-100 text-primary rounded-full hover:bg-gray-200 transition-colors duration-200"
                             >
-                              {platform}
+                             {getSocialIcon(platform)}
                             </a>
                           ) : null
                         ))}
