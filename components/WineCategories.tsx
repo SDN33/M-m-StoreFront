@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const VendorsPage = () => {
-  const [vendors, setVendors] = useState([]);
+  const [vendors, setVendors] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -26,11 +26,10 @@ const VendorsPage = () => {
         }
         const productData = await productResponse.json();
 
-        // Associate products with vendors
+        // Associate products with vendors by matching `store_name` with `display_name`
         const vendorsWithProducts = vendorData.map((vendor: { id: string; shop: { display_name: string; image?: string; banner?: string; title?: string }; name?: string; description?: string; social?: Record<string, string> }) => {
-          const vendorProducts = productData.filter(
-            (product: { store_name: string }) => product.store_name === vendor.shop.display_name
-          );
+          // Filter products for the current vendor by matching the display_name with store_name
+          const vendorProducts = productData.filter((product: { store_name: string }) => product.store_name === vendor.shop.display_name);
           return { ...vendor, products: vendorProducts };
         });
 
@@ -50,7 +49,7 @@ const VendorsPage = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 py-12 mt-28">
-
+        Loading...
       </div>
     );
   }
@@ -68,25 +67,21 @@ const VendorsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 -mb-52">
       <div className="max-w-5xl mx-auto p-6">
         <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">Nos vignerons partenaires</h1>
 
-        <div>
         <p className="text-center text-xl font-extrabold -mt-4 mb-4 slide-in-right text-primary">
           &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
         </p>
-        {/* Bio Winemakers Description */}
+
         <p className="text-center text-sm font-extrabold -mt-2 slide-in-right">
           Nos vignerons s&apos;engagent pour une agriculture respectueuse de l&apos;environnement,
           garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
           Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique.
-          <div className='border-t-2 border-primary w-16 mt-4 flex mx-auto'></div> {/* Réduit la largeur de la bordure et l'espacement */}
         </p>
-        <br /><br />
-      </div>
 
-
+        <div className='border-t-2 border-primary w-16 mt-4 flex mx-auto'></div>
 
         {vendors.length === 0 ? (
           <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
@@ -94,7 +89,7 @@ const VendorsPage = () => {
           </div>
         ) : (
           <div className="space-y-6">
-            {vendors.map((vendor: { id: string; shop: { display_name: string; image?: string; banner?: string; title?: string }; name?: string; description?: string; social?: Record<string, string>; products?: { id: string; name: string; description: string; price: number }[] }) => {
+            {vendors.map((vendor) => {
               const avatar = vendor.shop?.image || vendor.shop?.banner;
               return (
                 <div
@@ -136,34 +131,14 @@ const VendorsPage = () => {
 
                   {vendor.products && vendor.products.length > 0 && (
                     <div className="mt-6 pt-4 border-t border-gray-100">
-                      <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">Nos vignerons partenaires</h1>
+                      <h1 className="text-4xl font-bold mb-8 text-gray-800 text-center">Nos produits</h1>
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-                        {vendor.products.map((product) => (
+                        {vendor.products.map((product: { id: string; name: string; description: string; price: number }) => (
                           <div key={product.id} className="bg-gray-100 p-4 rounded-lg shadow-sm">
                             <h4 className="font-semibold text-gray-800">{product.name}</h4>
                             <p className="text-gray-600">{product.description.substring(0, 80)}...</p>
                             <p className="font-semibold text-gray-800">{product.price} €</p>
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {vendor.social && Object.keys(vendor.social).length > 0 && (
-                    <div className="mt-6 pt-4 border-t border-gray-100">
-                      <div className="flex gap-4">
-                        {Object.entries(vendor.social).map(([platform, url]) => (
-                          url ? (
-                            <a
-                              key={platform}
-                              href={url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors duration-200"
-                            >
-                              {platform}
-                            </a>
-                          ) : null
                         ))}
                       </div>
                     </div>

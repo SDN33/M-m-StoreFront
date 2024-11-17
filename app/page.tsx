@@ -181,8 +181,8 @@ export default function Home() {
                 </section>
               </div>
 
-              <HeroBanner />
               <WineCategories />
+              <HeroBanner />
               <Livraison />
               <div className="py-8" />
               <Trust />
