@@ -148,7 +148,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl">
         <button
           onClick={resetFilters}
-          className="w-full py-3 text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-teal-600 via-teal-500 to-teal-700 hover:from-teal-700 hover:to-teal-800 transition-all duration-300 ease-in-out transform hover:scale-[1.01] active:scale-[0.99] rounded-t-xl"
+          className="w-full py-3 text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-teal-700 via-teal-600 to-teal-800 hover:from-teal-700 hover:to-teal-900 transition-all duration-300 ease-in-out transform hover:scale-[1.01] active:scale-[0.99] rounded-t-xl"
         >
           Réinitialiser les filtres
         </button>

@@ -12,7 +12,6 @@ interface Product {
   categories: { id: number; name: string }[];
   certification?: string;
   images: { src: string }[];
-  vendor?: { vendorPhotoUrl?: string; name?: string };
   store_name?: string;
   nom_chateau?: string;
   appelation?: string;
@@ -26,6 +25,7 @@ interface Product {
   short_description?: string;
   description?: string;
   rating?: number;
+  vendor: number;
 }
 
 interface ProductCardProps {
@@ -43,6 +43,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const handleRedirect = () => {
     router.push(`/product/${product.id}`);
   };
+
+  const vendorRedirect = () => {
+    router.push(`/vendors/${product.vendor}`);
+  }
 
   const formatRating = (rating?: number, ratingCount?: number) => {
     if (!rating || !ratingCount || ratingCount === 0) return <span className='text-xs'>Non noté</span>;
@@ -164,7 +168,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
               }}
             />
           </div>
-          <p className='text-teal-800 font-semibold text-xs'>{product.store_name}<span className='text-xs font-semibold text-gray-800 flex items-center'><MapPin className="w-3 h-3 mr-1" />{product.region__pays ? product.region__pays.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : ''}</span></p>
+          <p className='text-teal-800 font-semibold text-xs cursor-pointer' onClick={vendorRedirect} >{product.store_name}<span className='text-xs font-semibold text-gray-800 flex items-center'><MapPin className="w-3 h-3 mr-1" />{product.region__pays ? product.region__pays.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : ''}</span></p>
         </div>
 
         <div className="flex justify-between items-center mb-2">

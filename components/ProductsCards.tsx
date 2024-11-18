@@ -16,6 +16,7 @@ interface Product {
   volume: string;
   style?: string;
   accord_mets?: string[];
+  vendor: number;
 }
 
 interface ProductsCardsProps {
