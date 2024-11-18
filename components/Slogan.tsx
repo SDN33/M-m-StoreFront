@@ -1,13 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState} from 'react';
 import Image from 'next/image';
 
 const Slogan: React.FC = () => {
   const h2Ref = useRef<HTMLHeadingElement | null>(null);
-  const engagementRefs = [
-    useRef<HTMLDivElement | null>(null),
-    useRef<HTMLDivElement | null>(null),
-    useRef<HTMLDivElement | null>(null),
-  ];
+  const engagementRefs: React.RefObject<HTMLDivElement>[] = [useRef<HTMLDivElement | null>(null), useRef<HTMLDivElement | null>(null), useRef<HTMLDivElement | null>(null)];
   const [isVisible, setIsVisible] = useState(false);
   const [cardsVisible, setCardsVisible] = useState([false, false, false]);
 
@@ -33,7 +29,7 @@ const Slogan: React.FC = () => {
         observer.unobserve(currentH2Ref);
       }
     };
-  }, []);
+  }, [engagementRefs]);
 
   useEffect(() => {
     const cardObserver = new IntersectionObserver(
@@ -60,7 +56,7 @@ const Slogan: React.FC = () => {
         if (ref.current) cardObserver.unobserve(ref.current);
       });
     };
-  }, []);
+  }, [engagementRefs]);
 
   return (
     <div
@@ -105,7 +101,7 @@ const Slogan: React.FC = () => {
           className="object-cover absolute right-0 bottom-0"
           width={200}
           height={100}
-          loading='lazy'
+          loading="lazy"
         />
       </div>
 
@@ -114,7 +110,7 @@ const Slogan: React.FC = () => {
           ref={h2Ref}
           className={`text-3xl md:text-4xl leading-tight font-black mb-2 transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
-          }`}
+            } md:transition-none`}
         >
           Avec Mémé Georgette, c&apos;est simple... <br />
           <span className="sloganhero font-light text-sm md:text-xl">
@@ -122,21 +118,19 @@ const Slogan: React.FC = () => {
           </span>
         </h2>
 
-        <div className="flex flex-col md:flex-row justify-around items-center mt-10 space-y-6 md:space-y-0 md:space-x-4">
+        <div className="flex flex-col sm:flex-row justify-center items-center mt-10 space-y-6 sm:space-y-0 sm:space-x-4">
           {['Notre Engagement', 'Circuit Court', 'Éco-Responsable'].map((title, index) => (
             <div
               key={index}
               ref={engagementRefs[index]}
-              className={`relative w-full md:w-1/3 transition-all duration-700 ${
-                cardsVisible[index]
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-10'
-              }`}
+              className={`relative w-full sm:w-1/3 transition-all duration-700 ${
+                cardsVisible[index] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              } ${index === 0 ? 'md:transition-none' : ''}`}
               style={{ transitionDelay: `${index * 200}ms` }}
             >
-              <div className="bg-white/95 backdrop-blur-sm text-gray-800 rounded-xl p-4 md:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
-                <h3 className="font-bold text-md md:text-lg" style={{ color: '#FF6B4A' }}>{title}</h3>
-                <p className="text-xs md:text-sm">
+              <div className="bg-white/95 backdrop-blur-sm text-gray-800 rounded-xl p-4 sm:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
+                <h3 className="font-bold text-md sm:text-lg" style={{ color: '#FF6B4A' }}>{title}</h3>
+                <p className="text-xs sm:text-sm">
                   {index === 0
                     ? 'Nous travaillons main dans la main avec des producteurs locaux pour offrir des vins de qualité.'
                     : index === 1
@@ -147,7 +141,7 @@ const Slogan: React.FC = () => {
               <div
                 className={`absolute ${
                   index === 0 ? '-top-3 -right-3' : index === 1 ? '-top-3 -left-3' : '-bottom-3 -right-3'
-                } w-8 h-8 md:w-10 md:h-10 rounded-full shadow-lg`}
+                } w-8 h-8 sm:w-10 sm:h-10 rounded-full shadow-lg`}
                 style={{
                   backgroundColor: index === 1
                     ? '#ff8568'

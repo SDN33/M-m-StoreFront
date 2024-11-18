@@ -187,7 +187,7 @@ const VendorsPage = () => {
                     </div>
                     <Link
                       href={`/vendors/${vendor.id}`}
-                      className="inline-flex items-center px-4 py-2 bg-blue-50 text-teal-800 rounded-lg hover:bg-blue-100 transition-colors duration-200"
+                      className="inline-flex items-center text-xs px-4 py-2 bg-blue-50 text-teal-800 rounded-lg hover:bg-blue-100 transition-colors duration-200"
                     >
                       Voir plus →
                     </Link>

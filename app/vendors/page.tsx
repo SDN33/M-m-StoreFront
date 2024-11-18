@@ -150,7 +150,7 @@ const VendorsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 mt-40">
+    <div className="min-h-screen bg-gray-50 mt-32 md:mt-40">
       <div className="max-w-5xl mx-auto p-6">
         <Image src="/images/vignerons.png" alt="Vineyard" width={1920} height={1080} className="rounded-lg mb-8" />
 
@@ -227,7 +227,7 @@ const VendorsPage = () => {
                   </div>
                   <Link
                     href={`/vendors/${vendor.id}`}
-                    className="inline-flex items-center px-4 py-2 bg-blue-50 text-teal-800 rounded-lg hover:bg-blue-100 transition-colors duration-200"
+                    className="inline-flex items-center text-xs px-4 py-2 bg-blue-50 bg-opacity-30 text-teal-800 rounded-lg hover:bg-blue-100 transition-colors duration-200"
                   >
                     Voir plus →
                   </Link>

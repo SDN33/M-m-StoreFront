@@ -1,4 +1,3 @@
-//path: pages/api/get-vendor.ts
 import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -9,14 +8,14 @@ type Vendor = {
   description: string;
   social: Record<string, string>;
   shop: {
-  picture: string;
-  banner: string;
+    picture: string;
+    banner: string;
   };
-  adress: {
+  address: {
     city: string;
     postcode: string;
   };
-  // Add more properties as needed
+  // Ajoutez d'autres propriétés si nécessaire
 };
 
 type ErrorResponse = {
@@ -25,54 +24,63 @@ type ErrorResponse = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Vendor[] | ErrorResponse>
+  res: NextApiResponse<Vendor[] | Vendor | ErrorResponse>
 ) {
+  // Vérification des variables d'environnement
+  const { WC_API_DOMAIN, WC_CONSUMER_KEY, WC_CONSUMER_SECRET } = process.env;
+  if (!WC_API_DOMAIN || !WC_CONSUMER_KEY || !WC_CONSUMER_SECRET) {
+    return res.status(500).json({ message: 'Missing WooCommerce API credentials in environment variables' });
+  }
+
   try {
     if (req.method === 'POST') {
       const { id } = req.body;
 
-      if (id) {
-        const response = await axios.get(`${process.env.WC_API_DOMAIN}/wp-json/mvx/v1/vendors/${id}`, {
-          headers: {
-            'Authorization': `Basic ${Buffer.from(`${process.env.WC_CONSUMER_KEY}:${process.env.WC_CONSUMER_SECRET}`).toString('base64')}`
-          }
-        });
-
-        if (response.status !== 200) {
-          return res.status(response.status).json({ message: 'Failed to fetch vendors' });
-        }
-
-        const vendors: Vendor[] = Array.isArray(response.data) ? response.data : [response.data];
-        res.status(200).json(vendors);
-      } else {
-        res.status(302).json({ message: 'ID not Found' });
+      if (!id) {
+        return res.status(400).json({ message: 'Vendor ID is required' });
       }
-    } else {
 
-      const response = await axios.get(`${process.env.WC_API_DOMAIN}/wp-json/mvx/v1/vendors`, {
+      // Requête pour un vendeur spécifique
+      const response = await axios.get(`${WC_API_DOMAIN}/wp-json/mvx/v1/vendors/${id}`, {
         headers: {
-          'Authorization': `Basic ${Buffer.from(`${process.env.WC_CONSUMER_KEY}:${process.env.WC_CONSUMER_SECRET}`).toString('base64')}`
+          Authorization: `Basic ${Buffer.from(`${WC_CONSUMER_KEY}:${WC_CONSUMER_SECRET}`).toString('base64')}`
         }
       });
 
-      if (response.status !== 200) {
-        return res.status(response.status).json({ message: 'Failed to fetch vendors' });
-      }
-
-      res.status(200).json(response.data);
-    }
-  } catch (error: unknown) {
-    console.error('Error fetching vendors:', (error as Error).message);
-    if (axios.isAxiosError(error)) {
-      if (error.response) {
-        res.status(error.response.status).json({ message: error.response.data.message || 'Error fetching vendors' });
-      } else if (error.request) {
-        res.status(500).json({ message: 'No response from server' });
+      if (response.status === 200) {
+        return res.status(200).json(response.data);
       } else {
-        res.status(500).json({ message: 'Server error' });
+        return res.status(response.status).json({ message: response.data.message || 'Failed to fetch vendor data' });
+      }
+    } else if (req.method === 'GET') {
+      // Requête pour tous les vendeurs
+      const response = await axios.get(`${WC_API_DOMAIN}/wp-json/mvx/v1/vendors`, {
+        headers: {
+          Authorization: `Basic ${Buffer.from(`${WC_CONSUMER_KEY}:${WC_CONSUMER_SECRET}`).toString('base64')}`
+        }
+      });
+
+      if (response.status === 200) {
+        return res.status(200).json(response.data);
+      } else {
+        return res.status(response.status).json({ message: response.data.message || 'Failed to fetch vendors' });
       }
     } else {
-      res.status(500).json({ message: 'Unexpected error' });
+      res.setHeader('Allow', ['GET', 'POST']);
+      return res.status(405).json({ message: `Method ${req.method} not allowed` });
     }
+  } catch (error: unknown) {
+    console.error('Error fetching vendors:', error);
+
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        return res
+          .status(error.response.status)
+          .json({ message: error.response.data.message || 'API error occurred' });
+      } else if (error.request) {
+        return res.status(500).json({ message: 'No response received from WooCommerce API' });
+      }
+    }
+    return res.status(500).json({ message: 'Unexpected server error occurred' });
   }
 }

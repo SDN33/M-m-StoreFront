@@ -68,7 +68,7 @@ const ProductsIntro: React.FC = () => {
         {/* Texte central avec compteur */}
         <div className="flex flex-col items-center mx-auto slide-in-right">
           <h1 className="text-base md:text-3xl font-extrabold text-primary tracking-tight text-center leading-tight">
-            <span className="font-['Orbitron'] text-2xl md:text-3xl">
+            <span className="text-4xl">
               {counter.toLocaleString()}
             </span>{' '}
             vins bio en direct des vignerons(nes)

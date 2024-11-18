@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronDown, ChevronUp, Wine, Locate, Calendar, Grape, Medal, Ruler, Utensils } from 'lucide-react';
 import Image from 'next/image';
 
@@ -16,6 +16,37 @@ interface ProductFilterProps {
   resetFilters: () => void;
   hideColorFilter?: boolean;
 }
+
+const AnimatedResetButton: React.FC<{ onClick: () => void; isScrolled: boolean }> = ({ onClick, isScrolled }) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        absolute
+        left-1/2
+        transform
+        -translate-x-1/2
+        transition-all
+        duration-500
+        ease-in-out
+        flex
+        items-center
+        justify-center
+        text-white
+        bg-gradient-to-r
+        from-teal-700
+        via-teal-600
+        to-teal-800
+        hover:scale-110
+        ${isScrolled
+          ? 'w-10 h-10 rounded-full text-xs top-2 opacity-100'
+          : 'w-full py-3 rounded-t-xl text-sm font-bold uppercase tracking-wider hover:from-teal-700 hover:to-teal-900'}
+      `}
+    >
+      {isScrolled ? '' : 'Réinitialiser les filtres'}
+    </button>
+  );
+};
 
 const getFilterTitle = (filterType: string) => {
   const titles: { [key: string]: JSX.Element } = {
@@ -128,6 +159,22 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   resetFilters,
 }) => {
   const [expandedSections, setExpandedSections] = useState<string[]>(Object.keys(filterOptions));
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const filterContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (filterContainerRef.current) {
+        const scrollPosition = filterContainerRef.current.scrollTop;
+        setIsScrolled(scrollPosition > 50);
+      }
+    };
+
+    const container = filterContainerRef.current;
+    container?.addEventListener('scroll', handleScroll);
+    return () => container?.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const toggleSection = (section: string) => {
     setExpandedSections(prev =>
@@ -144,28 +191,23 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div className="bg-white/10 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-2xl overflow-y-auto h-screen w-full transition-all duration-300 ease-in-out pt-52">
+    <div ref={filterContainerRef} className="bg-white/10 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-2xl overflow-y-auto h-screen w-full transition-all duration-300 ease-in-out mt-52">
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl">
-        <button
-          onClick={resetFilters}
-          className="w-full py-3 text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-teal-700 via-teal-600 to-teal-800 hover:from-teal-700 hover:to-teal-900 transition-all duration-300 ease-in-out transform hover:scale-[1.01] active:scale-[0.99] rounded-t-xl"
-        >
-          Réinitialiser les filtres
-        </button>
+        <AnimatedResetButton onClick={resetFilters} isScrolled={isScrolled} />
       </div>
       {Object.entries(filterOptions).map(([filterType, options]) => {
         if (hideColorFilter && filterType === 'color') return null;
         return (
-          <div key={filterType} className="border-b border-gray-300 bg-slate-100">
+          <div key={filterType} className="border-b border-gray-300 bg-slate-100 mt-20">
             <button
               onClick={() => toggleSection(filterType)}
               className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between hover:bg-gray-100 transition-colors"
             >
-              <span className="text-gray-800 text-base ">{getFilterTitle(filterType)}</span>
+              <span className="text-gray-800 text-base">{getFilterTitle(filterType)}</span>
               {expandedSections.includes(filterType) ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
             </button>
             {expandedSections.includes(filterType) && (
-              <div className="p-4 space-y-2 bg-white shadow-sm rounded-md">
+              <div className="p-4 space-y-2 bg-white shadow-sm rounded-md ">
                 {options.map((option) => (
                   <label key={option.value} className="flex items-center justify-between cursor-pointer hover:bg-gray-100 p-2 rounded transition-colors">
                     <div className="flex items-center">
