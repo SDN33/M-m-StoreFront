@@ -84,7 +84,7 @@ export default function VendorDetailsPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto mt-52">
+    <div className="max-w-4xl mx-auto mt-28 md:mt-52">
       {/* Cover Photo */}
       <div className="relative">
         <div className="w-full h-64 overflow-hidden rounded-b-lg">
