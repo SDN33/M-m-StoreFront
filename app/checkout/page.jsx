@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { createOrder } from '../../services/order';
 import { useCart } from '../../context/CartContext';
@@ -101,7 +102,7 @@ const CheckoutPage = () => {
   };
 
   const renderStepIndicator = () => (
-    <div className="mb-8">
+    <div className="mb-8 mt-48">
       <div className="flex justify-between items-center">
         {[
           { num: 1, title: 'Contact' },
@@ -289,7 +290,7 @@ const CheckoutPage = () => {
   );
 
   return (
-    <div className="mx-auto px-4 md:px-8 mt-24 max-w-6xl">
+    <div className="min-h-[calc(100vh-200px)] mx-auto px-4 md:px-8 mt-24 max-w-6xl pb-24">
       {renderStepIndicator()}
 
       <div className="flex flex-col md:flex-row gap-8">
@@ -299,6 +300,16 @@ const CheckoutPage = () => {
           {currentStep === 3 && (
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold mb-6">Paiement</h2>
+                <Image
+                  src="/images/stripe.webp"
+                  alt="Stripe"
+                  width={100}
+                  height={100}
+                />
+                <div>
+                  <p className="font-medium text-gray-900">Paiement sécurisé par Stripe</p>
+                  <p className="text-sm text-gray-600">Vos informations de paiement sont protégées par un cryptage SSL</p>
+                </div>
               {loading && <p className="text-blue-500">Création de la commande en cours...</p>}
               <StripePayment
                 totalPrice={totalPrice}
