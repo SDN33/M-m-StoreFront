@@ -10,6 +10,10 @@ type Vendor = {
   social: Record<string, string>;
   picture: string;
   banner: string;
+  adress: {
+    city: string;
+    postcode: string;
+  };
   // Add more properties as needed
 };
 

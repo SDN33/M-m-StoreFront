@@ -45,7 +45,7 @@ const Header: React.FC = () => {
 
   const categories = [
     { name: '⚡ PROMOS', href: '/promos', className: 'text-primary font-semibold' },
-    { name: 'Nos Vins', onClick: toggleNosVinsPopup, icon: <ChevronDown className="inline-block ml-1" /> },
+{ name: 'Nos Vins', onClick: toggleNosVinsPopup, icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com' },
     { name: 'Nos Vignerons.nes', href: '/vendors' },
     { name: 'Vins du Monde', href: '/vins-du-monde' },
@@ -126,7 +126,7 @@ const Header: React.FC = () => {
                       />
                     </div>
                     <span>{selectedCountry.name}</span>
-                    <ChevronDown className="w-4 h-4" />
+                    <ChevronDown className={`w-4 h-4 transition-transform ${isLanguageMenuOpen ? 'rotate-180' : ''}`} />
                   </button>
 
                   {isLanguageMenuOpen && (
@@ -156,10 +156,10 @@ const Header: React.FC = () => {
                 </div>
               </div>
 
-              <a href="/portailpro" className="text-white hover:text-gray-200 font-semibold whitespace-nowrap">
+              <a href="/portailpro" className="text-white hover:text-gray-800 font-semibold whitespace-nowrap">
                 Portail Pro
               </a>
-              <a href="/faq" className="text-white hover:text-gray-200 font-semibold whitespace-nowrap">
+              <a href="/faq" className="text-white hover:text-gray-800 font-semibold whitespace-nowrap">
                 Aide
               </a>
               <AuthButton />
@@ -219,7 +219,7 @@ const Header: React.FC = () => {
                       />
                     </div>
                     <span>{selectedCountry.name}</span>
-                    <ChevronDown className="w-4 h-4" />
+                    <ChevronDown className={`w-4 h-4 transition-transform ${isLanguageMenuOpen ? 'rotate-180' : ''}`} />
                   </button>
                 </div>
               </div>

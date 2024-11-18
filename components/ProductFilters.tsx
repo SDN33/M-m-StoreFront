@@ -144,13 +144,13 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div className="hidden sm:block bg-transparent h-full w-56 ml-10 overflow-y-auto mt-56 bg-gray-400 bg-opacity-30 shadow-lg rounded-lg">
-      <div className="p-4">
+    <div className="bg-white/10 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-2xl overflow-y-auto h-screen w-full transition-all duration-300 ease-in-out pt-52">
+      <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl">
         <button
           onClick={resetFilters}
-          className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-2 rounded-md hover:bg-primary-dark transition-colors shadow-md"
+          className="w-full py-3 text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-teal-600 via-teal-500 to-teal-700 hover:from-teal-700 hover:to-teal-800 transition-all duration-300 ease-in-out transform hover:scale-[1.01] active:scale-[0.99] rounded-t-xl"
         >
-          Réinitialiser
+          Réinitialiser les filtres
         </button>
       </div>
       {Object.entries(filterOptions).map(([filterType, options]) => {
@@ -197,15 +197,6 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
           </div>
         );
       })}
-
-      <div className="p-4">
-        <button
-          onClick={resetFilters}
-          className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-2 rounded-md hover:bg-primary-dark transition-colors shadow-md"
-        >
-          Réinitialiser
-        </button>
-      </div>
     </div>
   );
 };

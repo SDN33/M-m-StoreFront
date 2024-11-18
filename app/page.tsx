@@ -15,7 +15,7 @@ import WineCategories from '@/components/WineCategories';
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [scrollEnabled, setScrollEnabled] = useState(false); // Contrôle du défilement
+  const [scrollEnabled, setScrollEnabled] = useState(false);
 
   const mainContentRef = useRef<HTMLDivElement>(null);
   const filterContentRef = useRef<HTMLDivElement>(null);
@@ -62,16 +62,16 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (!scrollEnabled) return; // Désactiver le défilement si `scrollEnabled` est `false`
+    if (!scrollEnabled) return;
 
     const handleScroll = (e: WheelEvent) => {
       const target = e.target as Node;
       const mainContent = mainContentRef.current;
       const footer = footerRef.current;
+      const filterContent = filterContentRef.current;
 
-      if (filterContentRef.current?.contains(target)) {
-        e.preventDefault();
-        filterContentRef.current.scrollTop += e.deltaY;
+      // Allow natural scrolling for filter content
+      if (filterContent?.contains(target)) {
         return;
       }
 
@@ -113,7 +113,7 @@ export default function Home() {
       ...prev,
       [category]: filters
     }));
-    setScrollEnabled(true); // Activer le défilement uniquement après une modification des filtres
+    setScrollEnabled(true);
   };
 
   const resetAllFilters = () => {
@@ -146,9 +146,10 @@ export default function Home() {
               ref={filterContentRef}
               className="p-4 h-full overflow-y-auto scroll-container"
               style={{
-                overscrollBehavior: 'contain',
-                msOverflowStyle: 'none',
-                scrollbarWidth: 'thin'
+                overscrollBehavior: 'auto',
+                msOverflowStyle: 'auto',
+                scrollbarWidth: 'auto',
+                maxHeight: '100vh'
               }}
             >
               <ProductFilter

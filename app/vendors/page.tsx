@@ -19,6 +19,7 @@ const VendorsPage = () => {
     description?: string;
     address?: {
       city?: string;
+      postcode?: string;
     };
     social?: Record<string, string>;
     products?: {
@@ -219,7 +220,7 @@ const VendorsPage = () => {
                       </h2>
                       {vendor.address?.city && (
                         <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full flex items-center">
-                          <MapPin className="w-4 h-4 mr-1"/>{vendor.address.city}
+                          <MapPin className="w-4 h-4 mr-1"/>{vendor.address.city} ({vendor.address?.postcode?.substring(0, 2) || 'N/A'})
                         </span>
                       )}
                     </div>

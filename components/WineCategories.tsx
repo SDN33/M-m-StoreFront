@@ -19,6 +19,7 @@ const VendorsPage = () => {
     description?: string;
     address?: {
       city?: string;
+      postcode?: string;
     };
     social?: Record<string, string>;
     products?: {
@@ -155,7 +156,7 @@ const VendorsPage = () => {
           </div>
         ) : (
           <div className="space-y-6">
-            {vendors.map((vendor: { id: string; shop: { display_name: string; image?: string; banner?: string; title?: string; description?: string }; name?: string; description?: string; address?: {city?: string;}; social?: Record<string, string>; products?: { id: string; name: string; description: string; price: number }[] }) => {
+            {vendors.map((vendor: { id: string; shop: { display_name: string; image?: string; banner?: string; title?: string; description?: string }; name?: string; description?: string; address?: {city?: string; postcode?: string;}; social?: Record<string, string>; products?: { id: string; name: string; description: string; price: number }[] }) => {
               const avatar = vendor.shop?.image || vendor.shop?.banner;
               return (
                 <div
@@ -178,9 +179,9 @@ const VendorsPage = () => {
                           {vendor.shop?.title || 'Unknown Vendor'}
                         </h2>
                         {vendor.address?.city && (
-                          <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full flex items-center">
-                            <MapPin className="w-4 h-4 mr-1"/>{vendor.address.city}
-                          </span>
+                            <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full flex items-center">
+                              <MapPin className="w-4 h-4 mr-1"/>{vendor.address.city} ({vendor.address?.postcode?.substring(0, 2) || 'N/A'})
+                            </span>
                         )}
                       </div>
                     </div>
