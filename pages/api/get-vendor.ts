@@ -8,8 +8,10 @@ type Vendor = {
   display_name: string;
   description: string;
   social: Record<string, string>;
+  shop: {
   picture: string;
   banner: string;
+  };
   adress: {
     city: string;
     postcode: string;

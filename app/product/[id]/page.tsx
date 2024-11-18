@@ -1,7 +1,7 @@
 'use client'; // Ajoutez cette ligne en haut du fichier
 
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Star, Package } from 'lucide-react';
 import Livraison from '@/components/Livraison';
@@ -38,7 +38,7 @@ interface Product {
   certification?: string;
   degre?: number;
   millesime?: string;
-  degustation?: string;
+  degustation: string;
 }
 
 const formatDescription = (description: string, maxChars = 90) => {
@@ -86,6 +86,7 @@ const joinIfArray = (value: string | string[], separator: string = ', ') => {
 
 const ProductPage: React.FC = () => {
   const { id } = useParams() as { id: string };
+  const router = useRouter();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -119,6 +120,12 @@ const ProductPage: React.FC = () => {
     setCurrentUrl(window.location.href);
   }, []);
 
+  const vendorRedirect = () => {
+    if (product && product.vendor) {
+      router.push(`/vendors/${product.vendor}`);
+    }
+  }
+
 
 
   if (loading) {
@@ -150,7 +157,7 @@ const ProductPage: React.FC = () => {
 
 
   return (
-    <div className="mt-20 px-12 min-h-screen flex flex-col justify-between">
+    <div className="mt-16 px-12 min-h-screen flex flex-col justify-between">
 
       <div className="relative top-0 left-0 w-full">
       </div>
@@ -163,7 +170,7 @@ const ProductPage: React.FC = () => {
               <span className="mx-2 text-gray-500">&gt;</span>
             </li>
             <li className="flex items-center">
-            <a className="cursor-pointer text-teal-500 hover:text-gray-700">
+            <a className="cursor-pointer text-teal-500 hover:text-gray-700" onClick={vendorRedirect}>
               {product.store_name || ' @MéméGeorgette'}
             </a>
             <span className="mx-2 text-gray-500">&gt;</span>
@@ -175,21 +182,20 @@ const ProductPage: React.FC = () => {
         </nav>
 
         <div className="flex flex-col md:flex-row gap-8 justify-center items-center mx-auto">
-          <div className="md:w-1/2">
+            <div className="md:w-1/2">
             <div className="flex items-start z-10">
               <p className="ml-4 text-sm">
-                {product.certification ? (
-                  <Image
-                    {...getCertificationLogo(product.certification)}
-                    alt="Certification logo"
-                    width={product.certification === 'biodynamie' ? 100 : 30} // Plus grand si biodynamie
-                    height={product.certification === 'biodynamie' ? 100 : 30} // Plus grand si biodynamie
-                  />
-                ) : (
-                  'Non renseignée'
-                )}
+              {product.certification ? (
+                <Image
+                {...getCertificationLogo(product.certification)}
+                alt="Certification logo"
+                width={product.certification === 'biodynamie' ? 100 : 30} // Plus grand si biodynamie
+                height={product.certification === 'biodynamie' ? 100 : 30} // Plus grand si biodynamie
+                />
+              ) : (
+                'Non renseignée'
+              )}
               </p>
-
             </div>
             <Image
               src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
@@ -197,14 +203,14 @@ const ProductPage: React.FC = () => {
               width={300}
               height={500}
               objectFit="cover"
-              className="rounded-lg"
+              className="rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-125 cursor-zoom-in"
               loading="lazy"
             />
-          </div>
+            </div>
 
           <div className="md:w-1/2">
             <p className="text-sm font-bold flex">{product.nom_chateau || 'Château inconnu'}</p>
-            <h1 className="text-3xl font-bold">{product.name}</h1>
+            <h1 className="text-3xl font-bold text-primary">{product.name}</h1>
             <p className="text-sm font-bold flex mt-1">
               {product.appelation?.toUpperCase()} | {product.region__pays?.toUpperCase()} | {product.millesime}
             </p>
@@ -229,7 +235,7 @@ const ProductPage: React.FC = () => {
             <br />
             <p className="text-sm font-normal">
               Vendu par
-              <a className="cursor-pointer text-teal-500 hover:text-gray-700">
+              <a className="cursor-pointer text-teal-500 hover:text-gray-700" onClick={vendorRedirect}>
                  <br />{product.store_name || ' @MéméGeorgette'}
               </a>
             </p>

@@ -22,7 +22,7 @@ interface Product {
   nom_chateau?: string;
   accord_mets?: Array<string>;
   cepages?: Array<string>;
-  conservation?: string[];
+  degustation?: string[];
   style?: string;
   stock_status?: string;
   degre?: number;
@@ -53,7 +53,7 @@ const transformMetaData = (metaData: { key: string; value: string | string[] }[]
   let nom_chateau = '';
   let accord_mets: string[] = [];
   let cepages: string[] = [];
-  let conservation: string[] = [];
+  let degustation: string[] = [];
   let style = '';
   let degre = '0.0';
 
@@ -99,8 +99,8 @@ const transformMetaData = (metaData: { key: string; value: string | string[] }[]
       case 'cepages':
         cepages = Array.isArray(value) ? value : [value]; // S'assurer que c'est un tableau
         break;
-      case 'conservation':
-        conservation = Array.isArray(value) ? value : [value]; // S'assurer que c'est un tableau
+      case 'degustation':
+        degustation = Array.isArray(value) ? value : [value]; // S'assurer que c'est un tableau
         break;
       case 'style':
         style = Array.isArray(value) ? value.join(', ') : value;
@@ -123,7 +123,7 @@ const transformMetaData = (metaData: { key: string; value: string | string[] }[]
     nom_chateau,
     accord_mets,
     cepages,
-    conservation,
+    degustation,
     style,
     degre,
   };

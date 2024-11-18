@@ -121,7 +121,7 @@ const Header: React.FC = () => {
                       <Image
                         src={selectedCountry.imgSrc}
                         alt={selectedCountry.name}
-                        fill
+                        layout="fill"
                         className="object-contain"
                       />
                     </div>
