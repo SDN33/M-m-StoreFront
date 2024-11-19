@@ -28,6 +28,13 @@ interface Product {
   vendor: number;
 }
 
+interface VendorData {
+  id: number;
+  shop: {
+    images: string;
+  };
+}
+
 interface ProductCardProps {
   product: Product;
   onAddToCart: (productId: number, quantity: number, variationId: number) => Promise<void>;
@@ -39,6 +46,28 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const [variationId] = useState<number>(product.id);
   const [imageError, setImageError] = useState<boolean>(false);
   const [isTruncated, setIsTruncated] = useState<boolean>(false);
+  const [vendorImages, setVendorImages] = useState<string | null>(null);
+  const [vendorImageError, setVendorImageError] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchVendorImages = async () => {
+      try {
+        const response = await fetch(`/api/get-vendor-products?vendorId=${product.vendor}`);
+        if (!response.ok) throw new Error('Failed to fetch vendor data');
+        const vendorData: VendorData = await response.json();
+        if (vendorData?.shop?.images) {
+          setVendorImages(vendorData.shop.images);
+        }
+      } catch (error) {
+        console.error('Error fetching vendor image:', error);
+        setVendorImageError(true);
+      }
+    };
+
+    if (product.vendor) {
+      fetchVendorImages();
+    }
+  }, [product.vendor]);
 
   const handleRedirect = () => {
     router.push(`/product/${product.id}`);
@@ -51,6 +80,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const formatRating = (rating?: number, ratingCount?: number) => {
     if (!rating || !ratingCount || ratingCount === 0) return <span className='text-xs'>Non noté</span>;
     return <span>{(rating * 4).toFixed(1)}/20</span>;
+  };
+
+  const renderAOCBadge = () => {
+    if (product.name.toLowerCase().includes('aoc')) {
+      return (
+        <div className={`absolute bottom-3 ${product.certification?.toLowerCase() === 'bio' ? 'right-10' : 'right-12'} w-7 h-7 z-20`}>
+          <Image
+            src="/images/LogoAOC.jpg"
+            alt="Badge AOC"
+            fill
+            style={{ objectFit: 'contain' }}
+            onError={() => setImageError(true)}
+          />
+        </div>
+      );
+    }
+    return null;
   };
 
   const renderCertification = () => {
@@ -91,10 +137,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     return plainText;
   }
 
-  // Utilisation de useMemo pour calculer truncatedName sans appel à setIsTruncated
   const truncatedName = useMemo(() => stripHtmlAndTruncate(product.name, 36), [product.name]);
 
-  // Utilisation de useEffect pour mettre à jour isTruncated après calcul de truncatedName
   useEffect(() => {
     setIsTruncated(product.name.length > 38);
   }, [product.name]);
@@ -112,8 +156,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   };
 
   return (
-    <div className="w-full max-w-[400px] min-w-[300px] bg-white rounded-lg overflow-hidden shadow-md mb-8">
-      <div className="bg-gradient-to-r from-black via-gray-800 to-black text-white py-1 px-2 text-center text-sm font-semibold">
+    <div className="w-full max-w-[400px] min-w-[300px] bg-white rounded-lg overflow-hidden shadow-md mb-8">      <div className="bg-gradient-to-r from-black via-gray-800 to-black text-white py-1 px-2 text-center text-sm font-semibold">
         {generateSlogan()}
       </div>
 
@@ -135,7 +178,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
                 <div className="relative group" title={product.name}>
                   <Info className="w-4 h-4 text-gray-500 ml-1 cursor-pointer" />
                 </div>
-
               )}
             </div>
             <p className="text-xs text-gray-500 pl-6 truncate">
@@ -145,37 +187,55 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
 
         <div className="relative">
-          <div className="absolute top-0 left-0 z-10 bg-gradient-to-r from-teal-800 to-teal-950 rounded-full p-1.5 text-white">
-            <div className="text-sm font-bold">{formatRating(product.average_rating, product.rating_count)}</div>
-          {product.rating_count === 0 && (
-            <div className="absolute top-0 left-0 z-10 bg-gradient-to-r from-teal-800 to-teal-950 rounded-full p-1.5 text-white">
-              <div className="text-sm font-bold">Non noté</div>
+        <div className="absolute top-0 left-0 z-10 bg-gradient-to-r from-teal-800 to-teal-950 rounded-full p-1.5 text-white">
+          <div className="text-sm font-bold">{formatRating(product.average_rating, product.rating_count)}</div>
+        </div>
+        <div className="relative w-full h-52 mb-2">
+          <Image
+            src={product.images[0]?.src || '/images/vinmeme.png'}
+            alt={product.name}
+            fill
+            style={{ objectFit: 'contain' }}
+            priority
+            onClick={handleRedirect}
+            className="hover:scale-105 transition-transform cursor-pointer"
+            onError={(e) => {
+              const imgElement = e.target as HTMLImageElement;
+              imgElement.src = '/images/vinmeme.png';
+            }}
+          />
+          {renderAOCBadge()}
+          <div className={`absolute bottom-2 ${product.certification?.toLowerCase() === 'biodynamie' ? 'right-6' : 'right-0'} w-8 h-8 z-20`}>
+            {renderCertification()}
+          </div>
+
+        </div>
+        <div onClick={vendorRedirect} className="flex items-center gap-2 cursor-pointer">
+          {vendorImages && !vendorImageError && (
+            <div className="relative w-8 h-8 rounded-full overflow-hidden">
+              <Image
+                src={vendorImages}
+                alt={product.store_name || 'Vendor shop'}
+                fill
+                style={{ objectFit: 'cover' }}
+                onError={() => setVendorImageError(true)}
+              />
             </div>
           )}
+          <div>
+            <p className='text-xs cursor-pointer '>Découvrir <span className='text-teal-800'>{product.store_name || '@MéméGeorgette'}</span></p>
+            <span className='text-xs font-semibold text-gray-800 flex items-center'>
+              <MapPin className="w-3 h-3 mr-1 font-bold" />
+              {product.region__pays ? product.region__pays.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : ''}
+            </span>
           </div>
-          <div className="relative w-full h-52 mb-2">
-            <Image
-              src={product.images[0]?.src || '/images/vinmeme.png'}
-              alt={product.name}
-              fill
-              style={{ objectFit: 'contain' }}
-              priority
-              onClick={handleRedirect}
-              className="hover:scale-105 transition-transform cursor-pointer"
-              onError={(e) => {
-                const imgElement = e.target as HTMLImageElement;
-                imgElement.src = '/images/vinmeme.png';
-              }}
-            />
-          </div>
-          <p className='text-teal-800 font-semibold text-xs cursor-pointer' onClick={vendorRedirect} >{product.store_name}<span className='text-xs font-semibold text-gray-800 flex items-center'><MapPin className="w-3 h-3 mr-1" />{product.region__pays ? product.region__pays.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : ''}</span></p>
         </div>
+      </div>
 
         <div className="flex justify-between items-center mb-2">
           <span className="text-xs text-primary font-semibold cursor-pointer hover:underline">
             {product.rating_count || 0} avis
           </span>
-          {!imageError && <div className="flex gap-2">{renderCertification()}</div>}
         </div>
 
         <p className="text-xs mb-2 text-gray-700 h-8 overflow-hidden text-center">

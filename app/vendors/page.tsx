@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { MapPin, Facebook, Instagram, Twitter, Linkedin, Youtube, Globe, Search } from 'lucide-react';
+import { MapPin, Search } from 'lucide-react';
 
 interface ProductImage {
   id: number;
@@ -46,28 +46,6 @@ const VendorsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [availableCities, setAvailableCities] = useState<string[]>([]);
-
-  const getSocialIcon = (platform: string) => {
-    const iconProps = {
-      size: 20,
-      className: "text-gray-600"
-    };
-
-    switch (platform.toLowerCase()) {
-      case 'facebook':
-        return <Facebook {...iconProps} />;
-      case 'instagram':
-        return <Instagram {...iconProps} />;
-      case 'twitter':
-        return <Twitter {...iconProps} />;
-      case 'linkedin':
-        return <Linkedin {...iconProps} />;
-      case 'youtube':
-        return <Youtube {...iconProps} />;
-      default:
-        return <Globe {...iconProps} />;
-    }
-  }
 
   useEffect(() => {
     const fetchVendors = async () => {
@@ -242,23 +220,6 @@ const VendorsPage = () => {
                             <MapPin className="w-4 h-4 mr-1" />
                             {vendor.address.city} ({vendor.address?.postcode?.substring(0, 2) || 'N/A'})
                           </span>
-                        )}
-                        {vendor.social && Object.keys(vendor.social).length > 0 && (
-                          <div className="mt-2">
-                            {Object.entries(vendor.social).map(([platform, url]) => (
-                              url ? (
-                                <a
-                                  key={platform}
-                                  href={url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="px-3 py-1 text-sm bg-gray-100 text-primary rounded-full hover:bg-gray-200 transition-colors duration-200 mr-2"
-                                >
-                                  {getSocialIcon(platform)}
-                                </a>
-                              ) : null
-                            ))}
-                          </div>
                         )}
                       </div>
                     </div>

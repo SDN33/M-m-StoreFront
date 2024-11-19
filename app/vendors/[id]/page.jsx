@@ -105,27 +105,27 @@ export default function VendorDetailsPage() {
     <div className="max-w-4xl mx-auto mt-36">
       <div className="relative">
         <Image
-          src={normalizeUrl(vendor.shop.banner)}
-          alt={`${vendor.shop.title} banner`}
+          src={vendor.shop?.banner ? normalizeUrl(vendor.shop.banner) : '/images/slider3.png'}
+          alt={`${vendor.shop?.title || 'Vendor'} banner`}
           width={1200}
           height={400}
           className="object-cover"
         />
         <div className="absolute -bottom-16 left-6">
-        <Image
-          src={normalizeUrl(vendor.shop.image)}
-          alt={`${vendor.display_name} profile`}
-          width={128}
-          height={128}
-          className="rounded-full border-4 border-white object-cover bg-white shadow-lg"
-        />
+          <Image
+            src={vendor.shop?.image ? normalizeUrl(vendor.shop.image) : '/images/meme-pas-contente.png'}
+            alt={`${vendor.display_name || 'Vendor'} profile`}
+            width={128}
+            height={128}
+            className="rounded-full border-4 border-white object-cover bg-white shadow-lg"
+          />
         </div>
       </div>
 
       <div className="mt-20 px-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold">{vendor.shop.title}</h1>
+            <h1 className="text-2xl font-bold">{vendor.shop?.title || '@MéméGeorgette'}</h1>
             {vendor.address?.city && (
               <div className="flex items-center text-gray-600">
                 <MapPin className="w-4 h-4 mr-1" />
@@ -140,7 +140,7 @@ export default function VendorDetailsPage() {
 
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold mb-4 text-teal-800">À propos</h2>
-          <p className="text-gray-600 whitespace-pre-wrap">{vendor.shop.description}</p>
+          <p className="text-gray-600 whitespace-pre-wrap">{vendor.shop?.description || 'Une sélection de vins rares et de qualité spécialement préparée par Mémé Georgette.'}</p>
         </div>
 
         {vendor.social && Object.keys(vendor.social).length > 0 && (
@@ -172,7 +172,7 @@ export default function VendorDetailsPage() {
               products.map((product) => (
                 <div key={product.id} className="bg-white p-4 rounded-lg shadow-lg">
                   <Link href={`/product/${product.id}`} passHref>
-                    <Image src={product.images[0]?.src} alt={product.name} width={160} height={160} className="object-cover rounded" />
+                    <Image src={(product.images && product.images[0]?.src) || '/images/vinmeme.png'} alt={product.name} width={160} height={160} className="object-cover rounded" />
                   </Link>
                   <h3 className="mt-4 text-lg font-semibold">{product.name}</h3>
                   <p className="text-gray-600">{product.price} €</p>
