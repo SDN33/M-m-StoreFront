@@ -197,7 +197,7 @@ const Header: React.FC = () => {
 
           {/* Mobile Menu - Position absolue pour ne pas affecter la hauteur du header */}
           {isMenuOpen && (
-            <div className="md:hidden absolute left-0 right-0 top-full bg-white border-t border-gray-100 shadow-xl">
+            <div className="md:hidden absolute left-0 right-0 top-full bg-white border-t border-gray-100 shadow-xl z-50">
               <div className="p-4">
                 <SearchInput />
               </div>
