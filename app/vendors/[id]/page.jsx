@@ -25,6 +25,45 @@ const SocialIcon = ({ platform }) => {
   return icons[platform.toLowerCase()] || <Globe className="w-5 h-5" />;
 };
 
+const VendorLocationMap = ({ vendor }) => {
+  const hasCity = vendor.address?.city;
+
+  if (!hasCity) {
+    return (
+      <div className="bg-white rounded-lg shadow p-6">
+        <div className="flex items-center text-gray-600">
+          <MapPin className="w-5 h-5 mr-2" />
+          <span>Location information not available</span>
+        </div>
+      </div>
+    );
+  }
+
+  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(vendor.address.city)}&z=12&output=embed`;
+
+  return (
+    <div className="bg-white rounded-lg shadow p-6">
+      <h2 className="text-lg font-semibold mb-4 text-teal-800">Localisation</h2>
+      <div className="flex items-center text-gray-600 mb-4">
+        <MapPin className="w-5 h-5 mr-2" />
+        <span>
+          {vendor.address.street || ''} {vendor.address.city || ''} {vendor.address.postcode || ''}
+        </span>
+      </div>
+      <div className="w-full h-64 rounded-lg overflow-hidden">
+        <iframe
+          src={mapSrc}
+          width="100%"
+          height="100%"
+          style={{border: 0}}
+          allowFullScreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  );
+};
+
 export default function VendorDetailsPage() {
   const [vendor, setVendor] = useState(null);
   const [products, setProducts] = useState([]);
@@ -45,7 +84,6 @@ export default function VendorDetailsPage() {
           const vendorData = await vendorResponse.json();
           setVendor(vendorData);
 
-          // Correction ici pour utiliser le nouvel endpoint
           const productResponse = await fetch(`/api/get-vendor-products?vendorId=${id}`);
           if (!productResponse.ok) {
             throw new Error('Failed to fetch vendor products');
@@ -127,16 +165,13 @@ export default function VendorDetailsPage() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold">{vendor.shop?.title || '@MéméGeorgette'}</h1>
-            {vendor.address?.city && (
-              <div className="flex items-center text-gray-600">
-                <MapPin className="w-4 h-4 mr-1" />
-                <span>
-                  {vendor.address.city}
-                  {vendor.address?.postcode && ` (${vendor.address.postcode.substring(0, 2)})`}
-                </span>
-              </div>
-            )}
           </div>
+        </div>
+
+        <div>
+          {vendor.address && (
+            <VendorLocationMap vendor={vendor} />
+          )}
         </div>
 
         <div className="bg-white rounded-lg shadow p-6">
