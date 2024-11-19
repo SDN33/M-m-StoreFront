@@ -183,7 +183,7 @@ export default function VendorDetailsPage() {
             <h2 className="text-lg font-semibold mb-4 text-teal-800">Réseaux sociaux</h2>
             <div className="flex flex-wrap gap-4">
               {Object.entries(vendor.social)
-                .filter(([_, url]) => url)
+                .filter(([url]) => url)
                 .map(([platform, url]) => (
                   <a
                     key={platform}
