@@ -43,10 +43,10 @@ const AuthButton = () => {
     }
 
     return (
-        <div className="relative md:z-40" ref={menuRef}>
+        <div className="relative lg:z-50" ref={menuRef}>
             <span
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-sm text-primary mt-4 md:mt-0 md:text-white font-semibold hover:text-gray-800 cursor-pointer flex items-center gap-2"
+              className="text-sm text-primary sm:texy-primary mt-4 md:mt-0 md:text-white lg:text-white font-semibold hover:text-gray-800 cursor-pointer flex items-center gap-2"
             >
               <User size={16} />
               Mon compte
