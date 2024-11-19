@@ -223,7 +223,9 @@ const Header: React.FC = () => {
                 </div>
               </div>
 
-              <nav className="border-t border-gray-100">
+              <nav className="border-t border-gray-100 mb-20">
+                <AuthButton />
+
                 {categories.map((category) => (
                   <a
                     key={category.name}
@@ -237,7 +239,6 @@ const Header: React.FC = () => {
                     {category.icon}
                   </a>
                 ))}
-                <AuthButton />
 
               </nav>
 
