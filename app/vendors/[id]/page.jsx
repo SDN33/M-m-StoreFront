@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { MapPin, Globe, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 import Link from 'next/link';
+import SocialShare from '@/components/Socialshare';
 
 const normalizeUrl = (url) => {
   if (url.startsWith('//')) {
@@ -102,7 +103,7 @@ export default function VendorDetailsPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto mt-36">
+    <div className="max-w-4xl mx-auto mt-36 mb-24">
       <div className="relative">
         <Image
           src={vendor.shop?.banner ? normalizeUrl(vendor.shop.banner) : '/images/slider3.png'}
@@ -182,6 +183,8 @@ export default function VendorDetailsPage() {
               <p>Aucun produit trouvé pour ce vendeur.</p>
             )}
           </div>
+          <br />
+          <SocialShare />
         </div>
       </div>
     </div>

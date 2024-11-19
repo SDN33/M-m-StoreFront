@@ -36,7 +36,7 @@ const SocialShare: React.FC<SocialShareProps> = ({ url, title }) => {
 
   return (
     <div className="flex flex-col items-start space-y-4 relative">
-      <h3 className="text-sm font-semibold text-gray-800">Partager ce produit</h3>
+      <h3 className="text-sm font-semibold text-gray-800">Partager sur les réseaux sociaux</h3>
       <div className="flex space-x-4">
         <a href={shareLinks.facebook} target="_blank" rel="noopener noreferrer" className="text-accent hover:text-orange-800">
           <Facebook size={24} />
