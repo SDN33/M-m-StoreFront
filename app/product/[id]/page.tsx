@@ -63,6 +63,23 @@ const formatDescription = (description: string, maxChars = 90) => {
   return formattedDescription;
 };
 
+const renderAOCBadge = (product: Product) => {
+  if (product.name.toLowerCase().includes('aoc')) {
+    return (
+      <div className={`z-20 ${product.certification === 'biodynamie' ? 'ml-3' : 'ml-2'}`}>
+        <Image
+          src="/images/LogoAOC.jpg"
+          alt="Badge AOC"
+          style={{ objectFit: 'contain' }}
+          width={30}
+          height={30}
+        />
+      </div>
+    );
+  }
+  return null;
+};
+
 const getCertificationLogo = (certification?: string) => {
   switch (certification?.toLowerCase()) {
     case 'bio':
@@ -157,61 +174,63 @@ const ProductPage: React.FC = () => {
 
 
   return (
-    <div className="mt-16 px-12 min-h-screen flex flex-col justify-between">
-
+    <div className="md:mt-16 px-4 md:px-12 min-h-screen flex flex-col justify-between overflow-x-hidden">
       <div className="relative top-0 left-0 w-full">
       </div>
       <br /><br /><br />
-      <div className="max-w-6xl mx-auto px-8 sm:px-6 lg:px-8 py-8">
-        <nav aria-label="Breadcrumb" className="text-sm mb-4">
+      <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+        <nav aria-label="Breadcrumb" className="text-sm mb-4 overflow-x-auto whitespace-nowrap">
           <ol className="list-none p-0 inline-flex">
             <li className="flex items-center">
               <a href="/" className="text-gray-500 hover:text-gray-700">Accueil</a>
               <span className="mx-2 text-gray-500">&gt;</span>
             </li>
             <li className="flex items-center">
-            <a className="cursor-pointer text-teal-800 hover:text-gray-700" onClick={vendorRedirect}>
-              {product.store_name || ' @MéméGeorgette'}
-            </a>
-            <span className="mx-2 text-gray-500">&gt;</span>
+              <a className="cursor-pointer text-teal-800 hover:text-gray-700" onClick={vendorRedirect}>
+                {product.store_name || ' @MéméGeorgette'}
+              </a>
+              <span className="mx-2 text-gray-500">&gt;</span>
             </li>
             <li className="flex items-center">
-              <span className="text-primary" aria-current="page">{product.name}</span>
+              <span className="text-primary truncate max-w-[150px] sm:max-w-none" aria-current="page">{product.name}</span>
             </li>
           </ol>
         </nav>
 
-        <div className="flex flex-col md:flex-row gap-8 justify-center items-center mx-auto">
-            <div className="md:w-1/2">
-            <div className="flex items-start z-10">
-              <p className="ml-4 text-sm">
-              {product.certification ? (
-                <Image
-                {...getCertificationLogo(product.certification)}
-                alt="Certification logo"
-                width={product.certification === 'biodynamie' ? 100 : 30} // Plus grand si biodynamie
-                height={product.certification === 'biodynamie' ? 100 : 30} // Plus grand si biodynamie
-                />
-              ) : (
-                'Non renseignée'
-              )}
+        <div className="flex flex-col md:flex-row gap-8 justify-center items-start w-full">
+          <div className="w-full md:w-1/2 flex flex-col items-center">
+            <div className="flex items-start z-10 w-full justify-start px-4 md:px-0">
+              <p className="text-sm">
+                {product.certification ? (
+                  <Image
+                    {...getCertificationLogo(product.certification)}
+                    alt="Certification logo"
+                    width={product.certification === 'biodynamie' ? 100 : 30}
+                    height={product.certification === 'biodynamie' ? 100 : 30}
+                  />
+                ) : (
+                  'Non renseignée'
+                )}
               </p>
+              {renderAOCBadge(product)}
             </div>
-            <Image
-              src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
-              alt={product.name}
-              width={300}
-              height={500}
-              objectFit="cover"
-              className="rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-125 cursor-zoom-in"
-              loading="lazy"
-            />
+            <div className="relative w-full max-w-[300px]">
+              <Image
+                src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
+                alt={product.name}
+                width={300}
+                height={500}
+                className="mt-5 rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-125 cursor-zoom-in"
+                loading="lazy"
+                style={{ objectFit: 'cover' }}
+              />
             </div>
+          </div>
 
-          <div className="md:w-1/2">
-            <p className="text-sm font-bold flex">{product.nom_chateau || 'Château inconnu'}</p>
-            <h1 className="text-3xl font-bold text-primary">{product.name}</h1>
-            <p className="text-sm font-bold flex mt-1">
+          <div className="w-full md:w-1/2 px-4 md:px-0">
+            <p className="text-sm font-bold break-words">{product.nom_chateau || 'Château inconnu'}</p>
+            <h1 className="text-3xl font-bold text-primary break-words">{product.name}</h1>
+            <p className="text-sm font-bold mt-1 break-words">
               {product.appelation?.toUpperCase()} | {product.region__pays?.toUpperCase()} | {product.millesime}
             </p>
             <div className="flex items-center -mb-6 mx-auto">
@@ -269,26 +288,28 @@ const ProductPage: React.FC = () => {
                 }}
               />
             </div>
-          </div>
+            </div>
         </div>
+
         <br /><br />
         <Livraison />
         <br />
-        <div className="mt-8">
+
+        <div className="mt-8 w-full">
           <h2 className="text-2xl font-bold !-mb-2 text-center text-primary">Description du produit</h2>
-          <div className="border-b-4 border-primary w-[20rem] md:w-[50rem] my-2 md:my-2 slide-in-right flex mx-auto"></div>
-          <p className='font-bold text-center mt-8'>
+          <div className="border-b-4 border-primary w-full max-w-[50rem] my-2 slide-in-right mx-auto"></div>
+          <p className='font-bold text-center mt-8 px-4'>
             {product.description && product.short_description
               ? formatDescription(product.description.length > product.short_description.length ? product.description : product.short_description)
               : formatDescription(product.description || product.short_description || '')}
           </p>
           <br />
-          {/* Grille de 2 colonnes plus compact */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 mx-auto px-10">
-            {/* Cépages */}
-            <div className="bg-white p-4 rounded-lg shadow-md">
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-teal-800 text-left">Cépages</h3>
+
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 w-full px-4 md:px-10">
+            {/* Grille d'informations produit */}
+            <div className="bg-white p-4 rounded-lg shadow-md w-full">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                <h3 className="text-lg font-bold text-teal-800">Cépages</h3>
                 <p className="text-sm text-right">
                   {product.cepages ? joinIfArray(product.cepages) : 'Pas de cépages renseignés'}
                 </p>
