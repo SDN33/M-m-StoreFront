@@ -63,8 +63,8 @@ export default function Profile() {
 
   if (loading) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600" />
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-primary border-opacity-75"></div>
       </div>
     );
   }
@@ -99,7 +99,7 @@ export default function Profile() {
               onClick={handleLogout}
               className="w-full rounded-md bg-red-500 px-4 py-2 text-white transition-colors hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
             >
-              Déconnecter
+              Se déconnecter
             </button>
           </div>
         )}

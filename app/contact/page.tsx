@@ -20,7 +20,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto px-4 py-32 pb-10" style={{ paddingTop: '200px' }}> {/* Augmenté padding-top et réduit la largeur max */}
+    <div className="w-full max-w-md mx-auto px-4 py-28 pb-10" style={{ paddingTop: '170px' }}> {/* Augmenté padding-top et réduit la largeur max */}
       <div className="rounded-lg shadow-lg p-6 ">
         <div className="text-center mb-6">
           <h2 className="text-2xl font-bold text-primary">Contactez-nous</h2>
@@ -82,7 +82,7 @@ const ContactPage = () => {
 
           <button
             type="submit"
-            className="w-full py-3 px-6 rounded-md font-medium mt-4 bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white"
+            className="w-full py-3 px-6 rounded-md font-medium mt-4 bg-gradient-to-r from-primary to-rose-800 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white"
           >
             Envoyer
           </button>

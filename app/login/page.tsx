@@ -55,7 +55,7 @@ export default function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button className="bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white" type="submit">Connectez-vous</button>
+        <button className="bg-gradient-to-r from-primary to-rose-800 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white" type="submit">Connectez-vous</button>
       </form>
       <span className="text-xs text-center flex mt-2 italic">En continuant, vous acceptez les conditions d&apos;utilisation de Mémé Georgette et reconnaissez avoir lu notre Politique de confidentialité. Informations concernant la collecte de données.</span>
       <a href="/signup" className="link">Pas encore de compte? Inscrivez-vous</a>

@@ -64,7 +64,7 @@ const StripePayment = ({ totalPrice, formData, setError, onComplete, title = "Co
       <CardElement />
       <button
         type="submit"
-        className="bg-gradient-to-r from-primary to-rose-500 text-white py-2 px-4 mt-5 rounded"
+        className="bg-gradient-to-r from-primary to-rose-800 text-white py-2 px-4 mt-5 rounded"
         disabled={!stripe || loading || disable}
       >
         {loading ? 'Processing...' : title}

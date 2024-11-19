@@ -43,7 +43,7 @@ const Newsletter = () => {
             </div>
             <button
               type="submit"
-              className="bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white py-3 px-6 rounded whitespace-nowrap"
+              className="bg-gradient-to-r from-primary to-rose-800 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white py-3 px-6 rounded whitespace-nowrap"
             >
               S&apos;inscrire
             </button>

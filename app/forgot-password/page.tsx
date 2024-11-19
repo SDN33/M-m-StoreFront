@@ -31,7 +31,7 @@ export default function ForgotPasswordPage() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <button className="bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white" type="submit">Envoyer le lien de réinitialisation</button>
+        <button className="bg-gradient-to-r from-primary to-rose-800 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white" type="submit">Envoyer le lien de réinitialisation</button>
       </form>
       <a href="/login" className="link">Retour à la page de connexion</a>
     </div>

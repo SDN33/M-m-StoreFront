@@ -17,8 +17,8 @@ const colorStyles: Record<ColorStyle, { active: string; inactive: string }> = {
     inactive: 'bg-gray-50 hover:bg-gradient-to-r hover:from-purple-500 hover:to-indigo-500 hover:text-white',
   },
   red: {
-    active: 'bg-gradient-to-r from-red-500 to-rose-500 text-white',
-    inactive: 'bg-gray-50 hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-500 hover:text-white',
+    active: 'bg-gradient-to-r from-red-500 to-rose-800 text-white',
+    inactive: 'bg-gray-50 hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white',
   },
   yellow: {
     active: 'bg-gradient-to-r from-amber-400 to-yellow-700 text-white',

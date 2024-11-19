@@ -3,14 +3,23 @@
 import React, { useEffect, useState, useRef } from 'react';
 import ProductsCards from '@/components/ProductsCards';
 import ProductFilter from '@/components/ProductFilters';
+import Slogan from '@/components/Slogan';
+import ProductsIntro from '@/components/ProductIntro';
+import Slider from '@/components/Slider';
+import MobileHome from '@/components/MobileHome';
+import Trust from '@/components/Trust';
+import HeroBanner from '@/components/HeroBanner';
+import Livraison from '@/components/Livraison';
+import WineCategories from '@/components/WineCategories';
 
-export default function PromosPage() {
+export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [scrollEnabled, setScrollEnabled] = useState(false);
 
   const mainContentRef = useRef<HTMLDivElement>(null);
   const filterContentRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
 
   const [selectedFilters, setSelectedFilters] = useState({
     color: [],
@@ -25,6 +34,19 @@ export default function PromosPage() {
     categories: []
   });
 
+  const [isAtBottom, setIsAtBottom] = useState(false);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        await fetch('/api/products');
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
     setIsMobile(mediaQuery.matches);
@@ -38,6 +60,53 @@ export default function PromosPage() {
       mediaQuery.removeEventListener('change', handleMediaChange);
     };
   }, []);
+
+  useEffect(() => {
+    if (!scrollEnabled) return;
+
+    const handleScroll = (e: WheelEvent) => {
+      const target = e.target as Node;
+      const mainContent = mainContentRef.current;
+      const footer = footerRef.current;
+      const filterContent = filterContentRef.current;
+
+      // Allow natural scrolling for filter content
+      if (filterContent?.contains(target)) {
+        return;
+      }
+
+      if (mainContent?.contains(target) && footer) {
+        const mainScrollHeight = mainContent.scrollHeight;
+        const mainScrollTop = mainContent.scrollTop;
+        const mainClientHeight = mainContent.clientHeight;
+
+        const isNearBottom = mainScrollHeight - (mainScrollTop + mainClientHeight) < 10;
+
+        setIsAtBottom(isNearBottom);
+
+        if (isNearBottom && e.deltaY > 0) {
+          e.preventDefault();
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+          });
+        }
+
+        if (e.deltaY < 0 && isAtBottom) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+
+    window.addEventListener('wheel', handleScroll);
+    return () => {
+      window.removeEventListener('wheel', handleScroll);
+    };
+  }, [isMobile, isAtBottom, scrollEnabled]);
 
   const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {
     setSelectedFilters((prev) => ({
@@ -65,18 +134,7 @@ export default function PromosPage() {
   return (
     <>
       {isMobile ? (
-        <div>
-          {/* Mobile version - simplified */}
-          <ProductFilter
-            selectedFilters={selectedFilters}
-            onFilterChange={handleFilterChange}
-            resetFilters={resetAllFilters}
-          />
-          <ProductsCards
-            selectedFilters={selectedFilters}
-            onAddToCart={(product) => console.log('Add to cart:', product)}
-          />
-        </div>
+        <MobileHome />
       ) : (
         <div className="flex flex-1">
           <aside
@@ -110,16 +168,32 @@ export default function PromosPage() {
               height: '100vh'
             }}
           >
-            <div className="max-w-7xl mx-auto px-4 mb-8">
-              <h1 className="text-2xl font-bold mb-6 mt-8">Promotions</h1>
-              <section className="bg-white rounded-lg shadow">
-                <ProductsCards
-                  selectedFilters={selectedFilters}
-                  onAddToCart={(product) => console.log('Add to cart:', product)}
-                />
-              </section>
+            <div>
+              <div className="pt-24" />
+              <ProductsIntro />
+              <Slider />
+
+              <div className="max-w-7xl mx-auto px-4 mb-8">
+                <section className="bg-white rounded-lg shadow">
+                  <ProductsCards
+                    selectedFilters={selectedFilters}
+                    onAddToCart={(product) => console.log('Add to cart:', product)}
+                  />
+                </section>
+              </div>
+
+              <WineCategories />
+              <HeroBanner />
+              <Livraison />
+              <div className="py-8" />
+              <Trust />
+              <Slogan />
+              <div className="py-8" />
             </div>
           </main>
+
+          <footer ref={footerRef}>
+          </footer>
         </div>
       )}
 

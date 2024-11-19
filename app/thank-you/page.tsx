@@ -82,7 +82,7 @@ const ThankYouPage = () => {
       )}
       <button
         onClick={() => router.push('/')}
-        className="bg-gradient-to-r from-primary to-rose-500 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white py-2 px-4 rounded"
+        className="bg-gradient-to-r from-primary to-rose-800 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white py-2 px-4 rounded"
       >
         Retour à l&apos;accueil
       </button>
