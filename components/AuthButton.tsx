@@ -43,14 +43,14 @@ const AuthButton = () => {
     }
 
     return (
-        <div className="relative z-40" ref={menuRef}>
+        <div className="relative md:z-40" ref={menuRef}>
             <span
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-sm text-white font-semibold hover:text-gray-800 cursor-pointer flex items-center gap-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-sm text-primary md:text-white font-semibold hover:text-gray-800 cursor-pointer flex items-center gap-2"
             >
-                <User size={16} />
-                Mon compte
-                <ChevronDown size={16} className={`transition-transform ${isMenuOpen ? 'rotate-180' : ''}`} />
+              <User size={16} />
+              Mon compte
+              <ChevronDown size={16} className={`transition-transform ${isMenuOpen ? 'rotate-180' : ''}`} />
             </span>
 
             {isMenuOpen && (

@@ -191,7 +191,6 @@ const Header: React.FC = () => {
             </div>
 
             <div className="flex items-center space-x-2">
-              <AuthButton />
               <CartIcon onClick={toggleCartPopup} />
             </div>
           </div>
@@ -238,6 +237,8 @@ const Header: React.FC = () => {
                     {category.icon}
                   </a>
                 ))}
+                <AuthButton />
+
               </nav>
 
               <div className="border-t border-gray-100 p-4 space-y-2">
