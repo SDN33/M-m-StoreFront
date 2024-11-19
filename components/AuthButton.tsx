@@ -43,7 +43,7 @@ const AuthButton = () => {
     }
 
     return (
-        <div className="relative lg:z-50" ref={menuRef}>
+        <div className="relative z-50" ref={menuRef}>
             <span
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-sm text-primary p-2 bg-black rounded-xl sm:texy-primary md:mt-0 md:text-white lg:text-white font-semibold hover:text-gray-800 cursor-pointer flex items-center gap-2"
