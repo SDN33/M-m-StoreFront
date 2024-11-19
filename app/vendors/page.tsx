@@ -212,11 +212,11 @@ const VendorsPage = () => {
                         </div>
                       )}
                       <div className="ml-4">
-                        <h2 className="text-2xl font-semibold text-gray-800">
+                        <h2 className="text-xl font-semibold text-gray-800">
                           {vendor.shop?.title || 'Unknown Vendor'}
                         </h2>
                         {vendor.address?.city && (
-                          <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full flex items-center">
+                          <span className=" -mt-1 text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full flex items-center">
                             <MapPin className="w-4 h-4 mr-1" />
                             {vendor.address.city} ({vendor.address?.postcode?.substring(0, 2) || 'N/A'})
                           </span>
@@ -225,7 +225,7 @@ const VendorsPage = () => {
                     </div>
                     <Link
                       href={`/vendors/${vendor.id}`}
-                      className="inline-flex items-center text-xs px-4 py-2 bg-blue-50 text-teal-800 rounded-lg hover:bg-blue-100 transition-colors duration-200"
+                      className="inline-flex items-center text-xs px-2 font-normal py-2 bg-blue-50 text-teal-800 rounded-lg hover:bg-blue-100 transition-colors duration-200"
                     >
                       Voir plus →
                     </Link>

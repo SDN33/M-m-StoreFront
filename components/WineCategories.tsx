@@ -164,7 +164,7 @@ const VendorsPage = () => {
                         </div>
                       )}
                       <div className="ml-4">
-                        <h2 className="text-2xl font-semibold text-gray-800">
+                        <h2 className="text-xl font-semibold text-gray-800">
                           {vendor.shop?.title || 'Unknown Vendor'}
                         </h2>
                         {vendor.address?.city && (
@@ -177,21 +177,21 @@ const VendorsPage = () => {
                     </div>
                     <Link
                       href={`/vendors/${vendor.id}`}
-                      className="inline-flex items-center text-xs px-4 py-2 bg-blue-50 text-teal-800 rounded-lg hover:bg-blue-100 transition-colors duration-200"
+                      className="inline-flex items-center text-xs px-2 py-2 bg-blue-50 text-teal-800 rounded-lg hover:bg-blue-100 transition-colors duration-200"
                     >
                       Voir plus →
                     </Link>
                   </div>
 
                   {vendor.shop?.description && (
-                    <p className="mt-4 text-gray-600">
+                    <p className="mt-4 text-gray-600 text-sm">
                       {vendor.shop.description}
                     </p>
                   )}
 
                   {vendor.products && vendor.products.length > 0 && (
-                    <div className="mt-6 pt-4 border-t border-gray-100">
-                      <h3 className="text-lg font-semibold text-teal-800 mb-4">Bouteilles Recommandées</h3>
+                    <div className="mt-6 border-t border-gray-100">
+                      <h3 className="text-base font-semibold text-teal-800 mb-4">Bouteilles Recommandées</h3>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         {vendor.products.map((product) => (
                           <div
