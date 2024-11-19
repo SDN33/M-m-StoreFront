@@ -55,7 +55,7 @@ const MobileProductsIntro: React.FC = () => {
 
   return (
     <>
-      <div>
+      <div className='-mt-10'>
         <Image
           src="/images/meme-pas-contente.png"
           alt="Meme pas contente"
@@ -78,6 +78,7 @@ const MobileProductsIntro: React.FC = () => {
           }
           .animate-scroll {
             animation: scroll 1.5s infinite ease-in-out;
+            bg-opacity: 0.5;
           }
         `}</style>
       </div>
