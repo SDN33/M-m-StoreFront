@@ -8,10 +8,11 @@ import Link from 'next/link';
 import SocialShare from '@/components/Socialshare';
 
 const normalizeUrl = (url) => {
+  if (!url) return '';
   if (url.startsWith('//')) {
     return `https:${url}`;
   }
-  return url;
+  return url.startsWith('http') ? url : `https://${url}`;
 };
 
 const SocialIcon = ({ platform }) => {
@@ -168,26 +169,25 @@ export default function VendorDetailsPage() {
           </div>
         </div>
 
-        <div>
-          {vendor.address && (
-            <VendorLocationMap vendor={vendor} />
-          )}
-        </div>
+        {vendor.address && (
+          <VendorLocationMap vendor={vendor} />
+        )}
 
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold mb-4 text-teal-800">À propos</h2>
           <p className="text-gray-600 whitespace-pre-wrap">{vendor.shop?.description || ''}</p>
         </div>
 
-        {vendor.social && Object.keys(vendor.social).length > 0 && (
+        {vendor.social && typeof vendor.social === 'object' && Object.keys(vendor.social).length > 0 && (
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-lg font-semibold mb-4 text-teal-800">Réseaux sociaux</h2>
             <div className="flex flex-wrap gap-4">
-              {Object.entries(vendor.social).map(([platform, url]) => (
-                url && (
+              {Object.entries(vendor.social)
+                .filter(([platform, url]) => url)
+                .map(([platform, url]) => (
                   <a
                     key={platform}
-                    href={url}
+                    href={normalizeUrl(url)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
@@ -195,8 +195,8 @@ export default function VendorDetailsPage() {
                     <SocialIcon platform={platform} />
                     <span className="capitalize">{platform}</span>
                   </a>
-                )
-              ))}
+                ))
+              }
             </div>
           </div>
         )}
@@ -208,7 +208,13 @@ export default function VendorDetailsPage() {
               products.map((product) => (
                 <div key={product.id} className="bg-white p-4 rounded-lg shadow-lg">
                   <Link href={`/product/${product.id}`} passHref>
-                    <Image src={product.images[0]?.src || '/images/vinmeme.png'} alt={product.name} width={160} height={160} className="object-cover rounded" />
+                    <Image
+                      src={product.images[0]?.src || '/images/vinmeme.png'}
+                      alt={product.name}
+                      width={160}
+                      height={160}
+                      className="object-cover rounded"
+                    />
                   </Link>
                   <h3 className="mt-4 text-lg font-semibold">{product.name}</h3>
                   <p className="text-gray-600">{product.price} €</p>
