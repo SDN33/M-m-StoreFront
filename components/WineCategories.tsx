@@ -43,7 +43,6 @@ const VendorsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-
   useEffect(() => {
     const fetchVendors = async () => {
       try {
@@ -65,7 +64,6 @@ const VendorsPage = () => {
           throw new Error(`Error fetching products: ${response.status}`);
         }
         const products = await response.json();
-        // Prenons seulement les 3 derniers produits
         return products.slice(0, 3);
       } catch (error) {
         console.error(`Error fetching products for vendor ${vendorId}:`, error);
@@ -76,15 +74,12 @@ const VendorsPage = () => {
     const fetchAllData = async () => {
       try {
         const vendorData = await fetchVendors();
-
-        // Fetch products for each vendor
         const vendorsWithProducts = await Promise.all(
           vendorData.map(async (vendor: Vendor) => {
             const products = await fetchProductsForVendor(vendor.id);
             return { ...vendor, products };
           })
         );
-
         setVendors(vendorsWithProducts);
         setError('');
       } catch (error) {
@@ -147,7 +142,7 @@ const VendorsPage = () => {
             <p className="text-yellow-700">Aucun vignerons trouvés.</p>
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {vendors.map((vendor) => {
               const avatar = vendor.shop?.image || vendor.shop?.banner;
               return (
@@ -195,9 +190,9 @@ const VendorsPage = () => {
                   )}
 
                   {vendor.products && vendor.products.length > 0 && (
-                    <div className="mt-6 pt-4 border-t border-gray-100 max-w-screen-sm">
-                      <h3 className="text-lg font-semibold mb-4 text-teal-800">Bouteilles Recommandées</h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div className="mt-6 pt-4 border-t border-gray-100">
+                      <h3 className="text-lg font-semibold text-gray-700 mb-4 text-teal-800">Bouteilles Recommandées</h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         {vendor.products.map((product) => (
                           <div
                             key={product.id}

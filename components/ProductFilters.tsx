@@ -32,12 +32,15 @@ const AnimatedResetButton: React.FC<{ onClick: () => void; isScrolled: boolean }
         flex
         items-center
         justify-center
+        bg-gradient-to-r
+        from-gray-900
+        via-gray-800
+        to-black
         text-white
-        bg-black
         hover:scale-110
         ${isScrolled
           ? 'w-10 h-10 rounded-full text-xs top-2 opacity-100'
-          : 'w-full py-3 rounded-t-xl text-sm font-bold uppercase tracking-wider hover:from-teal-700 hover:to-teal-900'}
+          : 'w-full py-3 rounded-t-xl text-sm font-bold uppercase tracking-wider'}
       `}
     >
       {isScrolled ? <RefreshCw /> : 'Réinitialiser les filtres'}
