@@ -224,7 +224,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       </div>
 
         <div className="flex justify-between items-center mb-2">
-          <span className="text-xs text-primary font-semibold cursor-pointer hover:underline">
+          <span className="text-xs font-semibold cursor-pointer hover:underline">
             {product.rating_count || 0} avis
           </span>
         </div>

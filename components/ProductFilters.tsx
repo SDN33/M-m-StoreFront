@@ -195,50 +195,52 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl">
         <AnimatedResetButton onClick={resetFilters} isScrolled={isScrolled} />
       </div>
-      {Object.entries(filterOptions).map(([filterType, options]) => {
-        if (hideColorFilter && filterType === 'color') return null;
-        return (
-          <div key={filterType} className="border-b border-gray-300 bg-slate-100 mt-20">
-            <button
-              onClick={() => toggleSection(filterType)}
-              className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between hover:bg-gray-100 transition-colors"
-            >
-              <span className="text-gray-800 text-base">{getFilterTitle(filterType)}</span>
-              {expandedSections.includes(filterType) ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
-            </button>
-            {expandedSections.includes(filterType) && (
-              <div className="p-4 space-y-2 bg-white shadow-sm rounded-md ">
-                {options.map((option) => (
-                  <label key={option.value} className="flex items-center justify-between cursor-pointer hover:bg-gray-100 p-2 rounded transition-colors">
-                    <div className="flex items-center">
-                      <input
-                        type="checkbox"
-                        checked={selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']].includes(option.value)}
-                        onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
-                        className="form-checkbox h-4 w-4 text-teal-800 focus:ring-teal-800 rounded border-gray-300 transition duration-200 ease-in-out"
-                      />
-                      <span className="ml-2 text-sm text-gray-700 font-semibold">
-                        {option.label === 'Bio' ? (
-                          <span className="flex items-center">
-                            {option.label} <Image src="/images/logobio1.webp" alt="Bio" width={16} height={16} className="ml-1" />
-                          </span>
-                        ) : option.label === 'Biodynamie' ? (
-                          <span className="flex items-center">
-                            {option.label} <Image src="/images/biodemeter.png" alt="Biodynamie" width={50} height={16} className="ml-1" />
-                          </span>
-                        ) : (
-                          option.label
-                        )}
-                      </span>
-                    </div>
-                  </label>
-                ))}
-                <br /><br />
-              </div>
-            )}
-          </div>
-        );
-      })}
+      <div className='pb-52 mt-14'>
+        {Object.entries(filterOptions).map(([filterType, options]) => {
+          if (hideColorFilter && filterType === 'color') return null;
+          return (
+            <div key={filterType} className="border-b border-gray-300 bg-slate-100">
+              <button
+                onClick={() => toggleSection(filterType)}
+                className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between hover:bg-gray-100 transition-colors"
+              >
+                <span className="text-gray-800 text-base">{getFilterTitle(filterType)}</span>
+                {expandedSections.includes(filterType) ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
+              </button>
+              {expandedSections.includes(filterType) && (
+                <div className="p-4 space-y-2 bg-white shadow-sm rounded-md ">
+                  {options.map((option) => (
+                    <label key={option.value} className="flex items-center justify-between cursor-pointer hover:bg-gray-100 p-2 rounded transition-colors">
+                      <div className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']].includes(option.value)}
+                          onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
+                          className="form-checkbox h-4 w-4 text-teal-800 focus:ring-teal-800 rounded border-gray-300 transition duration-200 ease-in-out"
+                        />
+                        <span className="ml-2 text-sm text-gray-700 font-semibold">
+                          {option.label === 'Bio' ? (
+                            <span className="flex items-center">
+                              {option.label} <Image src="/images/logobio1.webp" alt="Bio" width={16} height={16} className="ml-1" />
+                            </span>
+                          ) : option.label === 'Biodynamie' ? (
+                            <span className="flex items-center">
+                              {option.label} <Image src="/images/biodemeter.png" alt="Biodynamie" width={50} height={16} className="ml-1" />
+                            </span>
+                          ) : (
+                            option.label
+                          )}
+                        </span>
+                      </div>
+                    </label>
+                  ))}
+                  <br /><br />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
