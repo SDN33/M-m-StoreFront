@@ -223,24 +223,23 @@ const Header: React.FC = () => {
                 </div>
               </div>
 
-              <nav className="border-t border-gray-100 mb-20">
+                <nav className="border-t border-gray-100">
                 <AuthButton />
 
                 {categories.map((category) => (
                   <a
-                    key={category.name}
-                    href={category.href}
-                    onClick={category.onClick}
-                    className={`block px-4 py-3 text-gray-900 hover:bg-gray-50 transition-colors ${
-                      category.className || ''
-                    }`}
+                  key={category.name}
+                  href={category.href}
+                  onClick={category.onClick}
+                  className={`block px-4 py-3 text-gray-900 hover:bg-gray-50 transition-colors ${
+                    category.className || ''
+                  }`}
                   >
-                    {category.name}
-                    {category.icon}
+                  {category.name}
+                  {category.icon}
                   </a>
                 ))}
-
-              </nav>
+                </nav>
 
               <div className="border-t border-gray-100 p-4 space-y-2">
                 <a href="/portailpro" className="block py-2 text-gray-900 hover:text-primary">
