@@ -1,16 +1,12 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductsCards from '@/components/ProductsCards';
 import ProductFilter from '@/components/ProductFilters';
 
 export default function PromosPage() {
   const [isMobile, setIsMobile] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [scrollEnabled, setScrollEnabled] = useState(false);
-
-  const mainContentRef = useRef<HTMLDivElement>(null);
-  const filterContentRef = useRef<HTMLDivElement>(null);
 
   const [selectedFilters, setSelectedFilters] = useState({
     color: [],
@@ -22,7 +18,8 @@ export default function PromosPage() {
     volume: [],
     accord_mets: [],
     region__pays: [],
-    categories: []
+    categories: [],
+    sale_price: ['true']
   });
 
   useEffect(() => {
@@ -44,7 +41,6 @@ export default function PromosPage() {
       ...prev,
       [category]: filters
     }));
-    setScrollEnabled(true);
   };
 
   const resetAllFilters = () => {
@@ -58,8 +54,15 @@ export default function PromosPage() {
       volume: [],
       accord_mets: [],
       region__pays: [],
-      categories: []
+      categories: [],
+      sale_price: ['true']
     });
+  };
+
+  // Modify selectedFilters to include only products with sale_price
+  const promoFilters = {
+    ...selectedFilters,
+    has_sale_price: ['true'] // Add a filter to ensure only sale priced products are shown
   };
 
   return (
@@ -73,7 +76,7 @@ export default function PromosPage() {
             resetFilters={resetAllFilters}
           />
           <ProductsCards
-            selectedFilters={selectedFilters}
+            selectedFilters={promoFilters}
             onAddToCart={(product) => console.log('Add to cart:', product)}
           />
         </div>
@@ -85,7 +88,6 @@ export default function PromosPage() {
             } ${isMobile && !isFilterOpen ? '-translate-x-full' : 'translate-x-0'}`}
           >
             <div
-              ref={filterContentRef}
               className="p-4 h-full overflow-y-auto scroll-container"
               style={{
                 overscrollBehavior: 'auto',
@@ -103,18 +105,17 @@ export default function PromosPage() {
           </aside>
 
           <main
-            ref={mainContentRef}
             className="flex-1 bg-white overflow-y-auto"
             style={{
               overscrollBehavior: 'contain',
               height: '100vh'
             }}
           >
-            <div className="max-w-7xl mx-auto px-4 mb-8">
-              <h1 className="text-2xl font-bold mb-6 mt-8">Promotions</h1>
+            <div className="max-w-7xl mx-auto px-4 mb-8 mt-44">
+              <h1 className="text-3xl font-bold mb-6 mt-8 text-center text-white bg-gradient-to-br from-gray-800 to-black p-10 slide-in-right">Nos vins en promotions</h1>
               <section className="bg-white rounded-lg shadow">
                 <ProductsCards
-                  selectedFilters={selectedFilters}
+                  selectedFilters={promoFilters}
                   onAddToCart={(product) => console.log('Add to cart:', product)}
                 />
               </section>

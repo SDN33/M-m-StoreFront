@@ -183,6 +183,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         <div className="absolute top-0 left-0 z-10 bg-gradient-to-r from-teal-800 to-teal-950 rounded-full p-1.5 text-white">
           <div className="text-sm font-bold">{formatRating(product.average_rating, product.rating_count)}</div>
         </div>
+        <span className='flex ml-14'> <p className='mt-2 text-xs font-semibold'>{product.rating_count} avis</p></span>
         <div className="relative w-full h-52 mb-2">
           <Image
             src={product.images[0]?.src || '/images/vinmeme.png'}
