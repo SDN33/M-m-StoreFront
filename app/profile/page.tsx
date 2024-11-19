@@ -42,12 +42,8 @@ export default function Profile() {
             setError('Failed to fetch profile data. Please try again later.');
           }
         }
-      } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError('An unexpected error occurred. Please try again later.');
-        }
+      } catch {
+        setError('An unexpected error occurred. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -60,7 +56,7 @@ export default function Profile() {
     try {
       await logout();
       router.push('/login');
-    } catch (err) {
+    } catch {
       setError('Failed to logout. Please try again.');
     }
   };
@@ -76,7 +72,9 @@ export default function Profile() {
   return (
     <main className="container mx-auto px-4 py-8 mt-48 mb-56">
       <div className="mx-auto max-w-md rounded-lg bg-white p-6 shadow-lg">
-        <h1 className="mb-6 text-center text-xl font-bold text-gray-800">Bienvenue <br /> {user?.user_display_name} </h1>
+        <h1 className="mb-6 text-center text-xl font-bold text-gray-800">
+          Bienvenue <br /> {user?.user_display_name}
+        </h1>
 
         {error && (
           <div className="mb-6 rounded-md bg-red-50 p-4 text-red-600">
