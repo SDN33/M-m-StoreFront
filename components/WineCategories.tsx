@@ -191,7 +191,7 @@ const VendorsPage = () => {
 
                   {vendor.products && vendor.products.length > 0 && (
                     <div className="mt-6 border-t border-gray-100">
-                      <h3 className="text-base font-semibold text-teal-800 mb-4 text-center">Bouteilles Recommandées</h3>
+                      <h3 className="text-base font-semibold text-teal-800 mb-4 text-center">Vins Recommandés</h3>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         {vendor.products.map((product) => (
                           <div

@@ -202,7 +202,7 @@ export default function VendorDetailsPage() {
         )}
 
         <div className="mt-10">
-          <h2 className="text-xl font-semibold mb-4 text-teal-800">Bouteilles en vente</h2>
+          <h2 className="text-xl font-semibold mb-4 text-teal-800">Vins en vente</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {products.length > 0 ? (
               products.map((product) => (
