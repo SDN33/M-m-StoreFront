@@ -102,7 +102,7 @@ export default function VendorDetailsPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto mt-28 md:mt-52">
+    <div className="max-w-4xl mx-auto mt-36">
       <div className="relative">
         <Image
           src={normalizeUrl(vendor.shop.banner)}
@@ -125,7 +125,7 @@ export default function VendorDetailsPage() {
       <div className="mt-20 px-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-primary">{vendor.shop.title}</h1>
+            <h1 className="text-2xl font-bold">{vendor.shop.title}</h1>
             {vendor.address?.city && (
               <div className="flex items-center text-gray-600">
                 <MapPin className="w-4 h-4 mr-1" />
@@ -138,13 +138,13 @@ export default function VendorDetailsPage() {
           </div>
         </div>
 
-        <div className="mt-6 bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">À propos</h2>
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold mb-4 text-teal-800">À propos</h2>
           <p className="text-gray-600 whitespace-pre-wrap">{vendor.shop.description}</p>
         </div>
 
         {vendor.social && Object.keys(vendor.social).length > 0 && (
-          <div className="mt-6 bg-white rounded-lg shadow p-6">
+          <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-lg font-semibold mb-4 text-teal-800">Réseaux sociaux</h2>
             <div className="flex flex-wrap gap-4">
               {Object.entries(vendor.social).map(([platform, url]) => (
@@ -166,7 +166,7 @@ export default function VendorDetailsPage() {
         )}
 
         <div className="mt-10">
-          <h2 className="text-xl font-semibold mb-4">Produits</h2>
+          <h2 className="text-xl font-semibold mb-4 text-teal-800">Bouteilles en vente</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {products.length > 0 ? (
               products.map((product) => (

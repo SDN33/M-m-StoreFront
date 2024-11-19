@@ -33,10 +33,7 @@ const AnimatedResetButton: React.FC<{ onClick: () => void; isScrolled: boolean }
         items-center
         justify-center
         text-white
-        bg-gradient-to-r
-        from-teal-700
-        via-teal-600
-        to-teal-800
+        bg-black
         hover:scale-110
         ${isScrolled
           ? 'w-10 h-10 rounded-full text-xs top-2 opacity-100'
