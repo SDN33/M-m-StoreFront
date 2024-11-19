@@ -37,12 +37,12 @@ export default async function handler(
     if (req.method === 'POST') {
       const { id } = req.body;
 
-      if (!id) {
-        return res.status(400).json({ message: 'Vendor ID is required' });
+      if (!id || isNaN(id)) {
+        return res.status(400).json({ message: 'Valid vendor ID is required' });
       }
 
       // Requête pour un vendeur spécifique
-      const response = await axios.get(`${WC_API_DOMAIN}/wp-json/mvx/v1/vendors/${id}`, {
+      const response = await axios.get(`${WC_API_DOMAIN}/wp-json/mvx/v1/vendors/${encodeURIComponent(id)}`, {
         headers: {
           Authorization: `Basic ${Buffer.from(`${WC_CONSUMER_KEY}:${WC_CONSUMER_SECRET}`).toString('base64')}`
         }
