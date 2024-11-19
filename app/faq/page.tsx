@@ -75,7 +75,7 @@ export default function Faq() {
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg mt-40">
           <div className="p-4">
-            <h1 className="text-xl font-bold text-center mb-3 text-primary">
+            <h1 className="text-2xl font-bold text-center mb-3 text-primary">
               Foire Aux Questions (FAQ)
             </h1>
 
@@ -102,7 +102,7 @@ export default function Faq() {
             </div>
 
             <div>
-              <h2 className="text-sm font-semibold text-gray-800 mb-2">
+              <h2 className="text-sm font-semibold text-teal-800 mb-2">
                 Questions fréquentes :
               </h2>
               <div className="grid gap-2 grid-cols-2">

@@ -37,29 +37,31 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="sx-container mt-60">
-      <h2 className="text-primary">Se connecter</h2>
-      {error && <p className="text-red-500 text-center">{error}</p>}
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          placeholder="Nom d'utilisateur"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Mot de passe"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button className="bg-gradient-to-r from-primary to-rose-800 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white" type="submit">Connectez-vous</button>
-      </form>
-      <span className="text-xs text-center flex mt-2 italic">En continuant, vous acceptez les conditions d&apos;utilisation de Mémé Georgette et reconnaissez avoir lu notre Politique de confidentialité. Informations concernant la collecte de données.</span>
-      <a href="/signup" className="link">Pas encore de compte? Inscrivez-vous</a>
-      <a href="/forgot-password" className="link">Mot de passe oublié?</a>
+    <div className="bg-gradient-to-b from-white to-orange-50">
+      <div className="sx-container !mt-48">
+        <h2 className="text-primary">Se connecter</h2>
+        {error && <p className="text-red-500 text-center">{error}</p>}
+        <form onSubmit={handleLogin}>
+          <input
+            type="text"
+            placeholder="Nom d'utilisateur"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Mot de passe"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button className="bg-gradient-to-r from-primary to-rose-800 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white" type="submit">Connectez-vous</button>
+        </form>
+        <span className="text-xs text-center flex mt-2 italic">En continuant, vous acceptez les conditions d&apos;utilisation de Mémé Georgette et reconnaissez avoir lu notre Politique de confidentialité. Informations concernant la collecte de données.</span>
+        <a href="/signup" className="link text-xs font-semibold">Pas encore de compte? Inscrivez-vous</a>
+        <a href="/forgot-password" className="link text-xs font-semibold">Mot de passe oublié?</a>
+      </div>
     </div>
   );
 }

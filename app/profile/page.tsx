@@ -70,7 +70,7 @@ export default function Profile() {
   }
 
   return (
-    <main className="container mx-auto px-4 py-8 mt-48 mb-56">
+    <main className="container mx-auto px-4 py-8 mt-48 mb-56 bg-gradient-to-b from-white to-orange-50">
       <div className="mx-auto max-w-md rounded-lg bg-white p-6 shadow-lg">
         <h1 className="mb-6 text-center text-xl font-bold text-gray-800">
           Bienvenue <br /> {user?.user_display_name}
@@ -105,7 +105,7 @@ export default function Profile() {
         )}
 
         {!user && !loading && (
-          <p className="text-center text-gray-600">Redirecting to login...</p>
+          <p className="text-center text-gray-600 ">Redirection en cours...</p>
         )}
       </div>
     </main>
