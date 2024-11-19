@@ -1,8 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { MapPin, Globe, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
+
+const normalizeUrl = (url) => {
+  if (url.startsWith('//')) {
+    return `https:${url}`;
+  }
+  return url;
+};
 
 const SocialIcon = ({ platform }) => {
   const icons = {
@@ -17,6 +25,7 @@ const SocialIcon = ({ platform }) => {
 
 export default function VendorDetailsPage() {
   const [vendor, setVendor] = useState(null);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const params = useParams();
@@ -26,16 +35,24 @@ export default function VendorDetailsPage() {
     if (id) {
       const fetchVendorDetails = async () => {
         try {
-          const response = await fetch('/api/get-vendor', {
+          const vendorResponse = await fetch('/api/get-vendor', {
             method: 'POST',
             body: JSON.stringify({ id }),
             headers: { 'Content-Type': 'application/json' }
           });
-          const data = await response.json();
-          setVendor(data);
+          const vendorData = await vendorResponse.json();
+          setVendor(vendorData);
+
+          // Correction ici pour utiliser le nouvel endpoint
+          const productResponse = await fetch(`/api/get-vendor-products?vendorId=${id}`);
+          if (!productResponse.ok) {
+            throw new Error('Failed to fetch vendor products');
+          }
+          const productsData = await productResponse.json();
+          setProducts(productsData);
         } catch (err) {
           console.error(err);
-          setError('Failed to fetch vendor details');
+          setError('Failed to fetch vendor details or products');
         } finally {
           setLoading(false);
         }
@@ -46,7 +63,7 @@ export default function VendorDetailsPage() {
       setError('No ID provided in the URL');
     }
   }, [id]);
-
+  
   if (loading) {
     return (
       <div className="max-w-4xl mx-auto p-4">
@@ -85,35 +102,32 @@ export default function VendorDetailsPage() {
 
   return (
     <div className="max-w-4xl mx-auto mt-28 md:mt-52">
-      {/* Cover Photo */}
       <div className="relative">
-        <div className="w-full h-64 overflow-hidden rounded-b-lg">
-          <img
-            src={vendor.shop.banner}
-            alt={`${vendor.shop.title} banner`}
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Profile Photo */}
+        <Image
+          src={normalizeUrl(vendor.shop.banner)}
+          alt={`${vendor.shop.title} banner`}
+          width={1200}
+          height={400}
+          className="object-cover"
+        />
         <div className="absolute -bottom-16 left-6">
-          <img
-            src={vendor.shop.image}
-            alt={`${vendor.display_name} profile`}
-            className="w-32 h-32 rounded-full border-4 border-white object-cover bg-white shadow-lg"
-          />
+        <Image
+          src={normalizeUrl(vendor.shop.image)}
+          alt={`${vendor.display_name} profile`}
+          width={128}
+          height={128}
+          className="rounded-full border-4 border-white object-cover bg-white shadow-lg"
+        />
         </div>
       </div>
 
-      {/* Content Section */}
       <div className="mt-20 px-6">
-        {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{vendor.shop.title}</h1>
+            <h1 className="text-2xl font-bold text-primary">{vendor.shop.title}</h1>
             {vendor.address?.city && (
-              <div className="mt-2 flex items-center text-gray-600">
-                <MapPin className="w-4 h-4 mr-1"/>
+              <div className="flex items-center text-gray-600">
+                <MapPin className="w-4 h-4 mr-1" />
                 <span>
                   {vendor.address.city}
                   {vendor.address?.postcode && ` (${vendor.address.postcode.substring(0, 2)})`}
@@ -123,21 +137,17 @@ export default function VendorDetailsPage() {
           </div>
         </div>
 
-        {/* Description */}
-        <div className="mt-6">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold mb-4">À propos</h2>
-            <p className="text-gray-600 whitespace-pre-wrap">{vendor.shop.description}</p>
-          </div>
+        <div className="mt-6 bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold mb-4">À propos</h2>
+          <p className="text-gray-600 whitespace-pre-wrap">{vendor.shop.description}</p>
         </div>
 
-        {/* Social Links */}
         {vendor.social && Object.keys(vendor.social).length > 0 && (
-          <div className="mt-6">
-            <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-lg font-semibold mb-4">Réseaux sociaux</h2>
-              <div className="flex flex-wrap gap-4">
-                {Object.entries(vendor.social).map(([platform, url]) => (
+          <div className="mt-6 bg-white rounded-lg shadow p-6">
+            <h2 className="text-lg font-semibold mb-4 text-teal-800">Réseaux sociaux</h2>
+            <div className="flex flex-wrap gap-4">
+              {Object.entries(vendor.social).map(([platform, url]) => (
+                url && (
                   <a
                     key={platform}
                     href={url}
@@ -148,11 +158,28 @@ export default function VendorDetailsPage() {
                     <SocialIcon platform={platform} />
                     <span className="capitalize">{platform}</span>
                   </a>
-                ))}
-              </div>
+                )
+              ))}
             </div>
           </div>
         )}
+
+        <div className="mt-10">
+          <h2 className="text-xl font-semibold mb-4">Produits</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {products.length > 0 ? (
+              products.map((product) => (
+                <div key={product.id} className="bg-white p-4 rounded-lg shadow-lg">
+                  <Image src={product.images[0]?.src} alt={product.name} width={160} height={160} className="object-cover rounded" />
+                  <h3 className="mt-4 text-lg font-semibold">{product.name}</h3>
+                  <p className="text-gray-600">{product.price} €</p>
+                </div>
+              ))
+            ) : (
+              <p>Aucun produit trouvé pour ce vendeur.</p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

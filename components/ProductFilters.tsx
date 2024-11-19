@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, ChevronUp, Wine, Locate, Calendar, Grape, Medal, Ruler, Utensils } from 'lucide-react';
+import { ChevronDown, ChevronUp, Wine, Locate, Calendar, Grape, Medal, Ruler, Utensils, RefreshCw } from 'lucide-react';
 import Image from 'next/image';
 
 interface ProductFilterProps {
@@ -43,7 +43,7 @@ const AnimatedResetButton: React.FC<{ onClick: () => void; isScrolled: boolean }
           : 'w-full py-3 rounded-t-xl text-sm font-bold uppercase tracking-wider hover:from-teal-700 hover:to-teal-900'}
       `}
     >
-      {isScrolled ? '' : 'Réinitialiser les filtres'}
+      {isScrolled ? <RefreshCw /> : 'Réinitialiser les filtres'}
     </button>
   );
 };

@@ -5,31 +5,40 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { MapPin, Facebook, Instagram, Twitter, Linkedin, Youtube, Globe, Search } from 'lucide-react';
 
-const VendorsPage = () => {
-  interface Vendor {
-    id: string;
-    shop: {
-      display_name: string;
-      image?: string;
-      banner?: string;
-      title?: string;
-      description?: string;
-    };
-    name?: string;
-    description?: string;
-    address?: {
-      city?: string;
-      postcode?: string;
-    };
-    social?: Record<string, string>;
-    products?: {
-      id: string;
-      name: string;
-      description: string;
-      price: number;
-    }[];
-  }
+interface ProductImage {
+  id: number;
+  src: string;
+  alt: string;
+}
 
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: string;
+  images: ProductImage[];
+}
+
+interface Vendor {
+  id: string;
+  shop: {
+    display_name: string;
+    image?: string;
+    banner?: string;
+    title?: string;
+    description?: string;
+  };
+  name?: string;
+  description?: string;
+  address?: {
+    city?: string;
+    postcode?: string;
+  };
+  social?: Record<string, string>;
+  products?: Product[];
+}
+
+const VendorsPage = () => {
   const [vendors, setVendors] = useState<Vendor[]>([]);
   const [filteredVendors, setFilteredVendors] = useState<Vendor[]>([]);
   const [loading, setLoading] = useState(true);
@@ -74,18 +83,17 @@ const VendorsPage = () => {
       }
     };
 
-    const fetchProductsForVendor = async (displayName: string) => {
+    const fetchProductsForVendor = async (vendorId: string) => {
       try {
-        const response = await fetch(`/api/products?store_name=${encodeURIComponent(displayName)}`);
+        const response = await fetch(`/api/get-vendor-products?vendorId=${vendorId}`);
         if (!response.ok) {
           throw new Error(`Error fetching products: ${response.status}`);
         }
         const products = await response.json();
-        return products.filter((product: { store_name: string }) =>
-          product.store_name === displayName
-        );
+        // Prenons seulement les 3 derniers produits
+        return products.slice(0, 3);
       } catch (error) {
-        console.error(`Error fetching products for ${displayName}:`, error);
+        console.error(`Error fetching products for vendor ${vendorId}:`, error);
         return [];
       }
     };
@@ -94,8 +102,8 @@ const VendorsPage = () => {
       try {
         const vendorData = await fetchVendors();
         const vendorsWithProducts = await Promise.all(
-          vendorData.map(async (vendor: { shop: { display_name: string } }) => {
-            const products = await fetchProductsForVendor(vendor.shop.display_name);
+          vendorData.map(async (vendor: Vendor) => {
+            const products = await fetchProductsForVendor(vendor.id);
             return { ...vendor, products };
           })
         );
@@ -150,9 +158,15 @@ const VendorsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 mt-32 md:mt-40">
+    <div className="min-h-screen bg-gray-50 mt-40">
       <div className="max-w-5xl mx-auto p-6">
-        <Image src="/images/vignerons.png" alt="Vineyard" width={1920} height={1080} className="rounded-lg mb-8" />
+        <Image
+          src="/images/vignerons.png"
+          alt="Vineyard"
+          width={1920}
+          height={1080}
+          className="rounded-lg mb-8"
+        />
 
         <div>
           <p className="text-center text-xl font-extrabold -mt-4 mb-4 slide-in-right text-primary">
@@ -164,6 +178,7 @@ const VendorsPage = () => {
             Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique.
           </p>
           <div className='border-t-2 border-primary w-16 mt-4 flex mx-auto'></div>
+          <br /><br />
         </div>
 
         {/* Search and Filter Section */}
@@ -194,87 +209,107 @@ const VendorsPage = () => {
 
         {filteredVendors.length === 0 ? (
           <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
-            <p className="text-yellow-700">Aucun vigneron trouvé pour votre recherche.</p>
+            <p className="text-yellow-700">Aucun vignerons trouvés.</p>
           </div>
         ) : (
           <div className="space-y-6">
-            {filteredVendors.map((vendor) => (
-              <div
-                key={vendor.id}
-                className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
-              >
-                <div className="flex justify-between items-start">
-                  <div className="space-y-2 flex items-center">
-                    {vendor.shop?.image && (
-                      <Image
-                        src={vendor.shop.image.startsWith('//') ? `https:${vendor.shop.image}` : vendor.shop.image}
-                        alt={vendor.shop?.title || 'Vendor Avatar'}
-                        className="w-16 h-16 rounded-full object-cover"
-                        width={64}
-                        height={64}
-                      />
-                    )}
-                    <div className="ml-4">
-                      <h2 className="text-2xl font-semibold text-gray-800">
-                        {vendor.shop?.title || 'Unknown Vendor'}
-                      </h2>
-                      {vendor.address?.city && (
-                        <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full flex items-center">
-                          <MapPin className="w-4 h-4 mr-1"/>{vendor.address.city} ({vendor.address?.postcode?.substring(0, 2) || 'N/A'})
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  <Link
-                    href={`/vendors/${vendor.id}`}
-                    className="inline-flex items-center text-xs px-4 py-2 bg-blue-50 bg-opacity-30 text-teal-800 rounded-lg hover:bg-blue-100 transition-colors duration-200"
-                  >
-                    Voir plus →
-                  </Link>
-                </div>
-
-                {vendor.shop?.description && (
-                  <p className="text-center mt-4">
-                    {vendor.shop.description}
-                  </p>
-                )}
-
-                {vendor.products && vendor.products.length > 0 && (
-                  <div className="mt-6 pt-4 border-t border-gray-100">
-                    <h3 className="text-xl font-semibold text-gray-700">Nos vins disponibles</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-                      {vendor.products.map((product) => (
-                        <div key={product.id} className="bg-gray-100 p-4 rounded-lg shadow-sm">
-                          <h4 className="font-semibold text-gray-800">{product.name}</h4>
-                          <p className="text-gray-600">{product.description.substring(0, 80)}...</p>
-                          <p className="font-semibold text-gray-800">{product.price} €</p>
+            {filteredVendors.map((vendor) => {
+              const avatar = vendor.shop?.image || vendor.shop?.banner;
+              return (
+                <div
+                  key={vendor.id}
+                  className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
+                >
+                  <div className="flex justify-between items-start">
+                    <div className="space-y-2 flex items-center">
+                      {avatar && (
+                        <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-100">
+                          <Image
+                            src={avatar.startsWith('//') ? `https:${avatar}` : avatar}
+                            alt={vendor.shop?.title || 'Vendor Avatar'}
+                            className="w-full h-full object-cover"
+                            width={64}
+                            height={64}
+                          />
                         </div>
-                      ))}
+                      )}
+                      <div className="ml-4">
+                        <h2 className="text-2xl font-semibold text-gray-800">
+                          {vendor.shop?.title || 'Unknown Vendor'}
+                        </h2>
+                        {vendor.address?.city && (
+                          <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full flex items-center">
+                            <MapPin className="w-4 h-4 mr-1" />
+                            {vendor.address.city} ({vendor.address?.postcode?.substring(0, 2) || 'N/A'})
+                          </span>
+                        )}
+                        {vendor.social && Object.keys(vendor.social).length > 0 && (
+                          <div className="mt-2">
+                            {Object.entries(vendor.social).map(([platform, url]) => (
+                              url ? (
+                                <a
+                                  key={platform}
+                                  href={url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="px-3 py-1 text-sm bg-gray-100 text-primary rounded-full hover:bg-gray-200 transition-colors duration-200 mr-2"
+                                >
+                                  {getSocialIcon(platform)}
+                                </a>
+                              ) : null
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </div>
+                    <Link
+                      href={`/vendors/${vendor.id}`}
+                      className="inline-flex items-center text-xs px-4 py-2 bg-blue-50 text-teal-800 rounded-lg hover:bg-blue-100 transition-colors duration-200"
+                    >
+                      Voir plus →
+                    </Link>
                   </div>
-                )}
 
-                {vendor.social && Object.keys(vendor.social).length > 0 && (
-                  <div className="mt-6 pt-4 border-t border-gray-100">
-                    <div className="flex gap-4">
-                      {Object.entries(vendor.social).map(([platform, url]) => (
-                        url ? (
-                          <a
-                            key={platform}
-                            href={url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-3 py-1 text-sm bg-gray-100 text-primary rounded-full hover:bg-gray-200 transition-colors duration-200"
+                  {vendor.shop?.description && (
+                    <p className="mt-4 text-gray-600">
+                      {vendor.shop.description}
+                    </p>
+                  )}
+
+                  {vendor.products && vendor.products.length > 0 && (
+                    <div className="mt-6 pt-4 border-t border-gray-100">
+                      <h3 className="text-lg font-semibold text-gray-700 mb-4">Dernières bouteilles</h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        {vendor.products.map((product) => (
+                          <div
+                            key={product.id}
+                            className="flex flex-col items-center bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
                           >
-                            {getSocialIcon(platform)}
-                          </a>
-                        ) : null
-                      ))}
+                            {product.images && product.images[0] && (
+                              <div className="w-24 h-24 mb-3 relative overflow-hidden rounded-full border-2 border-white shadow-sm">
+                                <Image
+                                  src={product.images[0].src}
+                                  alt={product.name}
+                                  layout="fill"
+                                  objectFit="cover"
+                                  className="transition-transform duration-300 hover:scale-110"
+                                />
+                              </div>
+                            )}
+                            <h4 className="font-medium text-sm text-center text-gray-800 line-clamp-1">
+                              {product.name}
+                            </h4>
+                            <p className="text-primary font-semibold mt-1">
+                              {product.price}€
+                            </p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
       </div>
