@@ -9,7 +9,6 @@ import MobileProductFilter from './MobileProductFilter';
 import Trust from '@/components/Trust';
 import Livraison from './Livraison';
 import MobileProductsIntro from './MobileProductIntro';
-import Slider from './Slider';
 
 const MobileHome: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -38,10 +37,6 @@ const MobileHome: React.FC = () => {
       <br /><br /><br /><br />
       <div className="mt-12">
         <MobileProductsIntro />
-        <div className='bg-primary'>
-          <Slider />
-        </div>
-
         <div className="max-w-7xl mx-auto px-4 space-y-8">
           <section className="bg-white rounded-lg shadow">
             <ProductsCards selectedFilters={selectedFilters} onAddToCart={(product) => console.log('Add to cart:', product)} />
