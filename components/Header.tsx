@@ -65,7 +65,7 @@ const Header: React.FC = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full bg-primary shadow-sm">
       {/* PromotionSection avec hauteur fixe */}
-      <div className="h-[37px]">
+      <div className="h-[35px]">
         <PromotionSection />
       </div>
 
@@ -75,7 +75,7 @@ const Header: React.FC = () => {
           {/* Desktop and Tablet View - Hauteur fixe */}
           <div className="hidden md:flex items-center justify-between h-16 relative">
             {/* Container des logos avec dimensions fixes */}
-            <div className="relative w-[280px] h-24 flex items-center">
+            <div className="relative w-[280px] h-32 flex items-center">
               <div className="absolute left-0 top-0 h-full w-[71px] flex items-center justify-center">
                 <Link href="/">
                   <Image
@@ -109,7 +109,7 @@ const Header: React.FC = () => {
             </div>
 
             {/* Right Actions - Largeur fixe */}
-            <div className="hidden lg:flex items-center space-x-8 text-sm px-6 min-w-[400px] justify-end">
+            <div className="hidden lg:flex items-center space-x-7 text-sm px-4 min-w-[400px] justify-end">
               <div className="flex items-center space-x-3">
                 <span className="text-white whitespace-nowrap">Livraison en</span>
                 <div className="relative">
