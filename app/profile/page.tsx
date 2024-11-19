@@ -9,18 +9,11 @@ interface User {
   user_email: string;
 }
 
-interface Order {
-  id: number;
-  date: string;
-  total: string;
-  status: string;
-}
-
 export default function Profile() {
   const { logout } = useAuth();
   const [user, setUser] = useState<User | null>(null);
-  const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -32,32 +25,25 @@ export default function Profile() {
 
     async function fetchUserData() {
       try {
-        const userResponse = await fetch('/api/profile', {
+        setError(null);
+        const response = await fetch('/api/profile', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        if (userResponse.ok) {
-          const userData: User = await userResponse.json();
-          setUser(userData);
+        if (response.ok) {
+          const data: User = await response.json();
+          setUser(data);
         } else {
-          router.push('/login');
-          return;
+          if (response.status === 401) {
+            router.push('/login');
+          } else {
+            setError('Failed to fetch profile data. Please try again later.');
+          }
         }
-
-        const ordersResponse = await fetch('/api/orders', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (ordersResponse.ok) {
-          const ordersData: Order[] = await ordersResponse.json();
-          setOrders(ordersData);
-        }
-      } catch {
-        router.push('/login');
+      } catch (err) {
+        setError('An unexpected error occurred. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -66,51 +52,60 @@ export default function Profile() {
     fetchUserData();
   }, [router]);
 
-  if (loading) return <div>Loading...</div>;
-  if (!user) return null;
+  const handleLogout = async () => {
+    try {
+      await logout();
+      router.push('/login');
+    } catch (err) {
+      setError('Failed to logout. Please try again.');
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600" />
+      </div>
+    );
+  }
 
   return (
-    <main style={{ maxWidth: '600px', margin: '14rem auto' }}>
-      <div style={{ textAlign: 'center' }}>
-        <h1>Bienvenue, {user.user_display_name}!</h1>
-        <p>Email: {user.user_email}</p>
-        <button
-          onClick={() => {
-            logout();
-            router.push('/login');
-          }}
-          style={{
-            backgroundColor: '#ff6347',
-            color: '#fff',
-            border: 'none',
-            padding: '10px 20px',
-            cursor: 'pointer',
-            borderRadius: '5px',
-            marginTop: '20px',
-          }}
-        >
-          Déconnexion
-        </button>
-      </div>
+    <main className="container mx-auto px-4 py-8 mt-48 mb-56">
+      <div className="mx-auto max-w-md rounded-lg bg-white p-6 shadow-lg">
+        <h1 className="mb-6 text-center text-xl font-bold text-gray-800">Bienvenue <br /> {user?.user_display_name} </h1>
 
-      {/* Section des commandes récentes */}
-      <section className="text-center" style={{ marginTop: '30px' }}>
-        <h2>Vos dernières commandes</h2>
-        {orders.length > 0 ? (
-          <ul style={{ listStyle: 'none', padding: 0 }}>
-            {orders.map((order) => (
-              <li key={order.id} style={{ borderBottom: '1px solid #ccc', padding: '10px 0' }}>
-                <p>Commande #{order.id}</p>
-                <p>Date: {new Date(order.date).toLocaleDateString()}</p>
-                <p>Total: {order.total} €</p>
-                <p>Statut: {order.status}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Aucune commande récente.</p>
+        {error && (
+          <div className="mb-6 rounded-md bg-red-50 p-4 text-red-600">
+            {error}
+          </div>
         )}
-      </section>
+
+        {user && (
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2">
+                <span className="text-gray-600">Name:</span>
+                <span className="font-medium">{user.user_display_name}</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-gray-600">Email:</span>
+                <span className="font-medium">{user.user_email}</span>
+              </div>
+            </div>
+
+            <button
+              onClick={handleLogout}
+              className="w-full rounded-md bg-red-500 px-4 py-2 text-white transition-colors hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+            >
+              Logout
+            </button>
+          </div>
+        )}
+
+        {!user && !loading && (
+          <p className="text-center text-gray-600">Redirecting to login...</p>
+        )}
+      </div>
     </main>
   );
 }

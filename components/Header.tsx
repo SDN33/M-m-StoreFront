@@ -168,7 +168,7 @@ const Header: React.FC = () => {
           </div>
 
           {/* Mobile View - Hauteur fixe */}
-          <div className="flex md:hidden items-center justify-between h-16">
+          <div className="flex md:hidden items-center justify-between h-20 mt-3">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 text-white hover:text-gray-200"
@@ -177,7 +177,7 @@ const Header: React.FC = () => {
               {isMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
             </button>
 
-            <div className="relative h-16 w-32 flex items-center justify-center">
+            <div className="relative h-20 w-40 flex items-center justify-center">
               <Link href="/">
                 <Image
                   src="/images/memelogo.png"

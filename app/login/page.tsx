@@ -37,7 +37,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="sx-container">
+    <div className="sx-container mt-60">
       <h2 className="text-primary">Se connecter</h2>
       {error && <p className="text-red-500 text-center">{error}</p>}
       <form onSubmit={handleLogin}>
