@@ -7,6 +7,7 @@ interface Product {
   name: string;
   price: string; // Assurez-vous que c'est un nombre, sinon convertissez-le
   sale_price: string; // Assurez-vous que c'est un nombre, sinon convertissez-le
+  regular_price: string; // Assurez-vous que c'est un nombre, sinon convertissez-le
   meta: { [key: string]: string };
   store_name?: string;
   millesime?: string;
