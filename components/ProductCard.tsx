@@ -217,21 +217,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           )}
           <div>
             <p className='text-xs cursor-pointer '>Découvrir <span className='text-teal-800'>{product.store_name || '@MéméGeorgette'}</span></p>
-            <span className='text-xs font-semibold text-gray-800 flex items-center'>
+            <span className='text-xs font-semibold text-teal-800 flex items-center'>
               <MapPin className="w-3 h-3 mr-1 font-bold" />
               {product.region__pays ? product.region__pays.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : ''}
             </span>
           </div>
         </div>
       </div>
-
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-xs font-semibold cursor-pointer hover:underline">
-            {product.rating_count || 0} avis
-          </span>
-        </div>
-
-        <p className="text-xs mb-2 text-gray-700 h-8 overflow-hidden text-center">
+        <p className="text-xs text-gray-700 h-8 overflow-hidden text-center mt-4 font-medium mb-4">
           {stripHtmlAndTruncate(product.short_description || product.description || '', 110)}
         </p>
 
