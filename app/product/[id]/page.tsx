@@ -15,6 +15,9 @@ interface Product {
   id: number;
   name: string;
   price: number;
+  regular_price: number;
+  sale_price: number;
+  stock_status: string;
   volume: string;
   region__pays?: string;
   appelation?: string;
@@ -242,6 +245,18 @@ const ProductPage: React.FC = () => {
 
 
             <br />
+            <div className='flex gap-2 mt-4'>
+              {product.sale_price ? (
+              <div className="bg-black text-primary text-right px-2 py-1 rounded w-fit text-sm ">
+                Promo
+              </div>
+              ) : null}
+              {product.sale_price && product.regular_price && (
+                <div className="bg-red-100 text-purple-900 px-1.5 py-0.5 rounded text-sm h-fit mt-1">
+                  {Math.round(((product.regular_price - product.sale_price) / product.regular_price) * 100)}%
+                </div>
+              )}
+            </div>
             <p className="text-5xl font-bold !mb-2 mt-2">
               <span className="flex items-start z-10">
                 <span className="text-3xl font-bold">{Math.floor(product.price)}</span>
@@ -250,6 +265,16 @@ const ProductPage: React.FC = () => {
                 </span>
               </span>
             </p>
+            <div className="flex items-center">
+          </div>
+          <div className="text-gray-500 -mt-2">
+            {product.sale_price && <div className="text-xs">avant remise</div>}
+            {product.sale_price && (
+              <div className="text-sm line-through">
+              {Math.floor(product.regular_price)}€
+              </div>
+            )}
+          </div>
             <span className="text-xs font-normal">Bouteille de {product.volume}</span>
             <br />
             <p className="text-sm font-normal">

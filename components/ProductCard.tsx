@@ -234,11 +234,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
              {Math.floor(product.price)}<sup className="text-sm">{(product.price % 1).toFixed(2).substring(2)}€</sup>
             </div>
           </div>
-        {product.sale_price ? (
-              <div className="bg-black text-primary text-right px-2 py-1 rounded text-sm  ">
-              Promo
-              </div>
-            ) : null}
+          {product.sale_price ? (
+          <div className="bg-black text-primary text-right px-2 py-1 rounded text-sm  ">
+            Promo
+          </div>
+          ) : null}
           <div className="flex items-center">
             {product.sale_price && product.regular_price && (
               <div className="bg-red-100 text-right ml-24 text-purple-900 px-1.5 py-0.5 rounded text-sm">
