@@ -178,12 +178,12 @@ export default function VendorDetailsPage() {
           <p className="text-gray-600 whitespace-pre-wrap">{vendor.shop?.description || ''}</p>
         </div>
 
-        {vendor.social && typeof vendor.social === 'object' && Object.keys(vendor.social).length > 0 && (
+        {vendor.social && Object.keys(vendor.social).length > 0 && (
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-lg font-semibold mb-4 text-teal-800">Réseaux sociaux</h2>
             <div className="flex flex-wrap gap-4">
               {Object.entries(vendor.social)
-                .filter(([platform, url]) => url)
+                .filter(([_, url]) => url)
                 .map(([platform, url]) => (
                   <a
                     key={platform}
