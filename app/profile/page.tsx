@@ -42,8 +42,12 @@ export default function Profile() {
             setError('Failed to fetch profile data. Please try again later.');
           }
         }
-      } catch (err) {
-        setError('An unexpected error occurred. Please try again later.');
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('An unexpected error occurred. Please try again later.');
+        }
       } finally {
         setLoading(false);
       }
@@ -97,7 +101,7 @@ export default function Profile() {
               onClick={handleLogout}
               className="w-full rounded-md bg-red-500 px-4 py-2 text-white transition-colors hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
             >
-              Logout
+              Déconnecter
             </button>
           </div>
         )}

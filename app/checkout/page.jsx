@@ -290,44 +290,47 @@ const CheckoutPage = () => {
   );
 
   return (
-    <div className="min-h-[calc(100vh-200px)] mx-auto px-4 md:px-8 mt-24 max-w-6xl pb-24">
+    <div className="min-h-[calc(100vh-200px)] mx-auto px-4 sm:px-8 mt-16 max-w-full md:max-w-6xl pb-24">
       {renderStepIndicator()}
 
       <div className="flex flex-col md:flex-row gap-8">
-        <div className="w-full md:w-2/3 bg-white rounded-lg p-6 shadow-sm">
-          {currentStep === 1 && renderContactStep()}
-          {currentStep === 2 && renderDeliveryStep()}
-          {currentStep === 3 && (
-            <div className="space-y-4">
-              <h2 className="text-2xl font-semibold mb-6">Paiement</h2>
-                <Image
-                  src="/images/stripe.webp"
-                  alt="Stripe"
-                  width={100}
-                  height={100}
-                />
-                <div>
-                  <p className="font-medium text-gray-900">Paiement sécurisé par Stripe</p>
-                  <p className="text-sm text-gray-600">Vos informations de paiement sont protégées par un cryptage SSL</p>
-                </div>
-              {loading && <p className="text-blue-500">Création de la commande en cours...</p>}
-              <StripePayment
-                totalPrice={totalPrice}
-                formData={formData}
-                setError={setError}
-                onComplete={handleOrderSubmit}
-                disable={!isStepComplete(2)}
-              />
-              {error && <p className="text-red-500 mt-4">{error}</p>}
-            </div>
-          )}
+    {/* Section principale */}
+    <div className="w-full md:w-2/3 bg-white rounded-lg p-4 sm:p-6 shadow-sm">
+      {currentStep === 1 && renderContactStep()}
+      {currentStep === 2 && renderDeliveryStep()}
+      {currentStep === 3 && (
+        <div className="space-y-4">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-4">Paiement</h2>
+          <Image
+            src="/images/stripe.webp"
+            alt="Stripe"
+            width={80}
+            height={80}
+            className="mx-auto sm:mx-0"
+          />
+          <div>
+            <p className="font-medium text-gray-900">Paiement sécurisé par Stripe</p>
+            <p className="text-sm text-gray-600">Vos informations de paiement sont protégées par un cryptage SSL.</p>
+          </div>
+          {loading && <p className="text-blue-500">Création de la commande en cours...</p>}
+          <StripePayment
+            totalPrice={totalPrice}
+            formData={formData}
+            setError={setError}
+            onComplete={handleOrderSubmit}
+            disable={!isStepComplete(2)}
+          />
+          {error && <p className="text-red-500 mt-2">{error}</p>}
         </div>
-
-        <div className="w-full md:w-1/3">
-          {renderOrderSummary()}
-        </div>
-      </div>
+      )}
     </div>
+
+    {/* Résumé commande */}
+    <div className="w-full md:w-1/3 bg-gray-50 rounded-lg p-4 sm:p-6 shadow-sm">
+      {renderOrderSummary()}
+    </div>
+  </div>
+</div>
   );
 };
 
