@@ -184,7 +184,7 @@ const VendorsPage = () => {
                   </div>
 
                   {vendor.shop?.description && (
-                    <p className="mt-4 text-gray-600 text-xs text-center">
+                    <p className="mt-4 text-black text-xs text-center">
                       {vendor.shop.description}
                     </p>
                   )}
