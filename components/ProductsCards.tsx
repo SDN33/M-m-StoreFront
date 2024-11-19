@@ -17,6 +17,7 @@ interface Product {
   style?: string;
   accord_mets?: string[];
   vendor: number;
+  sale_price: number;
 }
 
 interface ProductsCardsProps {

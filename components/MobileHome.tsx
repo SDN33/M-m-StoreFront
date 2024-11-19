@@ -36,9 +36,9 @@ const MobileHome: React.FC = () => {
   return (
     <div className="flex flex-col bg-gray-50 overflow-y-auto">
       <br /><br /><br /><br />
-      <div className="">
-        <Slider />
+      <div className="mt-10">
         <MobileProductsIntro />
+        <Slider />
         <div className="max-w-7xl mx-auto px-4 space-y-8">
           <section className="bg-white rounded-lg shadow">
             <ProductsCards selectedFilters={selectedFilters} onAddToCart={(product) => console.log('Add to cart:', product)} />

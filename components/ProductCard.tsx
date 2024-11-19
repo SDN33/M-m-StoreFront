@@ -9,6 +9,7 @@ interface Product {
   id: number;
   name: string;
   price: number;
+  sale_price: number;
   categories: { id: number; name: string }[];
   certification?: string;
   images: { src: string }[];
