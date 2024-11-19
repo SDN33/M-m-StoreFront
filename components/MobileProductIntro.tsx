@@ -66,7 +66,7 @@ const MobileProductsIntro: React.FC = () => {
 
       {/* Indicateur scroll */}
       <div className="scroll-animation flex justify-center">
-        <div className="w-6 h-6 rounded-full bg-gray-300 animate-scroll"><MoveVertical /></div>
+        <div className="w-6 h-6 rounded-full bg-white animate-scroll"><MoveVertical /></div>
         <style jsx>{`
           @keyframes scroll {
             0%, 100% {
