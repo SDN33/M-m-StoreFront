@@ -25,7 +25,7 @@ const colorStyles: Record<ColorStyle, { active: string; inactive: string }> = {
     inactive: 'bg-gray-50 hover:bg-gradient-to-r hover:from-amber-400 hover:to-yellow-500 hover:text-white',
   },
   orange: {
-    active: 'bg-gradient-to-r from-teal-500 to-teal-700 text-white',
+    active: 'bg-gradient-to-r from-teal-800 to-teal-700 text-white',
     inactive: 'bg-gray-50 hover:bg-gradient-to-r hover:from-emerald-500 hover:to-green-500 hover:text-white',
   },
 };

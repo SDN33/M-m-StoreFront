@@ -170,7 +170,7 @@ const ProductPage: React.FC = () => {
               <span className="mx-2 text-gray-500">&gt;</span>
             </li>
             <li className="flex items-center">
-            <a className="cursor-pointer text-teal-500 hover:text-gray-700" onClick={vendorRedirect}>
+            <a className="cursor-pointer text-teal-800 hover:text-gray-700" onClick={vendorRedirect}>
               {product.store_name || ' @MéméGeorgette'}
             </a>
             <span className="mx-2 text-gray-500">&gt;</span>
@@ -235,7 +235,7 @@ const ProductPage: React.FC = () => {
             <br />
             <p className="text-sm font-normal">
               Vendu par
-              <a className="cursor-pointer text-teal-500 hover:text-gray-700" onClick={vendorRedirect}>
+              <a className="cursor-pointer text-teal-800 hover:text-gray-700" onClick={vendorRedirect}>
                  <br />{product.store_name || ' @MéméGeorgette'}
               </a>
             </p>
@@ -288,7 +288,7 @@ const ProductPage: React.FC = () => {
             {/* Cépages */}
             <div className="bg-white p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-teal-500 text-left">Cépages</h3>
+                <h3 className="text-lg font-bold text-teal-800 text-left">Cépages</h3>
                 <p className="text-sm text-right">
                   {product.cepages ? joinIfArray(product.cepages) : 'Pas de cépages renseignés'}
                 </p>
@@ -298,7 +298,7 @@ const ProductPage: React.FC = () => {
             {/* Style */}
             <div className="bg-white p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-teal-500 text-left">Style</h3>
+                <h3 className="text-lg font-bold text-teal-800 text-left">Style</h3>
                 <p className="text-sm text-right">
                   {typeof product.style === 'string'
                     ? product.style.charAt(0).toUpperCase() + product.style.slice(1).toLowerCase()
@@ -310,7 +310,7 @@ const ProductPage: React.FC = () => {
             {/* Accords mets et vins */}
             <div className="bg-white p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-teal-500 text-left">Accords mets et vins</h3>
+                <h3 className="text-lg font-bold text-teal-800 text-left">Accords mets et vins</h3>
                 <p className="text-sm text-right">
                   {product.accord_mets ? joinIfArray(product.accord_mets) : 'Pas d\'accords renseignés'}
                 </p>
@@ -320,7 +320,7 @@ const ProductPage: React.FC = () => {
             {/* Degré d'alcool */}
             <div className="bg-white p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-teal-500 text-left">Degré d&apos;alcool</h3>
+                <h3 className="text-lg font-bold text-teal-800 text-left">Degré d&apos;alcool</h3>
                 <p className="text-sm text-right">
                   {product.degre ? `${product.degre}%` : 'Pas de degré renseigné'}
                 </p>
@@ -330,7 +330,7 @@ const ProductPage: React.FC = () => {
             {/* Dégustation */}
             <div className="bg-white p-4 rounded-lg shadow-md">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-teal-500 text-left">Dégustation</h3>
+                <h3 className="text-lg font-bold text-teal-800 text-left">Dégustation</h3>
                 <p className="text-sm text-right">
                   {product.degustation || 'Pas de note de dégustation'}
                 </p>

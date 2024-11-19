@@ -44,10 +44,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const router = useRouter();
   const [quantity, setQuantity] = useState<number>(1);
   const [variationId] = useState<number>(product.id);
-  const [imageError, setImageError] = useState<boolean>(false);
   const [isTruncated, setIsTruncated] = useState<boolean>(false);
   const [vendorImages, setVendorImages] = useState<string | null>(null);
-  const [vendorImageError, setVendorImageError] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchVendorImages = async () => {
@@ -60,7 +58,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         }
       } catch (error) {
         console.error('Error fetching vendor image:', error);
-        setVendorImageError(true);
       }
     };
 
@@ -91,7 +88,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             alt="Badge AOC"
             fill
             style={{ objectFit: 'contain' }}
-            onError={() => setImageError(true)}
           />
         </div>
       );
@@ -108,7 +104,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             alt="Certification biodynamique"
             fill
             style={{ objectFit: 'contain' }}
-            onError={() => setImageError(true)}
           />
         </div>
       );
@@ -121,7 +116,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             alt="Certification bio"
             fill
             style={{ objectFit: 'contain' }}
-            onError={() => setImageError(true)}
           />
         </div>
       );
@@ -211,14 +205,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
         </div>
         <div onClick={vendorRedirect} className="flex items-center gap-2 cursor-pointer">
-          {vendorImages && !vendorImageError && (
+          {vendorImages && (
             <div className="relative w-8 h-8 rounded-full overflow-hidden">
               <Image
                 src={vendorImages}
                 alt={product.store_name || 'Vendor shop'}
                 fill
                 style={{ objectFit: 'cover' }}
-                onError={() => setVendorImageError(true)}
+                priority
               />
             </div>
           )}

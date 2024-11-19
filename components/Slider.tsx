@@ -8,17 +8,17 @@ const Slider = () => {
     {
       id: 1,
       imageUrl: '/images/slider3.png',
-      link: '/vendor/mémégeorgette',
+      link: '/',
     },
     {
       id: 2,
       imageUrl: '/images/slider2.png',
-      link: '/vendor/mémégeorgette',
+      link: '/',
     },
     {
       id: 3,
       imageUrl: '/images/slider1.png',
-      link: '/vendor/mémégeorgette',
+      link: '/',
     },
   ];
 

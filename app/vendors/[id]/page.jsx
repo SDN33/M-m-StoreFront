@@ -140,7 +140,7 @@ export default function VendorDetailsPage() {
 
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold mb-4 text-teal-800">À propos</h2>
-          <p className="text-gray-600 whitespace-pre-wrap">{vendor.shop?.description || 'Une sélection de vins rares et de qualité spécialement préparée par Mémé Georgette.'}</p>
+          <p className="text-gray-600 whitespace-pre-wrap">{vendor.shop?.description || ''}</p>
         </div>
 
         {vendor.social && Object.keys(vendor.social).length > 0 && (
@@ -172,7 +172,7 @@ export default function VendorDetailsPage() {
               products.map((product) => (
                 <div key={product.id} className="bg-white p-4 rounded-lg shadow-lg">
                   <Link href={`/product/${product.id}`} passHref>
-                    <Image src={(product.images && product.images[0]?.src) || '/images/vinmeme.png'} alt={product.name} width={160} height={160} className="object-cover rounded" />
+                    <Image src={product.images[0]?.src || '/images/vinmeme.png'} alt={product.name} width={160} height={160} className="object-cover rounded" />
                   </Link>
                   <h3 className="mt-4 text-lg font-semibold">{product.name}</h3>
                   <p className="text-gray-600">{product.price} €</p>
