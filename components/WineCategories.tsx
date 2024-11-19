@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { MapPin, Facebook, Instagram, Twitter, Linkedin, Youtube, Globe } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 interface ProductImage {
   id: number;
@@ -43,27 +43,6 @@ const VendorsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const getSocialIcon = (platform: string) => {
-    const iconProps = {
-      size: 20,
-      className: "text-gray-600"
-    };
-
-    switch (platform.toLowerCase()) {
-      case 'facebook':
-        return <Facebook {...iconProps} />;
-      case 'instagram':
-        return <Instagram {...iconProps} />;
-      case 'twitter':
-        return <Twitter {...iconProps} />;
-      case 'linkedin':
-        return <Linkedin {...iconProps} />;
-      case 'youtube':
-        return <Youtube {...iconProps} />;
-      default:
-        return <Globe {...iconProps} />;
-    }
-  }
 
   useEffect(() => {
     const fetchVendors = async () => {
@@ -199,23 +178,6 @@ const VendorsPage = () => {
                             {vendor.address.city} ({vendor.address?.postcode?.substring(0, 2) || 'N/A'})
                           </span>
                         )}
-                        {vendor.social && Object.keys(vendor.social).length > 0 && (
-                            <div className="">
-                              {Object.entries(vendor.social).map(([platform, url]) => (
-                                url ? (
-                                  <a
-                                    key={platform}
-                                    href={url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="px-3 py-1 text-sm bg-gray-100 text-primary rounded-full hover:bg-gray-200 transition-colors duration-200"
-                                  >
-                                    {getSocialIcon(platform)}
-                                  </a>
-                                ) : null
-                              ))}
-                            </div>
-                        )}
                       </div>
                     </div>
                     <Link
@@ -243,13 +205,15 @@ const VendorsPage = () => {
                           >
                             {product.images && product.images[0] && (
                               <div className="w-24 h-24 mb-3 relative overflow-hidden rounded-full border-2 border-white shadow-sm">
-                                <Image
-                                  src={product.images[0].src}
-                                  alt={product.name}
-                                  layout="fill"
-                                  objectFit="cover"
-                                  className="transition-transform duration-300 hover:scale-110"
-                                />
+                                <Link href={`/product/${product.id}`} passHref>
+                                  <Image
+                                    src={product.images[0].src}
+                                    alt={product.name}
+                                    layout="fill"
+                                    objectFit="cover"
+                                    className="transition-transform duration-300 hover:scale-110"
+                                  />
+                                </Link>
                               </div>
                             )}
                             <h4 className="font-medium text-sm text-center text-gray-800 line-clamp-1">

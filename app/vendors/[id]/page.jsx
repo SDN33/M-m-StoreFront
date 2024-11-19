@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { MapPin, Globe, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
+import Link from 'next/link';
 
 const normalizeUrl = (url) => {
   if (url.startsWith('//')) {
@@ -63,7 +64,7 @@ export default function VendorDetailsPage() {
       setError('No ID provided in the URL');
     }
   }, [id]);
-  
+
   if (loading) {
     return (
       <div className="max-w-4xl mx-auto p-4">
@@ -170,7 +171,9 @@ export default function VendorDetailsPage() {
             {products.length > 0 ? (
               products.map((product) => (
                 <div key={product.id} className="bg-white p-4 rounded-lg shadow-lg">
-                  <Image src={product.images[0]?.src} alt={product.name} width={160} height={160} className="object-cover rounded" />
+                  <Link href={`/product/${product.id}`} passHref>
+                    <Image src={product.images[0]?.src} alt={product.name} width={160} height={160} className="object-cover rounded" />
+                  </Link>
                   <h3 className="mt-4 text-lg font-semibold">{product.name}</h3>
                   <p className="text-gray-600">{product.price} €</p>
                 </div>

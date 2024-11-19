@@ -287,13 +287,15 @@ const VendorsPage = () => {
                           >
                             {product.images && product.images[0] && (
                               <div className="w-24 h-24 mb-3 relative overflow-hidden rounded-full border-2 border-white shadow-sm">
-                                <Image
-                                  src={product.images[0].src}
-                                  alt={product.name}
-                                  layout="fill"
-                                  objectFit="cover"
-                                  className="transition-transform duration-300 hover:scale-110"
-                                />
+                                <Link href={`/product/${product.id}`} passHref>
+                                  <Image
+                                    src={product.images[0].src}
+                                    alt={product.name}
+                                    layout="fill"
+                                    objectFit="cover"
+                                    className="transition-transform duration-300 hover:scale-110"
+                                  />
+                                </Link>
                               </div>
                             )}
                             <h4 className="font-medium text-sm text-center text-gray-800 line-clamp-1">
