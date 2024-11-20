@@ -114,7 +114,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 mt-36">
+    <div className="min-h-screen bg-gray-50 w-[600px] py-12 px-4 sm:px-6 lg:px-8 mt-36 mx-auto">
       <div className="max-w-3xl mx-auto">
         {/* En-tête du profil */}
         <div className="bg-white rounded-t-2xl shadow-sm p-8 border-b border-gray-200">
