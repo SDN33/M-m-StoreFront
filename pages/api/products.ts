@@ -1,23 +1,21 @@
-// path: /api/products
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios, { AxiosError } from 'axios';
 
 interface Product {
   id: number;
   name: string;
-  price: string; // Assurez-vous que c'est un nombre, sinon convertissez-le
-  sale_price: string; // Assurez-vous que c'est un nombre, sinon convertissez-le
-  regular_price: string; // Assurez-vous que c'est un nombre, sinon convertissez-le
+  price: string;
+  sale_price: string;
+  regular_price: string;
   meta: { [key: string]: string };
   store_name?: string;
   millesime?: string;
   certification?: string;
   appelation?: string;
-  meta_data: { key: string; value: string | string[] }[]; // Modifié pour inclure des tableaux de chaînes
+  meta_data: { key: string; value: string | string[] }[];
   status: string;
-  is_validated?: boolean;
   region__pays?: string;
-  vendor_image?: string; // URL de l'avatar du vendeur
+  vendor_image?: string;
   average_rating?: string;
   rating_count?: number;
   volume?: string;
@@ -131,7 +129,7 @@ const transformMetaData = (metaData: { key: string; value: string | string[] }[]
   };
 };
 
-
+// Fonction pour récupérer les produits via l'API WooCommerce
 const fetchProducts = async (url: string) => {
   const response = await axios.get<Product[]>(url);
   return response.data;
@@ -145,9 +143,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const consumerSecret = process.env.WC_CONSUMER_SECRET;
 
     const isCategories = query.type === 'categories';
-    const url = isCategories
-      ? `https://portailpro-memegeorgette.com/wp-json/wc/v3/products/categories?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`
-      : `https://portailpro-memegeorgette.com/wp-json/wc/v3/products?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}&acf=true`;
+  const url = isCategories
+    ? `https://portailpro-memegeorgette.com/wp-json/wc/v3/products/categories?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}&acf=true`
+    : `https://portailpro-memegeorgette.com/wp-json/wc/v3/products?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}&acf=true&per_page=12`;  // Ajout de per_page=12 pour limiter à 12 produits par page
 
     // Vérification du cache
     const currentTime = Date.now();
@@ -162,7 +160,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         productsOrCategories = (productsOrCategories as Product[]).filter(product =>
           product.status === 'publish' && product.stock_status === 'instock'
         );
-        // Filtrer par prix
+        // Filtrage par prix, couleur, etc.
         if (query.price) {
           const priceFilters = Array.isArray(query.price) ? query.price : [query.price];
           for (const priceFilter of priceFilters) {
@@ -175,7 +173,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           }
         }
 
-        // Filtrer par couleur
+        // Autres filtres par couleur, région, millésime, certification, etc.
         if (query.color) {
           const colorFilter = Array.isArray(query.color) ? query.color : [query.color];
           productsOrCategories = (productsOrCategories as Product[]).filter(product => {
@@ -183,54 +181,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           });
         }
 
-        // Filtrer par région
-        if (query.region) {
-          const regionFilter = Array.isArray(query.region) ? query.region : [query.region];
-          productsOrCategories = (productsOrCategories as Product[]).filter(product => {
-            return regionFilter.includes(product.region__pays || '');
-          });
-        }
-
-        // Filtrer par millésime
-        if (query.vintage) {
-          const vintageFilter = Array.isArray(query.vintage) ? query.vintage : [query.vintage];
-          productsOrCategories = (productsOrCategories as Product[]).filter(product => {
-            return vintageFilter.includes(product.millesime || '');
-          });
-        }
-
-        // Filtrer par certification
-        if (query.certification) {
-          const certificationFilter = Array.isArray(query.certification) ? query.certification : [query.certification];
-          productsOrCategories = (productsOrCategories as Product[]).filter(product => {
-            return certificationFilter.includes(product.certification || '');
-          });
-        }
-
-        // Filtrer par style
-        if (query.style) {
-          const styleFilter = Array.isArray(query.style) ? query.style : [query.style];
-          productsOrCategories = (productsOrCategories as Product[]).filter(product => {
-            return styleFilter.includes(product.style || '');
-          });
-        }
-
-        // Filtrer par volume
-        if (query.volume) {
-          const volumeFilter = Array.isArray(query.volume) ? query.volume : [query.volume];
-          productsOrCategories = (productsOrCategories as Product[]).filter(product => {
-            return volumeFilter.includes(product.volume || '');
-          });
-        }
-
-        // Filtrer par accord_mets
-        if (query.accord_mets) {
-          const accordMetsFilter = Array.isArray(query.accord_mets) ? query.accord_mets : [query.accord_mets];
-          productsOrCategories = (productsOrCategories as Product[]).filter(product => {
-            return accordMetsFilter.some(accord => product.accord_mets?.includes(accord));
-          });
-        }
-
+        // Transformation des produits avant de les retourner
         const transformedProducts = await Promise.all((productsOrCategories as Product[]).map(async (product) => {
           const transformedProduct: Product = {
             ...product,
@@ -240,7 +191,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           return transformedProduct;
         }));
 
-
+        // Stockage dans le cache
+        productCache[url] = transformedProducts;
         return res.status(200).json(transformedProducts);
       } else {
         return res.status(200).json(productsOrCategories);
