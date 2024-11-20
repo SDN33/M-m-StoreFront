@@ -104,6 +104,12 @@ const joinIfArray = (value: string | string[], separator: string = ', ') => {
   return value; // Retourne la chaîne telle quelle si ce n'est pas un tableau
 };
 
+// Fonction getGoogleMapUrl
+const getGoogleMapUrl = (location: string) => {
+  const encodedLocation = encodeURIComponent(location || '');
+  return `https://maps.google.com/maps?q=${encodedLocation}&z=12&output=embed`;
+};
+
 const ProductPage: React.FC = () => {
   const { id } = useParams() as { id: string };
   const router = useRouter();
@@ -384,6 +390,23 @@ const ProductPage: React.FC = () => {
             </div>
           </div>
           <br />
+           {/* Affichage de la carte Google */}
+           {product.region__pays && (
+            <div className="mt-8">
+              <h2 className="text-2xl font-bold mb-8 text-center text-primary">Localisation du vigneron</h2>
+              <iframe
+                src={getGoogleMapUrl(product.nom_chateau || '')}
+                width="100%"
+                height="400"
+                frameBorder="0"
+                style={{ border: 0 }}
+                allowFullScreen
+                aria-hidden="false"
+                tabIndex={0}
+                title="Google Map"
+              ></iframe>
+            </div>
+          )}
           <br /><br />
           <h2 className="text-2xl font-bold !-mb-2 text-center text-primary">Avis clients</h2>
           <br /><br />

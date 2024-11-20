@@ -190,10 +190,10 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
           </div>
 
           {filteredProducts.length > visibleCount && (
-            <div className="flex justify-center py-6">
+            <div className="flex justify-center py-6 !-mt-4">
               <button
                 onClick={loadMoreProducts}
-                className="bg-primary text-white py-2 px-6 rounded-full hover:bg-orange-700 transition-colors duration-200"
+                className="bg-black text-white py-2 px-6 rounded-full hover:text-primary transition-colors duration-200"
               >
                 Voir Plus de Vins
               </button>
