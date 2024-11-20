@@ -2,12 +2,26 @@
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
+import crypto from 'crypto';
 
 interface User {
   user_display_name: string;
   user_email: string;
   billing_address: string;
   shipping_address: string;
+}
+
+const ENCRYPTION_KEY = 'your-encryption-key'; // Replace with your actual encryption key
+const ENCRYPTION_ALGORITHM = 'aes-256-ctr';
+
+function encrypt(text) {
+  const cipher = crypto.createCipher(ENCRYPTION_ALGORITHM, ENCRYPTION_KEY);
+  return cipher.update(text, 'utf8', 'hex') + cipher.final('hex');
+}
+
+function decrypt(text) {
+  const decipher = crypto.createDecipher(ENCRYPTION_ALGORITHM, ENCRYPTION_KEY);
+  return decipher.update(text, 'hex', 'utf8') + decipher.final('utf8');
 }
 
 export default function Profile() {
@@ -48,7 +62,7 @@ export default function Profile() {
 
     const cachedUser = localStorage.getItem('user');
     if (cachedUser) {
-      setUser(JSON.parse(cachedUser));
+      setUser(JSON.parse(decrypt(cachedUser)));
       setLoading(false);
     }
 
@@ -64,7 +78,7 @@ export default function Profile() {
         if (response.ok) {
           const data: User = await response.json();
           setUser(data);
-          localStorage.setItem('user', JSON.stringify(data));
+          localStorage.setItem('user', encrypt(JSON.stringify(data)));
         } else {
           if (response.status === 401) {
             router.push('/login');
@@ -128,7 +142,7 @@ export default function Profile() {
       if (user) {
         const updatedUser = { ...user, billing_address: newBillingAddress, shipping_address: newShippingAddress };
         setUser(updatedUser);
-        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('user', encrypt(JSON.stringify(updatedUser)));
         setNewBillingAddress('');
         setNewShippingAddress('');
       }
