@@ -177,20 +177,20 @@ const Header: React.FC = () => {
               {isMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
             </button>
 
-            <div className="relative h-20 w-40 flex items-center justify-center">
+            <div className="relative h-50 w-60 flex items-center justify-center scale-110">
               <Link href="/">
                 <Image
                   src="/images/memelogo.png"
                   alt="Logo"
-                  width={150}
+                  width={200}
                   height={100}
-                  className="object-contain pt-2"
+                  className="object-contain"
                   priority
                 />
               </Link>
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 mt-1">
               <CartIcon onClick={toggleCartPopup} />
             </div>
           </div>

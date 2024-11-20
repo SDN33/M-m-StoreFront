@@ -5,9 +5,7 @@ import ProductCard from '../../components/ProductCard';
 import Livraison from '@/components/Livraison';
 import HeroBanner from '@/components/HeroBanner';
 import Trust from '@/components/Trust';
-
-
-
+import FallingEurosPromo from '@/components/FallingEurosPromo';
 
 export default function ProductsPromotions() {
   const [products, setProducts] = useState([]);
@@ -62,9 +60,7 @@ export default function ProductsPromotions() {
     <div className="flex flex-col min-h-screen mx-20">
       <main className="flex-grow container mx-auto px-4 mt-40">
         {/* Section Titre */}
-        <div className="text-center py-10 bg-black text-white rounded-lg shadow-lg">
-          <h2 className="text-3xl font-bold">Les Promos de Mémé Georgette</h2>
-        </div>
+        <FallingEurosPromo />
 
         {/* Section Description */}
         <div className="bg-gray-100 p-6 rounded-lg shadow-md mb-12">
