@@ -33,11 +33,22 @@ const AgeVerificationModal = () => {
 
   const handleAccept = () => {
     setIsFading(true);
-    localStorage.setItem('ageVerifiedTime', new Date().getTime().toString());
+    const currentTime = new Date().getTime();
+    localStorage.setItem('ageVerifiedTime', currentTime.toString());
+
+    // Add this line to set an initial cookie consent state
+    localStorage.setItem('cookieConsent', JSON.stringify({
+      essential: true,
+      analytics: false,
+      marketing: false
+    }));
+
+    window.dispatchEvent(new Event('ageVerified'));
+
     setTimeout(() => {
       setIsOpen(false);
       setShouldRender(false);
-    }, 2000); // Durée de la transition
+    }, 2000);
   };
 
   const handleReject = () => {
@@ -48,7 +59,6 @@ const AgeVerificationModal = () => {
 
   return (
     <>
-      {/* Conteneur avec effet de flou */}
       <div
         className={`fixed inset-0 z-40 bg-gray-900 bg-opacity-50 backdrop-blur-lg transition-opacity duration-2000 ${
           isFading ? 'opacity-0' : 'opacity-100'
@@ -56,8 +66,7 @@ const AgeVerificationModal = () => {
         aria-hidden={!isOpen}
       ></div>
 
-      {/* Contenu du modal */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center w-fit mx-auto mt-10">
+      <div className="fixed inset-0 z-50 flex items-center justify-center w-fit mx-auto mt-20">
         <div
           className={`relative bg-white rounded-lg max-w-md p-6 shadow-xl text-center m-4
             transition-all duration-500 ${isFading ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}

@@ -6,27 +6,39 @@ const CookieConsent = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [preferences, setPreferences] = useState({
-    essential: true, // Toujours true
+    essential: true,
     analytics: false,
     marketing: false,
   });
 
   useEffect(() => {
+    const ageVerifiedTime = localStorage.getItem('ageVerifiedTime');
     const consent = localStorage.getItem('cookieConsent');
-    if (consent) {
-      try {
-        const savedPreferences = JSON.parse(consent);
-        setPreferences(prev => ({
-          ...prev,
-          ...savedPreferences
-        }));
-      } catch (e) {
-        console.error('Failed to parse cookie consent:', e);
+
+    const handleAgeVerification = () => {
+      if (!consent) {
         setIsVisible(true);
       }
-    } else {
-      setIsVisible(true);
+    };
+
+    // Listen for the age verification event
+    window.addEventListener('ageVerified', handleAgeVerification);
+
+    if (ageVerifiedTime) {
+      const currentTime = new Date().getTime();
+      const verificationTime = parseInt(ageVerifiedTime);
+
+      if (currentTime - verificationTime < 6 * 60 * 60 * 1000) {
+        if (!consent) {
+          setIsVisible(true);
+        }
+      }
     }
+
+    // Cleanup the event listener
+    return () => {
+      window.removeEventListener('ageVerified', handleAgeVerification);
+    };
   }, []);
 
   const acceptAll = () => {
@@ -58,7 +70,7 @@ const CookieConsent = () => {
   };
 
   const handleToggle = (type: 'essential' | 'analytics' | 'marketing') => {
-    if (type === 'essential') return; // Ne peut pas être désactivé
+    if (type === 'essential') return;
     setPreferences(prev => ({
       ...prev,
       [type]: !prev[type]
@@ -156,7 +168,7 @@ const CookieConsent = () => {
 
   return (
     <div className="fixed bottom-4 left-4 right-4 z-50 w-full h-fit">
-      <div className="bg-white rounded-lg shadow-lg border border-gray-100 p-1 text-sm">
+      <div className="bg-white opacity-90 rounded-lg shadow-lg border border-gray-100 p-1 text-sm">
         <div className="space-y-3">
           <p className="text-black text-center">
             <span className='text-3xl text-left'>🍪</span>Nous utilisons des cookies pour améliorer votre expérience client.<br />Veuillez accepter nos cookies pour continuer.
