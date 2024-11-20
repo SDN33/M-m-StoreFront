@@ -1,11 +1,5 @@
 'use client';
 import { useEffect, useState, useRef } from 'react';
-
-declare global {
-  interface Window {
-    google: any;
-  }
-}
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
 
