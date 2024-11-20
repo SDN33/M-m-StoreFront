@@ -122,7 +122,7 @@ export default function Profile() {
             <div className="flex items-center space-x-4">
               <div className="h-16 w-16 rounded-full bg-gradient-to-r from-teal-500 to-teal-600 flex items-center justify-center">
                 <span className="text-2xl font-bold text-white">
-                  {user?.user_display_name.charAt(0)}
+                  {user?.user_display_name?.charAt(0).toUpperCase() || ''}
                 </span>
               </div>
               <div>
