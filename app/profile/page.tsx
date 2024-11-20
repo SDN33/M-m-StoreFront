@@ -161,7 +161,7 @@ export default function Profile() {
             <div className="space-y-4">
               <div>
                 <label htmlFor="billing_address" className="block text-sm font-medium text-gray-700">
-                  Modifier l'adresse de facturation
+                  Modifier l&apos;adresse de facturation
                 </label>
                 <input
                   type="text"
@@ -173,7 +173,7 @@ export default function Profile() {
               </div>
               <div>
                 <label htmlFor="shipping_address" className="block text-sm font-medium text-gray-700">
-                  Modifier l'adresse de livraison
+                  Modifier l&apos;adresse de livraison
                 </label>
                 <input
                   type="text"
