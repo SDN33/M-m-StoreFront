@@ -42,12 +42,13 @@ export default function ProductsPromotions() {
     fetchProducts();
   }, []);
 
-  if (loading)
+  if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
-        <div className="text-gray-500 text-lg animate-pulse">Chargement des produits...</div>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-primary border-opacity-75"></div>
       </div>
     );
+  }
 
   if (error)
     return (
