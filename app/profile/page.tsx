@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
 
@@ -17,8 +17,6 @@ export default function Profile() {
   const [error, setError] = useState<string | null>(null);
   const [newBillingAddress, setNewBillingAddress] = useState<string>('');
   const [newShippingAddress, setNewShippingAddress] = useState<string>('');
-  const billingAddressRef = useRef<HTMLInputElement | null>(null);
-  const shippingAddressRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
 
   const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
@@ -46,12 +44,14 @@ export default function Profile() {
       return;
     }
 
+    // Récupérer les données de l'utilisateur depuis localStorage, si elles existent
     const cachedUser = localStorage.getItem('user');
     if (cachedUser) {
       setUser(JSON.parse(cachedUser));
-      setLoading(false);
+      setLoading(false); // Fin du chargement dès qu'on a les données du localStorage
     }
 
+    // Si l'utilisateur n'est pas dans le cache, appeler l'API
     async function fetchUserData() {
       try {
         setError(null);
@@ -64,6 +64,7 @@ export default function Profile() {
         if (response.ok) {
           const data: User = await response.json();
           setUser(data);
+          // Sauvegarder les informations dans le localStorage
           localStorage.setItem('user', JSON.stringify(data));
         } else {
           if (response.status === 401) {
@@ -82,38 +83,12 @@ export default function Profile() {
     if (!cachedUser) {
       fetchUserData();
     }
-
-    // Autocomplétion Google Places
-    if (window.google) {
-      const billingInput = billingAddressRef.current;
-      const shippingInput = shippingAddressRef.current;
-
-      if (billingInput) {
-        const billingAutocomplete = new window.google.maps.places.Autocomplete(billingInput, {
-          types: ['address'],
-        });
-        billingAutocomplete.addListener('place_changed', () => {
-          const place = billingAutocomplete.getPlace();
-          setNewBillingAddress(place.formatted_address || '');
-        });
-      }
-
-      if (shippingInput) {
-        const shippingAutocomplete = new window.google.maps.places.Autocomplete(shippingInput, {
-          types: ['address'],
-        });
-        shippingAutocomplete.addListener('place_changed', () => {
-          const place = shippingAutocomplete.getPlace();
-          setNewShippingAddress(place.formatted_address || '');
-        });
-      }
-    }
   }, [router]);
 
   const handleLogout = async () => {
     try {
       await logout();
-      localStorage.removeItem('user');
+      localStorage.removeItem('user'); // Retirer les informations de l'utilisateur du localStorage
       router.push('/login');
     } catch {
       setError('Failed to logout. Please try again.');
@@ -126,8 +101,11 @@ export default function Profile() {
 
     if (isBillingAddressValid && isShippingAddressValid) {
       if (user) {
+        // Mettre à jour les adresses dans l'état local
         const updatedUser = { ...user, billing_address: newBillingAddress, shipping_address: newShippingAddress };
         setUser(updatedUser);
+
+        // Sauvegarder les nouvelles adresses dans le localStorage
         localStorage.setItem('user', JSON.stringify(updatedUser));
         setNewBillingAddress('');
         setNewShippingAddress('');
@@ -179,6 +157,7 @@ export default function Profile() {
               </div>
             </div>
 
+            {/* Formulaire de modification d'adresses */}
             <div className="space-y-4">
               <div>
                 <label htmlFor="billing_address" className="block text-sm font-medium text-gray-700">
@@ -187,7 +166,6 @@ export default function Profile() {
                 <input
                   type="text"
                   id="billing_address"
-                  ref={billingAddressRef}
                   value={newBillingAddress}
                   onChange={(e) => setNewBillingAddress(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md"
@@ -200,7 +178,6 @@ export default function Profile() {
                 <input
                   type="text"
                   id="shipping_address"
-                  ref={shippingAddressRef}
                   value={newShippingAddress}
                   onChange={(e) => setNewShippingAddress(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md"
