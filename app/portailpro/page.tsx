@@ -174,7 +174,7 @@ export default function PortailPro() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className={`${feature.bgColor} p-8 rounded-2xl shadow-lg shadow-orange-100/50 hover:shadow-xl hover:shadow-orange-200/50 transition-all duration-300`}
+                className={`${feature.bgColor} p-8 rounded-2xl shadow-lg shadow-teal-100/50 hover:shadow-xl hover:shadow-teal-200/50 transition-all duration-300`}
               >
                 <div className="space-y-6">
                   <div className="bg-white w-16 h-16 rounded-xl flex items-center justify-center shadow-sm mx-auto">
@@ -190,7 +190,7 @@ export default function PortailPro() {
 
         {/* Pricing Section */}
         <div className="mt-24 max-w-2xl mx-auto">
-          <div className="bg-white rounded-3xl shadow-xl shadow-orange-100/50 overflow-hidden">
+          <div className="bg-white rounded-3xl shadow-xl shadow-teal-100/50 overflow-hidden">
             <div className="bg-primary text-white p-8 text-center">
               <h3 className="text-2xl font-bold mb-2">Frais D&apos;inscription</h3>
               <div className="flex items-center justify-center">
@@ -206,7 +206,7 @@ export default function PortailPro() {
                 </p>
                 <ul className="space-y-4 text-center mx-auto">
                   {pricingFeatures.map((feature, index) => (
-                    <li key={index} className="flex items-center text-gray-600 text-center">
+                    <li key={index} className="flex items-center text-black text-center">
                       <svg className="w-5 h-5 text-primary mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
