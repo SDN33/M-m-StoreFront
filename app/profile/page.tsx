@@ -108,10 +108,7 @@ export default function Profile() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="flex flex-col items-center space-y-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
-          <p className="text-gray-600 font-medium">Chargement de votre profil...</p>
-        </div>
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-primary border-opacity-75"></div>
       </div>
     );
   }
@@ -162,7 +159,7 @@ export default function Profile() {
           {/* Informations d'adresse */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-lg font-medium text-gray-900 mb-4">Informations d'adresse</h2>
+              <h2 className="text-lg font-medium text-gray-900 mb-4">Informations d&apos;adresse</h2>
               {!isEditMode ? (
                 <div className="space-y-6">
                   <div className="bg-gray-50 rounded-lg p-4">
