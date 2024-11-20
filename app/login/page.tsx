@@ -60,7 +60,7 @@ export default function LoginPage() {
         </form>
         <span className="text-xs text-center flex mt-2 italic">En continuant, vous acceptez les conditions d&apos;utilisation de Mémé Georgette et reconnaissez avoir lu notre Politique de confidentialité. Informations concernant la collecte de données.</span>
         <a href="/signup" className="link text-xs font-semibold">Pas encore de compte? Inscrivez-vous</a>
-        <a href="/forgot-password" className="link text-xs font-semibold">Mot de passe oublié?</a>
+        <a href="https://portailpro-memegeorgette.com/mon-compte/mon-compte-reset-password/" className="link text-xs font-semibold">Mot de passe oublié?</a>
       </div>
     </div>
   );
