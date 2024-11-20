@@ -2,23 +2,17 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
-import crypto from 'crypto';
+const CryptoJS = require('crypto-js');
 
-const algorithm = 'aes-256-ctr';
-const secretKey = 'vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3'; // This should be stored securely
+const secretKey = process.env.NEXT_PUBLIC_SECRET_KEY || '';
 
 const encrypt = (text: string) => {
-  const iv = crypto.randomBytes(16);
-  const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
-  const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
-  return iv.toString('hex') + ':' + encrypted.toString('hex');
+  return CryptoJS.AES.encrypt(text, secretKey).toString();
 };
 
 const decrypt = (hash: string) => {
-  const [iv, encrypted] = hash.split(':');
-  const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(iv, 'hex'));
-  const decrypted = Buffer.concat([decipher.update(Buffer.from(encrypted, 'hex')), decipher.final()]);
-  return decrypted.toString();
+  const bytes = CryptoJS.AES.decrypt(hash, secretKey);
+  return bytes.toString(CryptoJS.enc.Utf8);
 };
 
 interface User {
@@ -47,7 +41,13 @@ export default function Profile() {
     // Récupérer les données de l'utilisateur depuis localStorage, si elles existent
     const cachedUser = localStorage.getItem('user');
     if (cachedUser) {
-      setUser(JSON.parse(decrypt(cachedUser)));
+      try {
+        const decryptedUser = decrypt(cachedUser);
+        setUser(JSON.parse(decryptedUser));
+      } catch (e) {
+        console.error('Failed to parse user data from localStorage', e);
+        localStorage.removeItem('user'); // Remove invalid user data
+      }
       setLoading(false); // Fin du chargement dès qu'on a les données du localStorage
     }
 
