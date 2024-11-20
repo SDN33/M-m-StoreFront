@@ -112,7 +112,7 @@ const CheckoutPage = () => {
           <div key={step.num} className="flex items-center">
             <div
               className={`flex items-center justify-center w-8 h-8 rounded-full border-2
-                ${currentStep === step.num ? 'border-blue-500 bg-blue-500 text-white' :
+                ${currentStep === step.num ? 'border-teal-800 bg-teal-800 text-white' :
                   currentStep > step.num ? 'border-green-500 bg-green-500 text-white' :
                   'border-gray-300 text-gray-300'}`}
             >
