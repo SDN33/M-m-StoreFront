@@ -19,24 +19,6 @@ export default function Profile() {
   const [newShippingAddress, setNewShippingAddress] = useState<string>('');
   const router = useRouter();
 
-  const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
-
-  const validateAddress = async (address: string) => {
-    try {
-      const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${GOOGLE_API_KEY}`
-      );
-      const data = await response.json();
-      if (data.status === 'OK' && data.results.length > 0) {
-        return true;
-      }
-      return false;
-    } catch (error) {
-      console.error('Error validating address:', error);
-      return false;
-    }
-  };
-
   useEffect(() => {
     const token = localStorage.getItem('jwtToken');
     if (!token) {
@@ -95,23 +77,16 @@ export default function Profile() {
     }
   };
 
-  const handleUpdateAddress = async () => {
-    const isBillingAddressValid = await validateAddress(newBillingAddress);
-    const isShippingAddressValid = await validateAddress(newShippingAddress);
+  const handleUpdateAddress = () => {
+    if (user) {
+      // Mettre à jour les adresses dans l'état local
+      const updatedUser = { ...user, billing_address: newBillingAddress, shipping_address: newShippingAddress };
+      setUser(updatedUser);
 
-    if (isBillingAddressValid && isShippingAddressValid) {
-      if (user) {
-        // Mettre à jour les adresses dans l'état local
-        const updatedUser = { ...user, billing_address: newBillingAddress, shipping_address: newShippingAddress };
-        setUser(updatedUser);
-
-        // Sauvegarder les nouvelles adresses dans le localStorage
-        localStorage.setItem('user', JSON.stringify(updatedUser));
-        setNewBillingAddress('');
-        setNewShippingAddress('');
-      }
-    } else {
-      setError('Une ou plusieurs des adresses ne sont pas valides. Veuillez les vérifier.');
+      // Sauvegarder les nouvelles adresses dans le localStorage
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      setNewBillingAddress('');
+      setNewShippingAddress('');
     }
   };
 
@@ -161,7 +136,7 @@ export default function Profile() {
             <div className="space-y-4">
               <div>
                 <label htmlFor="billing_address" className="block text-sm font-medium text-gray-700">
-                  Modifier l&apos;adresse de facturation
+                  Modifier l'adresse de facturation
                 </label>
                 <input
                   type="text"
@@ -173,7 +148,7 @@ export default function Profile() {
               </div>
               <div>
                 <label htmlFor="shipping_address" className="block text-sm font-medium text-gray-700">
-                  Modifier l&apos;adresse de livraison
+                  Modifier l'adresse de livraison
                 </label>
                 <input
                   type="text"
