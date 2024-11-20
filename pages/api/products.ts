@@ -145,7 +145,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const isCategories = query.type === 'categories';
   const url = isCategories
     ? `https://portailpro-memegeorgette.com/wp-json/wc/v3/products/categories?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}&acf=true`
-    : `https://portailpro-memegeorgette.com/wp-json/wc/v3/products?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}&acf=true&per_page=12`;  // Ajout de per_page=12 pour limiter à 12 produits par page
+    : `https://portailpro-memegeorgette.com/wp-json/wc/v3/products?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}&acf=true&per_page=24`;  // Ajout de per_page=12 pour limiter à 12 produits par page
 
     // Vérification du cache
     const currentTime = Date.now();
