@@ -58,7 +58,7 @@ export default function ProductsPromotions() {
     );
 
   return (
-    <div className="flex flex-col min-h-screen mx-20">
+    <div className="flex flex-col min-h-screen">
       <main className="flex-grow container mx-auto px-4 mt-40">
         {/* Section Titre */}
         <FallingEurosPromo />
@@ -75,7 +75,7 @@ export default function ProductsPromotions() {
         </div>
 
         {/* Grille de Produits */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-1 min-w-fit mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-1 mb-20">
           {products.map((product) => (
             <div
               key={product.id}
