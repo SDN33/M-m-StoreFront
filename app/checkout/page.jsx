@@ -130,24 +130,10 @@ const CheckoutPage = () => {
     </div>
   );
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const profile = await getProfile();
-        if (profile.email) {
-          setFormData(prev => ({ ...prev, email: profile.email }));
-        }
-      } catch (error) {
-        console.error('Failed to fetch profile:', error);
-      }
-    };
-
-    fetchProfile();
-  }, []);
-
   const renderContactStep = () => (
     <div className="space-y-4">
       <input
+        name="email"
         type="email"
         placeholder="E-mail"
         value={formData.email}
