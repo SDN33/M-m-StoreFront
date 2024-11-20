@@ -2,6 +2,24 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
+import crypto from 'crypto';
+
+const algorithm = 'aes-256-ctr';
+const secretKey = 'vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3'; // This should be stored securely
+
+const encrypt = (text: string) => {
+  const iv = crypto.randomBytes(16);
+  const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
+  const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
+  return iv.toString('hex') + ':' + encrypted.toString('hex');
+};
+
+const decrypt = (hash: string) => {
+  const [iv, encrypted] = hash.split(':');
+  const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(iv, 'hex'));
+  const decrypted = Buffer.concat([decipher.update(Buffer.from(encrypted, 'hex')), decipher.final()]);
+  return decrypted.toString();
+};
 
 interface User {
   user_display_name: string;
@@ -29,7 +47,7 @@ export default function Profile() {
     // Récupérer les données de l'utilisateur depuis localStorage, si elles existent
     const cachedUser = localStorage.getItem('user');
     if (cachedUser) {
-      setUser(JSON.parse(cachedUser));
+      setUser(JSON.parse(decrypt(cachedUser)));
       setLoading(false); // Fin du chargement dès qu'on a les données du localStorage
     }
 
@@ -47,7 +65,7 @@ export default function Profile() {
           const data: User = await response.json();
           setUser(data);
           // Sauvegarder les informations dans le localStorage
-          localStorage.setItem('user', JSON.stringify(data));
+          localStorage.setItem('user', encrypt(JSON.stringify(data)));
         } else {
           if (response.status === 401) {
             router.push('/login');
@@ -84,7 +102,7 @@ export default function Profile() {
       setUser(updatedUser);
 
       // Sauvegarder les nouvelles adresses dans le localStorage
-      localStorage.setItem('user', JSON.stringify(updatedUser));
+      localStorage.setItem('user', encrypt(JSON.stringify(updatedUser)));
       setNewBillingAddress('');
       setNewShippingAddress('');
     }
