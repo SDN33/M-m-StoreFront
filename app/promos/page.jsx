@@ -1,16 +1,23 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import ProductCard from '@/components/ProductCard';
+import ProductCard from '../../components/ProductCard';
 import Livraison from '@/components/Livraison';
 import HeroBanner from '@/components/HeroBanner';
 import Trust from '@/components/Trust';
 
 
-export default function ProductsPromotions({ onAddToCart }) {
+
+
+export default function ProductsPromotions() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const handleAddToCart = (product) => {
+    console.log('Product added to cart:', product);
+    // Add your add to cart logic here
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -77,7 +84,7 @@ export default function ProductsPromotions({ onAddToCart }) {
               key={product.id}
               className="relative bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
             >
-              <ProductCard product={product} onAddToCart={onAddToCart} />
+              <ProductCard product={product} onAddToCart={handleAddToCart} />
             </div>
           ))}
         </div>
