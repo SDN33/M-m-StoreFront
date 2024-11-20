@@ -68,12 +68,12 @@ export default function Faq() {
   };
 
   return (
-    <div className="w-full bg-gradient-to-b from-white to-orange-50 pt-4 pb-8">
+    <div className="w-full bg-gradient-to-b from-white to-orange-50 pb-8 mb-28">
       <div className='h-20 w-auto'></div>
       <div className='min-h-2 w-auto'></div>
 
       <div className="container mx-auto px-4">
-        <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg mt-40">
+        <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg mt-32">
           <div className="p-4">
             <h1 className="text-2xl font-bold text-center mb-3 text-primary">
               Foire Aux Questions (FAQ)
@@ -89,13 +89,13 @@ export default function Faq() {
               />
             </div>
 
-            <div className="bg-gray-50 rounded-lg p-3 mb-3 h-16 overflow-y-auto">
+            <div className="bg-gray-50 rounded-lg p-3 h-16 overflow-y-auto">
               {filteredAnswer ? (
                 <p className="text-gray-700 text-xs leading-relaxed">
                   {filteredAnswer}
                 </p>
               ) : (
-                <p className="text-gray-500 text-xs text-center">
+                <p className="text-gray-500 text-sm text-center">
                   Veuillez entrer une question dans le champ ci-dessus.
                 </p>
               )}
@@ -115,7 +115,7 @@ export default function Faq() {
                     }}
                     className="text-left p-1.5 bg-white border border-gray-200 rounded hover:bg-gray-50 transition-colors duration-200"
                   >
-                    <p className="text-gray-700 text-xs line-clamp-2">{faq.question}</p>
+                    <p className="text-gray-700 text-sm line-clamp-2">{faq.question}</p>
                   </button>
                 ))}
               </div>

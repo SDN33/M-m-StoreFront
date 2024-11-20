@@ -1,5 +1,5 @@
 'use client'
-import { Globe, Lock, Box, Phone, CreditCard, X } from 'lucide-react'
+import { Globe, Lock, Box, CreditCard, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 
@@ -135,16 +135,38 @@ export default function PortailPro() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-orange-50">
-      <br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <div className="min-h-screen">
+      <br /><br /><br /><br /><br /><br /><br />
       <main className="max-w-6xl mx-auto px-4 pb-16">
+        {/* Background SVG */}
+        <svg
+          className="absolute top-0 left-0 w-full h-full opacity-10 -z-10"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+        >
+          <path
+            fill="#FF9800"
+            fillOpacity="0.3"
+            d="M0,160L48,176C96,192,192,224,288,218.7C384,213,480,171,576,170.7C672,171,768,213,864,229.3C960,245,1056,235,1152,213.3C1248,192,1344,160,1392,144L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+          ></path>
+        </svg>
         {/* Features Section */}
-        <div className="space-y-16">
-          <div className="text-center space-y-4">
-            <h3 className="text-4xl font-bold text-primary tracking-tight">
+        <div>
+          <div className="text-center space-y-4 mb-8">
+            {/* Suppression de l'image comme élément distinct */}
+            <h3
+              className="text-8xl tracking-tight font-bold relative bg-cover bg-center text-white flex items-center justify-center"
+              style={{
+              backgroundImage: 'url(/images/vins_fruitees.webp)', // Image en arrière-plan
+              backgroundSize: 'cover', // Couvrir toute la zone
+              backgroundPosition: 'center', // Centrer l'image
+              backgroundBlendMode: 'multiply', // Mélange de couleurs
+              height: '300px', // Augmenter la hauteur de l'image
+              }}
+            >
               PORTAIL PRO
             </h3>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="font-semibold text-xl mx-auto text-primary">
               Une solution complète pour les vignerons qui souhaitent développer leur présence en ligne, sans contraintes de logistique ni d&apos;engagement
             </p>
           </div>
@@ -182,9 +204,9 @@ export default function PortailPro() {
                 <p className="font-semibold text-lg text-center text-primary mb-6">
                   Sans Engagement
                 </p>
-                <ul className="space-y-4">
+                <ul className="space-y-4 text-center mx-auto">
                   {pricingFeatures.map((feature, index) => (
-                    <li key={index} className="flex items-center text-gray-600">
+                    <li key={index} className="flex items-center text-gray-600 text-center">
                       <svg className="w-5 h-5 text-primary mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
@@ -194,7 +216,6 @@ export default function PortailPro() {
                 </ul>
               </div>
 
-              {/* CGU Checkbox */}
               <Checkbox
                 id="cgu"
                 checked={cguAccepted}
@@ -224,16 +245,15 @@ export default function PortailPro() {
 
               <div className="space-y-4">
                 <button
-                  onClick={() => window.location.href = "tel:+33000000000"}
-                  className="bg-primary text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:shadow-orange-200/50 transition-all duration-300 flex items-center justify-center space-x-2"
+                  onClick={() => window.location.href = "/contact"}
+                  className="bg-primary text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:bg-orange-900 transition-all duration-300 flex items-center justify-center space-x-2"
                 >
-                  <Phone className="w-5 h-5" />
                   <span>Nous Contacter</span>
                 </button>
 
                 <button
                   onClick={handlePayment}
-                  className="bg-gradient-to-r from-green-500 to-green-600 text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:shadow-green-200/50 transition-all duration-300 flex items-center justify-center space-x-2"
+                  className="bg-teal-800 text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:bg-teal-950 transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <CreditCard className="w-5 h-5" />
                   <span>Procéder au paiement</span>
@@ -243,6 +263,7 @@ export default function PortailPro() {
           </div>
         </div>
       </main>
+
 
       {/* Custom Modal for CGU */}
       <Modal isOpen={showCGU} onClose={() => setShowCGU(false)}>
@@ -265,7 +286,7 @@ export default function PortailPro() {
               <div>
                 <h4 className="font-bold mb-2">Il est exposé que :</h4>
                 <p className="text-gray-600">
-                  Vins.mémégeorgette.com est une plateforme de Biolibairterre SAS, société par actions simplifiée au
+                  Vinsmemegeorgette.com est une plateforme de Biolibairterre SAS, société par actions simplifiée au
                   capital de 2500 euros, dont le siège social est situé à Saurel 33890 Coubeyrac immatriculée au registre
                   du commerce et des sociétés de Libourne sous le numéro 934 999 798 représentée par Monsieur
                   Charles Hannon, représentant légal dûment habilité (ci-après définie Biolibairterre SAS »,
@@ -786,7 +807,7 @@ export default function PortailPro() {
                   <br /><br />
                   9.3. Responsabilité
                   <br /><br />
-                  Le Vendeur accepte de ne pas cibler spécifiquement la marque vins.mémégeorgette.com par le biais
+                  Le Vendeur accepte de ne pas cibler spécifiquement la marque vinsmemegeorgette.com par le biais
                   d&apos;achats de mots clefs qui sont soumis aux Droits de Propriété Intellectuelle de Biolibairterre SAS.
                   9.4. Utilisation des logos et communication
                   Biolibairterre SAS pourra utiliser la marque ou le logo appartenant au Vendeur afin de promouvoir

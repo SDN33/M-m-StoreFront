@@ -34,7 +34,7 @@ const AuthButton = () => {
         return (
             <span
                 onClick={() => router.push('/login')}
-                className="text-sm text-white font-semibold hover:text-gray-800 cursor-pointer flex items-center gap-2"
+                className="text-sm text-white p-2 bg-black rounded-xl sm:texy-primary md:mt-0  font-semibold hover:text-primary cursor-pointer flex items-center gap-2"
             >
                 <User size={16} />
                 Se connecter
