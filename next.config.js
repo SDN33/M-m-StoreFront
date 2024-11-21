@@ -17,6 +17,11 @@ const nextConfig = {
         hostname: 'portailpro-memegeorgette.com',
         pathname: '/**',
       },
+      {
+        protocol: "https",
+        hostname: "i1.wp.com",
+        pathname: "/**", // Permet toutes les images sous ce domaine
+      },
     ],
   },
   async rewrites() {
