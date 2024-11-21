@@ -185,7 +185,9 @@ export default function Home() {
               <div className="py-8" />
               <HeroBanner />
               <Livraison />
+              <div className="py-8" />
               <WineCategories />
+              <div className="py-8" />
               <LatestArticles />
               <Trust />
               <Slogan />

@@ -13,18 +13,26 @@ export default async function handler(req, res) {
       },
     });
 
+    // Déboguer la réponse de l'API pour voir la structure exacte
+    console.log("Réponse de l'API :", JSON.stringify(response.data, null, 2)); // Affiche la réponse complète
+
     // Formater les données des articles pour le frontend
-    const formattedData = response.data.map((post) => ({
-      id: post.id,
-      title: post.title.rendered,
-      content: post.content.rendered,
-      excerpt: post.excerpt.rendered,
-      date: post.date,
-      slug: post.slug,
-      author: post._embedded?.author?.[0]?.name || "Anonyme",
-      // Récupère l'URL de l'image de l'article, si disponible
-      featuredImage: post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || null,
-    }));
+    const formattedData = response.data.map((post) => {
+      const featuredImage = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || null;
+
+      console.log("Image vedette pour l'article ID", post.id, ":", featuredImage); // Vérification de l'image
+
+      return {
+        id: post.id,
+        title: post.title.rendered,
+        content: post.content.rendered,
+        excerpt: post.excerpt.rendered,
+        date: post.date,
+        slug: post.slug,
+        author: post._embedded?.author?.[0]?.name || "Anonyme",
+        featuredImage: featuredImage,
+      };
+    });
 
     // Retourner les articles formatés avec l'image vedette
     res.status(200).json({ success: true, articles: formattedData });

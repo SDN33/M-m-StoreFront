@@ -11,7 +11,7 @@ const Newsletter = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg overflow-hidden h-[300px] relative">
+    <div className="bg-white rounded-lg overflow-hidden h-[300px] relative scroll-pt-24">
       <video
         src="/videos/newslettervid.mp4"
         className="w-full h-full object-cover"
