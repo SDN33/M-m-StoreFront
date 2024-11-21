@@ -105,6 +105,7 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-6 sm:py-12 px-4 sm:px-6 lg:px-8 mt-18 sm:mt-36">
+      <div className='md:hidden sm:flex'><br /><br /><br /><br /><br /></div>
       <div className="max-w-3xl mx-auto">
         <div className="bg-white rounded-t-2xl shadow-sm p-4 sm:p-8 border-b border-gray-200">
           <div className="flex flex-col sm:flex-row items-center sm:justify-between space-y-4 sm:space-y-0">
