@@ -24,19 +24,19 @@ export default function PortailPro() {
       icon: <Globe className="w-8 h-8 text-orange-500" />,
       title: "Votre espace vigneron en ligne",
       description: "Gérez votre espace professionnel en quelques clics. Vendez vos vins bio en Europe avec notre support marketing intégré.",
-      bgColor: "bg-gradient-to-br from-orange-50 to-orange-100"
+      bgColor: "bg-gradient-to-br from-teal-50 to-teal-100"
     },
     {
       icon: <Lock className="w-8 h-8 text-orange-500" />,
       title: "Liberté totale",
       description: "Aucun engagement de durée ou de quantité. Fixez vos propres prix de vente directement depuis votre domaine.",
-      bgColor: "bg-gradient-to-br from-orange-50 to-orange-100"
+      bgColor: "bg-gradient-to-br from-teal-50 to-teal-100"
     },
     {
       icon: <Box className="w-8 h-8 text-orange-500" />,
       title: "Logistique simplifiée",
       description: "Nous prenons en charge toute la logistique. Préparez vos commandes dans des emballages agréés et déposez-les au centre le plus proche.",
-      bgColor: "bg-gradient-to-br from-orange-50 to-orange-100"
+      bgColor: "bg-gradient-to-br from-teal-50 to-teal-100"
     }
   ]
 
