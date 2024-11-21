@@ -73,7 +73,7 @@ const Header: React.FC = () => {
       <div className="border-b bg-primary">
         <div className="container mx-auto px-4">
           {/* Desktop and Tablet View - Hauteur fixe */}
-          <div className="hidden md:flex items-center justify-between h-16 relative">
+          <div className="hidden lg:flex items-center justify-between h-16 relative">
             {/* Container des logos avec dimensions fixes */}
             <div className="relative w-[280px] h-32 flex items-center">
               <div className="absolute left-0 top-0 h-full w-[71px] flex items-center justify-center">
@@ -109,7 +109,7 @@ const Header: React.FC = () => {
             </div>
 
             {/* Right Actions - Largeur fixe */}
-            <div className="hidden lg:flex items-center space-x-7 text-sm px-4 min-w-[400px] justify-end">
+            <div className="hidden md:hidden lg:flex items-center space-x-7 text-sm px-4 min-w-[400px] justify-end my-auto">
               <div className="flex items-center space-x-3">
                 <span className="text-white whitespace-nowrap">Livraison en</span>
                 <div className="relative">
@@ -168,7 +168,7 @@ const Header: React.FC = () => {
           </div>
 
           {/* Mobile View - Hauteur fixe */}
-          <div className="flex md:hidden items-center justify-between h-20 mt-3">
+          <div className="flex lg:hidden items-center justify-between h-20 mt-3">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 text-white hover:text-gray-200"
@@ -177,7 +177,7 @@ const Header: React.FC = () => {
               {isMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
             </button>
 
-            <div className="relative h-50 w-60 flex items-center justify-center scale-110">
+            <div className="relative h-50 w-60 flex items-center justify-center scale-110 mx-auto my-auto">
               <Link href="/">
                 <Image
                   src="/images/memelogo.png"
@@ -197,7 +197,7 @@ const Header: React.FC = () => {
 
           {/* Mobile Menu - Position absolue pour ne pas affecter la hauteur du header */}
           {isMenuOpen && (
-            <div className="md:hidden absolute left-0 right-0 top-full bg-white border-t border-gray-100 shadow-xl z-50">
+            <div className="lg:hidden absolute left-0 right-0 top-full bg-white border-t border-gray-100 shadow-xl z-50">
               <div className="p-4">
                 <SearchInput />
               </div>
@@ -304,10 +304,10 @@ const Header: React.FC = () => {
       {isNosVinsOpen && (
         <>
           <div
-            className="fixed inset-0 bg-gray-800 bg-opacity-50 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-gray-800 bg-opacity-50 backdrop-blur-sm z-50 md:hidden sm:hidden"
             onClick={() => setIsNosVinsOpen(false)}
           />
-          <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+          <div className="fixed inset-0 flex items-center justify-center z-50 p-4 md:hidden sm:hidden">
             <div className="bg-white rounded-xl shadow-2xl mx-4 lg:w-3/4 lg:mx-auto relative max-h-[90vh] overflow-y-auto">
               <div className="p-8">
                 <button

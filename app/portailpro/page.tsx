@@ -163,8 +163,8 @@ export default function PortailPro() {
             >
               PORTAIL PRO
             </h3>
-            <p className="font-semibold text-xl mx-auto text-teal-800">
-              Une solution complète pour les vignerons qui souhaitent développer leur présence en ligne, sans contraintes de logistique ni d&apos;engagement
+            <p className="font-semibold text-xl mx-auto">
+              Une solution complète pour les vignerons qui souhaitent développer leur présence en ligne,<br />sans contraintes de logistique ni d&apos;engagement
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

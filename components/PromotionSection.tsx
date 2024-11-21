@@ -3,7 +3,7 @@ const PromotionSection = () => {
 
   return (
     <div
-      className={`opacity-90 text-center shadow-sm  w-full z-10 `}
+      className={`opacity-90 text-center shadow-sm  w-full z-10 h-8 `}
     >
       <p className="font-extrabold bg-black shadow-sm text-white text-xs sm:text-xs lg:text-sm">
         <span className="sm:hidden">
