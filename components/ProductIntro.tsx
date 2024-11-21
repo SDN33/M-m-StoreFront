@@ -105,7 +105,7 @@ const ProductsIntro: React.FC = () => {
             <Image
               src="/images/logointro.jpg"
               alt="biodynamie logo"
-              width={50}
+              width={60}
               height={30}
               className="object-contain w-12 h-auto"
               priority
@@ -121,8 +121,8 @@ const ProductsIntro: React.FC = () => {
             <Image
               src="/images/logointro2.jpg"
               alt="nature et progrès"
-              width={40}
-              height={30}
+              width={35}
+              height={28}
               className="object-contain w-10 h-auto"
               priority
             />
