@@ -24,19 +24,16 @@ export default function PortailPro() {
       icon: <Globe className="w-8 h-8 text-orange-500" />,
       title: "Votre espace vigneron en ligne",
       description: "Gérez votre espace professionnel en quelques clics. Vendez vos vins bio en Europe avec notre support marketing intégré.",
-      bgColor: "bg-gradient-to-br from-teal-50 to-teal-100"
     },
     {
       icon: <Lock className="w-8 h-8 text-orange-500" />,
       title: "Liberté totale",
       description: "Aucun engagement de durée ou de quantité. Fixez vos propres prix de vente directement depuis votre domaine.",
-      bgColor: "bg-gradient-to-br from-teal-50 to-teal-100"
     },
     {
       icon: <Box className="w-8 h-8 text-orange-500" />,
       title: "Logistique simplifiée",
       description: "Nous prenons en charge toute la logistique. Préparez vos commandes dans des emballages agréés et déposez-les au centre le plus proche.",
-      bgColor: "bg-gradient-to-br from-teal-50 to-teal-100"
     }
   ]
 
@@ -174,7 +171,7 @@ export default function PortailPro() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className={`${feature.bgColor} p-8 rounded-2xl shadow-lg shadow-teal-100/50 hover:shadow-xl hover:shadow-teal-200/50 transition-all duration-300`}
+                className={`p-8 rounded-2xl shadow-lg shadow-teal-100/50 hover:shadow-xl hover:shadow-teal-200/50 transition-all duration-300`}
               >
                 <div className="space-y-6">
                   <div className="bg-white w-16 h-16 rounded-xl flex items-center justify-center shadow-sm mx-auto">
