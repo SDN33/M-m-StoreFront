@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { Clock, ArrowRight, Rss } from "lucide-react";
 import he from "he";
+
+// Simple date formatting function
+const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+};
 
 type Article = {
   id: number;
@@ -9,20 +20,23 @@ type Article = {
   slug: string;
   featuredImage: string | null;
   date: string;
+  author?: string;
+  readTime?: number;
 };
 
 const LatestArticles: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
+        setIsLoading(true);
         const response = await fetch("/api/articles");
         const data = await response.json();
 
         if (data.success) {
-          // Ne garder que les 4 derniers articles
           setArticles(data.articles.slice(0, 4));
         } else {
           setError("Impossible de récupérer les articles.");
@@ -30,43 +44,95 @@ const LatestArticles: React.FC = () => {
       } catch (err) {
         console.error(err);
         setError("Erreur lors de la récupération des articles.");
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchArticles();
   }, []);
 
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-primary"></div>
+      </div>
+    );
+  }
+
   if (error) {
-    return <p className="text-red-500">{error}</p>;
+    return (
+      <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded relative" role="alert">
+        {error}
+      </div>
+    );
   }
 
   return (
-    <div className="my-8 mx-10">
-      <h2 className="text-2xl font-bold text-center text-primary">Le Blog de Mémé Georgette</h2>
-      <p className="text-center text-black mb-8">
-        Retrouvez ici les derniers articles de notre blog.
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+    <div className="container mx-auto px-24 py-8 mb-20">
+      <div className="text-center mb-10 bg-gradient-to-r from-gray-900 via-gray-800 to-black pt-7 rounded-t-xl">
+        <h2 className="text-3xl font-extrabold text-primary">
+          Le Blog de Mémé Georgette&nbsp;
+          <Rss size={32} className="inline text-white animate-ping duration-1000" />
+        </h2>
+        <p className="text-xl font-extrabold slide-in-right max-w-2xl mx-auto mb-8 text-white">
+          Découvrez nos dernières astuces et article pour les amateurs de vin
+        </p>
+        <div className="border-b-4 border-primary w-full max-w-[50rem] my-2 slide-in-right mx-auto"></div>
+      </div>
+      <br />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {articles.map((article) => (
-          <div key={article.id} className="border rounded-lg overflow-hidden shadow-md">
+          <div
+            key={article.id}
+            className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+          >
+            <div className="relative h-48 overflow-hidden rounded-t-xl">
               <Image
                 src={article.featuredImage || "/default-image.jpg"}
                 alt={article.title}
-                width={500}
-                height={160}
-                className="w-full h-40 object-cover"
+                fill
+                className="absolute inset-0 w-full h-full object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
-              <h3 className="text-lg font-semibold mb-2">{he.decode((article.title || "").replace(/<\/?[^>]+(>|$)/g, ""))}</h3>
+            </div>
+
+            <div className="p-5">
+              <div className="flex items-center text-sm text-gray-500 mb-2">
+                <Clock size={16} className="mr-2" />
+                <span>
+                  {formatDate(article.date)}
+                  {article.readTime && ` · ${article.readTime} min lecture`}
+                </span>
+              </div>
+
+              <h3 className="font-bold text-xl text-gray-900 mb-3 line-clamp-2">
+                {he.decode((article.title || "").replace(/<\/?[^>]+(>|$)/g, ""))}
+              </h3>
+
               <div
-                className="text-sm text-gray-700 mb-4"
+                className="text-gray-600 mb-4 line-clamp-3"
                 dangerouslySetInnerHTML={{ __html: article.excerpt }}
               />
-              <a
-                href={`/blog/${article.slug}`}
-                className="text-blue-500 hover:underline font-medium"
-              >
-                Lire la suite →
-              </a>
+
+              <div className="flex items-center justify-between">
+                <a
+                  href={`/blog/${article.slug}`}
+                  className="text-primary hover:text-primary-dark font-semibold flex items-center group"
+                >
+                  Lire la suite
+                  <ArrowRight
+                    size={20}
+                    className="ml-2 transform transition-transform group-hover:translate-x-1"
+                  />
+                </a>
+                {article.author && (
+                  <span className="text-sm text-gray-500">
+                    Par @MéméGeorgette
+                  </span>
+                )}
+              </div>
+            </div>
           </div>
         ))}
       </div>

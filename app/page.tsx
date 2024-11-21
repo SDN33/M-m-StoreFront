@@ -182,10 +182,10 @@ export default function Home() {
                   />
                 </section>
               </div>
-              <Livraison />
-              <WineCategories />
               <div className="py-8" />
               <HeroBanner />
+              <Livraison />
+              <WineCategories />
               <LatestArticles />
               <Trust />
               <Slogan />
