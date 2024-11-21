@@ -27,7 +27,7 @@ const SocialIcon = ({ platform }) => {
 };
 
 const VendorLocationMap = ({ vendor }) => {
-  const hasCity = vendor.address?.city;
+  const hasCity = vendor.address?.city && vendor.address?.address_1;
 
   if (!hasCity) {
     return (
@@ -40,7 +40,7 @@ const VendorLocationMap = ({ vendor }) => {
     );
   }
 
-  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(vendor.address.city)}&z=12&output=embed`;
+  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(hasCity)}&z=12&output=embed`;
 
   return (
     <div className="bg-white rounded-lg shadow p-6">
@@ -169,14 +169,14 @@ export default function VendorDetailsPage() {
           </div>
         </div>
 
-        {vendor.address && (
-          <VendorLocationMap vendor={vendor} />
-        )}
-
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold mb-4 text-teal-800">À propos</h2>
           <p className="text-gray-600 whitespace-pre-wrap">{vendor.shop.description ? vendor.shop.description.replace(/<\/?[^>]+(>|$)/g, "") : ''}</p>
         </div>
+
+        {vendor.address && (
+          <VendorLocationMap vendor={vendor} />
+        )}
 
         {vendor.social && Object.entries(vendor.social)
           .filter(([, url]) => url && url.trim() !== '')
