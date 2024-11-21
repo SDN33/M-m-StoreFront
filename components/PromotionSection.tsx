@@ -43,7 +43,7 @@ const PromotionSection = () => {
 
       {/* Éléments décoratifs de Noël */}
       <div className="absolute left-4 top-0 text-white opacity-50">
-        <ChristmasTree size={30} />
+        <ChristmasTree size={30} className="animate-bounce" />
       </div>
 
       <div className="absolute right-4 top-0 text-white opacity-50">
