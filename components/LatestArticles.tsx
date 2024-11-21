@@ -117,7 +117,7 @@ const LatestArticles: React.FC = () => {
 
               <div className="flex items-center justify-between">
                 <a
-                  href={`/blog/${article.slug}`}
+                  href={`/blog/${article.id}`}
                   className="text-primary hover:text-primary-dark font-semibold flex items-center group"
                 >
                   Lire la suite
