@@ -2,9 +2,27 @@ import React from 'react';
 import { Gift, Snowflake, TreePine as ChristmasTree } from 'lucide-react';
 
 const PromotionSection = () => {
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const promotionSection = document.querySelector('.promotion-section');
+      if (promotionSection) {
+        if (window.scrollY > 50) {
+          promotionSection.classList.add('hidden');
+        } else {
+          promotionSection.classList.remove('hidden');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <div
-      className={`relative overflow-hidden bg-black text-center shadow-lg w-full z-10 py-2 h-9`}
+      className={`relative overflow-hidden bg-black text-center shadow-lg w-full z-40 py-2 h-16 md:h-8 mb-1 promotion-section`}
     >
       {/* Flocons de neige animés */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
@@ -47,7 +65,7 @@ const PromotionSection = () => {
 
         <span className="hidden sm:inline text-base fade-in-up">
           Livraison <span className='text-accent'>OFFERTE</span>
-          <span className='text-xs'>&nbsp;en point relais dès 6 bouteilles d&apos;un même domaine achetés</span>
+          <span className='text-xs'>&nbsp;en point relais dès 6 bouteilles <span className='text-xs'>d&apos;un même domaine achetés</span></span>
         </span>
       </p>
     </div>
