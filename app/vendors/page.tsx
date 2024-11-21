@@ -233,7 +233,7 @@ const VendorsPage = () => {
 
                   {vendor.shop?.description && (
                     <p className="mt-4 text-gray-600 text-center text-sm">
-                      {vendor.shop.description}
+                      {vendor.shop.description ? vendor.shop.description.replace(/<\/?[^>]+(>|$)/g, "") : ''}
                     </p>
                   )}
 

@@ -184,12 +184,23 @@ const VendorsPage = () => {
                   </div>
 
                   {vendor.shop?.description && (
-                    <p className="mt-4 text-black text-xs text-center">
-                      {vendor.shop.description}
-                    </p>
+                    <>
+                      <p className="mt-4 text-black text-xs text-center">
+                        {vendor.shop.description.replace(/<\/?[^>]+(>|$)/g, "").length > 20
+                          ? `${vendor.shop.description.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 200)}...`
+                          : vendor.shop.description.replace(/<\/?[^>]+(>|$)/g, "")}
+                      </p>
+                      <Link
+                        href={`/vendors/${vendor.id}`}
+                        className="text-teal-800 text-xs mt-2 inline-block text-center mx-auto"
+                      >
+                        En Savoir plus →
+                      </Link>
+                    </>
                   )}
 
-                  {vendor.products && vendor.products.length > 0 && (
+
+                    {vendor.products && vendor.products.length > 0 && (
                     <div className="mt-6 border-t border-gray-100">
                       <h3 className="text-base font-semibold text-teal-800 mb-4 text-center">Vins Recommandés</h3>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

@@ -175,7 +175,7 @@ export default function VendorDetailsPage() {
 
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold mb-4 text-teal-800">À propos</h2>
-          <p className="text-gray-600 whitespace-pre-wrap">{vendor.shop?.description || ''}</p>
+          <p className="text-gray-600 whitespace-pre-wrap">{vendor.shop.description ? vendor.shop.description.replace(/<\/?[^>]+(>|$)/g, "") : ''}</p>
         </div>
 
         {vendor.social && Object.entries(vendor.social)
