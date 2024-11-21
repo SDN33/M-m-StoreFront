@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Heart, Info } from 'lucide-react';
+import { Info } from 'lucide-react';
 import AddToCartButton from './AddToCartButton';
 import { MapPin } from 'lucide-react';
 
@@ -258,7 +258,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
 
         <div className="flex items-center justify-center gap-2 mx-auto">
-          <Heart className="w-5 h-5 text-gray-400 cursor-pointer hover:text-red-500" />
           <select
             value={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}

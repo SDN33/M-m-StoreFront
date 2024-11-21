@@ -78,6 +78,7 @@ export default function Profile() {
   };
 
 
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -128,7 +129,7 @@ export default function Profile() {
         </div>
 
         <div className="bg-white rounded-b-2xl shadow-sm p-4 sm:p-8">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">Vos commandes</h2>
+          <h2 className="text-lg font-semibold text-teal-800 mb-4">Vos commandes</h2>
           {Array.isArray(orders) && orders.length > 0 ? (
             <ul className="space-y-4">
               {orders.map((order) => (
@@ -153,6 +154,8 @@ export default function Profile() {
           )}
         </div>
       </div>
+
+
     </div>
   );
 }
