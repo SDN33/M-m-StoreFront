@@ -11,6 +11,7 @@ import Trust from '@/components/Trust';
 import HeroBanner from '@/components/HeroBanner';
 import Livraison from '@/components/Livraison';
 import WineCategories from '@/components/WineCategories';
+import LatestArticles from '@/components/LatestArticles';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -183,9 +184,10 @@ export default function Home() {
               </div>
 
               <WineCategories />
-              <HeroBanner />
               <Livraison />
               <div className="py-8" />
+              <HeroBanner />
+              <LatestArticles />
               <Trust />
               <Slogan />
               <div className="py-8" />
