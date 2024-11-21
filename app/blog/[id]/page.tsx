@@ -190,6 +190,7 @@ const ArticlePage = () => {
             {formatDate(article.date)}
             {article.readTime && ` · ${article.readTime} min lecture`}
           </time>
+          <p>{article.author && ` · ${article.author}`}</p>
         </div>
       </header>
 
