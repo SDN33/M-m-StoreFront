@@ -4,7 +4,7 @@ import { Gift, Snowflake, TreePine as ChristmasTree } from 'lucide-react';
 const PromotionSection = () => {
   return (
     <div
-      className={`relative overflow-hidden bg-black text-center shadow-lg w-full z-10 py-2`}
+      className={`relative overflow-hidden bg-black text-center shadow-lg w-full z-10 py-2 h-9`}
     >
       {/* Flocons de neige animés */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
@@ -39,7 +39,7 @@ const PromotionSection = () => {
         />
       </div>
 
-      <p className="relative z-10 font-extrabold text-white text-xs sm:text-sm lg:text-base">
+      <p className="relative z-10 font-extrabold text-white text-xs sm:text-sm lg:text-sm h-fit">
         <span className="sm:hidden">
           Livraison <span className='text-accent'>OFFERTE</span><br />
           <span className='text-xs'>&nbsp;en point relais dès 6 bouteilles <br /> d&apos;un même domaine achetés</span>
