@@ -38,7 +38,7 @@ const Blog = () => {
         const data = await response.json();
 
         if (data.success) {
-            setArticles(data.articles.slice(20, 20));
+            setArticles(data.articles.slice(0, 20));
         } else {
           setError("Impossible de récupérer les articles.");
         }
@@ -109,7 +109,7 @@ const Blog = () => {
                 <Clock size={16} className="mr-2" />
                 <span>
                   {formatDate(article.date)}
-                  {article.readTime ? ` · ${article.readTime} min lecture` : ''}
+                  {article.readTime && ` · ${article.readTime} min lecture`}
                 </span>
               </div>
 
@@ -124,7 +124,7 @@ const Blog = () => {
 
               <div className="flex items-center justify-between">
                 <a
-                  href={`/blog/${article.slug}`}
+                  href={`/blog/${article.id}`}
                   className="text-primary hover:text-primary-dark font-semibold flex items-center group"
                 >
                   Lire la suite

@@ -1,14 +1,14 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const FallingEurosPromo = () => {
   interface Euro {
-    id: number;
+    id: string;
     left: number;
     angle: number;
     size: number;
     opacity: number;
     speed: number;
+    timestamp: number;
   }
 
   const [euros, setEuros] = useState<Euro[]>([]);
@@ -16,12 +16,13 @@ const FallingEurosPromo = () => {
   useEffect(() => {
     const createEuro = () => {
       const newEuro = {
-        id: Math.random(),
+        id: Date.now().toString() + Math.random().toString(36).substring(2),
         left: Math.random() * 100,
         angle: Math.random() * 360,
         size: Math.random() * (24 - 16) + 16,
         opacity: Math.random() * (0.8 - 0.4) + 0.4,
         speed: Math.random() * (12 - 8) + 8,
+        timestamp: Date.now(),
       };
       setEuros(prev => [...prev, newEuro]);
     };
@@ -29,10 +30,10 @@ const FallingEurosPromo = () => {
     // Create new euros periodically
     const interval = setInterval(createEuro, 300);
 
-    // Remove euros that have fallen beyond the screen
+    // Remove euros that have fallen beyond the screen after 5 seconds
     const cleanupInterval = setInterval(() => {
-      setEuros(prev => prev.filter(euro => euro.id > (Date.now() / 1000 - 5)));
-    }, 5000);
+      setEuros(prev => prev.filter(euro => Date.now() - euro.timestamp < 5000));
+    }, 1000);
 
     return () => {
       clearInterval(interval);
