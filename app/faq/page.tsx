@@ -75,7 +75,7 @@ export default function Faq() {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg mt-32">
           <div className="p-4">
-            <h1 className="text-2xl font-bold text-center mb-3 text-primary">
+            <h1 className="text-2xl font-bold text-center mb-3">
               Foire Aux Questions (FAQ)
             </h1>
 
@@ -95,7 +95,7 @@ export default function Faq() {
                   {filteredAnswer}
                 </p>
               ) : (
-                <p className="text-gray-500 text-sm text-center">
+                <p className="text-sm text-center text-primary">
                   Veuillez entrer une question dans le champ ci-dessus.
                 </p>
               )}
