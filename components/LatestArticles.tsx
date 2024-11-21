@@ -69,13 +69,13 @@ const LatestArticles: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto px-24 py-8 mb-20">
+    <div className="container mx-auto px-8 py-8 mb-20">
       <div className="text-center mb-10 bg-gradient-to-r from-gray-900 via-gray-800 to-black pt-7 rounded-t-xl">
-        <h2 className="text-3xl font-extrabold text-primary">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-primary">
           Le Blog de Mémé Georgette&nbsp;
           <Rss size={32} className="inline text-white animate-ping duration-1000" />
         </h2>
-        <p className="text-xl font-extrabold slide-in-right max-w-2xl mx-auto mb-8 text-white">
+        <p className="text-sm md:text-xl lg:text-xl  font-extrabold slide-in-right max-w-2xl mx-auto mb-8 text-white">
           Découvrez nos dernières astuces et article pour les amateurs de vin
         </p>
         <div className="border-b-4 border-primary w-full max-w-[50rem] my-2 slide-in-right mx-auto"></div>
