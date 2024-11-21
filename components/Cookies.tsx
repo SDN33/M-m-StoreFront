@@ -21,7 +21,6 @@ const CookieConsent = () => {
       }
     };
 
-    // Listen for the age verification event
     window.addEventListener('ageVerified', handleAgeVerification);
 
     if (ageVerifiedTime) {
@@ -35,7 +34,6 @@ const CookieConsent = () => {
       }
     }
 
-    // Cleanup the event listener
     return () => {
       window.removeEventListener('ageVerified', handleAgeVerification);
     };
@@ -81,64 +79,64 @@ const CookieConsent = () => {
 
   if (showDetails) {
     return (
-      <div className="fixed inset-0 bg-gray-200/50 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-xl max-w-lg w-full mx-auto border border-gray-300">
-          <div className="p-6 space-y-4">
+      <div className="fixed inset-0 bg-white/90 backdrop-blur-md z-50 flex items-center justify-center p-4 pb-4">
+        <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-auto border border-primary/20">
+          <div className="p-6 space-y-6">
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-medium text-gray-700">🍪 Paramètres des cookies</h3>
+              <h3 className="text-xl font-semibold text-black">🍪 Paramètres des cookies</h3>
               <button
                 onClick={() => setShowDetails(false)}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-black hover:text-primary transition-colors rounded-full p-2 hover:bg-primary/10"
               >
                 ✕
               </button>
             </div>
 
             <div className="space-y-4">
-              <div className="p-3 bg-gray-100 rounded-md">
+              <div className="p-4 bg-primary/5 rounded-xl border border-primary/10">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-medium text-gray-700">Cookies essentiels</p>
-                    <p className="text-sm text-gray-600">Nécessaires au fonctionnement du site</p>
+                    <p className="font-semibold">Cookies essentiels</p>
+                    <p className="text-sm text-primary/70">Nécessaires au fonctionnement du site</p>
                   </div>
-                  <div className="bg-gray-300 px-2 py-1 rounded text-sm text-gray-700">
+                  <div className="bg-primary/20 px-3 py-1 rounded-full text-sm text-primary">
                     Activé
                   </div>
                 </div>
               </div>
 
-              <div className="p-3 bg-gray-100 rounded-md">
+              <div className="p-4 bg-primary/5 rounded-xl border border-primary/10">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-medium text-gray-700">Cookies analytiques</p>
-                    <p className="text-sm text-gray-600">Mesure d&apos;audience et statistiques</p>
+                    <p className="font-semibold">Cookies analytiques</p>
+                    <p className="text-sm text-primary/70">Mesure d&apos;audience et statistiques</p>
                   </div>
                   <button
                     onClick={() => handleToggle('analytics')}
-                    className={`w-12 h-6 rounded-full transition-colors relative ${
-                      preferences.analytics ? 'bg-[#ff7961]' : 'bg-gray-300'
+                    className={`w-14 h-7 rounded-full transition-colors relative ${
+                      preferences.analytics ? 'bg-primary' : 'bg-primary/20'
                     }`}
                   >
-                    <span className={`absolute block w-4 h-4 rounded-full bg-white top-1 transition-transform ${
+                    <span className={`absolute block w-5 h-5 rounded-full bg-white top-1 transition-transform ${
                       preferences.analytics ? 'right-1' : 'left-1'
                     }`} />
                   </button>
                 </div>
               </div>
 
-              <div className="p-3 bg-gray-100 rounded-md">
+              <div className="p-4 bg-primary/5 rounded-xl border border-primary/10">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-medium text-gray-700">Cookies marketing</p>
-                    <p className="text-sm text-gray-600">Personnalisation et publicités</p>
+                    <p className="font-semibold">Cookies marketing</p>
+                    <p className="text-sm text-primary/70">Personnalisation et publicités</p>
                   </div>
                   <button
                     onClick={() => handleToggle('marketing')}
-                    className={`w-12 h-6 rounded-full transition-colors relative ${
-                      preferences.marketing ? 'bg-[#ff7961]' : 'bg-gray-300'
+                    className={`w-14 h-7 rounded-full transition-colors relative ${
+                      preferences.marketing ? 'bg-primary' : 'bg-primary/20'
                     }`}
                   >
-                    <span className={`absolute block w-4 h-4 rounded-full bg-white top-1 transition-transform ${
+                    <span className={`absolute block w-5 h-5 rounded-full bg-white top-1 transition-transform ${
                       preferences.marketing ? 'right-1' : 'left-1'
                     }`} />
                   </button>
@@ -146,16 +144,16 @@ const CookieConsent = () => {
               </div>
             </div>
 
-            <div className="flex justify-end gap-2 pt-4 border-t border-gray-200">
+            <div className="flex justify-end gap-3 pt-4 border-t border-primary/10">
               <button
                 onClick={refuse}
-                className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800"
+                className="px-4 py-2 text-sm text-primary/70 hover:bg-primary/10 rounded-md transition-colors"
               >
                 Tout refuser
               </button>
               <button
                 onClick={acceptSelected}
-                className="px-4 py-2 text-sm bg-[#ff7961] text-white rounded hover:bg-[#ff6347]"
+                className="px-4 py-2 text-sm bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
               >
                 Enregistrer mes choix
               </button>
@@ -168,28 +166,29 @@ const CookieConsent = () => {
 
   return (
     <div className="fixed bottom-4 left-4 right-4 z-50 w-full h-fit">
-      <div className="bg-white opacity-90 rounded-lg shadow-lg border border-gray-100 p-1 text-sm">
-        <div className="space-y-3">
-          <p className="text-black text-center">
-            <span className='text-3xl text-left'>🍪</span>Nous utilisons des cookies pour améliorer votre expérience client.<br />Veuillez accepter nos cookies pour continuer.
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-primary/10 p-4">
+        <div className="space-y-4">
+          <p className="text-center flex items-center justify-center gap-3">
+            <span className='text-3xl font-bold'>🍪</span>
+            <span>Nous utilisons des cookies pour améliorer votre expérience client. <br />Veuillez accepter nos cookies pour continuer.</span>
           </p>
 
           <div className="flex justify-center gap-4">
             <button
               onClick={acceptAll}
-              className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-600 transition-colors text-sm font-medium"
+              className="px-5 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors font-medium"
             >
               Tout accepter
             </button>
             <button
               onClick={() => setShowDetails(true)}
-              className="px-4 py-2 bg-white text-black rounded-md hover:bg-gray-300 transition-colors text-sm font-medium"
+              className="px-5 py-2 bg-primary/10 rounded-md hover:bg-primary/20 transition-colors font-medium"
             >
               Personnaliser
             </button>
             <button
               onClick={refuse}
-              className="px-4 py-2 bg-white text-black rounded-md hover:bg-gray-300 transition-colors text-sm font-medium"
+              className="px-5 py-2 bg-black text-white rounded-md hover:text-primary transition-colors font-medium"
             >
               Refuser
             </button>
