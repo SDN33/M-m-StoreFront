@@ -1,0 +1,145 @@
+"use client";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import { Clock, ArrowRight, Rss } from "lucide-react";
+import he from "he";
+
+// Simple date formatting function
+const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+};
+
+type Article = {
+  id: number;
+  title: string;
+  excerpt: string;
+  slug: string;
+  featuredImage: string | null;
+  date: string;
+  author?: string;
+  readTime?: number;
+};
+
+const Blog = () => {
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch("/api/articles");
+        const data = await response.json();
+
+        if (data.success) {
+            setArticles(data.articles.slice(20, 20));
+        } else {
+          setError("Impossible de récupérer les articles.");
+        }
+      } catch (err) {
+        console.error(err);
+        setError("Erreur lors de la récupération des articles.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchArticles();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="flex flex-col items-center">
+          <div className="loader"></div>
+          <p className="text-primary font-bold text-lg">Chargement des articles de Mémé...</p>
+        </div>
+        <br /><br />
+        <br /><br />
+        <br /><br />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-red-50 border  border-red-200 text-red-800 px-4 py-3 rounded relative mt-32 pb-60" role="alert">
+        {error}
+      </div>
+    );
+  }
+
+  return (
+    <div className="container mx-auto px-8 lg:px-32 py-8 mb-20 mt-36">
+      <div className="text-center mb-10 bg-gradient-to-r from-gray-900 via-gray-800 to-black pt-7 rounded-t-xl">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-primary">
+          Le Blog de Mémé Georgette&nbsp;
+          <Rss size={32} className="inline text-white animate-ping duration-1000" />
+        </h2>
+        <p className="text-sm md:text-xl lg:text-xl  font-extrabold slide-in-right max-w-2xl mx-auto mb-8 text-white">
+          Découvrez nos dernières astuces et article pour les amateurs de vin
+        </p>
+        <div className="border-b-4 border-primary w-full max-w-[50rem] my-2 slide-in-right mx-auto"></div>
+      </div>
+      <br />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {articles.map((article) => (
+          <div
+            key={article.id}
+            className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+          >
+            <div className="relative h-48 overflow-hidden rounded-t-xl">
+              <Image
+                src={article.featuredImage || "/default-image.jpg"}
+                alt={article.title}
+                fill={true}
+                className="absolute inset-0 w-full h-full object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </div>
+
+            <div className="p-5">
+              <div className="flex items-center text-sm text-gray-500 mb-2">
+                <Clock size={16} className="mr-2" />
+                <span>
+                  {formatDate(article.date)}
+                  {article.readTime ? ` · ${article.readTime} min lecture` : ''}
+                </span>
+              </div>
+
+              <h3 className="font-bold text-xl text-gray-900 mb-3 line-clamp-2">
+                {he.decode((article.title || "").replace(/<\/?[^>]+(>|$)/g, ""))}
+              </h3>
+
+              <div
+                className="text-gray-600 mb-4 line-clamp-3"
+                dangerouslySetInnerHTML={{ __html: article.excerpt }}
+              />
+
+              <div className="flex items-center justify-between">
+                <a
+                  href={`/blog/${article.slug}`}
+                  className="text-primary hover:text-primary-dark font-semibold flex items-center group"
+                >
+                  Lire la suite
+                  <ArrowRight
+                    size={20}
+                    className="ml-2 transform transition-transform group-hover:translate-x-1"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Blog;
