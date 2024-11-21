@@ -111,19 +111,19 @@ const ProductsIntro: React.FC = () => {
               priority
             />
             <Image
-              src="/images/logointro2.jpg"
-              alt="nature et progrès"
-              width={40}
-              height={30}
-              className="object-contain w-10 h-auto"
-              priority
-            />
-            <Image
               src="/images/biodyvin.jpg"
               alt="biodyvin logo"
               width={60}
               height={30}
               className="object-contain w-14 h-auto"
+              priority
+            />
+            <Image
+              src="/images/logointro2.jpg"
+              alt="nature et progrès"
+              width={40}
+              height={30}
+              className="object-contain w-10 h-auto"
               priority
             />
           </div>
