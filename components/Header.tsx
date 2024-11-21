@@ -44,7 +44,7 @@ const Header: React.FC = () => {
   };
 
   const categories = [
-    { name: '⚡ PROMOS', href: '/promos', className: 'text-primary font-semibold' },
+    { name: '⚡ PROMOS', href: '/promos', className: 'text-orange-800 font-semibold' },
 { name: 'Nos Vins', onClick: toggleNosVinsPopup, icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com' },
     { name: 'Nos Vignerons.nes', href: '/vendors' },
@@ -109,7 +109,7 @@ const Header: React.FC = () => {
             </div>
 
             {/* Right Actions - Largeur fixe */}
-            
+
             <div className="hidden md:hidden lg:flex items-center space-x-7 text-sm px-4 min-w-[400px] justify-end my-auto">
               <div className="flex items-center space-x-3">
                 <span className="text-white whitespace-nowrap">Livraison en</span>
@@ -157,10 +157,10 @@ const Header: React.FC = () => {
                 </div>
               </div>
 
-              <a href="/portailpro" className="text-white hover:text-gray-800 font-semibold whitespace-nowrap">
+              <a href="/portailpro" className="text-white hover:text-black font-semibold whitespace-nowrap">
                 Portail Pro
               </a>
-              <a href="/faq" className="text-white hover:text-gray-800 font-semibold whitespace-nowrap">
+              <a href="/faq" className="text-white hover:text-black font-semibold whitespace-nowrap">
                 Aide
               </a>
               <AuthButton />
