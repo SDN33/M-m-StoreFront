@@ -126,11 +126,6 @@ const LatestArticles: React.FC = () => {
                     className="ml-2 transform transition-transform group-hover:translate-x-1"
                   />
                 </a>
-                {article.author && (
-                  <span className="text-sm text-gray-500">
-                    Par @MéméGeorgette
-                  </span>
-                )}
               </div>
             </div>
           </div>

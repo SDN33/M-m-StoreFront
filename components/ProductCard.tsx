@@ -87,8 +87,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         <div className={`absolute bottom-3 ${product.certification?.toLowerCase() === 'bio' ? 'right-10' : 'right-12'} w-7 h-7 z-20`}>
           <Image
             src="/images/LogoAOC.jpg"
+            width={28}
+            height={28}
             alt="Badge AOC"
-            fill
             style={{ objectFit: 'contain' }}
           />
         </div>
@@ -257,11 +258,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-2 mx-auto">
+        <div className="flex items-center justify-center mx-auto">
           <select
             value={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}
-            className="border rounded-md p-1 text-sm"
+            className="border rounded-md p-2 text-sm"
           >
             {[...Array(10)].map((_, i) => (
               <option key={i} value={i + 1}>
@@ -277,6 +278,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
               await onAddToCart(product.id, quantity, variationId);
             }}
           />
+        </div>
+
+        <div>
+
         </div>
       </div>
     </div>

@@ -22,10 +22,11 @@ export default async function handler(req, res) {
       date: post.date,
       slug: post.slug,
       author: post._embedded?.author?.[0]?.name || "Anonyme",
+      // Récupère l'URL de l'image de l'article, si disponible
       featuredImage: post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || null,
     }));
 
-    // Retourner les articles formatés
+    // Retourner les articles formatés avec l'image vedette
     res.status(200).json({ success: true, articles: formattedData });
   } catch (error) {
     console.error("Erreur lors de la récupération des articles :", error.message);
