@@ -9,6 +9,7 @@ import MobileProductFilter from './MobileProductFilter';
 import Trust from '@/components/Trust';
 import Livraison from './Livraison';
 import MobileProductsIntro from './MobileProductIntro';
+import LatestArticles from './LatestArticles';
 
 const MobileHome: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -46,6 +47,7 @@ const MobileHome: React.FC = () => {
         <HeroBanner />
         <Livraison />
         <WineCategories />
+        <LatestArticles />
         <Trust />
         <Slogan />
         <br /><br />
