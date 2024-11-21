@@ -238,7 +238,7 @@ const ProductPage: React.FC = () => {
 
           <div className="w-full md:w-1/2 px-4 md:px-0">
             <p className="text-sm font-bold break-words">{product.nom_chateau || 'Château inconnu'}</p>
-            <h1 className="text-3xl font-bold text-primary break-words">{product.name}</h1>
+            <h1 className="text-3xl font-bold break-words">{product.name}</h1>
             <p className="text-sm font-bold mt-1 mb-2 break-words">
               {product.appelation?.toUpperCase()} | {product.region__pays?.toLowerCase() === 'bordeaux' ? 'Sud-Ouest' : product.region__pays?.toUpperCase()} | {product.millesime}
             </p>
