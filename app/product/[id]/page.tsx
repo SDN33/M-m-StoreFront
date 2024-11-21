@@ -20,7 +20,7 @@ interface Product {
   stock_status: string;
   volume: string;
   region__pays?: string;
-  appelation?: string;
+  appellation?: string;
   description?: string;
   short_description?: string;
   images: { src: string }[];
@@ -240,7 +240,7 @@ const ProductPage: React.FC = () => {
             <p className="text-sm font-bold break-words">{product.nom_chateau || 'Château inconnu'}</p>
             <h1 className="text-3xl font-bold break-words">{product.name}</h1>
             <p className="text-sm font-bold mt-1 mb-2 break-words">
-              {product.appelation?.toUpperCase()} | {product.region__pays?.toLowerCase() === 'bordeaux' ? 'Sud-Ouest' : product.region__pays?.toUpperCase()} | {product.millesime}
+              {product.appellation?.toUpperCase()} | {product.region__pays?.toLowerCase() === 'bordeaux' ? 'Sud-Ouest' : product.region__pays?.toUpperCase() || ''} | {product.millesime}
             </p>
             <div className="flex items-center -mb-6 mx-auto">
               {[...Array(5)].map((_, i) => (

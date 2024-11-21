@@ -16,7 +16,7 @@ interface Product {
   images: { src: string }[];
   store_name?: string;
   nom_chateau?: string;
-  appelation?: string;
+  appellation?: string;
   millesime?: string;
   region__pays?: string;
   volume?: string;
@@ -142,14 +142,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
   const generateSlogan = () => {
     if (product.price < 9) return `Le qualité/prix IMBATTABLE !`;
-    if (product.price > 20) return `${product.appelation?.toUpperCase() || 'Vin'} Haut de Gamme`;
+    if (product.price > 20) return `${product.appellation?.toUpperCase() || 'Vin'} Haut de Gamme`;
     if (product.average_rating && product.average_rating > 3.5) return `Coup De Coeur de Mémé`;
     if (product.certification?.toLowerCase().includes('biodynamie')) return `Vin Démeter qui respecte la nature`;
     if (product.categories.length > 0 && product.categories[0]?.name.toLowerCase().includes('pétillant')) {
       const categoryName = product.categories.map(category => category.name).join(', ');
       return `Un ${categoryName} À Découvrir`;
     }
-    return `Un ${product.appelation?.toUpperCase() || 'Vin'} À Découvrir`;
+    return `Un ${product.appellation?.toUpperCase() || 'Vin'} À Découvrir`;
   };
 
   return (
@@ -175,7 +175,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
               )}
             </div>
             <p className="text-xs text-gray-500 truncate">
-              {product.categories.map((category) => category.name).join(" et ")} - {product.appelation?.split(/[\s-]/).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} · {product.millesime} · {product.volume}
+              {product.categories.map((category) => category.name).join(" et ")} - {product.appellation?.split(/[\s-]/).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} · {product.millesime} · {product.volume}
             </p>
           </div>
         </div>

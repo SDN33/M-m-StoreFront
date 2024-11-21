@@ -11,7 +11,7 @@ interface Product {
   store_name?: string;
   millesime?: string;
   certification?: string;
-  appelation?: string;
+  appellation?: string;
   meta_data: { key: string; value: string | string[] }[];
   status: string;
   region__pays?: string;
