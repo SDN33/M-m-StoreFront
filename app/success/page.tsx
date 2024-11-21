@@ -27,7 +27,7 @@ const SuccessPage = () => {
   }
 
   return (
-    <div className="min-h-screen mt-24 flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+    <div className="min-h-screen mt-24 flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4 ">
       <div className="bg-white p-8 rounded-xl shadow-lg max-w-md w-full text-center space-y-6 transform animate-fade-in">
         {/* Icon Success */}
         <div className="flex justify-center">
@@ -46,10 +46,10 @@ const SuccessPage = () => {
           <p className="text-lg">
             Votre paiement a été traité avec succès. Veuillez nous envoyer un email à{' '}
             <a
-              href="mailto:contact@votresite.com"
+              href="mailto:vigneronnes-rons@vinsmemegeorgette.com"
               className="text-blue-500 hover:text-blue-600 font-semibold transition-colors"
             >
-              contact@memegeorgette.com
+              vigneronnes-rons@vinsmemegeorgette.com
             </a>{' '}
             pour activer votre compte vendeur.
           </p>
