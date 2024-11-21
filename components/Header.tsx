@@ -65,12 +65,12 @@ const Header: React.FC = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full bg-primary shadow-sm">
       {/* PromotionSection avec hauteur fixe */}
-      <div className="h-[35px]">
+      <div className="h-[30px]">
         <PromotionSection />
       </div>
 
       {/* Top Header - Hauteur fixe */}
-      <div className="border-b bg-primary">
+      <div className="border-b bg-primary pt-4">
         <div className="container mx-auto px-4">
           {/* Desktop and Tablet View - Hauteur fixe */}
           <div className="hidden lg:flex items-center justify-between h-16 relative">
