@@ -220,7 +220,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             <p className='text-xs cursor-pointer '>Découvrir <span className='text-teal-800'>{product.store_name || '@MéméGeorgette'}</span></p>
             <span className='text-xs font-semibold text-teal-800 flex items-center'>
               <MapPin className="w-3 h-3 mr-1 font-bold" />
-              {product.region__pays ? product.region__pays.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : ''}
+                {product.region__pays ? product.region__pays.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ').replace('Bordeaux', 'Sud-Ouest') : ''}
             </span>
           </div>
         </div>
