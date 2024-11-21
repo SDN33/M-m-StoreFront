@@ -83,7 +83,7 @@ const Blog = () => {
           <Rss size={32} className="inline text-white animate-ping duration-1000" />
         </h2>
         <p className="text-sm md:text-xl lg:text-xl  font-extrabold slide-in-right max-w-2xl mx-auto mb-8 text-white">
-          Découvrez nos dernières astuces et article pour les amateurs de vin
+          Découvrez tous nos derniers articles et actualités sur le vin et la vigne.
         </p>
         <div className="border-b-4 border-primary w-full max-w-[50rem] my-2 slide-in-right mx-auto"></div>
       </div>

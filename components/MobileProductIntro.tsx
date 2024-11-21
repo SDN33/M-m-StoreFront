@@ -56,11 +56,16 @@ const MobileProductsIntro: React.FC = () => {
   return (
     <>
       <div className='-mt-10'>
-        <Image
-          src="/images/meme-pas-contente.png"
-          alt="Meme pas contente"
+        <video
+          src="/videos/bannermobile.mp4"
           width={1920}
           height={1080}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="w-full h-full object-cover"
         />
       </div>
 

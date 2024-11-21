@@ -170,6 +170,7 @@ export default function Home() {
             }}
           >
             <div>
+              
               <div className="pt-24" />
               <ProductsIntro />
               <Slider />

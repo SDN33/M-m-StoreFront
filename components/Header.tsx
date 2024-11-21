@@ -109,6 +109,7 @@ const Header: React.FC = () => {
             </div>
 
             {/* Right Actions - Largeur fixe */}
+            
             <div className="hidden md:hidden lg:flex items-center space-x-7 text-sm px-4 min-w-[400px] justify-end my-auto">
               <div className="flex items-center space-x-3">
                 <span className="text-white whitespace-nowrap">Livraison en</span>

@@ -2,41 +2,40 @@ import React, { useEffect, useState } from 'react';
 import { Gift, Snowflake, TreePine as ChristmasTree } from 'lucide-react';
 
 const PromotionSection = () => {
-  const [scrollY, setScrollY] = useState(0);
+  const [snowflakes, setSnowflakes] = useState<{ left: string; animationDelay: string; opacity: number; size: number }[]>(
+    []
+  );
 
-  // UseEffect to handle scroll visibility
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+    const generateSnowflakes = () => {
+      return [...Array(15)].map(() => ({
+        left: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 5}s`,
+        opacity: Math.random() * 0.7,
+        size: Math.random() * 20 + 10,
+      }));
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    setSnowflakes(generateSnowflakes());
   }, []);
 
   return (
     <div
-      className={`relative overflow-hidden bg-black text-center shadow-lg w-full z-40 py-2 h-16 md:h-8 mb-1 ${scrollY > 50 ? 'hidden' : ''}`}
+      className="relative overflow-hidden bg-black text-center shadow-lg w-full z-40 py-2 h-16 md:h-8 mb-1"
     >
       {/* Flocons de neige animés */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
-        {[...Array(15)].map((_, index) => (
+        {snowflakes.map((flake, index) => (
           <div
             key={index}
             className="absolute snowflake"
             style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              opacity: Math.random() * 0.7,
+              left: flake.left,
+              animationDelay: flake.animationDelay,
+              opacity: flake.opacity,
             }}
           >
-            <Snowflake
-              size={Math.random() * 20 + 10}
-              color="white"
-              className="opacity-30 animate-fall"
-            />
+            <Snowflake size={flake.size} color="white" className="opacity-30 animate-fall" />
           </div>
         ))}
       </div>

@@ -10,6 +10,7 @@ import { CartProvider } from '../context/CartContext';
 import { Analytics } from "@vercel/analytics/react"
 import Cookies from "@/components/Cookies";
 
+
 export const metadata: Metadata = {
   title: "Les vins de Mémé Georgette | 2 500 vins bio en direct de vignerons et vigneronnes engagé(e)s | Vins Bio et Biodynamie Démeter",
   description:
