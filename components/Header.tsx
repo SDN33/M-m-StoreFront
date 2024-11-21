@@ -304,10 +304,10 @@ const Header: React.FC = () => {
       {isNosVinsOpen && (
         <>
           <div
-            className="fixed inset-0 bg-gray-800 bg-opacity-50 backdrop-blur-sm z-50 md:hidden sm:hidden"
+            className="fixed inset-0 bg-gray-800 bg-opacity-50 backdrop-blur-sm z-50 md:flex sm:hidden lg:flex"
             onClick={() => setIsNosVinsOpen(false)}
           />
-          <div className="fixed inset-0 flex items-center justify-center z-50 p-4 md:hidden sm:hidden">
+          <div className="fixed inset-0 flex items-center justify-center z-50 p-4 md:flex sm:hidden">
             <div className="bg-white rounded-xl shadow-2xl mx-4 lg:w-3/4 lg:mx-auto relative max-h-[90vh] overflow-y-auto">
               <div className="p-8">
                 <button
