@@ -87,7 +87,6 @@ const MobileProductsIntro: React.FC = () => {
           }
         `}</style>
       </div>
-      <div className='border-t-2 border-b-2 h-2 rounded-b-xl border-white'></div>
       <div
         ref={introRef}
         className={`transition-opacity duration-1000 ${
@@ -113,10 +112,10 @@ const MobileProductsIntro: React.FC = () => {
             priority={true}
           />
           <Image
-            src="/images/déméter.png"
-            alt="demeter logo"
-            width={35}
-            height={35}
+            src="/images/logointro2.jpg"
+            alt="nature et progrès"
+            width={26}
+            height={20}
             className="object-contain"
             priority={true}
           />
@@ -144,10 +143,10 @@ const MobileProductsIntro: React.FC = () => {
             priority={true}
           />
           <Image
-            src="/images/logointro2.jpg"
-            alt="nature et progrès"
-            width={26}
-            height={20}
+            src="/images/déméter.png"
+            alt="demeter logo"
+            width={35}
+            height={35}
             className="object-contain"
             priority={true}
           />
