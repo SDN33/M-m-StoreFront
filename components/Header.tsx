@@ -169,7 +169,7 @@ const Header: React.FC = () => {
           </div>
 
           {/* Mobile View - Hauteur fixe */}
-          <div className="flex lg:hidden items-center justify-between h-20 mt-3">
+          <div className="flex lg:hidden items-center justify-between h-20 mt-3 md:-mt-4">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 text-white hover:text-gray-200"

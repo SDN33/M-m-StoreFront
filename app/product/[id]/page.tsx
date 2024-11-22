@@ -183,7 +183,7 @@ const ProductPage: React.FC = () => {
 
 
   return (
-    <div className="md:mt-16 px-4 md:px-12 min-h-screen flex flex-col justify-between overflow-x-hidden">
+    <div className="sm:mt-20 md:mt-16 px-4 md:px-12 min-h-screen flex flex-col justify-between overflow-x-hidden">
       <div className="relative top-0 left-0 w-full">
       </div>
       <br /><br /><br />
