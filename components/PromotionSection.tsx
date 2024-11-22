@@ -41,18 +41,18 @@ const PromotionSection = () => {
       </div>
 
       {/* Éléments décoratifs de Noël */}
-      <div className="absolute left-4 top-5 text-white opacity-50">
+      <div className="absolute left-4 top-5 md:top-2 lg:top-0 text-white opacity-50">
         <ChristmasTree size={30} className="animate-bounce" />
       </div>
 
-      <div className="absolute right-4 top-5 text-white opacity-50">
+      <div className="absolute right-4 top-5 md:top-2 lg:top-0 text-white opacity-50">
         <Gift size={30} className="animate-bounce" />
       </div>
 
       {/* Texte promotionnel */}
-      <p className="relative z-10 font-extrabold text-white text-xs sm:text-sm lg:text-sm h-fit">
+      <p className="relative z-10 font-extrabold text-white text-xs sm:text-sm h-fit">
         <span className="sm:hidden">
-          Livraison <span className='text-accent'>OFFERTE</span><br />
+          Livraison <span className='text-accent'><strong>OFFERTE</strong></span><br />
           <span className='text-xs'>
             &nbsp;en point relais dès 6 bouteilles <br /> d&apos;un même domaine achetés
           </span>

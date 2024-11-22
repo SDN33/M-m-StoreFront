@@ -91,7 +91,7 @@ const MobileProductsIntro: React.FC = () => {
         ref={introRef}
         className={`transition-opacity duration-1000 ${
           isVisible ? 'opacity-100' : 'opacity-0'
-        } flex flex-col items-center text-center md:hidden bg-primary py-6 -mt-7`}
+        } flex flex-col items-center text-center lg:hidden bg-primary py-6 -mt-7`}
       >
         {/* Logos en haut */}
         <div className="flex space-x-8 mt-4">
