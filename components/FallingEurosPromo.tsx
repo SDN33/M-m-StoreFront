@@ -42,7 +42,7 @@ const FallingEurosPromo = () => {
   }, []);
 
   return (
-    <div className="relative w-full min-h-[100px] overflow-hidden bg-black">
+    <div className="relative w-full min-h-[100px] overflow-hidden bg-black rounded-t-xl">
       {/* Falling euros */}
       {euros.map(euro => (
         <div

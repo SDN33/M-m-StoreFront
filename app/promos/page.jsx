@@ -59,7 +59,7 @@ export default function ProductsPromotions() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex-grow container mx-auto px-4 mt-40 xl:px-40">
+      <main className="flex-grow container mx-auto px-4 mt-44 xl:px-40">
         {/* Section Titre */}
         <FallingEurosPromo />
 
