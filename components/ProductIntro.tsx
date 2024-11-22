@@ -57,7 +57,7 @@ const ProductsIntro: React.FC = () => {
         isVisible ? 'slide-in-visible' : 'slide-in'
       }`}
     >
-      <div className="container mx-auto -mb-60 -mt-10">
+      <div className="container mx-auto -mb-60 -mt-10 md:-mt-8 md:mb-8 lg:-mb-60">
         <div className="relative z-10 flex flex-col items-center lg:flex-row lg:justify-between">
           {/* Left Logos (Mobile Hidden) */}
           <div className="hidden lg:flex space-x-4 mb-4 lg:mb-0">
@@ -88,7 +88,7 @@ const ProductsIntro: React.FC = () => {
           </div>
 
           {/* Central Text with Counter */}
-          <div className="flex flex-col items-center text-center w-full lg:w-auto">
+          <div className="flex flex-col items-center text-center w-full lg:w-auto ">
             <h1 className="text-2xl sm:text-2xl lg:text-2xl font-extrabold text-primary tracking-tight leading-tight">
               <span className="block text-2xl sm:text-2xl mb-2">
                 {counter.toLocaleString()}
