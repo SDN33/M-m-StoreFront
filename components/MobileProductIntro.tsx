@@ -87,7 +87,7 @@ const MobileProductsIntro: React.FC = () => {
           }
         `}</style>
       </div>
-
+      <div className='border-t-2 border-b-2 h-2 rounded-b-xl border-white'></div>
       <div
         ref={introRef}
         className={`transition-opacity duration-1000 ${
