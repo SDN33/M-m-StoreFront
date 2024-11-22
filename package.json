@@ -42,7 +42,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@shadcn/ui": "^0.0.4",
     "@types/crypto-js": "^4.2.2",
     "@types/google.maps": "^3.58.1",
     "@types/he": "^1.2.3",
