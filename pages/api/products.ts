@@ -26,6 +26,7 @@ interface Product {
   style?: string;
   stock_status?: string;
   degre?: number;
+
 }
 
 interface AxiosErrorResponse {

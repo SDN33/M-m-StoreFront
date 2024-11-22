@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { Search, X } from 'lucide-react';
 import axios from 'axios';
 import debounce from 'lodash/debounce';
+import Image from 'next/image';
 
 interface ProductMetaData {
   key: string;
@@ -40,9 +41,26 @@ const SearchInput = () => {
   const resultsRef = useRef<HTMLDivElement>(null);
   const recentSearchesRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const timerRef = useRef<NodeJS.Timeout>();
 
-  // Fonction améliorée pour extraire les métadonnées
-  const extractMetaData = (product: Product): FilteredProduct => {
+  // Fonction pour gérer l'inactivité
+  const startInactivityTimer = useCallback(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    timerRef.current = setTimeout(() => {
+      setShowRecentSearches(false);
+    }, 4000); // 4 secondes
+  }, []);
+
+  // Reset du timer quand la souris bouge sur la zone de recherche
+  const handleMouseMove = useCallback(() => {
+    if (showRecentSearches) {
+      startInactivityTimer();
+    }
+  }, [showRecentSearches, startInactivityTimer]);
+
+  const extractMetaData = useCallback((product: Product): FilteredProduct => {
     const metaDataMap: { [key: string]: string } = {};
     const metaKeys = {
       '_nom_chateau': 'nom_chateau',
@@ -60,10 +78,9 @@ const SearchInput = () => {
     });
 
     return { ...product, ...metaDataMap };
-  };
+  }, []);
 
-  // Normalisation améliorée des chaînes
-  const normalizeString = (str: string) => {
+  const normalizeString = useCallback((str: string) => {
     if (!str) return '';
     return str
       .toLowerCase()
@@ -72,10 +89,9 @@ const SearchInput = () => {
       .replace(/[^\w\s]/g, " ")
       .replace(/\s+/g, " ")
       .trim();
-  };
+  }, []);
 
-  // Calcul du score de similarité amélioré
-  const getSimilarityScore = (input: string, product: FilteredProduct): number => {
+  const getSimilarityScore = useCallback((input: string, product: FilteredProduct): number => {
     const normalizedInput = normalizeString(input);
     const searchWords = normalizedInput.split(' ').filter(word => word.length > 1);
 
@@ -97,7 +113,6 @@ const SearchInput = () => {
       fieldsToSearch.forEach(field => {
         if (field.includes(word)) {
           matches++;
-          // Bonus pour les correspondances exactes
           if (field === word) matches += 0.5;
         }
       });
@@ -105,9 +120,20 @@ const SearchInput = () => {
 
     totalScore = matches / (searchWords.length * fieldsToSearch.length);
     return totalScore;
-  };
+  }, [normalizeString]);
 
-  // Recherche améliorée avec gestion d'erreur
+  const filterResults = useCallback((products: FilteredProduct[], term: string): FilteredProduct[] => {
+    return products
+      .map(product => ({
+        product,
+        score: getSimilarityScore(term, product)
+      }))
+      .filter(({ score }) => score > 0.1)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 10)
+      .map(({ product }) => product);
+  }, [getSimilarityScore]);
+
   const debouncedSearch = useMemo(
     () =>
       debounce(async (term: string) => {
@@ -123,7 +149,7 @@ const SearchInput = () => {
           const response = await axios.get('/api/products', {
             params: {
               search: term,
-              per_page: 20, // Augmenté pour plus de résultats
+              per_page: 20,
               status: 'publish',
               orderby: 'relevance'
             }
@@ -139,7 +165,6 @@ const SearchInput = () => {
           const filteredResults = filterResults(processedResults, term);
           setResults(filteredResults);
 
-          // Mise à jour des recherches récentes
           if (term.trim()) {
             setRecentSearches(prev => {
               const updated = [term, ...prev.filter(s => s !== term)].slice(0, 5);
@@ -148,28 +173,14 @@ const SearchInput = () => {
             });
           }
         } catch (error) {
-          console.error('Erreur de recherche:', error);
           setError('Une erreur est survenue lors de la recherche');
-          setResults([]);
+          console.error('Search error:', error);
         } finally {
           setIsLoading(false);
         }
       }, 300),
-    []
+    [extractMetaData, filterResults]
   );
-
-  // Filtrage amélioré des résultats
-  const filterResults = (products: FilteredProduct[], term: string): FilteredProduct[] => {
-    return products
-      .map(product => ({
-        product,
-        score: getSimilarityScore(term, product)
-      }))
-      .filter(({ score }) => score > 0.1) // Seuil minimum de pertinence
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 10) // Limite le nombre de résultats
-      .map(({ product }) => product);
-  };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const term = event.target.value;
@@ -188,7 +199,6 @@ const SearchInput = () => {
     }
   };
 
-  // Gestion des clics à l'extérieur
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -201,14 +211,21 @@ const SearchInput = () => {
       ) {
         setResults([]);
         setShowRecentSearches(false);
+        if (timerRef.current) {
+          clearTimeout(timerRef.current);
+        }
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
   }, []);
 
-  // Chargement initial des recherches récentes
   useEffect(() => {
     try {
       const saved = localStorage.getItem('recentSearches');
@@ -220,6 +237,18 @@ const SearchInput = () => {
     }
   }, []);
 
+  // Effet pour démarrer le timer quand showRecentSearches change
+  useEffect(() => {
+    if (showRecentSearches) {
+      startInactivityTimer();
+    }
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, [showRecentSearches, startInactivityTimer]);
+
   return (
     <div className="relative flex-grow mx-8 max-w-xl">
       <div className="relative">
@@ -229,6 +258,7 @@ const SearchInput = () => {
           value={searchTerm}
           onChange={handleSearchChange}
           onFocus={() => setShowRecentSearches(true)}
+          onMouseMove={handleMouseMove}
           placeholder="Rechercher un vin, un château, une appellation..."
           className="w-full pl-4 pr-20 py-3 border rounded-full text-sm bg-slate-100 border-gray-400 text-primary focus:outline-none focus:border-orange-500"
         />
@@ -257,7 +287,11 @@ const SearchInput = () => {
       )}
 
       {results.length > 0 && (
-        <div ref={resultsRef} className="absolute mt-2 w-full bg-white rounded-lg shadow-lg overflow-hidden z-20 max-h-96 overflow-y-auto">
+        <div
+          ref={resultsRef}
+          className="absolute mt-2 w-full bg-white rounded-lg shadow-lg overflow-hidden z-20 max-h-96 overflow-y-auto"
+          onMouseMove={handleMouseMove}
+        >
           {results.map((product, index) => (
             <a
               key={product.id}
@@ -265,10 +299,12 @@ const SearchInput = () => {
               className={`flex items-center p-4 hover:bg-gray-50 ${index !== results.length - 1 ? 'border-b' : ''}`}
             >
               {product.images[0] && (
-                <img
+                <Image
                   src={product.images[0].src}
                   alt={product.name}
-                  className="w-12 h-12 object-cover rounded"
+                  className="object-cover rounded"
+                  width={48}
+                  height={48}
                 />
               )}
               <div className="ml-4 flex-grow">
@@ -290,7 +326,11 @@ const SearchInput = () => {
       )}
 
       {!searchTerm && recentSearches.length > 0 && showRecentSearches && (
-        <div ref={recentSearchesRef} className="absolute mt-2 w-full bg-gray-100 rounded-lg shadow-lg p-4 z-20">
+        <div
+          ref={recentSearchesRef}
+          className="absolute mt-2 w-full bg-gray-100 rounded-lg shadow-lg p-4 z-20"
+          onMouseMove={handleMouseMove}
+        >
           <h3 className="text-sm font-semibold text-gray-500 mb-2">Recherches récentes</h3>
           <div className="flex flex-wrap gap-2">
             {recentSearches.map((term, index) => (

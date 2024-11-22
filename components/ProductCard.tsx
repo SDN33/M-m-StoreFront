@@ -75,10 +75,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const vendorRedirect = () => {
     router.push(`/vendors/${product.vendor}`);
   }
-
   const formatRating = (rating?: number, ratingCount?: number) => {
-    if (!rating || !ratingCount || ratingCount === 0) return <span className='text-xs'>Non noté</span>;
-    return <span>{(rating * 4).toFixed(1)}/20</span>;
+    if (ratingCount === 0) return <span className='text-xs'>/</span>;
+    return <span>{((rating ?? 0) * 4).toFixed(1)}/20</span>;
   };
 
   const renderAOCBadge = () => {
