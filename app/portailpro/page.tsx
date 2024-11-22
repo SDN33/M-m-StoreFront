@@ -134,7 +134,7 @@ export default function PortailPro() {
   return (
     <div className="min-h-screen">
       <br /><br /><br /><br /><br /><br /><br />
-      <main className="max-w-6xl mx-auto px-4 pb-16">
+      <main className="max-w-6xl mx-auto px-4 pb-16 ">
         {/* Background SVG */}
         <svg
           className="absolute top-0 left-0 w-full h-full opacity-10 -z-10"
@@ -152,7 +152,7 @@ export default function PortailPro() {
           <div className="text-center space-y-4 mb-8">
             {/* Suppression de l'image comme élément distinct */}
             <h3
-              className="text-8xl tracking-tight font-bold relative bg-cover bg-center text-white flex items-center justify-center"
+              className="text-7xl tracking-tight font-bold relative bg-cover bg-center text-white flex items-center justify-center rounded-t-xl"
               style={{
               backgroundImage: 'url(/images/vins_fruitees.webp)', // Image en arrière-plan
               backgroundSize: 'cover', // Couvrir toute la zone
@@ -163,7 +163,7 @@ export default function PortailPro() {
             >
               PORTAIL PRO
             </h3>
-            <p className="font-semibold text-xl mx-auto">
+            <p className="font-semibold text-lg mx-auto">
               Une solution complète pour les vignerons qui souhaitent développer leur présence en ligne,<br />sans contraintes de logistique ni d&apos;engagement
             </p>
           </div>

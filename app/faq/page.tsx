@@ -89,9 +89,9 @@ export default function Faq() {
               />
             </div>
 
-            <div className="bg-gray-50 rounded-lg p-3 h-16 overflow-y-auto">
+            <div className="bg-gray-50 rounded-lg p-3 h-16 overflow-y-auto mb-10">
               {filteredAnswer ? (
-                <p className="text-gray-700 text-xs leading-relaxed">
+                <p className="text-primary text-base leading-relaxed text-center font-bold">
                   {filteredAnswer}
                 </p>
               ) : (
