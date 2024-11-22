@@ -70,12 +70,12 @@ const MobileProductsIntro: React.FC = () => {
       </div>
 
       {/* Indicateur scroll */}
-      <div className="scroll-animation flex justify-center">
+      <div className="scroll-animation flex justify-center z-40">
         <div className="w-6 h-6 rounded-full bg-white animate-scroll"><MoveVertical /></div>
         <style jsx>{`
           @keyframes scroll {
             0%, 100% {
-              transform: translateY(-30px);
+              transform: translateY(-20px);
             }
             50% {
               transform: translateY(0px);
