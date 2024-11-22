@@ -66,6 +66,7 @@ const MobileProductsIntro: React.FC = () => {
           playsInline
           preload="auto"
           className="w-full h-full object-cover"
+          priority={true}
         />
       </div>
 

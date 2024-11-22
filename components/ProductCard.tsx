@@ -188,11 +188,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           <Image
             src={product.images[0]?.src || '/images/vinmeme.png'}
             alt={product.name}
-            fill
             style={{ objectFit: 'contain' }}
+            layout="fill"
             priority
             onClick={handleRedirect}
-            className="hover:scale-105 transition-transform cursor-pointer"
+            className="hover:scale-105 transition-transform cursor-pointer h-full w-full"
             onError={(e) => {
               const imgElement = e.target as HTMLImageElement;
               imgElement.src = '/images/vinmeme.png';
@@ -202,6 +202,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           <div className={`absolute bottom-2 ${product.certification?.toLowerCase() === 'biodynamie' ? 'right-6' : 'right-0'} w-8 h-8 z-20`}>
             {renderCertification()}
           </div>
+        </div>
+
 
         </div>
         <div onClick={vendorRedirect} className="flex items-center gap-2 cursor-pointer">
@@ -283,7 +285,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
         </div>
       </div>
-    </div>
   );
 };
 

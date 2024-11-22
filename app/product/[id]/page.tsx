@@ -216,6 +216,7 @@ const ProductPage: React.FC = () => {
                     alt="Certification logo"
                     width={product.certification === 'biodynamie' ? 100 : 30}
                     height={product.certification === 'biodynamie' ? 100 : 30}
+                    priority
                   />
                 ) : (
                   'Non renseignée'

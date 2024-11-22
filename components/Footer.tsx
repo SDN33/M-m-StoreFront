@@ -12,13 +12,28 @@ const Footer = () => {
         {/* Logos de paiement */}
         <div className="flex justify-center items-center space-x-4 w-fit mx-auto mb-8 bg-white rounded-lg p-2">
           <a href="https://www.visa.fr">
-            <Image src="/images/visa.png" alt="Visa" width={30} height={30} />
+            <Image
+              src="/images/visa.png"
+              alt="Visa"
+              height={30}
+              width={50}
+            />
           </a>
           <a href="https://www.mastercard.fr">
-            <Image src="/images/mastercard.png" alt="Mastercard" width={30} height={30} />
+            <Image
+              src="/images/mastercard.png"
+              alt="Mastercard"
+              height={30}
+              width={50}
+            />
           </a>
           <a href="https://stripe.com/fr">
-            <Image src="/images/stripe.webp" alt="Stripe" width={50} height={50} />
+            <Image
+              src="/images/stripe.webp"
+              alt="Stripe"
+              height={50}
+              width={50}
+            />
           </a>
           <div className="flex items-center text-gray-600">
             <CreditCard className="h-4 w-4 mr-1 text-black" />
@@ -26,7 +41,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Grille de navigation centrée */}
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto text-white">
           <div>
             <h3 className=" font-semibold mb-4 text-lg text-primary">À propos de Mémé Georgette</h3>
