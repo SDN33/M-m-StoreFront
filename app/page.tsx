@@ -170,8 +170,8 @@ export default function Home() {
             }}
           >
             <div>
-              
-              <div className="pt-24" />
+
+              <div className="pt-24 md:hidden lg:flex" />
               <ProductsIntro />
               <Slider />
 
