@@ -69,7 +69,7 @@ const LatestArticles: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto px-8 py-8 mb-20">
+    <div className="container mx-auto px-8 py-8 sm:mb-8 lg:mb-20">
       <div className="text-center mb-10 bg-gradient-to-r from-gray-900 via-gray-800 to-black pt-7 rounded-t-xl">
         <h2 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-primary">
           Le Blog de Mémé Georgette&nbsp;
@@ -81,7 +81,7 @@ const LatestArticles: React.FC = () => {
         <div className="border-b-4 border-primary w-full max-w-[50rem] my-2 slide-in-right mx-auto"></div>
       </div>
       <br />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.map((article) => (
           <div
             key={article.id}

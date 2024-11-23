@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import ProductCard from '../../components/ProductCard';
+import ProductCard from '@/components/ProductCard';
 import Livraison from '@/components/Livraison';
 import HeroBanner from '@/components/HeroBanner';
 import Trust from '@/components/Trust';
@@ -75,11 +75,11 @@ export default function ProductsPromotions() {
         </div>
 
         {/* Grille de Produits */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-1 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-1 mb-20 bg-transparent">
           {products.map((product) => (
             <div
               key={product.id}
-              className="relative bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
+              className="relative bg-transparent shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
             >
               <ProductCard product={product} onAddToCart={handleAddToCart} />
             </div>

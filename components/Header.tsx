@@ -54,12 +54,72 @@ const Header: React.FC = () => {
   ];
 
   const vinsSubCategories = [
-    { name: 'Rouge', href: '/vins/rouge', backgroundImage: '/images/cat1.png' },
-    { name: 'Blanc', href: '/vins/blanc', backgroundImage: '/images/cat2.png' },
-    { name: 'Rosé', href: '/vins/rose', backgroundImage: '/images/cat3.png' },
-    { name: 'Pétillant', href: '/vins/petillant', backgroundImage: '/images/cat4.png' },
-    { name: 'Liquoreux', href: '/vins/liquoreux', backgroundImage: '/images/cat5.png' },
-    { name: 'Autres', href: '/vins/autres', backgroundImage: '/images/cat6.png' },
+    {
+      name: (
+        <>
+          <span className="text-lg">Rouge<br />
+            <span className="text-xs">Parfait pour les viandes rouges, les plats en sauce et les fromages</span>
+          </span>
+        </>
+      ),
+      href: '/vins/rouge',
+      background: 'bg-gradient-to-br from-red-900 via-red-800 to-red-700'
+    },
+    {
+      name: (
+        <>
+          <span className="text-lg">Blanc<br />
+            <span className="text-xs">Idéal avec les poissons, fruits de mer et volailles</span>
+          </span>
+        </>
+      ),
+      href: '/vins/blanc',
+      background: 'bg-gradient-to-br from-yellow-100 via-yellow-150 to-yellow-200'
+    },
+    {
+      name: (
+        <>
+          <span className="text-lg">Rosé<br />
+            <span className="text-xs">Excellent pour l&apos;apéritif, les grillades et la cuisine méditerranéenne</span>
+          </span>
+        </>
+      ),
+      href: '/vins/rose',
+      background: 'bg-gradient-to-br from-pink-300 via-pink-400 to-pink-600'
+    },
+    {
+      name: (
+        <>
+          <span className="text-lg">Pétillant<br />
+            <span className="text-xs">Pour célébrer ou accompagner vos desserts</span>
+          </span>
+        </>
+      ),
+      href: '/vins/petillant',
+      background: 'bg-gradient-to-br from-yellow-200 via-amber-50 to-amber-100'
+    },
+    {
+      name: (
+        <>
+          <span className="text-lg">Liquoreux<br />
+            <span className="text-xs">Sublime avec le foie gras et les desserts</span>
+          </span>
+        </>
+      ),
+      href: '/vins/liquoreux',
+      background: 'bg-gradient-to-br from-orange-400 via-amber-300 to-yellow-300'
+    },
+    {
+      name: (
+        <>
+          <span className="text-lg">Autres<br />
+            <span className="text-xs">Découvrez nos autres vins d&apos;exception</span>
+          </span>
+        </>
+      ),
+      href: '/vins/autres',
+      background: 'bg-gradient-to-br from-teal-500 via-teal-450 to-teal-400'
+    },
   ];
 
   return (
@@ -308,7 +368,7 @@ const Header: React.FC = () => {
             className="fixed inset-0 bg-gray-800 bg-opacity-50 backdrop-blur-sm z-50 md:flex sm:hidden lg:flex"
             onClick={() => setIsNosVinsOpen(false)}
           />
-          <div className="fixed inset-0 flex items-center justify-center z-50 p-4 md:flex sm:hidden">
+          <div className="fixed inset-0 flex items-center justify-center z-50 p-4 md:flex sm:hidden rounded-2xl">
             <div className="bg-white rounded-xl shadow-2xl mx-4 lg:w-3/4 lg:mx-auto relative max-h-[90vh] overflow-y-auto">
               <div className="p-8">
                 <button
@@ -323,19 +383,15 @@ const Header: React.FC = () => {
 
                 <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
                   {vinsSubCategories.map((subCategory) => (
-                    <li key={subCategory.name} className="transform transition-transform duration-200 hover:scale-105">
+                    <li
+                      key={subCategory.href}
+                      className="transform transition-transform duration-200 hover:scale-105"
+                    >
                       <a
                         href={subCategory.href}
                         className="block relative rounded-lg overflow-hidden aspect-video group"
                       >
-                        <div className="relative w-full h-full">
-                          <Image
-                            src={subCategory.backgroundImage}
-                            alt={subCategory.name}
-                            fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-110"
-                          />
-                        </div>
+                        <div className={`relative w-full h-full ${subCategory.background} transition-transform duration-300 group-hover:scale-110`} />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20 group-hover:from-black/70 group-hover:to-black/30 transition-all duration-300">
                           <div className="absolute inset-0 flex items-center justify-center">
                             <span className="text-white font-semibold text-lg text-center px-4 transform transition-transform duration-300 group-hover:scale-105">
