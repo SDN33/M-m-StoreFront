@@ -38,7 +38,7 @@ const ContactPage = () => {
             <input
               id="name"
               type="text"
-              name="name"
+              name="Nom"
               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
               required
             />
