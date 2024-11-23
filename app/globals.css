@@ -212,3 +212,50 @@ ul::-webkit-scrollbar {
 .scrollbar-hidden::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
+
+
+.prose p {
+  margin-bottom: 1.5rem; /* Ajustez la valeur pour plus ou moins d'espace */
+  line-height: 1.8; /* Pour espacer les lignes dans un paragraphe */
+}
+
+.prose h3 {
+  font-size: 1.5rem; /* Taille du texte */
+  font-weight: bold; /* Mettre en gras */
+  color: #333; /* Couleur du texte */
+  margin-top: 2rem; /* Espace au-dessus */
+  margin-bottom: 1rem; /* Espace en-dessous */
+  border-left: 4px solid #ff6347; /* Ligne décorative à gauche */
+  padding-left: 1rem; /* Espace entre la bordure et le texte */
+  line-height: 1.4; /* Hauteur de ligne */
+}
+
+.prose a {
+  color: #0070f3; /* Couleur du lien */
+  text-decoration: none; /* Enlever le soulignement */
+  font-weight: bold; /* Mettre en gras */
+}
+
+.prose a:hover {
+  text-decoration: underline; /* Souligner au survol */
+}
+
+.prose ul {
+  margin-bottom: 1.5rem; /* Espace en-dessous */
+  padding-left: 1.5rem; /* Espace à gauche */
+}
+
+.prose ul li {
+  margin-bottom: 0.5rem; /* Espace entre les éléments */
+}
+
+.prose ol {
+  margin-bottom: 1.5rem; /* Espace en-dessous */
+  padding-left: 1.5rem; /* Espace à gauche */
+}
+
+.prose p {
+  margin-bottom: 1.5rem; /* Espace en-dessous */
+  
+
+}
