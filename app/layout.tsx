@@ -12,7 +12,7 @@ import Cookies from "@/components/Cookies";
 
 
 export const metadata: Metadata = {
-  title: "Les vins de Mémé Georgette | 2 500 vins bio en direct de vignerons et vigneronnes engagé(e)s | Vins Bio et Biodynamie Démeter",
+  title: "Les vins de Mémé Georgette | 2 500 vins Bio en direct de vignerons et vigneronnes engagé(e)s | Vins Bio et Biodynamie Démeter",
   description:
     "Plongez dans l’univers du vin bio, où chaque gorgée raconte une histoire de passion et de respect pour la nature. Contrairement aux idées reçues, choisir un vin bio n’est pas synonyme de prix élevé. En effet, nous vous proposons une sélection de vins d'exception à des prix abordables, tout en garantissant un impact environnemental minimal.",
   icons: {
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   keywords: ["vin bio", "vin biodynamie", "Mémé Georgette", "vin sans sulfites", "vin vegan", "vin bio pas cher", "vin bio en ligne", "vin bio livraison gratuite", "Les vins de Mémé Georgette", "vin bio sans sulfites ajoutés", "vin bio sans sulfites", "acheter vins", "vins en ligne", "vins pas cher", "vins livraison gratuite", "vins sans alcool", "vins sans sulfites ajoutés", "vins sans sulfites", "vins vegan", "vins naturels", "vins biodynamie", "vins bio en ligne", "vins bio pas cher", "vins bio livraison gratuite"],
   openGraph: {
-    title: "Les vins de Mémé Georgette | 2 500 vins bio en direct de vignerons et vigneronnes engagé(e)s | Vins Bio et Biodynamie Démeter",
+    title: "Les vins de Mémé Georgette | 2 500 vins Bio en direct de vignerons et vigneronnes engagé(e)s | Vins Bio et Biodynamie Démeter",
     description:
       "Plongez dans l’univers du vin bio, où chaque gorgée raconte une histoire de passion et de respect pour la nature. Contrairement aux idées reçues, choisir un vin bio n’est pas synonyme de prix élevé. En effet, nous vous proposons une sélection de vins d'exception à des prix abordables, tout en garantissant un impact environnemental minimal.",
     images: [
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Les vins de Mémé Georgette | 2 500 vins bio en direct de vignerons et vigneronnes engagé(e)s  | Vins Bio et Biodynamie Démeter",
+    title: "Les vins de Mémé Georgette | 2 500 vins Bio en direct de vignerons et vigneronnes engagé(e)s  | Vins Bio et Biodynamie Démeter",
     description:
       "Plongez dans l’univers du vin bio, où chaque gorgée raconte une histoire de passion et de respect pour la nature. Contrairement aux idées reçues, choisir un vin bio n’est pas synonyme de prix élevé. En effet, nous vous proposons une sélection de vins d'exception à des prix abordables, tout en garantissant un impact environnemental minimal.",
     images: [
