@@ -140,15 +140,87 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   }, [product.name]);
 
   const generateSlogan = () => {
-    if (product.price < 9) return `Le qualité/prix IMBATTABLE !`;
-    if (product.price > 20) return `${product.appellation?.toUpperCase() || 'Vin'} Haut de Gamme`;
-    if (product.average_rating && product.average_rating > 3.5) return `Coup De Coeur de Mémé`;
-    if (product.certification?.toLowerCase().includes('biodynamie')) return `Vin Démeter qui respecte la nature`;
+    // Helper pour sélection aléatoire
+    const getRandomSlogan = (slogans: string[]) => {
+      const randomIndex = Math.floor(Math.random() * slogans.length);
+      return slogans[randomIndex];
+    };
+
+    // Variations pour chaque type de slogan
+    const slogans = {
+      qualitePrix: [
+        "Le qualité/prix IMBATTABLE !",
+        "Prix MINI, Qualité MAXI !",
+        "Le Meilleur Rapport Qualité/Prix !",
+        "Petit Prix, Grand Vin !",
+        "Une Affaire à ne pas Manquer !"
+      ],
+
+      hautDeGamme: [
+        `${product.appellation?.toUpperCase() || 'Vin'} Haut de Gamme`,
+        `${product.appellation?.toUpperCase() || 'Vin'} d'Exception`,
+        `${product.appellation?.toUpperCase() || 'Vin'} Premium`,
+        `${product.appellation?.toUpperCase() || 'Vin'} de Prestige`,
+        `${product.appellation?.toUpperCase() || 'Vin'} Grand Cru`
+      ],
+
+      coupDeCoeur: [
+        "Coup De Coeur de Mémé",
+        "Le Favori de Mémé",
+        "La Sélection de Mémé",
+        "Le Choix de Mémé",
+        "La Pépite de Mémé"
+      ],
+
+      biodynamie: [
+        "Vin Démeter qui respecte la nature",
+        "Culture Biodynamique Démeter",
+        "Vin Bio Démeter",
+        "Vin Nature Démeter",
+        "Agriculture Biodynamique Démeter"
+      ],
+
+      petillant: (categoryName: string) => [
+        `Un ${categoryName} À Découvrir`,
+        `${categoryName} d'Exception`,
+        `${categoryName} Festif`,
+        `Un ${categoryName} Pétillant de Plaisir`,
+        `${categoryName} de Caractère`
+      ],
+
+      decouverte: (appellation: string) => [
+        `Un ${appellation.toUpperCase() || 'Vin'} À Découvrir`,
+        `Découvrez ce ${appellation.toUpperCase() || 'Vin'} d'Exception`,
+        `Un ${appellation.toUpperCase() || 'Vin'} Unique`,
+        `${appellation.toUpperCase() || 'Vin'} à Explorer`,
+        `Le ${appellation.toUpperCase() || 'Vin'} qui va vous Surprendre`
+      ]
+    };
+
+    // Même logique de conditions, mais avec variations
+    if (product.price < 9) {
+      return getRandomSlogan(slogans.qualitePrix);
+    }
+
+    if (product.price > 20) {
+      return getRandomSlogan(slogans.hautDeGamme);
+    }
+
+    if (product.average_rating && product.average_rating > 3.5) {
+      return getRandomSlogan(slogans.coupDeCoeur);
+    }
+
+    if (product.certification?.toLowerCase().includes('biodynamie')) {
+      return getRandomSlogan(slogans.biodynamie);
+    }
+
     if (product.categories.length > 0 && product.categories[0]?.name.toLowerCase().includes('pétillant')) {
       const categoryName = product.categories.map(category => category.name).join(', ');
-      return `Un ${categoryName} À Découvrir`;
+      return getRandomSlogan(slogans.petillant(categoryName));
     }
-    return `Un ${product.appellation?.toUpperCase() || 'Vin'} À Découvrir`;
+
+    // Slogan par défaut avec variations
+    return getRandomSlogan(slogans.decouverte(product.appellation || 'Vin'));
   };
 
   return (
@@ -227,7 +299,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           </div>
         </div>
       </div>
-        <p className="text-xs text-gray-700 h-8 overflow-hidden text-center mt-4 font-medium mb-4">
+        <p className="text-xs text-gray-700 h-8 overflow-hidden text-center mt-4 font-medium mb-4 mx-2">
           {stripHtmlAndTruncate(product.short_description || product.description || '', 110)}
         </p>
 
