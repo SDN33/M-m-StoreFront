@@ -171,7 +171,7 @@ export default function PortailPro() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className={`p-8 rounded-2xl shadow-lg shadow-teal-100/50 hover:shadow-xl hover:shadow-teal-200/50 transition-all duration-300`}
+                className={`p-8 rounded-2xl shadow-lg shadow-black-100/50 hover:shadow-xl hover:shadow-primary-200/50 transition-all duration-300`}
               >
                 <div className="space-y-6">
                   <div className="bg-white w-16 h-16 rounded-xl flex items-center justify-center shadow-sm mx-auto">
