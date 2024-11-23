@@ -184,6 +184,7 @@ const ProductPage: React.FC = () => {
 
   return (
     <div className="sm:mt-28 md:mt-16 px-4 md:px-12 min-h-screen flex flex-col justify-between overflow-x-hidden">
+      <span className='sm:flex md:hidden lg:hidden'><br /><br /></span>
       <div className="relative top-0 left-0 w-full">
       </div>
       <br /><br /><br />
@@ -264,24 +265,25 @@ const ProductPage: React.FC = () => {
                 </div>
               )}
             </div>
-            <p className="text-5xl font-bold !mb-2 mt-2">
-              <span className="flex items-start z-10">
-                <span className="text-3xl font-bold">{Math.floor(product.price)}</span>
-                <span className="text-xl font-bold align-top mt-1">
-                  <sup>€{(product.price % 1).toFixed(2).substring(2)}</sup>
+            <div className='flex'>
+              <p className="text-5xl font-bold !mb-2 mt-2">
+                <span className="flex items-start z-10">
+                  <span className="text-3xl font-bold">{Math.floor(product.price)}</span>
+                  <span className="text-xl font-bold align-top mt-1">
+                    <sup>€{(product.price % 1).toFixed(2).substring(2)}</sup>
+                  </span>
                 </span>
-              </span>
-            </p>
-            <div className="flex items-center">
+              </p>
+              <div className="text-gray-500 ml-2 mt-2">
+              {product.sale_price && <div className="text-xs">avant remise</div>}
+              {product.sale_price && (
+                <div className="text-sm line-through">
+                {Math.floor(product.regular_price)}€
+                </div>
+              )}
+            </div>
           </div>
-          <div className="text-gray-500 -mt-2">
-            {product.sale_price && <div className="text-xs">avant remise</div>}
-            {product.sale_price && (
-              <div className="text-sm line-through">
-              {Math.floor(product.regular_price)}€
-              </div>
-            )}
-          </div>
+
             <span className="text-xs font-normal">Bouteille de {product.volume}</span>
             <br />
             <p className="text-sm font-normal">
