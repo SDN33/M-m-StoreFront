@@ -1,27 +1,25 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm, ValidationError } from '@formspree/react';
 
 const ContactPage = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [state, handleSubmit] = useForm("xovqnvab"); // Utilisez votre clé Formspree ici
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Logique pour traiter le formulaire ici
-    console.log('Nom:', name);
-    console.log('Email:', email);
-    console.log('Message:', message);
-
-    setName('');
-    setEmail('');
-    setMessage('');
-  };
+  if (state.succeeded) {
+    return (
+      <div className="w-full max-w-md mx-auto px-4 py-28 pb-10" style={{ paddingTop: '170px' }}>
+        <div className="rounded-lg shadow-lg p-6 text-center">
+          <h2 className="text-2xl font-bold text-green-600 mt-20">Merci pour votre message!</h2>
+          <p className="text-gray-600 mt-2 mb-64">Nous vous répondrons dans les plus brefs délais.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="w-full max-w-md mx-auto px-4 py-28 pb-10 " style={{ paddingTop: '170px' }}> {/* Augmenté padding-top et réduit la largeur max */}
-      <div className="rounded-lg shadow-lg p-6 ">
+    <div className="w-full max-w-md mx-auto px-4 py-28 pb-10" style={{ paddingTop: '170px' }}>
+      <div className="rounded-lg shadow-lg p-6">
         <div className="text-center mb-6">
           <h2 className="text-2xl font-bold">Contactez-nous</h2>
           <p className="text-gray-600">
@@ -40,11 +38,11 @@ const ContactPage = () => {
             <input
               id="name"
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              name="name"
               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
               required
             />
+            <ValidationError prefix="Name" field="name" errors={state.errors} />
           </div>
 
           <div className="space-y-2">
@@ -57,11 +55,11 @@ const ContactPage = () => {
             <input
               id="email"
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
               required
             />
+            <ValidationError prefix="Email" field="email" errors={state.errors} />
           </div>
 
           <div className="space-y-2">
@@ -73,19 +71,21 @@ const ContactPage = () => {
             </label>
             <textarea
               id="message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              name="message"
               className="w-full p-3 border border-gray-300 rounded-md h-24 resize-none focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
               required
             />
+            <ValidationError prefix="Message" field="message" errors={state.errors} />
           </div>
 
           <button
             type="submit"
-            className="w-full py-3 px-6 rounded-md font-medium mt-4 bg-primary text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white"
+            disabled={state.submitting}
+            className="w-full py-3 px-6 rounded-md font-medium mt-4 bg-primary text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white disabled:opacity-50"
           >
-            Envoyer
+            {state.submitting ? 'Envoi en cours...' : 'Envoyer'}
           </button>
+          <ValidationError errors={state.errors} />
         </form>
       </div>
       <br /><br />
