@@ -25,7 +25,7 @@ export const metadata: Metadata = {
       "Plongez dans l’univers du vin bio, où chaque gorgée raconte une histoire de passion et de respect pour la nature. Contrairement aux idées reçues, choisir un vin bio n’est pas synonyme de prix élevé. En effet, nous vous proposons une sélection de vins d'exception à des prix abordables, tout en garantissant un impact environnemental minimal.",
     images: [
       {
-        url: "/images/Bannermeta.png",
+        url: "/images/post_partage.png",
         width: 800,
         height: 600,
         alt: "banner les vins de Mémé Georgette",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
       "Plongez dans l’univers du vin bio, où chaque gorgée raconte une histoire de passion et de respect pour la nature. Contrairement aux idées reçues, choisir un vin bio n’est pas synonyme de prix élevé. En effet, nous vous proposons une sélection de vins d'exception à des prix abordables, tout en garantissant un impact environnemental minimal.",
     images: [
       {
-        url: "/images/Bannermeta.png",
+        url: "/images/post_partage.png",
         alt: "banner Les Vins de Mémé Georgette",
       },
     ],
