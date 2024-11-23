@@ -8,10 +8,10 @@ const ContactPage = () => {
 
   if (state.succeeded) {
     return (
-      <div className="w-full max-w-md mx-auto px-4 py-28 pb-10" style={{ paddingTop: '170px' }}>
+      <div className="w-full max-w-md mx-auto px-4 py-28 pb-10 mt-20 mb-64" style={{ paddingTop: '170px' }}>
         <div className="rounded-lg shadow-lg p-6 text-center">
-          <h2 className="text-2xl font-bold text-green-600 mt-20">Merci pour votre message!</h2>
-          <p className="text-gray-600 mt-2 mb-64">Nous vous répondrons dans les plus brefs délais.</p>
+          <h2 className="text-2xl font-bold text-green-600">Merci pour votre message!</h2>
+          <p className="text-gray-600 mt-2 ">Nous vous répondrons dans les plus brefs délais.</p>
         </div>
       </div>
     );
