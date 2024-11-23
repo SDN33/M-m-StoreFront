@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu as MenuIcon, X, ChevronDown } from 'lucide-react';
+import { Menu as MenuIcon, X, ChevronDown, ChevronRight, ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import CartPopup from './CartPopup';
@@ -164,14 +164,14 @@ const Header: React.FC = () => {
             </div>
 
             {/* Search Bar - Largeur fixe */}
-            <div className="flex-grow max-w-2xl mx-8">
+            <div className="flex-grow max-w-xl mx-4 ml-30">
               <SearchInput />
             </div>
 
             {/* Right Actions - Largeur fixe */}
 
-            <div className="hidden md:hidden lg:flex items-center space-x-7 text-sm px-4 min-w-[400px] justify-end my-auto">
-              <div className="flex items-center space-x-3">
+            <div className="hidden md:hidden lg:flex items-center space-x-7 text-sm px-4 justify-end my-auto -ml-10">
+              <div className="flex items-center space-x-3 md:hidden lg:flex ">
                 <span className="text-white whitespace-nowrap">Livraison en</span>
                 <div className="relative">
                   <button
@@ -318,6 +318,16 @@ const Header: React.FC = () => {
       {/* Navigation Bar - Desktop and Tablet - Hauteur fixe */}
       <nav className="hidden sm:min-w-sm md:hidden lg:flex xl:flex bg-white shadow-xl relative h-12">
         <div className="container mx-auto px-4 h-full flex items-center justify-between">
+          <ChevronLeft
+            className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors flex-shrink-0"
+            onClick={() => {
+              const scrollContainer = document.querySelector('.scrollable-menu');
+              if (scrollContainer) {
+                scrollContainer.scrollBy({ left: -150, behavior: 'smooth' });
+              }
+            }}
+          />
+
           <ul className="scrollable-menu flex items-center justify-center space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar h-full mx-4 flex-grow">
             {categories.map((category) => (
               <li
@@ -327,7 +337,7 @@ const Header: React.FC = () => {
                 <a
                   href={category.href}
                   onClick={category.onClick}
-                  className={`px-0 text-gray-900 hover:text-primary transition-colors flex items-center h-full ${
+                  className={`px-5 text-gray-900 hover:text-primary transition-colors flex items-center h-full ${
                     category.className || ''
                   }`}
                 >
@@ -337,6 +347,16 @@ const Header: React.FC = () => {
               </li>
             ))}
           </ul>
+
+          <ChevronRight
+            className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors flex-shrink-0"
+            onClick={() => {
+              const scrollContainer = document.querySelector('.scrollable-menu');
+              if (scrollContainer) {
+                scrollContainer.scrollBy({ left: 150, behavior: 'smooth' });
+              }
+            }}
+          />
         </div>
       </nav>
 
