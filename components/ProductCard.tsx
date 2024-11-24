@@ -150,8 +150,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     const slogans = {
       qualitePrix: [
         "Le qualité/prix IMBATTABLE !",
-        "Prix MINI, Qualité MAXI !",
-        "Le Meilleur Rapport Qualité/Prix !",
         "Petit Prix, Grand Vin !",
         "Une Affaire à ne pas Manquer !"
       ],
@@ -166,17 +164,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
       coupDeCoeur: [
         "Coup De Coeur de Mémé",
-        "Le Favori de Mémé",
         "La Sélection de Mémé",
-        "Le Choix de Mémé",
         "La Pépite de Mémé"
       ],
 
       biodynamie: [
         "Vin Démeter qui respecte la nature",
         "Culture Biodynamique Démeter",
-        "Vin Bio Démeter",
-        "Vin Nature Démeter",
         "Agriculture Biodynamique Démeter"
       ],
 
@@ -192,7 +186,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         `Un ${appellation.toUpperCase() || 'Vin'} À Découvrir`,
         `Découvrez ce ${appellation.toUpperCase() || 'Vin'} d'Exception`,
         `Un ${appellation.toUpperCase() || 'Vin'} Unique`,
-        `${appellation.toUpperCase() || 'Vin'} à Explorer`,
         `Le ${appellation.toUpperCase() || 'Vin'} qui va vous Surprendre`
       ]
     };
