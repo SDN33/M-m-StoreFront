@@ -46,7 +46,7 @@ const Header: React.FC = () => {
   const categories = [
     { name: 'PROMOS', href: '/promos', className: 'text-red-700 font-black' },
     { name: 'Nos Vins', onClick: toggleNosVinsPopup, icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
-    { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com' },
+    { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com', target: "_blank", rel: "noopener noreferrer" },
     { name: 'Nos Vignerons.nes', href: '/vendors' },
     { name: 'Vins du Monde', href: '/vins-du-monde' },
     { name: 'Contactez-nous', href: '/contact' },
