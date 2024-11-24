@@ -10,7 +10,7 @@ const SocialFollow = () => {
           href="https://www.facebook.com/memegeorgette/"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center text-black bg-gray-100 hover:bg-gray-200 rounded-full px-6 py-2"
+          className="flex items-center text-black bg-gray-100 hover:bg-gray-200 rounded-full px-6 py-2 text-sm"
         >
           <span className="text-[#1877F2] mr-2">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -24,7 +24,7 @@ const SocialFollow = () => {
           href="https://www.instagram.com/memegeorgette/"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center text-black bg-gray-100 hover:bg-gray-200 rounded-full px-6 py-2"
+          className="flex items-center text-black bg-gray-100 hover:bg-gray-200 rounded-full px-6 py-2 text-sm"
         >
           <span className="text-[#E4405F] mr-2">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
