@@ -329,7 +329,7 @@ const CheckoutPage = () => {
   const renderOrderSummary = () => (
     <div className="bg-gray-50 rounded-lg p-6">
       <h3 className="text-xl font-semibold mb-4 text-teal-800">Résumé de la commande</h3>
-      <ul className="space-y-4 mb-4 font-bold">
+      <ul className="space-y-4 mb-4 font-bold text-sm">
         {cartDetails.items.map((item) => (
           <li key={item.product_id} className="flex justify-between items-center border-b pb-2">
             <span>{item.name}<br /> x {item.quantity}</span>
