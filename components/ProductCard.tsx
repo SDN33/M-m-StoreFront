@@ -323,7 +323,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             )}
           </div>
         </div>
-
         <div className="flex items-center justify-center mx-auto pb-4">
           <select
             value={quantity}

@@ -10,6 +10,7 @@ import Trust from '@/components/Trust';
 import Livraison from './Livraison';
 import MobileProductsIntro from './MobileProductIntro';
 import LatestArticles from './LatestArticles';
+import BackToTop from './BackToTop';
 
 const MobileHome: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -52,6 +53,7 @@ const MobileHome: React.FC = () => {
         <Slogan />
         <br /><br />
         <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} />
+        <BackToTop />
       </div>
     </div>
   );

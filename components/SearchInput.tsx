@@ -41,23 +41,17 @@ const SearchInput = () => {
   const resultsRef = useRef<HTMLDivElement>(null);
   const recentSearchesRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const timerRef = useRef<NodeJS.Timeout>();
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Fonction pour gérer l'inactivité
   const startInactivityTimer = useCallback(() => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-    }
+    if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
       setShowRecentSearches(false);
-    }, 4000); // 4 secondes
+    }, 4000);
   }, []);
 
-  // Reset du timer quand la souris bouge sur la zone de recherche
   const handleMouseMove = useCallback(() => {
-    if (showRecentSearches) {
-      startInactivityTimer();
-    }
+    if (showRecentSearches) startInactivityTimer();
   }, [showRecentSearches, startInactivityTimer]);
 
   const extractMetaData = useCallback((product: Product): FilteredProduct => {
@@ -67,27 +61,24 @@ const SearchInput = () => {
       '_appellation': 'appellation',
       '_millesime': 'millesime',
       '_region': 'region__pays',
-      '_couleur': 'categorie'
+      '_couleur': 'categorie',
     };
 
     product.meta_data.forEach(meta => {
       const mappedKey = metaKeys[meta.key as keyof typeof metaKeys];
-      if (mappedKey) {
-        metaDataMap[mappedKey] = meta.value;
-      }
+      if (mappedKey) metaDataMap[mappedKey] = meta.value;
     });
 
     return { ...product, ...metaDataMap };
   }, []);
 
   const normalizeString = useCallback((str: string) => {
-    if (!str) return '';
     return str
       .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^\w\s]/g, " ")
-      .replace(/\s+/g, " ")
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^\w\s]/g, ' ')
+      .replace(/\s+/g, ' ')
       .trim();
   }, []);
 
@@ -103,31 +94,22 @@ const SearchInput = () => {
       product.appellation,
       product.millesime,
       product.region__pays,
-      product.categorie
-    ].filter(Boolean).map(str => normalizeString(str as string));
+      product.categorie,
+    ]
+      .filter(Boolean)
+      .map(str => normalizeString(str as string));
 
-    let totalScore = 0;
     let matches = 0;
-
     searchWords.forEach(word => {
-      fieldsToSearch.forEach(field => {
-        if (field.includes(word)) {
-          matches++;
-          if (field === word) matches += 0.5;
-        }
-      });
+      if (fieldsToSearch.some(field => field.includes(word))) matches++;
     });
 
-    totalScore = matches / (searchWords.length * fieldsToSearch.length);
-    return totalScore;
+    return matches / searchWords.length;
   }, [normalizeString]);
 
   const filterResults = useCallback((products: FilteredProduct[], term: string): FilteredProduct[] => {
     return products
-      .map(product => ({
-        product,
-        score: getSimilarityScore(term, product)
-      }))
+      .map(product => ({ product, score: getSimilarityScore(term, product) }))
       .filter(({ score }) => score > 0.1)
       .sort((a, b) => b.score - a.score)
       .slice(0, 10)
@@ -147,19 +129,8 @@ const SearchInput = () => {
 
         try {
           const response = await axios.get('/api/products', {
-            params: {
-              search: term,
-              per_page: 20,
-              status: 'publish',
-              orderby: 'relevance'
-            }
+            params: { search: term, per_page: 20, status: 'publish', orderby: 'relevance' },
           });
-
-          if (response.data.length === 0) {
-            setError('Aucun résultat trouvé');
-            setResults([]);
-            return;
-          }
 
           const processedResults = response.data.map(extractMetaData);
           const filteredResults = filterResults(processedResults, term);
@@ -172,9 +143,8 @@ const SearchInput = () => {
               return updated;
             });
           }
-        } catch (error) {
+        } catch {
           setError('Une erreur est survenue lors de la recherche');
-          console.error('Search error:', error);
         } finally {
           setIsLoading(false);
         }
@@ -189,65 +159,34 @@ const SearchInput = () => {
     debouncedSearch(term);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        !resultsRef.current?.contains(event.target as Node) &&
+        !recentSearchesRef.current?.contains(event.target as Node) &&
+        !inputRef.current?.contains(event.target as Node)
+      ) {
+        setResults([]);
+        setShowRecentSearches(false);
+        if (timerRef.current) clearTimeout(timerRef.current);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const savedSearches = localStorage.getItem('recentSearches');
+    if (savedSearches) setRecentSearches(JSON.parse(savedSearches));
+  }, []);
+
   const clearSearch = () => {
     setSearchTerm('');
     setResults([]);
     setShowRecentSearches(false);
     setError(null);
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
   };
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        resultsRef.current &&
-        !resultsRef.current.contains(event.target as Node) &&
-        recentSearchesRef.current &&
-        !recentSearchesRef.current.contains(event.target as Node) &&
-        inputRef.current &&
-        !inputRef.current.contains(event.target as Node)
-      ) {
-        setResults([]);
-        setShowRecentSearches(false);
-        if (timerRef.current) {
-          clearTimeout(timerRef.current);
-        }
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem('recentSearches');
-      if (saved) {
-        setRecentSearches(JSON.parse(saved));
-      }
-    } catch (error) {
-      console.error('Erreur lors du chargement des recherches récentes:', error);
-    }
-  }, []);
-
-  // Effet pour démarrer le timer quand showRecentSearches change
-  useEffect(() => {
-    if (showRecentSearches) {
-      startInactivityTimer();
-    }
-    return () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
-    };
-  }, [showRecentSearches, startInactivityTimer]);
 
   return (
     <div className="relative flex-grow mx-8 max-w-xl">

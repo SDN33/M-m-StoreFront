@@ -297,8 +297,8 @@ const ProductPage: React.FC = () => {
             <br />
             <SocialShare url={currentUrl} title={product.name} />
             <div className="items-center mt-6 flex gap-2">
-              <Package className="h-6 w-6 mb-6" />
-              <span className="font-bold text-xs mb-6">Livraison offerte dès 6 bouteilles achetées sur un domaine</span>
+              <Package className="h-6 w-6" />
+              <span className="font-bold text-xs ">Livraison offerte dès 6 bouteilles achetées sur un domaine</span>
             </div>
             <div className="flex items-center mt-1">
               <select
