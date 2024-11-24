@@ -51,7 +51,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
         alt: "banner Les Vins de Mémé Georgette",
       },
     ],
-  },
+  }
 };
 
 export default function RootLayout({
