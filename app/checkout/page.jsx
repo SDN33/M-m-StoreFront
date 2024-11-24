@@ -219,7 +219,7 @@ const CheckoutPage = () => {
       <button
         onClick={() => setCurrentStep(2)}
         disabled={!isStepComplete(1)}
-        className="w-full bg-blue-500 text-white py-2 rounded disabled:bg-gray-300"
+        className="w-full bg-primary text-white py-2 rounded disabled:bg-gray-300"
       >
         Continuer
       </button>
@@ -311,14 +311,14 @@ const CheckoutPage = () => {
       <div className="flex gap-4">
         <button
           onClick={() => setCurrentStep(1)}
-          className="flex-1 border border-blue-500 text-blue-500 py-2 rounded"
+          className="flex-1 border border-teal-800 text-teal-800 py-2 rounded"
         >
           Retour
         </button>
         <button
           onClick={() => setCurrentStep(3)}
           disabled={!isStepComplete(2)}
-          className="flex-1 bg-blue-500 text-white py-2 rounded disabled:bg-gray-300"
+          className="flex-1 bg-primary text-white py-2 rounded disabled:bg-gray-300"
         >
           Continuer
         </button>
