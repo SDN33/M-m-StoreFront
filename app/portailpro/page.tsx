@@ -188,7 +188,7 @@ export default function PortailPro() {
               </div>
             ))}
           </div>
-          <p className="font-bold text-lg text-center mx-auto mt-32 mb-28  slide-in-right ">
+          <p className="font-bold text-lg text-center mx-auto mt-20 mb-28  slide-in-right ">
           <span className='font-black text-3xl text-primary border-black-500'>VinsMemeGeorgette.com</span><br /><br />C&apos;est bien plus qu&apos;une marketplace ! C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte, reconnue par le grand public grâce à <a className='text-primary font-black' href="https://www.memegeorgette.com/" >Mémé Georgette</a>. Nous vous offrons un accès direct aux amateurs de vin en Europe, tout en simplifiant vos démarches avec une logistique intégrée et un accompagnement marketing personnalisé
           </p>
         </div>
