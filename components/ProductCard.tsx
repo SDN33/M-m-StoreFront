@@ -306,7 +306,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         <div className="flex items-center justify-between mb-2">
           <div>
             <div className="text-2xl font-bold ml-4">
-             {Math.floor(product.price)}<sup className="text-sm">{(product.price % 1).toFixed(2).substring(2)}€</sup>
+             {Math.floor(product.price)}<sup className="text-sm">,{(product.price % 1).toFixed(2).substring(2)}€</sup>
             </div>
           </div>
           {product.sale_price ? (
