@@ -152,23 +152,24 @@ export default function PortailPro() {
           <div className="text-center space-y-4 mb-8 gap-1">
             {/* Suppression de l'image comme élément distinct */}
             <h3
-              className="text-7xl tracking-tight font-bold relative bg-cover bg-center text-white flex items-center justify-center rounded-t-xl pl-20"
+              className="text-4xl md:text-5xl lg:text-7xl tracking-tight font-bold relative bg-cover bg-center text-white pt-16 items-center justify-center rounded-t-xl text-center"
               style={{
-              backgroundImage: 'url(/images/vins_fruitees.webp)', // Image en arrière-plan
-              backgroundSize: 'cover', // Couvrir toute la zone
-              backgroundPosition: 'center', // Centrer l'image
-              backgroundBlendMode: 'multiply', // Mélange de couleurs
-              height: '300px', // Augmenter la hauteur de l'image
+              backgroundImage: 'url(/images/vins_fruitees.webp)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundBlendMode: 'multiply',
+              minHeight: '200px',
+              height: 'auto',
+              padding: '2rem 1rem'
               }}
             >
               PORTAIL PRO
-              <br />
-              <p className="font-bold text-lg mx-auto text-white slide-in-right">
+              <p className="font-bold text-base md:text-lg lg:text-xl mx-auto fade-in-up mt-4">
               Une solution e-commerce complète pour les vignerons bio
-            </p>
+              </p>
             </h3>
           </div>
-          <p className="font-bold text-xl text-center mx-auto mt-2 mb-8 slide-in-right text-teal-800">
+          <p className="font-bold text-lg text-center mx-auto mb-16 slide-in-right text-teal-800">
             Rejoignez une marketplace dédiée aux vignerons bio, où simplicité, logistique prise en charge, et liberté totale vous permettent de vendre vos vins à travers l&apos;Europe sans contraintes.
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -187,8 +188,8 @@ export default function PortailPro() {
               </div>
             ))}
           </div>
-          <p className="font-bold text-xl text-center mx-auto mt-20 -mb-4 slide-in-right text-teal-800">
-            Intégrez une communauté de vignerons bio partageant vos valeurs. Notre marketplace vous offre un accès direct aux amateurs de vin en Europe, tout en simplifiant vos démarches grâce à une logistique intégrée et un support marketing dédié
+          <p className="font-bold text-lg text-center mx-auto mt-32 mb-28  slide-in-right text-teal-800">
+          <span className='font-black text-3xl text-primary border-black-500'>VinsMemeGeorgette.com</span><br /><br />C&apos;est bien plus qu&apos;une marketplace ! C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte, reconnue par le grand public grâce à <a className='text-primary font-black' href="https://www.memegeorgette.com/" >Mémé Georgette</a>. Nous vous offrons un accès direct aux amateurs de vin en Europe, tout en simplifiant vos démarches avec une logistique intégrée et un accompagnement marketing personnalisé
           </p>
         </div>
 
