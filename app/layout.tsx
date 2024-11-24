@@ -18,6 +18,7 @@ type TwitterMetadata = {
   images: { url: string; alt: string }[];
 };
 
+
 export const metadata: Metadata & { twitter: TwitterMetadata } = {
   title: "Les vins de Mémé Georgette | 2 500 vins Bio en direct de vignerons et vigneronnes engagé(e)s | Vins Bio et Biodynamie Démeter",
   description:
@@ -25,7 +26,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
   icons: {
     icon: "/favicon.ico",
   },
-  keywords: ["vin bio", "vin biodynamie", "Mémé Georgette", "vin sans sulfites", "vin vegan", "vin bio pas cher", "vin bio en ligne", "vin bio livraison gratuite", "Les vins de Mémé Georgette", "vin bio sans sulfites ajoutés", "vin bio sans sulfites", "acheter vins", "vins en ligne", "vins pas cher", "vins livraison gratuite", "vins sans alcool", "vins sans sulfites ajoutés", "vins sans sulfites", "vins vegan", "vins naturels", "vins biodynamie", "vins bio en ligne", "vins bio pas cher", "vins bio livraison gratuite"],
+  keywords: ["Mémé Georgette, Vins Mémé Georgette, acheter vins, vinatis, les grappes, vin en ligne, acheter vins bio, acheter vins en ligne, vins bio, vins en ligne, vins naturels, vins biodynamiques, vins pas chers, vins de qualité, vins de vignerons, vins de vigneronnes, vins de France, vins du monde, vins rouges, vins blancs, vins rosés, vins pétillants, vins effervescents, vins tranquilles, vins de garde, vins de cépages, vins de terroir, vins de caractère, vins de gastronomie, vins de fête, vins de tous les jours, vins de qualité, vins de prestige, vins de collection, vins de garde, vins de Bordeaux, vins de Bourgogne, vins de Loire, vins de Rhône, vins de Provence, vins de Champagne, vins d'Alsace, vins du Languedoc, vins du Roussillon, vins du Sud-Ouest, vins du Jura, vins de Savoie, vins de Corse, vins d'Espagne, vins d'Italie, vins d'Allemagne, vins du Portugal"],
   openGraph: {
     title: "Les vins de Mémé Georgette | 2 500 vins Bio en direct de vignerons et vigneronnes engagé(e)s | Vins Bio et Biodynamie Démeter",
     description:
