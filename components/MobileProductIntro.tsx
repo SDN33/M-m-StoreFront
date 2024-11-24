@@ -57,7 +57,7 @@ const MobileProductsIntro: React.FC = () => {
     <>
       <div className='-mt-10'>
         <video
-          src="/videos/bannermobile.mp4"
+          src="https://res.cloudinary.com/daroyxenr/video/upload/q_auto:good/v1732411795/Design_sans_titre_7_1_nobrzq.mp4"
           width={1920}
           height={1080}
           autoPlay
@@ -66,6 +66,15 @@ const MobileProductsIntro: React.FC = () => {
           playsInline
           preload="auto"
           className="w-full h-full object-cover"
+          onLoadedData={(e) => {
+        const video = e.target as HTMLVideoElement;
+        video.play();
+        if (typeof caches !== 'undefined') {
+          caches.open('video-cache').then(cache => {
+            cache.add(video.src);
+          });
+        }
+          }}
         />
       </div>
 

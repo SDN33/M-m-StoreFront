@@ -163,8 +163,8 @@ export default function PortailPro() {
             >
               PORTAIL PRO
             </h3>
-            <p className="font-bold text-lg mx-auto">
-              Une solution e-commerce complète pour les vignerons bio <br /> restez concentré sur votre production, nous nous occupons du reste
+            <p className="font-bold text-xl mx-auto text-teal-800 slide-in-right">
+              Une solution e-commerce complète pour les vignerons bio
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -183,8 +183,8 @@ export default function PortailPro() {
               </div>
             ))}
           </div>
-          <p className="font-bold text-xl text-center mx-auto mt-20 -mb-4 slide-in-right">
-              Rejoignez notre réseau de vignerons et vendez vos vins bio en Europe,<br /> déverrouillez votre potentiel de vente dès aujourd&apos;hui sans contraintes de logistique ni d&apos;engagement.
+          <p className="font-bold text-xl text-center mx-auto mt-20 -mb-4 slide-in-right text-teal-800">
+              Rejoignez notre réseau de vignerons et vendez vos vins bio en Europe,<br /> déverrouillez votre potentiel de vente dès aujourd&apos;hui sans contraintes de logistique ni d&apos;engagement
           </p>
         </div>
 
