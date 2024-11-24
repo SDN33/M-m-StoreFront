@@ -149,10 +149,10 @@ export default function PortailPro() {
         </svg>
         {/* Features Section */}
         <div>
-          <div className="text-center space-y-4 mb-8">
+          <div className="text-center space-y-4 mb-8 gap-1">
             {/* Suppression de l'image comme élément distinct */}
             <h3
-              className="text-7xl tracking-tight font-bold relative bg-cover bg-center text-white flex items-center justify-center rounded-t-xl"
+              className="text-7xl tracking-tight font-bold relative bg-cover bg-center text-white flex items-center justify-center rounded-t-xl pl-20"
               style={{
               backgroundImage: 'url(/images/vins_fruitees.webp)', // Image en arrière-plan
               backgroundSize: 'cover', // Couvrir toute la zone
@@ -162,11 +162,15 @@ export default function PortailPro() {
               }}
             >
               PORTAIL PRO
-            </h3>
-            <p className="font-bold text-xl mx-auto text-teal-800 slide-in-right">
+              <br />
+              <p className="font-bold text-lg mx-auto text-white slide-in-right">
               Une solution e-commerce complète pour les vignerons bio
             </p>
+            </h3>
           </div>
+          <p className="font-bold text-xl text-center mx-auto mt-2 mb-8 slide-in-right text-teal-800">
+            Rejoignez une marketplace dédiée aux vignerons bio, où simplicité, logistique prise en charge, et liberté totale vous permettent de vendre vos vins à travers l&apos;Europe sans contraintes.
+          </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <div
@@ -184,7 +188,7 @@ export default function PortailPro() {
             ))}
           </div>
           <p className="font-bold text-xl text-center mx-auto mt-20 -mb-4 slide-in-right text-teal-800">
-              Rejoignez notre réseau de vignerons et vendez vos vins bio en Europe,<br /> déverrouillez votre potentiel de vente dès aujourd&apos;hui sans contraintes de logistique ni d&apos;engagement
+            Intégrez une communauté de vignerons bio partageant vos valeurs. Notre marketplace vous offre un accès direct aux amateurs de vin en Europe, tout en simplifiant vos démarches grâce à une logistique intégrée et un support marketing dédié
           </p>
         </div>
 
