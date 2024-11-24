@@ -282,13 +282,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
         <div onClick={vendorRedirect} className="flex items-center gap-2 cursor-pointer">
           {vendorImages && (
-            <div className="relative w-8 h-8 rounded-full overflow-hidden">
+            <div className="relative w-10 h-10 rounded-full overflow-hidden">
               <Image
-                src={vendorImages}
+                src={vendorImages || '/images/meme-pas-contente.png'}
                 alt={product.store_name || 'Vendor shop'}
                 fill
                 style={{ objectFit: 'cover' }}
                 priority
+                layout="fill"
               />
             </div>
           )}
