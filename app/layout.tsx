@@ -11,7 +11,14 @@ import { Analytics } from "@vercel/analytics/react"
 import Cookies from "@/components/Cookies";
 
 
-export const metadata: Metadata = {
+type TwitterMetadata = {
+  card: string;
+  title: string;
+  description: string;
+  images: { url: string; alt: string }[];
+};
+
+export const metadata: Metadata & { twitter: TwitterMetadata } = {
   title: "Les vins de Mémé Georgette | 2 500 vins Bio en direct de vignerons et vigneronnes engagé(e)s | Vins Bio et Biodynamie Démeter",
   description:
     "Plongez dans l’univers du vin bio, où chaque gorgée raconte une histoire de passion et de respect pour la nature. Contrairement aux idées reçues, choisir un vin bio n’est pas synonyme de prix élevé. En effet, nous vous proposons une sélection de vins d'exception à des prix abordables, tout en garantissant un impact environnemental minimal.",
@@ -54,6 +61,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
+      <head>
+        <meta property="og:image" content="https://vinsmemegeorgette.com/images/post_partage.png" />
+        <meta property="og:title" content={metadata.openGraph?.title as string} />
+        <meta property="og:description" content={metadata.openGraph?.description as string} />
+        <meta property="og:url" content="https://vinsmemegeorgette.com" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content={metadata.twitter?.card} />
+        <meta name="twitter:title" content={metadata.twitter?.title} />
+        <meta name="twitter:description" content={metadata.twitter?.description} />
+        <meta name="twitter:image" content={metadata.twitter?.images[0].url} />
+        <link rel="icon" href="https://memegeorgette.com/app/favicon.ico" type="image/x-icon" />
+      </head>
       <body>
         <AuthProvider>
           <CartProvider>
