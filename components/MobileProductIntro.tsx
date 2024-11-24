@@ -57,7 +57,7 @@ const MobileProductsIntro: React.FC = () => {
     <>
       <div className='-mt-10'>
         <video
-          src="https://res.cloudinary.com/daroyxenr/video/upload/q_auto:good/v1732411795/Design_sans_titre_7_1_nobrzq.mp4"
+          src="https://res.cloudinary.com/daroyxenr/video/upload/q_auto:eco/v1732411795/Design_sans_titre_7_1_nobrzq.mp4"
           width={1920}
           height={1080}
           autoPlay
