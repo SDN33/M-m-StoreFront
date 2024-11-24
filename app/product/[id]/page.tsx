@@ -225,15 +225,15 @@ const ProductPage: React.FC = () => {
               </p>
               {renderAOCBadge(product)}
             </div>
-            <div className="relative w-full max-w-[300px]">
+            <div className="relative w-full max-w-[200px]">
               <Image
-                src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
-                alt={product.name}
-                width={300}
-                height={500}
-                className="mt-5 rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-125 cursor-zoom-in"
-                loading="lazy"
-                style={{ objectFit: 'cover' }}
+              src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
+              alt={product.name}
+              width={300}
+              height={400} // Adjusted height to maintain a consistent aspect ratio
+              className="mt-5 rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-125 cursor-zoom-in"
+              loading="lazy"
+              style={{ objectFit: 'cover' }}
               />
             </div>
           </div>
@@ -298,7 +298,7 @@ const ProductPage: React.FC = () => {
             <SocialShare url={currentUrl} title={product.name} />
             <div className="items-center mt-6 flex gap-2">
               <Package className="h-6 w-6" />
-              <span className="font-bold text-xs ">Livraison offerte dès 6 bouteilles achetées sur un domaine</span>
+              <span className="font-bold text-xs mb-1">Livraison offerte dès 6 bouteilles achetées sur un domaine</span>
             </div>
             <div className="flex items-center mt-1">
               <select
