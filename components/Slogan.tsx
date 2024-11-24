@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState} from 'react';
 import Image from 'next/image';
+import Reseaux from './Reseaux';
 
 const Slogan: React.FC = () => {
   const h2Ref = useRef<HTMLHeadingElement | null>(null);
@@ -155,6 +156,7 @@ const Slogan: React.FC = () => {
         </div>
         <br />
         <span className="text-white text-xs block mt-4">* en comparaison avec les vins non biologiques</span>
+        <Reseaux />
       </div>
     </div>
   );
