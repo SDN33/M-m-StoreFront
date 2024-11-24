@@ -169,7 +169,7 @@ export default function PortailPro() {
               </p>
             </h3>
           </div>
-          <p className="font-bold text-lg text-center mx-auto mb-14 slide-in-right text-teal-800">
+          <p className="font-bold text-lg text-center mx-auto mb-8 slide-in-right">
             Rejoignez une marketplace dédiée aux vignerons bio, où simplicité, logistique prise en charge, et liberté totale<br /> vous permettent de vendre vos vins à travers l&apos;Europe sans contraintes.
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -188,7 +188,7 @@ export default function PortailPro() {
               </div>
             ))}
           </div>
-          <p className="font-bold text-lg text-center mx-auto mt-32 mb-28  slide-in-right text-teal-800">
+          <p className="font-bold text-lg text-center mx-auto mt-32 mb-28  slide-in-right ">
           <span className='font-black text-3xl text-primary border-black-500'>VinsMemeGeorgette.com</span><br /><br />C&apos;est bien plus qu&apos;une marketplace ! C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte, reconnue par le grand public grâce à <a className='text-primary font-black' href="https://www.memegeorgette.com/" >Mémé Georgette</a>. Nous vous offrons un accès direct aux amateurs de vin en Europe, tout en simplifiant vos démarches avec une logistique intégrée et un accompagnement marketing personnalisé
           </p>
         </div>
