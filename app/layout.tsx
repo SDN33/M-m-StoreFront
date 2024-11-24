@@ -69,6 +69,13 @@ export default function RootLayout({
         <meta property="og:description" content={metadata.openGraph?.description as string} />
         <meta property="og:url" content="https://vinsmemegeorgette.com" />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content={metadata.openGraph?.siteName} />
+        <meta property="og:locale" content="fr_FR" />
+        <meta name="icon" content={typeof metadata.icons === 'string' ? metadata.icons : undefined} />
+        <meta name="author" content="Vins Mémé Georgette" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charSet="UTF-8" />
+
         <meta name="twitter:card" content={metadata.twitter?.card} />
         <meta name="twitter:title" content={metadata.twitter?.title} />
         <meta name="twitter:description" content={metadata.twitter?.description} />
