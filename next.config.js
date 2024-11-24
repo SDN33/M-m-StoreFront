@@ -26,7 +26,12 @@ const nextConfig = {
         protocol: "https",
         hostname: "secure.gravatar.com",
         pathname: "/avatar/**", // Permet les avatars Gravatar
-      }
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**", // Permet toutes les images sous ce domaine
+      },
     ],
   },
   async rewrites() {

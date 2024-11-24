@@ -2,6 +2,7 @@
 import { Globe, Lock, Box, CreditCard, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
+import Image from 'next/image'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
@@ -21,17 +22,17 @@ export default function PortailPro() {
 
   const features = [
     {
-      icon: <Globe className="w-8 h-8 text-orange-500" />,
+      icon: <Globe className="w-8 h-8 text-teal-800" />,
       title: "Votre espace vigneron en ligne",
       description: "Gérez votre espace professionnel en quelques clics. Vendez vos vins bio en Europe avec notre support marketing intégré.",
     },
     {
-      icon: <Lock className="w-8 h-8 text-orange-500" />,
+      icon: <Lock className="w-8 h-8 text-teal-800" />,
       title: "Liberté totale",
       description: "Aucun engagement de durée ou de quantité. Fixez vos propres prix de vente directement depuis votre domaine.",
     },
     {
-      icon: <Box className="w-8 h-8 text-orange-500" />,
+      icon: <Box className="w-8 h-8 text-teal-800" />,
       title: "Logistique simplifiée",
       description: "Nous prenons en charge toute la logistique. Préparez vos commandes dans des emballages agréés et déposez-les au centre le plus proche.",
     }
@@ -189,9 +190,30 @@ export default function PortailPro() {
             ))}
           </div>
           <p className="font-bold text-lg text-center mx-auto mt-20 mb-28  slide-in-right ">
-          <span className='font-black text-3xl text-primary border-black-500'>VinsMemeGeorgette.com</span><br /><br />C&apos;est bien plus qu&apos;une marketplace ! C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte, reconnue par le grand public grâce à <a className='text-primary font-black' href="https://www.memegeorgette.com/" >Mémé Georgette</a>. Nous vous offrons un accès direct aux amateurs de vin en Europe, tout en simplifiant vos démarches avec une logistique intégrée et un accompagnement marketing personnalisé
+          <span className='font-black text-3xl text-primary border-black-500'>VinsMemeGeorgette.com</span><br /><br />C&apos;est bien plus qu&apos;une marketplace ! C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte, reconnue par le grand public grâce à <a className='text-primary font-black'  href="https://www.memegeorgette.com/" >Mémé Georgette</a><br /><br />
+          <div className="flex gap-4 justify-center items-center p-6 eshadow-lg rounded-lg">
+  <Image
+    src="https://res.cloudinary.com/daroyxenr/image/upload/ar_16:9,c_fill,e_sharpen,g_auto,q_auto:good,w_1000/v1732486602/Capture_d_%C3%A9cran_2024-11-24_231608_dp7xms.webp"
+    alt="Vins fruités"
+    width={200}
+    height={200}
+    className="flex-1 object-cover rounded-lg shadow-md transform transition-all duration-500 hover:scale-105 hover:rotate-1 hover:shadow-xl mt-4"
+  />
+  <Image
+    src="/images/meme-pas-contente.png"
+    alt="Vins fruités"
+    width={200}
+    height={200}
+    className="flex-1 object-cover rounded-lg shadow-md transform transition-all duration-500 hover:scale-105 hover:-rotate-1 hover:shadow-xl mt-4"
+  />
+</div>
+
+        <br /><br /> Nous vous offrons un accès direct aux amateurs de vin en Europe, tout en simplifiant vos démarches avec une logistique intégrée et un accompagnement marketing personnalisé
           </p>
         </div>
+
+
+
 
         {/* Pricing Section */}
         <div className="mt-24 max-w-2xl mx-auto slide-in-right">
