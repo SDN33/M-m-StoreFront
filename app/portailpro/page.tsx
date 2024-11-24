@@ -170,7 +170,7 @@ export default function PortailPro() {
             </h3>
           </div>
           <p className="font-bold text-lg text-center mx-auto mb-16 slide-in-right text-teal-800">
-            Rejoignez une marketplace dédiée aux vignerons bio, où simplicité, logistique prise en charge, et liberté totale vous permettent de vendre vos vins à travers l&apos;Europe sans contraintes.
+            Rejoignez une marketplace dédiée aux vignerons bio, où simplicité, logistique prise en charge, et liberté totale<br /> vous permettent de vendre vos vins à travers l&apos;Europe sans contraintes.
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
