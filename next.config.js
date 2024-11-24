@@ -22,6 +22,11 @@ const nextConfig = {
         hostname: "i1.wp.com",
         pathname: "/**", // Permet toutes les images sous ce domaine
       },
+      {
+        protocol: "https",
+        hostname: "secure.gravatar.com",
+        pathname: "/avatar/**", // Permet les avatars Gravatar
+      }
     ],
   },
   async rewrites() {

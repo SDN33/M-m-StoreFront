@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import { Clock, Facebook, Twitter, Linkedin, Link2 } from "lucide-react";
 import he from "he";
+import Comments from "@/components/Comments";
 
 interface Article {
   id: number;
@@ -204,9 +205,12 @@ const ArticlePage = () => {
           __html: removeFeaturedImageFromContent(article.content, article.featuredImage)
         }}
       />
+      <br /><br />
       <div className="mt-8 flex justify-center">
         <SocialShare title={article.title} url={window.location.href} />
       </div>
+      <br /><br />
+      <Comments postId={article.id} />
     </article>
   );
 };
