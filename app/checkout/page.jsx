@@ -102,44 +102,61 @@ const CheckoutPage = () => {
   };
 
   const StepIndicator = ({ currentStep }) => {
+    const { viewAllCartItems } = useCart();
+    const cartDetails = viewAllCartItems();
+    const hasItems = cartDetails?.items?.length > 0;
+
+    // Redirect to cart if no items
+    React.useEffect(() => {
+      if (!hasItems) {
+        router.push('/');
+      }
+    }, [hasItems]);
+
     return (
       <div className="px-4 sm:px-6 md:px-8 mb-8 mt-12 sm:mt-24 md:mt-48 w-full">
-        <span className='md:hidden lg:hidden xl:hidden'><br /><br /><br /><br /></span>
-        <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-          {[
-            { num: 1, title: 'Contact' },
-            { num: 2, title: 'Livraison' },
-            { num: 3, title: 'Paiement' }
-          ].map((step) => (
-            <div
-              key={step.num}
-              className="flex items-center justify-center sm:justify-start w-full sm:w-auto"
-            >
-              <div className="flex items-center">
+        {!hasItems ? (
+          <div className="text-center">Redirection vers le panier...</div>
+        ) : (
+          <>
+            <span className='md:hidden lg:hidden xl:hidden'><br /><br /><br /><br /></span>
+            <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+              {[
+                { num: 1, title: 'Contact' },
+                { num: 2, title: 'Livraison' },
+                { num: 3, title: 'Paiement' }
+              ].map((step) => (
                 <div
-                  className={`flex items-center justify-center w-8 h-8 rounded-full border-2
-                    ${currentStep === step.num ? 'border-teal-800 bg-teal-800 text-white' :
-                      currentStep > step.num ? 'border-green-500 bg-green-500 text-white' :
-                      'border-gray-300 text-gray-300'}`}
+                  key={step.num}
+                  className="flex items-center justify-center sm:justify-start w-full sm:w-auto"
                 >
-                  {currentStep > step.num ? <Check size={16} /> : step.num}
+                  <div className="flex items-center">
+                    <div
+                      className={`flex items-center justify-center w-8 h-8 rounded-full border-2
+                        ${currentStep === step.num ? 'border-teal-800 bg-teal-800 text-white' :
+                          currentStep > step.num ? 'border-green-500 bg-green-500 text-white' :
+                          'border-gray-300 text-gray-300'}`}
+                    >
+                      {currentStep > step.num ? <Check size={16} /> : step.num}
+                    </div>
+                    <span
+                      className={`ml-2 text-sm sm:text-base ${currentStep >= step.num ? 'text-gray-900' : 'text-gray-400'}`}
+                    >
+                      {step.title}
+                    </span>
+                  </div>
+                  {step.num < 3 && (
+                    <div className="hidden sm:block">
+                      <div
+                        className={`w-12 md:w-24 h-0.5 mx-2 md:mx-4 ${currentStep > step.num ? 'bg-green-500' : 'bg-gray-300'}`}
+                      />
+                    </div>
+                  )}
                 </div>
-                <span
-                  className={`ml-2 text-sm sm:text-base ${currentStep >= step.num ? 'text-gray-900' : 'text-gray-400'}`}
-                >
-                  {step.title}
-                </span>
-              </div>
-              {step.num < 3 && (
-                <div className="hidden sm:block">
-                  <div
-                    className={`w-12 md:w-24 h-0.5 mx-2 md:mx-4 ${currentStep > step.num ? 'bg-green-500' : 'bg-gray-300'}`}
-                  />
-                </div>
-              )}
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
       </div>
     );
   };
@@ -274,34 +291,40 @@ const CheckoutPage = () => {
     </div>
   );
 
-  const renderOrderSummary = () => (
-    <div className="bg-gray-50 rounded-lg p-6">
-      <h3 className="text-xl font-semibold mb-4 text-teal-800">Résumé de la commande</h3>
-      <ul className="space-y-4 mb-4">
-        {cartDetails.items.map((item) => (
-          <li key={item.product_id} className="flex justify-between items-center border-b pb-2">
-            <span>{item.name} x {item.quantity}</span>
-            <span>{(item.price * item.quantity).toFixed(2)}€</span>
-          </li>
-        ))}
-      </ul>
-      <div className="flex justify-between text-sm font-semibold mb-2">
-        <span>Sous-total</span>
-        <span>{cartDetails.total.toFixed(2)}€</span>
+  const renderOrderSummary = () => {
+    const hasProductWithSixOrMore = cartDetails?.items?.some(item => item.quantity >= 6) || false;
+    const shippingCost = hasProductWithSixOrMore ? 0 : 10;
+    const finalTotal = (cartDetails.total + shippingCost).toFixed(2);
+
+    return (
+      <div className="bg-gray-50 rounded-lg p-6">
+        <h3 className="text-xl font-semibold mb-4 text-teal-800">Résumé de la commande</h3>
+        <ul className="space-y-4 mb-4">
+          {cartDetails.items.map((item) => (
+            <li key={item.product_id} className="flex justify-between items-center border-b pb-2">
+              <span>{item.name} x {item.quantity}</span>
+              <span>{(item.price * item.quantity).toFixed(2)}€</span>
+            </li>
+          ))}
+        </ul>
+        <div className="flex justify-between text-sm font-semibold mb-2">
+          <span>Sous-total</span>
+          <span>{cartDetails.total.toFixed(2)}€</span>
+        </div>
+        <div className="flex justify-between text-base mb-2">
+          <span>
+            {formData.deliveryMethod === 'standard' ? 'Livraison standard' : 'Point Relais'}
+            <span className="text-xs ml-2">(3-5 jours)</span>
+          </span>
+          <span>{shippingCost === 0 ? <span className="text-teal-800">Offert</span> : `${shippingCost.toFixed(2)}€`}</span>
+        </div>
+        <div className="flex justify-between font-bold text-xl mt-4 pt-4 border-t text-primary">
+          <span>Total :</span>
+          <span>{finalTotal}€</span>
+        </div>
       </div>
-      <div className="flex justify-between text-base mb-2">
-        <span>
-          {formData.deliveryMethod === 'standard' ? 'Livraison standard' : 'Point Relais'}
-          <span className="text-xs ml-2">(3-5 jours)</span>
-        </span>
-        <span>10.00€</span>
-      </div>
-      <div className="flex justify-between font-bold text-xl mt-4 pt-4 border-t  text-primary">
-        <span>Total :</span>
-        <span>{totalPrice}€</span>
-      </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="min-h-[calc(100vh-200px)] mx-auto px-4 sm:px-8 mt-16 max-w-full md:max-w-6xl pb-24">
