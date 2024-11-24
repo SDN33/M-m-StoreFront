@@ -44,8 +44,8 @@ const Header: React.FC = () => {
   };
 
   const categories = [
-    { name: 'PROMOS', href: '/promos', className: 'text-red-700 font-semibold' },
-{ name: 'Nos Vins', onClick: toggleNosVinsPopup, icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
+    { name: 'PROMOS', href: '/promos', className: 'text-red-700 font-black' },
+    { name: 'Nos Vins', onClick: toggleNosVinsPopup, icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com' },
     { name: 'Nos Vignerons.nes', href: '/vendors' },
     { name: 'Vins du Monde', href: '/vins-du-monde' },
@@ -57,9 +57,7 @@ const Header: React.FC = () => {
     {
       name: (
         <>
-          <span className="text-lg">Rouge<br />
-            <span className="text-xs">Parfait pour les viandes rouges, les plats en sauce et les fromages</span>
-          </span>
+          <span className="text-lg">Rouge</span>
         </>
       ),
       href: '/vins/rouge',
@@ -68,9 +66,7 @@ const Header: React.FC = () => {
     {
       name: (
         <>
-          <span className="text-lg">Blanc<br />
-            <span className="text-xs">Idéal avec les poissons, fruits de mer et volailles</span>
-          </span>
+          <span className="text-lg">Blanc</span>
         </>
       ),
       href: '/vins/blanc',
@@ -79,9 +75,7 @@ const Header: React.FC = () => {
     {
       name: (
         <>
-          <span className="text-lg">Rosé<br />
-            <span className="text-xs">Excellent pour l&apos;apéritif, les grillades et la cuisine méditerranéenne</span>
-          </span>
+          <span className="text-lg">Rosé</span>
         </>
       ),
       href: '/vins/rose',
@@ -90,9 +84,7 @@ const Header: React.FC = () => {
     {
       name: (
         <>
-          <span className="text-lg">Pétillant<br />
-            <span className="text-xs">Pour célébrer ou accompagner vos desserts</span>
-          </span>
+          <span className="text-lg">Pétillant</span>
         </>
       ),
       href: '/vins/petillant',
@@ -101,9 +93,7 @@ const Header: React.FC = () => {
     {
       name: (
         <>
-          <span className="text-lg">Liquoreux<br />
-            <span className="text-xs">Sublime avec le foie gras et les desserts</span>
-          </span>
+          <span className="text-lg">Liquoreux</span>
         </>
       ),
       href: '/vins/liquoreux',
@@ -112,9 +102,7 @@ const Header: React.FC = () => {
     {
       name: (
         <>
-          <span className="text-lg">Autres<br />
-            <span className="text-xs">Découvrez nos autres vins d&apos;exception</span>
-          </span>
+          <span className="text-lg">Autres</span>
         </>
       ),
       href: '/vins/autres',

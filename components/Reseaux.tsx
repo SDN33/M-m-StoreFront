@@ -3,7 +3,7 @@ import React from 'react';
 const SocialFollow = () => {
   return (
     <div className="w-full p-6 mb-12">
-      <h2 className="text-2xl font-semibold mb-4 text-center">Mémé Georgette sur les réseaux sociaux</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-center">Suivez Mémé sur les réseaux sociaux !</h2>
 
       <div className="flex flex-wrap justify-center gap-3">
         <a
