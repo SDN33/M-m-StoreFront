@@ -12,6 +12,7 @@ import HeroBanner from '@/components/HeroBanner';
 import Livraison from '@/components/Livraison';
 import WineCategories from '@/components/WineCategories';
 import LatestArticles from '@/components/LatestArticles';
+import BackToTop from '@/components/BackToTop';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -193,6 +194,7 @@ export default function Home() {
               <Trust />
               <Slogan />
               <div className="py-8" />
+                <BackToTop />
             </div>
           </main>
 
