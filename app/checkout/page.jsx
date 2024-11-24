@@ -329,7 +329,7 @@ const CheckoutPage = () => {
   const renderOrderSummary = () => (
     <div className="bg-gray-50 rounded-lg p-6">
       <h3 className="text-xl font-semibold mb-4 text-teal-800">Résumé de la commande</h3>
-      <ul className="space-y-4 mb-4">
+      <ul className="space-y-4 mb-4 font-bold">
         {cartDetails.items.map((item) => (
           <li key={item.product_id} className="flex justify-between items-center border-b pb-2">
             <span>{item.name}<br /> x {item.quantity}</span>
@@ -341,12 +341,12 @@ const CheckoutPage = () => {
         <span>Sous-total</span>
         <span>{cartDetails.total.toFixed(2)}€</span>
       </div>
-      <div className="flex justify-between text-base mb-2">
+      <div className="flex justify-between text-sm mb-2">
         <span className='font-bold'>
           {formData.deliveryMethod === 'standard' ? 'Livraison standard' : 'Point Relais'}
           <span className="text-xs ml-2">(3-5 jours)</span>
         </span>
-        <span>{shippingCost === 0 ? <span className="text-teal-800">Offert</span> : `${shippingCost.toFixed(2)}€`}</span>
+        <span className='font-bold'>{shippingCost === 0 ? <span className="text-teal-800">Offert</span> : `${shippingCost.toFixed(2)}€`}</span>
       </div>
       {/* Coupon Section */}
       <div className="mt-4 space-y-2">

@@ -8,6 +8,8 @@ const SocialFollow = () => {
       <div className="flex flex-wrap justify-center gap-3">
         <a
           href="https://www.facebook.com/memegeorgette/"
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex items-center text-black bg-gray-100 hover:bg-gray-200 rounded-full px-6 py-2"
         >
           <span className="text-[#1877F2] mr-2">
@@ -20,6 +22,8 @@ const SocialFollow = () => {
 
         <a
           href="https://www.instagram.com/memegeorgette/"
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex items-center text-black bg-gray-100 hover:bg-gray-200 rounded-full px-6 py-2"
         >
           <span className="text-[#E4405F] mr-2">
