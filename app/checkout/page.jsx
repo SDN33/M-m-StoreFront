@@ -328,7 +328,7 @@ const CheckoutPage = () => {
 
   const renderOrderSummary = () => (
     <div className="bg-gray-50 rounded-lg p-6">
-      <h3 className="text-xl font-semibold mb-4 text-teal-800">Résumé de la commande</h3>
+      <h3 className="text-xl font-semibold mb-4">Résumé de la commande</h3>
       <ul className="space-y-4 mb-4 font-bold text-sm">
         {cartDetails.items.map((item) => (
           <li key={item.product_id} className="flex justify-between items-center border-b pb-2">
@@ -378,7 +378,7 @@ const CheckoutPage = () => {
           </div>
         )}
       </div>
-      <div className="flex justify-between font-bold text-xl mt-4 pt-4 border-t text-primary">
+      <div className="flex justify-between font-bold text-xl mt-4 pt-4 border-t">
         <span>Total :</span>
         <span>{totalPrice}€</span>
       </div>
