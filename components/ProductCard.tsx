@@ -324,11 +324,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center mx-auto pb-2">
+        <div className="flex items-center justify-center mx-auto pb-4">
           <select
             value={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}
-            className="border rounded-md p-2 text-sm"
+            className="border mr-4 rounded-md p-2 text-sm"
           >
             {[...Array(10)].map((_, i) => (
               <option key={i} value={i + 1}>
