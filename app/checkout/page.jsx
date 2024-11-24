@@ -9,6 +9,7 @@ import BoxtalMap from '../../components/BoxtalMap';
 import { Check } from 'lucide-react';
 
 const CheckoutPage = () => {
+  const [notification, setNotification] = useState(null);
   const { deleteAllCartItems, viewAllCartItems } = useCart();
   const [selectedPoint, setSelectedPoint] = useState(null);
   const router = useRouter();
@@ -23,23 +24,58 @@ const CheckoutPage = () => {
     email: '',
     phone: '',
     paymentMethod: 'stripe',
-    deliveryMethod: 'standard' // 'standard' ou 'pickup'
+    deliveryMethod: 'standard'
   });
 
+  const [coupon, setCoupon] = useState('');
+  const [discount, setDiscount] = useState(0);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const cartDetails = viewAllCartItems();
-  const totalPrice = (cartDetails.total + 10).toFixed(2);
+  const hasProductWithSixOrMore = cartDetails?.items?.some(item => item.quantity >= 6) || false;
+  const shippingCost = hasProductWithSixOrMore ? 0 : 10;
+  const totalPrice = (cartDetails.total + shippingCost - discount).toFixed(2);
+
+  const applyCoupon = async () => {
+    try {
+      const response = await fetch('/api/coupons');
+      if (!response.ok) throw new Error('Erreur lors de la récupération des coupons');
+
+      const coupons = await response.json();
+      const matchedCoupon = coupons.find((c) => c.code === coupon);
+
+      if (matchedCoupon) {
+        const discountValue =
+          matchedCoupon.discount_type === 'percent'
+            ? cartDetails.total * (parseFloat(matchedCoupon.amount) / 100)
+            : parseFloat(matchedCoupon.amount);
+
+        setDiscount(discountValue);
+        setError('');
+        setNotification({ type: 'success', message: 'Coupon ajouté avec succès ! 🎉' });
+      } else {
+        setError('Code de coupon invalide');
+        setDiscount(0);
+        setNotification({ type: 'error', message: 'Votre coupon est invalide ou expiré.' });
+      }
+    } catch (err) {
+      console.error(err);
+      setError('Impossible de vérifier le code du coupon. Veuillez réessayer plus tard.');
+      setNotification({ type: 'error', message: 'Erreur réseau. Réessayez plus tard.' });
+    } finally {
+      setTimeout(() => setNotification(null), 3000);
+    }
+  };
 
   const isStepComplete = (step) => {
     switch (step) {
-      case 1: // Contact Info
+      case 1:
         return formData.email && formData.phone;
-      case 2: // Delivery
+      case 2:
         return formData.deliveryMethod === 'standard' ?
           (formData.firstName && formData.lastName && formData.address1 && formData.city && formData.postcode) :
           selectedPoint;
-      case 3: // Review
+      case 3:
         return true;
       default:
         return false;
@@ -86,7 +122,7 @@ const CheckoutPage = () => {
         shipping_lines: [{
           method_id: formData.deliveryMethod,
           method_title: formData.deliveryMethod === 'pickup' ? 'Point Relais' : 'Livraison Standard',
-          total: '10.00'
+          total: shippingCost.toFixed(2)
         }],
       };
 
@@ -106,7 +142,6 @@ const CheckoutPage = () => {
     const cartDetails = viewAllCartItems();
     const hasItems = cartDetails?.items?.length > 0;
 
-    // Redirect to cart if no items
     React.useEffect(() => {
       if (!hasItems) {
         router.push('/');
@@ -200,7 +235,7 @@ const CheckoutPage = () => {
         >
           <h3 className="font-semibold">Livraison Standard</h3>
           <p className="text-sm text-gray-600">3-5 jours ouvrés</p>
-          <p className="font-semibold mt-2">10.00€</p>
+          <p className="font-semibold mt-2">{shippingCost.toFixed(2)}€</p>
         </button>
         <button
           onClick={() => setFormData(prev => ({ ...prev, deliveryMethod: 'pickup' }))}
@@ -208,7 +243,7 @@ const CheckoutPage = () => {
         >
           <h3 className="font-semibold">Point Relais</h3>
           <p className="text-sm text-gray-600">2-4 jours ouvrés</p>
-          <p className="font-semibold mt-2">10.00€</p>
+          <p className="font-semibold mt-2">{shippingCost.toFixed(2)}€</p>
         </button>
       </div>
 
@@ -291,83 +326,107 @@ const CheckoutPage = () => {
     </div>
   );
 
-  const renderOrderSummary = () => {
-    const hasProductWithSixOrMore = cartDetails?.items?.some(item => item.quantity >= 6) || false;
-    const shippingCost = hasProductWithSixOrMore ? 0 : 10;
-    const finalTotal = (cartDetails.total + shippingCost).toFixed(2);
-
-    return (
-      <div className="bg-gray-50 rounded-lg p-6">
-        <h3 className="text-xl font-semibold mb-4 text-teal-800">Résumé de la commande</h3>
-        <ul className="space-y-4 mb-4">
-          {cartDetails.items.map((item) => (
-            <li key={item.product_id} className="flex justify-between items-center border-b pb-2">
-              <span>{item.name} x {item.quantity}</span>
-              <span>{(item.price * item.quantity).toFixed(2)}€</span>
-            </li>
-          ))}
-        </ul>
-        <div className="flex justify-between text-sm font-semibold mb-2">
-          <span>Sous-total</span>
-          <span>{cartDetails.total.toFixed(2)}€</span>
-        </div>
-        <div className="flex justify-between text-base mb-2">
-          <span>
-            {formData.deliveryMethod === 'standard' ? 'Livraison standard' : 'Point Relais'}
-            <span className="text-xs ml-2">(3-5 jours)</span>
-          </span>
-          <span>{shippingCost === 0 ? <span className="text-teal-800">Offert</span> : `${shippingCost.toFixed(2)}€`}</span>
-        </div>
-        <div className="flex justify-between font-bold text-xl mt-4 pt-4 border-t text-primary">
-          <span>Total :</span>
-          <span>{finalTotal}€</span>
-        </div>
+  const renderOrderSummary = () => (
+    <div className="bg-gray-50 rounded-lg p-6">
+      <h3 className="text-xl font-semibold mb-4 text-teal-800">Résumé de la commande</h3>
+      <ul className="space-y-4 mb-4">
+        {cartDetails.items.map((item) => (
+          <li key={item.product_id} className="flex justify-between items-center border-b pb-2">
+            <span>{item.name}<br /> x {item.quantity}</span>
+            <span>{(item.price * item.quantity).toFixed(2)}€</span>
+          </li>
+        ))}
+      </ul>
+      <div className="flex justify-between text-sm font-semibold mb-2">
+        <span>Sous-total</span>
+        <span>{cartDetails.total.toFixed(2)}€</span>
       </div>
-    );
-  };
+      <div className="flex justify-between text-base mb-2">
+        <span className='font-bold'>
+          {formData.deliveryMethod === 'standard' ? 'Livraison standard' : 'Point Relais'}
+          <span className="text-xs ml-2">(3-5 jours)</span>
+        </span>
+        <span>{shippingCost === 0 ? <span className="text-teal-800">Offert</span> : `${shippingCost.toFixed(2)}€`}</span>
+      </div>
+      {/* Coupon Section */}
+      <div className="mt-4 space-y-2">
+        <div className="flex gap-2">
+          <input
+            type="text"
+            value={coupon}
+            onChange={(e) => setCoupon(e.target.value)}
+            placeholder="Code promo"
+            className="flex-1 border p-2 rounded text-sm"
+            />
+          <button
+            onClick={applyCoupon}
+            className="bg-teal-800 text-white px-4 py-2 rounded text-sm"
+            disabled={!coupon}
+          >
+            Appliquer
+          </button>
+        </div>
+        {notification && (
+          <div className={`text-sm p-2 rounded ${notification.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+            {notification.message}
+          </div>
+        )}
+        {discount > 0 && (
+          <div className="flex justify-between text-sm text-green-600 font-semibold">
+            <span>Réduction</span>
+            <span>-{discount.toFixed(2)}€</span>
+          </div>
+        )}
+      </div>
+      <div className="flex justify-between font-bold text-xl mt-4 pt-4 border-t text-primary">
+        <span>Total :</span>
+        <span>{totalPrice}€</span>
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-[calc(100vh-200px)] mx-auto px-4 sm:px-8 mt-16 max-w-full md:max-w-6xl pb-24">
       <StepIndicator currentStep={currentStep} />
 
       <div className="flex flex-col md:flex-row gap-8">
-    {/* Section principale */}
-    <div className="w-full md:w-2/3 bg-white rounded-lg p-4 sm:p-6 shadow-sm">
-      {currentStep === 1 && renderContactStep()}
-      {currentStep === 2 && renderDeliveryStep()}
-      {currentStep === 3 && (
-        <div className="space-y-4">
-          <h2 className="text-xl sm:text-2xl font-semibold mb-4">Paiement</h2>
-          <Image
-            src="/images/stripe.webp"
-            alt="Stripe"
-            width={80}
-            height={80}
-            className="mx-auto sm:mx-0"
-          />
-          <div>
-            <p className="font-medium text-gray-900">Paiement sécurisé par Stripe</p>
-            <p className="text-sm text-gray-600">Vos informations de paiement sont protégées par un cryptage SSL.</p>
-          </div>
-          {loading && <p className="text-blue-500">Création de la commande en cours...</p>}
-          <StripePayment
-            totalPrice={totalPrice}
-            formData={formData}
-            setError={setError}
-            onComplete={handleOrderSubmit}
-            disable={!isStepComplete(2)}
-          />
-          {error && <p className="text-red-500 mt-2">{error}</p>}
+        {/* Section principale */}
+        <div className="w-full md:w-2/3 bg-white rounded-lg p-4 sm:p-6 shadow-sm">
+          {currentStep === 1 && renderContactStep()}
+          {currentStep === 2 && renderDeliveryStep()}
+          {currentStep === 3 && (
+            <div className="space-y-4">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-4">Paiement</h2>
+              <Image
+                src="/images/stripe.webp"
+                alt="Stripe"
+                width={80}
+                height={80}
+                className="mx-auto sm:mx-0"
+              />
+              <div>
+                <p className="font-medium text-gray-900">Paiement sécurisé par Stripe</p>
+                <p className="text-sm text-gray-600">Vos informations de paiement sont protégées par un cryptage SSL.</p>
+              </div>
+              {loading && <p className="text-blue-500">Création de la commande en cours...</p>}
+              <StripePayment
+                totalPrice={totalPrice}
+                formData={formData}
+                setError={setError}
+                onComplete={handleOrderSubmit}
+                disable={!isStepComplete(2)}
+              />
+              {error && <p className="text-red-500 mt-2">{error}</p>}
+            </div>
+          )}
         </div>
-      )}
-    </div>
 
-    {/* Résumé commande */}
-    <div className="w-full md:w-1/3 bg-gray-50 rounded-lg p-4 sm:p-6 shadow-sm">
-      {renderOrderSummary()}
+        {/* Résumé commande */}
+        <div className="w-full md:w-1/3 bg-gray-50 rounded-lg p-4 sm:p-6 shadow-sm">
+          {renderOrderSummary()}
+        </div>
+      </div>
     </div>
-  </div>
-</div>
   );
 };
 
