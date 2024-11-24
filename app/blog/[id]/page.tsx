@@ -138,6 +138,7 @@ const ArticlePage = () => {
   const [article, setArticle] = useState<Article | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const authToken = `Authorization: Bearer your-token-here`;  // Replace with actual token handling logic
   const id = params?.id;
 
   useEffect(() => {
@@ -205,12 +206,11 @@ const ArticlePage = () => {
           __html: removeFeaturedImageFromContent(article.content, article.featuredImage)
         }}
       />
-      <br /><br />
       <div className="mt-8 flex justify-center">
         <SocialShare title={article.title} url={window.location.href} />
       </div>
       <br /><br />
-      <Comments postId={article.id} />
+      <Comments postId={article.id} userToken={authToken} />
     </article>
   );
 };

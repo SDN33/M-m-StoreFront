@@ -21,6 +21,14 @@ const formatDate = (dateString: string): string => {
   });
 };
 
+// Fonction pour extraire les initiales d'un nom
+const getInitials = (name: string): string => {
+  return name
+    .split(" ")
+    .map((part) => part.charAt(0).toUpperCase())
+    .join("");
+};
+
 const Comments: React.FC<{ postId: number }> = ({ postId }) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -64,14 +72,19 @@ const Comments: React.FC<{ postId: number }> = ({ postId }) => {
             <div className="flex items-center mb-4">
               {comment.authorAvatar ? (
                 <Image
-                  src={comment.authorAvatar || '/default-avatar.png'}
+                  src={comment.authorAvatar || "/default-avatar.png"}
                   alt={`Avatar de ${comment.author}`}
                   className="rounded-full mr-3"
                   width={40}
                   height={40}
                 />
               ) : (
-                <div className="w-10 h-10 rounded-full bg-gray-300 mr-3" />
+                <div
+                  className="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold mr-3"
+                  title={comment.author}
+                >
+                  {getInitials(comment.author)}
+                </div>
               )}
               <div>
                 <p className="text-sm text-gray-500">
