@@ -163,8 +163,8 @@ export default function PortailPro() {
             >
               PORTAIL PRO
             </h3>
-            <p className="font-semibold text-lg mx-auto">
-              Une solution complète pour les vignerons qui souhaitent développer leur présence en ligne,<br />sans contraintes de logistique ni d&apos;engagement
+            <p className="font-bold text-lg mx-auto">
+              Une solution e-commerce complète pour les vignerons bio <br /> restez concentré sur votre production, nous nous occupons du reste
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -183,10 +183,13 @@ export default function PortailPro() {
               </div>
             ))}
           </div>
+          <p className="font-bold text-xl text-center mx-auto mt-20 -mb-4 slide-in-right">
+              Rejoignez notre réseau de vignerons et vendez vos vins bio en Europe,<br /> déverrouillez votre potentiel de vente dès aujourd&apos;hui sans contraintes de logistique ni d&apos;engagement.
+          </p>
         </div>
 
         {/* Pricing Section */}
-        <div className="mt-24 max-w-2xl mx-auto">
+        <div className="mt-24 max-w-2xl mx-auto slide-in-right">
           <div className="bg-white rounded-3xl shadow-xl shadow-teal-100/50 overflow-hidden">
             <div className="bg-primary text-white p-8 text-center">
               <h3 className="text-2xl font-bold mb-2">Frais D&apos;inscription</h3>
