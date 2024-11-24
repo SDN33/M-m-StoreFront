@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Info } from 'lucide-react';
@@ -30,13 +30,6 @@ interface Product {
   vendor: number;
 }
 
-interface VendorData {
-  id: number;
-  shop: {
-    images: string;
-  };
-}
-
 interface ProductCardProps {
   product: Product;
   onAddToCart: (productId: number, quantity: number, variationId: number) => Promise<void>;
@@ -48,24 +41,40 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const [variationId] = useState<number>(product.id);
   const [isTruncated, setIsTruncated] = useState<boolean>(false);
   const [vendorImages, setVendorImages] = useState<string | null>(null);
+  const vendorImageCache = useRef<{ [key: number]: string }>({});
 
   useEffect(() => {
     const fetchVendorImages = async () => {
+      if (!product.vendor) return;
+
+      // Check cache first
+      if (vendorImageCache.current[product.vendor]) {
+        setVendorImages(vendorImageCache.current[product.vendor]);
+        return;
+      }
+
       try {
-        const response = await fetch(`/api/get-vendor-products?vendorId=${product.vendor}`);
+        const response = await fetch('/api/get-vendor', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: product.vendor })
+        });
+
         if (!response.ok) throw new Error('Failed to fetch vendor data');
-        const vendorData: VendorData = await response.json();
-        if (vendorData?.shop?.images) {
-          setVendorImages(vendorData.shop.images);
+
+        const vendorData = await response.json();
+        if (vendorData?.shop?.image) {
+          vendorImageCache.current[product.vendor] = vendorData.shop.image;
+          setVendorImages(vendorData.shop.image);
         }
       } catch (error) {
-        console.error('Error fetching vendor image:', error);
+        console.error('Error fetching vendor images:', error);
       }
     };
 
-    if (product.vendor) {
-      fetchVendorImages();
-    }
+    fetchVendorImages();
   }, [product.vendor]);
 
   const handleRedirect = () => {
