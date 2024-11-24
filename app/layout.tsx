@@ -11,6 +11,7 @@ import { Analytics } from "@vercel/analytics/react"
 import Cookies from "@/components/Cookies";
 
 
+
 type TwitterMetadata = {
   card: string;
   title: string;
