@@ -149,7 +149,7 @@ export default function PortailPro() {
         </svg>
         {/* Features Section */}
         <div>
-          <div className="text-center space-y-4 mb-8 gap-1">
+          <div className="text-center space-y-4 mb-4 gap-1">
             {/* Suppression de l'image comme élément distinct */}
             <h3
               className="text-4xl md:text-5xl lg:text-7xl tracking-tight font-bold relative bg-cover bg-center text-white pt-16 items-center justify-center rounded-t-xl text-center"
@@ -169,7 +169,7 @@ export default function PortailPro() {
               </p>
             </h3>
           </div>
-          <p className="font-bold text-lg text-center mx-auto mb-16 slide-in-right text-teal-800">
+          <p className="font-bold text-lg text-center mx-auto mb-14 slide-in-right text-teal-800">
             Rejoignez une marketplace dédiée aux vignerons bio, où simplicité, logistique prise en charge, et liberté totale<br /> vous permettent de vendre vos vins à travers l&apos;Europe sans contraintes.
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
