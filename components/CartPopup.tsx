@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { emptyCart } from '../services/cart';
-// import Link from 'next/link';
 import { useCart } from '../context/CartContext';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -23,8 +21,14 @@ interface CartItem {
 const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { cartTotal: total, cartItems, deleteAllCartItems } = useCart();
+  const { cartItems, deleteAllCartItems } = useCart();
+  const total = cartItems.reduce((acc: number, item: CartItem) => acc + item.price * item.quantity, 0);
   const router = useRouter();
+
+  // Calculer la quantité totale de bouteilles dans le panier
+  const totalBottles = cartItems.reduce((acc: number, item: CartItem) => acc + item.quantity, 0);
+  const hasFreeShipping = totalBottles >= 6;
+  const remainingBottlesForFreeShipping = hasFreeShipping ? 0 : 6 - totalBottles;
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -45,11 +49,13 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
     fetchCart();
   }, [isOpen]);
 
+
+
   const handleEmptyCart = () => {
     deleteAllCartItems();
     onClose();
-    // emptyCart(); // For Api
   };
+
   const handleCheckout = async () => {
     router.push(`/checkout`);
     await new Promise(resolve => setTimeout(resolve, 500));
@@ -86,6 +92,21 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
             </div>
           ) : (
             <div className="space-y-4">
+              {/* Message de livraison gratuite global */}
+              {hasFreeShipping ? (
+                <div className="bg-green-50 p-3 rounded-md">
+                  <p className="text-green-600 text-sm font-medium text-center">
+                    ✨ Livraison gratuite sur votre commande !
+                  </p>
+                </div>
+              ) : (
+                <div className="bg-teal-50 p-3 rounded-md">
+                  <p className="text-teal-800 text-sm text-center">
+                    Plus que {remainingBottlesForFreeShipping} bouteille{remainingBottlesForFreeShipping > 1 ? 's' : ''} pour bénéficier de la livraison gratuite !
+                  </p>
+                </div>
+              )}
+
               <div className="max-h-[50vh] overflow-y-auto">
                 {cartItems.map((item: CartItem) => (
                   <div key={item.product_id} className="flex items-start py-4 border-b border-gray-200">
@@ -105,14 +126,13 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
                         Vin {item.categories?.join(', ') || 'Vin'}
                       </p>
                       <div className="flex justify-between items-center mt-2">
-                        <span className="text-sm">Quantité: {item.quantity}</span>
                         <span className="font-medium text-[#FF6B4A]">
                           {(item.price * item.quantity).toFixed(2)} €
                         </span>
                       </div>
                       {item.quantity > 1 && (
                         <div className="flex justify-between items-center">
-                          <span className='text-xs'>Prix à l&apos;unité : {item.price} €</span>
+                          <span className="text-xs">Prix à l&apos;unité : {item.price} €</span>
                         </div>
                       )}
                     </div>
