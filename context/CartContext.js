@@ -83,6 +83,7 @@ export const CartProvider = ({ children }) => {
     setCartItems([]);
   };
 
+
   // Retrieve all items in the cart along with the total price
   const viewAllCartItems = () => {
     const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);

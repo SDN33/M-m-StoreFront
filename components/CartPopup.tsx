@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useCart } from '../context/CartContext';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { Minus, Plus } from 'lucide-react';
 
 interface CartPopupProps {
   isOpen: boolean;
@@ -21,11 +22,10 @@ interface CartItem {
 const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { cartItems, deleteAllCartItems } = useCart();
+  const { cartItems, deleteAllCartItems, updateCartItem } = useCart();
   const total = cartItems.reduce((acc: number, item: CartItem) => acc + item.price * item.quantity, 0);
   const router = useRouter();
 
-  // Calculer la quantité totale de bouteilles dans le panier
   const totalBottles = cartItems.reduce((acc: number, item: CartItem) => acc + item.quantity, 0);
   const hasFreeShipping = totalBottles >= 6;
   const remainingBottlesForFreeShipping = hasFreeShipping ? 0 : 6 - totalBottles;
@@ -49,7 +49,11 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
     fetchCart();
   }, [isOpen]);
 
-
+  const handleQuantityChange = (productId: number, newQuantity: number) => {
+    if (newQuantity >= 1 && newQuantity <= 99) {
+      updateCartItem(productId, newQuantity);
+    }
+  };
 
   const handleEmptyCart = () => {
     deleteAllCartItems();
@@ -92,7 +96,6 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
             </div>
           ) : (
             <div className="space-y-4">
-              {/* Message de livraison gratuite global */}
               {hasFreeShipping ? (
                 <div className="bg-green-50 p-3 rounded-md">
                   <p className="text-green-600 text-sm font-medium text-center">
@@ -126,6 +129,25 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
                         Vin {item.categories?.join(', ') || 'Vin'}
                       </p>
                       <div className="flex justify-between items-center mt-2">
+                        <div className="flex items-center space-x-2">
+                          <button
+                            onClick={() => handleQuantityChange(item.product_id, item.quantity - 1)}
+                            className="p-1 rounded-md hover:bg-gray-100"
+                            disabled={item.quantity <= 1}
+                            aria-label="Diminuer la quantité"
+                          >
+                            <Minus className="w-4 h-4" />
+                          </button>
+                          <span className="w-8 text-center">{item.quantity}</span>
+                          <button
+                            onClick={() => handleQuantityChange(item.product_id, item.quantity + 1)}
+                            className="p-1 rounded-md hover:bg-gray-100"
+                            disabled={item.quantity >= 99}
+                            aria-label="Augmenter la quantité"
+                          >
+                            <Plus className="w-4 h-4" />
+                          </button>
+                        </div>
                         <span className="font-medium text-[#FF6B4A]">
                           {(item.price * item.quantity).toFixed(2)} €
                         </span>
