@@ -52,43 +52,43 @@ const getFilterTitle = (filterType: string) => {
   const titles: { [key: string]: JSX.Element } = {
     color: (
       <>
-        <Wine className="inline-block ml-1 text-teal-800" />
+        <Wine className="inline-block  text-teal-800 w-6" />
         <br /><>COULEUR </>
       </>
     ),
     region: (
       <>
-        <Locate className="inline-block ml-1 text-teal-800" />
+        <Locate className="inline-block text-teal-800 w-6" />
         <br /><>RÉGIONS</>
       </>
     ),
     vintage: (
       <>
-        <Calendar className="inline-block ml-1 text-teal-800" />
+        <Calendar className="inline-block text-teal-800 w-6" />
         <>MILLÉSIME <br /></>
       </>
     ),
     certification: (
       <>
-        <Medal className="inline-block ml-1 text-teal-800" />
+        <Medal className="inline-block text-teal-800 w-6" />
         <br /><>CERTIFICATION</>
       </>
     ),
     style: (
       <>
-        <Grape className="inline-block ml-1 text-teal-800" />
+        <Grape className="inline-block text-teal-800 w-6" />
         <br /><>STYLE</>
       </>
     ),
     volume: (
       <>
-        <Ruler className="inline-block ml-1 text-teal-800" />
+        <Ruler className="inline-block text-teal-800 w-6" />
         <br /><>VOLUME</>
       </>
     ),
     accord_mets: (
       <>
-        <Utensils className="inline-block ml-1 text-teal-800" />
+        <Utensils className="inline-block text-teal-800 w-6" />
         <br /><>ACCORD METS </>
       </>
     ),
