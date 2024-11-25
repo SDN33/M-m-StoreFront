@@ -117,18 +117,18 @@ const VendorsPage = () => {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-5xl mx-auto p-6">
       <div className="text-center mb-10 bg-gradient-to-r from-gray-900 via-gray-800 to-black pt-7 rounded-t-xl">
-        <h2 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-primary">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-primary mb-8">
           Nos Vignerons Partenaires&nbsp;
           <Wine size={32} className="inline text-white animate-ping duration-1000" />
         </h2>
-        <p className="text-sm md:text-xl lg:text-xl  font-extrabold slide-in-right max-w-2xl mx-auto mb-8 text-white">
-          &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
-        </p>
         <div className="border-b-4 border-primary w-full max-w-[50rem] my-2 slide-in-right mx-auto"></div>
       </div>
 
         <div>
           <p className="text-center text-xl font-extrabold -mt-4 mb-4 slide-in-right text-primary">
+          </p>
+          <p className="text-center text-base font-extrabold -mt-2 slide-in-right mb-8 text-teal-800">
+            &ldquo;Chaque domaine viticole est unique, chaque vin est une histoire à raconter&rdquo;
           </p>
           <p className="text-center text-sm font-extrabold -mt-2 slide-in-right">
             Nos vignerons s&apos;engagent pour une agriculture respectueuse de l&apos;environnement,
@@ -245,6 +245,12 @@ const VendorsPage = () => {
             height={1080}
             className="rounded-lg mb-8"
           />
+          <Link
+            href={`/vendors`}
+            className="inline-flex items-center text-sm px-2 py-2 bg-blue-50 text-teal-800 rounded-lg hover:bg-blue-100 transition-colors duration-200"
+          >
+            Voir tous les vignerons →
+          </Link>
           </div>
         )}
       </div>
