@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Clock, ArrowRight, Rss } from "lucide-react";
 import he from "he";
+import { CommentCount } from 'disqus-react';
+
 
 // Simple date formatting function
 const formatDate = (dateString: string): string => {
@@ -132,6 +134,21 @@ const Blog = () => {
                     size={20}
                     className="ml-2 transform transition-transform group-hover:translate-x-1"
                   />
+                  <span className="text-right ml-8 text-xs">
+                    <CommentCount
+                        shortname='vinsmemegeorgette'
+                        config={
+                            {
+                              url: `https://vinsmemegeorgette.com/blog/${article.id}`,
+                              identifier: article.id.toString(),
+                              title: `Post ${article.id}`,
+                            }
+                        }
+                    >
+                        {/* Placeholder Text */}
+
+                    </CommentCount>
+                  </span>
                 </a>
               </div>
             </div>
