@@ -12,6 +12,11 @@ export default function Document() {
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet" />
 
+        <script
+          async
+          src={`https://staticw2.yotpo.com/${process.env.YOTPO_APP_KEY}/widget.js`}
+        ></script>
+
       </Head>
       <body>
         <Main />

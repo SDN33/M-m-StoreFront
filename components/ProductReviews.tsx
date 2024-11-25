@@ -1,70 +1,40 @@
-import React, { useEffect, useState } from 'react';
+"use client";
+import { useEffect } from "react";
 
-interface Review {
-  id: number;
-  product_id: number;
-  author: string;
-  rating: number;
-  date_created: string;
-  review: string;
+declare global {
+  interface Window {
+    yotpo: {
+      initWidgets: () => void;
+    };
+  }
 }
 
 interface ProductReviewsProps {
-  productId: string; // L'ID du produit dont on veut afficher les avis
+  productId: string;
+  productImages: string[];
+  productPrice: string;
 }
 
-const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // Fonction pour récupérer les avis du produit
+const ProductReviews = ({ productId, productImages, productPrice }: ProductReviewsProps) => {
   useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await fetch(`/api/reviews?id=${productId}`);
-        const data = await response.json();
+    if (typeof window !== "undefined" && window.yotpo) {
+      window.yotpo.initWidgets();
+    }
+  }, []);
 
-        // Si on reçoit des avis, on les met dans l'état
-        if (Array.isArray(data)) {
-          setReviews(data);
-        } else {
-          setError('Aucune critique trouvée.');
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchReviews();
-  }, [productId]);
-
-  // Afficher un message de chargement
-  if (loading) return <div>Chargement des avis...</div>;
-
-  // Afficher un message d'erreur
-  if (error) return <div style={{ color: 'red' }}>{error}</div>;
-
-  // Afficher les avis
   return (
     <div>
-      {reviews.length === 0 ? (
-        <p className='text-center'>Aucun avis pour ce produit.</p>
-      ) : (
-        <ul>
-          {reviews.map((review) => (
-            <li key={review.id} style={{ marginBottom: '20px' }}>
-              <div style={{ marginBottom: '5px', fontWeight: 'bold' }}>
-                {review.author} - <span>{review.rating} / 5</span>
-              </div>
-              <div style={{ marginBottom: '5px', color: 'gray' }}>
-                {new Date(review.date_created).toLocaleDateString()}
-              </div>
-              <p>{review.review}</p>
-            </li>
-          ))}
-        </ul>
-      )}
+      {/* Widget Yotpo Reviews */}
+      <div
+        className="yotpo yotpo-main-widget"
+        data-product-id={productId}
+        data-name={productId}
+        data-url={`https://https://portalpro-memegeorgette.com/produit/${productId}`}
+        data-image-url={productImages[0]}
+        data-description={`Description of product ${productId}`}
+        data-price={productPrice}
+        data-currency="EUR"
+      ></div>
     </div>
   );
 };

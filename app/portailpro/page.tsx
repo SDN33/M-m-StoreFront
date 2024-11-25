@@ -153,7 +153,7 @@ export default function PortailPro() {
           <div className="text-center space-y-4 mb-4 gap-1">
             {/* Suppression de l'image comme élément distinct */}
             <h3
-              className="text-4xl md:text-5xl lg:text-7xl tracking-tight font-bold relative bg-cover bg-center text-white pt-16 items-center justify-center rounded-t-xl text-center"
+              className="text-4xl md:text-5xl lg:text-7xl tracking-tight font-bold relative bg-cover bg-center text-white pt-28 items-center justify-center rounded-t-xl text-center"
               style={{
               backgroundImage: 'url(/images/vins_fruitees.webp)',
               backgroundSize: 'cover',
@@ -161,15 +161,15 @@ export default function PortailPro() {
               backgroundBlendMode: 'multiply',
               minHeight: '200px',
               height: 'auto',
-              padding: '2rem 1rem'
+              padding: '4rem 1rem'
               }}
             >
               PORTAIL PRO
-              <p className="font-bold text-base md:text-lg lg:text-xl mx-auto fade-in-up mt-4">
-              Une solution e-commerce complète pour les vignerons bio
-              </p>
             </h3>
           </div>
+          <p className="font-bold text-base md:text-lg lg:text-2xl mx-auto fade-in-up mt-8 text-center text-primary mb-8">
+              {"Une solution e-commerce complète pour les vignerons bio".toUpperCase()}
+          </p>
           <p className="font-bold text-lg text-center mx-auto mb-8 slide-in-right">
             Rejoignez une marketplace dédiée aux vignerons bio, où simplicité, logistique prise en charge, et liberté totale<br /> vous permettent de vendre vos vins à travers l&apos;Europe sans contraintes.
           </p>

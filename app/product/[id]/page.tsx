@@ -11,6 +11,7 @@ import ProductReviews from '@/components/ProductReviews';
 
 
 
+
 interface Product {
   id: number;
   name: string;
@@ -43,6 +44,7 @@ interface Product {
   millesime?: string;
   degustation: string;
 }
+
 
 const formatDescription = (description: string, maxChars = 90) => {
   const plainText = description.replace(/<\/?[^>]+(>|$)/g, '');
@@ -413,7 +415,11 @@ const ProductPage: React.FC = () => {
           <br /><br />
           <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-900 via-gray-800 to-black p-8 rounded-t-xl">Avis clients</h2>
           <br /><br />
-          <ProductReviews productId={product.id.toString()} />
+          <ProductReviews
+            productId={product.id.toString()}
+            productImages={product.images.map(img => img.src)}
+            productPrice={product.price.toString()}
+          />
 
 
 
