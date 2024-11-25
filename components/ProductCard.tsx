@@ -84,10 +84,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const vendorRedirect = () => {
     router.push(`/vendors/${product.vendor}`);
   }
-  const formatRating = (rating?: number, ratingCount?: number) => {
-    if (ratingCount === 0) return <span className='text-xs'>/</span>;
-    return <span>{((rating ?? 0) * 4).toFixed(1)}/20</span>;
-  };
 
   const renderAOCBadge = () => {
     if (product.name.toLowerCase().includes('aoc')) {
@@ -255,7 +251,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
         <div className="relative">
         <div className="absolute top-0 left-0 z-10 bg-gradient-to-r from-teal-800 to-teal-950 rounded-full text-white p-2">
-          <div className="text-sm font-bold">{formatRating(product.average_rating, product.rating_count)}<span> <p className='text-xs font-semibold'> {product.rating_count} avis</p></span>
+          <div className="text-sm font-bold">
+            <span className='text-xs font-semibold'> {product.rating_count} avis</span>
           </div>
         </div>
         <div className="relative w-full h-52 mb-2">
