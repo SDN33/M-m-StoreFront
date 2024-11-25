@@ -330,7 +330,7 @@ const ProductPage: React.FC = () => {
         <br />
 
         <div className="mt-8 w-full">
-          <h2 className="text-2xl font-bold !-mb-2 text-center text-primary">Description du produit</h2>
+          <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-900 via-gray-800 to-black p-8 rounded-t-xl">Description du produit</h2>
           <div className="border-b-4 border-primary w-full max-w-[50rem] my-2 slide-in-right mx-auto"></div>
           <p className='font-bold text-center mt-8 px-4'>
             {product.description && product.short_description
@@ -396,7 +396,7 @@ const ProductPage: React.FC = () => {
            {/* Affichage de la carte Google */}
            {product.region__pays && (
             <div className="mt-8">
-              <h2 className="text-2xl font-bold mb-8 text-center text-primary">Localisation du vigneron</h2>
+              <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-900 via-gray-800 to-black p-8 rounded-t-xl">Localisation du vigneron</h2>
               <iframe
                 src={getGoogleMapUrl(product.nom_chateau || '')}
                 width="100%"
@@ -411,7 +411,7 @@ const ProductPage: React.FC = () => {
             </div>
           )}
           <br /><br />
-          <h2 className="text-2xl font-bold !-mb-2 text-center text-primary">Avis clients</h2>
+          <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-900 via-gray-800 to-black p-8 rounded-t-xl">Avis clients</h2>
           <br /><br />
           <ProductReviews productId={product.id.toString()} />
 
