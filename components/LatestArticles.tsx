@@ -88,13 +88,15 @@ const LatestArticles: React.FC = () => {
             className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
           >
             <div className="relative h-48 overflow-hidden rounded-t-xl">
-              <Image
-                src={article.featuredImage || "/default-image.jpg"}
-                alt={article.title}
-                fill
-                className="absolute inset-0 w-full h-full object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
+              <a href={`/blog/${article.id}`}>
+                <Image
+                  src={article.featuredImage || "/default-image.jpg"}
+                  alt={article.title}
+                  fill
+                  className="absolute inset-0 w-full h-full object-cover cursor-pointer"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </a>
             </div>
 
             <div className="p-5">

@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import { DiscussionEmbed } from 'disqus-react';
+
 
 interface Comment {
   id: number;
@@ -11,23 +12,6 @@ interface Comment {
   date: string;
   authorAvatar: string | null;
 }
-
-const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("fr-FR", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-};
-
-// Fonction pour extraire les initiales d'un nom
-const getInitials = (name: string): string => {
-  return name
-    .split(" ")
-    .map((part) => part.charAt(0).toUpperCase())
-    .join("");
-};
 
 const Comments: React.FC<{ postId: number }> = ({ postId }) => {
   const [comments, setComments] = useState<Comment[]>([]);
@@ -63,43 +47,17 @@ const Comments: React.FC<{ postId: number }> = ({ postId }) => {
   return (
     <section className="mt-10 max-w-4xl mx-auto">
       <h2 className="text-2xl font-bold mb-6">Commentaires</h2>
-      <ul className="space-y-6">
-        {comments.map((comment) => (
-          <li
-            key={comment.id}
-            className="border border-gray-200 p-4 rounded-lg shadow-sm text-black"
-          >
-            <div className="flex items-center mb-4">
-              {comment.authorAvatar ? (
-                <Image
-                  src={comment.authorAvatar || "/default-avatar.png"}
-                  alt={`Avatar de ${comment.author}`}
-                  className="rounded-full mr-3"
-                  width={40}
-                  height={40}
-                />
-              ) : (
-                <div
-                  className="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold mr-3"
-                  title={comment.author}
-                >
-                  {getInitials(comment.author)}
-                </div>
-              )}
-              <div>
-                <p className="text-sm text-gray-500">
-                  Par <span className="font-semibold text-primary">{comment.author}</span>,{" "}
-                  le {formatDate(comment.date)}
-                </p>
-              </div>
-            </div>
-            <div
-              className="prose prose-sm text-gray-700"
-              dangerouslySetInnerHTML={{ __html: comment.content }}
-            />
-          </li>
-        ))}
-      </ul>
+      <DiscussionEmbed
+          shortname='vinsmemegeorgette'
+          config={
+              {
+                  url: `https://vinsmemegeorgette.com/blog/${postId}`,
+                  identifier: postId.toString(),
+                  title: `Post ${postId}`,
+                  language: 'fr'
+              }
+          }
+      />
     </section>
   );
 };
