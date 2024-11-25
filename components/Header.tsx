@@ -25,6 +25,8 @@ const Header: React.FC = () => {
     imgSrc: '/images/fr.png',
   });
 
+
+
   const toggleNosVinsPopup = () => {
     setIsNosVinsOpen((prev) => !prev);
     setIsMenuOpen(false);
@@ -44,7 +46,7 @@ const Header: React.FC = () => {
   };
 
   const categories = [
-    { name: 'PROMOS', href: '/promos', className: 'text-red-700 font-black' },
+    { name: 'PROMOS', href: '/promos', className: '!text-red-700 font-black' },
     { name: 'Nos Vins', onClick: toggleNosVinsPopup, icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com', target: "_blank", rel: "noopener noreferrer" },
     { name: 'Nos Vignerons.nes', href: '/vendors' },
@@ -121,9 +123,9 @@ const Header: React.FC = () => {
       <div className="border-b bg-primary pt-4">
         <div className="container mx-auto px-4">
           {/* Desktop and Tablet View - Hauteur fixe */}
-          <div className="hidden lg:flex items-center justify-between h-16 relative">
+          <div className="hidden lg:flex items-center justify-between h-14 relative">
             {/* Container des logos avec dimensions fixes */}
-            <div className="relative w-[280px] h-32 flex items-center">
+            <div className="relative w-[280px] h-[90px] flex items-center">
               <div className="absolute left-0 top-0 h-full w-[71px] flex items-center justify-center">
                 <Link href="/">
                   <Image
@@ -131,7 +133,7 @@ const Header: React.FC = () => {
                     alt="Logo"
                     width={71}
                     height={90}
-                    className="transform scale-x-[-1] scale-110 object-contain"
+                    className="transform scale-x-[-1] object-contain h-full w-full"
                     priority
                   />
                 </Link>
@@ -144,7 +146,7 @@ const Header: React.FC = () => {
                     alt="Logo"
                     width={210}
                     height={90}
-                    className="object-contain"
+                    className="object-contain h-full w-full"
                     priority
                   />
                 </Link>
@@ -159,23 +161,25 @@ const Header: React.FC = () => {
             {/* Right Actions - Largeur fixe */}
 
             <div className="hidden md:hidden lg:flex items-center space-x-7 text-sm px-4 justify-end my-auto -ml-10">
-              <div className="flex items-center space-x-3 md:hidden lg:flex ">
+              <div className="hidden md:flex items-center space-x-3">
                 <span className="text-white whitespace-nowrap">Livraison en</span>
                 <div className="relative">
                   <button
                     onClick={toggleLanguageMenu}
-                    className="flex items-center text-white hover:text-gray-200"
+                    className="flex items-center space-x-1 text-white hover:text-gray-200"
                   >
-                    <div className="w-[40px] h-[20px] relative">
+                    <div className="relative w-6 h-6">
                       <Image
                         src={selectedCountry.imgSrc}
                         alt={selectedCountry.name}
-                        layout="fill"
+                        fill
                         className="object-contain"
                       />
                     </div>
                     <span>{selectedCountry.name}</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform ${isLanguageMenuOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown
+                      className={`w-4 h-4 transition-transform ${isLanguageMenuOpen ? 'rotate-180' : ''}`}
+                    />
                   </button>
 
                   {isLanguageMenuOpen && (
@@ -226,13 +230,12 @@ const Header: React.FC = () => {
               {isMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
             </button>
 
-            <div className="relative h-50 w-60 flex items-center justify-center scale-110 mx-auto my-auto">
+            <div className="relative h-[80px] w-[200px] flex items-center justify-center">
               <Link href="/">
                 <Image
                   src="/images/memelogo.png"
                   alt="Logo"
-                  width={200}
-                  height={100}
+                  fill
                   className="object-contain"
                   priority
                 />
@@ -273,14 +276,16 @@ const Header: React.FC = () => {
               </div>
 
                 <nav className="border-t border-gray-100">
-                <AuthButton />
+                <div className="px-4 py-3">
+                  <AuthButton />
+                </div>
 
                 {categories.map((category) => (
                   <a
                   key={category.name}
                   href={category.href}
                   onClick={category.onClick}
-                  className={`block px-4 py-3 text-gray-900 hover:bg-gray-50 transition-colors ${
+                  className={`block px-4 py-3 text-gray-900 hover:bg-gray-50 transition-colors font-bold ${
                     category.className || ''
                   }`}
                   >
@@ -290,11 +295,11 @@ const Header: React.FC = () => {
                 ))}
                 </nav>
 
-              <div className="border-t border-gray-100 p-4 space-y-2">
-                <a href="/portailpro" className="block py-2 text-gray-900 hover:text-primary">
+              <div className="border-t border-gray-100 p-4 space-y-2 font-bold">
+                <a href="/portailpro" className="block py-2 text-primary hover:text-primary">
                   Portail Pro
                 </a>
-                <a href="/faq" className="block py-2 text-gray-900 hover:text-primary">
+                <a href="/faq" className="block py-2 text-primary hover:text-primary font-bold">
                   Aide
                 </a>
               </div>

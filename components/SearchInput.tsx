@@ -77,7 +77,7 @@ const SearchInput = () => {
       .toLowerCase()
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
-      .replace(/[^\w\s]/g, ' ')
+      .replace(/[^\w\s]/g, '')  // Simplifié
       .replace(/\s+/g, ' ')
       .trim();
   }, []);
@@ -188,6 +188,14 @@ const SearchInput = () => {
     setError(null);
   };
 
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []); // Nettoyage du timer à la destruction du composant
+
   return (
     <div className="relative flex-grow mx-8 max-w-xl">
       <div className="relative">
@@ -244,6 +252,9 @@ const SearchInput = () => {
                   className="object-cover rounded"
                   width={48}
                   height={48}
+                  loading="lazy"  // Chargement différé
+                  placeholder="blur"
+                  blurDataURL="/placeholder.png"  // Optionnel : image de placeholder
                 />
               )}
               <div className="ml-4 flex-grow">
