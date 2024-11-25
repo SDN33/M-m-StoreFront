@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { MapPin, Search } from 'lucide-react';
+import { MapPin, Search, Wine } from 'lucide-react';
 
 interface ProductImage {
   id: number;
@@ -136,16 +136,18 @@ const VendorsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 mt-40">
+    <div className="min-h-screen bg-gray-50 mt-44 mx-8">
+      <div className="text-center mb-10 bg-gradient-to-r from-gray-900 via-gray-800 to-black pt-7 rounded-t-xl mx-8">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-primary">
+          Nos Vignerons Partenaires&nbsp;
+          <Wine size={32} className="inline text-white animate-ping duration-1000" />
+        </h2>
+        <p className="text-sm md:text-xl lg:text-xl  font-extrabold slide-in-right max-w-2xl mx-auto mb-8 text-white">
+          &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
+        </p>
+        <div className="border-b-4 border-primary w-full max-w-[50rem] my-2 slide-in-right mx-auto"></div>
+      </div>
       <div className="max-w-5xl mx-auto p-6">
-        <Image
-          src="/images/vignerons.png"
-          alt="Vineyard"
-          width={1920}
-          height={1080}
-          className="rounded-lg mb-8"
-        />
-
         <div>
           <p className="text-center text-xl font-extrabold -mt-4 mb-4 slide-in-right text-primary">
             &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
@@ -275,6 +277,13 @@ const VendorsPage = () => {
             })}
           </div>
         )}
+        <Image
+          src="/images/bannereco2.png"
+          alt="Vineyard"
+          width={1920}
+          height={1080}
+          className="rounded-lg mb-8 mt-8"
+        />
       </div>
     </div>
   );

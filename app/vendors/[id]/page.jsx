@@ -143,6 +143,7 @@ export default function VendorDetailsPage() {
 
   return (
     <div className="max-w-4xl mx-auto mt-36 mb-24">
+      
       <div className="relative">
         <Image
           src={vendor.shop?.banner ? normalizeUrl(vendor.shop.banner) : '/images/slider3.png'}
