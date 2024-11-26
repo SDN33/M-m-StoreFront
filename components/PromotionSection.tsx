@@ -53,14 +53,14 @@ const PromotionSection = () => {
       <p className="relative z-10 font-extrabold text-white text-xs sm:text-sm h-fit">
         <span className="sm:hidden">
           Livraison <span className='text-accent'><strong>OFFERTE</strong></span><br />
-          <span className='text-xs'>
+          <span className='!text-xs'>
             &nbsp;en point relais dès 6 bouteilles <br /> d&apos;un même domaine achetés
           </span>
         </span>
 
-        <span className="hidden sm:inline text-xs fade-in-up">
+        <span className="hidden sm:inline text-base fade-in-up">
           Livraison <span className='text-accent'>OFFERTE</span>
-          <span className='text-xs'>
+          <span className='!text-xs'>
             &nbsp;en point relais dès 6 bouteilles <span className='text-xs'>d&apos;un même domaine achetés</span>
           </span>
         </span>

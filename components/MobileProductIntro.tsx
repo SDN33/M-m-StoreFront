@@ -77,7 +77,6 @@ const MobileProductsIntro: React.FC = () => {
         />
       </div>
 
-
       <div
         ref={introRef}
         className={`transition-opacity duration-1000 ${
