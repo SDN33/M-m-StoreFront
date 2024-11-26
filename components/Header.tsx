@@ -55,27 +55,27 @@ const Header: React.FC = () => {
 
   const vinsSubCategories = [
     {
-      name: 'Nos vins Rouges',
+      name: 'Les vins Rouges',
       href: '/vins/rouge',
       bgClass: 'bg-gradient-to-r from-bordeaux-light to-bordeaux-light',
     },
     {
-      name: 'Nos vins Blancs',
+      name: 'Les vins Blancs',
       href: '/vins/blanc',
       bgClass: 'bg-gradient-to-r from-wine-white-light to-wine-white-deep',
     },
     {
-      name: 'Nos vins Rosés',
+      name: 'Les vins Rosés',
       href: '/vins/rose',
       bgClass: 'bg-gradient-to-r from-rose-pale to-rose-profond',
     },
     {
-      name: 'Nos vins Pétillants',
+      name: 'Les vins Pétillants',
       href: '/vins/petillant',
       bgClass: 'bg-gradient-to-r from-champagne-light to-champagne-deep',
     },
     {
-      name: 'Nos vins Liquoreux',
+      name: 'Les vins Liquoreux',
       href: '/vins/liquoreux',
       bgClass: 'bg-gradient-to-r from-liquoreux-light to-liquoreux-deep',
     },
@@ -396,7 +396,7 @@ const Header: React.FC = () => {
 
                 {/* Header */}
                 <div className="bg-gradient-to-r from-gray-900 to-black p-6 text-center">
-                  <h2 className="text-2xl font-bold text-white p-8 rounded-t-xl drop-shadow-md">
+                  <h2 className="text-2xl font-bold text-white p-5 rounded-t-xl drop-shadow-md">
                     Nos Catégories de Vins
                   </h2>
                 </div>
