@@ -75,16 +75,22 @@ export default function ProductsPromotions() {
         </div>
 
         {/* Grille de Produits */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-1 mb-20 bg-transparent">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="relative bg-transparent shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
-            >
-              <ProductCard product={product} onAddToCart={handleAddToCart} />
-            </div>
-          ))}
-        </div>
+        {products.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-1 mb-20 bg-transparent">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="relative bg-transparent shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
+              >
+                <ProductCard product={product} onAddToCart={handleAddToCart} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-gray-700 text-lg mb-20">
+            Aucuns vins disponible pour le moment
+          </div>
+        )}
         <HeroBanner />
         <Livraison />
         <Trust />

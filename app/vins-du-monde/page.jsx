@@ -78,7 +78,7 @@ export default function VinsDuMonde() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-1 mb-20">
           {products.length === 0 ? (
             <div className="col-span-full text-center py-8">
-              <p className="text-lg text-gray-600">Aucun vins disponible pour le moment</p>
+              <p className="text-lg text-gray-600">Aucuns vins disponible pour le moment</p>
             </div>
           ) : (
             products.map((product) => (
