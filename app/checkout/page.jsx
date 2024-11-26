@@ -1,7 +1,8 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { getCookie } from 'cookies-next';
 import { createOrder } from '../../services/order';
 import { useCart } from '../../context/CartContext';
 import StripePayment from '../../components/StripePayment';
@@ -26,6 +27,23 @@ const CheckoutPage = () => {
     paymentMethod: 'stripe',
     deliveryMethod: 'standard'
   });
+
+  // Nouvelle fonction pour récupérer l'e-mail
+  const getUserEmailFromCookie = () => {
+    // Côté client, utilisez getCookie de cookies-next
+    return getCookie('userEmail');
+  };
+
+  // Effet pour pré-remplir l'e-mail s'il est disponible
+  useEffect(() => {
+    const storedEmail = getUserEmailFromCookie();
+    if (storedEmail) {
+      setFormData(prev => ({
+        ...prev,
+        email: storedEmail
+      }));
+    }
+  }, []);
 
   const [coupon, setCoupon] = useState('');
   const [discount, setDiscount] = useState(0);
