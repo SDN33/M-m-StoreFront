@@ -170,7 +170,7 @@ export default function PortailPro() {
         <div>
           <div className="text-center space-y-4 mb-4 gap-1">
             {/* Suppression de l'image comme élément distinct */}
-            <h3 className="text-4xl md:text-5xl lg:text-7xl tracking-tight font-bold bg-teal-800 text-white pt-28">
+            <h3 className="text-4xl md:text-5xl lg:text-7xl tracking-tight font-bold bg-primary text-white pt-28">
               PORTAIL PRO
             </h3>
 
