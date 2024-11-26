@@ -119,7 +119,7 @@ const VendorsPage = () => {
       <div className="text-center mb-10 bg-gradient-to-r from-gray-900 via-gray-800 to-black pt-7 rounded-t-xl">
         <h2 className="text-lg md:text-2xl lg:text-3xl font-extrabold text-white mb-8">
           Nos Vignerons Partenaires&nbsp;
-          <Wine size={32} className="inline text-white animate-ping duration-1000" />
+          <Wine size={32} className="md:inline text-white animate-ping duration-1000 hidden" />
         </h2>
         <div className="border-b-4 border-primary w-full max-w-[50rem] my-2 slide-in-right mx-auto"></div>
       </div>
