@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import {MoveVertical} from 'lucide-react';
 
 const MobileProductsIntro: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -78,24 +77,7 @@ const MobileProductsIntro: React.FC = () => {
         />
       </div>
 
-      {/* Indicateur scroll */}
-      <div className="scroll-animation flex justify-center z-40">
-        <div className="w-6 h-6 rounded-full bg-white animate-scroll"><MoveVertical /></div>
-        <style jsx>{`
-          @keyframes scroll {
-            0%, 100% {
-              transform: translateY(-20px);
-            }
-            50% {
-              transform: translateY(0px);
-            }
-          }
-          .animate-scroll {
-            animation: scroll 1.5s infinite ease-in-out;
-            bg-opacity: 0.5;
-          }
-        `}</style>
-      </div>
+
       <div
         ref={introRef}
         className={`transition-opacity duration-1000 ${
