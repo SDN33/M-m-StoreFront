@@ -79,10 +79,12 @@ const MobileProductsIntro: React.FC = () => {
 
       <div
         ref={introRef}
-        className={`transition-opacity duration-1000 ${
+        className={`transition-all duration-1000 ${
           isVisible ? 'opacity-100' : 'opacity-0'
-        } flex flex-col items-center text-center lg:hidden bg-primary py-6 -mt-7 min-h-[300px]`} // Added min-h to prevent shifts
+        } flex flex-col items-center text-center lg:hidden bg-primary py-6 min-h-[300px] h-auto`}
+        style={{ overflow: 'hidden', transition: 'opacity 1s ease, height 1s ease' }}
       >
+
         {/* Logos en haut - Added fixed container */}
         <div className="flex space-x-8 mt-4 h-[35px] items-center">
           <div className="w-[28px] h-[20px] relative">
