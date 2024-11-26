@@ -25,7 +25,7 @@ const CheckoutPage = () => {
     email: '',
     phone: '',
     paymentMethod: 'stripe',
-    deliveryMethod: 'standard'
+    deliveryMethod: 'Forfait Boxtal'
   });
 
   // Nouvelle fonction pour récupérer l'e-mail

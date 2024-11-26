@@ -247,7 +247,7 @@ const VendorsPage = () => {
           />
           <Link
             href={`/vendors`}
-            className="inline-flex items-center text-sm px-2 py-2 bg-blue-50 text-teal-800 rounded-lg hover:bg-blue-100 transition-colors duration-200"
+            className="inline-flex items-center text-sm px-2 py-2 bg-blue-50 text-primary rounded-lg hover:bg-blue-100 transition-colors duration-200"
           >
             Voir tous les vignerons →
           </Link>
