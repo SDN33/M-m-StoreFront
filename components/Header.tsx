@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu as MenuIcon, X, ChevronDown, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Menu as MenuIcon, X, ChevronDown, ChevronRight, ChevronLeft, Rss, BadgePercent } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import CartPopup from './CartPopup';
@@ -44,13 +44,13 @@ const Header: React.FC = () => {
   };
 
   const categories = [
-    { name: 'PROMOS', href: '/promos', className: '!text-red-700 font-black' },
+    { name: 'PROMOS', href: '/promos', className: '!text-red-700 font-black', icon: <BadgePercent className="inline-block ml-1 -mt-1 w-4 h-4" /> },
     { name: 'Nos Vins', href: '#', onClick: toggleNosVinsPopup, icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com', target: "_blank", rel: "noopener noreferrer" },
     { name: 'Nos Vignerons.nes', href: '/vendors' },
     { name: 'Vins du Monde', href: '/vins-du-monde' },
     { name: 'Contactez-nous', href: '/contact' },
-    { name: 'Blog', href: '/blog' },
+    { name: 'Blog', href: '/blog', icon: <Rss className="inline-block ml-1 -mt-1 w-4 h-4" /> },
   ];
 
   const vinsSubCategories = [
