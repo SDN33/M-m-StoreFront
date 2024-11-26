@@ -100,13 +100,12 @@ const Slogan: React.FC = () => {
           src="/images/meme-pas-contente.png"
           alt="Mémé Newsletter"
           className="object-cover absolute right-0 bottom-0"
-          width={200}
+          width={300}
           height={100}
-          loading="lazy"
         />
       </div>
 
-      <div className="relative max-w-4xl mx-auto text-center text-white z-10 px-4">
+      <div className="relative max-w-4xl mx-auto text-center text-white z-10 px-4 mt-8">
         <h2
           ref={h2Ref}
           className={`text-3xl md:text-4xl leading-tight font-black mb-2 transition-all duration-1000 ${
@@ -155,7 +154,7 @@ const Slogan: React.FC = () => {
           ))}
         </div>
         <br />
-        <span className="text-white text-xs block mt-4">* en comparaison avec les vins non biologiques</span>
+        <span className="text-white text-xs block mt-4 -pb-8">* en comparaison avec les vins non biologiques</span>
         <Reseaux />
       </div>
     </div>
