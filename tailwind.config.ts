@@ -63,6 +63,15 @@ const config: Config = {
         '7xl': ['4.5rem', { lineHeight: '1' }],
         '8xl': ['6rem', { lineHeight: '1' }],
       },
+      animation: {
+        'progress': 'progress 2s ease-in-out infinite'
+      },
+      keyframes: {
+        progress: {
+          '0%, 100%': { width: '0%' },
+          '50%': { width: '100%' }
+        }
+      }
     }
   }
 };

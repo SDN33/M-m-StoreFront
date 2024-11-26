@@ -16,8 +16,10 @@ import BackToTop from '@/components/BackToTop';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
+  const [isInitialRender, setIsInitialRender] = useState(true);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [scrollEnabled, setScrollEnabled] = useState(false);
+  const [productsLoaded, setProductsLoaded] = useState(false);
 
   const mainContentRef = useRef<HTMLDivElement>(null);
   const filterContentRef = useRef<HTMLDivElement>(null);
@@ -39,22 +41,76 @@ export default function Home() {
   const [isAtBottom, setIsAtBottom] = useState(false);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        await fetch('/api/products');
-      } catch (error) {
-        console.error('Failed to fetch products:', error);
+    // Minimal loading state
+    const loadingTimeout = setTimeout(() => {
+      setIsInitialRender(false);
+    }, 2000);
+
+    // Reset scroll position immediately on load
+    window.scrollTo(0, 0);
+
+    const resetScroll = () => {
+      window.scrollTo(0, 0);
+      if (mainContentRef.current) {
+        mainContentRef.current.scrollTop = 0;
       }
     };
+
+    // Reset scroll on initial load
+    resetScroll();
+
+    // Reset scroll after products are loaded
+    const resetScrollTimeout = setTimeout(resetScroll, 100);
+
+    const fetchProducts = async () => {
+      try {
+        const cachedProducts = localStorage.getItem('cachedProducts');
+
+        if (cachedProducts) {
+          setProductsLoaded(true);
+          resetScroll();
+          return;
+        }
+
+        const response = await fetch('/api/products');
+        if (response.ok) {
+          const products = await response.json();
+          localStorage.setItem('cachedProducts', JSON.stringify(products));
+          setProductsLoaded(true);
+          resetScroll();
+        }
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+        setProductsLoaded(true);
+        resetScroll();
+      }
+    };
+
     fetchProducts();
+
+    // Additional scroll reset listeners
+    window.addEventListener('load', resetScroll);
+
+    return () => {
+      window.removeEventListener('load', resetScroll);
+      clearTimeout(resetScrollTimeout);
+      clearTimeout(loadingTimeout);
+    };
   }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
-    setIsMobile(mediaQuery.matches);
+
+    const checkMobile = () => {
+      setIsMobile(mediaQuery.matches);
+      window.scrollTo(0, 0);
+    };
+
+    checkMobile();
 
     const handleMediaChange = (e: MediaQueryListEvent) => {
       setIsMobile(e.matches);
+      window.scrollTo(0, 0);
     };
 
     mediaQuery.addEventListener('change', handleMediaChange);
@@ -72,7 +128,6 @@ export default function Home() {
       const footer = footerRef.current;
       const filterContent = filterContentRef.current;
 
-      // Allow natural scrolling for filter content
       if (filterContent?.contains(target)) {
         return;
       }
@@ -133,6 +188,21 @@ export default function Home() {
     });
   };
 
+  // Minimal loading state - empty div for 2 seconds
+  if (isInitialRender) {
+    return (
+      <div
+        className="fixed inset-0 bg-white flex items-center justify-center"
+        style={{ zIndex: 9999 }}
+      >
+        {/* Optional: Add a subtle loading indicator */}
+        <div className="animate-ping w-16 h-16 bg-gray-200 rounded-full">
+          <div className="w-16 h-16 bg-primary rounded-full" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       {isMobile ? (
@@ -171,17 +241,18 @@ export default function Home() {
             }}
           >
             <div>
-
               <div className="pt-24 md:hidden lg:flex" />
               <ProductsIntro />
               <Slider />
 
               <div className="max-w-7xl mx-auto px-4">
                 <section className="bg-white rounded-lg shadow">
-                  <ProductsCards
-                    selectedFilters={selectedFilters}
-                    onAddToCart={(product) => console.log('Add to cart:', product)}
-                  />
+                  {productsLoaded && (
+                    <ProductsCards
+                      selectedFilters={selectedFilters}
+                      onAddToCart={(product) => console.log('Add to cart:', product)}
+                    />
+                  )}
                 </section>
               </div>
               <div className="py-8" />
@@ -194,7 +265,7 @@ export default function Home() {
               <Trust />
               <Slogan />
               <div className="py-8" />
-                <BackToTop />
+              <BackToTop />
             </div>
           </main>
 

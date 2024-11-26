@@ -54,7 +54,7 @@ const MobileProductsIntro: React.FC = () => {
 
   return (
     <>
-      <div className='-mt-10'>
+      <div className='-mt-10 relative w-full pb-[100%]'> {/* 16:9 aspect ratio container */}
         <video
           src="https://res.cloudinary.com/daroyxenr/video/upload/q_auto:eco/v1732411795/Design_sans_titre_7_1_nobrzq.mp4"
           width={1920}
@@ -64,7 +64,7 @@ const MobileProductsIntro: React.FC = () => {
           muted
           playsInline
           preload="auto"
-          className="w-full h-full object-cover"
+          className="absolute top-0 left-0 w-full h-full object-cover"
           onLoadedData={(e) => {
         const video = e.target as HTMLVideoElement;
         video.play();
@@ -81,34 +81,37 @@ const MobileProductsIntro: React.FC = () => {
         ref={introRef}
         className={`transition-opacity duration-1000 ${
           isVisible ? 'opacity-100' : 'opacity-0'
-        } flex flex-col items-center text-center lg:hidden bg-primary py-6 -mt-7`}
+        } flex flex-col items-center text-center lg:hidden bg-primary py-6 -mt-7 min-h-[300px]`} // Added min-h to prevent shifts
       >
-        {/* Logos en haut */}
-        <div className="flex space-x-8 mt-4">
-          <Image
-            src="/images/logobio1.webp"
-            alt="bio logo"
-            width={28}
-            height={20}
-            className="object-contain"
-            priority={true}
-          />
-          <Image
-            src="/images/Logobioeu.jpg"
-            alt="Bio euro logo"
-            width={35}
-            height={35}
-            className="object-contain"
-            priority={true}
-          />
-          <Image
-            src="/images/logointro2.jpg"
-            alt="nature et progrès"
-            width={26}
-            height={20}
-            className="object-contain"
-            priority={true}
-          />
+        {/* Logos en haut - Added fixed container */}
+        <div className="flex space-x-8 mt-4 h-[35px] items-center">
+          <div className="w-[28px] h-[20px] relative">
+            <Image
+              src="/images/logobio1.webp"
+              alt="bio logo"
+              fill
+              className="object-contain"
+              priority={true}
+            />
+          </div>
+          <div className="w-[35px] h-[35px] relative">
+            <Image
+              src="/images/Logobioeu.jpg"
+              alt="Bio euro logo"
+              fill
+              className="object-contain"
+              priority={true}
+            />
+          </div>
+          <div className="w-[26px] h-[20px] relative">
+            <Image
+              src="/images/logointro2.jpg"
+              alt="nature et progrès"
+              fill
+              className="object-contain"
+              priority={true}
+            />
+          </div>
         </div>
 
         {/* Texte central avec compteur */}
@@ -122,32 +125,35 @@ const MobileProductsIntro: React.FC = () => {
           </h1>
         </div>
 
-        {/* Logos en bas */}
-        <div className="flex space-x-8 mt-8 mb-4">
-          <Image
-            src="/images/logointro.jpg"
-            alt="biodynamie logo"
-            width={35}
-            height={20}
-            className="object-contain"
-            priority={true}
-          />
-          <Image
-            src="/images/déméter.png"
-            alt="demeter logo"
-            width={35}
-            height={35}
-            className="object-contain"
-            priority={true}
-          />
-          <Image
-            src="/images/biodyvin.jpg"
-            alt="biodyvin logo"
-            width={35}
-            height={20}
-            className="object-contain"
-            priority={true}
-          />
+        {/* Logos en bas - Added fixed container */}
+        <div className="flex space-x-8 mt-8 mb-4 h-[35px] items-center">
+          <div className="w-[35px] h-[20px] relative">
+            <Image
+              src="/images/logointro.jpg"
+              alt="biodynamie logo"
+              fill
+              className="object-contain"
+              priority={true}
+            />
+          </div>
+          <div className="w-[35px] h-[35px] relative">
+            <Image
+              src="/images/déméter.png"
+              alt="demeter logo"
+              fill
+              className="object-contain"
+              priority={true}
+            />
+          </div>
+          <div className="w-[35px] h-[20px] relative">
+            <Image
+              src="/images/biodyvin.jpg"
+              alt="biodyvin logo"
+              fill
+              className="object-contain"
+              priority={true}
+            />
+          </div>
         </div>
       </div>
     </>

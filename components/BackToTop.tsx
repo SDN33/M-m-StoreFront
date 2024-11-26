@@ -40,7 +40,7 @@ const BackToTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`sticky bottom-6 right-6 z-[9999] ml-auto mr-6 flex h-12 w-12 items-center justify-center rounded-full bg-teal-800 text-white shadow-lg transition-opacity duration-300 hover:bg-primary 600 focus:outline-none focus:ring-1 focus:ring-black lg:h-14 lg:w-14 ${
+      className={`sticky bottom-6 right-6 z-[49] ml-auto mr-6 flex h-12 w-12 items-center justify-center rounded-full bg-teal-800 text-white shadow-lg transition-opacity duration-300 hover:bg-primary 600 focus:outline-none focus:ring-1 focus:ring-black lg:h-14 lg:w-14 ${
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
       aria-label="Retour en haut de page"
