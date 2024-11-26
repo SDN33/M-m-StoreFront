@@ -93,7 +93,7 @@ const ProductsIntro: React.FC = () => {
           {counter.toLocaleString()}
           &nbsp;vins bio en direct des vignerons(nes)
           </span>
-          <span className="block text-black text-xs sm:text-sm font-['Inter'] mt-2 opacity-70">
+          <span className="block text-black text-xs sm:text-sm font-['Inter'] mt-2">
           Tu sais, celles et ceux qui respectent la terre, ses locataires...
           </span>
         </h1>

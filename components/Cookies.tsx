@@ -79,7 +79,7 @@ const CookieConsent = () => {
 
   if (showDetails) {
     return (
-      <div className="fixed inset-0 bg-white/90 backdrop-blur-md z-50 flex items-center justify-center p-4 pb-4">
+      <div className="fixed inset-0 bg-white backdrop-blur-md z-50 flex items-center justify-center p-4 pb-4">
         <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-auto border border-primary/20">
           <div className="p-6 space-y-6">
             <div className="flex justify-between items-center">
@@ -165,30 +165,30 @@ const CookieConsent = () => {
   }
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 z-50 w-full h-fit">
-      <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-primary/10 p-4">
+    <div className="fixed bottom-0 z-50 w-full h-fit">
+      <div className="bg-primary/95 backdrop-blur-sm rounded-t-xl shadow-lg border border-primary/10 p-4">
         <div className="space-y-4">
           <p className="text-center flex items-center justify-center gap-3">
-            <span className='text-3xl font-bold'>🍪</span>
-            <span>Nous utilisons des cookies pour améliorer votre expérience client. <br />Veuillez accepter nos cookies pour continuer.</span>
+            <span className='text-3xl font-bold text-left'>🍪</span>
+            <span className='font-normal text-white'>Nous utilisons des cookies pour améliorer votre expérience client et nos services.<br /> Selon la législation en vigueur, vous pouvez accepter ou refuser ces cookies.</span>
           </p>
 
           <div className="flex justify-center gap-4">
             <button
               onClick={acceptAll}
-              className="px-5 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors font-medium"
+              className="px-5 py-2 bg-white  shadow-xl rounded-md transition-colors font-medium"
             >
               Tout accepter
             </button>
             <button
               onClick={() => setShowDetails(true)}
-              className="px-5 py-2 bg-primary/10 rounded-md hover:bg-primary/20 transition-colors font-medium"
+              className="px-5 py-2 bg-white shadow-xl rounded-md transition-colors font-medium"
             >
               Personnaliser
             </button>
             <button
               onClick={refuse}
-              className="px-5 py-2 bg-black text-white rounded-md hover:text-primary transition-colors font-medium"
+              className="px-5 py-2 bg-black text-white rounded-md transition-colors font-medium"
             >
               Refuser
             </button>
