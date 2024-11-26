@@ -45,7 +45,7 @@ const Header: React.FC = () => {
 
   const categories = [
     { name: 'PROMOS', href: '/promos', className: '!text-red-700 font-black' },
-    { name: 'Nos Vins', onClick: toggleNosVinsPopup, icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
+    { name: 'Nos Vins', href: '#', onClick: toggleNosVinsPopup, icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com', target: "_blank", rel: "noopener noreferrer" },
     { name: 'Nos Vignerons.nes', href: '/vendors' },
     { name: 'Vins du Monde', href: '/vins-du-monde' },
@@ -57,56 +57,50 @@ const Header: React.FC = () => {
     {
       name: (
         <>
-          <span className="text-lg">Rouge</span>
+          <span className="text-sm">Rouge</span>
         </>
       ),
       href: '/vins/rouge',
-      background: 'bg-gradient-to-br from-red-900 via-red-800 to-red-700'
     },
     {
       name: (
         <>
-          <span className="text-lg">Blanc</span>
+          <span className="text-sm">Blanc</span>
         </>
       ),
       href: '/vins/blanc',
-      background: 'bg-gradient-to-br from-yellow-100 via-yellow-150 to-yellow-200'
     },
     {
       name: (
         <>
-          <span className="text-lg">Rosé</span>
+          <span className="text-sm">Rosé</span>
         </>
       ),
       href: '/vins/rose',
-      background: 'bg-gradient-to-br from-pink-300 via-pink-400 to-pink-600'
     },
     {
       name: (
         <>
-          <span className="text-lg">Pétillant</span>
+          <span className="text-sm">Pétillant</span>
         </>
       ),
       href: '/vins/petillant',
-      background: 'bg-gradient-to-br from-yellow-200 via-amber-50 to-amber-100'
     },
     {
       name: (
         <>
-          <span className="text-lg">Liquoreux</span>
+          <span className="text-sm">Liquoreux</span>
         </>
       ),
       href: '/vins/liquoreux',
-      background: 'bg-gradient-to-br from-orange-400 via-amber-300 to-yellow-300'
     },
     {
       name: (
         <>
-          <span className="text-lg">Autres</span>
+          <span className="text-sm">Autres</span>
         </>
       ),
       href: '/vins/autres',
-      background: 'bg-gradient-to-br from-teal-500 via-teal-450 to-teal-400'
     },
   ];
 
@@ -355,54 +349,57 @@ const Header: React.FC = () => {
       {/* Nos Vins Popup */}
       {isNosVinsOpen && (
         <>
-          <div
-            className="fixed inset-0 bg-gray-800 bg-opacity-50 backdrop-blur-sm z-50 md:flex sm:hidden lg:flex"
+          {/* Overlay */}
+      <div
+        className="fixed inset-0 bg-black bg-opacity-50 z-40"
+        onClick={() => setIsNosVinsOpen(false)}
+      />
+
+      {/* Popup Container */}
+      <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+        <div
+          className="bg-white rounded-xl shadow-2xl w-full max-w-md relative max-h-[90vh] overflow-y-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Close Button */}
+          <button
             onClick={() => setIsNosVinsOpen(false)}
-          />
-          <div className="fixed inset-0 flex items-center justify-center z-50 p-4 md:flex sm:hidden rounded-2xl">
-            <div className="bg-white rounded-xl shadow-2xl mx-4 lg:w-3/4 lg:mx-auto relative max-h-[90vh] overflow-y-auto">
-              <div className="p-8">
-                <button
-                  onClick={() => setIsNosVinsOpen(false)}
-                  className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
-                  aria-label="Fermer"
-                >
-                  <X className="w-6 h-6 text-gray-500" />
-                </button>
+            className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 z-50"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
 
-                <h2 className="text-2xl font-bold mb-6">Nos Vins</h2>
-
-                <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-                  {vinsSubCategories.map((subCategory) => (
-                    <li
-                      key={subCategory.href}
-                      className="transform transition-transform duration-200 hover:scale-105"
-                    >
-                      <a
-                        href={subCategory.href}
-                        className="block relative rounded-lg overflow-hidden aspect-video group"
-                      >
-                        <div className={`relative w-full h-full ${subCategory.background} transition-transform duration-300 group-hover:scale-110`} />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20 group-hover:from-black/70 group-hover:to-black/30 transition-all duration-300">
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <span className="text-white font-semibold text-lg text-center px-4 transform transition-transform duration-300 group-hover:scale-105">
-                              {subCategory.name}
-                            </span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+          {/* Content */}
+          <div className="p-6 pt-12">
+            <ul className="space-y-4">
+              {vinsSubCategories.map((subCategory) => (
+                <li key={subCategory.href}>
+                  <a
+                    href={subCategory.href}
+                    className="block py-3 px-4 bg-gray-100 rounded-lg hover:bg-primary transition-colors text-center font-semibold text-sm"
+                  >
+                    {subCategory.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-        </>
-      )}
+        </div>
+      </div>
+    </>
+  )}
 
-      {/* Cart Popup */}
-      {isCartOpen && <CartPopup isOpen={isCartOpen} onClose={toggleCartPopup} />}
-    </header>
+  {/* Cart Popup */}
+  <CartPopup isOpen={isCartOpen} onClose={toggleCartPopup} />
+</header>
   );
 };
 
