@@ -345,25 +345,25 @@ export default function PortailPro() {
               <div>
                 <h4 className="font-bold mb-2">Il est exposé que :</h4>
                 <p className="text-gray-600">
-                  Vinsmemegeorgette.com est une plateforme de Biolibairterre SAS, société par actions simplifiée au
-                  capital de 2500 euros, dont le siège social est situé à Saurel 33890 Coubeyrac immatriculée au registre
-                  du commerce et des sociétés de Libourne sous le numéro 934 999 798 représentée par Monsieur
-                  Charles Hannon, représentant légal dûment habilité (ci-après définie Biolibairterre SAS »,
-                  conformément à la marque commerciale Mémé Georgette déposée par Charles Hannon).
-                  Biolibairterre SAS exploite, depuis la France, des plateformes web sous forme de site internet de vente
-                  en ligne, de site internet vitrine à destination des vignerons ou assimilés situés en France métropolitaine
-                  et en Europe (ci-après les «Vignerons») avec notamment un site internet de vente en ligne exploité
-                  par Biolibairterre SAS pour acheteurs particuliers par l&apos;intermédiaire d&apos;une vitrine public et pour les
-                  professionnels via un accès privé, dont les conditions sont régies dans ce document Conditions
-                  Générales d&apos;Utilisation Vendeur (ci-après les « CGU Vendeurs »)
-                  Biolibairterre SAS met ainsi à la disposition des Vignerons des Services (ci-après les « Services »)
-                  Les Vignerons peuvent proposer sur ces plateformes des prestations (ci-après les « Prestations ») ou
-                  des produits (ci-après les « Produits ») à des clients particuliers et professionnels. Les Vignerons
-                  peuvent proposer à la vente leurs Produits ou leurs Prestations et être ainsi présentés comme Vendeurs.
-                  (ci-après les « Vendeurs »)
-                  Il est rappelé que Biolibairterre SAS n&apos;est en aucun cas le producteur des Produits mis en ligne, seuls les
-                  Vignerons qui mettent leurs produits vinicoles en vente sur le Site détiennent ce statut de producteur.
-                  Il a été en conséquence convenu et arrêté ce qui suit :
+                Vins.mémégeorgette.com est une plateforme de Biolibairterre SAS, société par actions simplifiée au
+                capital de 2500 euros, dont le siège social est situé à Saurel 33890 Coubeyrac immatriculée au registre
+                du commerce et des sociétés de Libourne sous le numéro 934 999 798 représentée par Monsieur
+                Charles Hannon, représentant légal dûment habilité (ci-après définie Biolibairterre SAS »,
+                conformément à la marque commerciale Mémé Georgette déposée par Charles Hannon).
+                Biolibairterre SAS exploite, depuis la France, des plateformes web sous forme de site internet de vente
+                en ligne, de site internet vitrine à destination des vignerons ou assimilés situés en France métropolitaine
+                et en Europe (ci-après les « Vignerons ») avec notamment un site internet de vente en ligne exploité
+                par Biolibairterre SAS pour acheteurs particuliers par l&apos;intermédiaire d&apos;une vitrine public et pour les
+                professionnels via un accès privé, dont les conditions sont régies dans ce document Conditions
+                Générales d&apos;Utilisation Vendeur (ci-après les « CGU Vendeurs »)
+                Biolibairterre SAS met ainsi à la disposition des Vignerons des Services (ci-après les « Services »)
+                Les Vignerons peuvent proposer sur ces plateformes des prestations (ci-après les « Prestations ») ou
+                des produits (ci-après les « Produits ») à des clients particuliers et professionnels. Les Vignerons
+                peuvent proposer à la vente leurs Produits ou leurs Prestations et être ainsi présentés comme Vendeurs.
+                (ci-après les « Vendeurs »)
+                Il est rappelé que Biolibairterre SAS n&apos;est en aucun cas le producteur des Produits mis en ligne, seuls les
+                Vignerons qui mettent leurs produits vinicoles en vente sur le Site détiennent ce statut de producteur.
+                Il a été en conséquence convenu et arrêté ce qui suit :
                 </p>
               </div>
 
@@ -372,7 +372,7 @@ export default function PortailPro() {
                 <p className="text-gray-600">
                   Les présentes Conditions Générales d&apos;Utilisation Vendeur (ci-après les « CGU Vendeur ») s&apos;appliquent en
                   complément des Conditions Générales de Ventes Particuliers et des Conditions Générales de Ventes
-                  Professionnels accessibles à l&apos;adresse URL www.XXXXXXXXX/CGV/CGU et forment un tout. Les Vendeurs
+                  Professionnels accessibles à l&apos;adresse URL https://vinsmemegeorgette.com/portailpro et forment un tout. Les Vendeurs
                   acceptent de se soumettre à tout moment sans restriction ni réserve aux CGV des sites de Biolairtere
                   SAS
                   L&apos;objet de ces CGU Vendeur a pour but de définir les conditions dans lesquelles Biolibairterre SAS met à
@@ -384,7 +384,7 @@ export default function PortailPro() {
                   l&apos;échange simple et direct avec les Utilisateurs par le biais de commentaires mais aussi de Services
                   divers que Biolibairterre SAS met à disposition des Vendeurs. Pour utiliser le Site et avoir accès aux
                   Services, le Vendeur accepte de se soumettre aux CGV et CGU Vendeur. Les CGU Vendeur sont
-                  accessibles de manière automatique depuis URL www.XXXXXXXXX/CGV/CGU
+                  accessibles de manière automatique depuis https://vinsmemegeorgette.com/portailpro
                   <br />
                   Biolibairterre SAS se réserve la possibilité de modifier les CGU Vendeur à tout moment, puis d&apos;en
                   informer le vendeur. Les CGU et CGV applicables sont celles en vigueur au jour de la passation de la
@@ -423,7 +423,7 @@ export default function PortailPro() {
                 souscrire à un Compte Utilisateur selon le formulaire de candidature en ligne sur le Site et garantir être
                 un professionnel.
                 L&apos;inscription du Vendeur et la création de son compte (ci-après “Espace Vigneron”) se font au moyen
-                d&apos;un formulaire de candidature accessible sur le site https://lXXXXXXXXXXXX.
+                d&apos;un formulaire de candidature accessible sur le site site https://vinsmemegeorgette.com/portailpro.
                 Un seul compte peut être attribué par Vendeur (même SIRET) et associé à une même adresse
                 électronique.
                 La création du Compte Utilisateur permettra notamment au Vendeur d&apos;échanger de manière simple et
@@ -570,8 +570,8 @@ export default function PortailPro() {
                   supports de réseaux sociaux et commerciaux à destination exclusive de ses clients et/ou
                   membres.
                    Le droit de représentation, c&apos;est-à-dire le droit de communiquer au public les Œuvres
-                  photographiques sur le Site à l&apos;adresse www.lesgrappes.com et www.lesgrappes.com/pro,
-                  ppour ses partenaires et sur tous supports commerciaux à destination exclusive de ses clients.
+                  photographiques sur le Site à l&apos;adresse l&apos;adresse www.vinsmemegeorgette.com pour ses partenaires et
+                  sur tous supports commerciaux à destination exclusive de ses clients..
                    Le droit d&apos;adaptation, c&apos;est-à-dire le droit d&apos;appliquer aux Œuvres photographiques des
                   agencements rendus nécessaires par des contraintes techniques ou commerciales liées à leur
                   utilisation ou reproduction, sans pour autant les dénaturer ou porter atteinte à leurs
@@ -824,7 +824,7 @@ export default function PortailPro() {
                   En cas d&apos;erreur ou de différence de montant entre le règlement et la ou les factures, de difficultés de
                   lettrage de l&apos;opération, ou pour toute autre question relative à la dette de Biolibairterre SAS envers le
                   vendeur, le Vendeur est tenu de communiquer clairement l&apos;objet de désaccord ou questionnement sur
-                  la boîte mail compta@biolibertaire.com
+                  la boîte mail compta@vinsmemegorgette.com
                   <br /><br />
                   7.3. Délai de règlement
                   <br /><br />
