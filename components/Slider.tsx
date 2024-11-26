@@ -20,6 +20,7 @@ const Slider = () => {
       imageUrl: '/images/slider1.png',
       link: '/',
     },
+
   ];
 
   const nextSlide = useCallback(() => {
