@@ -44,7 +44,7 @@ export default function Home() {
     // Minimal loading state
     const loadingTimeout = setTimeout(() => {
       setIsInitialRender(false);
-    }, 2000);
+    }, 1000);
 
     // Reset scroll position immediately on load
     window.scrollTo(0, 0);
