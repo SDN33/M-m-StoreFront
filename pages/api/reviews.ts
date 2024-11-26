@@ -19,12 +19,21 @@ interface AxiosErrorResponse {
   message: string;
 }
 
+const isValidProductId = (productId: string): boolean => {
+  const productIdPattern = /^[a-zA-Z0-9_-]+$/;
+  return productIdPattern.test(productId);
+};
+
 const fetchYotpoReviews = async (productId: string): Promise<Review[]> => {
   const APP_KEY = process.env.YOTPO_APP_KEY;
   const API_KEY = process.env.YOTPO_SECRET_KEY;
 
   if (!APP_KEY || !API_KEY) {
     throw new Error('Yotpo API keys are required');
+  }
+
+  if (!isValidProductId(productId)) {
+    throw new Error('Invalid product ID');
   }
 
   try {
