@@ -124,7 +124,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
                       )}
                     </div>
                     <div className="ml-4 flex-grow">
-                      <h3 className="font-medium text-gray-800">{item.name}</h3>
+                      <h3 className="font-semibold text-gray-800">{item.name}</h3>
                       <p className="text-sm text-gray-500">
                         Vin {item.categories?.join(', ') || 'Vin'}
                       </p>
