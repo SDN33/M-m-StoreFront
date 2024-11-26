@@ -328,8 +328,7 @@ const ProductPage: React.FC = () => {
         </div>
 
         <br /><br />
-        <Livraison />
-        <br />
+
 
         <div className="mt-8 w-full">
           <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-900 via-gray-800 to-black p-8 rounded-t-xl">Description du produit</h2>
@@ -394,6 +393,9 @@ const ProductPage: React.FC = () => {
               </div>
             </div>
           </div>
+          <br />
+          <Livraison />
+          <br />
           <br />
            {/* Affichage de la carte Google */}
            {product.region__pays && (
