@@ -23,7 +23,7 @@ type TwitterMetadata = {
 export const metadata: Metadata & { twitter: TwitterMetadata } = {
   title: "Achat Vins Bio et Démeter Biodynamie | 2 500 vins Bio en direct de vignerons et vigneronnes engagé(e)s | VinsMemeGeorgette.com",
   description:
-    "Plongez dans l’univers du vin bio, où chaque gorgée raconte une histoire de passion et de respect pour la nature. Contrairement aux idées reçues, choisir un vin bio n’est pas synonyme de prix élevé. En effet, nous vous proposons une sélection de vins d'exception à des prix abordables, tout en garantissant un impact environnemental minimal.",
+    "Les vins de Mémé Georgette, découvrer notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s.",
   icons: {
     icon: "/favicon.ico",
   },
@@ -31,7 +31,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
   openGraph: {
     title: "Achat Vins Bio et Démeter Biodynamie | 2 500 vins Bio en direct de vignerons et vigneronnes engagé(e)s | VinsMemeGeorgette.com",
     description:
-      "Plongez dans l’univers du vin bio, où chaque gorgée raconte une histoire de passion et de respect pour la nature. Contrairement aux idées reçues, choisir un vin bio n’est pas synonyme de prix élevé. En effet, nous vous proposons une sélection de vins d'exception à des prix abordables, tout en garantissant un impact environnemental minimal.",
+      "Les vins de Mémé Georgette, découvrer notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s.",
     images: [
       {
         url: "/images/post_partage.png",
@@ -46,7 +46,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
     card: "summary_large_image",
     title: "Achat Vins Bio et Démeter Biodynamie | 2 500 vins Bio en direct de vignerons et vigneronnes engagé(e)s | VinsMemeGeorgette.com",
     description:
-      "Plongez dans l’univers du vin bio, où chaque gorgée raconte une histoire de passion et de respect pour la nature. Contrairement aux idées reçues, choisir un vin bio n’est pas synonyme de prix élevé. En effet, nous vous proposons une sélection de vins d'exception à des prix abordables, tout en garantissant un impact environnemental minimal.",
+      "Les vins de Mémé Georgette, découvrer notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s.",
     images: [
       {
         url: "/images/post_partage.png",
