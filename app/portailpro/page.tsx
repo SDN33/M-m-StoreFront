@@ -1,16 +1,33 @@
 'use client'
-import { Globe, Lock, Box, CreditCard, X } from 'lucide-react'
+import { Globe, Lock, Box, CreditCard, X, Download  } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import Image from 'next/image'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
+// Fonction de téléchargement du document
+const handleDownloadDocument = () => {
+  // URL du document à télécharger (à remplacer par votre URL réelle)
+  const documentUrl = '/documents/PDF TUTO MéméGeorgette espace pro.pdf'
+
+  // Créer un lien temporaire pour le téléchargement
+  const link = document.createElement('a');
+  link.href = documentUrl;
+  link.download = 'Guide-Creation-Produit-Portail-Pro.pdf';
+
+  // Déclencher le téléchargement
+  document.body.appendChild(link);
+  link.click();
+
+  // Nettoyer
+  document.body.removeChild(link);
+};
+
 export default function PortailPro() {
   const [cguAccepted, setCguAccepted] = useState(false)
   const [showCGU, setShowCGU] = useState(false)
   const [showError, setShowError] = useState(false)
-
   // Empêcher le défilement du body quand le modal est ouvert
   useEffect(() => {
     if (showCGU) {
@@ -19,6 +36,7 @@ export default function PortailPro() {
       document.body.style.overflow = 'unset'
     }
   }, [showCGU])
+
 
   const features = [
     {
@@ -167,8 +185,8 @@ export default function PortailPro() {
               PORTAIL PRO
             </h3>
           </div>
-          <p className="font-bold text-base md:text-lg lg:text-2xl mx-auto fade-in-up mt-8 text-center text-primary mb-8">
-              La{" solution e-commerce".toUpperCase()}&nbsp; pour les vignerons bio
+          <p className="font-semibold text-base md:text-lg lg:text-2xl mx-auto fade-in-up mt-8 text-center text-primary mb-8">
+              La{" solution e-commerce".toUpperCase()}<br /> pour les vignerons bio et biodynamiques
           </p>
           <p className="font-bold text-lg text-center mx-auto mb-8 -mt-4 slide-in-right">
             Rejoignez une marketplace dédiée aux vignerons bio, où simplicité, logistique prise en charge, et liberté totale<br /> vous permettent de vendre vos vins à travers l&apos;Europe sans contraintes.
@@ -285,6 +303,18 @@ export default function PortailPro() {
                   <CreditCard className="w-5 h-5" />
                   <span>Procéder au paiement</span>
                 </button>
+                <br />
+                  {/* Nouveau bouton de téléchargement */}
+                <div>
+                  <p className='text-center font-normal mb-2'>Pour les vignrons déjà inscrits, téléchargez notre guide de création de produit :</p>
+                  <button
+                    onClick={handleDownloadDocument}
+                    className="bg-blue-700 text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:bg-teal-950 transition-all duration-300 flex items-center justify-center space-x-2"
+                    >
+                    <Download className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                    Télécharger le guide de création de produit
+                  </button>
+                </div>
               </div>
             </div>
           </div>
