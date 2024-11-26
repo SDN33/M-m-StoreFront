@@ -211,17 +211,17 @@ export default function PortailPro() {
           <span className='font-black text-3xl text-primary border-black-500'>VinsMemeGeorgette.com</span><br /><br />C&apos;est bien plus qu&apos;une marketplace ! C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte, reconnue par le grand public grâce à <a className='text-primary font-black'  href="https://www.memegeorgette.com/" >Mémé Georgette</a><br /><br />
           <div className="flex gap-4 justify-center items-center p-6 eshadow-lg rounded-lg">
             <Image
-              src="https://res.cloudinary.com/daroyxenr/image/upload/q_auto:best/v1732486602/Capture_d_%C3%A9cran_2024-11-24_231608_dp7xms.webp"
+              src="https://res.cloudinary.com/daroyxenr/image/upload/v1732486602/Capture_d_%C3%A9cran_2024-11-24_231608_dp7xms.webp"
               alt="Vins fruités"
-              width={100}
-              height={100}
+              width={600}
+              height={600}
               className="flex-1 object-cover rounded-lg shadow-md transform transition-all duration-500 hover:scale-105 hover:rotate-1 hover:shadow-xl mt-4"
             />
             <Image
               src="/images/meme-pas-contente.png"
               alt="Vins fruités"
-              width={100}
-              height={100}
+              width={600}
+              height={600}
               className="flex-1 object-cover rounded-lg shadow-md transform transition-all duration-500 hover:scale-105 hover:-rotate-1 hover:shadow-xl mt-4"
             />
           </div>
