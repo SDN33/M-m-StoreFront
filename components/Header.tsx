@@ -364,10 +364,10 @@ const Header: React.FC = () => {
                         strokeWidth="2"
                         strokeOpacity="0.1"
                       />
-                      <circle cx="50" cy="50" r="5" fill="#D2691E" fillOpacity="0.05" />
+                      <circle cx="50" cy="50" r="5" fill="#EC641D" fillOpacity="0.05" />
                     </pattern>
                   </defs>
-                  <rect width="100%" height="100%" fill="url(#winePattern)" />
+                  <rect width="100%" height="100%" fill="#EC641D" />
                 </svg>
               </div>
 
