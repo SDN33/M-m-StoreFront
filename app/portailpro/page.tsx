@@ -170,20 +170,10 @@ export default function PortailPro() {
         <div>
           <div className="text-center space-y-4 mb-4 gap-1">
             {/* Suppression de l'image comme élément distinct */}
-            <h3
-              className="text-4xl md:text-5xl lg:text-7xl tracking-tight font-bold relative bg-cover bg-center text-white pt-28 items-center justify-center rounded-t-xl text-center"
-              style={{
-              backgroundImage: 'url(/images/vins_fruitees.webp)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundBlendMode: 'multiply',
-              minHeight: '200px',
-              height: 'auto',
-              padding: '4rem 1rem'
-              }}
-            >
+            <h3 className="text-4xl md:text-5xl lg:text-7xl tracking-tight font-bold bg-teal-800 text-white pt-28">
               PORTAIL PRO
             </h3>
+
           </div>
           <div>
            <p className="font-black text-base md:text-lg lg:text-2xl mx-auto fade-in-up mt-8 text-center text-teal-800 mb-8">
@@ -217,15 +207,16 @@ export default function PortailPro() {
               alt="Vins fruités"
               width={600}
               height={600}
-              className="flex-1 object-cover rounded-lg shadow-md transform transition-all duration-500 hover:scale-105 hover:rotate-1 hover:shadow-xl mt-4"
+              className="w-full flex-1 object-cover rounded-lg shadow-md transform transition-all duration-500 hover:scale-105 hover:rotate-1 hover:shadow-xl mt-4"
             />
             <Image
-              src="/images/meme-pas-contente.png"
+              src="https://res.cloudinary.com/daroyxenr/image/upload/v1732486602/Capture_d_%C3%A9cran_2024-11-24_231608_dp7xms.webp"
               alt="Vins fruités"
               width={600}
               height={600}
-              className="flex-1 object-cover rounded-lg shadow-md transform transition-all duration-500 hover:scale-105 hover:-rotate-1 hover:shadow-xl mt-4"
+              className="w-full object-cover rounded-lg shadow-md transform transition-all duration-500 hover:scale-105 hover:rotate-1 hover:shadow-xl"
             />
+
           </div>
 
         <br /><br /> Nous vous offrons un accès direct aux amateurs de vin en Europe, tout en simplifiant vos démarches avec une logistique intégrée et un accompagnement marketing personnalisé
