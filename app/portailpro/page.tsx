@@ -188,7 +188,7 @@ export default function PortailPro() {
           <p className="font-semibold text-base md:text-lg lg:text-2xl mx-auto fade-in-up mt-8 text-center text-primary mb-8">
               La{" solution e-commerce".toUpperCase()}<br /> pour les vignerons bio et biodynamiques
           </p>
-          <p className="font-bold text-lg text-center mx-auto mb-8 -mt-4 slide-in-right">
+          <p className="text-lg text-center mx-auto mb-8 -mt-4 slide-in-right">
             Rejoignez une marketplace dédiée aux vignerons bio, où simplicité, logistique prise en charge, et liberté totale<br /> vous permettent de vendre vos vins à travers l&apos;Europe sans contraintes.
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -201,8 +201,8 @@ export default function PortailPro() {
                   <div className="bg-white w-16 h-16 rounded-xl flex items-center justify-center shadow-sm mx-auto">
                     {feature.icon}
                   </div>
-                  <h4 className="font-bold text-xl text-gray-800 text-center">{feature.title}</h4>
-                  <p className="text-gray-600 leading-relaxed text-center">{feature.description}</p>
+                  <h4 className="font-bold text-xl text-black text-center">{feature.title}</h4>
+                  <p className="text-blackleading-relaxed text-center">{feature.description}</p>
                 </div>
               </div>
             ))}
