@@ -166,7 +166,7 @@ const CookieConsent = () => {
 
   return (
     <div className="fixed bottom-0 z-50 w-full h-fit">
-      <div className="bg-primary/95 backdrop-blur-sm rounded-t-xl shadow-lg border border-primary/10 p-4">
+      <div className="bg-black/90 backdrop-blur-sm rounded-t-xl shadow-lg border border-primary/10 p-4">
         <div className="space-y-4">
           <p className="text-center flex items-center justify-center gap-3">
             <span className='text-3xl font-bold text-left'>🍪</span>

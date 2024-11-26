@@ -55,52 +55,34 @@ const Header: React.FC = () => {
 
   const vinsSubCategories = [
     {
-      name: (
-        <>
-          <span className="text-sm">Rouge</span>
-        </>
-      ),
+      name: 'Nos vins Rouges',
       href: '/vins/rouge',
+      bgClass: 'bg-gradient-to-r from-bordeaux-light to-bordeaux-light',
     },
     {
-      name: (
-        <>
-          <span className="text-sm">Blanc</span>
-        </>
-      ),
+      name: 'Nos vins Blancs',
       href: '/vins/blanc',
+      bgClass: 'bg-gradient-to-r from-wine-white-light to-wine-white-deep',
     },
     {
-      name: (
-        <>
-          <span className="text-sm">Rosé</span>
-        </>
-      ),
+      name: 'Nos vins Rosés',
       href: '/vins/rose',
+      bgClass: 'bg-gradient-to-r from-rose-pale to-rose-profond',
     },
     {
-      name: (
-        <>
-          <span className="text-sm">Pétillant</span>
-        </>
-      ),
+      name: 'Nos vins Pétillants',
       href: '/vins/petillant',
+      bgClass: 'bg-gradient-to-r from-champagne-light to-champagne-deep',
     },
     {
-      name: (
-        <>
-          <span className="text-sm">Liquoreux</span>
-        </>
-      ),
+      name: 'Nos vins Liquoreux',
       href: '/vins/liquoreux',
+      bgClass: 'bg-gradient-to-r from-liquoreux-light to-liquoreux-deep',
     },
     {
-      name: (
-        <>
-          <span className="text-sm">Autres</span>
-        </>
-      ),
+      name: 'Les Autres',
       href: '/vins/autres',
+      bgClass: 'bg-gradient-to-r from-gray-700 to-gray-900',
     },
   ];
 
@@ -350,57 +332,108 @@ const Header: React.FC = () => {
       {isNosVinsOpen && (
         <>
           {/* Overlay */}
-      <div
-        className="fixed inset-0 bg-black bg-opacity-50 z-40"
-        onClick={() => setIsNosVinsOpen(false)}
-      />
-
-      {/* Popup Container */}
-      <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-        <div
-          className="bg-white rounded-xl shadow-2xl w-full max-w-md relative max-h-[90vh] overflow-y-auto"
-          onClick={(e) => e.stopPropagation()}
-        >
-          {/* Close Button */}
-          <button
+          <div
+            className="fixed inset-0 bg-gradient-to-br from-wine-deep/50 to-wine-light/50 backdrop-blur-sm z-40"
             onClick={() => setIsNosVinsOpen(false)}
-            className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 z-50"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          />
+
+          {/* Popup Container */}
+          <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+            <div
+              className="relative w-full max-w-md max-h-[90vh] overflow-hidden rounded-2xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+              {/* SVG Background */}
+              <div className="absolute inset-0 opacity-10">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 800 600"
+                  className="w-full h-full"
+                >
+                  <defs>
+                    <pattern
+                      id="winePattern"
+                      patternUnits="userSpaceOnUse"
+                      width="100"
+                      height="100"
+                    >
+                      <path
+                        d="M0 0 Q50 50, 100 0 T200 0"
+                        fill="none"
+                        stroke="#8B0000"
+                        strokeWidth="2"
+                        strokeOpacity="0.1"
+                      />
+                      <circle cx="50" cy="50" r="5" fill="#D2691E" fillOpacity="0.05" />
+                    </pattern>
+                  </defs>
+                  <rect width="100%" height="100%" fill="url(#winePattern)" />
+                </svg>
+              </div>
 
-          {/* Content */}
-          <div className="p-6 pt-12">
-            <ul className="space-y-4">
-              {vinsSubCategories.map((subCategory) => (
-                <li key={subCategory.href}>
-                  <a
-                    href={subCategory.href}
-                    className="block py-3 px-4 bg-gray-100 rounded-lg hover:bg-primary transition-colors text-center font-semibold text-sm"
+              {/* Content Container */}
+              <div className="relative bg-white/90 rounded-2xl shadow-xl overflow-hidden">
+                {/* Close Button */}
+                <button
+                  onClick={() => setIsNosVinsOpen(false)}
+                  className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 z-50 bg-white/50 rounded-full p-2 transition-all hover:bg-white/80"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    {subCategory.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </>
-  )}
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
 
-  {/* Cart Popup */}
-  <CartPopup isOpen={isCartOpen} onClose={toggleCartPopup} />
-</header>
-  );
-};
+                {/* Header */}
+                <div className="bg-gradient-to-r from-gray-900 to-black p-6 text-center">
+                  <h2 className="text-2xl font-bold text-white p-8 rounded-t-xl drop-shadow-md">
+                    Nos Catégories de Vins
+                  </h2>
+                </div>
+
+                {/* Content */}
+                <div className="p-6 space-y-4 max-h-[60vh] overflow-y-auto">
+                  <ul className="space-y-4">
+                    {vinsSubCategories.map((subCategory) => (
+                      <li
+                        key={subCategory.href}
+                        className="transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                      >
+                        <a
+                          href={subCategory.href}
+                          className="block rounded-xl text-center font-semibold text-lg
+                          transition-all duration-300 relative overflow-hidden hover:scale-105"
+                        >
+                          <span
+                            className={`block text-white w-full py-4 px-6 ${subCategory.bgClass}`}
+                          >
+                            {subCategory.name}
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+        {/* Cart Popup */}
+        <CartPopup isOpen={isCartOpen} onClose={toggleCartPopup} />
+      </header>
+    );
+  };
 
 export default Header;

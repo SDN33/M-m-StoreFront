@@ -86,7 +86,7 @@ const AgeVerificationModal = () => {
           ${isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
       >
         <Image
-          src="/images/memelogo2.png"
+          src="https://res.cloudinary.com/daroyxenr/image/upload/q_auto:eco/v1732631587/bloc-marque-filet_technique_01_3_2_1_yzobd5.webp"
           alt="Vérification de l'âge"
           width={150}
           height={150}

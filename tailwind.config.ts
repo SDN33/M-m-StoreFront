@@ -1,4 +1,5 @@
-module.exports = {
+import type { Config } from 'tailwindcss'
+const config: Config = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -14,6 +15,39 @@ module.exports = {
         background: '#FFFFFF',   // Blanc
         foreground: '#171717',   // Noir
         // Ajoutez d'autres couleurs si nécessaire
+        // Wine Red Gradients
+        bordeaux: {
+          light: '#8B0000',
+          deep: '#4B0082',
+        },
+        // Wine White Gradients
+        'wine-white': {
+          light: '#F5DEB3',
+          deep: '#DEB887',
+        },
+        // Rose Gradients
+        rose: {
+          pale: '#FFB6C1',
+          profond: '#C71585',
+        },
+        // Champagne/Sparkling Gradients
+        champagne: {
+          light: '#F0E68C',
+          deep: '#DAA520',
+        },
+        // Liquoreux Gradients
+        liquoreux: {
+          light: '#D2691E',
+          deep: '#8B4513',
+        },
+        // Wine-related color palette
+        wine: {
+          light: '#DEB887',
+          deep: '#8B0000',
+        },
+      },
+      backgroundImage: {
+        'wine-droplet': "url(\"data:image/svg+xml,...\")",
       },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1rem' }],
@@ -29,10 +63,8 @@ module.exports = {
         '7xl': ['4.5rem', { lineHeight: '1' }],
         '8xl': ['6rem', { lineHeight: '1' }],
       },
-    },
-  },
-
-  plugins: [
-    require('tailwind-scrollbar-hide'),
-  ],
+    }
+  }
 };
+
+export default config;
