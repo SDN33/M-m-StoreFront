@@ -155,6 +155,14 @@ const Blog = () => {
           </div>
         ))}
       </div>
+      <div className="text-center mt-16 text-lg">
+        <p>
+          Un grand merci à nos contributeurs pour leur aide précieuse dans la rédaction de ces articles.
+        </p>
+        <p>
+          Si vous souhaitez contribuer à notre blog, n&apos;hésitez pas à nous <a className="cursor-pointer text-primary" href="/contact">contacter</a>
+        </p>
+      </div>
     </div>
   );
 };
