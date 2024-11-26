@@ -185,12 +185,14 @@ export default function PortailPro() {
               PORTAIL PRO
             </h3>
           </div>
-          <p className="font-black text-base md:text-lg lg:text-2xl mx-auto fade-in-up mt-8 text-center text-teal-800 mb-8">
-              La{" solution e-commerce".toUpperCase()}<br /> pour les vignerons bio et biodynamiques
-          </p>
-          <p className="text-lg text-center mx-auto mb-8 -mt-4 slide-in-right">
-            Rejoignez une marketplace dédiée aux vignerons bio, où simplicité, logistique prise en charge, et liberté totale<br /> vous permettent de vendre vos vins à travers l&apos;Europe sans contraintes.
-          </p>
+          <div>
+           <p className="font-black text-base md:text-lg lg:text-2xl mx-auto fade-in-up mt-8 text-center text-teal-800 mb-8">
+               La{" solution e-commerce".toUpperCase()}<br /> pour les vignerons bio et biodynamiques
+           </p>
+           <p className="text-lg text-center mx-auto mb-8 -mt-4 slide-in-right">
+             Rejoignez une marketplace dédiée aux vignerons bio, où simplicité, logistique prise en charge, et liberté totale<br /> vous permettent de vendre vos vins à travers l&apos;Europe sans contraintes.
+           </p>
+          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <div
