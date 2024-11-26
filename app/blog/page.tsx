@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Clock, ArrowRight, Rss } from "lucide-react";
 import he from "he";
 import { CommentCount } from 'disqus-react';
+import Trust from "@/components/Trust";
 
 
 // Simple date formatting function
@@ -155,7 +156,7 @@ const Blog = () => {
           </div>
         ))}
       </div>
-      <div className="text-center mt-16 text-lg">
+      <div className="text-center mt-16 text-lg mb-16">
         <p>
           Un grand merci à nos contributeurs pour leur aide précieuse dans la rédaction de ces articles.
         </p>
@@ -163,6 +164,7 @@ const Blog = () => {
           Si vous souhaitez contribuer à notre blog, n&apos;hésitez pas à nous <a className="cursor-pointer text-primary" href="/contact">contacter</a>
         </p>
       </div>
+      <Trust />
     </div>
   );
 };
