@@ -108,14 +108,14 @@ export default function VendorDetailsPage() {
   if (loading) {
     return (
       <div className="max-w-4xl mx-auto p-4">
-        <div className="w-full h-64 bg-gray-200 animate-pulse rounded-b-lg" />
+        <div className="w-full h-64 bg-gray-200 rounded-b-lg" />
         <div className="flex items-end -mt-16 px-6">
-          <div className="w-32 h-32 rounded-full bg-gray-200 animate-pulse border-4 border-white" />
+          <div className="w-32 h-32 rounded-full bg-gray-200 border-4 border-white" />
         </div>
         <div className="mt-4 space-y-4">
-          <div className="h-8 w-64 bg-gray-200 animate-pulse rounded" />
-          <div className="h-4 w-full bg-gray-200 animate-pulse rounded" />
-          <div className="h-4 w-3/4 bg-gray-200 animate-pulse rounded" />
+          <div className="h-8 w-64 bg-gray-200 rounded" />
+          <div className="h-4 w-full bg-gray-200 rounded" />
+          <div className="h-4 w-3/4 bg-gray-200 rounded" />
         </div>
       </div>
     );
@@ -143,7 +143,7 @@ export default function VendorDetailsPage() {
 
   return (
     <div className="max-w-4xl mx-auto mt-36 mb-24">
-      
+
       <div className="relative">
         <Image
           src={vendor.shop?.banner ? normalizeUrl(vendor.shop.banner) : '/images/slider3.png'}

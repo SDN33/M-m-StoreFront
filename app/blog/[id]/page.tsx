@@ -94,7 +94,7 @@ const removeFeaturedImageFromContent = (content: string, featuredImage: string |
 };
 
 const ArticleSkeleton = () => (
-  <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-20 mt-36 animate-pulse">
+  <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-20 mt-36">
     <div className="text-center mb-10">
       <div className="h-12 bg-gray-200 w-3/4 mx-auto mb-4 rounded" />
       <div className="h-6 bg-gray-200 w-48 mx-auto rounded" />

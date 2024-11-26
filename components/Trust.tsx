@@ -89,7 +89,7 @@ const MemeGeorgettePremium = () => {
         </div>
 
         <div className="text-center">
-          <div className="w-16 h-16 mx-auto mb-4 animate-pulse">
+          <div className="w-16 h-16 mx-auto mb-4 animate-bounce">
           <svg className="fill-primary" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
              viewBox="0 0 426.494 426.494"
              xmlSpace="preserve">
@@ -161,7 +161,7 @@ const MemeGeorgettePremium = () => {
         </div>
 
         <div className="text-center">
-          <div className="w-16 h-16 mx-auto mb-4 animate-pulse">
+          <div className="w-16 h-16 mx-auto mb-4 animate-bounce">
             <svg className="fill-primary" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                viewBox="0 0 512 512"  xmlSpace="preserve">
             <g>
