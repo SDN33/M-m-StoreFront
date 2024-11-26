@@ -5,7 +5,7 @@ import Image from 'next/image';
 const Livraison: React.FC = () => {
   return (
     <>
-      <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white p-6 shadow-lg flex flex-col md:flex-row items-center justify-center md:space-x-4 rounded-b-lg">
+      <div className="bg-primary text-white p-6 shadow-lg flex flex-col md:flex-row items-center justify-center md:space-x-4 rounded-xl">
         {/* Conteneur flex pour le logo et le message de livraison */}
         <div className="flex items-center justify-center md:justify-start">
           {/* Message de livraison */}

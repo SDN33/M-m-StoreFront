@@ -2,12 +2,12 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import axios, { AxiosError } from 'axios';
 
 interface Review {
-  id: number;
-  product_id: number;
-  author: string;
+  id: string;
+  product_id: string;
+  author_name: string;
   rating: number;
+  review_text: string;
   date_created: string;
-  review: string;
 }
 
 interface AxiosErrorResponse {
@@ -19,30 +19,33 @@ interface AxiosErrorResponse {
   message: string;
 }
 
-const fetchReviews = async (productId: string): Promise<Review[]> => {
-  const consumerKey = process.env.WC_CONSUMER_KEY;
-  const consumerSecret = process.env.WC_CONSUMER_SECRET;
+const fetchYotpoReviews = async (productId: string): Promise<Review[]> => {
+  const APP_KEY = process.env.YOTPO_APP_KEY;
+  const API_KEY = process.env.YOTPO_SECRET_KEY;
 
-  if (!consumerKey || !consumerSecret) {
-    throw new Error('Consumer key and secret must be provided');
+  if (!APP_KEY || !API_KEY) {
+    throw new Error('Yotpo API keys are required');
   }
 
   try {
-    console.log(`Fetching reviews for productId: ${productId}`);  // Ajout du log ici
     const response = await axios.get<Review[]>(
-      `https://portailpro-memegeorgette.com/wp-json/wc/v3/products/reviews?product=${productId}`,
+      `https://api.yotpo.com/v1/apps/${APP_KEY}/products/${productId}/reviews`,
       {
-        auth: {
-          username: consumerKey,
-          password: consumerSecret,
-        },
+        headers: {
+          'Authorization': `Bearer ${API_KEY}`,
+        }
       }
     );
-    console.log('Reviews fetched successfully:', response.data);  // Log après la récupération
     return response.data;
   } catch (error) {
-    console.error('Error fetching reviews:', error);  // Log d'erreur
-    throw error;
+    console.error('Error fetching reviews from Yotpo:', error);  // Log d'erreur général
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError<AxiosErrorResponse>;
+      const errorMessage =
+        axiosError?.response?.data.message || 'Error retrieving reviews from Yotpo';
+      throw new Error(errorMessage);
+    }
+    throw new Error('An unexpected error occurred');
   }
 };
 
@@ -50,19 +53,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { method, query } = req;
 
   if (method === 'GET') {
-    const { id } = query; // ID du produit
+    const { id } = query;  // ID du produit
 
     if (!id) {
       return res.status(400).json({ message: 'Product ID is required' });
     }
 
     try {
-      const reviews = await fetchReviews(id as string);
+      const reviews = await fetchYotpoReviews(id as string);
       return res.status(200).json(reviews);
     } catch (error) {
       console.error('Error in handler:', error);  // Log d'erreur côté serveur
-      const axiosError = error as AxiosError<AxiosErrorResponse>;
-      const errorMessage = axiosError?.response?.data.message || 'Erreur lors de la récupération des avis';
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       return res.status(500).json({ message: errorMessage });
     }
   }

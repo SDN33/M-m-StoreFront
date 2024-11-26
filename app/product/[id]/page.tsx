@@ -227,13 +227,13 @@ const ProductPage: React.FC = () => {
               </p>
               {renderAOCBadge(product)}
             </div>
-            <div className="relative w-full max-w-[200px]">
+            <div className="relative w-full sm:max-w[200px] md:max-w[300px] lg:max-w-[400px]">
               <Image
               src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
               alt={product.name}
-              width={300}
-              height={400} // Adjusted height to maintain a consistent aspect ratio
-              className="mt-5 rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-125 cursor-zoom-in"
+              width={700}
+              height={800} // Adjusted height to maintain a consistent aspect ratio
+              className="mt-5 rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-110 cursor-zoom-in"
               loading="lazy"
               style={{ objectFit: 'cover' }}
               />
