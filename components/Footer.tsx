@@ -16,7 +16,7 @@ const Footer = () => {
               src="/images/visa.png"
               alt="Visa"
               height={30}
-              width={50}
+              width={30}
             />
           </a>
           <a href="https://www.mastercard.fr">
@@ -24,7 +24,7 @@ const Footer = () => {
               src="/images/mastercard.png"
               alt="Mastercard"
               height={30}
-              width={50}
+              width={30}
             />
           </a>
           <a href="https://stripe.com/fr">
@@ -32,7 +32,7 @@ const Footer = () => {
               src="/images/stripe.webp"
               alt="Stripe"
               height={50}
-              width={50}
+              width={30}
             />
           </a>
           <div className="flex items-center text-gray-600">
