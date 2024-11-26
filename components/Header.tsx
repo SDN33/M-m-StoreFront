@@ -25,8 +25,6 @@ const Header: React.FC = () => {
     imgSrc: '/images/fr.png',
   });
 
-
-
   const toggleNosVinsPopup = () => {
     setIsNosVinsOpen((prev) => !prev);
     setIsMenuOpen(false);
