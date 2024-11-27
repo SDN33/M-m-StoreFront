@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Clock, ArrowRight, Rss } from "lucide-react";
 import he from "he";
+import Link from "next/link";
 
 // Simple date formatting function
 const formatDate = (dateString: string): string => {
@@ -132,6 +133,12 @@ const LatestArticles: React.FC = () => {
             </div>
           </div>
         ))}
+        <Link
+            href={`/blog`}
+            className="inline-flex items-center text-sm px-2 py-2 bg-blue-50 text-primary rounded-lg hover:bg-blue-100 transition-colors duration-200"
+          >
+            Voir tous nos articles →
+          </Link>
       </div>
     </div>
   );
