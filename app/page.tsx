@@ -19,7 +19,6 @@ export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isInitialRender, setIsInitialRender] = useState(true);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [scrollEnabled, setScrollEnabled] = useState(false);
   const [productsLoaded, setProductsLoaded] = useState(false);
 
   const mainContentRef = useRef<HTMLDivElement>(null);
@@ -121,7 +120,6 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (!scrollEnabled) return;
 
     const handleScroll = (e: WheelEvent) => {
       const target = e.target as Node;
@@ -164,14 +162,13 @@ export default function Home() {
     return () => {
       window.removeEventListener('wheel', handleScroll);
     };
-  }, [isMobile, isAtBottom, scrollEnabled]);
+  }, [isMobile, isAtBottom]);
 
   const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {
     setSelectedFilters((prev) => ({
       ...prev,
       [category]: filters
     }));
-    setScrollEnabled(true);
   };
 
   const resetAllFilters = () => {
