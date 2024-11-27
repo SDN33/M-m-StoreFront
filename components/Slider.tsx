@@ -9,18 +9,21 @@ const Slider = () => {
       id: 1,
       imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/v1732673811/100_engag%C3%A9e_pour_la_nature_1_znpf0c.webp',
       link: '/',
+      className: 'bg-center bg-cover',
+      lcp: true,
     },
     {
       id: 2,
       imageUrl: '/images/slider2.png',
       link: '/',
+      lcp: true,
     },
     {
       id: 3,
       imageUrl: '/images/slider1.png',
       link: '/',
+      lcp: true,
     },
-
   ];
 
   const nextSlide = useCallback(() => {
