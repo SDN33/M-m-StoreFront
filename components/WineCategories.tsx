@@ -121,7 +121,7 @@ const VendorsPage = () => {
           Nos Vignerons Partenaires&nbsp;
           <Wine size={32} className="md:inline text-white animate-ping duration-1000 hidden" />
         </h2>
-        <div className="border-b-4 border-primary w-full max-w-[50rem] my-2 slide-in-right mx-auto"></div>
+        <div className="border-b-4 border-white w-full max-w-[50rem] my-2 slide-in-right mx-auto"></div>
       </div>
 
         <div>
