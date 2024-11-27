@@ -11,10 +11,14 @@ const fetchUserOrders = async () => {
         },
       }
     );
-    return response.data;
+    if (response.data && Array.isArray(response.data)) {
+      return response.data; // Retourne les commandes
+    } else {
+      throw new Error('Aucune commande trouvée.');
+    }
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.error('Error fetching user orders:', error.response?.data || error.message);
+      console.error(`Error fetching user orders from ${process.env.WC_API_DOMAIN}/wp-json/wc/v3/orders:`, error.response?.data || error.message);
     } else {
       console.error('Error fetching user orders:', error);
     }
@@ -26,8 +30,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
-    res.status(405).end();
-    return;
+    return res.status(405).json({ message: 'Méthode HTTP non autorisée' });
   }
 
   try {
@@ -35,6 +38,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(200).json(orders);
   } catch (error) {
     console.error('Error in handler:', error);
-    res.status(500).json({ error: 'Impossible de récupérer vos commandes. Réessayez plus tard.' });
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        res.status(500).json({ error: 'Erreur de l\'API WooCommerce, veuillez réessayer plus tard.' });
+      } else if (error.request) {
+        res.status(500).json({ error: 'Aucune réponse du serveur WooCommerce, veuillez réessayer plus tard.' });
+      } else {
+        res.status(500).json({ error: 'Erreur interne, veuillez réessayer plus tard.' });
+      }
+    } else {
+      res.status(500).json({ error: 'Erreur inconnue, veuillez réessayer plus tard.' });
+    }
   }
 }
