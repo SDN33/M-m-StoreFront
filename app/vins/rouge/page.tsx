@@ -11,7 +11,6 @@ import BackToTop from '@/components/BackToTop';
 
 export default function RedWinePage() {
   const [isMobile, setIsMobile] = useState(false);
-  const [showMobileFilter, setShowMobileFilter] = useState(false);
 
   const [selectedFilters, setSelectedFilters] = useState({
     color: ['Rouge'],
@@ -67,15 +66,6 @@ export default function RedWinePage() {
           </h2>
           <h3 className='text-center text-sm text-black-500 mt-4 mx-10'> Les vins rouges sont des vins obtenus par la fermentation de raisins noirs ou de raisins blancs à peau rouge. Ils se caractérisent par leur couleur rouge, qui peut varier du rouge violacé jeune au rouge brique pour les vins plus âgés. Ils se distinguent des vins blancs et des vins rosés par leur couleur, mais aussi par leur mode de vinification et leur goût.</h3>
 
-          {isMobile && (
-            <button
-              onClick={() => setShowMobileFilter(true)}
-              className="fixed bottom-6 right-6 bg-red-600 text-white p-4 rounded-full shadow-lg z-10"
-            >
-              Filtres
-            </button>
-          )}
-
           <ProductsCards
             selectedFilters={selectedFilters}
             onAddToCart={(product) => console.log('Add to cart:', product)}
@@ -88,24 +78,13 @@ export default function RedWinePage() {
         <Slogan />
         <BackToTop />
       </main>
+      <div className='sm:flex md:hidden lg:hidden'>
+        <MobileProductFilter
+          selectedFilters={selectedFilters}
+          onFilterChange={handleFilterChange}
+        />
+      </div>
 
-      {isMobile && showMobileFilter && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-20 flex items-center justify-center overflow-hidden">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 max-h-[90vh] overflow-y-auto">
-            <MobileProductFilter
-              selectedFilters={selectedFilters}
-              onFilterChange={handleFilterChange}
-            />
-            <button
-              onClick={() => setShowMobileFilter(false)}
-              className="mt-4 bg-red-600 text-white w-full py-2 rounded-lg"
-              aria-label="Fermer les filtres"
-            >
-              Fermer
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
