@@ -142,14 +142,14 @@ const VendorsPage = () => {
           Nos Vignerons Partenaires&nbsp;
           <Wine size={32} className="inline text-white animate-ping duration-1000" />
         </h2>
-        <div className="border-b-4 border-primary w-full max-w-[50rem] my-2 slide-in-right mx-auto"></div>
+        <div className="border-b-4 border-primary w-full max-w-[50rem] my-2 mx-auto"></div>
       </div>
       <div className="max-w-5xl mx-auto p-6">
         <div>
-          <p className="text-center text-xl font-extrabold -mt-4 mb-4 slide-in-right text-teal-800">
+          <p className="text-center text-xl font-extrabold -mt-4 mb-4 text-teal-800">
             &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
           </p>
-          <p className="text-center text-sm font-extrabold -mt-2 slide-in-right">
+          <p className="text-center text-sm font-extrabold -mt-2">
             Nos vignerons s&apos;engagent pour une agriculture respectueuse de l&apos;environnement,
             garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
             Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique.
