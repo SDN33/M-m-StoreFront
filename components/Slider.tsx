@@ -14,13 +14,13 @@ const Slider = () => {
     },
     {
       id: 2,
-      imageUrl: '/images/slider2.png',
+      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto:best/v1732715675/slider2_ipsxcq.webp',
       link: '/',
       lcp: true,
     },
     {
       id: 3,
-      imageUrl: '/images/slider1.png',
+      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto:best/v1732715675/slider1_kvcute.webp',
       link: '/',
       lcp: true,
     },
