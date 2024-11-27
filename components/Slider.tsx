@@ -7,7 +7,7 @@ const Slider = () => {
   const slides = [
     {
       id: 1,
-      imageUrl: '/images/slider3.png',
+      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/v1732673811/100_engag%C3%A9e_pour_la_nature_1_znpf0c.webp',
       link: '/',
     },
     {
