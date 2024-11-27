@@ -17,7 +17,6 @@ import PromoCode from '@/components/PromoCode';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
-  const [isInitialRender, setIsInitialRender] = useState(true);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [scrollEnabled, setScrollEnabled] = useState(false);
   const [productsLoaded, setProductsLoaded] = useState(false);
@@ -42,10 +41,6 @@ export default function Home() {
   const [isAtBottom, setIsAtBottom] = useState(false);
 
   useEffect(() => {
-    // Minimal loading state
-    const loadingTimeout = setTimeout(() => {
-      setIsInitialRender(false);
-    }, 1000);
 
     // Reset scroll position immediately on load
     window.scrollTo(0, 0);
@@ -95,7 +90,6 @@ export default function Home() {
     return () => {
       window.removeEventListener('load', resetScroll);
       clearTimeout(resetScrollTimeout);
-      clearTimeout(loadingTimeout);
     };
   }, []);
 
@@ -187,21 +181,7 @@ export default function Home() {
       region__pays: [],
       categories: []
     });
-  };
 
-  // Minimal loading state - empty div for 2 seconds
-  if (isInitialRender) {
-    return (
-      <div
-        className="fixed inset-0 bg-white flex items-center justify-center"
-        style={{ zIndex: 9999 }}
-      >
-        {/* Optional: Add a subtle loading indicator */}
-        <div className="animate-ping w-16 h-16 bg-gray-200 rounded-full">
-          <div className="w-16 h-16 bg-primary rounded-full" />
-        </div>
-      </div>
-    );
   }
 
   return (
