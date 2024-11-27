@@ -142,7 +142,7 @@ const VendorsPage = () => {
           Nos Vignerons Partenaires&nbsp;
           <Wine size={32} className="inline text-white animate-ping duration-1000" />
         </h2>
-        <div className="border-b-4 border-primary w-full max-w-[50rem] my-2 mx-auto"></div>
+        <div className="border-b-4 border-white w-full max-w-[50rem] my-2 mx-auto"></div>
       </div>
       <div className="max-w-5xl mx-auto p-6">
         <div>

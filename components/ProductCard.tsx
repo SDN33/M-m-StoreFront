@@ -160,38 +160,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       ],
 
       hautDeGamme: [
-        `${product.appellation?.toUpperCase() || 'Vin'} Haut de Gamme`,
-        `${product.appellation?.toUpperCase() || 'Vin'} d'Exception`,
-        `${product.appellation?.toUpperCase() || 'Vin'} Premium`,
         `${product.appellation?.toUpperCase() || 'Vin'} de Prestige`,
-        `${product.appellation?.toUpperCase() || 'Vin'} Grand Cru`
       ],
 
       coupDeCoeur: [
         "Coup De Coeur de Mémé",
-        "La Sélection de Mémé",
-        "La Pépite de Mémé"
       ],
 
       biodynamie: [
-        "Vin Démeter qui respecte la nature",
         "Culture Biodynamique Démeter",
-        "Agriculture Biodynamique Démeter"
       ],
 
       petillant: (categoryName: string) => [
         `Un ${categoryName} À Découvrir`,
-        `${categoryName} d'Exception`,
-        `${categoryName} Festif`,
-        `Un ${categoryName} Pétillant de Plaisir`,
-        `${categoryName} de Caractère`
       ],
 
       decouverte: (appellation: string) => [
         `Un ${appellation.toUpperCase() || 'Vin'} À Découvrir`,
-        `Un ${appellation.toUpperCase() || 'Vin'} d'Exception`,
-        `Un ${appellation.toUpperCase() || 'Vin'} Unique`,
-        `Le ${appellation.toUpperCase() || 'Vin'} qui Surprend`,
       ]
     };
 
