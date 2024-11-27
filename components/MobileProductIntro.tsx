@@ -54,26 +54,24 @@ const MobileProductsIntro: React.FC = () => {
 
   return (
     <>
-      <div className='-mt-10 relative w-full pb-[100%]'> {/* 16:9 aspect ratio container */}
-        <video
-          src="https://res.cloudinary.com/daroyxenr/video/upload/q_auto:eco/v1732411795/Design_sans_titre_7_1_nobrzq.mp4"
-          width={1920}
-          height={1080}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
+      <div className='-mt-2 relative h-full w-full pb-[100%]'> {/* 16:9 aspect ratio container */}
+        <br /><br />
+        <Image
+          src="/images/mbnr.webp"
+          width={600}
+          height={460}
+          quality={100}
+          priority={true}
+          alt="100% engagée pour la nature"
           className="absolute top-0 left-0 w-full h-full object-cover"
-          onLoadedData={(e) => {
-        const video = e.target as HTMLVideoElement;
-        video.play();
-        if (typeof caches !== 'undefined') {
-          caches.open('video-cache').then(cache => {
-            cache.add(video.src);
-          });
-        }
-          }}
+        onLoad={(e) => {
+          const image = e.target as HTMLImageElement;
+          if (typeof caches !== 'undefined') {
+            caches.open('image-cache').then(cache => {
+              cache.add(image.src);
+            });
+          }
+        }}
         />
       </div>
 
@@ -81,12 +79,12 @@ const MobileProductsIntro: React.FC = () => {
         ref={introRef}
         className={`transition-all duration-1000 ${
           isVisible ? 'opacity-100' : 'opacity-0'
-        } flex flex-col items-center text-center lg:hidden bg-primary py-6 min-h-[300px] h-auto`}
+        } flex flex-col items-center text-center lg:hidden bg-primary py-6 min-h-[200px] h-auto`}
         style={{ overflow: 'hidden', transition: 'opacity 1s ease, height 1s ease' }}
       >
 
         {/* Logos en haut - Added fixed container */}
-        <div className="flex space-x-8 mt-4 h-[35px] items-center">
+        <div className="flex space-x-8 h-[35px] items-center">
           <div className="w-[28px] h-[20px] relative">
             <Image
               src="/images/logobio1.webp"
@@ -119,7 +117,6 @@ const MobileProductsIntro: React.FC = () => {
         {/* Texte central avec compteur */}
         <div className="flex flex-col items-center mx-auto mt-6 slide-in-right">
           <h1 className="text-2xl font-extrabold text-white tracking-tight text-center leading-tight">
-            {counter.toLocaleString()} vins bio <br />
             en direct des vignerons(nes)
             <span className="block text-white text-xs">
               Tu sais, celles et ceux qui respectent la terre, ses locataires...
