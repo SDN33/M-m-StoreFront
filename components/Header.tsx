@@ -100,7 +100,7 @@ const Header: React.FC = () => {
           <div className="hidden lg:flex items-center justify-between h-14 relative">
             {/* Container des logos avec dimensions fixes */}
             <div className="relative w-[280px] h-[90px] flex items-center">
-              <div className="absolute left-4 top-0 h-full w-[71px] flex items-center justify-center">
+              <div className="absolute -left-0 top-0 h-full w-[71px] flex items-center justify-center">
                 <Link href="/">
                   <Image
                     src="/images/meme-pas-contente.png"
@@ -113,7 +113,7 @@ const Header: React.FC = () => {
                 </Link>
               </div>
 
-              <div className="absolute left-16 h-full w-[210px] flex items-center justify-center">
+              <div className="absolute left-16 pr-4 h-full w-[210px] flex items-center justify-center">
                 <Link href="/">
                   <Image
                     src="/images/memelogo.png"
