@@ -22,6 +22,7 @@ const getUserProfile = async (token, req, res) => {
 
         return response.data;
     } catch (error) {
+        console.error('Error fetching user profile:', error); // Log pour le débogage
         throw new Error(error.response?.data?.message || "Failed to fetch user data.");
     }
 };
@@ -41,6 +42,7 @@ export default async function handler(req, res) {
         const userData = await getUserProfile(token, req, res);
         return res.status(200).json(userData);
     } catch (error) {
+        console.error('Error in handler:', error); // Log pour le débogage
         return res.status(401).json({ message: error.message });
     }
 }

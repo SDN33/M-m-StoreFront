@@ -135,7 +135,7 @@ const VendorsPage = () => {
             garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
             Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique.
           </p>
-          <div className='border-t-2 border-primary w-16 mt-4 flex mx-auto'></div>
+          <div className='border-t-2 border-white w-16 mt-4 flex mx-auto'></div>
           <br /><br />
         </div>
 
