@@ -70,9 +70,9 @@ const Slider = () => {
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`w-3 h-3 rounded-full transition-colors duration-300
+            className={`w-8 h-5 rounded-full transition-colors duration-300
                        ${currentSlide === index
-                         ? 'bg-white scale-100'
+                         ? 'bg-white/90 scale-100'
                          : 'bg-white/50 scale-90 hover:scale-95'}`}
             aria-label={`Aller au slide ${index + 1}`}
           />
