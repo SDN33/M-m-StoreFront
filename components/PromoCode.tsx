@@ -1,5 +1,6 @@
-import { BadgeEuro } from "lucide-react";
+import { BadgeEuro, Snowflake } from "lucide-react";
 import { useState, useEffect } from "react";
+
 
 const PromoCode: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -30,9 +31,15 @@ const PromoCode: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const snowflakes = [
+    { left: "10%", animationDelay: "0s", opacity: 0.8, size: 20 },
+    { left: "50%", animationDelay: "1s", opacity: 0.5, size: 15 },
+    { left: "90%", animationDelay: "2s", opacity: 0.3, size: 10 },
+  ];
+
   return (
     <div
-      className={` shadow-xl -mt-8 bg-primary p-4 w-fit h-fit fixed bottom-4 right-4 z-50 transform transition-all duration-500 ${isVisible ? 'translate-x-0' : 'translate-x-full'}`}
+      className={` shadow-xl -mt-8 bg-primary border-teal/80 border-4 p-4 w-fit h-fit fixed bottom-4 right-4 z-50 transform transition-all duration-500 ${isVisible ? 'translate-x-0' : 'translate-x-full'}`}
       style={{
         borderRadius: "10px",
         display: "flex",
@@ -45,10 +52,28 @@ const PromoCode: React.FC = () => {
     >
       {isVisible && !isHovered ? (
         <div style={{ textAlign: "center", color: "#fff" }}>
-          <div className="border-t-4 border-white w-8 mx-auto mb-2" />
-          <BadgeEuro />
+          {/* Flocons de neige animés */}
+          <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+            {snowflakes.map((flake, index) => (
+              <div
+                key={index}
+                className="absolute snowflake"
+                style={{
+                  left: flake.left,
+                  animationDelay: flake.animationDelay,
+                  opacity: flake.opacity,
+                }}
+              >
+                <Snowflake size={flake.size} color="white" className="opacity-30 animate-fall" />
+              </div>
+            ))}
+          </div>
+            <div className="border-t-4 border-white w-8 mx-auto mb-2" />
+            <div className="flex justify-center">
+            <BadgeEuro />
+            </div>
           <h3><span style={{ fontWeight: "black" }}>PROMO DES FETES -10%</span></h3>
-          <p className="pt-1" style={{ fontSize: "14px" }}><strong className="text-xl font-black text-red-800">meme10</strong> <br />sur votre première commande <br /> (dès 50€ d&apos;achat)</p>
+          <p className="pt-1" style={{ fontSize: "14px" }}><strong className="text-xl font-black">meme10</strong> <br />sur votre première commande <br /> (dès 50€ d&apos;achat)</p>
         </div>
       ) : null}
     </div>
