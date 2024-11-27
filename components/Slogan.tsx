@@ -73,8 +73,8 @@ const Slogan: React.FC = () => {
       >
         <defs>
           <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" style={{ stopColor: '#FF6B4A', stopOpacity: 0.6 }} />
-            <stop offset="100%" style={{ stopColor: '#ff8568', stopOpacity: 0.6 }} />
+            <stop offset="0%" style={{ stopColor: '#FF6B4A', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: '#0000', stopOpacity: 1 }} />
           </linearGradient>
         </defs>
         <path fill="url(#grad)">
@@ -105,7 +105,7 @@ const Slogan: React.FC = () => {
         />
       </div>
 
-      <div className="relative max-w-4xl mx-auto text-center text-white z-10 px-4 mt-4">
+      <div className="relative max-w-4xl mx-auto text-center text-white z-10 px-4 mt-6">
         <h2
           ref={h2Ref}
           className={`text-3xl md:text-4xl leading-tight font-black mb-2 transition-all duration-1000 ${
