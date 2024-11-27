@@ -62,10 +62,10 @@ export default function OtherWinesPage() {
             Nos Autres Vins
           </h1>
           <h2 className="text-center text-lg text-black mt-4 font-bold">
-            Découvrez notre sélection d'autres vins
+            Découvrez notre sélection d&apos;autres vins
           </h2>
           <h3 className='text-center text-sm text-black-500 mt-4 mx-10'>
-            Nos autres vins incluent une variété d'options qui ne se classent pas dans les catégories traditionnelles de vin rouge, blanc, ou rosé. Ces vins sont souvent uniques et offrent des saveurs intéressantes à découvrir.
+            Nos autres vins incluent une variété d&apos;options qui ne se classent pas dans les catégories traditionnelles de vin rouge, blanc, ou rosé. Ces vins sont souvent uniques et offrent des saveurs intéressantes à découvrir.
           </h3>
 
           <ProductsCards
