@@ -61,6 +61,8 @@ export default function RedWinePage() {
           <h1 className="text-center text-4xl text-white font-black bg-red-800 p-8 rounded-t-xl">
             Nos Vins Rouges
           </h1>
+          <div className="border-b-4 border-white w-full max-w-[50rem] -mt-1 mx-auto"></div>
+
           <h2 className="text-center text-lg text-black mt-4 font-bold">
             Découvrez notre sélection de vins rouges
           </h2>

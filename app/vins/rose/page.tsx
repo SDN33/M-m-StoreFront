@@ -61,6 +61,8 @@ export default function RoseWinePage() {
           <h1 className="text-center text-4xl text-white font-black bg-pink-500 p-8 rounded-t-xl">
             Nos Vins Rosés
           </h1>
+          <div className="border-b-4 border-white w-full max-w-[50rem] -mt-1 mx-auto"></div>
+
           <h2 className="text-center text-lg text-black mt-4 font-bold">
             Découvrez notre sélection de vins rosés
           </h2>
