@@ -191,7 +191,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         `Un ${appellation.toUpperCase() || 'Vin'} À Découvrir`,
         `Un ${appellation.toUpperCase() || 'Vin'} d'Exception`,
         `Un ${appellation.toUpperCase() || 'Vin'} Unique`,
-        `Le ${appellation.toUpperCase() || 'Vin'} qui va vous Surprendre`
+        `Le ${appellation.toUpperCase() || 'Vin'} qui Surprend`,
       ]
     };
 
