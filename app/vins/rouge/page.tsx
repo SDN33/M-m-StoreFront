@@ -80,7 +80,7 @@ export default function RedWinePage() {
         <Slogan />
         <BackToTop />
       </main>
-      <div className='sm:flex md:hidden lg:hidden'>
+      <div className='sm:flex md:flex lg:hidden'>
         <MobileProductFilter
           selectedFilters={selectedFilters}
           onFilterChange={handleFilterChange}
