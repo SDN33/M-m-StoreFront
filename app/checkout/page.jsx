@@ -285,7 +285,7 @@ const CheckoutPage = () => {
         >
           <h3 className="font-semibold">Point Relais (Indisponible)</h3>
           <p className="text-sm text-gray-600">Non disponible pour le moment</p>
-          <p className="font-semibold mt-2">{shippingCost.toFixed(2)}€</p>
+          {/* <p className="font-semibold mt-2">{shippingCost.toFixed(2)}€</p> */}
         </button>
       </div>
 
@@ -390,7 +390,6 @@ const CheckoutPage = () => {
         </span>
         <span className='font-bold'>{shippingCost === 0 ? <span className="text-teal-800">Offert</span> : `${shippingCost.toFixed(2)}€`}</span>
       </div>
-      {/* Coupon Section */}
       <div className="mt-4 space-y-2">
         <div className="flex gap-2">
           <input

@@ -91,7 +91,7 @@ const BoxtalMap = ({ onSelectPoint }) => {
       });
       alert(`Point relais sélectionné : ${selectedPoint.name}`);
     } else {
-      setError('Veuillez sélectionner un point relais sur la carte.');
+      alert('Veuillez sélectionner un point relais sur la carte.');
     }
   };
 
