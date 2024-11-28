@@ -37,7 +37,7 @@ const MobileHome: React.FC = () => {
   return (
     <div className="flex flex-col bg-gray-50 overflow-y-auto">
       <br /><br /><br /><br />
-      <div className="mt-12">
+      <div className="mt-8">
         <MobileProductsIntro />
         <div className="max-w-7xl mx-auto px-4 space-y-8">
           <section className="bg-white rounded-lg shadow">
