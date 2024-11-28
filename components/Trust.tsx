@@ -1,13 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { Mail } from "lucide-react";
 
 const Newsletter = () => {
-  const [email, setEmail] = React.useState("");
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setEmail("");
+
+    if (!email || !email.includes('@')) {
+      setMessage("Veuillez entrer une adresse email valide.");
+      return;
+    }
+
+    setIsLoading(true);
+    setMessage('');
+
+    try {
+      // Envoi de l'email à l'API backend
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        setMessage("Vous êtes inscrit à la newsletter !");
+        setEmail('');
+      } else {
+        setMessage("Une erreur est survenue. Essayez à nouveau.");
+      }
+    } catch {
+      setMessage("Erreur lors de l'envoi. Vérifiez votre connexion.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -23,9 +54,7 @@ const Newsletter = () => {
       />
       <div className="absolute inset-0 bg-black/70 z-10" />
       <div className="absolute inset-0 z-20 p-6 flex flex-col justify-center items-center text-white">
-        <h2 className="text-2xl md:text-3xl font-bold mb-2">
-          Newsletter
-        </h2>
+        <h2 className="text-2xl md:text-3xl font-bold mb-2">Newsletter</h2>
         <p className="text-lg mb-1 text-center">Des offres exclusives, des nouveautés...</p>
         <p className="font-semibold mb-4 text-center">Parole de Mémé, on ne spamme pas !</p>
         <form onSubmit={handleSubscribe} className="w-full max-w-md">
@@ -43,12 +72,14 @@ const Newsletter = () => {
             </div>
             <button
               type="submit"
+              disabled={isLoading}
               className="bg-gradient-to-r from-primary to-rose-800 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white py-3 px-6 rounded whitespace-nowrap"
             >
-              S&apos;inscrire
+              {isLoading ? "Chargement..." : "S'inscrire"}
             </button>
           </div>
         </form>
+        {message && <p className="mt-4 text-center">{message}</p>}
       </div>
     </div>
   );
