@@ -35,15 +35,15 @@ const MobileProductsIntro: React.FC = () => {
 
   return (
     <>
-      <div className='relative h-full w-full pb-48 pt-20'> {/* 16:9 aspect ratio container */}
+      <div className='relative h-full w-full pb-48 pt-20 md:pt-40'> {/* 16:9 aspect ratio container */}
         <br /><br />
         <Image
           src="/images/mbnr.webp"
           width={600}
-          height={460}
+          height={600}
           priority={true}
           alt="100% engagée pour la nature"
-          className="absolute top-0 left-0 w-full h-full object-cover"
+          className="absolute top-0 left-0 w-full h-full object-contain"
         onLoad={(e) => {
           const image = e.target as HTMLImageElement;
           if (typeof caches !== 'undefined') {
@@ -59,7 +59,7 @@ const MobileProductsIntro: React.FC = () => {
         ref={introRef}
         className={`transition-all duration-1000 ${
           isVisible ? 'opacity-100' : 'opacity-0'
-        } flex flex-col items-center text-center lg:hidden bg-primary py-6 min-h-[170px] h-auto`}
+        } flex flex-col items-center text-center md:hidden lg:hidden bg-primary py-6 min-h-[170px] h-auto`}
         style={{ overflow: 'hidden', transition: 'opacity 1s ease, height 1s ease' }}
       >
 
@@ -96,8 +96,8 @@ const MobileProductsIntro: React.FC = () => {
 
         {/* Texte central avec compteur */}
         <div className="flex flex-col items-center mx-auto mt-6 slide-in-right">
-          <h1 className="text-2xl font-extrabold text-white tracking-tight text-center leading-tight">
-        en direct des vignerons<span className='text-sm'> (-nes)</span>
+          <h1 className="text-xl font-extrabold tracking-tight text-center leading-tight text-white">
+        en direct des vignerons<span className='text-sm'>-nes</span>
         <span className="block text-white text-xs">
           Tu sais, celles et ceux qui respectent la terre, ses locataires...
         </span>

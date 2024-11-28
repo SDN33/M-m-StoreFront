@@ -54,9 +54,9 @@ const ProductsIntro: React.FC = () => {
 
     <div
       ref={introRef}
-      className="relative overflow-hidden bg-white px-4 sm:px-6 md:px-8 lg:px-18 sm:py-24 md:py-32 shadow-lg text-center slide-in mt-2 md:mt-16 lg:mt-2"
+      className="relative overflow-hidden bg-white px-4 sm:px-6 md:px-8 lg:px-18 sm:py-24 md:py-32 shadow-lg text-center slide-in mt-2 md:mt-16 lg:mt-2 xl:mt-52"
     >
-      <div className="container mx-auto -mb-60 -mt-10 md:-mt-14 md:mb-8 lg:-mb-60">
+      <div className="container mx-auto -mb-60 -mt-10 md:-mt-14 md:mb-8 lg:-mb-60 xl:mb-0">
       <div className="relative z-10 flex flex-col items-center lg:flex-row lg:justify-between">
         {/* Left Logos (Mobile Hidden) */}
         <div className="hidden lg:flex space-x-4 mb-4 lg:mb-0">

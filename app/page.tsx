@@ -19,7 +19,6 @@ export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isInitialRender, setIsInitialRender] = useState(true);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [scrollEnabled, setScrollEnabled] = useState(false);
   const [productsLoaded, setProductsLoaded] = useState(false);
 
   const mainContentRef = useRef<HTMLDivElement>(null);
@@ -39,7 +38,6 @@ export default function Home() {
     categories: []
   });
 
-  const [isAtBottom, setIsAtBottom] = useState(false);
 
   useEffect(() => {
     // Minimal loading state
@@ -120,58 +118,13 @@ export default function Home() {
     };
   }, []);
 
-  useEffect(() => {
-    if (!scrollEnabled) return;
 
-    const handleScroll = (e: WheelEvent) => {
-      const target = e.target as Node;
-      const mainContent = mainContentRef.current;
-      const footer = footerRef.current;
-      const filterContent = filterContentRef.current;
-
-      if (filterContent?.contains(target)) {
-        return;
-      }
-
-      if (mainContent?.contains(target) && footer) {
-        const mainScrollHeight = mainContent.scrollHeight;
-        const mainScrollTop = mainContent.scrollTop;
-        const mainClientHeight = mainContent.clientHeight;
-
-        const isNearBottom = mainScrollHeight - (mainScrollTop + mainClientHeight) < 10;
-
-        setIsAtBottom(isNearBottom);
-
-        if (isNearBottom && e.deltaY > 0) {
-          e.preventDefault();
-          window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth'
-          });
-        }
-
-        if (e.deltaY < 0 && isAtBottom) {
-          e.preventDefault();
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          });
-        }
-      }
-    };
-
-    window.addEventListener('wheel', handleScroll);
-    return () => {
-      window.removeEventListener('wheel', handleScroll);
-    };
-  }, [isMobile, isAtBottom, scrollEnabled]);
 
   const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {
     setSelectedFilters((prev) => ({
       ...prev,
       [category]: filters
     }));
-    setScrollEnabled(true);
   };
 
   const resetAllFilters = () => {
