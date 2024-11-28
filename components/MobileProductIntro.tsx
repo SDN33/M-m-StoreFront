@@ -116,7 +116,7 @@ const MobileProductsIntro: React.FC = () => {
         </div>
 
         {/* Texte central avec compteur */}
-        <div className="flex flex-col items-center mx-auto mt-6 slide-in-right">
+        <div className="flex flex-col items-center mx-auto mt-3 slide-in-right">
           <h1 className="text-2xl font-extrabold text-white tracking-tight text-center leading-tight">
             en direct des vignerons(nes)
             <span className="block text-white text-xs">
@@ -126,7 +126,7 @@ const MobileProductsIntro: React.FC = () => {
         </div>
 
         {/* Logos en bas - Added fixed container */}
-        <div className="flex space-x-8 mt-8 mb-4 h-[35px] items-center">
+        <div className="flex space-x-8 mt-4 mb-4 h-[35px] items-center">
           <div className="w-[38px] h-[38px] relative">
             <Image
               src="/images/logointro.jpg"
