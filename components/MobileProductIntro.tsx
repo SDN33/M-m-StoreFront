@@ -95,7 +95,7 @@ const MobileProductsIntro: React.FC = () => {
               priority={true}
             />
           </div>
-          <div className="w-[35px] h-[35px] relative">
+          <div className="w-[40px] h-[40px] relative">
             <Image
               src="/images/Logobioeu.jpg"
               alt="Bio euro logo"
@@ -136,7 +136,7 @@ const MobileProductsIntro: React.FC = () => {
               priority={true}
             />
           </div>
-          <div className="w-[38px] h-[38px] relative">
+          <div className="w-[45px] h-[45px] relative">
             <Image
               src="/images/déméter.png"
               alt="demeter logo"
