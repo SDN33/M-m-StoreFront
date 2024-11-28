@@ -283,8 +283,8 @@ const CheckoutPage = () => {
           onClick={() => setFormData(prev => ({ ...prev, deliveryMethod: 'pickup' }))}
           className={`flex-1 p-4 border rounded-lg ${formData.deliveryMethod === 'pickup' ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}`}
         >
-          <h3 className="font-semibold">Point Relais</h3>
-          <p className="text-sm text-gray-600">2-4 jours ouvrés</p>
+          <h3 className="font-semibold">Point Relais (Indisponible)</h3>
+          <p className="text-sm text-gray-600">Non disponible pour le moment</p>
           <p className="font-semibold mt-2">{shippingCost.toFixed(2)}€</p>
         </button>
       </div>
