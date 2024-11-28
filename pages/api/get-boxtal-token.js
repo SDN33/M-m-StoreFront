@@ -6,12 +6,12 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Construct the authorization header
-    const encodedCredentials = Buffer.from(`${process.env.BOXTEL_ACCESS_KEY}:${process.env.BOXTEL_SECRET_KEY}`).toString('base64');
+    const encodedCredentials = Buffer.from(
+      `${process.env.BOXTEL_ACCESS_KEY}:${process.env.BOXTEL_SECRET_KEY}`
+    ).toString('base64');
 
-    // Make the API request to Boxtal
     const response = await axios.post(
-      'https://api.boxtal.build/iam/account-app/token',
+      'https://api.boxtal.com/iam/account-app/token',
       {},
       {
         headers: {
@@ -21,12 +21,13 @@ export default async function handler(req, res) {
       }
     );
 
-    // Send the access token as the response
     res.status(200).json({
       token: response.data.accessToken,
     });
   } catch (error) {
-    console.error('Error fetching Boxtal access token:', error);
-    res.status(500).json({ error: 'Failed to fetch access token' });
+    console.error('Error fetching Boxtal access token:', error?.response?.data || error.message);
+    res.status(error?.response?.status || 500).json({
+      error: error?.response?.data?.message || 'Failed to fetch access token',
+    });
   }
 }

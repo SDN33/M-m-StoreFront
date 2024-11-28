@@ -4,57 +4,96 @@ import { useEffect, useState } from 'react';
 const BoxtalMap = ({ onSelectPoint }) => {
   const [boxtalLoaded, setBoxtalLoaded] = useState(false);
   const [accessToken, setAccessToken] = useState(null);
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [postcode, setPostcode] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [selectedPoint, setSelectedPoint] = useState(null);
 
+  // Fetch token on mount
   useEffect(() => {
-    // Fetch access token from your API
-    const fetchAccessToken = async () => {
+    const fetchToken = async () => {
       try {
-        const response = await fetch('/api/get-boxtal-token'); // Replace with your endpoint
-        const data = await response.json();
-        setAccessToken(data.token); // Assuming response has token key
-      } catch (error) {
-        console.error('Failed to fetch access token:', error);
+        setLoading(true);
+        const res = await fetch('/api/get-boxtal-token');
+        const data = await res.json();
+        if (data?.token) {
+          setAccessToken(data.token);
+        } else {
+          throw new Error('Token manquant.');
+        }
+      } catch (err) {
+        setError('Erreur lors de la récupération du token.');
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
     };
-
-    fetchAccessToken();
+    fetchToken();
   }, []);
 
-  useEffect(() => {
-    if (boxtalLoaded && accessToken) {
+  const handleSearch = () => {
+    if (!boxtalLoaded || !accessToken) {
+      setError("La carte n'est pas encore prête.");
+      return;
+    }
+    setError(null);
+    setLoading(true);
 
-      // Initialize BoxtalMaps with access token and baseUrl
+    try {
       const boxtalMaps = new BoxtalMaps({
         domToLoadMap: '#parcel-point-map',
         accessToken,
-        baseUrl: 'https://maps.boxtal.com/app/v3', // Correct base URL
+        baseUrl: 'https://maps.boxtal.com/app/v3',
         config: {
           locale: 'fr',
           parcelPointNetworks: [
-            {
-              code: ['CHRP_NETWORK', 'MONR_NETWORK', 'SOGP_NETWORK'],
-              markerTemplate: { color: '#94a1e8' },
-            },
+            { code: 'MONR_NETWORK', markerTemplate: { color: '#94a1e8' } },
+            { code: 'CHRP_NETWORK', markerTemplate: { color: '#FF4500' } },
           ],
-          options: {
-            primaryColor: '#00FA9A',
-            autoSelectNearestParcelPoint: true,
-          },
+          options: { primaryColor: '#00FA9A', autoSelectNearestParcelPoint: true },
         },
         onMapLoaded: () => {
-          console.log('Boxtal map loaded successfully');
+          console.log('Carte Boxtal chargée.');
+          boxtalMaps.searchParcelPoints(
+            { country: 'FR', zipCode: postcode, city, street: address },
+            (point) => {
+              console.log('Point relais sélectionné :', point);
+              setSelectedPoint(point);
+            }
+          );
         },
       });
 
-      // Handle parcel points response and trigger onSelectPoint callback
       boxtalMaps.onSearchParcelPointsResponse((points) => {
-        if (points && points.length > 0) {
-          console.log('Parcel points found:', points);
-          onSelectPoint(points[0]); // Send the first point to onSelectPoint callback
+        setLoading(false);
+        if (points.length > 0) {
+          console.log('Points relais trouvés :', points);
+        } else {
+          setError('Aucun point relais trouvé.');
         }
       });
+    } catch (err) {
+      setError("Erreur lors de l'initialisation de la carte.");
+      console.error(err);
+      setLoading(false);
     }
-  }, [boxtalLoaded, accessToken, onSelectPoint]);
+  };
+
+  const handleSelectPoint = () => {
+    if (selectedPoint) {
+      onSelectPoint({
+        name: selectedPoint.name,
+        address: selectedPoint.address,
+        city: selectedPoint.city,
+        postcode: selectedPoint.postcode,
+      });
+      alert(`Point relais sélectionné : ${selectedPoint.name}`);
+    } else {
+      setError('Veuillez sélectionner un point relais sur la carte.');
+    }
+  };
 
   return (
     <>
@@ -62,9 +101,50 @@ const BoxtalMap = ({ onSelectPoint }) => {
         src="https://maps.boxtal.com/app/v3/assets/js/boxtal-maps.js"
         strategy="lazyOnload"
         onLoad={() => setBoxtalLoaded(true)}
-        onError={() => console.error('Failed to load Boxtal Maps script.')}
+        onError={() => setError('Échec du chargement du script Boxtal Maps.')}
       />
-      <div id="parcel-point-map" style={{ width: '100%', height: '200px' }}></div>
+      <div className="p-4 space-y-4">
+        <h2 className="text-xl font-bold">Rechercher un point relais</h2>
+        <div className="flex flex-col space-y-2">
+          <input
+            type="text"
+            placeholder="Adresse (facultatif)"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            className="p-2 border rounded"
+          />
+          <input
+            type="text"
+            placeholder="Ville"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            className="p-2 border rounded"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Code postal"
+            value={postcode}
+            onChange={(e) => setPostcode(e.target.value)}
+            className="p-2 border rounded"
+            required
+          />
+          <button
+            onClick={handleSearch}
+            className="p-3 bg-teal-800 text-white rounded hover:bg-teal-700"
+          >
+            {loading ? 'Recherche en cours...' : 'Rechercher'}
+          </button>
+        </div>
+        {error && <p className="text-red-600">{error}</p>}
+      </div>
+      <div id="parcel-point-map" style={{ width: '100%', height: '400px', marginTop: '1rem' }}></div>
+      <button
+        className="mt-4 bg-teal-800 text-white p-3 rounded hover:bg-teal-900"
+        onClick={handleSelectPoint}
+      >
+        Choisir ce point relais
+      </button>
     </>
   );
 };

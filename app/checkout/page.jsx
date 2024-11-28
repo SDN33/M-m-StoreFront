@@ -37,6 +37,7 @@ const CheckoutPage = () => {
   const totalPrice = (cartDetails.total + shippingCost - discount).toFixed(2);
 
   const applyCoupon = async () => {
+    setLoading(true);
     try {
       const response = await fetch('/api/coupons');
       if (!response.ok) throw new Error('Erreur lors de la récupération des coupons');
@@ -44,25 +45,62 @@ const CheckoutPage = () => {
       const coupons = await response.json();
       const matchedCoupon = coupons.find((c) => c.code === coupon);
 
-      if (matchedCoupon) {
-        const discountValue =
-          matchedCoupon.discount_type === 'percent'
-            ? cartDetails.total * (parseFloat(matchedCoupon.amount) / 100)
-            : parseFloat(matchedCoupon.amount);
-
-        setDiscount(discountValue);
-        setError('');
-        setNotification({ type: 'success', message: 'Coupon ajouté avec succès ! 🎉' });
-      } else {
+      if (!matchedCoupon) {
         setError('Code de coupon invalide');
         setDiscount(0);
         setNotification({ type: 'error', message: 'Votre coupon est invalide ou expiré.' });
+        return;
       }
+
+      if (matchedCoupon.date_expires && new Date(matchedCoupon.date_expires) < new Date()) {
+        setError('Ce coupon a expiré.');
+        setDiscount(0);
+        setNotification({ type: 'error', message: 'Votre coupon a expiré.' });
+        return;
+      }
+
+      if (matchedCoupon.usage_limit && matchedCoupon.usage_count >= matchedCoupon.usage_limit) {
+        setError('Ce coupon a atteint sa limite d\'utilisation.');
+        setDiscount(0);
+        setNotification({ type: 'error', message: 'Ce coupon a atteint sa limite d\'utilisation.' });
+        return;
+      }
+
+      if (matchedCoupon.minimum_amount && cartDetails.total < parseFloat(matchedCoupon.minimum_amount)) {
+        setError(`Le montant minimum pour utiliser ce coupon est de ${matchedCoupon.minimum_amount}€.`);
+        setDiscount(0);
+        setNotification({ type: 'error', message: `Le montant minimum pour utiliser ce coupon est de ${matchedCoupon.minimum_amount}€.` });
+        return;
+      }
+
+      if (matchedCoupon.maximum_amount && cartDetails.total > parseFloat(matchedCoupon.maximum_amount)) {
+        setError(`Le montant maximum pour utiliser ce coupon est de ${matchedCoupon.maximum_amount}€.`);
+        setDiscount(0);
+        setNotification({ type: 'error', message: `Le montant maximum pour utiliser ce coupon est de ${matchedCoupon.maximum_amount}€.` });
+        return;
+      }
+
+      if (matchedCoupon.exclude_sale_items && cartDetails.items.some(item => item.on_sale)) {
+        setError('Ce coupon ne peut pas être utilisé sur des articles en promotion.');
+        setDiscount(0);
+        setNotification({ type: 'error', message: 'Ce coupon ne peut pas être utilisé sur des articles en promotion.' });
+        return;
+      }
+
+      const discountValue =
+        matchedCoupon.discount_type === 'percent'
+          ? cartDetails.total * (parseFloat(matchedCoupon.amount) / 100)
+          : parseFloat(matchedCoupon.amount);
+
+      setDiscount(discountValue);
+      setError('');
+      setNotification({ type: 'success', message: 'Coupon ajouté avec succès ! 🎉' });
     } catch (err) {
       console.error(err);
       setError('Impossible de vérifier le code du coupon. Veuillez réessayer plus tard.');
       setNotification({ type: 'error', message: 'Erreur réseau. Réessayez plus tard.' });
     } finally {
+      setLoading(false);
       setTimeout(() => setNotification(null), 3000);
     }
   };
@@ -88,37 +126,40 @@ const CheckoutPage = () => {
   };
 
   const handlePointSelect = (point) => {
-    setSelectedPoint(point);
-    setFormData(prev => ({ ...prev, deliveryMethod: 'pickup' }));
+    if (point && point.address && point.city && point.postcode) {
+      setSelectedPoint(point);
+      setFormData(prev => ({ ...prev, deliveryMethod: 'pickup' }));
+    } else {
+      console.error("Données du point relais incorrectes :", point);
+    }
   };
+
 
   const handleOrderSubmit = async () => {
     setLoading(true);
     try {
+      if (formData.deliveryMethod === 'pickup' && !selectedPoint) {
+        throw new Error('Aucun point relais sélectionné.');
+      }
+
+      const address = formData.deliveryMethod === 'pickup' ? selectedPoint.address : formData.address1;
+      if (!address || !formData.city || !formData.postcode) {
+        throw new Error('Adresse incomplète.');
+      }
+
       const orderData = {
-        payment_method: "stripe",
-        payment_method_title: "Stripe",
-        set_paid: true,
         billing: {
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          address_1: formData.deliveryMethod === 'pickup' ? selectedPoint.address : formData.address1,
+          address_1: address,
           city: formData.deliveryMethod === 'pickup' ? selectedPoint.city : formData.city,
           postcode: formData.deliveryMethod === 'pickup' ? selectedPoint.postcode : formData.postcode,
           email: formData.email,
           phone: formData.phone
         },
         shipping: {
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          address_1: formData.deliveryMethod === 'pickup' ? selectedPoint.address : formData.address1,
+          address_1: address,
           city: formData.deliveryMethod === 'pickup' ? selectedPoint.city : formData.city,
           postcode: formData.deliveryMethod === 'pickup' ? selectedPoint.postcode : formData.postcode,
         },
-        line_items: cartDetails.items.map((item) => ({
-          product_id: item.product_id,
-          quantity: item.quantity,
-        })),
         shipping_lines: [{
           method_id: formData.deliveryMethod,
           method_title: formData.deliveryMethod === 'pickup' ? 'Point Relais' : 'Livraison Standard',
@@ -131,11 +172,12 @@ const CheckoutPage = () => {
       router.push(`/thank-you?order_id=${orderResponse.id}`);
     } catch (err) {
       console.error(err);
-      setError('La création de la commande a échoué. Veuillez réessayer.');
+      setError(err.message || 'Erreur lors de la création de la commande.');
     } finally {
       setLoading(false);
     }
   };
+
 
   const StepIndicator = ({ currentStep }) => {
     const { viewAllCartItems } = useCart();
