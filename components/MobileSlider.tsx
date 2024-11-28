@@ -31,7 +31,7 @@ const Slider = () => {
   }, [nextSlide]);
 
   return (
-    <div className="relative w-full h-[11vh] overflow-hidden bg-black md:-mt-52 lg:-mt-28  ">
+    <div className="relative w-full h-[12vh] overflow-hidden bg-black md:-mt-52 lg:-mt-28  ">
       {/* Slides container */}
       <div
         className="flex h-full transition-transform duration-700 ease-in-out bg-black"

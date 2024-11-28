@@ -7,8 +7,10 @@ import MobileSlider from './MobileSlider';
 const MobileProductsIntro: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [counter, setCounter] = useState(0);
+  const [displayedText, setDisplayedText] = useState('');
   const introRef = useRef<HTMLDivElement | null>(null);
   const targetCount = 2500;
+  const fullText = "en direct des vignerons";
 
   // Observer pour détecter l'élément visible
   useEffect(() => {
@@ -16,10 +18,10 @@ const MobileProductsIntro: React.FC = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.disconnect(); // Arrêter l'observation après le déclenchement
+          observer.disconnect();
         }
       },
-      { threshold: 0.1 } // L'élément doit être visible à 10% pour déclencher
+      { threshold: 0.1 }
     );
 
     const currentIntroRef = introRef.current;
@@ -53,9 +55,20 @@ const MobileProductsIntro: React.FC = () => {
     }
   }, [isVisible, counter, targetCount]);
 
+  // Animation du texte
+  useEffect(() => {
+    if (isVisible && displayedText.length < fullText.length) {
+      const timer = setTimeout(() => {
+        setDisplayedText(fullText.slice(0, displayedText.length + 1));
+      }, 50);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, displayedText]);
+
   return (
     <>
-      <div className='-mt-2 relative h-full w-full pb-[100%]'> {/* 16:9 aspect ratio container */}
+      <div className='-mt-2 relative h-full w-full pb-[100%]'>
         <br /><br />
         <Image
           src="/images/mbnr.webp"
@@ -65,14 +78,14 @@ const MobileProductsIntro: React.FC = () => {
           priority={true}
           alt="100% engagée pour la nature"
           className="absolute top-0 left-0 w-full h-full object-cover"
-        onLoad={(e) => {
-          const image = e.target as HTMLImageElement;
-          if (typeof caches !== 'undefined') {
-            caches.open('image-cache').then(cache => {
-              cache.add(image.src);
-            });
-          }
-        }}
+          onLoad={(e) => {
+            const image = e.target as HTMLImageElement;
+            if (typeof caches !== 'undefined') {
+              caches.open('image-cache').then(cache => {
+                cache.add(image.src);
+              });
+            }
+          }}
         />
       </div>
 
@@ -83,8 +96,6 @@ const MobileProductsIntro: React.FC = () => {
         } flex flex-col items-center text-center lg:hidden bg-primary py-6 min-h-[200px] h-auto`}
         style={{ overflow: 'hidden', transition: 'opacity 1s ease, height 1s ease' }}
       >
-
-        {/* Logos en haut - Added fixed container */}
         <div className="flex space-x-8 h-[35px] items-center">
           <div className="w-[30px] h-[30px] relative">
             <Image
@@ -115,17 +126,20 @@ const MobileProductsIntro: React.FC = () => {
           </div>
         </div>
 
-        {/* Texte central avec compteur */}
         <div className="flex flex-col items-center mx-auto mt-3 slide-in-right">
           <h1 className="text-2xl font-extrabold text-white tracking-tight text-center leading-tight">
-            en direct des vignerons(nes)
-            <span className="block text-white text-xs">
-              Tu sais, celles et ceux qui respectent la terre, ses locataires...
-            </span>
+            {displayedText}
+            {displayedText === fullText && (
+              <>
+                <span className='text-md'>(nes)</span>
+                <span className="block text-white text-xs">
+                  Tu sais, celles et ceux qui respectent la terre, ses locataires...
+                </span>
+              </>
+            )}
           </h1>
         </div>
 
-        {/* Logos en bas - Added fixed container */}
         <div className="flex space-x-8 mt-4 mb-4 h-[35px] items-center">
           <div className="w-[38px] h-[38px] relative">
             <Image
@@ -157,7 +171,6 @@ const MobileProductsIntro: React.FC = () => {
         </div>
         <br />
         <MobileSlider />
-
       </div>
     </>
   );
