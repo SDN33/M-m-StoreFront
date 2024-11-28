@@ -70,10 +70,10 @@ const PromoCode: React.FC = () => {
           </div>
             <div className="border-t-4 border-white w-8 mx-auto mb-2" />
             <div className="flex justify-center">
-            <BadgeEuro />
+              <BadgeEuro />
             </div>
-          <h3><span style={{ fontWeight: "black" }}>PROMO DES FETES -10%</span></h3>
-          <p className="pt-1" style={{ fontSize: "14px" }}><strong className="text-xl font-black">meme10</strong> <br />sur votre première commande <br /> (dès 50€ d&apos;achat)</p>
+            <h3><span style={{ fontWeight: "bold" }}>PROMO DES FETES <span style={{ fontWeight: "bold" }}>-10%</span></span></h3>
+            <p className="pt-1" style={{ fontSize: "14px" }}><strong className="text-xl font-black">meme10</strong> <br />sur votre première commande <br /> (dès 50€ d&apos;achat)</p>
         </div>
       ) : null}
     </div>

@@ -158,14 +158,8 @@ const ProductPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="flex flex-col items-center">
-          <div className="loader"></div>
-          <p className="text-primary font-bold text-lg">Chargement des vins de Mémé...</p>
-        </div>
-        <br /><br />
-        <br /><br />
-        <br /><br />
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-primary border-opacity-75"></div>
       </div>
     );
   }
