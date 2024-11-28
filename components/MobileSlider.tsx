@@ -5,21 +5,15 @@ const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
+
     {
       id: 1,
-      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/v1732673811/100_engag%C3%A9e_pour_la_nature_1_znpf0c.webp',
-      link: '/',
-      className: 'bg-center bg-cover',
-      lcp: true,
-    },
-    {
-      id: 2,
       imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto:best/v1732715675/slider2_ipsxcq.webp',
       link: '/',
       lcp: true,
     },
     {
-      id: 3,
+      id: 2,
       imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto:best/v1732715675/slider1_kvcute.webp',
       link: '/',
       lcp: true,
@@ -37,10 +31,10 @@ const Slider = () => {
   }, [nextSlide]);
 
   return (
-    <div className="relative w-full h-[20vh] sm:h-[20vh] md:h-[50vh] max-h-[300px] overflow-hidden bg-white md:-mt-52 lg:-mt-28  ">
+    <div className="relative w-full h-[16vh] overflow-hidden bg-black md:-mt-52 lg:-mt-28  ">
       {/* Slides container */}
       <div
-        className="flex h-full transition-transform duration-700 ease-in-out bg-white"
+        className="flex h-full transition-transform duration-700 ease-in-out bg-black"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
         {slides.map((slide) => (
