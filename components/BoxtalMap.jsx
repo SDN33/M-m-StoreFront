@@ -32,7 +32,7 @@ const BoxtalMap = ({ onSelectPoint }) => {
           locale: 'fr',
           parcelPointNetworks: [
             {
-              code: 'CHRP_NETWORK',
+              code: ['CHRP_NETWORK', 'MONR_NETWORK', 'SOGP_NETWORK'],
               markerTemplate: { color: '#94a1e8' },
             },
           ],

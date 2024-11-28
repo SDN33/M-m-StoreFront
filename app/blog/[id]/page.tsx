@@ -45,6 +45,7 @@ const SocialShare = ({ title, url }: { title: string; url: string }) => {
       }
     };
 
+
     return (
       <div className="flex space-x-4">
         <a href={shareLinks.facebook} target="_blank" rel="noopener noreferrer"><Facebook size={20} /></a>
@@ -139,6 +140,7 @@ const ArticlePage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const id = params?.id;
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -206,7 +208,7 @@ const ArticlePage = () => {
         }}
       />
       <div className="mt-8 flex justify-center">
-        <SocialShare title={article.title} url={window.location.href} />
+      <SocialShare url={currentUrl} title={article.title} />
       </div>
       <br /><br />
       <Comments postId={article.id} />

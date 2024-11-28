@@ -15,9 +15,10 @@ const SocialShare: React.FC<SocialShareProps> = ({ url, title }) => {
   const shareLinks = {
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
     whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
-    linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}`,
+    linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}&summary=${encodedTitle}&source=${encodedUrl}`,
     email: `mailto:?subject=${encodedTitle}&body=Découvrez ce produit : ${encodedUrl}`
   };
+
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(url).then(() => {

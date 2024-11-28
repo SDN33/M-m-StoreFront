@@ -35,7 +35,7 @@ const MobileProductsIntro: React.FC = () => {
 
   return (
     <>
-      <div className='relative h-full w-full pb-48 pt-20 md:pt-40'> {/* 16:9 aspect ratio container */}
+      <div className='relative h-full w-full pb-48 pt-20 md:pt-40 bg-primary'> {/* 16:9 aspect ratio container */}
         <br /><br />
         <Image
           src="/images/mbnr.webp"
