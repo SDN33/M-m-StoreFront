@@ -65,7 +65,7 @@ const ProductsIntro: React.FC = () => {
           alt="bio logo"
           width={40}
           height={30}
-          className="object-contain w-10 h-auto"
+          className="object-contain w-10 lg:min-w-8 h-auto"
           priority
         />
         <Image
@@ -73,7 +73,7 @@ const ProductsIntro: React.FC = () => {
           alt="Bio euro logo"
           width={50}
           height={50}
-          className="object-contain w-12 h-auto"
+          className="object-contain w-12 lg:min-w-8 h-auto"
           priority
         />
         <Image
@@ -81,7 +81,7 @@ const ProductsIntro: React.FC = () => {
           alt="demeter logo"
           width={50}
           height={50}
-          className="object-contain w-12 h-auto"
+          className="object-contain w-12 lg:min-w-8 h-auto"
           priority
         />
         </div>
@@ -106,7 +106,7 @@ const ProductsIntro: React.FC = () => {
           alt="biodynamie logo"
           width={60}
           height={30}
-          className="object-contain w-12 h-auto"
+          className="object-contain w-12 lg:min-w-8 h-auto"
           priority
         />
         <Image
@@ -114,7 +114,7 @@ const ProductsIntro: React.FC = () => {
           alt="biodyvin logo"
           width={60}
           height={30}
-          className="object-contain w-14 h-auto"
+          className="object-contain w-14 lg:min-w-8 h-auto"
           priority
         />
         <Image
@@ -122,7 +122,7 @@ const ProductsIntro: React.FC = () => {
           alt="nature et progrès"
           width={35}
           height={28}
-          className="object-contain w-10 h-auto"
+          className="object-contain w-10 lg:min-w-8 h-auto"
           priority
         />
         </div>
