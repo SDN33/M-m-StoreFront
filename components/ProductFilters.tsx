@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, ChevronUp, Wine, Locate, Calendar, Grape, Medal, Ruler, Utensils, RefreshCw } from 'lucide-react';
+import { ChevronDown, ChevronUp, Wine, Locate, Calendar, Grape, Medal, Ruler, Utensils, RefreshCw, FlaskConicalOff } from 'lucide-react';
 import Image from 'next/image';
 
 interface ProductFilterProps {
@@ -11,6 +11,7 @@ interface ProductFilterProps {
     volume: string[];
     accord_mets: string[];
     region__pays: string[];
+    sans_sulfites_: string[];
   };
   onFilterChange: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
   resetFilters: () => void;
@@ -92,6 +93,12 @@ const getFilterTitle = (filterType: string) => {
         <br /><>ACCORD METS </>
       </>
     ),
+        sans_sulfites_: (
+      <>
+        <FlaskConicalOff className="inline-block text-teal-800 w-6" />
+        <br /><>SULFITES</>
+      </>
+    ),
   };
   return titles[filterType] || <>{filterType}</>;
 };
@@ -128,6 +135,9 @@ const filterOptions = {
     { label: 'Bio', value: 'Bio' },
     { label: 'Biodynamie', value: 'Biodynamie' },
     { label: 'En conversion 🔄', value: 'En conversion' },
+  ],
+  sans_sulfites_: [
+    { label: 'Sans sulfites ajoutés', value: 'Sans sulfites ajoutés' },
   ],
   style: [
     { label: 'Charpenté', value: 'Charpenté' },
@@ -212,7 +222,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
             <div key={filterType} className="border-b border-gray-300 bg-slate-100">
               <button
                 onClick={() => toggleSection(filterType)}
-                className="w-full p-4 text-left text-lg font-semibold flex items-center justify-between hover:bg-gray-100 transition-colors"
+                className="w-full p-4 text-left text-base font-semibold flex items-center justify-between hover:bg-gray-100 transition-colors"
               >
                 <span className="text-gray-800 text-base">{getFilterTitle(filterType)}</span>
                 {expandedSections.includes(filterType) ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
