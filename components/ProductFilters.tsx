@@ -158,7 +158,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   hideColorFilter = false,
   resetFilters,
 }) => {
-  const [expandedSections, setExpandedSections] = useState<string[]>(Object.keys(filterOptions));
+  const [expandedSections, setExpandedSections] = useState<string[]>(['color']);
   const [isScrolled, setIsScrolled] = useState(false);
 
   const filterContainerRef = useRef<HTMLDivElement>(null);
@@ -191,7 +191,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div ref={filterContainerRef} className="bg-white/10 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-2xl overflow-y-auto h-screen w-full transition-all duration-300 ease-in-out mt-52">
+    <div ref={filterContainerRef} className="bg-white/10 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-2xl overflow-y-auto h-screen w-full transition-all duration-300 ease-in-out mt-52  pr-2 mr-6 pb-10">
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl">
         <AnimatedResetButton onClick={resetFilters} isScrolled={isScrolled} />
       </div>
