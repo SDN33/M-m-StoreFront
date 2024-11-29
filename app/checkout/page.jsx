@@ -277,7 +277,7 @@ const CheckoutPage = () => {
         >
           <h3 className="font-semibold">Livraison Standard</h3>
           <p className="text-sm text-gray-600">3-5 jours ouvrés</p>
-          <p className="font-semibold mt-2">{shippingCost.toFixed(2)}€</p>
+          <p className="font-semibold mt-2">{shippingCost === 0 ? 'OFFERT' : `${shippingCost.toFixed(2)}€`}</p>
         </button>
         <button
           onClick={() => setFormData(prev => ({ ...prev, deliveryMethod: 'pickup' }))}
@@ -285,7 +285,8 @@ const CheckoutPage = () => {
         >
           <h3 className="font-semibold">Point Relais (Indisponible)</h3>
           <p className="text-sm text-gray-600">Non disponible pour le moment</p>
-          {/* <p className="font-semibold mt-2">{shippingCost.toFixed(2)}€</p> */}
+          {/* Coupon Section */}
+
         </button>
       </div>
 

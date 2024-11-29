@@ -283,7 +283,7 @@ const Header: React.FC = () => {
       </div>
 
       {/* Navigation Bar - Desktop and Tablet - Hauteur fixe */}
-      <nav className="hidden sm:min-w-sm md:hidden lg:flex xl:flex bg-white shadow-xl relative h-12">
+      <nav className="hidden sm:min-w-sm md:hidden lg:flex xl:flex bg-white shadow-xl relative h-12 mx-auto">
         <div className="container mx-auto h-full flex items-center justify-between overflow-x-auto overflow-y-hidden">
           <ChevronLeft
         className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors flex-shrink-0"
