@@ -236,7 +236,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                           type="checkbox"
                           checked={selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']].includes(option.value)}
                           onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
-                          className="form-checkbox h-4 w-4 text-teal-800 focus:ring-teal-800 rounded border-gray-300 transition duration-200 ease-in-out"
+                          className="form-checkbox h-3 w-3 text-teal-800 focus:ring-teal-800 rounded border-gray-300 transition duration-200 ease-in-out"
                         />
                         <span className="ml-2 text-sm text-gray-700 font-semibold">
                           {option.label === 'Bio' ? (
