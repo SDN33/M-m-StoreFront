@@ -136,7 +136,7 @@ const Header: React.FC = () => {
 
             <div className="hidden md:hidden lg:flex items-center space-x-7 text-sm px-4 justify-end my-auto -ml-10">
               <div className="hidden md:flex items-center space-x-3">
-                <span className="text-white whitespace-nowrap">Livraison en</span>
+                <span className="text-white font-light whitespace-nowrap">Livraison en</span>
                 <div className="relative">
                   <button
                     onClick={toggleLanguageMenu}
