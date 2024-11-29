@@ -61,7 +61,7 @@ const ProductsIntro: React.FC = () => {
         {/* Left Logos (Mobile Hidden) */}
         <div className="hidden lg:flex space-x-4 mb-4 lg:mb-0">
         <Image
-          src="/images/logobio1.webp"
+          src="/images/bio2.png"
           alt="bio logo"
           width={40}
           height={30}

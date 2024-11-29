@@ -99,7 +99,7 @@ const MobileProductsIntro: React.FC = () => {
         <div className="flex space-x-8 h-[35px] items-center">
           <div className="w-[30px] h-[30px] relative">
             <Image
-              src="/images/logobio1.webp"
+              src="/images/bio2.png"
               alt="bio logo"
               fill
               className="object-contain"
