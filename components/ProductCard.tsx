@@ -134,12 +134,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   function stripHtmlAndTruncate(text: string = '', maxLength: number): string {
     const plainText = text.replace(/<\/?[^>]+(>|$)/g, '');
     if (plainText.length > maxLength) {
-      return plainText.substring(0, plainText.lastIndexOf(' ', maxLength)) + '...';
+      return plainText.substring(0, plainText.lastIndexOf(' ', maxLength)) + '... voir plus';
     }
     return plainText;
   }
 
-  const truncatedName = useMemo(() => stripHtmlAndTruncate(product.name, 36), [product.name]);
+  const truncatedName = useMemo(() => stripHtmlAndTruncate(product.name, 30), [product.name]);
 
   useEffect(() => {
     setIsTruncated(product.name.length > 40);
@@ -217,13 +217,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         <div className="flex items-start gap-1 mb-2">
           <div className="relative flex-grow">
             <div className="flex items-center">
-              <h3
+              <h1
                 className="text-base font-bold cursor-pointer hover:underline truncate"
                 onClick={handleRedirect}
                 title={isTruncated ? product.name : undefined}
               >
                 {truncatedName}
-              </h3>
+              </h1>
               {isTruncated && (
                 <div className="relative group" title={product.name}>
                   <Info className="w-4 h-4 text-gray-500 ml-1 cursor-pointer" />
@@ -293,9 +293,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           </div>
         </div>
       </div>
-        <p className="text-xs text-gray-700 h-8 overflow-hidden text-center mt-4 font-medium mb-4 mx-2">
+        <a onClick={handleRedirect} className="text-xs text-gray-700 h-8 overflow-hidden text-center mt-4 font-medium mb-4 flex justify-center cursor-pointer">
           {stripHtmlAndTruncate(product.short_description || product.description || '', 110)}
-        </p>
+        </a>
 
         <div className="flex items-center justify-between mb-2">
           <div>

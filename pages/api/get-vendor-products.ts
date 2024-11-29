@@ -2,13 +2,14 @@ import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import NodeCache from 'node-cache';
 
-// Configuration du cache en mémoire
+// Configuration du cache avec des paramètres optimisés
 const productCache = new NodeCache({
   stdTTL: 3600, // Durée de vie du cache : 1 heure
-  checkperiod: 600 // Vérification du cache toutes les 10 minutes
+  checkperiod: 600, // Vérification du cache toutes les 10 minutes
+  useClones: false, // Désactive la création de clones pour améliorer les performances
+  maxKeys: 500 // Limite le nombre de clés en cache
 });
 
-// Types
 type Product = {
   id: number;
   name: string;
@@ -34,10 +35,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Product[] | ErrorResponse>
 ) {
-  // Vérification des variables d'environnement
-  const { WC_API_DOMAIN, WC_CONSUMER_KEY, WC_CONSUMER_SECRET } = process.env;
+  // Vérification des variables d'environnement avec déstructuration optimisée
+  const {
+    WC_API_DOMAIN: domain,
+    WC_CONSUMER_KEY: consumerKey,
+    WC_CONSUMER_SECRET: consumerSecret
+  } = process.env;
 
-  if (!WC_API_DOMAIN || !WC_CONSUMER_KEY || !WC_CONSUMER_SECRET) {
+  if (!domain || !consumerKey || !consumerSecret) {
     return res.status(500).json({
       message: 'Identifiants API WooCommerce manquants'
     });
@@ -50,83 +55,78 @@ export default async function handler(
   }
 
   try {
-    // Récupération du vendor ID depuis les query parameters
-    const { vendorId } = req.query;
-
+    // Récupération du vendor ID avec validation rapide
+    const vendorId = req.query.vendorId as string;
     if (!vendorId) {
       return res.status(400).json({ message: 'ID du vendeur requis' });
     }
 
-    // Clé de cache unique
-    const cacheKey = `vendor_products_${vendorId}`;
+    // Clé de cache unique et compacte
+    const cacheKey = `vp_${vendorId}`;
 
-    // Vérification du cache
+    // Vérification du cache avec méthode optimisée
     const cachedProducts = productCache.get<Product[]>(cacheKey);
     if (cachedProducts) {
       return res.status(200).json(cachedProducts);
     }
 
-    // Construction de l'URL avec les paramètres
-    const apiUrl = `${WC_API_DOMAIN}/wp-json/wc/v2/products`;
+    // Configuration Axios avec des paramètres optimisés
+    const axiosInstance = axios.create({
+      baseURL: `${domain}/wp-json/wc/v2/products`,
+      timeout: 5000, // Timeout de 5 secondes
+      headers: {
+        'Authorization': `Basic ${Buffer.from(`${consumerKey}:${consumerSecret}`).toString('base64')}`,
+        'Accept': 'application/json',
+        'Cache-Control': 'no-cache'
+      }
+    });
 
-    // Requête vers l'API WooCommerce avec optimisations
-    const response = await axios.get(apiUrl, {
+    // Requête avec gestion d'erreur et récupération rapide
+    const { data: rawProducts } = await axiosInstance.get('', {
       params: {
         vendor: vendorId,
         _fields: 'id,name,description,price,regular_price,sale_price,status,stock_status,images',
         per_page: 100,
         page: 1,
         status: 'publish'
-      },
-      headers: {
-        Authorization: `Basic ${Buffer.from(
-          `${WC_CONSUMER_KEY}:${WC_CONSUMER_SECRET}`
-        ).toString('base64')}`
       }
     });
 
-    if (response.status === 200) {
-      // Transformation/filtrage des données optimisée
-      const products: Product[] = response.data.map((product: Omit<Product, 'vendorId'>) => ({
-        id: product.id,
-        name: product.name,
-        description: product.description || '',
-        price: product.price,
-        regular_price: product.regular_price,
-        sale_price: product.sale_price,
-        status: product.status,
-        stock_status: product.stock_status,
-        images: product.images.map((img: { id: number; src: string; alt: string }) => ({
-          id: img.id,
-          src: img.src,
-          alt: img.alt || product.name
-        })),
-        vendorId: vendorId
-      }));
+    // Transformation des données avec filtrage précoce et minimal
+    const products: Product[] = rawProducts.map((product: Product) => ({
+      ...product,
+      description: product.description || '',
+      images: product.images.map(img => ({
+        id: img.id,
+        src: img.src,
+        alt: img.alt || product.name
+      })),
+      vendorId
+    }));
 
-      // Mise en cache des résultats
-      productCache.set(cacheKey, products);
+    // Mise en cache rapide avec options
+    productCache.set(cacheKey, products, 3600);
 
-      return res.status(200).json(products);
-    } else {
-      return res.status(response.status).json({
-        message: response.data.message || 'Échec de récupération des produits du vendeur'
-      });
-    }
+    return res.status(200).json(products);
 
   } catch (error: unknown) {
-    console.error('Erreur de récupération des produits du vendeur:', error);
+    // Gestion d'erreur avec log conditionnel
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('Erreur de récupération des produits du vendeur:', error);
+    }
+
+    const errorResponse: Record<number, string> = {
+      500: 'Erreur serveur inattendue',
+      404: 'Vendeur ou produits non trouvés',
+      403: 'Accès non autorisé',
+      304: 'Aucune modification'
+    };
 
     if (axios.isAxiosError(error)) {
-      if (error.response) {
-        return res.status(error.response.status).json({
-          message: error.response.data.message || 'Erreur de l\'API'
-        });
-      } else if (error.request) {
-        return res.status(500).json({
-          message: 'Aucune réponse de l\'API WooCommerce'
-        });
-      }
+      const status = error.response?.status || 500;
+      return res.status(status).json({
+        message: errorResponse[status] || 'Erreur de l\'API'
+      });
     }
 
     return res.status(500).json({
