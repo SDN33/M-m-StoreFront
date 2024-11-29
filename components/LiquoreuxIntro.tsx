@@ -52,10 +52,10 @@ const LiquoreuxIntro: React.FC = () => {
           <div className="text-gray-800 text-sm">* Livraison offerte dès 6 bouteilles achetées sur le même domaine</div>
         </h3>
 
-        {/* Logo Bio Demeter, centré sur mobile et aligné à droite sur desktop */}
+        {/* Logo Bio Biodynamie, centré sur mobile et aligné à droite sur desktop */}
         <Image
-          src="/images/biodemeter.png"
-          alt="Logo Bio Demeter"
+          src="/images/bioBiodynamie.png"
+          alt="Logo Bio Biodynamie"
           className='sm:pl-10 mx-auto sm:mx-0' // Center on mobile, align left on desktop
           width={200}
           height={200}

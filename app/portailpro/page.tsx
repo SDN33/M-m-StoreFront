@@ -80,8 +80,8 @@ export default function PortailPro() {
   const pricingFeatures = [
     "Gestion simplifiée depuis votre tableau de bord",
     "Logistique prise en charge par nos équipes",
-    "Support client dédié",
-    "Accès à notre réseau de distribution"
+    "Support vendeur et client dédié",
+    "Accès à notre réseau e-commerce et/ou de distribution"
   ]
 
 
@@ -186,7 +186,7 @@ export default function PortailPro() {
             </h3>
           </div>
           <div>
-           <p className="font-black text-base md:text-lg lg:text-2xl mx-auto fade-in-up mt-8 text-center text-teal-800 mb-8">
+           <p className="font-black text-base md:text-lg lg:text-2xl mx-auto fade-in-up mt-8 text-center text-black mb-8">
                La{" solution e-commerce".toUpperCase()}<br /> pour les vignerons bio et biodynamiques
            </p>
            <p className="text-lg text-center mx-auto mb-8 -mt-4 slide-in-right font-semibold">
@@ -228,7 +228,7 @@ export default function PortailPro() {
             />
             </div>
 
-        <br /><br /> Nous vous offrons un accès direct aux amateurs de vin en Europe, tout en simplifiant vos démarches avec une logistique intégrée et un accompagnement marketing personnalisé
+        <br /><br /> Nous vous offrons un accès direct aux amateurs de vins en Europe, tout en simplifiant vos démarches avec une logistique intégrée et un accompagnement marketing personnalisé, notre assistance vendeur et client dédiée vous permet de vous concentrer sur l&apos;essentiel, la fabrication de vins de qualité.
           </p>
         </div>
 

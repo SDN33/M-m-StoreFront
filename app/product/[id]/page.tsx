@@ -90,7 +90,7 @@ const getCertificationLogo = (certification?: string) => {
     case 'bio':
       return { src: '/images/logobio1.webp', width: 24, height: 24 };
     case 'biodynamie':
-      return { src: '/images/biodemeter.png', width: 80, height: 80 };
+      return { src: '/images/bioBiodynamie.png', width: 80, height: 80 };
     case 'en conversion':
       return { src: '/images/enconv.png', width: 28, height: 28 };
     default:

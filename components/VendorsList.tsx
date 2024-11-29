@@ -98,9 +98,9 @@ const VendorList: React.FC = () => {
     switch (certification?.toLowerCase()) {
       case 'bio':
         return { src: "/images/logobio1.webp", width: 15, height: 15 };
-      case 'demeter':
+      case 'Biodynamie':
       case 'biodynamie':
-        return { src: "/images/biodemeter.png", width: 50, height: 50 };
+        return { src: "/images/bioBiodynamie.png", width: 50, height: 50 };
       case 'en conversion':
         return { src: '/images/enconv.png', width: 20, height: 20 };
       default:

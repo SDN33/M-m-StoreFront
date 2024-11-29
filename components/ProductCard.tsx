@@ -107,7 +107,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       return (
         <div className="relative w-20 h-6">
           <Image
-            src="/images/biodemeter.png"
+            src="/images/bioBiodynamie.png"
             alt="Certification biodynamique"
             fill
             style={{ objectFit: 'contain' }}

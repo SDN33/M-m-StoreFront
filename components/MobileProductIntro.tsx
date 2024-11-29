@@ -153,7 +153,7 @@ const MobileProductsIntro: React.FC = () => {
           <div className="w-[45px] h-[45px] relative">
             <Image
               src="/images/déméter.png"
-              alt="demeter logo"
+              alt="Biodynamie logo"
               fill
               className="object-contain"
               priority={true}

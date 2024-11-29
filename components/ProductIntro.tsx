@@ -78,7 +78,7 @@ const ProductsIntro: React.FC = () => {
         />
         <Image
           src="/images/déméter.png"
-          alt="demeter logo"
+          alt="Biodynamie logo"
           width={50}
           height={50}
           className="object-contain w-12 lg:min-w-8 h-auto"

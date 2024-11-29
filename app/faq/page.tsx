@@ -33,7 +33,7 @@ const faqData = [
   },
   {
     question: "Les vins proposés sont-ils tous certifiés bio ?",
-    answer: "Oui, tous les vins proposés sur notre marketplace sont certifiés bio, et beaucoup d'entre eux sont également certifiés Demeter. Nous nous engageons à ne proposer que des produits de haute qualité, respectueux de l'environnement.",
+    answer: "Oui, tous les vins proposés sur notre marketplace sont certifiés bio, et beaucoup d'entre eux sont également certifiés Biodynamie. Nous nous engageons à ne proposer que des produits de haute qualité, respectueux de l'environnement.",
   },
   {
     question: "Quels sont les délais de livraison pour ma commande de vin ?",
