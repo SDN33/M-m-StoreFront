@@ -28,6 +28,7 @@ interface Product {
   description?: string;
   rating?: number;
   vendor: number;
+  _sans_sulfites_?: string;
 }
 
 interface ProductCardProps {

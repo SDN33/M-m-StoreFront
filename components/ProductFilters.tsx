@@ -191,7 +191,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div ref={filterContainerRef} className="bg-white/10 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-2xl overflow-y-auto h-screen w-full transition-all duration-300 ease-in-out mt-52  pr-2 mr-6 pb-10">
+    <div ref={filterContainerRef} className="bg-white/10 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-2xl overflow-y-auto h-screen w-full transition-all duration-300 ease-in-out mt-52 mr-5">
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl">
         <AnimatedResetButton onClick={resetFilters} isScrolled={isScrolled} />
       </div>
@@ -225,7 +225,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                             </span>
                           ) : option.label === 'Biodynamie' ? (
                             <span className="flex items-center">
-                              {option.label} <Image src="/images/bioBiodynamie.png" alt="Biodynamie" width={50} height={16} className="ml-1" />
+                              {option.label} <Image src="/images/biodemeter.png" alt="Biodynamie" width={50} height={16} className="ml-1" />
                             </span>
                           ) : (
                             option.label

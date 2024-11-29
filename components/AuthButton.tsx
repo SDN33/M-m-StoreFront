@@ -11,6 +11,27 @@ const AuthButton = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            fetch('/api/profile')
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.isAuthenticated) {
+                        router.push('/login');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching profile:', error);
+                    router.push('/login');
+                });
+            if (!isAuthenticated) {
+                router.push('/login');
+            }
+        }, 1800000); // 30 minutes in milliseconds
+
+        return () => clearInterval(interval);
+    }, [isAuthenticated, router]);
+
     const handleLogout = () => {
         logout();
         router.push('/login');
@@ -34,7 +55,7 @@ const AuthButton = () => {
         return (
             <span
                 onClick={() => router.push('/login')}
-                className="text-sm text-white md:p-1 p-3 mr-2 bg-black rounded-xl sm:texy-primary md:mt-0  font-semibold hover:text-primary cursor-pointer flex items-center gap-2"
+                className="text-sm text-white p-3 mr-2 bg-black rounded-xl sm:texy-primary md:mt-0  font-semibold hover:text-primary cursor-pointer flex items-center gap-2"
             >
                 <User size={16} />
                 Se connecter

@@ -22,7 +22,8 @@ export default function OtherWinesPage() {
     volume: [],
     accord_mets: [],
     region__pays: [],
-    categories: []
+    categories: [],
+    sans_sulfites_: []
   });
 
   useEffect(() => {
@@ -58,6 +59,7 @@ export default function OtherWinesPage() {
 
       <main className={`flex-1 overflow-y-auto ${isMobile ? 'p-4' : 'p-8'}`}>
         <div className="max-w-7xl mx-auto mt-36">
+          <div className='text-center text-xs mx-auto text-black mb-4'><a href="/">Accueil</a> / <strong>Les Autres Vins</strong></div>
           <h1 className="text-center text-4xl text-white font-black bg-gray-600 p-8 rounded-t-xl">
             Nos Autres Vins
           </h1>

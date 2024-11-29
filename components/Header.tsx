@@ -72,7 +72,7 @@ const Header: React.FC = () => {
     {
       name: 'Les vins Pétillants',
       href: '/vins/petillant',
-      bgClass: 'bg-gradient-to-r from-champagne-light to-champagne-deep',
+      bgClass: 'bg-gradient-to-r from-teal-800 to-teal-900',
     },
     {
       name: 'Les vins Liquoreux',
@@ -299,7 +299,7 @@ const Header: React.FC = () => {
             {categories.map((category) => (
               <li
                 key={category.name}
-                className="whitespace-nowrap font-bold hover-animate text-sm h-full flex items-center"
+                className="whitespace-nowrap font-bold hover-animate h-full flex items-center text-base"
               >
                 <a
                   href={category.href}

@@ -26,7 +26,7 @@ interface Product {
   style?: string;
   stock_status?: string;
   degre?: number;
-
+  sans_sulfites_?: boolean;
 }
 
 interface AxiosErrorResponse {
@@ -38,14 +38,11 @@ interface AxiosErrorResponse {
   message: string;
 }
 
-// In-memory cache with simple timestamp-based invalidation
 const productCache: { [key: string]: { data: Product[]; timestamp: number } } = {};
 const CACHE_DURATION = 60000; // 1 minute cache duration
 
 const transformMetaData = (metaData: { key: string; value: string | string[] }[]): { [key: string]: unknown } => {
   const productData: { [key: string]: unknown } = {};
-
-  // Initialize all potential metadata fields
 
   const initialMetadata: { [key: string]: string | string[] } = {
     millesime: '',
@@ -60,17 +57,15 @@ const transformMetaData = (metaData: { key: string; value: string | string[] }[]
     cepages: [],
     degustation: [],
     style: '',
-    degre: '0.0'
+    degre: '0.0',
+    sans_sulfites_: '',
   };
 
-  // Process metadata
   metaData.forEach(({ key, value }) => {
     const cleanKey = key.startsWith('_') ? key.slice(1) : key;
 
-    // Store raw metadata
     productData[cleanKey] = Array.isArray(value) ? value : (value || '');
 
-    // Handle specific metadata fields
     switch (key) {
       case 'nom_chateau':
       case 'millesime':
@@ -89,6 +84,7 @@ const transformMetaData = (metaData: { key: string; value: string | string[] }[]
       case 'degustation':
         initialMetadata[cleanKey] = Array.isArray(value) ? value : [value];
         break;
+      case 'sans_sulfites_':
     }
   });
 
@@ -115,7 +111,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       ? `https://portailpro-memegeorgette.com/wp-json/wc/v3/products/categories?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}&acf=true`
       : `https://portailpro-memegeorgette.com/wp-json/wc/v3/products?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}&acf=true&per_page=100`;
 
-    // Check in-memory cache
     const currentTime = Date.now();
     const cachedData = productCache[url];
     if (cachedData && (currentTime - cachedData.timestamp < CACHE_DURATION)) {
@@ -126,12 +121,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       let productsOrCategories = await fetchProducts(url);
 
       if (!isCategories) {
-        // Filter published and in-stock products
         productsOrCategories = (productsOrCategories as Product[]).filter(product =>
           product.status === 'publish' && product.stock_status === 'instock'
         );
 
-        // Price filtering
         if (query.price) {
           const priceFilters = Array.isArray(query.price) ? query.price : [query.price];
           productsOrCategories = (productsOrCategories as Product[]).filter(product => {
@@ -143,7 +136,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           });
         }
 
-        // Color filtering
         if (query.color) {
           const colorFilter = Array.isArray(query.color) ? query.color : [query.color];
           productsOrCategories = (productsOrCategories as Product[]).filter(product =>
@@ -151,17 +143,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           );
         }
 
-        // Transform products with full metadata
+        // Add "Sans sulfites ajoutés" filtering
+        if (query.sans_sulfites_ === 'oui') {
+          productsOrCategories = (productsOrCategories as Product[]).filter(product =>
+            product.sans_sulfites_ === true
+          );
+        }
+
         const transformedProducts = (productsOrCategories as Product[]).map(product => ({
           ...product,
           ...transformMetaData(product.meta_data),
           store_name: product.store_name || '',
-          // Include ALL original metadata for maximum flexibility
           original_meta: product.meta,
           original_meta_data: product.meta_data
         }));
 
-        // Store in in-memory cache
         productCache[url] = {
           data: transformedProducts,
           timestamp: currentTime

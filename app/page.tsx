@@ -35,7 +35,8 @@ export default function Home() {
     volume: [],
     accord_mets: [],
     region__pays: [],
-    categories: []
+    categories: [],
+    sans_sulfites_: []
   });
 
 
@@ -138,7 +139,8 @@ export default function Home() {
       volume: [],
       accord_mets: [],
       region__pays: [],
-      categories: []
+      categories: [],
+      sans_sulfites_: []
     });
   };
 

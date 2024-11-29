@@ -19,6 +19,7 @@ interface Product {
   vendor: number;
   sale_price: number;
   regular_price: number;
+  sans_sulfites_?: string;
 }
 
 interface ProductsCardsProps {
@@ -32,6 +33,7 @@ interface ProductsCardsProps {
     accord_mets: string[];
     region__pays: string[];
     categories: string[];
+    sans_sulfites_: string[];
   };
   onAddToCart: (productId: number, quantity: number, variationId: number) => void;
 }
@@ -106,6 +108,13 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
             (met) => met.toLowerCase().trim() === accordMets.toLowerCase().trim()
           )
         );
+
+      const isSansSulfitesMatch = selectedFilters.sans_sulfites_.length === 0 ||
+        selectedFilters.sans_sulfites_.some(
+          (sansSulfites) =>
+            sansSulfites.toLowerCase().trim() === (product.sans_sulfites_ || '').toLowerCase().trim()
+        );
+        
 
       return (
         isColorMatch &&
