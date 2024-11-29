@@ -186,7 +186,7 @@ export default function PortailPro() {
             </h3>
           </div>
           <div>
-           <p className="font-black text-base md:text-lg lg:text-2xl mx-auto fade-in-up mt-8 text-center text-black mb-8">
+           <p className="font-black text-base md:text-lg lg:text-2xl mx-auto fade-in-up mt-8 text-center text-teal-800 mb-8">
                La{" solution e-commerce".toUpperCase()}<br /> pour les vignerons bio et biodynamiques
            </p>
            <p className="text-lg text-center mx-auto mb-8 -mt-4 slide-in-right font-semibold">
