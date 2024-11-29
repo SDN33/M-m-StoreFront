@@ -276,7 +276,7 @@ const CheckoutPage = () => {
           className={`flex-1 p-4 border rounded-lg ${formData.deliveryMethod === 'standard' ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}`}
         >
           <h3 className="font-semibold">Livraison Standard</h3>
-          <p className="text-sm text-gray-600">3-5 jours ouvrés</p>
+          <p className="text-sm text-gray-600">3-6 jours ouvrés</p>
           <p className="font-semibold mt-2">{shippingCost === 0 ? 'OFFERT' : `${shippingCost.toFixed(2)}€`}</p>
         </button>
         <button

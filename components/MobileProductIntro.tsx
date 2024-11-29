@@ -72,12 +72,12 @@ const MobileProductsIntro: React.FC = () => {
         <br /><br />
         <Image
           src="/images/mbnr.png"
-          width={600}
+          width={500}
           height={460}
           quality={100}
           priority={true}
           alt="100% engagée pour la nature"
-          className="absolute top-0 left-0 w-full h-full object-cover"
+          className="absolute top-0 left-0 w-full h-full"
           onLoad={(e) => {
             const image = e.target as HTMLImageElement;
             if (typeof caches !== 'undefined') {
