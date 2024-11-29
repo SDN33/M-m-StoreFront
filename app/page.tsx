@@ -166,7 +166,7 @@ export default function Home() {
       ) : (
         <div className="flex flex-1">
           <aside
-            className={`w-64 bg-white border-r border-gray-200 ${
+            className={`w-72 bg-white border-r border-gray-200 ${
               isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out' : 'relative'
             } ${isMobile && !isFilterOpen ? '-translate-x-full' : 'translate-x-0'}`}
           >
@@ -190,7 +190,7 @@ export default function Home() {
 
           <main
             ref={mainContentRef}
-            className="flex-1 bg-white overflow-y-auto"
+            className="flex-1 bg-white overflow-y-auto px-8"
             style={{
               overscrollBehavior: 'contain',
               height: '100vh'

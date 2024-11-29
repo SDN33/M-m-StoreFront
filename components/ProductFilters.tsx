@@ -43,7 +43,7 @@ const AnimatedResetButton: React.FC<{ onClick: () => void; isScrolled: boolean }
           : 'w-full py-3 rounded-t-xl text-sm font-bold uppercase tracking-wider'}
       `}
     >
-      {isScrolled ? <RefreshCw /> : 'Réinitialiser les filtres'}
+      {isScrolled ? <RefreshCw /> : <>Réinitialiser <br /> les filtres</>}
     </button>
   );
 };
@@ -191,7 +191,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div ref={filterContainerRef} className="bg-white/10 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-2xl overflow-y-auto h-screen w-full transition-all duration-300 ease-in-out mt-52 mr-5">
+    <div ref={filterContainerRef} className="bg-white/10 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-2xl overflow-y-auto h-screen min-w-full transition-all duration-300 ease-in-out mt-52 mr-14">
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl">
         <AnimatedResetButton onClick={resetFilters} isScrolled={isScrolled} />
       </div>
