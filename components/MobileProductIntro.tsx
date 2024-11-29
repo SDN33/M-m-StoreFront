@@ -71,7 +71,7 @@ const MobileProductsIntro: React.FC = () => {
       <div className='-mt-2 relative h-full w-full pb-[100%]'>
         <br /><br />
         <Image
-          src="/images/mbnr.webp"
+          src="/images/mbnr.png"
           width={600}
           height={460}
           quality={100}
