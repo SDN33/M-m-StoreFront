@@ -94,7 +94,7 @@ const Header: React.FC = () => {
       </div>
 
       {/* Top Header - Hauteur fixe */}
-      <div className="border-b bg-primary pt-4">
+      <div className="border-b bg-primary pt-4 pb-1">
         <div className="container mx-auto px-4">
           {/* Desktop and Tablet View - Hauteur fixe */}
           <div className="hidden lg:flex items-center justify-between h-14 relative">
@@ -284,45 +284,45 @@ const Header: React.FC = () => {
 
       {/* Navigation Bar - Desktop and Tablet - Hauteur fixe */}
       <nav className="hidden sm:min-w-sm md:hidden lg:flex xl:flex bg-white shadow-xl relative h-12">
-        <div className="container mx-auto px-4 h-full flex items-center justify-between">
+        <div className="container mx-auto h-full flex items-center justify-between overflow-x-auto overflow-y-hidden">
           <ChevronLeft
-            className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors flex-shrink-0"
-            onClick={() => {
-              const scrollContainer = document.querySelector('.scrollable-menu');
-              if (scrollContainer) {
-                scrollContainer.scrollBy({ left: -150, behavior: 'smooth' });
-              }
-            }}
+        className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors flex-shrink-0"
+        onClick={() => {
+          const scrollContainer = document.querySelector('.scrollable-menu');
+          if (scrollContainer) {
+            scrollContainer.scrollBy({ left: -150, behavior: 'smooth' });
+          }
+        }}
           />
 
-          <ul className="scrollable-menu flex items-center justify-center space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar h-full mx-4 flex-grow">
-            {categories.map((category) => (
-              <li
-                key={category.name}
-                className="whitespace-nowrap font-bold hover-animate h-full flex items-center text-base"
-              >
-                <a
-                  href={category.href}
-                  onClick={category.onClick}
-                  className={`px-5 text-gray-900 hover:text-primary transition-colors flex items-center h-full ${
-                    category.className || ''
-                  }`}
-                >
-                  {category.name}
-                  {category.icon}
-                </a>
-              </li>
-            ))}
+          <ul className="scrollable-menu flex items-center justify-start space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar h-full mx-4 pl-4 flex-grow">
+        {categories.map((category) => (
+          <li
+            key={category.name}
+            className="whitespace-nowrap font-bold hover-animate h-full flex items-center text-base"
+          >
+            <a
+          href={category.href}
+          onClick={category.onClick}
+          className={`px-5 text-gray-900 hover:text-primary transition-colors flex items-center h-full ${
+            category.className || ''
+          }`}
+            >
+          {category.name}
+          {category.icon}
+            </a>
+          </li>
+        ))}
           </ul>
 
           <ChevronRight
-            className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors flex-shrink-0"
-            onClick={() => {
-              const scrollContainer = document.querySelector('.scrollable-menu');
-              if (scrollContainer) {
-                scrollContainer.scrollBy({ left: 150, behavior: 'smooth' });
-              }
-            }}
+        className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors flex-shrink-0"
+        onClick={() => {
+          const scrollContainer = document.querySelector('.scrollable-menu');
+          if (scrollContainer) {
+            scrollContainer.scrollBy({ left: 150, behavior: 'smooth' });
+          }
+        }}
           />
         </div>
       </nav>
