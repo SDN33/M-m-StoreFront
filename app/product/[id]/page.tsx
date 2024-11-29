@@ -262,6 +262,7 @@ const ProductPage: React.FC = () => {
                 </div>
               )}
             </div>
+            <br />
             <div className='flex'>
               <p className="text-5xl font-bold !mb-2 mt-2">
                 <span className="flex items-start z-10">
@@ -297,6 +298,17 @@ const ProductPage: React.FC = () => {
               <Package className="h-6 w-6" />
               <span className="font-bold text-xs mb-1">Livraison offerte dès 6 bouteilles achetées sur un domaine</span>
             </div>
+            <div
+              className='ml-8 px-1 text-xs font-light -mt-5 mb-4'
+              aria-label={`Prix par 6 : ${Math.floor(product.price * 6)} euros, livraison offerte`}
+            >
+              <p>
+                <br />
+                <span className='font-semibold'>Par 6 = {Math.floor(product.price * 6)}€ &nbsp;+</span>
+                <span className='text-primary text-sm'>&nbsp;&nbsp;Livraison offerte</span>
+              </p>
+            </div>
+
             <div className="flex items-center mt-1">
               <select
                 value={quantity}
