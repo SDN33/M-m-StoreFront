@@ -40,15 +40,6 @@ const PromotionSection = () => {
         ))}
       </div>
 
-      {/* Éléments décoratifs de Noël */}
-      <div className="absolute left-4 top-5 md:top-2 lg:top-0 text-white opacity-50">
-        <ChristmasTree size={30} className="" />
-      </div>
-
-      <div className="absolute right-4 top-5 md:top-2 lg:top-0 text-white opacity-50">
-        <Gift size={30} className="" />
-      </div>
-
       {/* Texte promotionnel */}
       <p className="relative z-10 font-extrabold text-white text-xs sm:text-sm h-fit -mt-1">
         <span className="sm:hidden">
