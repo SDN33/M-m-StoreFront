@@ -62,12 +62,6 @@ const getFilterTitle = (filterType: string) => {
         <br /><>RÉGIONS</>
       </>
     ),
-    vintage: (
-      <>
-        <Calendar className="inline-block text-teal-800 w-6" />
-        <>MILLÉSIME <br /></>
-      </>
-    ),
     certification: (
       <>
         <Medal className="inline-block text-teal-800 w-6" />
@@ -78,6 +72,12 @@ const getFilterTitle = (filterType: string) => {
       <>
         <Grape className="inline-block text-teal-800 w-6" />
         <br /><>STYLE</>
+      </>
+    ),
+    millesime: (
+      <>
+        <Calendar className="inline-block text-teal-800 w-6" />
+        <br /><>MILLÉSIME</>
       </>
     ),
     volume: (
@@ -136,6 +136,16 @@ const filterOptions = {
     { label: 'Corsé', value: 'Corsé' },
     { label: 'Sec', value: 'Sec' },
   ],
+  millesime: [
+    { label: '2023', value: '2023' },
+    { label: '2022', value: '2022' },
+    { label: '2021', value: '2021' },
+    { label: '2020', value: '2020' },
+    { label: '2019', value: '2019' },
+    { label: '2018', value: '2018' },
+    { label: '2017', value: '2017' },
+    { label: '2016 et avant', value: '2016_et_avant' },
+  ],
   volume: [
     { label: '75 cl', value: '75 cl' },
     { label: '1 Litre', value: '1 Litre' },
@@ -158,7 +168,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   hideColorFilter = false,
   resetFilters,
 }) => {
-  const [expandedSections, setExpandedSections] = useState<string[]>(['color']);
+  const [expandedSections, setExpandedSections] = useState<string[]>(['color',]);
   const [isScrolled, setIsScrolled] = useState(false);
 
   const filterContainerRef = useRef<HTMLDivElement>(null);

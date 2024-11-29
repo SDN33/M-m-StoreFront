@@ -27,7 +27,7 @@ interface ProductsCardsProps {
   selectedFilters: {
     color: string[];
     region: string[];
-    vintage: string[];
+    millesime: string[];
     certification: string[];
     style: string[];
     volume: string[];
@@ -78,8 +78,8 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
           )
         );
 
-      const isVintageMatch = selectedFilters.vintage.length === 0 ||
-        selectedFilters.vintage.includes(product.millesime || '');
+      const isVintageMatch = selectedFilters.millesime.length === 0 ||
+        selectedFilters.millesime.includes(product.millesime || '');
 
       const isRegionMatch = selectedFilters.region.length === 0 ||
         selectedFilters.region.some(

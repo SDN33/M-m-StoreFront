@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Gift, Snowflake, TreePine as ChristmasTree } from 'lucide-react';
+import { Snowflake } from 'lucide-react';
 
 const PromotionSection = () => {
   const [snowflakes, setSnowflakes] = useState<{ left: string; animationDelay: string; opacity: number; size: number }[]>(
