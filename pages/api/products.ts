@@ -26,7 +26,7 @@ interface Product {
   style?: string;
   stock_status?: string;
   degre?: number;
-  sans_sulfites_?: boolean;
+  sans_sulfites_?: string;
 }
 
 interface AxiosErrorResponse {
@@ -76,6 +76,7 @@ const transformMetaData = (metaData: { key: string; value: string | string[] }[]
       case 'rating_count':
       case 'volume':
       case 'style':
+      case 'sans_sulfites_':
       case 'degre':
         initialMetadata[cleanKey] = Array.isArray(value) ? value.join(', ') : value;
         break;
@@ -84,7 +85,6 @@ const transformMetaData = (metaData: { key: string; value: string | string[] }[]
       case 'degustation':
         initialMetadata[cleanKey] = Array.isArray(value) ? value : [value];
         break;
-      case 'sans_sulfites_':
     }
   });
 
@@ -143,12 +143,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           );
         }
 
-        // Add "Sans sulfites ajoutés" filtering
-        if (query.sans_sulfites_ === 'oui') {
-          productsOrCategories = (productsOrCategories as Product[]).filter(product =>
-            product.sans_sulfites_ === true
-          );
-        }
 
         const transformedProducts = (productsOrCategories as Product[]).map(product => ({
           ...product,

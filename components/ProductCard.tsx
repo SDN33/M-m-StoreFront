@@ -28,7 +28,7 @@ interface Product {
   description?: string;
   rating?: number;
   vendor: number;
-  _sans_sulfites_?: string;
+  sans_sulfites_?: string;
 }
 
 interface ProductCardProps {
@@ -242,6 +242,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             <span className='text-xs font-semibold'> {product.rating_count} avis</span>
           </div>
         </div>
+        <div>
+          {product.sans_sulfites_ === 'oui' && (
+            <div className="absolute top-0 right-0 z-10 bg-primary/95 text-white text-xs px-2 py-2 rounded-full">
+              Sans sulfites
+            </div>
+          )}
+        </div>
         <div className="relative w-full h-52 mb-2">
           <Image
             src={product.images[0]?.src || '/images/vinmeme.png'}
@@ -338,11 +345,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             }}
           />
         </div>
-
-        <div>
-
-        </div>
+      <div>
       </div>
+    </div>
   );
 };
 

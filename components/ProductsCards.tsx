@@ -19,6 +19,8 @@ interface Product {
   vendor: number;
   sale_price: number;
   regular_price: number;
+  sans_sulfites_: string;
+
 }
 
 interface ProductsCardsProps {
@@ -32,6 +34,7 @@ interface ProductsCardsProps {
     accord_mets: string[];
     region__pays: string[];
     categories: string[];
+    sans_sulfites_: string[];
   };
   onAddToCart: (productId: number, quantity: number, variationId: number) => void;
 }
