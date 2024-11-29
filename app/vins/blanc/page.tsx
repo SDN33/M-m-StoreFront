@@ -6,7 +6,6 @@ import ProductFilter from '@/components/ProductFilters';
 import MobileProductFilter from '@/components/MobileProductFilter';
 import Slogan from '@/components/Slogan';
 import HeroBanner from '@/components/HeroBanner';
-import WineCategories from '@/components/WineCategories';
 import BackToTop from '@/components/BackToTop';
 
 export default function BlancWinePage() {
@@ -81,7 +80,6 @@ export default function BlancWinePage() {
         <br />
         <HeroBanner />
         <br />
-        <WineCategories />
         <Slogan />
         <BackToTop />
       </main>
