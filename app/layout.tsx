@@ -23,15 +23,15 @@ type TwitterMetadata = {
 export const metadata: Metadata & { twitter: TwitterMetadata } = {
   title: "Achat Vins Bio et Démeter Biodynamie | 2 500 vins Bio en direct de vignerons et vigneronnes engagé(e)s | VinsMemeGeorgette.com",
   description:
-    "Les vins de Mémé Georgette, découvrer notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s.",
+    "Les vins de Mémé Georgette, découvrez notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s.",
   icons: {
     icon: "/favicon.ico",
   },
-  keywords: ["Mémé Georgette, meme georgette,  Vins Mémé Georgette, acheter vins, vinatis, les grappes, vin en ligne, acheter vins bio, acheter vins en ligne, vins bio, vins en ligne, vins nature, vin nature, vins biodynamiques, vins pas chers, vins de qualité, vins de vignerons, vins de vigneronnes, vins de France, vins du monde, vins rouges, vins blancs, vins rosés, vins pétillants, vins effervescents, vins tranquilles, vins de garde, cépages, terroir français, vins de caractère, vins de gastronomie, vins de fête, vins de tous les jours, vins de qualité, vins de prestige, vins de collection, vins de garde, vins de Bordeaux, vins de Bourgogne, vins de Loire, vins de Rhône, vins de Provence, vins de Champagne, vins d'Alsace, vins du Languedoc, vins du Roussillon, vins du Sud-Ouest, vins du Jura, vins de Savoie, vins de Corse, vins d'Espagne, vins d'Italie, vins d'Allemagne, vins du Portugal, vinaigre, wu, aoc, bouteille crémant prix  "],
+  keywords: ["Mémé Georgette, meme georgette,  Vins Mémé Georgette, acheter vins, vinatis, les grappes, vin en ligne, acheter vins bio, acheter vins en ligne, vins bio, vins en ligne, vins sans sulfites, vins nature, vin nature, vins biodynamiques, vins pas chers, vins de qualité, vins de vignerons, vins de vigneronnes, vins de France, vins du monde, vins rouges, vins blancs, vins rosés, vins pétillants, vins effervescents, vins tranquilles, vins de garde, cépages, terroir français, vins de caractère, vins de gastronomie, vins de fête, vins de tous les jours, vins de qualité, vins de prestige, vins de collection, vins de garde, vins de Bordeaux, vins de Bourgogne, vins de Loire, vins de Rhône, vins de Provence, vins de Champagne, vins d'Alsace, vins du Languedoc, vins du Roussillon, vins du Sud-Ouest, vins du Jura, vins de Savoie, vins de Corse, vins d'Espagne, vins d'Italie, vins d'Allemagne, vins du Portugal, vinaigre, wu, aoc, bouteille crémant prix  "],
   openGraph: {
     title: "Achat Vins Bio et Démeter Biodynamie | 2 500 vins Bio en direct de vignerons et vigneronnes engagé(e)s | VinsMemeGeorgette.com",
     description:
-      "Les vins de Mémé Georgette, découvrer notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s.",
+      "Les vins de Mémé Georgette, découvrez notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s.",
     images: [
       {
         url: "/images/post_partage.png",
@@ -46,7 +46,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
     card: "summary_large_image",
     title: "Achat Vins Bio et Démeter Biodynamie | 2 500 vins Bio en direct de vignerons et vigneronnes engagé(e)s | VinsMemeGeorgette.com",
     description:
-      "Les vins de Mémé Georgette, découvrer notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s.",
+      "Les vins de Mémé Georgette, découvrez notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s.",
     images: [
       {
         url: "/images/post_partage.png",
