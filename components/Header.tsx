@@ -67,7 +67,7 @@ const Header: React.FC = () => {
     {
       name: 'Les vins Rosés',
       href: '/vins/rose',
-      bgClass: 'bg-gradient-to-r from-rose-pale to-rose-profond',
+      bgClass: 'bg-gradient-to-r from-rose-pale to-rose-700',
     },
     {
       name: 'Les vins Pétillants',

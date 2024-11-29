@@ -21,7 +21,7 @@ type TwitterMetadata = {
 
 
 export const metadata: Metadata & { twitter: TwitterMetadata } = {
-  title: "Achat Vins Bio et Démeter Biodynamie | 2 500 vins Bio en direct de vignerons et vigneronnes engagé(e)s | VinsMemeGeorgette.com",
+  title: "Achat Vin Bio et Démeter Biodynamie | 2 500 vins Bio en direct de vignerons et vigneronnes engagé(e)s | Vin Rouge Vin Blanc Vin Rosé",
   description:
     "Les vins de Mémé Georgette, découvrez notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s.",
   icons: {

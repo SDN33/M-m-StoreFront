@@ -59,11 +59,12 @@ export default function SparklingWinePage() {
 
       <main className={`flex-1 overflow-y-auto ${isMobile ? 'p-4' : 'p-8'}`}>
         <div className="max-w-7xl mx-auto mt-36">
-          <div className='text-center text-xs mx-auto text-black mb-4'><a href="/">Accueil</a> / <strong>Vins Pétillant</strong></div>
+          <div className="bg-teal-800 text-white">
+            <div className="text-center text-xs mx-auto p-2"><a href="/">Accueil</a> / <strong>Vins Pétillants</strong></div>
+            <h1 className="text-center text-4xl font-black p-8 rounded-t-xl">Nos Vins Pétillants</h1>
+            <div className="border-b-4 border-white w-full max-w-[50rem] -mt-1 mx-auto"></div>
+          </div>
 
-          <h1 className="text-center text-4xl text-white font-black bg-teal-800 p-8 rounded-t-xl">
-            Nos Vins Pétillants
-          </h1>
           <div className="border-b-4 border-white w-full max-w-[50rem] -mt-1 mx-auto"></div>
           <h2 className="text-center text-lg text-black mt-4 font-bold">
             Découvrez notre sélection de vins pétillants

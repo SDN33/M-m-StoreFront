@@ -59,17 +59,13 @@ export default function RedWinePage() {
 
       <main className={`flex-1 overflow-y-auto ${isMobile ? 'p-4' : 'p-8'}`}>
         <div className="max-w-7xl mx-auto mt-36">
-          <div className='text-center text-xs mx-auto text-black mb-4'><a href="/">Accueil</a> / <strong>Vins Rouges</strong></div>
-
-          <h1 className="text-center text-4xl text-white font-black bg-red-800 p-8 rounded-t-xl">
-            Nos Vins Rouges
-          </h1>
-          <div className="border-b-4 border-white w-full max-w-[50rem] -mt-1 mx-auto"></div>
-
-          <h2 className="text-center text-lg text-black mt-4 font-bold">
-            Découvrez notre sélection de vins rouges
-          </h2>
-          <h3 className='text-center text-sm text-black-500 mt-4 mx-10'> Les vins rouges sont des vins obtenus par la fermentation de raisins noirs ou de raisins blancs à peau rouge. Ils se caractérisent par leur couleur rouge, qui peut varier du rouge violacé jeune au rouge brique pour les vins plus âgés. Ils se distinguent des vins blancs et des vins rosés par leur couleur, mais aussi par leur mode de vinification et leur goût.</h3>
+          <div className="bg-red-800 text-white">
+            <div className="text-center text-xs mx-auto p-2"><a href="/">Accueil</a> / <strong>Vins Rouges</strong></div>
+            <h1 className="text-center text-4xl font-black p-8 rounded-t-xl">Nos Vins Rouges</h1>
+            <div className="border-b-4 border-white w-full max-w-[50rem] -mt-1 mx-auto"></div>
+          </div>
+          <h2 className="text-center text-lg text-black mt-4 font-bold">Découvrez notre sélection de vins rouges</h2>
+          <h3 className="text-center text-sm text-black-500 mt-4 mx-10">Les vins rouges sont des vins obtenus par la fermentation de raisins noirs ou de raisins blancs à peau rouge. Ils se caractérisent par leur couleur rouge, qui peut varier du rouge violacé jeune au rouge brique pour les vins plus âgés. Ils se distinguent des vins blancs et des vins rosés par leur couleur, mais aussi par leur mode de vinification et leur goût.</h3>
 
           <ProductsCards
             selectedFilters={selectedFilters}
@@ -89,7 +85,6 @@ export default function RedWinePage() {
           onFilterChange={handleFilterChange}
         />
       </div>
-
     </div>
   );
 }
