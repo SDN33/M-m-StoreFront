@@ -14,6 +14,7 @@ import WineCategories from '@/components/WineCategories';
 import LatestArticles from '@/components/LatestArticles';
 import BackToTop from '@/components/BackToTop';
 import PromoCode from '@/components/PromoCode';
+import Image from 'next/image';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -152,8 +153,16 @@ export default function Home() {
         style={{ zIndex: 9999 }}
       >
         {/* Optional: Add a subtle loading indicator */}
-        <div className="animate-ping w-16 h-16 bg-gray-200 rounded-full">
-          <div className="w-16 h-16 bg-primary rounded-full" />
+        <div className=" w-16 h-16 bg-gray-200 rounded-full">
+            <div className="animate-ping w-16 h-16 bg-primary rounded-full font-black flex items-center justify-center text-center">
+              <Image
+                src="/images/meme-pas-contente.png"
+                alt="Mémé Georgette"
+                width={65}
+                height={65}
+                className='rounded-full mt-2'
+              />
+            </div>
         </div>
       </div>
     );
