@@ -43,6 +43,7 @@ interface Product {
   degre?: number;
   millesime?: string;
   degustation: string;
+  sans_sulfites_?: string;
 }
 
 
@@ -383,6 +384,16 @@ const ProductPage: React.FC = () => {
                 <h3 className="text-lg font-bold text-teal-800 text-left">Dégustation</h3>
                 <p className="text-sm text-right">
                   {product.degustation || 'Pas de note de dégustation'}
+                </p>
+              </div>
+            </div>
+
+            {/* Sans Sulfite */}
+            <div className="bg-white p-4 rounded-lg shadow-md">
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-bold text-teal-800 text-left">Sulfites</h3>
+                <p className="text-sm text-right">
+                  {product.sans_sulfites_ === 'oui' ? 'Sans sulfites ajoutés' : 'Contient des sulfites'}
                 </p>
               </div>
             </div>
