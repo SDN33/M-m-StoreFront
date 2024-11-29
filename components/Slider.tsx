@@ -15,7 +15,7 @@ const Slider = () => {
     {
       id: 2,
       imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto:best/v1732715675/slider2_ipsxcq.webp',
-      link: '/',
+      link: '/vendors/255986119',
       lcp: true,
     },
     {
