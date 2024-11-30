@@ -107,7 +107,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const renderCertification = () => {
     if (product.certification?.toLowerCase() === 'biodynamie') {
       return (
-        <div className="relative w-20 h-6">
+        <div className="relative w-20 h-6 mt-1">
           <Image
             src="/images/bioBiodynamie.png"
             alt="Certification biodynamique"
@@ -123,7 +123,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           <Image
             src="/images/logobio1.webp"
             alt="Certification bio"
-            fill
+            width={24}
+            height={24}
             style={{ objectFit: 'contain' }}
           />
         </div>
