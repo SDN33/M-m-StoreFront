@@ -70,7 +70,7 @@ const LatestArticles: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto px-8 py-8 sm:mb-8 lg:mb-20">
+    <div className="container mx-auto px-8 py-8 sm:mb-8 lg:mb-10">
       <div className="text-center mb-10 bg-gradient-to-r from-gray-900 via-gray-800 to-black pt-7 rounded-t-xl">
         <h2 className="text-lg md:text-2xl lg:text-3xl font-extrabold text-primary text-center">
           <span className="text-white">Le Blog de </span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="flex sm:flex md:hidden lg:hidden xl:hidden -mt-8"></span>Mémé Georgette&nbsp;
