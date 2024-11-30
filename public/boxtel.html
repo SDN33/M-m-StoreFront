@@ -3,55 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boxtal Maps Test</title>
-    <!-- Load the Boxtal Maps script -->
-    <script src="https://maps.boxtal.com/app/v3/assets/js/boxtal-maps.js"></script>
+    <title>Boxtal Parcel Point Map Test</title>
+    <!-- Boxtal Maps Script -->
+    <script src="https://maps.boxtal.com/app/v3/assets/js/boxtal-maps.js" defer></script>
 </head>
 <body>
     <h1>Boxtal Parcel Point Map Test</h1>
     <div id="parcel-point-map" style="height: 500px; width: 100%; border: 1px solid #ccc;"></div>
 
     <script>
-      window.onload = function () {
-          if (typeof BoxtalMaps !== 'undefined') {
-              console.log('Boxtal Maps script loaded successfully');
+        // Fonction pour récupérer le token via un serveur proxy
+        async function fetchAccessToken() {
+            try {
+                const response = await fetch('/api/get-boxtal-token', { method: 'POST' });
+                if (!response.ok) throw new Error('Failed to retrieve token');
+                const data = await response.json();
+                return data.accessToken || data.token;
+            } catch (error) {
+                console.error('Error fetching token:', error.message);
+                alert('Unable to load map. Please try again later.');
+                return null;
+            }
+        }
 
-              // Utilisez l'accessToken généré
-              const accessToken = 'YOUR_ACCESS_TOKEN'; // Remplacez par le token obtenu
+        window.onload = async function () {
+            // Vérifie si le script Boxtal Maps est chargé
+            if (typeof BoxtalMaps !== 'undefined') {
+                console.log('Boxtal Maps script loaded successfully');
 
-              // Initialiser Boxtal Maps avec le token
-              const boxtalMaps = new BoxtalMaps({
-                  domToLoadMap: '#parcel-point-map',
-                  accessToken: accessToken,
-                  baseUrl: 'https://maps.boxtal.com/app/v3',
-                  config: {
-                      locale: 'fr',
-                      parcelPointNetworks: [
-                          {
-                              code: 'CHRP_NETWORK',
-                              markerTemplate: {
-                                  color: '#94a1e8'
-                              }
-                          }
-                      ],
-                      options: {
-                          primaryColor: '#00FA9A',
-                          autoSelectNearestParcelPoint: true
-                      }
-                  },
-                  onMapLoaded: function () {
-                      console.log('Boxtal map loaded successfully');
-                  }
-              });
+                // Récupère le token d'accès via le proxy
+                const accessToken = await fetchAccessToken();
 
-              boxtalMaps.onSearchParcelPointsResponse(function (points) {
-                  console.log('Parcel points found:', points);
-              });
-          } else {
-              console.error('Boxtal Maps script failed to load. Please check the script URL.');
-          }
-      };
-  </script>
+                if (accessToken) {
+                    // Initialise la carte Boxtal avec le token d'accès obtenu
+                    const boxtalMaps = new BoxtalMaps({
+                        domToLoadMap: '#parcel-point-map',
+                        accessToken: accessToken,
+                        baseUrl: 'https://maps.boxtal.com/app/v3',
+                        config: {
+                            locale: 'fr',
+                            parcelPointNetworks: [
+                                {
+                                    code: 'CHRP_NETWORK',
+                                    markerTemplate: { color: '#94a1e8' }
+                                }
+                            ],
+                            options: {
+                                primaryColor: '#00FA9A',
+                                autoSelectNearestParcelPoint: true
+                            }
+                        },
+                        onMapLoaded: function () {
+                            console.log('Boxtal map loaded successfully');
+                        },
+                        onError: function (error) {
+                            console.error('Map loading error:', error);
+                            alert('Error loading the map. Please try again later.');
+                        }
+                    });
 
+                    // Gestion des réponses lors de la recherche de points de retrait
+                    boxtalMaps.onSearchParcelPointsResponse(function (points) {
+                        console.log('Parcel points found:', points);
+                    });
+                }
+            } else {
+                console.error('Boxtal Maps script failed to load. Please check the script URL.');
+            }
+        };
+    </script>
 </body>
 </html>

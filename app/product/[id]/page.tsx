@@ -185,6 +185,7 @@ const ProductPage: React.FC = () => {
       <div className="relative top-0 left-0 w-full">
       </div>
       <br /><br /><br />
+<<<<<<< HEAD
       <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 overflow-y-hidden">
         <nav aria-label="Breadcrumb" className="text-sm mb-8 overflow-x-auto whitespace-nowrap">
           <ol className="list-none p-0 inline-flex">
@@ -194,12 +195,27 @@ const ProductPage: React.FC = () => {
             </li>
             <li className="flex items-center">
               <a className="cursor-pointer text-gray-900 hover:text-gray-700" onClick={vendorRedirect}>
+=======
+      <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 overflow-y-hidden pb-2">
+        <nav aria-label="Breadcrumb" className="text-sm mb-4 overflow-x-auto whitespace-nowrap">
+          <ol className="list-none p-0 inline-flex">
+            <li className="flex items-center">
+              <a href="/" className="text-xs text-gray-500 hover:text-gray-700">Accueil</a>
+              <span className="mx-2 text-gray-500">&gt;</span>
+            </li>
+            <li className="flex items-center">
+              <a className="text-xs cursor-pointer text-gray-500 hover:text-gray-700" onClick={vendorRedirect}>
+>>>>>>> f3d6894cd096b815647d4d55c09e58603b237f4e
                 {product.store_name || ' @MéméGeorgette'}
               </a>
               <span className="mx-2 text-gray-900">&gt;</span>
             </li>
             <li className="flex items-center">
+<<<<<<< HEAD
               <span className="text-gray-900 truncate max-w-[150px] sm:max-w-none" aria-current="page">{product.name}</span>
+=======
+              <span className="text-sm truncate max-w-[150px] sm:max-w-none" aria-current="page">{product.name}</span>
+>>>>>>> f3d6894cd096b815647d4d55c09e58603b237f4e
             </li>
           </ol>
         </nav>
@@ -310,6 +326,7 @@ const ProductPage: React.FC = () => {
             </div>
 
             <div className="flex items-center mt-1">
+<<<<<<< HEAD
               <select
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
@@ -320,6 +337,22 @@ const ProductPage: React.FC = () => {
                   <option key={num} value={num}>{num}</option>
                 ))}
               </select>
+=======
+              <div className="flex items-center">
+                <label htmlFor="quantity-select" className="sr-only">Sélectionner la quantité</label>
+                <select
+                  id="quantity-select"
+                  value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                  className="mr-4 p-2 border rounded bg-white border-gray-300"
+                  aria-label="Sélectionner la quantité"
+                >
+                  {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
+                    <option key={num} value={num}>{num}</option>
+                  ))}
+                </select>
+              </div>
+>>>>>>> f3d6894cd096b815647d4d55c09e58603b237f4e
               <AddToCartButton
                 product={product}
                 quantity={quantity}

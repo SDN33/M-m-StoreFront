@@ -230,9 +230,8 @@ export default function Home() {
               <Livraison />
               <div className="py-8" />
               <WineCategories />
-              <div className="py-8" />
-              <LatestArticles />
               <Trust />
+              <LatestArticles />
               <Slogan />
               <div className="py-8" />
               <GoToFooter />

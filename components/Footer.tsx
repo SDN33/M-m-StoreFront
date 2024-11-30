@@ -42,7 +42,7 @@ const Footer = () => {
         </div>
 
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto text-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 max-w-4xl mx-auto text-white">
           <div>
             <h3 className=" font-semibold mb-4 text-lg text-white">À propos de Mémé Georgette</h3>
             <ul className="space-y-2 font-normal">
@@ -57,11 +57,21 @@ const Footer = () => {
           <div>
             <h3 className=" font-semibold mb-4 text-lg text-white">Découvrez nos vins</h3>
             <ul className="space-y-2 font-normal">
-              <li><a href="/vins/rouge" className="text-white hover:text-primary transition-colors text-sm">Nos vins rouges</a></li>
-              <li><a href="/vins/blanc" className="text-white hover:text-primary transition-colors text-sm">Nos vins blancs</a></li>
-              <li><a href="/vins/rose" className="text-white hover:text-primary transition-colors text-sm">Nos vins rosés</a></li>
-              <li><a href="/vins/petillant" className="text-white hover:text-primary transition-colors text-sm">Nos vins pétillants</a></li>
-              <li><a href="/vins/liquoreux"className="text-white hover:text-primary transition-colors text-sm">Nos vins liquoreux</a></li>
+              <li><a href="/vins/rouge" className="text-white hover:text-primary transition-colors text-sm">Nos Vins Rouges</a></li>
+              <li><a href="/vins/blanc" className="text-white hover:text-primary transition-colors text-sm">Nos Vins Blancs</a></li>
+              <li><a href="/vins/rose" className="text-white hover:text-primary transition-colors text-sm">Nos Vins Rosés</a></li>
+              <li><a href="/vins/petillant" className="text-white hover:text-primary transition-colors text-sm">Nos Vins Pétillants</a></li>
+              <li><a href="/vins/liquoreux"className="text-white hover:text-primary transition-colors text-sm">Nos Vins Liquoreux</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className=" font-semibold mb-4 text-lg text-white">Nos Catégories</h3>
+            <ul className="space-y-2 font-normal">
+              <li><a href="/vendors" className="text-white hover:text-primary transition-colors text-sm">Nos Vignerons</a></li>
+              <li><a href="/promos" className="text-white hover:text-primary transition-colors text-sm">Promos</a></li>
+              <li><a href="/vins-du-monde" className="text-white hover:text-primary transition-colors text-sm">Vins du Monde</a></li>
+              <li><a href="/vins/autres" className="text-white hover:text-primary transition-colors text-sm">Les Autres Vins</a></li>
             </ul>
           </div>
 

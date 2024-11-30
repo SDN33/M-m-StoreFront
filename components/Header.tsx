@@ -308,7 +308,7 @@ const Header: React.FC = () => {
             <a
           href={category.href}
           onClick={category.onClick}
-          className={`px-5 text-gray-900 hover:text-primary transition-colors flex items-center h-full ${
+          className={`px-5 text-gray-900 text-sm hover:text-primary transition-colors flex items-center h-full ${
             category.className || ''
           }`}
             >

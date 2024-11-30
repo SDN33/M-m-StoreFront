@@ -34,13 +34,7 @@ body {
   }
 }
 
-.sloganhero {
-  font-family: var(--font-oswald), sans-serif; /* Utiliser Oswald comme police alternative */
-  font-weight: 400; /* Gras */
-  line-height: 1.2; /* Hauteur de ligne */
-  margin: 0; /* Évite les marges par défaut */
-  padding: 0; /* Évite les paddings par défaut */
-}
+
 
 .productscontainer {
   margin-left: auto; /* Marge à gauche automatique */
@@ -65,35 +59,6 @@ body {
   animation: slideInFromRight 1s ease-out forwards;
 }
 
-.loader {
-  border: 8px solid #f3f3f3; /* Couleur de fond */
-  border-top: 8px solid #ff5722; /* Couleur de l'animation */
-  border-radius: 50%;
-  width: 40px; /* Taille du loader */
-  height: 40px; /* Taille du loader */
-  animation: spin 1s linear infinite; /* Animation */
-  margin: 20px auto; /* Centre le loader */
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes fadeInUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.fade-in-up {
-  animation: fadeInUp 1s ease-out forwards;
-}
 
 
 
@@ -152,43 +117,6 @@ ul::-webkit-scrollbar {
 
 /* globals.css */
 
-
-.sx-container {
-  max-width: 400px;
-  width: 100%;
-  padding: 2rem;
-  background-color: #fff;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
-  margin-top: 14rem;
-  margin-bottom: 3rem;
-}
-
-.sx-container input, .sx-container button {
-  width: 100%;
-  padding: 0.75rem;
-  margin-top: 1rem;
-  border-radius: 0.375rem;
-  border: 1px solid #ddd;
-}
-
-.sx-container button {
-  background-color: #0070f3;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.sx-container button:hover {
-  background-color: #005bb5;
-}
-.sx-container h2 {
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
 
 .link {
   display: block;
