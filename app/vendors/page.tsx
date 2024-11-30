@@ -149,7 +149,7 @@ const VendorsPage = () => {
           <p className="text-center text-xl font-extrabold -mt-4 mb-4 text-teal-800">
             &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
           </p>
-          <p className="text-center text-sm font-extrabold -mt-2">
+          <p className="text-center text-base font-serif -mt-2">
             Nos vignerons s&apos;engagent pour une agriculture respectueuse de l&apos;environnement,
             garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
             Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique.
@@ -231,7 +231,7 @@ const VendorsPage = () => {
                   </div>
 
                   {vendor.shop?.description && (
-                    <p className="mt-4 text-gray-600 text-center text-sm">
+                    <p className="mt-4 text-gray-900 text-center text-sm">
                       {vendor.shop.description ? vendor.shop.description.replace(/<\/?[^>]+(>|$)/g, "") : ''}
                     </p>
                   )}
@@ -261,7 +261,7 @@ const VendorsPage = () => {
                             <h4 className="font-medium text-sm text-center text-gray-800 line-clamp-1">
                               {product.name}
                             </h4>
-                            <p className="text-primary font-semibold mt-1">
+                            <p className="text-gray-900 font-semibold mt-1">
                               {product.price}€
                             </p>
                           </div>

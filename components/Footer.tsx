@@ -49,6 +49,7 @@ const Footer = () => {
               <li><a href="https://www.memegeorgette.com/" className=" hover:text-primary transition-colors text-sm">Découvrir Mémé Georgette</a></li>
               <li><a href="/portailpro" className=" hover:text-primary transition-colors text-sm">Portail Pro</a></li>
               <li><a href="/blog" className=" hover:text-primary transition-colors text-sm">Le Blog de Mémé</a></li>
+              <li><a href="/vendors" className=" hover:text-primary transition-colors text-sm">Nos Vignerons</a></li>
             </ul>
           </div>
 
