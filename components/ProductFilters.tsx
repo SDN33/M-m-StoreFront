@@ -213,10 +213,12 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   const isPetitPrixMatch = () => {
+    resetFilters();
     handleCheckboxChange('petit_prix', { label: 'Petit prix', value: 'petit_prix' });
   };
 
   const isHGPrixMatch = () => {
+    resetFilters();
     handleCheckboxChange('haut_de_gamme', { label: 'Haut de gamme', value: 'haut_de_gamme' });
   }
 

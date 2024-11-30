@@ -311,7 +311,7 @@ export default function PortailPro() {
                   {/* Nouveau bouton de téléchargement */}
                 <div>
                   <p className='text-center text-xl mt-12 mb-4'>Pour les vignerons déjà inscrits</p>
-                  <p className='text-center font-normal mb-2'>Téléchargez notre guide de création de produit, pour vous aider à mettre en ligne vos vins bio et biodynamiques sur notre plateforme:</p>
+                  <p className='text-center text-sm mb-2'>Téléchargez notre guide de création de produit, pour vous aider à mettre en ligne vos vins bio et biodynamiques sur notre plateforme:</p>
                   <button
                     onClick={handleDownloadDocument}
                     className="bg-black text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:bg-teal-950 transition-all duration-300 flex items-center justify-center space-x-2"
