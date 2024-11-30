@@ -225,7 +225,7 @@ const VendorsPage = () => {
                             <h4 className="font-medium text-sm text-center text-gray-800 line-clamp-1">
                               {product.name}
                             </h4>
-                            <p className="text-primary font-semibold mt-1">
+                            <p className="text-black font-semibold mt-1">
                               {product.price}€
                             </p>
                           </div>
