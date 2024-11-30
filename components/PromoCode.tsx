@@ -68,6 +68,21 @@ const PromoCode: React.FC = () => {
               </div>
             ))}
           </div>
+          <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+            {snowflakes.map((flake, index) => (
+              <div
+                key={index}
+                className="absolute snowflake"
+                style={{
+                  left: flake.left,
+                  animationDelay: flake.animationDelay,
+                  opacity: flake.opacity,
+                }}
+              >
+                <Snowflake size={flake.size} color="white" className="opacity-30 animate-fall" />
+              </div>
+            ))}
+          </div>
             <div className="border-t-4 border-white w-8 mx-auto mb-2" />
             <div className="flex justify-center">
               <BadgeEuro />
