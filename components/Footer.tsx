@@ -47,8 +47,8 @@ const Footer = () => {
             <h3 className=" font-semibold mb-4 text-lg text-primary">À propos de Mémé Georgette</h3>
             <ul className="space-y-2 font-normal">
               <li><a href="https://www.memegeorgette.com/" className=" hover:text-primary transition-colors text-sm">Découvrir Mémé Georgette</a></li>
-              <li><a href="/demarche" className=" hover:text-primary transition-colors text-sm">Notre Démarche</a></li>
-              <li><a href="/actualites" className=" hover:text-primary transition-colors text-sm">On parle de nous !</a></li>
+              <li><a href="/portailpro" className=" hover:text-primary transition-colors text-sm">Portail Pro</a></li>
+              <li><a href="/blog" className=" hover:text-primary transition-colors text-sm">Le Blog de Mémé</a></li>
             </ul>
           </div>
 
