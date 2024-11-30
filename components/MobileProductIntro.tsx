@@ -93,7 +93,7 @@ const MobileProductsIntro: React.FC = () => {
         ref={introRef}
         className={`transition-all duration-1000 ${
           isVisible ? 'opacity-100' : 'opacity-0'
-        } rounded-b-xl flex flex-col items-center text-center lg:hidden bg-primary py-6 min-h-[200px] h-auto`}
+        } rounded-b-xl shadow-sm flex flex-col items-center text-center lg:hidden bg-primary py-6 min-h-[200px] h-auto`}
         style={{ overflow: 'hidden', transition: 'opacity 1s ease, height 1s ease' }}
       >
         <div className="flex space-x-8 h-[35px] items-center">
