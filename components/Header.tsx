@@ -295,7 +295,7 @@ const Header: React.FC = () => {
         }}
           />
 
-          <ul className="scrollable-menu flex items-center justify-start space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar h-full mx-4 pl-20 flex-grow">
+          <ul className="scrollable-menu flex items-center justify-start space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar h-full mx-4 pl-28 flex-grow">
         {categories.map((category) => (
           <li
             key={category.name}
