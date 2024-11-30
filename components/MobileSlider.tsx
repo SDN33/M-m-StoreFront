@@ -40,7 +40,7 @@ const Slider = () => {
     <div className="relative w-full h-[12vh] overflow-hidden bg-primary md:-mt-52 lg:-mt-28  ">
       {/* Slides container */}
       <div
-        className="flex h-full transition-transform duration-700 ease-in-out bg-black"
+        className="flex h-full transition-transform duration-700 ease-in-out bg-primary"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
         {slides.map((slide) => (
