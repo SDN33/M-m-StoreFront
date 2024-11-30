@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer id="footer" className="bg-gradient-to-r from-gray-900 via-gray-800 to-black shadow-lg text-white py-2 text-center">
+    <footer id="footer" className="bg-gradient-to-r from-gray-900 via-gray-800 to-black shadow-lg text-white py-2 text-center overflow-y-hidden">
 
       <div className="max-w-7xl mx-auto px-4 mt-8">
         {/* Logos de paiement */}
@@ -42,7 +42,7 @@ const Footer = () => {
         </div>
 
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 max-w-4xl mx-auto text-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto text-white">
           <div>
             <h3 className=" font-semibold mb-4 text-lg text-white">À propos de Mémé Georgette</h3>
             <ul className="space-y-2 font-normal">
@@ -62,16 +62,6 @@ const Footer = () => {
               <li><a href="/vins/rose" className="text-white hover:text-primary transition-colors text-sm">Nos Vins Rosés</a></li>
               <li><a href="/vins/petillant" className="text-white hover:text-primary transition-colors text-sm">Nos Vins Pétillants</a></li>
               <li><a href="/vins/liquoreux"className="text-white hover:text-primary transition-colors text-sm">Nos Vins Liquoreux</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className=" font-semibold mb-4 text-lg text-white">Nos Catégories</h3>
-            <ul className="space-y-2 font-normal">
-              <li><a href="/vendors" className="text-white hover:text-primary transition-colors text-sm">Nos Vignerons</a></li>
-              <li><a href="/promos" className="text-white hover:text-primary transition-colors text-sm">Promos</a></li>
-              <li><a href="/vins-du-monde" className="text-white hover:text-primary transition-colors text-sm">Vins du Monde</a></li>
-              <li><a href="/vins/autres" className="text-white hover:text-primary transition-colors text-sm">Les Autres Vins</a></li>
             </ul>
           </div>
 

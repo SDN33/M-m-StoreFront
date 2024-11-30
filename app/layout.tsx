@@ -73,7 +73,7 @@ export default function RootLayout({
         <meta property="og:locale" content="fr_FR" />
         <meta name="icon" content={typeof metadata.icons === 'string' ? metadata.icons : undefined} />
         <meta name="author" content="Vins Mémé Georgette" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.9" />
         <meta charSet="UTF-8" />
 
         <meta name="twitter:card" content={metadata.twitter?.card} />

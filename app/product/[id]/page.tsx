@@ -180,7 +180,7 @@ const ProductPage: React.FC = () => {
 
 
   return (
-    <div className="sm:mt-28 md:mt-16 px-4 md:px-12 min-h-screen flex flex-col justify-between overflow-x-hidden">
+    <div className=" min-h-screen sm:mt-28 md:mt-16 px-4 md:px-12 flex flex-col justify-between overflow-x-hidden overflow-y-hidden">
       <span className='sm:flex md:hidden lg:hidden'><br /><br /></span>
       <div className="relative top-0 left-0 w-full">
       </div>
@@ -455,7 +455,6 @@ const ProductPage: React.FC = () => {
             className="w-fit flex mx-auto" // Ajuste la hauteur si nécessaire
           />
 
-          <br /><br />
         </div>
       </div>
     </div>

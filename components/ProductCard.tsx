@@ -323,13 +323,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
 
         <div className="flex items-center justify-center mx-auto pb-4">
-          <label className="sr-only" htmlFor="quantity-select">Sélectionnez la quantité</label>
           <select
-            id="quantity-select"
             value={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}
-            className="border mr-4 rounded-md p-2 text-sm"
-            aria-label="Sélectionnez la quantité"
+            className="border mr-4 rounded-md p-2 "
+
           >
             {[...Array(10)].map((_, i) => (
               <option key={i} value={i + 1}>
