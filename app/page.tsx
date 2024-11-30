@@ -37,7 +37,8 @@ export default function Home() {
     accord_mets: [],
     region__pays: [],
     categories: [],
-    sans_sulfites_: []
+    sans_sulfites_: [],
+    petit_prix: [],
   });
 
 
@@ -141,7 +142,8 @@ export default function Home() {
       accord_mets: [],
       region__pays: [],
       categories: [],
-      sans_sulfites_: []
+      sans_sulfites_: [],
+      petit_prix: [],
     });
   };
 

@@ -24,7 +24,8 @@ const MobileHome: React.FC = () => {
     accord_mets: [],
     region__pays: [],
     categories: [],
-    sans_sulfites_: []
+    sans_sulfites_: [],
+    petit_prix: [],
   });
 
   const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {

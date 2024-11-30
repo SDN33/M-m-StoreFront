@@ -22,7 +22,8 @@ export default function SweetWinePage() {
     accord_mets: [],
     region__pays: [],
     categories: [],
-    sans_sulfites_: []
+    sans_sulfites_: [],
+    petit_prix: [],
   });
 
   useEffect(() => {

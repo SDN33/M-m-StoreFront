@@ -29,6 +29,7 @@ interface Product {
   rating?: number;
   vendor: number;
   sans_sulfites_?: string;
+  petit_prix?: string;
 }
 
 interface ProductCardProps {

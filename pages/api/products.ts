@@ -27,6 +27,7 @@ interface Product {
   stock_status?: string;
   degre?: number;
   sans_sulfites_?: string;
+  petit_prix?: string;
 }
 
 interface AxiosErrorResponse {

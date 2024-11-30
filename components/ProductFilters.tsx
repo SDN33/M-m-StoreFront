@@ -12,6 +12,7 @@ interface ProductFilterProps {
     accord_mets: string[];
     region__pays: string[];
     sans_sulfites_: string[];
+    petit_prix: string[];
   };
   onFilterChange: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
   resetFilters: () => void;
@@ -178,7 +179,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   hideColorFilter = false,
   resetFilters,
 }) => {
-  const [expandedSections, setExpandedSections] = useState<string[]>(['color',]);
+  const [expandedSections, setExpandedSections] = useState<string[]>([]);
   const [isScrolled, setIsScrolled] = useState(false);
 
   const filterContainerRef = useRef<HTMLDivElement>(null);
@@ -210,8 +211,15 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     onFilterChange(filterType, updatedOptions);
   };
 
+  const isPetitPrixMatch = () => {
+    handleCheckboxChange('petit_prix', { label: 'Petit prix', value: 'petit_prix' });
+  };
+
   return (
     <div ref={filterContainerRef} className="bg-white/10 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-2xl overflow-y-auto h-screen min-w-full transition-all duration-300 ease-in-out mt-52 mr-14">
+      <button onClick={isPetitPrixMatch} className="mb-4 p-2 text-center rounded-lg border-black mx-auto bg-primary text-white hover:from-orange-700 hover:via-primary hover:to-orange-300 transition-all duration-300 text-sm w-3/5 ml-10">
+        Petit Budget BIO<br /> &lt; de 8€
+      </button>
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl">
         <AnimatedResetButton onClick={resetFilters} isScrolled={isScrolled} />
       </div>

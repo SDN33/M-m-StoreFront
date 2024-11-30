@@ -20,7 +20,6 @@ interface Product {
   sale_price: number;
   regular_price: number;
   sans_sulfites_: string;
-
 }
 
 interface ProductsCardsProps {
@@ -35,6 +34,7 @@ interface ProductsCardsProps {
     region__pays: string[];
     categories: string[];
     sans_sulfites_: string[];
+    petit_prix: string[];
   };
   onAddToCart: (productId: number, quantity: number, variationId: number) => void;
 }
@@ -78,7 +78,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
           )
         );
 
-      const isVintageMatch = selectedFilters.millesime.length === 0 ||
+      const isMillesimeMatch = selectedFilters.millesime.length === 0 ||
         selectedFilters.millesime.includes(product.millesime || '');
 
       const isRegionMatch = selectedFilters.region.length === 0 ||
@@ -117,15 +117,23 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
           sansSulfites.toLowerCase().trim() === (product.sans_sulfites_ || '').toLowerCase().trim()
           );
 
+        const isPetitPrixMatch = (selectedFilters.petit_prix?.length ?? 0) === 0 ||
+          selectedFilters.petit_prix?.some(
+            (petitPrix) =>
+              petitPrix.toLowerCase().trim() === 'petit_prix' &&
+              (product.price <= 8 || (product.sale_price && product.sale_price <= 8))
+          );
+
       return (
         isColorMatch &&
-        isVintageMatch &&
+        isMillesimeMatch &&
         isRegionMatch &&
         isCertificationMatch &&
         isStyleMatch &&
         isVolumeMatch &&
         isAccordMetsMatch &&
-        isSansSulfitesMatch
+        isSansSulfitesMatch &&
+        isPetitPrixMatch
       );
     },
     [selectedFilters]
