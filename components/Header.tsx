@@ -299,7 +299,7 @@ const Header: React.FC = () => {
         {categories.map((category) => (
           <li
             key={category.name}
-            className="whitespace-nowrap font-bold hover-animate h-full flex items-center text-base"
+            className="whitespace-nowrap font-bold hover-animate h-full flex items-center text-sm"
           >
             <a
           href={category.href}
