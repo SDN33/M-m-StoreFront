@@ -24,6 +24,7 @@ export default function BlancWinePage() {
     categories: [],
     sans_sulfites_: [],
     petit_prix: [],
+    haut_de_gamme: [],
   });
 
   useEffect(() => {
