@@ -9,7 +9,7 @@ const GoToFootButton = () => {
     <div>
       <button
         onClick={scrollToBottom}
-        className="bg-white w-full p-4 text-primary font-bold overflow-hidden"
+        className="bg-white w-full p-4 text-black border-primary border-3 font-bold overflow-hidden"
         aria-label="Défiler vers le bas"
       >
         <span className="flex items-center justify-center hover:scale-150">

@@ -44,7 +44,7 @@ const Footer = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto text-white">
           <div>
-            <h3 className=" font-semibold mb-4 text-lg text-primary">À propos de Mémé Georgette</h3>
+            <h3 className=" font-semibold mb-4 text-lg text-white">À propos de Mémé Georgette</h3>
             <ul className="space-y-2 font-normal">
               <li><a href="https://www.memegeorgette.com/" className=" hover:text-primary transition-colors text-sm">Découvrir Mémé Georgette</a></li>
               <li><a href="/portailpro" className=" hover:text-primary transition-colors text-sm">Portail Pro</a></li>
@@ -53,18 +53,18 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className=" font-semibold mb-4 text-lg text-primary">Découvrez nos vins</h3>
+            <h3 className=" font-semibold mb-4 text-lg text-white">Découvrez nos vins</h3>
             <ul className="space-y-2 font-normal">
-              <li><a href="/products/category/rouge" className="text-white hover:text-primary transition-colors text-sm">Les rouges</a></li>
-              <li><a href="/products/category/blanc" className="text-white hover:text-primary transition-colors text-sm">Les blancs</a></li>
-              <li><a href="/products/category/rose" className="text-white hover:text-primary transition-colors text-sm">Les rosés</a></li>
-              <li><a href="/products/category/petillant" className="text-white hover:text-primary transition-colors text-sm">Les pétillants</a></li>
-              <li><a href="/products/category/liquoreux"className="text-white hover:text-primary transition-colors text-sm">Les liquoreux</a></li>
+              <li><a href="/vins/rouge" className="text-white hover:text-primary transition-colors text-sm">Nos vins rouges</a></li>
+              <li><a href="/vins/blanc" className="text-white hover:text-primary transition-colors text-sm">Nos vins blancs</a></li>
+              <li><a href="/vins/rose" className="text-white hover:text-primary transition-colors text-sm">Nos vins rosés</a></li>
+              <li><a href="/vins/petillant" className="text-white hover:text-primary transition-colors text-sm">Nos vins pétillants</a></li>
+              <li><a href="/vins/liquoreux"className="text-white hover:text-primary transition-colors text-sm">Nos vins liquoreux</a></li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4 text-lg text-primary">Besoin d&apos;aide ?</h3>
+            <h3 className="font-semibold mb-4 text-lg text-white">Besoin d&apos;aide ?</h3>
             <ul className="space-y-2 font-normal">
               <li><a href="/contact" className="text-white hover:text-primary transition-colors text-sm">Nous contacter</a></li>
               <li><a href="/faq" className="text-white hover:text-primary transition-colors text-sm">FAQ (Foire aux questions)</a></li>
