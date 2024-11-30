@@ -189,7 +189,7 @@ export default function PortailPro() {
           </div>
           <div>
            <p className="font-black text-base md:text-lg lg:text-2xl mx-auto fade-in-up mt-8 text-center text-teal-800 mb-8">
-               La{" solution e-commerce".toUpperCase()}<br /> pour les vignerons bio et biodynamiques
+               Notre {" solution e-commerce".toUpperCase()}<br /> pour les vignerons bio et biodynamiques
            </p>
            <p className="text-lg text-center mx-auto mb-8 -mt-4 font-semibold">
              Rejoignez une marketplace dédiée aux vignerons bio, où simplicité, logistique prise en charge, et liberté totale<br /> vous permettent de vendre vos vins à travers l&apos;Europe sans contraintes.
