@@ -26,6 +26,7 @@ const MobileHome: React.FC = () => {
     categories: [],
     sans_sulfites_: [],
     petit_prix: [],
+    haut_de_gamme: []
   });
 
   const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {

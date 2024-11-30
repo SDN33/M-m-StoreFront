@@ -35,6 +35,7 @@ interface ProductsCardsProps {
     categories: string[];
     sans_sulfites_: string[];
     petit_prix: string[];
+    haut_de_gamme: string[];
   };
   onAddToCart: (productId: number, quantity: number, variationId: number) => void;
 }
@@ -110,19 +111,26 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
           )
         );
 
-        const isSansSulfitesMatch = selectedFilters.sans_sulfites_.length === 0 ||
-          selectedFilters.sans_sulfites_.some(
-            (sansSulfites) =>
+      const isSansSulfitesMatch = selectedFilters.sans_sulfites_.length === 0 ||
+        selectedFilters.sans_sulfites_.some(
+          (sansSulfites) =>
           (sansSulfites.toLowerCase().trim() === 'sans sulfites ajoutés' && product.sans_sulfites_.toLowerCase().trim() === 'oui') ||
           sansSulfites.toLowerCase().trim() === (product.sans_sulfites_ || '').toLowerCase().trim()
-          );
+        );
 
-        const isPetitPrixMatch = (selectedFilters.petit_prix?.length ?? 0) === 0 ||
-          selectedFilters.petit_prix?.some(
-            (petitPrix) =>
-              petitPrix.toLowerCase().trim() === 'petit_prix' &&
-              (product.price <= 8 || (product.sale_price && product.sale_price <= 8))
-          );
+      const isPetitPrixMatch = (selectedFilters.petit_prix?.length ?? 0) === 0 ||
+        selectedFilters.petit_prix?.some(
+          (petitPrix) =>
+          petitPrix.toLowerCase().trim() === 'petit_prix' &&
+          (product.price <= 8 || (product.sale_price && product.sale_price <= 8))
+      );
+
+      const isHGPrixMatch = (selectedFilters.haut_de_gamme?.length ?? 0) === 0 ||
+        selectedFilters.haut_de_gamme?.some(
+          (hautDeGamme) =>
+            hautDeGamme.toLowerCase().trim() === 'haut_de_gamme' &&
+            (product.price >= 20 || (product.sale_price && product.sale_price >= 20))
+        );
 
       return (
         isColorMatch &&
@@ -133,7 +141,8 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
         isVolumeMatch &&
         isAccordMetsMatch &&
         isSansSulfitesMatch &&
-        isPetitPrixMatch
+        isPetitPrixMatch &&
+        isHGPrixMatch
       );
     },
     [selectedFilters]

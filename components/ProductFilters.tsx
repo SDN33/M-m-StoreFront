@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, ChevronUp, Wine, Locate, Calendar, Grape, Medal, Ruler, Utensils, RefreshCw, FlaskConicalOff, ChartCandlestick } from 'lucide-react';
+import { ChevronDown, ChevronUp, Wine, Locate, Calendar, Grape, Medal, Ruler, Utensils, RefreshCw, FlaskConicalOff } from 'lucide-react';
 import Image from 'next/image';
 
 interface ProductFilterProps {
@@ -13,6 +13,7 @@ interface ProductFilterProps {
     region__pays: string[];
     sans_sulfites_: string[];
     petit_prix: string[];
+    haut_de_gamme: string[];
   };
   onFilterChange: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
   resetFilters: () => void;
@@ -215,12 +216,20 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     handleCheckboxChange('petit_prix', { label: 'Petit prix', value: 'petit_prix' });
   };
 
+  const isHGPrixMatch = () => {
+    handleCheckboxChange('haut_de_gamme', { label: 'Haut de gamme', value: 'haut_de_gamme' });
+  }
+
   return (
     <div ref={filterContainerRef} className="bg-white/10 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-2xl overflow-y-auto h-screen min-w-full transition-all duration-300 ease-in-out mt-52 mr-14">
-      <button onClick={isPetitPrixMatch} className="mb-4 p-2 text-center rounded-lg border-black mx-auto bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white hover:from-orange-700 hover:via-primary hover:to-orange-300 transition-all duration-300 text-sm w-full">
+      <button onClick={isHGPrixMatch} className="mb-2 p-2 text-center rounded-lg border-black mx-auto bg-gradient-to-r from-teal-800 via-teal-800 to-teal-900 text-white hover:from-teal-700 hover:via-teal-800 hover:to-teal-300 transition-all duration-300 text-sm w-full">
         <div className='flex items-center justify-center text-center mx-auto space-x-4'>
-          <ChartCandlestick className="w-5 h-auto text-left mr-2"/>
-          <span className="text-center">Petit Budget &lt; de 8€</span>
+          <span className="text-center">Haut de gamme • plus de 20€</span>
+        </div>
+      </button>
+      <button onClick={isPetitPrixMatch} className="mb-4 p-2 text-center rounded-lg border-black mx-auto bg-gradient-to-r from-primary via-primary to-orange-900 text-white hover:from-orange-700 hover:via-primary hover:to-orange-300 transition-all duration-300 text-sm w-full">
+        <div className='flex items-center justify-center text-center mx-auto space-x-4'>
+          <span className="text-center">Petit Budget • moins de 8€</span>
         </div>
       </button>
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl">
