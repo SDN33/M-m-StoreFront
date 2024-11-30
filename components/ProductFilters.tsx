@@ -228,9 +228,9 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl mt-4">
         <AnimatedResetButton onClick={resetFilters} isScrolled={isScrolled} />
       </div>
-      <button onClick={isHGPrixMatch} className="mt-20 mb-2 p-2 text-center rounded-lg border-black mx-auto bg-gradient-to-r from-teal-800 via-teal-800 to-teal-900 text-white hover:from-teal-700 hover:via-teal-800 hover:to-teal-300 transition-all duration-300 text-sm w-full">
+      <button onClick={isHGPrixMatch} className="mt-20 mb-2 p-2 text-center rounded-lg border-black mx-auto bg-gradient-to-r from-gray-800 via-gray-800 to-gray-900 text-white hover:from-teal-700 hover:via-teal-800 hover:to-teal-300 transition-all duration-300 text-sm w-full">
         <div className='flex items-center justify-center text-center mx-auto space-x-4'>
-          <span className="text-center">Haut de gamme • Plus de 20<span className='text-xs -mt-4'>&nbsp;€</span></span>
+          <span className="text-center">Vins festif  • Plus de 20<span className='text-xs -mt-4'>&nbsp;€</span></span>
         </div>
       </button>
       <button onClick={isPetitPrixMatch} className="p-2 text-center rounded-lg border-black mx-auto bg-gradient-to-r from-primary via-primary to-orange-900 text-white hover:from-orange-700 hover:via-primary hover:to-orange-300 transition-all duration-300 text-sm w-full">
