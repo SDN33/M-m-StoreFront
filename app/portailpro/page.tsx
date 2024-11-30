@@ -191,7 +191,7 @@ export default function PortailPro() {
            <p className="font-black text-base md:text-lg lg:text-2xl mx-auto fade-in-up mt-8 text-center text-teal-800 mb-8">
                La{" solution e-commerce".toUpperCase()}<br /> pour les vignerons bio et biodynamiques
            </p>
-           <p className="text-lg text-center mx-auto mb-8 -mt-4 slide-in-right font-semibold">
+           <p className="text-lg text-center mx-auto mb-8 -mt-4 font-semibold">
              Rejoignez une marketplace dédiée aux vignerons bio, où simplicité, logistique prise en charge, et liberté totale<br /> vous permettent de vendre vos vins à travers l&apos;Europe sans contraintes.
            </p>
           </div>
@@ -211,7 +211,7 @@ export default function PortailPro() {
               </div>
             ))}
           </div>
-          <p className="font-bold text-lg text-center mx-auto mt-20 mb-28  slide-in-right ">
+          <div className="font-bold text-lg text-center mx-auto mt-20 mb-28  slide-in-right ">
           <span className='font-black text-3xl text-primary border-black-500'>VinsMemeGeorgette.com</span><br /><br />C&apos;est bien plus qu&apos;une marketplace ! C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte, reconnue par le grand public grâce à <a className='text-primary font-black'  href="https://www.memegeorgette.com/" >Mémé Georgette</a><br /><br />
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center p-6 eshadow-lg rounded-lg">
             <Image
@@ -231,7 +231,7 @@ export default function PortailPro() {
             </div>
 
         <br /><br /> Nous vous offrons un accès direct aux amateurs de vins en Europe, tout en simplifiant vos démarches avec une logistique intégrée et un accompagnement marketing personnalisé, notre assistance vendeur et client dédiée vous permet de vous concentrer sur l&apos;essentiel, la fabrication de vins de qualité.
-          </p>
+          </div>
         </div>
 
 
