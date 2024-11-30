@@ -8,7 +8,7 @@ const Slider = () => {
 
     {
       id: 1,
-      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto:best/v1732715675/slider2_ipsxcq.webp',
+      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_100/v1732982358/Banni%C3%A8re_fin_d_ann%C3%A9e_2_wpv7ow.webp',
       link: '/',
       lcp: true,
     },
@@ -20,7 +20,7 @@ const Slider = () => {
     },
     {
       id: 3,
-      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto:best/v1732715675/slider1_kvcute.webp',
+      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_100/v1732982616/Banni%C3%A8re_fin_d_ann%C3%A9e_3_zpauh0.webp',
       link: '/',
       lcp: true,
     },
