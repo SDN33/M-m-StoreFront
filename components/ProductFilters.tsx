@@ -53,49 +53,49 @@ const getFilterTitle = (filterType: string) => {
   const titles: { [key: string]: JSX.Element } = {
     color: (
       <>
-        <Wine className="inline-block  text-teal-800 w-6" />
+        <Wine className="inline-block  text-teal-800 w-5" />
         <br /><>COULEUR </>
       </>
     ),
     region: (
       <>
-        <Locate className="inline-block text-teal-800 w-6" />
+        <Locate className="inline-block text-teal-800 w-5" />
         <br /><>RÉGIONS</>
       </>
     ),
     certification: (
       <>
-        <Medal className="inline-block text-teal-800 w-6" />
+        <Medal className="inline-block text-teal-800 w-5" />
         <br /><>CERTIFICATION</>
       </>
     ),
     style: (
       <>
-        <Grape className="inline-block text-teal-800 w-6" />
+        <Grape className="inline-block text-teal-800 w-5" />
         <br /><>STYLE</>
       </>
     ),
     millesime: (
       <>
-        <Calendar className="inline-block text-teal-800 w-6" />
+        <Calendar className="inline-block text-teal-800 w-5" />
         <br /><>MILLÉSIME</>
       </>
     ),
     volume: (
       <>
-        <Ruler className="inline-block text-teal-800 w-6" />
+        <Ruler className="inline-block text-teal-800 w-5" />
         <br /><>VOLUME</>
       </>
     ),
     accord_mets: (
       <>
-        <Utensils className="inline-block text-teal-800 w-6" />
+        <Utensils className="inline-block text-teal-800 w-5" />
         <br /><>ACCORD METS </>
       </>
     ),
         sans_sulfites_: (
       <>
-        <FlaskConicalOff className="inline-block text-teal-800 w-6" />
+        <FlaskConicalOff className="inline-block text-teal-800 w-5" />
         <br /><>SULFITES</>
       </>
     ),
