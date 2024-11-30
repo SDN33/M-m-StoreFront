@@ -26,7 +26,7 @@ const SocialIcon = ({ platform }) => {
 };
 
 const VendorLocationMap = ({ vendor }) => {
-  const hasCity = vendor.address?.city && vendor.address?.address_1;
+  const hasCity = vendor.address?.city && vendor.address?.address_1 && vendor.address.postcode;
 
   if (!hasCity) {
     return (
