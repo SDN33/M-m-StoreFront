@@ -73,7 +73,7 @@ const LatestArticles: React.FC = () => {
     <div className="container mx-auto px-8 py-8 sm:mb-8 lg:mb-20">
       <div className="text-center mb-10 bg-gradient-to-r from-gray-900 via-gray-800 to-black pt-7 rounded-t-xl">
         <h2 className="text-lg md:text-2xl lg:text-3xl font-extrabold text-primary text-center">
-          Le Blog de <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="flex sm:flex md:hidden lg:hidden xl:hidden -mt-8"></span>Mémé Georgette&nbsp;
+          <span className="text-white">Le Blog de </span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="flex sm:flex md:hidden lg:hidden xl:hidden -mt-8"></span>Mémé Georgette&nbsp;
           <Rss size={32} className="inline text-white animate-ping duration-1000" />
         </h2>
         <p className="text-sm md:text-xl lg:text-xl  font-extrabold slide-in-right max-w-2xl mx-auto mb-8 text-white">
