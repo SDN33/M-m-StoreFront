@@ -256,6 +256,25 @@ ul::-webkit-scrollbar {
 
 .prose p {
   margin-bottom: 1.5rem; /* Espace en-dessous */
-  
 
+
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px; /* Largeur de la scrollbar */
+  margin-left: 100%;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Couleur de l'arrière-plan */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Couleur du pouce (partie qui se déplace) */
+  border-radius: 10px; /* Arrondi */
+  border: 3px solid #f1f1f1; /* Bord pour créer un espacement */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: black; /* Couleur du pouce au survol */
 }
