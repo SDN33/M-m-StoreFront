@@ -82,6 +82,7 @@ export default function RedWinePage() {
         <MobileProductFilter
           selectedFilters={selectedFilters}
           onFilterChange={handleFilterChange}
+          resetFilters={() => {}}
         />
       </div>
     </div>

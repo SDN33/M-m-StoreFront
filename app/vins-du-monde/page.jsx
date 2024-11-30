@@ -93,6 +93,7 @@ export default function VinsDuMonde() {
             ))
           )}
         </div>
+        
         <HeroBanner />
         <Livraison />
         <br />

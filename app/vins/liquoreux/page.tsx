@@ -90,6 +90,7 @@ export default function SweetWinePage() {
           <MobileProductFilter
             selectedFilters={selectedFilters}
             onFilterChange={handleFilterChange}
+            resetFilters={() => {}}
           />
         </div>
       )}

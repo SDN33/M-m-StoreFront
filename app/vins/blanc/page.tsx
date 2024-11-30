@@ -90,6 +90,7 @@ export default function BlancWinePage() {
           <MobileProductFilter
             selectedFilters={selectedFilters}
             onFilterChange={handleFilterChange}
+            resetFilters={() => {}}
           />
         </div>
       )}

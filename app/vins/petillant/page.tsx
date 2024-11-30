@@ -90,6 +90,7 @@ export default function SparklingWinePage() {
           <MobileProductFilter
             selectedFilters={selectedFilters}
             onFilterChange={handleFilterChange}
+            resetFilters={() => {}}
           />
         </div>
       )}

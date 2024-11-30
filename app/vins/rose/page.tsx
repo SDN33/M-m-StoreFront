@@ -90,6 +90,7 @@ export default function RoseWinePage() {
           <MobileProductFilter
             selectedFilters={selectedFilters}
             onFilterChange={handleFilterChange}
+            resetFilters={() => {}}
           />
         </div>
       )}

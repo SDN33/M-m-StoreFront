@@ -90,6 +90,7 @@ export default function OtherWinesPage() {
           <MobileProductFilter
             selectedFilters={selectedFilters}
             onFilterChange={handleFilterChange}
+            resetFilters={() => {}}
           />
         </div>
       )}
