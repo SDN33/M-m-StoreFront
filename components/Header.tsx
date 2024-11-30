@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu as MenuIcon, X, ChevronDown, Truck, ChevronRight, ChevronLeft, Rss, BadgePercent, UsersRound, MessageCircleQuestion } from 'lucide-react';
+import { Menu as MenuIcon, X, ChevronDown, ChevronRight, ChevronLeft, Rss, BadgePercent, UsersRound, MessageCircleQuestion } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import CartPopup from './CartPopup';
@@ -138,20 +138,19 @@ const Header: React.FC = () => {
               <div className="hidden md:flex items-center space-x-3">
                 <div className="relative">
                   <div className='whitespace-nowrap text-center flex flex-col items-center'>
-                    <Truck className='w-5 h-auto text-white' />
                     <button
                       onClick={toggleLanguageMenu}
-                      className="flex items-center space-x-1 text-white font-semibold hover:text-gray-200"
+                      className="flex items-center space-x-1 text-white font-semibold group hover:text-black"
                     >
-                      <ChevronDown className={`w-4 h-4 transition-transform ${isLanguageMenuOpen ? 'rotate-180' : ''}`} />
                       <span>Livraison</span>
+                      <ChevronDown className={`w-4 h-4 transition-transform ${isLanguageMenuOpen ? 'rotate-180' : ''}`} />
                       <div className="relative w-6 h-6">
-                        <Image
-                          src={selectedCountry.imgSrc}
-                          alt={selectedCountry.name}
-                          fill
-                          className="object-contain"
-                        />
+                      <Image
+                        src={selectedCountry.imgSrc}
+                        alt={selectedCountry.name}
+                        fill
+                        className="object-contain"
+                      />
                       </div>
                     </button>
                   </div>
