@@ -149,7 +149,7 @@ const VendorsPage = () => {
           <p className="text-center text-xl font-extrabold -mt-4 mb-4 text-teal-800">
             &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
           </p>
-          <p className="text-center text-sm font-extrabold -mt-2">
+          <p className="text-center text-base font-serif -mt-2">
             Nos vignerons s&apos;engagent pour une agriculture respectueuse de l&apos;environnement,
             garantissant des vins de qualité, riches en saveurs et sans produits chimiques.
             Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique.
@@ -162,7 +162,7 @@ const VendorsPage = () => {
         <div className="my-8 space-y-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-900" size={20} />
               <input
                 type="text"
                 placeholder="Rechercher un domaine..."
@@ -217,7 +217,7 @@ const VendorsPage = () => {
                         {vendor.address?.city && (
                           <span className=" -mt-1 text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full flex items-center">
                             <MapPin className="w-4 h-4 mr-1" />
-                            {vendor.address.city} ({vendor.address?.postcode?.substring(0, 2) || 'N/A'})
+                            {vendor.address.city.split(/[\s-]/).map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')} ({vendor.address?.postcode?.substring(0, 2) || 'N/A'})
                           </span>
                         )}
                       </div>
@@ -231,7 +231,7 @@ const VendorsPage = () => {
                   </div>
 
                   {vendor.shop?.description && (
-                    <p className="mt-4 text-gray-600 text-center text-sm">
+                    <p className="mt-4 text-gray-900 text-center text-sm">
                       {vendor.shop.description ? vendor.shop.description.replace(/<\/?[^>]+(>|$)/g, "") : ''}
                     </p>
                   )}
