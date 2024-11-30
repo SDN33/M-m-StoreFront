@@ -305,7 +305,7 @@ const ProductPage: React.FC = () => {
               <p>
                 <br />
                 <span className='font-semibold'>Par 6 = {Math.floor(product.price * 6)}€ &nbsp;+</span>
-                <span className='bg-black p-1 text-primary ml-2'>Livraison offerte</span>
+                <span className='bg-black p-1 text-white ml-2'>Livraison offerte</span>
               </p>
             </div>
 
