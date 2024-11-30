@@ -94,7 +94,7 @@ const Header: React.FC = () => {
       </div>
 
       {/* Top Header - Hauteur fixe */}
-      <div className="border-b bg-primary pt-4 pb-1">
+      <div className="border-b bg-gradient-to-l from-primary to-primary/95 pt-4 pb-1">
         <div className="container mx-auto px-4">
           {/* Desktop and Tablet View - Hauteur fixe */}
           <div className="hidden lg:flex items-center justify-between h-14 relative">
