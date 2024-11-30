@@ -130,9 +130,9 @@ const VendorsPage = () => {
           <p className="text-center text-base font-extrabold -mt-2 slide-in-right mb-8 text-teal-800">
             &ldquo;Chaque domaine viticole est unique, chaque vin est une histoire à raconter&rdquo;
           </p>
-          <p className="text-center sm:text-sm text-sm font-extrabold -mt-2 slide-in-right">
+          <p className="text-center sm:text-sm text-sm font-extrabold -mt-2 slide-in-right px-20">
             Nos vignerons s&apos;engagent pour une agriculture respectueuse de l&apos;environnement,
-            garantissant des vins de qualité et sans produits chimiques. <br />
+            <br />garantissant des vins de qualité et sans produits chimiques. <br />
             Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique
           </p>
           <div className='border-t-2 border-white w-16 mt-4 flex mx-auto'></div>
