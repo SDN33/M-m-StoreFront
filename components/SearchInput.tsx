@@ -214,14 +214,14 @@ const SearchInput = () => {
           {isLoading ? (
             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-orange-500" />
           ) : (
-            <Search className="w-5 h-5 text-gray-400" />
+            <Search className="w-5 h-5 text-gray-600" />
           )}
           {searchTerm && (
             <button
               onClick={clearSearch}
               className="p-1 hover:bg-white rounded-full"
             >
-              <X className="w-4 h-4 text-gray-400" />
+              <X className="w-4 h-4 text-gray-600" />
             </button>
           )}
         </div>
