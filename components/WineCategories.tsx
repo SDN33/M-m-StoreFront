@@ -130,8 +130,8 @@ const VendorsPage = () => {
           <p className="text-center text-base font-extrabold -mt-2 slide-in-right mb-8 text-teal-800">
             &ldquo;Chaque domaine viticole est unique, chaque vin est une histoire à raconter&rdquo;
           </p>
-          <p className="text-center sm:text-xs text-sm font-serif -mt-2 slide-in-right px-4 md:px-20">
-            Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique
+          <p className="text-center sm:text-xs md:text-lg font-serif -mt-8 slide-in-right px-4 md:px-20">
+          • Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique •
           </p>
           <div className='border-t-2 border-white w-16 mt-4 flex mx-auto'></div>
           <br /><br />
