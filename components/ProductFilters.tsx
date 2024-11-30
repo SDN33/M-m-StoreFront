@@ -223,8 +223,8 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   }
 
   return (
-    <div ref={filterContainerRef} className=" custom-scrollbar bg-transparent backdrop-blur-sm overflow-y-auto h-screen min-w-full transition-all duration-300 ease-in-out mt-52 mr-14">
-      <button onClick={isHGPrixMatch} className=" mt-4 mb-2 p-2 text-center rounded-lg border-black mx-auto bg-gradient-to-r from-teal-800 via-teal-800 to-teal-900 text-white hover:from-teal-700 hover:via-teal-800 hover:to-teal-300 transition-all duration-300 text-sm w-full">
+    <div ref={filterContainerRef} className=" custom-scrollbar -px-10 bg-transparent backdrop-blur-sm overflow-y-auto h-screen min-w-full transition-all duration-300 ease-in-out mt-52 mr-14">
+      <button onClick={isHGPrixMatch} className="mt-4 mb-2 p-2 text-center rounded-lg border-black mx-auto bg-gradient-to-r from-teal-800 via-teal-800 to-teal-900 text-white hover:from-teal-700 hover:via-teal-800 hover:to-teal-300 transition-all duration-300 text-sm w-full">
         <div className='flex items-center justify-center text-center mx-auto space-x-4'>
           <span className="text-center">Haut de gamme • Plus de 20<span className='text-xs -mt-4'>&nbsp;€</span></span>
         </div>

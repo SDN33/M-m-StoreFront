@@ -262,7 +262,7 @@ ul::-webkit-scrollbar {
 
 .custom-scrollbar::-webkit-scrollbar {
   width: 12px; /* Largeur de la scrollbar */
-  margin-left: 100%;
+  padding-left: 1rem; /* Espace à gauche */
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -276,5 +276,5 @@ ul::-webkit-scrollbar {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: black; /* Couleur du pouce au survol */
+  background: #555; /* Couleur du pouce au survol */
 }
