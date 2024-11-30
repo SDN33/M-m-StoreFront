@@ -129,7 +129,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
         selectedFilters.haut_de_gamme?.some(
           (hautDeGamme) =>
             hautDeGamme.toLowerCase().trim() === 'haut_de_gamme' &&
-            (product.price >= 20 || (product.sale_price && product.sale_price >= 20))
+            (product.price >= 14 || (product.sale_price && product.sale_price >= 14))
         );
 
       return (
@@ -229,7 +229,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
         </div>
       )}
     </div>
-    
+
   );
 };
 
