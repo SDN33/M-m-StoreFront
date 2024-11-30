@@ -250,7 +250,7 @@ export default function PortailPro() {
 
             <div className="p-8 space-y-8">
               <div>
-                <p className="font-semibold text-lg text-center text-primary mb-6">
+                <p className="font-semibold text-lg text-center text-black mb-6">
                   Sans Engagement
                 </p>
                 <ul className="space-y-4 text-center mx-auto">
