@@ -197,7 +197,7 @@ const SearchInput = () => {
   }, []); // Nettoyage du timer à la destruction du composant
 
   return (
-    <div className="relative flex-grow mx-3 max-w-xl">
+    <div className="relative flex-grow mx-4 -pl-8 max-w-xl">
       <div className="relative">
         <input
           ref={inputRef}
