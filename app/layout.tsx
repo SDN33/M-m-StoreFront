@@ -119,7 +119,7 @@ export default function RootLayout({
             <AgeVerificationModal />
             <Cookies />
             {children}
-            <Footer id="footer" />
+            <Footer  />
           </CartProvider>
         </AuthProvider>
         <Analytics />
