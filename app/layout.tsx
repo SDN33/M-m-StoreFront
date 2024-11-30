@@ -23,7 +23,7 @@ type TwitterMetadata = {
 export const metadata: Metadata & { twitter: TwitterMetadata } = {
   title: "Achat Vins Bio et Démeter Biodynamie | 2 500 vins Bio | Mémé Georgette",
   description:
-    "Les vins de Mémé Georgette, découvrez notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s.",
+    "Les vins de Mémé Georgette, découvrez notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s. Vin rouge, vin blanc, vin rosé, vin pétillant, vin rosé, vin sans sulfites ajoutés",
   icons: {
     icon: "/favicon.ico",
   },
@@ -31,7 +31,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
   openGraph: {
     title: "Achat Vins Bio et Démeter Biodynamie | 2 500 vins Bio | Mémé Georgette",
     description:
-      "Les vins de Mémé Georgette, découvrez notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s.",
+      "Les vins de Mémé Georgette, découvrez notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s. Vin rouge, vin blanc, vin rosé, vin pétillant, vin rosé, vin sans sulfites ajoutés",
     images: [
       {
         url: "/images/post_partage.png",
@@ -46,7 +46,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
     card: "summary_large_image",
     title: "Achat Vins Bio et Démeter Biodynamie | 2 500 vins Bio | Mémé Georgette",
     description:
-      "Les vins de Mémé Georgette, découvrez notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s.",
+      "Les vins de Mémé Georgette, découvrez notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s. Vin rouge, vin blanc, vin rosé, vin pétillant, vin rosé, vin sans sulfites ajoutés",
     images: [
       {
         url: "/images/post_partage.png",
