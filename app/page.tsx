@@ -15,6 +15,7 @@ import LatestArticles from '@/components/LatestArticles';
 import BackToTop from '@/components/BackToTop';
 import PromoCode from '@/components/PromoCode';
 import Image from 'next/image';
+import GoToFooter from '@/components/GoToFooter';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -234,6 +235,7 @@ export default function Home() {
               <Trust />
               <Slogan />
               <div className="py-8" />
+              <GoToFooter />
               <BackToTop />
               <PromoCode />
             </div>

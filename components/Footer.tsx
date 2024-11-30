@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-gray-900 via-gray-800 to-black shadow-lg text-white py-2 text-center">
+    <footer id="footer" className="bg-gradient-to-r from-gray-900 via-gray-800 to-black shadow-lg text-white py-2 text-center">
 
       <div className="max-w-7xl mx-auto px-4 mt-8">
         {/* Logos de paiement */}

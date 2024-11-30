@@ -9,13 +9,12 @@ const Slider = () => {
       id: 1,
       imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto/v1732880778/100_engag%C3%A9e_pour_la_nature_2_n2zvgy.webp',
       link: '/',
-      className: 'bg-center bg-cover',
       lcp: true,
     },
     {
       id: 2,
-      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto:best/v1732715675/slider2_ipsxcq.webp',
-      link: '/vendors/255986119',
+      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_100/v1732974216/100_engag%C3%A9e_pour_la_nature_4_pwjwn9.webp',
+      link: '/vendors/255986134',
       lcp: true,
     },
     {
@@ -24,8 +23,13 @@ const Slider = () => {
       link: '/',
       lcp: true,
     },
+    {
+      id: 4,
+      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto:best/v1732715675/slider2_ipsxcq.webp',
+      link: '/vendors/255986119',
+      lcp: true,
+    },
   ];
-
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
