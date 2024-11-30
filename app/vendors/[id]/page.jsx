@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { MapPin, Globe, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 import Link from 'next/link';
-import SocialShare from '@/components/Socialshare';
 
 const normalizeUrl = (url) => {
   if (!url) return '';
@@ -142,14 +141,15 @@ export default function VendorDetailsPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto mt-36 mb-24">
+    <div className="max-w-4xl mx-auto mt-44 mb-24">
+      <div className='text-center text-xs mx-auto text-black mb-4'><a href="/">Accueil</a> / <a href="/vendors">Nos Vignerons.nes</a> / <strong>{vendor.shop?.title}</strong></div>
 
       <div className="relative">
         <Image
           src={vendor.shop?.banner ? normalizeUrl(vendor.shop.banner) : '/images/slider3.png'}
           alt={`${vendor.shop?.title || 'Vendor'} banner`}
-          width={1200}
-          height={400}
+          width={2000}
+          height={2000}
           className="object-cover"
         />
         <div className="absolute -bottom-16 left-6">
@@ -228,7 +228,6 @@ export default function VendorDetailsPage() {
             )}
           </div>
           <br />
-          <SocialShare url={typeof window !== 'undefined' ? window.location.href : ''} />
         </div>
       </div>
     </div>

@@ -169,6 +169,8 @@ export default function PortailPro() {
         {/* Features Section */}
         <div>
           <div className="text-center space-y-4 mb-4 gap-1">
+          <div className='text-center text-xs mx-auto text-black mb-4'><a href="/">Accueil</a> / <strong>Portail Pro</strong></div>
+
             {/* Suppression de l'image comme élément distinct */}
             <h3
               className="text-4xl md:text-5xl lg:text-7xl tracking-tight font-bold relative bg-cover bg-center text-white pt-28 items-center justify-center rounded-t-xl text-center"
