@@ -228,7 +228,7 @@ export default function VendorDetailsPage() {
             )}
           </div>
           <br />
-          <SocialShare />
+          <SocialShare url={typeof window !== 'undefined' ? window.location.href : ''} />
         </div>
       </div>
     </div>

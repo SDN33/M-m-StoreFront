@@ -46,7 +46,7 @@ const Slider = () => {
               className="absolute inset-0 bg-center"
               style={{
                 backgroundImage: `url(${slide.imageUrl})`,
-                backgroundSize: 'contain',
+                backgroundSize: 'object-fit',
                 backgroundRepeat: 'no-repeat',
               }}
             >

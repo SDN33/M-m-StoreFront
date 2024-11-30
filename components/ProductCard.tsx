@@ -168,10 +168,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         "Coup De Coeur de Mémé",
       ],
 
-      biodynamie: [
-        "Culture Biodynamique Démeter",
-      ],
-
       petillant: (categoryName: string) => [
         `Un ${categoryName} À Découvrir`,
       ],
@@ -192,10 +188,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
     if (product.average_rating && product.average_rating > 3.5) {
       return getRandomSlogan(slogans.coupDeCoeur);
-    }
-
-    if (product.certification?.toLowerCase().includes('biodynamie')) {
-      return getRandomSlogan(slogans.biodynamie);
     }
 
     if (product.categories.length > 0 && product.categories[0]?.name.toLowerCase().includes('pétillant')) {
