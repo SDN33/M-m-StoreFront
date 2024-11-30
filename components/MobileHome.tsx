@@ -54,7 +54,7 @@ const MobileHome: React.FC = () => {
         <Trust />
         <Slogan />
         <br /><br />
-        <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} />
+        <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} resetFilters={() => {}} />
         <BackToTop />
       </div>
     </div>
