@@ -230,7 +230,7 @@ export default function PortailPro() {
             />
             </div>
 
-        <br /><br /> Nous vous offrons un accès direct aux amateurs de vins en Europe, tout en simplifiant vos démarches avec une logistique intégrée et un accompagnement marketing personnalisé, notre assistance vendeur et client dédiée vous permet de vous concentrer sur l&apos;essentiel, la fabrication de vins de qualité.
+        <br /><br /><span className='text-base mx-14'>Nous vous offrons un accès direct aux amateurs de vins en Europe, tout en simplifiant vos démarches avec une logistique intégrée et un accompagnement marketing personnalisé, notre assistance vendeur et client dédiée vous permet de vous concentrer sur l&apos;essentiel,<br />la fabrication de vins de qualité.</span>
           </div>
         </div>
 
@@ -238,7 +238,7 @@ export default function PortailPro() {
 
 
         {/* Pricing Section */}
-        <div className="mt-24 max-w-2xl mx-auto slide-in-right">
+        <div className="mt-16 max-w-2xl mx-auto slide-in-right ">
           <div className="bg-white rounded-3xl shadow-xl shadow-teal-100/50 overflow-hidden">
             <div className="bg-primary text-white p-8 text-center">
               <h3 className="text-2xl font-bold mb-2">Frais D&apos;inscription</h3>
