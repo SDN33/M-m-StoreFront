@@ -310,15 +310,20 @@ const ProductPage: React.FC = () => {
             </div>
 
             <div className="flex items-center mt-1">
-              <select
-                value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
-                className="mr-4 p-2 border rounded bg-white border-gray-300"
-              >
-                {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
-                  <option key={num} value={num}>{num}</option>
-                ))}
-              </select>
+              <div className="flex items-center">
+                <label htmlFor="quantity-select" className="sr-only">Sélectionner la quantité</label>
+                <select
+                  id="quantity-select"
+                  value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                  className="mr-4 p-2 border rounded bg-white border-gray-300"
+                  aria-label="Sélectionner la quantité"
+                >
+                  {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
+                    <option key={num} value={num}>{num}</option>
+                  ))}
+                </select>
+              </div>
               <AddToCartButton
                 product={product}
                 quantity={quantity}
