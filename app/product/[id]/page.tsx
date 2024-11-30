@@ -263,8 +263,8 @@ const ProductPage: React.FC = () => {
               )}
             </div>
             <br />
-            <div className='flex'>
-              <p className="text-5xl font-bold !mb-2 mt-2">
+            <div className='flex -mt-8'>
+              <p className="text-5xl font-bold !mb-2">
                 <span className="flex items-start z-10">
                   <span className="text-3xl font-bold">{Math.floor(product.price)}</span>
                   <span className="text-xl font-bold align-top mt-1">
