@@ -23,7 +23,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
   icons: { icon: "/favicon.ico" },
   keywords: ["vins bio", "achat vin", "vin nature", "vins sans sulfites"],
   openGraph: {
-    title: "Achat Vin Bio | VinsMemeGeorgette.com",
+    title: "Achat Vin Bio et Démeter Biodynamie | 2 500 vins Bio | Mémé Georgette",
     description:
       "Découvrez notre sélection de vin bio et biodynamie démeter.",
     images: [{ url: "/images/post_partage.png", width: 800, height: 600, alt: "Mémé Georgette" }],
@@ -31,7 +31,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Achat Vin Bio | VinsMemeGeorgette.com",
+    title: "Achat Vin Bio et Démeter Biodynamie | 2 500 vins Bio | Mémé Georgette",
     description:
       "Découvrez notre sélection de vin bio et biodynamie démeter.",
     images: [{ url: "/images/post_partage.png", alt: "Mémé Georgette" }],
