@@ -296,7 +296,7 @@ const ProductPage: React.FC = () => {
             <SocialShare url={currentUrl} title={product.name} />
             <div className="items-center mt-6 flex gap-2">
               <Package className="h-6 w-6" />
-              <span className="font-bold text-xs mb-1">Livraison offerte dès 6 bouteilles achetées sur un domaine</span>
+              <span className="font-bold text-xs mb-1">Livraison offerte dès <span className='text-primary'>6 bouteilles achetées</span> sur un domaine</span>
             </div>
             <div
               className='ml-8 px-1 text-xs font-light -mt-4 mb-4'
@@ -304,7 +304,7 @@ const ProductPage: React.FC = () => {
             >
               <p>
                 <br />
-                <span className='font-semibold'>Par 6 = {Math.floor(product.price * 6)}€ &nbsp;+</span>
+                <span className='font-semibold'>Par <span className='text-primary'>6</span> = <span className='text-base'>{Math.floor(product.price * 6)}€</span> &nbsp;+</span>
                 <span className='bg-black p-1 text-white ml-2'>Livraison offerte</span>
               </p>
             </div>
@@ -340,7 +340,7 @@ const ProductPage: React.FC = () => {
         <div className="mt-8 w-full">
           <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-900 via-gray-800 to-black p-8 rounded-t-xl">Description du produit</h2>
           <div className="border-b-4 border-primary w-full max-w-[50rem] my-2 slide-in-right mx-auto"></div>
-          <p className='font-bold text-center mt-8 px-4'>
+          <p className='font-serif text-center mt-8 px-8'>
             {product.description && product.short_description
               ? formatDescription(product.description.length > product.short_description.length ? product.description : product.short_description)
               : formatDescription(product.description || product.short_description || '')}
