@@ -141,7 +141,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     return plainText;
   }
 
-  const truncatedName = useMemo(() => stripHtmlAndTruncate(product.name, 30), [product.name]);
+  const truncatedName = useMemo(() => stripHtmlAndTruncate(product.name, 40), [product.name]);
 
   useEffect(() => {
     setIsTruncated(product.name.length > 40);
