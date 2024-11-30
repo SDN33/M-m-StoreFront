@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu as MenuIcon, X, ChevronDown, ChevronRight, ChevronLeft, Rss, BadgePercent } from 'lucide-react';
+import { Menu as MenuIcon, X, ChevronDown, Truck, ChevronRight, ChevronLeft, Rss, BadgePercent, UsersRound, MessageCircleQuestion } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import CartPopup from './CartPopup';
@@ -136,25 +136,25 @@ const Header: React.FC = () => {
 
             <div className="hidden md:hidden lg:flex items-center space-x-7 text-sm px-4 justify-end my-auto -ml-10">
               <div className="hidden md:flex items-center space-x-3">
-                <span className="text-white font-light whitespace-nowrap">Livraison en</span>
                 <div className="relative">
-                  <button
-                    onClick={toggleLanguageMenu}
-                    className="flex items-center space-x-1 text-white hover:text-gray-200"
-                  >
-                    <div className="relative w-6 h-6">
-                      <Image
-                        src={selectedCountry.imgSrc}
-                        alt={selectedCountry.name}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-                    <span>{selectedCountry.name}</span>
-                    <ChevronDown
-                      className={`w-4 h-4 transition-transform ${isLanguageMenuOpen ? 'rotate-180' : ''}`}
-                    />
-                  </button>
+                  <div className='whitespace-nowrap text-center flex flex-col items-center'>
+                    <Truck className='w-5 h-auto text-white' />
+                    <button
+                      onClick={toggleLanguageMenu}
+                      className="flex items-center space-x-1 text-white font-semibold hover:text-gray-200"
+                    >
+                      <ChevronDown className={`w-4 h-4 transition-transform ${isLanguageMenuOpen ? 'rotate-180' : ''}`} />
+                      <span>Livraison</span>
+                      <div className="relative w-6 h-6">
+                        <Image
+                          src={selectedCountry.imgSrc}
+                          alt={selectedCountry.name}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    </button>
+                  </div>
 
                   {isLanguageMenuOpen && (
                     <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-100 py-1 w-52 z-50">
@@ -182,15 +182,20 @@ const Header: React.FC = () => {
                   )}
                 </div>
               </div>
+              <a href="/portailpro" className="text-white hover:text-black font-semibold whitespace-nowrap text-center flex flex-col items-center">
+                <MessageCircleQuestion className="mb-1 w-5 h-auto" />
+                FAQ
+              </a>
 
-              <a href="/portailpro" className="text-white hover:text-black font-semibold whitespace-nowrap">
+              <a href="/portailpro" className="text-white hover:text-black font-semibold whitespace-nowrap text-center flex flex-col items-center">
+                <UsersRound className="mb-1 w-5 h-auto" />
                 Portail Pro
               </a>
-              <a href="/faq" className="text-white hover:text-black font-semibold whitespace-nowrap">
-                Aide
-              </a>
               <AuthButton />
-              <CartIcon onClick={toggleCartPopup} />
+              <div className='text-white space-y-1 hover:text-black font-semibold whitespace-nowrap text-center flex flex-col items-center'>
+                <CartIcon onClick={toggleCartPopup} />
+              </div>
+
             </div>
           </div>
 
