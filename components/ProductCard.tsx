@@ -135,7 +135,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   function stripHtmlAndTruncate(text: string = '', maxLength: number): string {
     const plainText = text.replace(/<\/?[^>]+(>|$)/g, '');
     if (plainText.length > maxLength) {
-      return plainText.substring(0, plainText.lastIndexOf(' ', maxLength)) + '... voir plus';
+      return plainText.substring(0, plainText.lastIndexOf(' ', maxLength)) + '';
     }
     return plainText;
   }
