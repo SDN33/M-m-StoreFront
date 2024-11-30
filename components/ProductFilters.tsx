@@ -54,49 +54,49 @@ const getFilterTitle = (filterType: string) => {
     color: (
       <>
         <Wine className="inline-block  text-teal-800 w-5" />
-        <br /><>COULEUR </>
+        <br /><><span className='text-sm'>COULEUR</span></>
       </>
     ),
     region: (
       <>
         <Locate className="inline-block text-teal-800 w-5" />
-        <br /><>RÉGIONS</>
+        <br /><><span className='text-sm'>RÉGIONS</span></>
       </>
     ),
     certification: (
       <>
         <Medal className="inline-block text-teal-800 w-5" />
-        <br /><>CERTIFICATION</>
+        <br /><><span className='text-sm'>CERTIFICATION</span></>
       </>
     ),
     style: (
       <>
         <Grape className="inline-block text-teal-800 w-5" />
-        <br /><>STYLE</>
+        <br /><><span className='text-sm'>STYLE</span></>
       </>
     ),
     millesime: (
       <>
         <Calendar className="inline-block text-teal-800 w-5" />
-        <br /><>MILLÉSIME</>
+        <br /><><span className='text-sm'>MILLÉSIME</span></>
       </>
     ),
     volume: (
       <>
         <Ruler className="inline-block text-teal-800 w-5" />
-        <br /><>VOLUME</>
+        <br /><><span className='text-sm'>VOLUME</span></>
       </>
     ),
     accord_mets: (
       <>
         <Utensils className="inline-block text-teal-800 w-5" />
-        <br /><>ACCORD METS </>
+        <br /><><span className='text-sm'>ACCORD METS</span></>
       </>
     ),
         sans_sulfites_: (
       <>
         <FlaskConicalOff className="inline-block text-teal-800 w-5" />
-        <br /><>SULFITES</>
+        <br /><><span className='text-sm'>SULFITES</span></>
       </>
     ),
   };
