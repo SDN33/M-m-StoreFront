@@ -267,14 +267,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
         <div onClick={vendorRedirect} className="flex items-center gap-2 cursor-pointer">
           {vendorImages && (
-            <div className="relative w-10 h-10 rounded-full overflow-hidden">
+            <div className="relative rounded-full overflow-hidden">
               <Image
                 src={vendorImages || '/images/meme-pas-contente.png'}
                 alt={product.store_name || 'Vendor shop'}
-                fill
-                style={{ objectFit: 'cover' }}
+                width={40}
+                height={40}
                 priority
-                layout="fill"
               />
             </div>
           )}
@@ -287,7 +286,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           </div>
         </div>
       </div>
-        <a onClick={handleRedirect} className="text-xs text-gray-700 h-8 overflow-hidden text-center mt-4 font-medium mb-4 flex justify-center cursor-pointer">
+        <a onClick={handleRedirect} className="text-xs text-gray-900 h-8 overflow-hidden text-center mt-4 font-medium mb-4 flex justify-center cursor-pointer">
           {stripHtmlAndTruncate(product.short_description || product.description || '', 110)}
         </a>
 
