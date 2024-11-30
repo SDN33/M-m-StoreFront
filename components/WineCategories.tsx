@@ -170,10 +170,10 @@ const VendorsPage = () => {
                           {vendor.shop?.title || 'Unknown Vendor'}
                         </h2>
                         {vendor.address?.city && (
-                          <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full flex items-center">
+                            <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full flex items-center">
                             <MapPin className="w-4 h-4 mr-1" />
-                            {vendor.address.city} ({vendor.address?.postcode?.substring(0, 2) || 'N/A'})
-                          </span>
+                            {vendor.address.city.split(/[\s-]/).map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')} ({vendor.address?.postcode?.substring(0, 2) || 'N/A'})
+                            </span>
                         )}
                       </div>
                     </div>
