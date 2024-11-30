@@ -207,7 +207,7 @@ const SearchInput = () => {
           onFocus={() => setShowRecentSearches(true)}
           onMouseMove={handleMouseMove}
           placeholder="Rechercher un vin, un château, une appellation..."
-          className="w-full pl-4 pr-20 py-3 border rounded-full text-sm bg-slate-100 border-gray-400 text-primary focus:outline-none focus:border-orange-500"
+          className="w-full pl-4 pr-20 py-3 border rounded-full text-sm bg-slate-50 border-gray-400 text-primary focus:outline-none focus:border-orange-500"
         />
 
         <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
