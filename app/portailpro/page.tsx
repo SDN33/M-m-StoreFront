@@ -310,7 +310,7 @@ export default function PortailPro() {
                 <br />
                   {/* Nouveau bouton de téléchargement */}
                 <div>
-                  <p className='text-center font-normal mb-2'>Pour les vignrons déjà inscrits, téléchargez notre guide de création de produit :</p>
+                  <p className='text-center font-normal mb-2'>Pour les vignerons déjà inscrits, téléchargez notre guide de création de produit :</p>
                   <button
                     onClick={handleDownloadDocument}
                     className="bg-black text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:bg-teal-950 transition-all duration-300 flex items-center justify-center space-x-2"
