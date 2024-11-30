@@ -217,7 +217,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
   return (
     <div ref={filterContainerRef} className="bg-white/10 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-2xl overflow-y-auto h-screen min-w-full transition-all duration-300 ease-in-out mt-52 mr-14">
-      <button onClick={isPetitPrixMatch} className="mb-4 p-2 text-center rounded-lg border-black mx-auto bg-primary text-white hover:from-orange-700 hover:via-primary hover:to-orange-300 transition-all duration-300 text-sm w-full">
+      <button onClick={isPetitPrixMatch} className="mb-4 p-2 text-center rounded-lg border-black mx-auto bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white hover:from-orange-700 hover:via-primary hover:to-orange-300 transition-all duration-300 text-sm w-full">
         <div className='flex items-center justify-center text-center mx-auto space-x-4'>
           <ChartCandlestick className="w-5 h-auto text-left mr-2"/>
           <span className="text-center">Petit Budget &lt; de 8€</span>
