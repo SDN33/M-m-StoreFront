@@ -287,7 +287,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           </div>
         </div>
       </div>
-        <a onClick={handleRedirect} className="text-xs text-gray-900 h-8 overflow-hidden text-center mt-4 font-medium mb-4 flex justify-center cursor-pointer">
+        <a href={`/product/${product.id}`} className="text-xs text-gray-900 h-8 overflow-hidden text-center mt-4 font-medium mb-4 flex justify-center cursor-pointer">
           {stripHtmlAndTruncate(product.short_description || product.description || '', 110)}
         </a>
 
