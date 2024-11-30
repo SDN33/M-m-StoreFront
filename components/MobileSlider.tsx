@@ -14,6 +14,12 @@ const Slider = () => {
     },
     {
       id: 2,
+      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_100/v1732974216/100_engag%C3%A9e_pour_la_nature_4_pwjwn9.webp',
+      link: '/vendors/255986134',
+      lcp: true,
+    },
+    {
+      id: 3,
       imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto:best/v1732715675/slider1_kvcute.webp',
       link: '/',
       lcp: true,
