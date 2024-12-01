@@ -112,6 +112,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             src="/images/bioBiodynamie.png"
             alt="Certification biodynamique"
             fill
+            sizes='100%'
             style={{ objectFit: 'contain' }}
           />
         </div>

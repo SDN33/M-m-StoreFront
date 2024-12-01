@@ -118,7 +118,7 @@ const Header: React.FC = () => {
                     src="/images/memelogo.png"
                     alt="Logo"
                     width={210}
-                    height={90}
+                    height={210}
                     className="object-contain h-full w-full"
                   />
                 </Link>
@@ -169,6 +169,7 @@ const Header: React.FC = () => {
                               src={country.imgSrc}
                               alt={country.name}
                               fill
+                              sizes='30px'
                               className="object-contain"
                             />
                           </div>
