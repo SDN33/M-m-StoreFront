@@ -44,7 +44,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vins Bio et Biodynamiques - 2 500 Références de Vins - Mémé Georgette",
+    title: "Achat Vins Bio et Biodynamiques - Rouge, Blanc, Rosé, Pétillant",
     description:
       "Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites",
     images: [
