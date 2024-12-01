@@ -56,7 +56,7 @@ const getFilterTitle = (filterType: string) => {
     color: (
       <>
         <div className="flex items-center">
-          <Wine className="text-teal-800 w-5 mr-2" />
+          <Wine className="text-teal-800 w-3 h-auto mr-2" />
           <span className="text-sm">COULEUR</span>
         </div>
       </>
@@ -64,7 +64,7 @@ const getFilterTitle = (filterType: string) => {
     region: (
       <>
         <div className="flex items-center">
-          <Locate className="text-teal-800 w-5 mr-2" />
+          <Locate className="text-teal-800 w-3 h-auto mr-2" />
           <span className="text-sm">RÉGIONS</span>
         </div>
       </>
@@ -72,7 +72,7 @@ const getFilterTitle = (filterType: string) => {
     certification: (
       <>
         <div className="flex items-center">
-          <Medal className="text-teal-800 w-5 mr-2" />
+          <Medal className="text-teal-800 w-3 h-auto mr-2" />
           <span className="text-sm">CERTIFICATION</span>
         </div>
       </>
@@ -80,7 +80,7 @@ const getFilterTitle = (filterType: string) => {
     style: (
       <>
         <div className="flex items-center">
-          <Grape className="text-teal-800 w-5 mr-2" />
+          <Grape className="text-teal-800 w-3 h-auto mr-2" />
           <span className="text-sm">STYLE</span>
         </div>
       </>
@@ -88,7 +88,7 @@ const getFilterTitle = (filterType: string) => {
     millesime: (
       <>
         <div className="flex items-center">
-          <Calendar className="text-teal-800 w-5 mr-2" />
+          <Calendar className="text-teal-800 w-3 h-auto mr-2" />
           <span className="text-sm">MILLÉSIME</span>
         </div>
       </>
@@ -96,7 +96,7 @@ const getFilterTitle = (filterType: string) => {
     volume: (
       <>
         <div className="flex items-center">
-          <Ruler className="text-teal-800 w-5 mr-2" />
+          <Ruler className="text-teal-800 w-3 h-auto mr-2" />
           <span className="text-sm">VOLUME</span>
         </div>
       </>
@@ -104,7 +104,7 @@ const getFilterTitle = (filterType: string) => {
     accord_mets: (
       <>
         <div className="flex items-center">
-          <Utensils className="text-teal-800 w-5 mr-2" />
+          <Utensils className="text-teal-800 w-3 h-auto mr-2" />
           <span className="text-sm">ACCORD METS</span>
         </div>
       </>
@@ -112,7 +112,7 @@ const getFilterTitle = (filterType: string) => {
     sans_sulfites_: (
       <>
         <div className="flex items-center">
-          <FlaskConicalOff className="text-teal-800 w-5 mr-2" />
+          <FlaskConicalOff className="text-teal-800 w-3 h-auto mr-2" />
           <span className="text-sm">SULFITES</span>
         </div>
       </>
