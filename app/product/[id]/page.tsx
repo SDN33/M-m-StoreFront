@@ -348,12 +348,12 @@ const ProductPage: React.FC = () => {
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 w-full px-4 md:px-10">
             {/* Grille d'informations produit */}
-            <div className="bg-white p-4 rounded-lg shadow-md w-full">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-                <h3 className="text-lg font-bold text-teal-800">Cépages</h3>
-                <p className="text-sm text-right">
-                  {product.cepages ? joinIfArray(product.cepages) : 'Pas de cépages renseignés'}
-                </p>
+            <div className="bg-white p-4 rounded-lg shadow-md">
+              <div className="flex justify-between items-center">
+              <h3 className="text-lg font-bold text-teal-800 text-left">Cépages</h3>
+              <p className="text-sm text-right">
+                {product.cepages ? joinIfArray(product.cepages) : 'Pas de cépages renseignés'}
+              </p>
               </div>
             </div>
 

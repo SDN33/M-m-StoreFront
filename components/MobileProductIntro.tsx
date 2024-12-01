@@ -155,7 +155,7 @@ const MobileProductsIntro: React.FC = () => {
           </div>
           <div className="w-[45px] h-[45px] relative">
             <Image
-              src="/images/déméter.png"
+              src="/images/Biodynamie-logo.png"
               alt="Biodynamie logo"
               fill
               sizes='45px'

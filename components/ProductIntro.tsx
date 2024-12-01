@@ -77,7 +77,7 @@ const ProductsIntro: React.FC = () => {
           priority
         />
         <Image
-          src="/images/déméter.png"
+          src="/images/Biodynamie-logo.png"
           alt="Biodynamie logo"
           width={50}
           height={50}
