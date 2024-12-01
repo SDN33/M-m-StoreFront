@@ -67,7 +67,7 @@ const FallingFlagsPromo = () => {
 
       {/* Contenu superposé */}
       <div className="relative z-10 text-center py-10">
-        <h2 className="text-3xl font-bold text-white">Vins Du Monde</h2>
+        <h1 className="text-3xl font-bold text-white">Vins Du Monde</h1>
       </div>
 
       <style jsx>{`

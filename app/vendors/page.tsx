@@ -138,10 +138,10 @@ const VendorsPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 mt-44 mx-8">
       <div className="text-center mb-10 bg-gradient-to-r from-gray-900 via-gray-800 to-black pt-7 rounded-t-xl mx-8">
-        <h2 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-white mb-8">
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-white mb-8">
           Nos Vignerons Partenaires&nbsp;
           <Wine size={32} className="inline text-white animate-ping duration-1000" />
-        </h2>
+        </h1>
         <div className="border-b-4 border-white w-full max-w-[50rem] my-2 mx-auto"></div>
       </div>
       <div className="max-w-5xl mx-auto p-6">

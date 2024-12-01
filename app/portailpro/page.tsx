@@ -171,7 +171,7 @@ export default function PortailPro() {
           <div className="text-center space-y-4 mb-4 gap-1">
           <div className='text-center text-xs mx-auto text-black mb-4'><a href="/">Accueil</a> / <strong>Portail Pro</strong></div>
 
-          <h3
+          <h1
             className="text-2xl md:text-4xl lg:text-5xl tracking-tight font-bold relative text-white pt-28 items-center justify-center rounded-t-xl text-center
                        bg-primary bg-size-200 bg-position-0 hover:bg-position-100
                        transition-all duration-500 ease-in-out shadow-2xl bg-noise-overlay
@@ -198,7 +198,7 @@ export default function PortailPro() {
             <div
               className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-gray-800 via-black to-gray-900 opacity-80 transform -skew-x-6"
             />
-          </h3>
+          </h1>
 
 
           </div>
