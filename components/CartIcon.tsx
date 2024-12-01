@@ -14,7 +14,7 @@ const CartIcon: React.FC<CartIconProps> = ({ onClick, className }) => {
     <div className={`relative inline-block ${className}`}>
       <div
         onClick={onClick}
-        className="group relative cursor-pointer"
+        className="group relative cursor-pointer -mt-1"
       >
         <ShoppingCart
           className="w-8 h-8 text-white group-hover:text-black
