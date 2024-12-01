@@ -87,7 +87,7 @@ export default function RootLayout({
             "@type": "Store",
             "name": "Vins Mémé Georgette",
             "url": "https://www.vinsmemegeorgette.com",
-            "logo": "https://www.vinsmemegeorgette.com/logo.png",
+            "logo": "https://www.vinsmemegeorgette.com/memelogo2.png",
             "description": "Vins bio et biodynamiques en direct des vignerons engagés",
             "address": {
               "@type": "PostalAddress",
