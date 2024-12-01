@@ -23,19 +23,18 @@ const ProductReviews = ({
   productName
 }: ProductReviewsProps) => {
   useEffect(() => {
-    // Ensure we're in a browser environment and Yotpo is loaded
+    // Assurez-vous que Yotpo est chargé et initialisez les widgets
     if (typeof window !== "undefined" && window.yotpo) {
-      // Attempt to initialize Yotpo widgets
       try {
         window.yotpo.initWidgets();
       } catch (error) {
         console.error("Error initializing Yotpo widgets:", error);
       }
     }
-  }, [productId]); // Re-run if productId changes
+  }, [productId]);
 
   return (
-    <div className="yotpo-reviews-container">
+    <div className="yotpo-reviews-container ">
       {/* Widget Yotpo Reviews */}
       <div
         className="yotpo yotpo-main-widget"

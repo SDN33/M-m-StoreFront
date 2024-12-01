@@ -426,7 +426,6 @@ const ProductPage: React.FC = () => {
                 height="400"
                 frameBorder="0"
                 style={{ border: 0 }}
-                allowFullScreen
                 aria-hidden="false"
                 tabIndex={0}
                 title="Google Map"
@@ -435,23 +434,14 @@ const ProductPage: React.FC = () => {
           )}
           <br /><br />
           <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-900 via-gray-800 to-black p-8 rounded-t-xl">Avis clients</h2>
-          <br /><br />
-          <ProductReviews
-            productId={product.id.toString()}
-            productImages={product.images.map(img => img.src)}
-            productPrice={product.price.toString()}
-          />
-
-
-
           <br />
           <br />
           <Image
             src="/images/bannereco2.png"
             alt="Bannière écologique"
-            width={1920}
+            width={800}
             height={400}
-            objectFit="cover"
+            objectFit="object-cover"
             className="w-fit flex mx-auto" // Ajuste la hauteur si nécessaire
           />
 
