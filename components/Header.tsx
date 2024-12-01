@@ -119,7 +119,7 @@ const Header: React.FC = () => {
                     alt="Logo"
                     width={210}
                     height={210}
-                    className="object-contain h-auto w-auto"
+                    className="object-contain h-auto w-auto "
                   />
                 </Link>
               </div>
