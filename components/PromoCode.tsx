@@ -32,9 +32,16 @@ const PromoCode: React.FC = () => {
   }, []);
 
   const snowflakes = [
-    { left: "10%", animationDelay: "0s", opacity: 0.8, size: 20 },
+    { left: "10%", animationDelay: "0s", opacity: 0.8, size: 30 },
     { left: "50%", animationDelay: "1s", opacity: 0.5, size: 15 },
     { left: "90%", animationDelay: "2s", opacity: 0.3, size: 10 },
+    { left: "20%", animationDelay: "3s", opacity: 0.7, size: 20 },
+    { left: "70%", animationDelay: "4s", opacity: 0.6, size: 25 },
+    { left: "40%", animationDelay: "5s", opacity: 0.4, size: 12 },
+    { left: "80%", animationDelay: "6s", opacity: 0.2, size: 8 },
+    { left: "30%", animationDelay: "7s", opacity: 0.9, size: 22 },
+    { left: "60%", animationDelay: "8s", opacity: 0.5, size: 18 },
+    { left: "0%", animationDelay: "9s", opacity: 0.6, size: 25 },
   ];
 
   return (
@@ -87,8 +94,8 @@ const PromoCode: React.FC = () => {
             <div className="flex justify-center">
               <BadgeEuro />
             </div>
-            <h3><span style={{ fontWeight: "bold" }}>PROMO DES FETES <span style={{ fontWeight: "bold" }}>-10%</span></span></h3>
-            <p className="pt-1" style={{ fontSize: "14px" }}><strong className="text-xl font-black">meme10</strong> <br />sur votre première commande <br /> (dès 50€ d&apos;achat)</p>
+            <h3><span style={{ fontWeight: "bold" }}>PROMO DES FETES</span></h3>
+            <p className="pt-1" style={{ fontSize: "14px" }}><strong className="text-xl font-black">meme10</strong> <br />-10% sur votre première commande <br /> (dès 50€ d&apos;achat)</p>
         </div>
       ) : null}
     </div>

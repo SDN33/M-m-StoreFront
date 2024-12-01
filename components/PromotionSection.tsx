@@ -8,10 +8,10 @@ const PromotionSection = () => {
 
   useEffect(() => {
     const generateSnowflakes = () => {
-      return [...Array(15)].map(() => ({
+      return [...Array(35)].map(() => ({
         left: `${Math.random() * 100}%`,
         animationDelay: `${Math.random() * 5}s`,
-        opacity: Math.random() * 0.7,
+        opacity: Math.random() * 0.4 + 0.2,
         size: Math.random() * 20 + 10,
       }));
     };
