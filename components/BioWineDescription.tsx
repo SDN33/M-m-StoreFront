@@ -1,5 +1,4 @@
 import React from 'react';
-import { Wine, Locate, Medal, Grape, Calendar, Ruler } from 'lucide-react';
 
 const BioWineDescription: React.FC = () => {
   return (
