@@ -108,7 +108,6 @@ const Header: React.FC = () => {
                     width={71}
                     height={90}
                     className="transform scale-x-[-1] object-contain h-full w-full lg:flex hidden"
-                    priority
                   />
                 </Link>
               </div>
@@ -121,7 +120,6 @@ const Header: React.FC = () => {
                     width={210}
                     height={90}
                     className="object-contain h-full w-full"
-                    priority
                   />
                 </Link>
               </div>
@@ -308,7 +306,7 @@ const Header: React.FC = () => {
             <a
           href={category.href}
           onClick={category.onClick}
-          className={`px-5 text-gray-900 text-sm hover:text-primary transition-colors flex items-center h-full ${
+          className={`px-5 text-gray-900 hover:text-primary transition-colors flex items-center h-full ${
             category.className || ''
           }`}
             >
