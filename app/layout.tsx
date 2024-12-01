@@ -21,17 +21,17 @@ type TwitterMetadata = {
 
 
 export const metadata: Metadata & { twitter: TwitterMetadata } = {
-  title: "ACHAT VINS BIO et BIODYNAMIE - 2 500 vins - Mémé Georgette",
+  title: "Vins Bio et Biodynamiques - 2 500 Références de Vins - Mémé Georgette",
   description:
-    "Les vins de Mémé Georgette, découvrez notre sélection de vin bio et biodynamie démeter. Plus de 2500 vins en direct de vignerons et vigneronnes engagé(e)s. Vin rouge, vin blanc, vin rosé, vin pétillant, vin rosé, vin sans sulfites ajoutés",
+    "Découvrez les vins bio et biodynamiques de Mémé Georgette : plus de 2 500 références de vins rouges, blancs, rosés, pétillants, et sans sulfites, directement des vignerons engagés.",
   icons: {
     icon: "/favicon.ico"
   },
   keywords: ["Mémé Georgette, meme georgette,  Vins Mémé Georgette, acheter vins, vinatis, les grappes, vin en ligne, acheter vins bio, acheter vins en ligne, vins bio, vins en ligne, vins sans sulfites, vins nature, vin nature, vins biodynamiques, vins pas chers, vins de qualité, vins de vignerons, vins de vigneronnes, vins de France, vins du monde, vins rouges, vins blancs, vins rosés, vins pétillants, vins effervescents, vins tranquilles, vins de garde, cépages, terroir français, vins de caractère, vins de gastronomie, vins de fête, vins de tous les jours, vins de qualité, vins de prestige, vins de collection, vins de garde, vins de Bordeaux, vins de Bourgogne, vins de Loire, vins de Rhône, vins de Provence, vins de Champagne, vins d'Alsace, vins du Languedoc, vins du Roussillon, vins du Sud-Ouest, vins du Jura, vins de Savoie, vins de Corse, vins d'Espagne, vins d'Italie, vins d'Allemagne, vins du Portugal, vinaigre, wu, aoc, bouteille crémant prix  "],
   openGraph: {
-    title: "ACHAT VINS BIO et BIODYNAMIE - 2 500 vins - Mémé Georgette",
+    title: "Vins Bio et Biodynamiques - 2 500 Références de Vins - Mémé Georgette",
     description:
-      "Vins Mémé Georgette, découvrez notre sélection de vin bio et biodynamie démeter. Vin rouge, vin blanc, vin rosé, vin pétillant, vin rosé, vin sans sulfites ajoutés",
+      "Découvrez les vins bio et biodynamiques de Mémé Georgette : plus de 2 500 références de vins rouges, blancs, rosés, pétillants, et sans sulfites, directement des vignerons engagés.",
     images: [
       {
         url: "/images/post_partage.png",
@@ -44,9 +44,9 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ACHAT VINS BIO et BIODYNAMIE - 2 500 vins - Mémé Georgette",
+    title: "Vins Bio et Biodynamiques - 2 500 Références de Vins - Mémé Georgette",
     description:
-      "Vins Mémé Georgette, découvrez notre sélection de vin bio et biodynamie démeter. Vin rouge, vin blanc, vin rosé, vin pétillant, vin rosé, vin sans sulfites ajoutés",
+      "Découvrez les vins bio et biodynamiques de Mémé Georgette : plus de 2 500 références de vins rouges, blancs, rosés, pétillants, et sans sulfites, directement des vignerons engagés.",
     images: [
       {
         url: "/images/post_partage.png",
@@ -81,19 +81,36 @@ export default function RootLayout({
         <meta name="twitter:description" content={metadata.twitter?.description} />
         <meta name="twitter:image" content={metadata.twitter?.images[0].url} />
         <link rel="icon" href="https://memegeorgette.com/app/favicon.ico" type="image/x-icon" />
-      </head>
-      <body>
-        <AuthProvider>
-          <CartProvider>
-            <Header />
-            <AgeVerificationModal />
-            <Cookies />
-            {children}
-          </CartProvider>
-        </AuthProvider>
-        <Analytics />
-        <Footer  />
-      </body>
-    </html>
-  );
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "http://schema.org",
+            "@type": "Store",
+            "name": "Vins Mémé Georgette",
+            "url": "https://www.vinsmemegeorgette.com",
+            "logo": "https://www.vinsmemegeorgette.com/logo.png",
+            "description": "Vins bio et biodynamiques en direct des vignerons engagés",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Coubeyrac",
+              "addressRegion": "Dordogne",
+              "postalCode": "24000",
+              "addressCountry": "FR"
+            },
+          })}
+        </script>
+              </head>
+              <body>
+                <AuthProvider>
+                  <CartProvider>
+                    <Header />
+                    <AgeVerificationModal />
+                    <Cookies />
+                    {children}
+                  </CartProvider>
+                </AuthProvider>
+                <Analytics />
+                <Footer  />
+              </body>
+            </html>
+          );
 }
