@@ -150,15 +150,15 @@ export default function VendorDetailsPage() {
           alt={`${vendor.shop?.title || 'Vendor'} banner`}
           width={2000}
           height={2000}
-          className="object-cover"
+
         />
         <div className="absolute -bottom-16 left-6">
           <Image
             src={vendor.shop?.image ? normalizeUrl(vendor.shop.image) : '/images/meme-pas-contente.png'}
             alt={`${vendor.display_name || 'Vendor'} profile`}
-            width={128}
-            height={128}
-            className="rounded-full border-4 border-white object-cover bg-white shadow-lg"
+            width={120}
+            height={120}
+            className="rounded-full border-4 border-white bg-white shadow-lg"
           />
         </div>
       </div>
@@ -216,7 +216,7 @@ export default function VendorDetailsPage() {
                       alt={product.name}
                       width={160}
                       height={160}
-                      className="object-cover rounded"
+                      className="rounded"
                     />
                   </Link>
                   <h3 className="mt-4 text-lg font-semibold">{product.name}</h3>

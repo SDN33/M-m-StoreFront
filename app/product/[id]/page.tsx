@@ -229,7 +229,6 @@ const ProductPage: React.FC = () => {
               height={800} // Adjusted height to maintain a consistent aspect ratio
               className="mt-5 rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-110 cursor-zoom-in"
               loading="lazy"
-              style={{ objectFit: 'cover' }}
               />
             </div>
           </div>
@@ -439,8 +438,7 @@ const ProductPage: React.FC = () => {
             src="/images/bannereco2.png"
             alt="Bannière écologique"
             width={800}
-            height={400}
-            objectFit="object-cover"
+            height={800}
             className="w-fit flex mx-auto" // Ajuste la hauteur si nécessaire
           />
 

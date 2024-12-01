@@ -46,10 +46,9 @@ const Newsletter = () => {
       <Image
         src="/images/newsletter.webp"
         alt="Inscription à la newsletter"
-        width={1920}
-        height={1080}
-        objectFit="cover"
-        quality={100}
+        className="w-full h-[300px] object-cover "
+        width={800}
+        height={300}
       />
       <div className="absolute inset-0 bg-black/70 z-10" />
       <div className="absolute inset-0 z-20 p-6 flex flex-col justify-center items-center text-white">

@@ -178,7 +178,9 @@ const VendorsPage = () => {
             >
               <option value="">Toutes les villes</option>
               {availableCities.map(city => (
-                <option key={city} value={city}>{city}</option>
+              <option key={city} value={city}>
+                {city.split(/[\s-]/).map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}
+              </option>
               ))}
             </select>
           </div>
@@ -251,8 +253,8 @@ const VendorsPage = () => {
                                   <Image
                                     src={product.images[0].src}
                                     alt={product.name}
-                                    layout="fill"
-                                    objectFit="cover"
+                                    fill
+                                    sizes='24'
                                     className="transition-transform duration-300 hover:scale-110"
                                   />
                                 </Link>

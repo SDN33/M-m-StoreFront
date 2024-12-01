@@ -90,13 +90,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const renderAOCBadge = () => {
     if (product.name.toLowerCase().includes('aoc')) {
       return (
-        <div className={`absolute bottom-3 ${product.certification?.toLowerCase() === 'bio' ? 'right-10' : 'right-12'} w-7 h-7 z-20`}>
+        <div className={`absolute bottom-2 ${product.certification?.toLowerCase() === 'bio' ? 'right-10' : 'right-12'} w-auto h-auto z-20`}>
           <Image
             src="/images/LogoAOC.jpg"
             width={28}
             height={28}
             alt="Badge AOC"
             style={{ objectFit: 'contain' }}
+
           />
         </div>
       );
@@ -251,6 +252,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             style={{ objectFit: 'contain' }}
             width={500}
             height={500}
+            sizes='100%'
             priority
             onClick={handleRedirect}
             className="hover:scale-105 transition-transform cursor-pointer h-full w-full"
@@ -269,13 +271,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
         <div onClick={vendorRedirect} className="flex items-center gap-2 cursor-pointer">
           {vendorImages && (
-            <div className="relative rounded-full overflow-hidden">
+            <div className="relative rounded-full overflow-hidden w-9 h-auto">
               <Image
                 src={vendorImages || '/images/meme-pas-contente.png'}
                 alt={product.store_name || 'Vendor shop'}
-                width={40}
-                height={40}
-                priority
+                width={36}
+                height={36}
+                className="rounded-full"
+                sizes='100%'
               />
             </div>
           )}

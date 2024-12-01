@@ -10,13 +10,14 @@ const Footer = () => {
 
       <div className="max-w-7xl mx-auto px-4 mt-8">
         {/* Logos de paiement */}
-        <div className="flex justify-center items-center space-x-4 w-fit mx-auto mb-8 bg-white rounded-lg p-2">
+        <div className="flex justify-center items-center space-x-4 w-fit h-auto mx-auto mb-8 bg-white rounded-lg p-2">
           <a href="https://www.visa.fr">
             <Image
               src="/images/visa.png"
               alt="Visa"
               height={30}
               width={30}
+              sizes="30"
             />
           </a>
           <a href="https://www.mastercard.fr">

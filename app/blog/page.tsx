@@ -95,8 +95,8 @@ const Blog = () => {
               <Image
                 src={article.featuredImage || "/default-image.jpg"}
                 alt={article.title}
-                fill={true}
-                className="absolute inset-0 w-full h-full object-cover"
+                fill
+                className="absolute inset-0 w-full h-full "
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>

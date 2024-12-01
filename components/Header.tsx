@@ -216,7 +216,6 @@ const Header: React.FC = () => {
                   fill
                   sizes='200px'
                   className="object-contain"
-                  priority
                 />
               </Link>
             </div>

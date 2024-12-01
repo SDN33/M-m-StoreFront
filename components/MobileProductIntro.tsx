@@ -97,11 +97,12 @@ const MobileProductsIntro: React.FC = () => {
         style={{ overflow: 'hidden', transition: 'opacity 1s ease, height 1s ease' }}
       >
         <div className="flex space-x-8 h-[35px] items-center">
-          <div className="w-[30px] h-[30px] relative">
+          <div className="w-[30px] h-auto relative">
             <Image
               src="/images/bio2.png"
               alt="bio logo"
               fill
+              sizes='30px'
               className="object-contain"
               priority={true}
             />
@@ -111,6 +112,7 @@ const MobileProductsIntro: React.FC = () => {
               src="/images/Logobioeu.jpg"
               alt="Bio euro logo"
               fill
+              sizes='40px'
               className="object-contain"
               priority={true}
             />
@@ -120,6 +122,7 @@ const MobileProductsIntro: React.FC = () => {
               src="/images/logointro2.jpg"
               alt="nature et progrès"
               fill
+              sizes='35px'
               className="object-contain"
               priority={true}
             />
@@ -146,6 +149,7 @@ const MobileProductsIntro: React.FC = () => {
               src="/images/logointro.jpg"
               alt="biodynamie logo"
               fill
+              sizes='38px'
               className="object-contain"
               priority={true}
             />
@@ -155,6 +159,7 @@ const MobileProductsIntro: React.FC = () => {
               src="/images/déméter.png"
               alt="Biodynamie logo"
               fill
+              sizes='45px'
               className="object-contain"
               priority={true}
             />
@@ -164,6 +169,7 @@ const MobileProductsIntro: React.FC = () => {
               src="/images/biodyvin.jpg"
               alt="biodyvin logo"
               fill
+              sizes='38px'
               className="object-contain"
               priority={true}
             />

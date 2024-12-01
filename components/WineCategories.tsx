@@ -216,7 +216,7 @@ const VendorsPage = () => {
                                     src={product.images[0].src}
                                     alt={product.name}
                                     layout="fill"
-                                    objectFit="cover"
+                                    sizes='100%'
                                     className="transition-transform duration-300 hover:scale-110"
                                   />
                                 </Link>
