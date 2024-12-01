@@ -119,7 +119,9 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
                           src={item.image}
                           alt={item.name}
                           fill
-                          className="object-cover rounded"
+                          sizes='100%'
+                          className="rounded"
+                          priority
                         />
                       )}
                     </div>
