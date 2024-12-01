@@ -163,16 +163,32 @@ export default function VendorDetailsPage() {
         </div>
       </div>
 
-      <div className="mt-20 px-6">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div className="mt-4 px-6">
+        <div className="pl-36 flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8 ">
           <div>
-            <h1 className="text-2xl font-bold">{vendor.shop?.title || '@MéméGeorgette'}</h1>
+            <h1 className="text-2xl font-bold text-center">{vendor.shop?.title || '@MéméGeorgette'}</h1>
           </div>
         </div>
 
         <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4 text-teal-800">À propos</h2>
-          <p className="text-gray-600 whitespace-pre-wrap">{vendor.shop.description ? vendor.shop.description.replace(/<\/?[^>]+(>|$)/g, "") : ''}</p>
+          <h2 className="text-lg font-semibold mb-4 text-teal-800 text-center">À propos</h2>
+          {vendor.shop.description ? (
+            <p className="text-gray-600 whitespace-pre-wrap text-center">
+              {vendor.shop.description
+                .replace(/<\/?[^>]+(>|$)/g, "") // Remove HTML tags
+                .split('\n') // Split into paragraphs
+                .map((paragraph, index) => (
+                  paragraph.trim() && (
+                    <span key={index} className="block mb-2">
+                      {paragraph.trim()}
+                    </span>
+                  )
+                ))
+              }
+            </p>
+          ) : (
+            <p className="text-gray-500 text-center italic">Aucune description disponible</p>
+          )}
         </div>
 
         {vendor.address && (
