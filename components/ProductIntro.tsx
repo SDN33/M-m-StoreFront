@@ -89,11 +89,11 @@ const ProductsIntro: React.FC = () => {
         {/* Central Text with Counter */}
         <div className="flex flex-col items-center text-center w-full lg:w-auto ">
         <h1 className="text-2xl sm:text-2xl lg:text-2xl font-black text-primary tracking-tight leading-tight">
-          <span className="block text-3xl sm:text-2xl mb-2">
+          <span className="block text-4xl sm:text-2xl mb-2 font-serif">
           {counter.toLocaleString()}
           &nbsp;vins bio en direct des vignerons(nes)
           </span>
-          <span className="block text-black text-xs sm:text-sm font-['Inter'] mt-2">
+          <span className="block text-black text-sm sm:text-sm font-['Inter']">
           Tu sais, celles et ceux qui respectent la terre, ses locataires...
           </span>
         </h1>
