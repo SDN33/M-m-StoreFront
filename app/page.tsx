@@ -225,8 +225,8 @@ export default function Home() {
                   )}
                 </section>
               </div>
-              <div className="py-8" />
               <HeroBanner />
+              <br />
               <Livraison />
               <div className="py-8" />
               <WineCategories />

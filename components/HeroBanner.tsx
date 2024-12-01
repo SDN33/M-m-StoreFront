@@ -14,24 +14,24 @@ const HeroBanner = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlogan(prev => (prev + 1) % slogans.length);
+      setCurrentSlogan((prev) => (prev + 1) % slogans.length);
     }, 5000); // Change de slogan toutes les 5 secondes
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="relative container mx-auto px-4 flex flex-col justify-center items-center from-primary to-pink-600 py-4"> {/* Réduit le padding vertical */}
-      <div className="flex flex-col items-center text-center z-10 relative max-w-md"> {/* Réduit la largeur maximale */}
-        <h1 className="text-2xl md:text-2xl leading-tight md:font-bold sloganhero font-semibold"> {/* Réduit la taille de la police */}
+    <div className="relative container mx-auto px-4 flex flex-col justify-center items-center from-primary to-pink-600 py-4">
+      <div className="flex flex-col items-center text-center z-10 relative max-w-md">
+        <h1 className="text-2xl md:text-2xl leading-tight md:font-bold sloganhero font-semibold">
+          {/* Hauteur fixe ajustée selon le plus long slogan */}
           <span
-            className="block font-serif fade-in min-h-[3rem] md:min-h-[4rem]"
+            className="font-serif min-h-[6rem] md:min-h-[8rem] flex items-center justify-center"
             dangerouslySetInnerHTML={{ __html: slogans[currentSlogan] }}
           />
         </h1>
-        <div className='border-t-2 border-accent w-16 mt-2'></div> {/* Réduit la largeur de la bordure et l'espacement */}
+        <div className="border-t-2 border-accent w-16 mt-2"></div>
       </div>
-      <br /><br />
     </div>
   );
 };
