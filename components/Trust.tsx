@@ -71,7 +71,7 @@ const Newsletter = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="bg-gradient-to-r from-primary to-rose-800 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white py-3 px-6 rounded whitespace-nowrap"
+              className="bg-gradient-to-r from-primary to-red-900 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white py-3 px-6 rounded whitespace-nowrap"
             >
               {isLoading ? "Chargement..." : "S'inscrire"}
             </button>
