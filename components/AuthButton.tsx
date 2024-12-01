@@ -101,7 +101,7 @@ const AuthButton = () => {
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-sm text-white p-3 bg-black rounded-xl sm:texy-primary md:mt-0 font-semibold hover:text-primary cursor-pointer flex items-center gap-2 py-2"
             >
-                Mon compte
+                Mon Espace
                 <ChevronDown
                     size={16}
                     className={`transition-transform ${isMenuOpen ? 'rotate-180' : ''}`}

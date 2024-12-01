@@ -90,10 +90,10 @@ const ProductsIntro: React.FC = () => {
         <div className="flex flex-col items-center text-center w-full lg:w-auto ">
         <h1 className="text-2xl sm:text-2xl lg:text-2xl font-black text-primary tracking-tight leading-tight">
           <span className="block text-4xl sm:text-2xl mb-2 font-serif">
-          {counter.toLocaleString()}
+          <span className='text-3xl'>{counter.toLocaleString()}</span>
           &nbsp;vins bio en direct des vignerons(nes)
           </span>
-          <span className="block text-black text-sm sm:text-sm font-['Inter']">
+          <span className="block text-gray-900 text-base sm:text-sm font-['Inter']">
           Tu sais, celles et ceux qui respectent la terre, ses locataires...
           </span>
         </h1>
