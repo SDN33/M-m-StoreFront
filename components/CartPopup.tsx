@@ -180,7 +180,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
 
                   <button
                     onClick={handleCheckout}
-                    className="w-full py-3 px-4 bg-gradient-to-r from-primary to-red-900 text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white rounded transition font-medium text-center block"
+                    className="w-full py-3 px-4 bg-gradient-to-r from-primary to-red-900 text-white hover:scale-105 rounded transition-transform  font-medium text-center block"
                   >
                     Passer la commande
                   </button>
