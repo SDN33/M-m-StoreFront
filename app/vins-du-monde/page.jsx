@@ -69,9 +69,9 @@ export default function VinsDuMonde() {
         {/* Section Description */}
         <div className="bg-gray-100 p-6 rounded-lg shadow-md mb-12">
           <p className="text-lg font-medium text-center text-gray-700">
-            🍷 Découvrez notre sélection de vins du monde !
+            Découvrez notre sélection de vins du monde entier
             <br />
-            <span className="font-bold text-teal-800">
+            <span className="font-bold text-teal-800 text-sm">
               Une collection unique de vins d&apos;Espagne, d&apos;Italie, du Portugal et d&apos;Allemagne.
             </span>
           </p>

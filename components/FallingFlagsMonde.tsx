@@ -47,7 +47,7 @@ const FallingFlagsPromo = () => {
   }, [flags]);
 
   return (
-    <div className="relative w-full min-h-[100px] overflow-hidden bg-gradient-to-r from-teal-200 to-teal-400 rounded-t-xl">
+    <div className="relative w-full min-h-[100px] overflow-hidden bg-gradient-to-r from-teal-200 via-teal-600 to-teal-800 rounded-t-xl">
       {/* Drapeaux qui tombent */}
       {fallingFlags.map(flag => (
         <div
