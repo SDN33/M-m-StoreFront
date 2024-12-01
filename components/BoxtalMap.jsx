@@ -25,7 +25,7 @@ const BoxtalMap = ({ onSelectPoint }) => {
           throw new Error('Token manquant.');
         }
       } catch (err) {
-        setError('Erreur lors de la récupération du token.');
+        setError('Erreur lors du chargement de la map Boxtal');
         console.error(err);
       } finally {
         setLoading(false);

@@ -28,7 +28,7 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('Erreur proxy Boxtal:', error?.response?.data || error.message);
     res.status(error?.response?.status || 500).json({
-      error: error?.response?.data?.error || 'Échec de la récupération du token',
+      error: error?.response?.data?.error || 'Erreur lors du chargement de la map Boxtal',
     });
   }
 }

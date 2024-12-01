@@ -213,13 +213,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         <div className="flex items-start gap-1 mb-2">
           <div className="relative flex-grow">
             <div className="flex items-center">
-              <h1
+              <h2
                 className="text-base font-bold cursor-pointer hover:underline truncate"
                 onClick={handleRedirect}
                 title={isTruncated ? product.name : undefined}
               >
                 {truncatedName}
-              </h1>
+              </h2>
               {isTruncated && (
                 <div className="relative group" title={product.name}>
                   <Info className="w-4 h-4 text-gray-500 ml-1 cursor-pointer" />
