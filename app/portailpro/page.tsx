@@ -192,7 +192,7 @@ export default function PortailPro() {
               letterSpacing: '0.03em', // Added letter spacing
               }}
             >
-              PORTAIL PRO <br /><span className='text-lg font-light'>Rejoignez une marketplace dédiée aux vignerons bio,<br /> où simplicité, logistique prise en charge, et liberté totale</span>
+              PORTAIL PRO <br /><span className='text-lg font-light'>Rejoignez une marketplace dédiée aux vignerons bio,<br /> simple, logistique prise en charge, et liberté totale</span>
               <div
               className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-gray-800 via-black to-gray-900
                      opacity-80 transform -skew-x-6"
@@ -301,7 +301,8 @@ export default function PortailPro() {
               <div className="space-y-4">
                 <button
                   onClick={() => window.location.href = "/contact"}
-                  className="bg-gradient-to-r from-primary via-orange-900 to-red-900 text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:bg-orange-900 transition-all duration-300 flex items-center justify-center space-x-2"
+                  className="bg-gradient-to-r from-primary via-orange-900 to-red-900
+                   text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:bg-orange-900 transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <span>Nous Contacter</span>
                 </button>
