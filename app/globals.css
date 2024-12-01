@@ -247,7 +247,6 @@ ul::-webkit-scrollbar {
 
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: "primary" #f3f3f3;
+  scrollbar-color: "primary" transparent;
+
 }
-
-

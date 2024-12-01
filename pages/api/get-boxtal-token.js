@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   try {
     // Encodage des credentials
     const encodedCredentials = Buffer.from(
-      `${process.env.BOXTEL_ACCESS_KEY}:${process.env.BOXTEL_SECRET_KEY}`
+      `${process.env.NEXT_PUBLIC_BOXTEL_ACCESS_KEY}:${process.env.BOXTEL_SECRET_KEY}`
     ).toString('base64');
 
     // Proxy pour rediriger la requête vers Boxtal
