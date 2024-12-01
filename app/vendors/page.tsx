@@ -233,9 +233,15 @@ const VendorsPage = () => {
                   </div>
 
                   {vendor.shop?.description && (
-                    <p className="mt-4 text-gray-900 text-center text-sm">
-                      {vendor.shop.description ? vendor.shop.description.replace(/<\/?[^>]+(>|$)/g, "") : ''}
-                    </p>
+                    <div className="mt-4 text-gray-700 text-sm max-w-3xl mx-auto text-center">
+                      {vendor.shop.description?.split('\n').map((paragraph, index) => (
+                      paragraph.trim() && (
+                        <p key={index} className="mb-2 leading-relaxed">
+                        {paragraph.replace(/<\/?[^>]+(>|$)/g, "").trim()}
+                        </p>
+                      )
+                      ))}
+                    </div>
                   )}
 
                   {vendor.products && vendor.products.length > 0 && (
