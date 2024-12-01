@@ -255,7 +255,7 @@ const VendorsPage = () => {
       <br />
       <div className="bg-transprent p-6 rounded-lg mb-16 mx-14">
         <h3 className="text-2xl font-serif font-semibold text-teal-800 mb-4 text-center">
-          Le Défi de l'Agriculture Bio dans la Vigne :<br />Les Vignerons Français au Cœur de la Transition Écologique
+          Le Défi de l&apos;Agriculture Bio dans la Vigne :<br />Les Vignerons Français au Cœur de la Transition Écologique
         </h3>
         <br />
         <p className="text-gray-700 text-sm font-serif leading-relaxed text-center">
