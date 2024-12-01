@@ -61,7 +61,7 @@ const Slogan: React.FC = () => {
 
   return (
     <div
-      className="relative py-10 md:py-10 -mt-4 min-h-[700px] md:min-h-[200px] overflow-hidden rounded-xl"
+      className="relative py-10 md:py-10 -mt-4 min-h-[700px] md:min-h-[200px] overflow- rounded-xl"
       style={{ backgroundColor: '#EC641D' }}
     >
       {/* SVG Background with brand color */}
@@ -74,7 +74,7 @@ const Slogan: React.FC = () => {
         <defs>
           <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" style={{ stopColor: '#FF6B4A', stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: '#FF6B4A', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: '#0000', stopOpacity: 1 }} />
           </linearGradient>
         </defs>
         <path fill="url(#grad)">
