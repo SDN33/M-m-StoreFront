@@ -181,7 +181,7 @@ const Header: React.FC = () => {
                   )}
                 </div>
               </div>
-              <a href="/portailpro" className="text-white hover:text-black font-semibold whitespace-nowrap text-center flex flex-col items-center">
+              <a href="/faq" className="text-white hover:text-black font-semibold whitespace-nowrap text-center flex flex-col items-center">
                 <MessageCircleQuestion className="mb-1 w-5 h-auto" />
                 FAQ
               </a>
