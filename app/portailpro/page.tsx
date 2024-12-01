@@ -173,25 +173,33 @@ export default function PortailPro() {
 
             {/* Suppression de l'image comme élément distinct */}
             <h3
-              className="text-4xl md:text-5xl lg:text-7xl tracking-tight font-bold relative bg-cover bg-center text-white pt-28 items-center justify-center rounded-t-xl text-center"
+              className="text-4xl md:text-5xl lg:text-5xl tracking-tight font-bold relative text-white pt-28 items-center justify-center rounded-t-xl text-center
+                   bg-gradient-to-r from-primary via-orange-900 to-red-900
+                   bg-size-200 bg-position-0 hover:bg-position-100
+                   transition-all duration-500 ease-in-out
+                   shadow-2xl
+                   bg-noise-overlay
+                   transform hover:scale-105
+                   font-[Montserrat]" // Changed font to Montserrat
               style={{
-              backgroundImage: 'url(/images/vins_fruitees.webp)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundBlendMode: 'multiply',
-              minHeight: '200px',
+              minHeight: '250px',
               height: 'auto',
-              padding: '4rem 1rem'
+              padding: '4rem 1rem',
+              perspective: '500px',
+              transformStyle: 'preserve-3d',
+              textTransform: 'uppercase', // Made text uppercase
+              fontWeight: '900', // Made font extra bold
+              letterSpacing: '0.03em', // Added letter spacing
               }}
             >
-              PORTAIL PRO
+              PORTAIL PRO <br /><span className='text-lg font-light'>Rejoignez une marketplace dédiée aux vignerons bio,<br /> où simplicité, logistique prise en charge, et liberté totale</span>
+              <div
+              className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-gray-800 via-black to-gray-900
+                     opacity-80 transform -skew-x-6"
+              />
             </h3>
           </div>
           <div>
-
-           <p className="text-lg text-center mx-auto mb-8 -mt-2 font-semibold">
-             Rejoignez une marketplace dédiée aux vignerons bio, où simplicité, logistique prise en charge, et liberté totale<br /> vous permettent de vendre vos vins à travers l&apos;Europe sans contraintes.
-           </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
