@@ -219,7 +219,7 @@ export default function PortailPro() {
             ))}
           </div>
           <div className="font-bold text-lg text-center mx-auto mt-20 mb-28  slide-in-right ">
-          <span className='font-black text-3xl text-primary border-black-500'>VinsMemeGeorgette.com</span><br /><br />C&apos;est bien plus qu&apos;une marketplace ! C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte, reconnue par le grand public grâce à <a className='text-primary font-black'  href="https://www.memegeorgette.com/" >Mémé Georgette</a><br /><br />
+          <span className='font-black text-xl md:text-3xl text-primary border-black-500'>VinsMemeGeorgette.com</span><br /><br />C&apos;est bien plus qu&apos;une marketplace ! C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte, reconnue par le grand public grâce à <a className='text-primary font-black'  href="https://www.memegeorgette.com/" >Mémé Georgette</a><br /><br />
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center p-6 eshadow-lg rounded-lg">
             <Image
               src="https://res.cloudinary.com/daroyxenr/image/upload/v1732486602/Capture_d_%C3%A9cran_2024-11-24_231608_dp7xms.webp"
@@ -237,7 +237,10 @@ export default function PortailPro() {
             />
             </div>
 
-        <br /><br /><span className='text-base mx-14'>Nous vous offrons un accès direct aux amateurs de vins en Europe, tout en simplifiant vos démarches avec une logistique intégrée et un accompagnement marketing personnalisé, notre assistance vendeur et client dédiée vous permet de vous concentrer sur l&apos;essentiel,<br />la fabrication de vins de qualité.</span>
+            <div className='text-base mx-14 flex flex-col gap-2'>
+              <span>Nous vous offrons un accès direct aux amateurs de vins en Europe, tout en simplifiant vos démarches avec une logistique intégrée et un accompagnement marketing personnalisé, notre assistance vendeur et client dédiée vous permet de vous concentrer sur l&apos;essentiel:</span>
+              <span className='text-primary'>la fabrication de vins de qualité.</span>
+            </div>
           </div>
         </div>
 
