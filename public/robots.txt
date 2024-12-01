@@ -2,6 +2,10 @@
 User-agent: Googlebot
 Disallow:
 
+# Autoriser Bingbot à explorer l'ensemble du site
+User-agent: Bingbot
+Disallow:
+
 # Autoriser Googlebot-Image à indexer les images
 User-agent: googlebot-image
 Disallow:
