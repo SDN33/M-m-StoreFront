@@ -6,6 +6,7 @@ import Livraison from '@/components/Livraison';
 import HeroBanner from '@/components/HeroBanner';
 import Trust from '@/components/Trust';
 import FallingEurosPromo from '@/components/FallingEurosPromo';
+import PromoCode from '@/components/PromoCode';
 
 export default function ProductsPromotions() {
   const [products, setProducts] = useState([]);
@@ -68,10 +69,10 @@ export default function ProductsPromotions() {
         {/* Section Description */}
         <div className="bg-gray-100 p-6 rounded-lg shadow-md mb-12">
           <p className="text-lg font-medium text-center text-gray-700">
-            🍇 Découvrez nos vins en promotion et profitez de remises exclusives !
+            Découvrez nos vins en promotion et profitez de remises exclusives sur une sélection de produits
             <br />
-            <span className="font-bold text-teal-800">
-              Merci Mémé ! Mais dépêchez-vous, les stocks sont limités.
+            <span className="font-bold text-primary text-sm">
+              Merci Mémé ! Mais dépêchez-vous, les stocks sont limités !
             </span>
           </p>
         </div>
@@ -90,12 +91,15 @@ export default function ProductsPromotions() {
           </div>
         ) : (
           <div className="text-center text-gray-700 text-lg mb-20">
+            <br /><br />
             Aucuns vins disponible pour le moment
+            <br /><br /><br /><br /><br /><br />
           </div>
         )}
         <HeroBanner />
         <Livraison />
         <Trust />
+        <PromoCode />
         <br />
       </main>
     </div>
