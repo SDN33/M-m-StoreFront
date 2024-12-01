@@ -101,9 +101,8 @@ const MobileProductsIntro: React.FC = () => {
             <Image
               src="/images/bio2.png"
               alt="bio logo"
-              fill
-              sizes='30px'
-              className="object-contain"
+              width={30}
+              height={30}
               priority={true}
             />
           </div>
