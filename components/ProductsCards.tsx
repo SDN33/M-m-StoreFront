@@ -212,10 +212,12 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
         <div className="text-center p-4">Aucun produit trouvé.</div>
       ) : (
         <div className="space-y-10 ">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 justify-center">
-            {filteredProducts.slice(0, visibleCount).map((product) => (
-              <ProductCard key={product.id} product={product} onAddToCart={async () => await onAddToCart(product.id, 1, 0)} />
-            ))}
+          <div className="mx-auto overflow-hidden">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 justify-center">
+              {filteredProducts.slice(0, visibleCount).map((product) => (
+                <ProductCard key={product.id} product={product} onAddToCart={async () => await onAddToCart(product.id, 1, 0)} />
+              ))}
+            </div>
           </div>
           {filteredProducts.length > visibleCount && (
             <div className="flex justify-center py-6 !-mt-4">
