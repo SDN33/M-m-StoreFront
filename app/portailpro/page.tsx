@@ -173,7 +173,7 @@ export default function PortailPro() {
 
             {/* Suppression de l'image comme élément distinct */}
             <h3
-              className="text-4xl md:text-5xl lg:text-5xl tracking-tight font-bold relative text-white pt-28 items-center justify-center rounded-t-xl text-center
+              className="text-2xl md:text-4xl lg:text-5xl tracking-tight font-bold relative text-white pt-28 items-center justify-center rounded-t-xl text-center
                    bg-gradient-to-r from-primary via-orange-900 to-red-900
                    bg-size-200 bg-position-0 hover:bg-position-100
                    transition-all duration-500 ease-in-out
@@ -182,7 +182,6 @@ export default function PortailPro() {
                    transform hover:scale-105
                    font-[Montserrat]" // Changed font to Montserrat
               style={{
-              minHeight: '250px',
               height: 'auto',
               padding: '4rem 1rem',
               perspective: '500px',
@@ -192,12 +191,14 @@ export default function PortailPro() {
               letterSpacing: '0.03em', // Added letter spacing
               }}
             >
-              PORTAIL PRO <br /><span className='text-lg font-light'>Rejoignez une marketplace dédiée aux vignerons bio,<br /> simple, logistique prise en charge, et liberté totale</span>
+              PORTAIL PRO <br /><span className='mt-4 md:text-lg font-light sm:flex text-xs md:flex lg:flex text-center justify-center items-center mx-auto'>Rejoignez une marketplace dédiée aux vignerons bio</span>
+
               <div
               className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-gray-800 via-black to-gray-900
                      opacity-80 transform -skew-x-6"
               />
             </h3>
+
           </div>
           <div>
           </div>
