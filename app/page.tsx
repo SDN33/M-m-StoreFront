@@ -228,7 +228,7 @@ export default function Home() {
               <HeroBanner />
               <br />
               <Livraison />
-              <div className="py-8" />
+              <div className="py-4" />
               <WineCategories />
               <Trust />
               <LatestArticles />
