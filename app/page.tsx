@@ -16,6 +16,7 @@ import BackToTop from '@/components/BackToTop';
 import PromoCode from '@/components/PromoCode';
 import Image from 'next/image';
 import GoToFooter from '@/components/GoToFooter';
+import BioWineDescription from '@/components/BioWineDescription';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -235,6 +236,7 @@ export default function Home() {
               <WineCategories />
               <Trust />
               <LatestArticles />
+              <BioWineDescription />
               <Slogan />
               <div className="py-8" />
               <GoToFooter />
