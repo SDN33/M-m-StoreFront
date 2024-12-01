@@ -81,36 +81,6 @@ export default function RootLayout({
         <meta name="twitter:description" content={metadata.twitter?.description} />
         <meta name="twitter:image" content={metadata.twitter?.images[0].url} />
         <link rel="icon" href="https://memegeorgette.com/app/favicon.ico" type="image/x-icon" />
-        {/* Yotpo Widget Script */}
-        {process.env.YOTPO_APP_KEY && (
-          <script
-            id="yotpo-widget-script"
-            async
-            defer
-            src={`https://staticw2.yotpo.com/${process.env.YOTPO_APP_KEY}/widget.js`}
-          />
-        )}
-
-        {/* Optional: Add Yotpo tracking script if needed */}
-        {process.env.YOTPO_APP_KEY && (
-          <script
-            id="yotpo-tracking-script"
-            async
-            defer
-            dangerouslySetInnerHTML={{
-              __html: `
-                (function(){
-                  window.yotpoTrackPageView = function() {
-                    if (window.yotpo && window.yotpo.track) {
-                      window.yotpo.track('pageView');
-                    }
-                  };
-                  window.yotpoTrackPageView();
-                })();
-              `
-            }}
-          />
-        )}
       </head>
       <body>
         <AuthProvider>
