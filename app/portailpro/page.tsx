@@ -173,7 +173,7 @@ export default function PortailPro() {
 
           <h1
             className="text-2xl md:text-4xl lg:text-5xl tracking-tight font-bold relative text-white pt-28 items-center justify-center rounded-t-xl text-center
-                       bg-primary bg-size-200 bg-position-0 hover:bg-position-100
+                       bg-gradient-to-r from-primary via-orange-800 to-red-800 bg-size-200 bg-position-0 hover:bg-position-100
                        transition-all duration-500 ease-in-out shadow-2xl bg-noise-overlay
                        transform hover:scale-105"
             style={{
@@ -184,11 +184,9 @@ export default function PortailPro() {
               textTransform: 'uppercase',
               fontWeight: '900',
               letterSpacing: '0.03em',
-              backgroundImage: `url('/images/vins_fruitees.webp')`, // URL de l'image de fond
-              backgroundSize: 'cover',
               backgroundPosition: 'center',
-              backgroundBlendMode: 'overlay', // Mélange l'image avec le fond
-              opacity: 0.9, // Transparence légère
+              backgroundBlendMode: 'multiply',
+              opacity: 1,
             }}
           >
             PORTAIL PRO <br />
@@ -196,7 +194,7 @@ export default function PortailPro() {
               Rejoignez une marketplace dédiée aux vignerons bio
             </span>
             <div
-              className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-gray-800 via-gray-950 to-gray-950 opacity-80 transform -skew-x-6"
+              className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-teal-800 via-teal-800 to-teal-950 opacity-80 transform -skew-x-6"
             />
           </h1>
 
