@@ -186,12 +186,15 @@ export default function Home() {
           >
             <div
               ref={filterContentRef}
-              className="p-4 h-full overflow-y-auto scroll-container ml-10"
+              className="p-4 h-full overflow-y-auto scroll-container ml-20"
               style={{
                 overscrollBehavior: 'auto',
                 msOverflowStyle: 'auto',
                 scrollbarWidth: 'auto',
-                maxHeight: '100vh'
+                maxHeight: '100vh',
+                maxWidth: '15.6rem',
+                scrollbarColor: 'transparent transparent',
+                scrollMarginLeft: '1rem'
               }}
             >
               <ProductFilter

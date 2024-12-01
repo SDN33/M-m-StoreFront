@@ -55,55 +55,73 @@ const getFilterTitle = (filterType: string) => {
   const titles: { [key: string]: JSX.Element } = {
     color: (
       <>
-        <Wine className="inline-block  text-teal-800 w-5" />
-        <br /><><span className='text-sm'>COULEUR</span></>
+        <div className="flex items-center">
+          <Wine className="text-teal-800 w-5 mr-2" />
+          <span className="text-sm">COULEUR</span>
+        </div>
       </>
     ),
     region: (
       <>
-        <Locate className="inline-block text-teal-800 w-5" />
-        <br /><><span className='text-sm'>RÉGIONS</span></>
+        <div className="flex items-center">
+          <Locate className="text-teal-800 w-5 mr-2" />
+          <span className="text-sm">RÉGIONS</span>
+        </div>
       </>
     ),
     certification: (
       <>
-        <Medal className="inline-block text-teal-800 w-5" />
-        <br /><><span className='text-sm'>CERTIFICATION</span></>
+        <div className="flex items-center">
+          <Medal className="text-teal-800 w-5 mr-2" />
+          <span className="text-sm">CERTIFICATION</span>
+        </div>
       </>
     ),
     style: (
       <>
-        <Grape className="inline-block text-teal-800 w-5" />
-        <br /><><span className='text-sm'>STYLE</span></>
+        <div className="flex items-center">
+          <Grape className="text-teal-800 w-5 mr-2" />
+          <span className="text-sm">STYLE</span>
+        </div>
       </>
     ),
     millesime: (
       <>
-        <Calendar className="inline-block text-teal-800 w-5" />
-        <br /><><span className='text-sm'>MILLÉSIME</span></>
+        <div className="flex items-center">
+          <Calendar className="text-teal-800 w-5 mr-2" />
+          <span className="text-sm">MILLÉSIME</span>
+        </div>
       </>
     ),
     volume: (
       <>
-        <Ruler className="inline-block text-teal-800 w-5" />
-        <br /><><span className='text-sm'>VOLUME</span></>
+        <div className="flex items-center">
+          <Ruler className="text-teal-800 w-5 mr-2" />
+          <span className="text-sm">VOLUME</span>
+        </div>
       </>
     ),
     accord_mets: (
       <>
-        <Utensils className="inline-block text-teal-800 w-5" />
-        <br /><><span className='text-sm'>ACCORD METS</span></>
+        <div className="flex items-center">
+          <Utensils className="text-teal-800 w-5 mr-2" />
+          <span className="text-sm">ACCORD METS</span>
+        </div>
       </>
     ),
-        sans_sulfites_: (
+    sans_sulfites_: (
       <>
-        <FlaskConicalOff className="inline-block text-teal-800 w-5" />
-        <br /><><span className='text-sm'>SULFITES</span></>
+        <div className="flex items-center">
+          <FlaskConicalOff className="text-teal-800 w-5 mr-2" />
+          <span className="text-sm">SULFITES</span>
+        </div>
       </>
     ),
   };
+
   return titles[filterType] || <>{filterType}</>;
 };
+
 
 const filterOptions = {
   color: [
