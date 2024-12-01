@@ -7,6 +7,7 @@ import MobileProductFilter from '@/components/MobileProductFilter';
 import Slogan from '@/components/Slogan';
 import HeroBanner from '@/components/HeroBanner';
 import BackToTop from '@/components/BackToTop';
+import CatSlider from '@/components/CatSlider';
 
 export default function RoseWinePage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -81,6 +82,9 @@ export default function RoseWinePage() {
         </div>
         <br />
         <HeroBanner />
+        <br />
+        <CatSlider />
+        <br />
         <br />
         <Slogan />
         <BackToTop />
