@@ -4,7 +4,8 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import { Clock, Facebook, Twitter, Linkedin, Link2 } from "lucide-react";
 import he from "he";
-import Comments from "@/components/Comments";
+import dynamic from "next/dynamic";
+const Comments = dynamic(() => import("@/components/Comments"), { ssr: false });
 
 interface Article {
   id: number;
@@ -211,7 +212,7 @@ const ArticlePage = () => {
       <SocialShare url={currentUrl} title={article.title} />
       </div>
       <br /><br />
-      <Comments postId={article.id} />
+      <Comments postId={article.id} postTitle={article.title} postSlug={article.slug} />
     </article>
   );
 };
