@@ -49,12 +49,13 @@ const Newsletter = () => {
         className="w-full h-[300px] object-cover "
         width={800}
         height={300}
+        priority
       />
       <div className="absolute inset-0 bg-black/70 z-10" />
       <div className="absolute inset-0 z-20 p-6 flex flex-col justify-center items-center text-white">
         <h2 className="text-2xl md:text-3xl font-bold mb-2">Newsletter</h2>
         <p className="text-lg mb-1 text-center">Des offres exclusives, des nouveautés...</p>
-        <p className="font-semibold mb-4 text-center">Parole de Mémé, on ne spamme pas !</p>
+        <p className="text-sm md:text-base font-semibold mb-4 text-center">Parole de Mémé, on ne spamme pas !</p>
         <form onSubmit={handleSubscribe} className="w-full max-w-md">
           <div className="flex flex-col sm:flex-row gap-2 items-center">
             <div className="relative flex-grow">
