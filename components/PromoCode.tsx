@@ -26,7 +26,7 @@ const PromoCode: React.FC = () => {
         window.removeEventListener("mousemove", handleMouseMove);
         window.removeEventListener("mouseleave", handleMouseLeave);
       };
-    }, 10000); // Démarre après 10 secondes
+    }, 20000); // Démarre après 10 secondes
 
     return () => clearTimeout(timer);
   }, []);
