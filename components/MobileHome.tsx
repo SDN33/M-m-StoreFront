@@ -11,6 +11,7 @@ import Livraison from './Livraison';
 import MobileProductsIntro from './MobileProductIntro';
 import LatestArticles from './LatestArticles';
 import BackToTop from './BackToTop';
+import BioWineDescription from './BioWineDescription';
 
 const MobileHome: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -53,6 +54,7 @@ const MobileHome: React.FC = () => {
         <WineCategories />
         <Trust />
         <LatestArticles />
+        <BioWineDescription />
         <Slogan />
         <br /><br />
         <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} resetFilters={() => {}} />

@@ -343,6 +343,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             productId={product.id}
             product={product}
             quantity={quantity}
+            label="Ajouter au panier"
             onAddToCart={async () => {
               await onAddToCart(product.id, quantity, variationId);
             }}

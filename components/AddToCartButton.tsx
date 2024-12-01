@@ -5,6 +5,7 @@ interface AddToCartButtonProps {
   productId: number;
   product: object;
   quantity?: number;
+  label?: string;
   onAddToCart: () => Promise<void>;
 
 }
