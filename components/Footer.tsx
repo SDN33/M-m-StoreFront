@@ -42,7 +42,7 @@ const Footer = () => {
         </div>
 
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto text-white">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto text-white">
           <div>
             <h3 className=" font-semibold mb-4 text-lg text-white">À propos de Mémé Georgette</h3>
             <ul className="space-y-2 font-normal">

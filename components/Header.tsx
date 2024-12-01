@@ -105,9 +105,9 @@ const Header: React.FC = () => {
                   <Image
                     src="/images/meme-pas-contente.png"
                     alt="Logo"
-                    width={71}
+                    width={90}
                     height={90}
-                    className="transform scale-x-[-1] object-contain h-full w-full lg:flex hidden"
+                    className="transform scale-x-[-1] object-contain h-auto w-auto lg:flex hidden"
                   />
                 </Link>
               </div>
@@ -119,7 +119,7 @@ const Header: React.FC = () => {
                     alt="Logo"
                     width={210}
                     height={210}
-                    className="object-contain h-full w-full"
+                    className="object-contain h-auto w-auto"
                   />
                 </Link>
               </div>
@@ -147,6 +147,7 @@ const Header: React.FC = () => {
                         src={selectedCountry.imgSrc}
                         alt={selectedCountry.name}
                         fill
+                        sizes='30px'
                         className="object-contain"
                       />
                       </div>
@@ -207,12 +208,13 @@ const Header: React.FC = () => {
               {isMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
             </button>
 
-            <div className="relative h-[80px] w-[200px] flex items-center justify-center">
+            <div className="relative h-[200px] w-[200px] flex items-center justify-center">
               <Link href="/">
                 <Image
                   src="/images/memelogo.png"
                   alt="Logo"
                   fill
+                  sizes='200px'
                   className="object-contain"
                   priority
                 />
@@ -243,6 +245,7 @@ const Header: React.FC = () => {
                         src={selectedCountry.imgSrc}
                         alt={selectedCountry.name}
                         fill
+                        sizes='30px'
                         className="object-contain"
                       />
                     </div>

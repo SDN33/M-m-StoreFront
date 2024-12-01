@@ -129,7 +129,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
         selectedFilters.haut_de_gamme?.some(
           (hautDeGamme) =>
         hautDeGamme.toLowerCase().trim() === 'haut_de_gamme' &&
-        ((product.price >= 14 && product.price <= 20) || 
+        ((product.price >= 14 && product.price <= 20) ||
          (product.sale_price && product.sale_price >= 14 && product.sale_price <= 20))
         );
 
@@ -211,7 +211,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
       ) : filteredProducts.length === 0 ? (
         <div className="text-center p-4">Aucun produit trouvé.</div>
       ) : (
-        <div className="space-y-10">
+        <div className="space-y-10 ">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 justify-center">
             {filteredProducts.slice(0, visibleCount).map((product) => (
               <ProductCard key={product.id} product={product} onAddToCart={async () => await onAddToCart(product.id, 1, 0)} />

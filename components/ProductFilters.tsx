@@ -223,7 +223,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   }
 
   return (
-    <div ref={filterContainerRef} className=" custom-scrollbar -px-10 bg-transparent backdrop-blur-sm overflow-y-auto h-screen min-w-full transition-all duration-300 ease-in-out mt-48 mr-14">
+    <div ref={filterContainerRef} className=" custom-scrollbar -px-10 bg-transparent backdrop-blur-sm overflow-y-auto h-screen min-w-full transition-all duration-300 ease-in-out mt-48 md:mt-40 lg:mt-48 mr-14">
 
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl mt-4">
         <AnimatedResetButton onClick={resetFilters} isScrolled={isScrolled} />
