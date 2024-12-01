@@ -83,10 +83,10 @@ const CookieConsent = () => {
         <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-auto border border-primary/20">
           <div className="p-6 space-y-6">
             <div className="flex justify-between items-center">
-              <h3 className="text-xl font-semibold text-black">🍪 Paramètres des cookies</h3>
+              <h3 className="text-xl font-semibold text-gray-950">🍪 Paramètres des cookies</h3>
               <button
                 onClick={() => setShowDetails(false)}
-                className="text-black hover:text-primary transition-colors rounded-full p-2 hover:bg-primary/10"
+                className="text-gray-950 hover:text-primary transition-colors rounded-full p-2 hover:bg-primary/10"
               >
                 ✕
               </button>
@@ -166,7 +166,7 @@ const CookieConsent = () => {
 
   return (
     <div className="fixed bottom-0 z-50 w-full h-fit">
-      <div className="bg-black/90 backdrop-blur-sm rounded-t-xl shadow-lg border border-primary/10 p-4 ">
+      <div className="bg-gray-950/90 backdrop-blur-sm rounded-t-xl shadow-lg border border-primary/10 p-4 ">
         <div className="space-y-4">
           <p className="text-center flex items-center justify-center gap-3">
             <span className='text-3xl font-bold text-left'>🍪</span>
@@ -188,7 +188,7 @@ const CookieConsent = () => {
             </button>
             <button
               onClick={refuse}
-              className="px-5 py-2 bg-black text-white rounded-md transition-colors font-medium"
+              className="px-5 py-2 bg-gray-950 text-white rounded-md transition-colors font-medium"
             >
               Refuser
             </button>

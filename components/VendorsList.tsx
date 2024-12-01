@@ -137,12 +137,12 @@ const VendorList: React.FC = () => {
         </div>
       ) : (
         <div className="relative mx-auto max-w-3xl">
-          <button onClick={handleScrollLeft} className="absolute -left-5 top-1/2 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white px-4 py-2 rounded-full z-10">←</button>
+          <button onClick={handleScrollLeft} className="absolute -left-5 top-1/2 bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 text-white px-4 py-2 rounded-full z-10">←</button>
 
           <div ref={vendorContainerRef} className="flex overflow-x-auto space-x-6 scrollbar-hide appearance-none">
             {vendors.map((vendor) => (
-              <div key={vendor.store_name} className="bg-gray-200 border-black rounded-lg w-80 shadow-md hover:bg-gray-300 transition-colors">
-                <div className="p-4 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-4 border-gray-500 border-spacing-4 border-lg rounded-md shadow-md cursor-pointer mx-6 mt-6">
+              <div key={vendor.store_name} className="bg-gray-200 border-gray-950 rounded-lg w-80 shadow-md hover:bg-gray-300 transition-colors">
+                <div className="p-4 bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 text-white py-4 border-gray-500 border-spacing-4 border-lg rounded-md shadow-md cursor-pointer mx-6 mt-6">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gray-200 border-4 border-white rounded-full overflow-hidden">
                       <Image
@@ -169,7 +169,7 @@ const VendorList: React.FC = () => {
                   <div className="flex">
                     <span className="text-sm font-serif text-green-600 mx-auto text-center">{vendor.products.length} vins disponibles</span>
                   </div>
-                  <h3 className="text-sm font-black mb-4 text-black mx-auto text-center">Derniers vins ajoutés</h3>
+                  <h3 className="text-sm font-gray-950 mb-4 text-gray-950 mx-auto text-center">Derniers vins ajoutés</h3>
                   {vendor.products.length === 0 ? (
                     <p className="text-gray-400">Aucuns vins disponibles.</p>
                   ) : (
@@ -194,7 +194,7 @@ const VendorList: React.FC = () => {
                             </div>
                           </div>
                           <span className="text-base font-bold text-primary px-8 py-8 w-26 h-26">
-                            <span className="px-2 py-1 text-xs font-semibold text-black bg-gray-200 rounded-full">
+                            <span className="px-2 py-1 text-xs font-semibold text-gray-950 bg-gray-200 rounded-full">
                               {parseFloat(product.price).toFixed(2)}€
                             </span>
                             <Image
@@ -215,7 +215,7 @@ const VendorList: React.FC = () => {
             ))}
           </div>
 
-          <button onClick={handleScrollRight} className="absolute -right-5 top-1/2 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white px-4 py-2 rounded-full">→</button>
+          <button onClick={handleScrollRight} className="absolute -right-5 top-1/2 bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 text-white px-4 py-2 rounded-full">→</button>
           <br />
         </div>
       )}

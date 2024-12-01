@@ -95,7 +95,7 @@ const PromoCode: React.FC = () => {
               <BadgeEuro />
             </div>
             <h3><span style={{ fontWeight: "bold" }}>PROMO DES FETES</span></h3>
-            <p className="pt-1" style={{ fontSize: "14px" }}><strong className="text-xl font-black">meme10</strong> <br />-10% sur votre première commande <br /> (dès 50€ d&apos;achat)</p>
+            <p className="pt-1" style={{ fontSize: "14px" }}><strong className="text-xl font-gray-950">meme10</strong> <br />-10% sur votre première commande <br /> (dès 50€ d&apos;achat)</p>
         </div>
       ) : null}
     </div>

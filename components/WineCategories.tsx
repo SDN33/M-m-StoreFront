@@ -116,7 +116,7 @@ const VendorsPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto p-6">
-      <div className="text-center mb-10 bg-gradient-to-r from-gray-900 via-gray-800 to-black pt-7 rounded-t-xl">
+      <div className="text-center mb-10 bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 pt-7 rounded-t-xl">
         <h2 className="text-lg md:text-2xl lg:text-3xl font-extrabold text-white mb-8">
           Nos Vignerons Partenaires&nbsp;
           <Wine size={32} className="md:inline text-white animate-ping duration-1000 hidden" />
@@ -185,7 +185,7 @@ const VendorsPage = () => {
 
                   {vendor.shop?.description && (
                     <>
-                      <p className="mt-4 text-black text-xs text-center">
+                      <p className="mt-4 text-gray-950 text-xs text-center">
                         {vendor.shop.description.replace(/<\/?[^>]+(>|$)/g, "").length > 20
                           ? `${vendor.shop.description.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 200)}...`
                           : vendor.shop.description.replace(/<\/?[^>]+(>|$)/g, "")}
@@ -225,7 +225,7 @@ const VendorsPage = () => {
                             <h4 className="font-medium text-sm text-center text-gray-800 line-clamp-1">
                               {product.name}
                             </h4>
-                            <p className="text-black font-semibold mt-1">
+                            <p className="text-gray-950 font-semibold mt-1">
                               {product.price}€
                             </p>
                           </div>

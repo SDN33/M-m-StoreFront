@@ -217,7 +217,7 @@ const CheckoutPage = () => {
                       {currentStep > step.num ? <Check size={16} /> : step.num}
                     </div>
                     <span
-                      className={`ml-2 text-sm sm:text-base ${currentStep >= step.num ? 'text-gray-900' : 'text-gray-400'}`}
+                      className={`ml-2 text-sm sm:text-base ${currentStep >= step.num ? 'text-gray-950' : 'text-gray-400'}`}
                     >
                       {step.title}
                     </span>
@@ -447,7 +447,7 @@ const CheckoutPage = () => {
                 className="mx-auto sm:mx-0"
               />
               <div>
-                <p className="font-medium text-gray-900">Paiement sécurisé par Stripe</p>
+                <p className="font-medium text-gray-950">Paiement sécurisé par Stripe</p>
                 <p className="text-sm text-gray-600">Vos informations de paiement sont protégées par un cryptage SSL.</p>
               </div>
               {loading && <p className="text-blue-500">Création de la commande en cours...</p>}

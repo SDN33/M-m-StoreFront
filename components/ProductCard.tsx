@@ -205,7 +205,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
   return (
     <div className="w-full max-w-[400px] min-w-[300px] bg-white rounded-lg overflow-hidden shadow-md mb-8">
-      <div className="bg-gradient-to-r from-black via-gray-800 to-black text-white py-1 px-2 text-center text-sm font-semibold">
+      <div className="bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 text-white py-1 px-2 text-center text-sm font-semibold">
         {generateSlogan()}
       </div>
 
@@ -291,7 +291,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           </div>
         </div>
       </div>
-        <a href={`/product/${product.id}`} className="text-xs text-gray-900 h-8 overflow-hidden text-center mx-4 font-medium mb-4 flex justify-center cursor-pointer">
+        <a href={`/product/${product.id}`} className="text-xs text-gray-950 h-8 overflow-hidden text-center mx-4 font-medium mb-4 flex justify-center cursor-pointer">
           {stripHtmlAndTruncate(product.short_description || product.description || '', 110)}
         </a>
 
@@ -302,7 +302,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             </div>
           </div>
           {product.sale_price ? (
-          <div className="bg-black text-primary text-right px-2 py-1 rounded text-sm ml-2 ">
+          <div className="bg-gray-950 text-primary text-right px-2 py-1 rounded text-sm ml-2 ">
             Promo
           </div>
           ) : null}

@@ -63,15 +63,15 @@ export default function OtherWinesPage() {
         <div className="max-w-7xl mx-auto mt-36">
           <div className="bg-gray-800 text-white">
             <div className="text-center text-xs mx-auto p-2"><a href="/">Accueil</a> / <strong>Les Autres Vins</strong></div>
-            <h1 className="text-center text-4xl font-black p-8 rounded-t-xl">Nos Autres Vins</h1>
+            <h1 className="text-center text-4xl font-gray-950 p-8 rounded-t-xl">Nos Autres Vins</h1>
             <div className="border-b-4 border-white w-full max-w-[50rem] -mt-1 mx-auto"></div>
           </div>
           <div className="border-b-4 border-white w-full max-w-[50rem] -mt-1 mx-auto"></div>
 
-          <h2 className="text-center text-lg text-black mt-4 font-bold">
+          <h2 className="text-center text-lg text-gray-950 mt-4 font-bold">
             Découvrez notre sélection d&apos;autres vins
           </h2>
-          <h3 className='text-center text-sm text-black-500 mt-4 mx-10'>
+          <h3 className='text-center text-sm text-gray-950-500 mt-4 mx-10'>
             Nos autres vins incluent une variété d&apos;options qui ne se classent pas dans les catégories traditionnelles de vin rouge, blanc, ou rosé. Ces vins sont souvent uniques et offrent des saveurs intéressantes à découvrir.
           </h3>
 

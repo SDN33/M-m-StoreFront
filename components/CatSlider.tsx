@@ -38,7 +38,7 @@ const CatSlider = () => {
                 className="w-full h-40 bg-cover bg-center"
                 style={{ backgroundImage: `url(${category.image})` }}
               >
-                <div className="flex items-center justify-center h-full bg-black bg-opacity-50">
+                <div className="flex items-center justify-center h-full bg-gray-950 bg-opacity-50">
                   <h3 className="text-white text-2xl font-bold">{category.title}</h3>
                 </div>
               </div>

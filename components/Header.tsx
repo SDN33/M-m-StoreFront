@@ -44,7 +44,7 @@ const Header: React.FC = () => {
   };
 
   const categories = [
-    { name: 'PROMOS', href: '/promos', className: '!text-primary font-black', icon: <BadgePercent className="inline-block ml-1 -mt-1 w-4 h-4" /> },
+    { name: 'PROMOS', href: '/promos', className: '!text-primary font-gray-950', icon: <BadgePercent className="inline-block ml-1 -mt-1 w-4 h-4" /> },
     { name: 'Nos Vins', href: '#', onClick: toggleNosVinsPopup, icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com', target: "_blank", rel: "noopener noreferrer" },
     { name: 'Nos Vignerons.nes', href: '/vendors' },
@@ -82,7 +82,7 @@ const Header: React.FC = () => {
     {
       name: 'Les Autres',
       href: '/vins/autres',
-      bgClass: 'bg-gradient-to-r from-gray-700 to-gray-900',
+      bgClass: 'bg-gradient-to-r from-gray-700 to-gray-950',
     },
   ];
 
@@ -138,7 +138,7 @@ const Header: React.FC = () => {
                   <div className='whitespace-nowrap text-center flex flex-col items-center'>
                     <button
                       onClick={toggleLanguageMenu}
-                      className="flex items-center space-x-1 text-white font-semibold group hover:text-black"
+                      className="flex items-center space-x-1 text-white font-semibold group hover:text-gray-950"
                     >
                       <span>Livraison</span>
                       <ChevronDown className={`w-4 h-4 transition-transform ${isLanguageMenuOpen ? 'rotate-180' : ''}`} />
@@ -181,17 +181,17 @@ const Header: React.FC = () => {
                   )}
                 </div>
               </div>
-              <a href="/faq" className="text-white hover:text-black font-semibold whitespace-nowrap text-center flex flex-col items-center">
+              <a href="/faq" className="text-white hover:text-gray-950 font-semibold whitespace-nowrap text-center flex flex-col items-center">
                 <MessageCircleQuestion className="mb-1 w-5 h-auto" />
                 FAQ
               </a>
 
-              <a href="/portailpro" className="text-white hover:text-black font-semibold whitespace-nowrap text-center flex flex-col items-center">
+              <a href="/portailpro" className="text-white hover:text-gray-950 font-semibold whitespace-nowrap text-center flex flex-col items-center">
                 <UsersRound className="mb-1 w-5 h-auto" />
                 Portail Pro
               </a>
               <AuthButton />
-              <div className='text-white space-y-1 hover:text-black font-semibold whitespace-nowrap text-center flex flex-col items-center'>
+              <div className='text-white space-y-1 hover:text-gray-950 font-semibold whitespace-nowrap text-center flex flex-col items-center'>
                 <CartIcon onClick={toggleCartPopup} />
               </div>
 
@@ -264,7 +264,7 @@ const Header: React.FC = () => {
                   key={category.name}
                   href={category.href}
                   onClick={category.onClick}
-                  className={`block px-4 py-3 text-gray-900 hover:bg-gray-50 transition-colors font-bold ${
+                  className={`block px-4 py-3 text-gray-950 hover:bg-gray-50 transition-colors font-bold ${
                     category.className || ''
                   }`}
                   >
@@ -291,7 +291,7 @@ const Header: React.FC = () => {
       <nav className="hidden sm:min-w-sm md:hidden lg:flex xl:flex bg-white shadow-xl relative h-12 mx-auto">
         <div className="container mx-auto h-full flex items-center justify-between overflow-x-auto overflow-y-hidden">
           <ChevronLeft
-        className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors flex-shrink-0"
+        className="w-6 h-6 text-gray-950 cursor-pointer hover:text-primary transition-colors flex-shrink-0"
         onClick={() => {
           const scrollContainer = document.querySelector('.scrollable-menu');
           if (scrollContainer) {
@@ -309,7 +309,7 @@ const Header: React.FC = () => {
             <a
           href={category.href}
           onClick={category.onClick}
-          className={`px-5 text-gray-900 hover:text-primary transition-colors flex items-center h-full ${
+          className={`px-5 text-gray-950 hover:text-primary transition-colors flex items-center h-full ${
             category.className || ''
           }`}
             >
@@ -321,7 +321,7 @@ const Header: React.FC = () => {
           </ul>
 
           <ChevronRight
-        className="w-6 h-6 text-black cursor-pointer hover:text-primary transition-colors flex-shrink-0"
+        className="w-6 h-6 text-gray-950 cursor-pointer hover:text-primary transition-colors flex-shrink-0"
         onClick={() => {
           const scrollContainer = document.querySelector('.scrollable-menu');
           if (scrollContainer) {
@@ -381,7 +381,7 @@ const Header: React.FC = () => {
                 {/* Close Button */}
                 <button
                   onClick={() => setIsNosVinsOpen(false)}
-                  className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 z-50 bg-white/50 rounded-full p-2 transition-all hover:bg-white/80"
+                  className="absolute top-4 right-4 text-gray-600 hover:text-gray-950 z-50 bg-white/50 rounded-full p-2 transition-all hover:bg-white/80"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -400,7 +400,7 @@ const Header: React.FC = () => {
                 </button>
 
                 {/* Header */}
-                <div className="bg-gradient-to-r from-gray-900 to-black p-6 text-center">
+                <div className="bg-gradient-to-r from-gray-950 to-gray-950 p-6 text-center">
                   <h2 className="text-2xl font-bold text-white p-5 rounded-t-xl drop-shadow-md">
                     Nos Catégories de Vins
                   </h2>

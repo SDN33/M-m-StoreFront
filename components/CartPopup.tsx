@@ -69,9 +69,9 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-950 bg-opacity-50">
       <div className="bg-white rounded-lg shadow-lg w-full max-w-lg relative">
-        <div className="bg-black text-white p-4 rounded-t-lg flex justify-between items-center">
+        <div className="bg-gray-950 text-white p-4 rounded-t-lg flex justify-between items-center">
           <h2 className="text-xl font-semibold">Mon Panier</h2>
           <button
             onClick={onClose}

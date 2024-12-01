@@ -21,7 +21,7 @@ const PromotionSection = () => {
 
   return (
     <div
-      className="relative overflow-hidden bg-black text-center shadow-lg w-full z-40 py-2 h-16 md:h-8 mb-1"
+      className="relative overflow-hidden bg-gray-950 text-center shadow-lg w-full z-40 py-2 h-16 md:h-8 mb-1"
     >
       {/* Flocons de neige animés */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">

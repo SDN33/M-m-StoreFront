@@ -17,14 +17,14 @@ const CartIcon: React.FC<CartIconProps> = ({ onClick, className }) => {
         className="group relative cursor-pointer -mt-1"
       >
         <ShoppingCart
-          className="w-8 h-8 text-white group-hover:text-black
+          className="w-8 h-8 text-white group-hover:text-gray-950
           transition-all duration-300 ease-in-out
           transform group-hover:scale-110"
         />
         {cartCount > 0 && (
           <span
             className="absolute -top-2 -right-2
-            bg-black text-white text-xs
+            bg-gray-950 text-white text-xs
             rounded-full w-5 h-5
             flex items-center justify-center
             animate-pulse"

@@ -75,7 +75,7 @@ const AuthButton = () => {
     if (isLoading) {
         return (
             <span
-                className="text-sm text-white p-3 bg-black rounded-xl sm:texy-primary md:mt-0 font-semibold flex items-center gap-2"
+                className="text-sm text-white p-3 bg-gray-950 rounded-xl sm:texy-primary md:mt-0 font-semibold flex items-center gap-2"
             >
                 Chargement...
             </span>
@@ -87,7 +87,7 @@ const AuthButton = () => {
         return (
             <span
                 onClick={() => router.push('/login')}
-                className="text-sm text-white p-3 bg-black rounded-xl sm:texy-primary md:mt-0 font-semibold hover:text-primary cursor-pointer flex items-center gap-2"
+                className="text-sm text-white p-3 bg-gray-950 rounded-xl sm:texy-primary md:mt-0 font-semibold hover:text-primary cursor-pointer flex items-center gap-2"
             >
                 Connexion
             </span>
@@ -99,7 +99,7 @@ const AuthButton = () => {
         <div className="relative -pr-2" ref={menuRef}>
             <span
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-sm text-white p-3 bg-black rounded-xl sm:texy-primary md:mt-0 font-semibold hover:text-primary cursor-pointer flex items-center gap-2 py-2"
+                className="text-sm text-white p-3 bg-gray-950 rounded-xl sm:texy-primary md:mt-0 font-semibold hover:text-primary cursor-pointer flex items-center gap-2 py-2"
             >
                 Mon Espace
                 <ChevronDown
@@ -110,7 +110,7 @@ const AuthButton = () => {
 
             {isMenuOpen && (
                 <div
-                    className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50"
+                    className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-gray-950 ring-opacity-5 z-50"
                 >
                     <div className="py-1">
                         <button

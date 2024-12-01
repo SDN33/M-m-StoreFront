@@ -51,7 +51,7 @@ const Newsletter = () => {
         height={300}
         priority
       />
-      <div className="absolute inset-0 bg-black/70 z-10" />
+      <div className="absolute inset-0 bg-gray-950/70 z-10" />
       <div className="absolute inset-0 z-20 p-6 flex flex-col justify-center items-center text-white">
         <h2 className="text-2xl md:text-3xl font-bold mb-2">Newsletter</h2>
         <p className="text-lg mb-1 text-center">Des offres exclusives, des nouveautés...</p>
@@ -219,7 +219,7 @@ const MemeGeorgettePremium = () => {
         </div>
 
         <div className="relative overflow-hidden rounded-lg group">
-          <div className="absolute inset-0 bg-black/40 z-10"></div>
+          <div className="absolute inset-0 bg-gray-950/40 z-10"></div>
           <Image
             src="/images/winery.jpg"
             alt="Producteurs"

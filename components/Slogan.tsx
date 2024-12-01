@@ -108,7 +108,7 @@ const Slogan: React.FC = () => {
       <div className="relative max-w-4xl mx-auto text-center text-white z-10 px-4 mt-6">
         <h2
           ref={h2Ref}
-          className={`text-3xl md:text-4xl leading-tight font-black mb-2 transition-all duration-1000 ${
+          className={`text-3xl md:text-4xl leading-tight font-gray-950 mb-2 transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
             } md:transition-none`}
         >

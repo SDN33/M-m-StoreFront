@@ -74,7 +74,7 @@ const Blog = () => {
 
   return (
     <div className="container mx-auto px-8 lg:px-32 py-8 mb-20 mt-36">
-      <div className="text-center mb-10 bg-gradient-to-r from-gray-900 via-gray-800 to-black pt-7 rounded-t-xl">
+      <div className="text-center mb-10 bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 pt-7 rounded-t-xl">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-primary">
           Le Blog de Mémé Georgette&nbsp;
           <Rss size={32} className="inline text-white animate-ping duration-1000" />
@@ -110,7 +110,7 @@ const Blog = () => {
                 </span>
               </div>
 
-              <h3 className="font-bold text-xl text-gray-900 mb-3 line-clamp-2">
+              <h3 className="font-bold text-xl text-gray-950 mb-3 line-clamp-2">
                 {he.decode((article.title || "").replace(/<\/?[^>]+(>|$)/g, ""))}
               </h3>
 

@@ -258,7 +258,7 @@ const SearchInput = () => {
                 />
               )}
               <div className="ml-4 flex-grow">
-                <h4 className="font-semibold text-gray-900">{product.name}</h4>
+                <h4 className="font-semibold text-gray-950">{product.name}</h4>
               </div>
               <div className="ml-4 text-right">
                 <div className="font-semibold text-secondary">

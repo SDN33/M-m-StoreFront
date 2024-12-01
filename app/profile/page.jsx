@@ -116,7 +116,7 @@ export default function Profile() {
                 </span>
               </div>
               <div>
-                <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{user?.user_display_name}</h1>
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-950">{user?.user_display_name}</h1>
                 <p className="text-sm sm:text-base text-gray-500">{user?.user_email}</p>
               </div>
             </div>

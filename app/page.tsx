@@ -160,7 +160,7 @@ export default function Home() {
       >
         {/* Optional: Add a subtle loading indicator */}
         <div className=" w-16 h-16 bg-gray-200 rounded-full">
-            <div className="animate-ping w-16 h-16 bg-primary rounded-full font-black flex items-center justify-center text-center">
+            <div className="animate-ping w-16 h-16 bg-primary rounded-full font-gray-950 flex items-center justify-center text-center">
               <Image
                 src="/images/meme-pas-contente.png"
                 alt="Mémé Georgette"
@@ -252,7 +252,7 @@ export default function Home() {
 
       {isMobile && isFilterOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30"
+          className="fixed inset-0 bg-gray-950 bg-opacity-50 z-30"
           onClick={() => setIsFilterOpen(false)}
         />
       )}

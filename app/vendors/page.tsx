@@ -137,7 +137,7 @@ const VendorsPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 mt-44 mx-8">
-      <div className="text-center mb-10 bg-gradient-to-r from-gray-900 via-gray-800 to-black pt-7 rounded-t-xl mx-8">
+      <div className="text-center mb-10 bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 pt-7 rounded-t-xl mx-8">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-white mb-8">
           Nos Vignerons Partenaires&nbsp;
           <Wine size={32} className="inline text-white animate-ping duration-1000" />
@@ -162,7 +162,7 @@ const VendorsPage = () => {
         <div className="my-8 space-y-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-900" size={20} />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-950" size={20} />
               <input
                 type="text"
                 placeholder="Rechercher un domaine..."
@@ -269,7 +269,7 @@ const VendorsPage = () => {
                             <h4 className="font-medium text-sm text-center text-gray-800 line-clamp-1">
                               {product.name}
                             </h4>
-                            <p className="text-gray-900 font-semibold mt-1">
+                            <p className="text-gray-950 font-semibold mt-1">
                               {product.price}€
                             </p>
                           </div>

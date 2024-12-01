@@ -75,7 +75,7 @@ const AgeVerificationModal = () => {
     >
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
+        className="absolute inset-0 bg-gray-950 bg-opacity-50 backdrop-blur-sm"
         onClick={handleReject}
       />
 
@@ -98,10 +98,10 @@ const AgeVerificationModal = () => {
             transition: 'opacity 500ms ease-in-out'
           }}
         />
-        <h2 className="text-xl font-bold text-gray-900 mb-4">
+        <h2 className="text-xl font-bold text-gray-950 mb-4">
           Vérification de l&apos;âge
         </h2>
-        <p className="text-gray-900 mb-6 font-serif">
+        <p className="text-gray-950 mb-6 font-serif">
           Ce site est réservé aux personnes majeures.<br />
           En entrant sur ce site, vous certifiez<br />
           <span className="font-serif font-bold text-primary">avoir 18 ans ou plus</span>.
@@ -120,7 +120,7 @@ const AgeVerificationModal = () => {
             J&apos;ai moins de 18 ans
           </button>
         </div>
-        <p className="mt-4 text-sm text-gray-900 font-serif">
+        <p className="mt-4 text-sm text-gray-950 font-serif">
           L&apos;abus d&apos;alcool est dangereux pour la santé.<br />
           À consommer avec modération.
         </p>

@@ -36,9 +36,9 @@ const AnimatedResetButton: React.FC<{ onClick: () => void; isScrolled: boolean }
         items-center
         justify-center
         bg-gradient-to-r
-        from-gray-900
+        from-gray-950
         via-gray-800
-        to-black
+        to-gray-950
         text-white
         hover:scale-110
         ${isScrolled
@@ -246,12 +246,12 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl mt-4">
         <AnimatedResetButton onClick={resetFilters} isScrolled={isScrolled} />
       </div>
-      <button onClick={isHGPrixMatch} className="mt-20 mb-2 p-2 text-center rounded-lg border-black mx-auto bg-gradient-to-r from-gray-800 via-gray-800 to-gray-900 text-white hover:from-red-700 hover:via-red-800 hover:to-red-500 transition-all duration-300 text-sm w-full">
+      <button onClick={isHGPrixMatch} className="mt-20 mb-2 p-2 text-center rounded-lg border-gray-950 mx-auto bg-gradient-to-r from-gray-800 via-gray-800 to-gray-950 text-white hover:from-red-700 hover:via-red-800 hover:to-red-500 transition-all duration-300 text-sm w-full">
         <div className='flex items-center justify-center text-center mx-auto space-x-4'>
             <span className="text-center">• Pour Offrir<span className='text-xs -mt-4'>&nbsp;<Gift className='w-3 h-auto inline-block ml-1'/></span> •</span>
         </div>
       </button>
-      <button onClick={isPetitPrixMatch} className="p-2 text-center rounded-lg border-black mx-auto bg-gradient-to-r from-primary via-orange-800 to-red-900 text-white hover:from-orange-700 hover:via-primary hover:to-orange-500 transition-all duration-300 text-sm w-full">
+      <button onClick={isPetitPrixMatch} className="p-2 text-center rounded-lg border-gray-950 mx-auto bg-gradient-to-r from-primary via-orange-800 to-red-900 text-white hover:from-orange-700 hover:via-primary hover:to-orange-500 transition-all duration-300 text-sm w-full">
         <div className='flex items-center justify-center text-center mx-auto space-x-4'>
           <span className="text-center">• Petit Budget<span className='text-xs -mt-4'>&nbsp;€</span> •</span>
         </div>

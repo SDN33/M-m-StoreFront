@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer id="footer" className="bg-gradient-to-r from-gray-900 via-gray-800 to-black shadow-lg text-white py-2 text-center overflow-y-hidden">
+    <footer id="footer" className="bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 shadow-lg text-white py-2 text-center overflow-y-hidden">
 
       <div className="max-w-7xl mx-auto px-4 mt-10">
         {/* Logos de paiement */}
@@ -37,7 +37,7 @@ const Footer = () => {
             />
           </a>
           <div className="flex items-center text-gray-600">
-            <CreditCard className="h-4 w-4 mr-1 text-black" />
+            <CreditCard className="h-4 w-4 mr-1 text-gray-950" />
             <span className="text-xs font-semibold text-gray-800">Paiement sécurisé</span>
           </div>
         </div>

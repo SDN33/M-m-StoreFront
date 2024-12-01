@@ -140,7 +140,7 @@ export default function PortailPro() {
 
     return (
       <div className="fixed inset-0 z-50 overflow-y-auto">
-        <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" onClick={onClose}></div>
+        <div className="fixed inset-0 bg-gray-950 bg-opacity-50 transition-opacity" onClick={onClose}></div>
         <div className="flex min-h-full items-center justify-center p-4">
           <div className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all w-full max-w-3xl">
             {children}
@@ -169,7 +169,7 @@ export default function PortailPro() {
         {/* Features Section */}
         <div>
           <div className="text-center space-y-4 mb-4 gap-1">
-          <div className='text-center text-xs mx-auto text-black mb-4'><a href="/">Accueil</a> / <strong>Portail Pro</strong></div>
+          <div className='text-center text-xs mx-auto text-gray-950 mb-4'><a href="/">Accueil</a> / <strong>Portail Pro</strong></div>
 
           <h1
             className="text-2xl md:text-4xl lg:text-5xl tracking-tight font-bold relative text-white pt-28 items-center justify-center rounded-t-xl text-center
@@ -196,7 +196,7 @@ export default function PortailPro() {
               Rejoignez une marketplace dédiée aux vignerons bio
             </span>
             <div
-              className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-gray-800 via-black to-gray-900 opacity-80 transform -skew-x-6"
+              className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-gray-800 via-gray-950 to-gray-950 opacity-80 transform -skew-x-6"
             />
           </h1>
 
@@ -208,20 +208,20 @@ export default function PortailPro() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className={`p-8 rounded-2xl shadow-lg shadow-black-100/50 hover:shadow-xl hover:shadow-primary-200/50 transition-all duration-300`}
+                className={`p-8 rounded-2xl shadow-lg shadow-gray-950-100/50 hover:shadow-xl hover:shadow-primary-200/50 transition-all duration-300`}
               >
                 <div className="space-y-6">
                   <div className="bg-white w-16 h-16 rounded-xl flex items-center justify-center shadow-sm mx-auto">
                     {feature.icon}
                   </div>
-                  <h4 className="font-bold text-xl text-black text-center">{feature.title}</h4>
-                  <p className="text-blackleading-relaxed text-center">{feature.description}</p>
+                  <h4 className="font-bold text-xl text-gray-950 text-center">{feature.title}</h4>
+                  <p className="text-gray-950leading-relaxed text-center">{feature.description}</p>
                 </div>
               </div>
             ))}
           </div>
           <div className="font-bold text-lg text-center mx-auto mt-20 mb-28  slide-in-right ">
-          <span className='font-black text-xl md:text-3xl text-primary border-black-500'>VinsMemeGeorgette.com</span><br />C&apos;est bien plus qu&apos;une marketplace !<br /><br />C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte,<br />reconnue par le grand public grâce à <a className='text-primary font-black'  href="https://www.memegeorgette.com/" >Mémé Georgette</a><br /><br />
+          <span className='font-gray-950 text-xl md:text-3xl text-primary border-gray-950-500'>VinsMemeGeorgette.com</span><br />C&apos;est bien plus qu&apos;une marketplace !<br /><br />C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte,<br />reconnue par le grand public grâce à <a className='text-primary font-gray-950'  href="https://www.memegeorgette.com/" >Mémé Georgette</a><br /><br />
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center p-6 eshadow-lg rounded-lg">
             <Image
               src="https://res.cloudinary.com/daroyxenr/image/upload/v1732486602/Capture_d_%C3%A9cran_2024-11-24_231608_dp7xms.webp"
@@ -263,12 +263,12 @@ export default function PortailPro() {
 
             <div className="p-8 space-y-8">
               <div>
-                <p className="font-semibold text-lg text-center text-black mb-6">
+                <p className="font-semibold text-lg text-center text-gray-950 mb-6">
                   Sans Engagement
                 </p>
                 <ul className="space-y-4 text-center mx-auto">
                   {pricingFeatures.map((feature, index) => (
-                    <li key={index} className="flex items-center text-black text-center">
+                    <li key={index} className="flex items-center text-gray-950 text-center">
                       <svg className="w-5 h-5 text-primary mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
@@ -328,7 +328,7 @@ export default function PortailPro() {
                   <p className='text-center text-sm mb-2'>Téléchargez notre guide de création de produit, pour vous aider à mettre en ligne vos vins bio et biodynamiques sur notre plateforme:</p>
                   <button
                     onClick={handleDownloadDocument}
-                    className="bg-black text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:bg-teal-950 transition-all duration-300 flex items-center justify-center space-x-2"
+                    className="bg-gray-950 text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:bg-teal-950 transition-all duration-300 flex items-center justify-center space-x-2"
                     >
                     <Download className="w-5 h-5 mr-4 group-hover:scale-110 transition-transform" />Télécharger<br />Guide de création de produit
                   </button>

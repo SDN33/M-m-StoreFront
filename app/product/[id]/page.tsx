@@ -188,17 +188,17 @@ const ProductPage: React.FC = () => {
         <nav aria-label="Breadcrumb" className="text-sm mb-8 overflow-x-auto whitespace-nowrap">
           <ol className="list-none p-0 inline-flex">
             <li className="flex items-center">
-              <a href="/" className="text-gray-900 hover:text-gray-700">Accueil</a>
-              <span className="mx-2 text-gray-900">&gt;</span>
+              <a href="/" className="text-gray-950 hover:text-gray-700">Accueil</a>
+              <span className="mx-2 text-gray-950">&gt;</span>
             </li>
             <li className="flex items-center">
-              <a className="cursor-pointer text-gray-900 hover:text-gray-700" onClick={vendorRedirect}>
+              <a className="cursor-pointer text-gray-950 hover:text-gray-700" onClick={vendorRedirect}>
                 {product.store_name || ' @MéméGeorgette'}
               </a>
-              <span className="mx-2 text-gray-900">&gt;</span>
+              <span className="mx-2 text-gray-950">&gt;</span>
             </li>
             <li className="flex items-center">
-              <span className="text-gray-900 truncate max-w-[150px] sm:max-w-none" aria-current="page">{product.name}</span>
+              <span className="text-gray-950 truncate max-w-[150px] sm:max-w-none" aria-current="page">{product.name}</span>
             </li>
           </ol>
         </nav>
@@ -250,7 +250,7 @@ const ProductPage: React.FC = () => {
             <br />
             <div className='flex gap-2 mt-4'>
               {product.sale_price ? (
-              <div className="bg-black text-primary text-right px-2 py-1 rounded w-fit text-sm ">
+              <div className="bg-gray-950 text-primary text-right px-2 py-1 rounded w-fit text-sm ">
                 Promo
               </div>
               ) : null}
@@ -284,7 +284,7 @@ const ProductPage: React.FC = () => {
             <br />
             <p className="text-sm font-normal">
               Vendu par
-              <a className="cursor-pointer text-gray-900 hover:text-teal-800" onClick={vendorRedirect}>
+              <a className="cursor-pointer text-gray-950 hover:text-teal-800" onClick={vendorRedirect}>
                  <br />{product.store_name || ' @MéméGeorgette'}
               </a>
             </p>
@@ -303,7 +303,7 @@ const ProductPage: React.FC = () => {
               <p>
                 <br />
                 <span className='font-semibold'>Par <span className='text-primary'>6</span> = <span className='text-base'>{Math.floor(product.price * 6)}€</span> &nbsp;+</span>
-                <span className='bg-black p-1 text-white ml-2'>Livraison offerte</span>
+                <span className='bg-gray-950 p-1 text-white ml-2'>Livraison offerte</span>
               </p>
             </div>
 
@@ -337,7 +337,7 @@ const ProductPage: React.FC = () => {
 
 
         <div className="mt-8 w-full">
-          <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-900 via-gray-800 to-black p-8 rounded-t-xl">Description du produit</h2>
+          <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 p-8 rounded-t-xl">Description du produit</h2>
           <div className="border-b-8 border-white w-full max-w-[50rem] my-3 h-3 slide-in-right mx-auto -mt-1"></div>
           <p className='font-serif text-center mt-8 px-8'>
             {product.description && product.short_description
@@ -417,7 +417,7 @@ const ProductPage: React.FC = () => {
            {/* Affichage de la carte Google */}
            {product.region__pays && (
             <div className="mt-8">
-              <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-900 via-gray-800 to-black p-8 rounded-t-xl">Localisation du vigneron</h2>
+              <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 p-8 rounded-t-xl">Localisation du vigneron</h2>
               <iframe
                 src={getGoogleMapUrl(product.nom_chateau || '')}
                 width="100%"
@@ -431,9 +431,9 @@ const ProductPage: React.FC = () => {
             </div>
           )}
           <br /><br />
-          <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-900 via-gray-800 to-black p-8 rounded-t-xl">Avis clients</h2>
+          <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 p-8 rounded-t-xl">Avis clients</h2>
           <br />
-          
+
           <br />
           <Image
             src="/images/bannereco2.png"

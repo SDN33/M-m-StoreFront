@@ -217,7 +217,7 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
               <div className="flex justify-between items-center p-4">
                 <button
                   onClick={resetFilters}
-                  className="flex items-center justify-center bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white hover:scale-110 py-2 px-4 rounded-lg"
+                  className="flex items-center justify-center bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 text-white hover:scale-110 py-2 px-4 rounded-lg"
                 >
                   <RefreshCw className="mr-2 w-4 h-4" /> Réinitialiser les filtres
                 </button>
@@ -233,7 +233,7 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
 
             <button
               onClick={isPetitPrixMatch}
-              className="mb-4 p-2 text-center rounded-lg border-black mx-auto bg-primary text-white hover:from-orange-700 hover:via-primary hover:to-orange-300 transition-all duration-300 text-sm w-full"
+              className="mb-4 p-2 text-center rounded-lg border-gray-950 mx-auto bg-primary text-white hover:from-orange-700 hover:via-primary hover:to-orange-300 transition-all duration-300 text-sm w-full"
             >
               <div className='flex items-center justify-center text-center mx-auto space-x-4'>
                 <ChartCandlestick className="w-5 h-auto text-left mr-2"/>

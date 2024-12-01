@@ -134,7 +134,7 @@ export default function VendorDetailsPage() {
 
   return (
     <div className="max-w-4xl mx-auto mt-44 mb-24">
-      <div className='text-center text-xs m</div>x-auto text-black mb-4'><a href="/">Accueil</a> / <a href="/vendors">Nos Vignerons.nes</a> / <strong>{vendor.shop?.title}</strong></div>
+      <div className='text-center text-xs m</div>x-auto text-gray-950 mb-4'><a href="/">Accueil</a> / <a href="/vendors">Nos Vignerons.nes</a> / <strong>{vendor.shop?.title}</strong></div>
 
       <div className="relative">
         <Image

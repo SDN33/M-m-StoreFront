@@ -63,15 +63,15 @@ export default function RoseWinePage() {
         <div className="max-w-7xl mx-auto mt-36">
         <div className="bg-pink-700 text-white">
             <div className="text-center text-xs mx-auto p-2"><a href="/">Accueil</a> / <strong>Vins Rosés</strong></div>
-            <h1 className="text-center text-4xl font-black p-8 rounded-t-xl">Nos Vins Rosés</h1>
+            <h1 className="text-center text-4xl font-gray-950 p-8 rounded-t-xl">Nos Vins Rosés</h1>
             <div className="border-b-4 border-white w-full max-w-[50rem] -mt-1 mx-auto"></div>
           </div>
           <div className="border-b-4 border-white w-full max-w-[50rem] -mt-1 mx-auto"></div>
 
-          <h2 className="text-center text-lg text-black mt-4 font-bold">
+          <h2 className="text-center text-lg text-gray-950 mt-4 font-bold">
             Découvrez notre sélection de vins rosés
           </h2>
-          <h3 className='text-center text-sm text-black-500 mt-4 mx-10'>
+          <h3 className='text-center text-sm text-gray-950-500 mt-4 mx-10'>
             Les vins rosés sont appréciés pour leur fraîcheur et leur légèreté. Obtenus par macération courte des raisins rouges, ils offrent des notes fruitées et florales idéales pour l&apos:apéritif ou les repas estivaux.
           </h3>
 

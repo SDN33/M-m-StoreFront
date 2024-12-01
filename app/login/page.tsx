@@ -106,7 +106,7 @@ export default function LoginPage() {
       )}
 
       <div className="sx-container !mt-48">
-        <h2 className="text-black">Se Connecter</h2>
+        <h2 className="text-gray-950">Se Connecter</h2>
         {error && <p className="text-red-500 text-center">{error}</p>}
         <form onSubmit={handleLogin}>
           <input
