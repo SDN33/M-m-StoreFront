@@ -51,8 +51,8 @@ const MobileHome: React.FC = () => {
         <HeroBanner />
         <Livraison />
         <WineCategories />
-        <LatestArticles />
         <Trust />
+        <LatestArticles />
         <Slogan />
         <br /><br />
         <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} resetFilters={() => {}} />

@@ -72,9 +72,8 @@ const MobileProductsIntro: React.FC = () => {
         <br /><br />
         <Image
           src="/images/mbnr.png"
-          width={500}
-          height={460}
-          quality={100}
+          width={522}
+          height={476}
           priority={true}
           alt="100% engagée pour la nature"
           className="absolute top-0 left-0 w-full h-full"
