@@ -174,7 +174,7 @@ export default function PortailPro() {
             {/* Suppression de l'image comme élément distinct */}
             <h3
               className="text-2xl md:text-4xl lg:text-5xl tracking-tight font-bold relative text-white pt-28 items-center justify-center rounded-t-xl text-center
-                   bg-gradient-to-r from-primary via-orange-900 to-red-900
+                   bg-primary
                    bg-size-200 bg-position-0 hover:bg-position-100
                    transition-all duration-500 ease-in-out
                    shadow-2xl
@@ -250,7 +250,7 @@ export default function PortailPro() {
         {/* Pricing Section */}
         <div className="mt-16 max-w-2xl mx-auto slide-in-right ">
           <div className="bg-white rounded-3xl shadow-xl shadow-teal-100/50 overflow-hidden">
-            <div className="bg-gradient-to-r from-primary via-orange-900 to-red-900 text-white p-8 text-center">
+            <div className="bg-gradient-to-r from-primary via-orange-800 to-red-800 text-white p-8 text-center">
               <h3 className="text-2xl font-bold mb-2">Frais D&apos;inscription</h3>
               <div className="flex items-center justify-center">
                 <span className="text-3xl font-bold">240€</span>
@@ -305,7 +305,7 @@ export default function PortailPro() {
               <div className="space-y-4">
                 <button
                   onClick={() => window.location.href = "/contact"}
-                  className="bg-gradient-to-r from-primary via-orange-900 to-red-900
+                  className="bg-gradient-to-r from-primary via-orange-800 to-red-800
                    text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:bg-orange-900 transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <span>Nous Contacter</span>
