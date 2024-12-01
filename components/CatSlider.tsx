@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 
 const categories = [
-  { id: 1, title: "Vins de Fête de Fin d'Année", image: '/images/vins-fete.jpg' },
-  { id: 2, title: 'Les Fruitées', image: '/images/vins_fruitees.webp' },
+  { id: 1, title: "Les Blancs", image: '/images/vins-fete.jpg', ref: '/vins/blanc' },
+  { id: 2, title: 'Les Rosés', image: '/images/vins_fruitees.webp', ref: '/vins/rose' },
   { id: 3, title: 'Les Perles Rares', image: '/images/perles_rares.jpg' },
   // Ajoutez d'autres catégories selon vos besoins
 ];
@@ -22,13 +22,13 @@ const CatSlider = () => {
             onMouseEnter={() => setHoveredCategory(category.id)}
             onMouseLeave={() => setHoveredCategory(null)}
           >
-            <Link href={`/categories/${category.id}`} passHref>
+            <Link href={`${category.ref}`} passHref>
               <div
                 className="w-full h-40 bg-cover bg-center"
                 style={{ backgroundImage: `url(${category.image})` }}
               >
-                <div className="flex items-center justify-center h-full bg-black bg-opacity-30">
-                  <h3 className="text-white text-lg font-bold">{category.title}</h3>
+                <div className="flex items-center justify-center h-full bg-black bg-opacity-50">
+                  <h3 className="text-white text-2xl font-bold">{category.title}</h3>
                 </div>
               </div>
             </Link>

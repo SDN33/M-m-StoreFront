@@ -433,6 +433,7 @@ const ProductPage: React.FC = () => {
           <br /><br />
           <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-900 via-gray-800 to-black p-8 rounded-t-xl">Avis clients</h2>
           <br />
+          
           <br />
           <Image
             src="/images/bannereco2.png"

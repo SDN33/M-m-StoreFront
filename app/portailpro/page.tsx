@@ -171,33 +171,35 @@ export default function PortailPro() {
           <div className="text-center space-y-4 mb-4 gap-1">
           <div className='text-center text-xs mx-auto text-black mb-4'><a href="/">Accueil</a> / <strong>Portail Pro</strong></div>
 
-            {/* Suppression de l'image comme élément distinct */}
-            <h3
-              className="text-2xl md:text-4xl lg:text-5xl tracking-tight font-bold relative text-white pt-28 items-center justify-center rounded-t-xl text-center
-                   bg-primary
-                   bg-size-200 bg-position-0 hover:bg-position-100
-                   transition-all duration-500 ease-in-out
-                   shadow-2xl
-                   bg-noise-overlay
-                   transform hover:scale-105
-                   font-[Montserrat]" // Changed font to Montserrat
-              style={{
+          <h3
+            className="text-2xl md:text-4xl lg:text-5xl tracking-tight font-bold relative text-white pt-28 items-center justify-center rounded-t-xl text-center
+                       bg-primary bg-size-200 bg-position-0 hover:bg-position-100
+                       transition-all duration-500 ease-in-out shadow-2xl bg-noise-overlay
+                       transform hover:scale-105"
+            style={{
               height: 'auto',
               padding: '4rem 1rem',
               perspective: '500px',
               transformStyle: 'preserve-3d',
-              textTransform: 'uppercase', // Made text uppercase
-              fontWeight: '900', // Made font extra bold
-              letterSpacing: '0.03em', // Added letter spacing
-              }}
-            >
-              PORTAIL PRO <br /><span className='mt-4 md:text-lg font-light sm:flex text-xs md:flex lg:flex text-center justify-center items-center mx-auto'>Rejoignez une marketplace dédiée aux vignerons bio</span>
+              textTransform: 'uppercase',
+              fontWeight: '900',
+              letterSpacing: '0.03em',
+              backgroundImage: `url('/images/vins_fruitees.webp')`, // URL de l'image de fond
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundBlendMode: 'overlay', // Mélange l'image avec le fond
+              opacity: 0.9, // Transparence légère
+            }}
+          >
+            PORTAIL PRO <br />
+            <span className="mt-4 md:text-lg font-light sm:flex text-xs md:flex lg:flex text-center justify-center items-center mx-auto">
+              Rejoignez une marketplace dédiée aux vignerons bio
+            </span>
+            <div
+              className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-gray-800 via-black to-gray-900 opacity-80 transform -skew-x-6"
+            />
+          </h3>
 
-              <div
-              className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-gray-800 via-black to-gray-900
-                     opacity-80 transform -skew-x-6"
-              />
-            </h3>
 
           </div>
           <div>

@@ -3,7 +3,6 @@ import axios from "axios";
 export default async function handler(req, res) {
   const WP_API_URL = process.env.WC_API_DOMAIN;
   const POSTS_ENDPOINT = "/wp-json/wp/v2/posts";
-  const FIFU_ENDPOINT = "/wp-json/custom-api/v1/set-featured-image";
 
   try {
     // Récupération des articles
@@ -24,19 +23,6 @@ export default async function handler(req, res) {
           if (match) {
             // Récupération de la première URL (avant l'espace)
             featuredImage = match[1].split(" ")[0];
-          }
-        }
-
-        // Définir l'image via FIFU si une URL valide a été trouvée
-        if (featuredImage) {
-          try {
-            await axios.post(`${WP_API_URL}${FIFU_ENDPOINT}`, {
-              post_id: post.id,
-              image_url: featuredImage,
-            });
-            console.log(`Image définie pour l'article ${post.id}: ${featuredImage}`);
-          } catch (error) {
-            console.error(`Erreur FIFU pour l'article ${post.id}:`, error.message);
           }
         }
 
