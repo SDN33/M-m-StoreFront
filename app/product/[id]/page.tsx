@@ -7,7 +7,6 @@ import { Star, Package } from 'lucide-react';
 import Livraison from '@/components/Livraison';
 import SocialShare from '@/components/Socialshare';
 import AddToCartButton from '@/components/AddToCartButton';
-import ProductReviews from '@/components/ProductReviews';
 
 
 
