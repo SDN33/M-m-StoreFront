@@ -23,7 +23,7 @@ type TwitterMetadata = {
 export const metadata: Metadata & { twitter: TwitterMetadata } = {
   title: "Vins Bio et Biodynamiques - 2 500 Références de Vins - Mémé Georgette",
   description:
-    "Découvrez les vins bio et biodynamiques de Mémé Georgette : plus de 2 500 références de vins rouges, blancs, rosés, pétillants, et sans sulfites, directement des vignerons engagés.",
+    "Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites",
   icons: {
     icon: "/favicon.ico"
   },
@@ -31,7 +31,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
   openGraph: {
     title: "Vins Bio et Biodynamiques - 2 500 Références de Vins - Mémé Georgette",
     description:
-      "Découvrez les vins bio et biodynamiques de Mémé Georgette : plus de 2 500 références de vins rouges, blancs, rosés, pétillants, et sans sulfites, directement des vignerons engagés.",
+      "Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites",
     images: [
       {
         url: "/images/post_partage.png",
@@ -46,7 +46,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
     card: "summary_large_image",
     title: "Vins Bio et Biodynamiques - 2 500 Références de Vins - Mémé Georgette",
     description:
-      "Découvrez les vins bio et biodynamiques de Mémé Georgette : plus de 2 500 références de vins rouges, blancs, rosés, pétillants, et sans sulfites, directement des vignerons engagés.",
+      "Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites",
     images: [
       {
         url: "/images/post_partage.png",
