@@ -11,7 +11,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 mt-10">
         {/* Logos de paiement */}
         <div className="flex justify-center items-center space-x-4 w-fit h-auto mx-auto mb-8 bg-white rounded-lg p-2">
-          <a href="https://www.visa.fr" aria-label="Visa">
+          <a href="https://www.visa.fr" title="Visa">
             <Image
               src="/images/visa.png"
               alt="Visa"
@@ -20,7 +20,7 @@ const Footer = () => {
               sizes="30"
             />
           </a>
-          <a href="https://www.mastercard.fr" aria-label="Mastercard">
+          <a href="https://www.mastercard.fr" title="mastercard" aria-label="Mastercard">
             <Image
               src="/images/mastercard.png"
               alt="Mastercard"
@@ -28,7 +28,7 @@ const Footer = () => {
               width={30}
             />
           </a>
-          <a href="https://stripe.com/fr" aria-label="Stripe">
+          <a href="https://stripe.com/fr" title="Stripe" aria-label="Stripe">
             <Image
               src="/images/stripe.webp"
               alt="Stripe"
@@ -47,11 +47,11 @@ const Footer = () => {
           <div>
             <h3 className=" font-semibold mb-4 text-lg lg:text-xl text-white">À propos de Mémé...</h3>
             <ul className="space-y-2 font-normal">
-              <li><a href="https://www.memegeorgette.com/" className=" hover:text-primary transition-colors text-sm">Découvrir Mémé Georgette</a></li>
-              <li><a href="/portailpro" className=" hover:text-primary transition-colors text-sm">Portail Pro</a></li>
-              <li><a href="/blog" className=" hover:text-primary transition-colors text-sm">Le Blog de Mémé</a></li>
-              <li><a href="/vendors" className=" hover:text-primary transition-colors text-sm">Nos Vignerons</a></li>
-              <li><a href="/promos" className=" hover:text-primary transition-colors text-sm">Promos</a></li>
+              <li><a href="https://www.memegeorgette.com/" title="Site Mémé Georgette" className=" hover:text-primary transition-colors text-sm">Découvrir Mémé Georgette</a></li>
+              <li><a href="/portailpro" title="Portail Pro Mémé Georgette" className=" hover:text-primary transition-colors text-sm">Portail Pro</a></li>
+              <li><a href="/blog" title="Blog Vins Mémé Georgette" className=" hover:text-primary transition-colors text-sm">Le Blog de Mémé</a></li>
+              <li><a href="/vendors" title="Vignerons Mémé Georgette" className=" hover:text-primary transition-colors text-sm">Nos Vignerons</a></li>
+              <li><a href="/promos" title="Promo Vins Mémé Georgette" className=" hover:text-primary transition-colors text-sm">Promos</a></li>
             </ul>
           </div>
 
