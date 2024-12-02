@@ -127,7 +127,7 @@ const VendorsPage = () => {
         <div>
           <p className="text-center text-xl font-extrabold -mt-4 slide-in-right text-primary">
           </p>
-          <h3 className="sm:text-sm md:text-lg lg:text-xl xl:text-2xl font-serif font-semibold text-teal-800 mb-4 text-center">
+          <h3 className="sm:text-sm md:text-lg lg:text-xl xl:text-xl font-serif font-semibold text-teal-800 mb-2 text-center">
             <span className='hidden lg:flex justify-center'>Le Défi de l&apos;Agriculture Bio dans la Vigne :</span>Les Vignerons Français au Cœur de la Transition Écologique
           </h3>
           <p className="text-center sm:text-xs md:text-lg font-serif -mt-2 slide-in-right px-4 md:px-20">
