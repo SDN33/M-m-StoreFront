@@ -71,7 +71,7 @@ export default function RootLayout({
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={metadata.openGraph?.siteName} />
         <meta property="og:locale" content="fr_FR" />
-        <meta name="icon" content={typeof metadata.icons === 'string' ? metadata.icons : undefined} />
+        <meta name="icon" content="/favicon.ico" />
         <meta name="author" content="Vins Mémé Georgette" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charSet="UTF-8" />
