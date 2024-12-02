@@ -208,7 +208,7 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
       </button>
 
       {isOpen && (
-        <div className=" w-3/5 fixed inset-0 bg-white/50 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-2xl z-50 overflow-y-auto">
+        <div className="w-3/5 fixed inset-0 bg-white/50 backdrop-blur-sm border border-gray-200/50 rounded-xl shadow-2xl z-[55] overflow-y-auto">
           <div
             ref={sidebarRef}
             className="w-full h-full"
