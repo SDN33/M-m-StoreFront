@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Gift, ChevronUp, RefreshCw, ChartCandlestick, X, Filter } from 'lucide-react';
+import { ChevronDown, Gift, ChevronUp, ChartCandlestick, X, Filter } from 'lucide-react';
 import Image from 'next/image';
 
 interface ProductFilterProps {
