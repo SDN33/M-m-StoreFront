@@ -21,9 +21,9 @@ const HeroBanner = () => {
   }, []);
 
   return (
-    <div className="relative container mx-auto px-4 flex flex-col justify-center items-center from-primary to-pink-600 py-4">
+    <div className="relative container mx-auto px-4 flex flex-col justify-center items-center pb-8">
       <div className="flex flex-col items-center text-center z-10 relative max-w-md">
-        <h1 className="text-2xl md:text-2xl leading-tight md:font-bold sloganhero font-semibold">
+        <h1 className="lg:text-2xl md:text-lg sm:text-base  leading-tight md:font-bold sloganhero font-semibold">
           {/* Hauteur fixe ajustée selon le plus long slogan */}
           <span
             className="font-serif min-h-[6rem] md:min-h-[8rem] flex items-center justify-center"

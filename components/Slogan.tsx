@@ -106,17 +106,17 @@ const Slogan: React.FC = () => {
       </div>
 
       <div className="relative max-w-4xl mx-auto text-center text-white z-10 px-4 mt-6">
-        <h2
+        <h4
           ref={h2Ref}
-          className={`text-3xl md:text-4xl leading-tight font-gray-950 mb-2 transition-all duration-1000 ${
+          className={`lg:text-3xl md:text-2xl sm:text-base leading-tight text-white mb-2 transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
             } md:transition-none`}
         >
           Avec Mémé Georgette, c&apos;est simple... <br />
-          <span className="sloganhero font-light text-sm md:text-xl">
+          <span className="sloganhero font-light text-xs md:text-xl">
             Du vin bio directement chez vous, pour pas plus cher ! *
           </span>
-        </h2>
+        </h4>
 
         <div className="flex flex-col sm:flex-row justify-center items-center mt-10 space-y-6 sm:space-y-0 sm:space-x-4">
           {['Notre Engagement', 'Circuit Court', 'Éco-Responsable'].map((title, index) => (
