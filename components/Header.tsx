@@ -220,7 +220,7 @@ const Header: React.FC = () => {
               </Link>
             </div>
 
-            <div className="flex items-center space-x-2 mt-1">
+            <div className="flex items-center space-x-2 mt-1 !text-white">
               <CartIcon onClick={toggleCartPopup} />
             </div>
           </div>
