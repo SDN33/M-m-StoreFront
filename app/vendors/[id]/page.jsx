@@ -145,6 +145,7 @@ export default function VendorDetailsPage() {
 
         />
         <div className="absolute -bottom-16 left-6">
+          <br />
           <Image
             src={vendor.shop?.image ? normalizeUrl(vendor.shop.image) : '/images/meme-pas-contente.png'}
             alt={`${vendor.display_name || 'Vendor'} profile`}
@@ -158,7 +159,7 @@ export default function VendorDetailsPage() {
       <div className="mt-4 px-6">
         <div className=" ">
           <div>
-            <h1 className="text-2xl font-bold text-center">{vendor.shop?.title || '@MéméGeorgette'}</h1>
+            <h1 className="text-2xl font-bold text-center"><span className='sm:flex md:hidden'><br /><br /></span>{vendor.shop?.title || '@MéméGeorgette'}</h1>
           </div>
         </div>
         {vendor.address && (
