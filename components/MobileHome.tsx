@@ -45,9 +45,10 @@ const MobileHome: React.FC = () => {
       <div className="mt-12">
         <PromotionSection />
         <div className="mx-auto">
+        <MobileSlider />
+
           <MobileProductsIntro />
           <div className="w-screen">
-          <MobileSlider />
         </div>
 
           <div className="max-w-7xl mx-auto px-4 space-y-6">
