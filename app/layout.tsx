@@ -34,7 +34,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
       "Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites",
     images: [
       {
-        url: "/images/post_partage.png",
+        url: "/images/post_partage.webp",
         width: 800,
         height: 600,
         alt: "banner les vins de Mémé Georgette",
@@ -64,7 +64,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-        <meta property="og:image" content="https://vinsmemegeorgette.com/images/post_partage.png" />
+        <meta property="og:image" content="https://vinsmemegeorgette.com/images/post_partage.webp" />
         <meta property="og:title" content={metadata.openGraph?.title as string} />
         <meta property="og:description" content={metadata.openGraph?.description as string} />
         <meta property="og:url" content="https://vinsmemegeorgette.com" />
