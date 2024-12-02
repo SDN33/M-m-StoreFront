@@ -26,9 +26,32 @@
             }
         }
 
-        window.onload = async function () {
+        // Attendre que le script Boxtal Maps soit chargé avant d'initialiser
+        document.addEventListener('DOMContentLoaded', async function() {
             // Vérifie si le script Boxtal Maps est chargé
-            if (typeof BoxtalMaps !== 'undefined') {
+            function checkBoxtalMapsLoaded() {
+                return new Promise((resolve, reject) => {
+                    const maxAttempts = 10;
+                    let attempts = 0;
+
+                    function checkScript() {
+                        attempts++;
+                        if (typeof BoxtalMaps !== 'undefined') {
+                            resolve(true);
+                        } else if (attempts >= maxAttempts) {
+                            reject(new Error('Boxtal Maps script failed to load'));
+                        } else {
+                            setTimeout(checkScript, 500);
+                        }
+                    }
+
+                    checkScript();
+                });
+            }
+
+            try {
+                // Attendre le chargement du script Boxtal Maps
+                await checkBoxtalMapsLoaded();
                 console.log('Boxtal Maps script loaded successfully');
 
                 // Récupère le token d'accès via le proxy
@@ -39,6 +62,7 @@
                     const boxtalMaps = new BoxtalMaps({
                         domToLoadMap: '#parcel-point-map',
                         accessToken: accessToken,
+                        baseUrl: 'https://maps.boxtal.com/app/v3',
                         config: {
                             locale: 'fr',
                             parcelPointNetworks: [
@@ -66,10 +90,11 @@
                         console.log('Parcel points found:', points);
                     });
                 }
-            } else {
-                console.error('Boxtal Maps script failed to load. Please check the script URL.');
+            } catch (error) {
+                console.error('Map initialization error:', error);
+                alert('Unable to initialize map. Please try again later.');
             }
-        };
+        });
     </script>
 </body>
 </html>
