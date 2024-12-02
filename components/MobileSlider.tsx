@@ -37,10 +37,10 @@ const Slider = () => {
   }, [nextSlide]);
 
   return (
-    <div className="relative w-full h-[12vh] overflow-hidden bg-primary md:-mt-52 lg:-mt-28  ">
+    <div className="relative w-full h-[12vh] overflow-hidden bg-transparent md:-mt-52 lg:-mt-28  ">
       {/* Slides container */}
       <div
-        className="flex h-full transition-transform duration-700 ease-in-out bg-primary"
+        className="flex h-full transition-transform duration-700 ease-in-out bg-transparent"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
         {slides.map((slide) => (
@@ -65,21 +65,6 @@ const Slider = () => {
               aria-label={`Aller à ${slide.link}`}
             />
           </div>
-        ))}
-      </div>
-
-      {/* Slide indicators */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-8 h-5 rounded-full transition-colors duration-300
-                       ${currentSlide === index
-                         ? 'bg-white/90 scale-100'
-                         : 'bg-white/50 scale-90 hover:scale-95'}`}
-            aria-label={`Aller au slide ${index + 1}`}
-          />
         ))}
       </div>
     </div>

@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import MobileSlider from './MobileSlider';
 
 const MobileProductsIntro: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -10,7 +9,48 @@ const MobileProductsIntro: React.FC = () => {
   const [displayedText, setDisplayedText] = useState('');
   const introRef = useRef<HTMLDivElement | null>(null);
   const targetCount = 2500;
-  const fullText = "en direct des vignerons";
+  const fullText = "Mémé Georgette";
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+        const logos = [
+          { src: "/images/bio2.png", alt: "bio logo", width: 30, height: 30, sizes: "30px" },
+          { src: "/images/Logobioeu.jpg", alt: "Bio euro logo", width: 40, height: 40, sizes: "40px" },
+          { src: "/images/logointro2.jpg", alt: "nature et progrès", width: 35, height: 35, sizes: "35px" },
+          { src: "/images/logointro.jpg", alt: "biodynamie logo", width: 38, height: 38, sizes: "38px" },
+          { src: "/images/Biodynamie-logo.png", alt: "Biodynamie logo", width: 45, height: 45, sizes: "45px" },
+          { src: "/images/biodyvin.jpg", alt: "biodyvin logo", width: 38, height: 38, sizes: "38px" }
+        ];
+
+        useEffect(() => {
+          const timer = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % logos.length);
+          }, 2000);
+          return () => clearInterval(timer);
+        }, [logos.length]);
+
+        const LogoSlider: React.FC = () => (
+          <div className="relative w-full h-[45px] overflow-hidden">
+            <div className="flex transition-transform duration-500 ease-in-out"
+                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+              {logos.map((logo, index) => (
+                <div key={index} className="min-w-full flex justify-center items-center">
+                  <div className="relative" style={{ width: logo.width, height: logo.height }}>
+                    <Image
+                      src={logo.src}
+                      alt={logo.alt}
+                      fill={logo.width === logo.height}
+                      width={logo.width === logo.height ? undefined : logo.width}
+                      height={logo.width === logo.height ? undefined : logo.height}
+                      sizes={logo.sizes}
+                      className="object-contain"
+                      priority={true}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
 
   // Observer pour détecter l'élément visible
   useEffect(() => {
@@ -68,113 +108,32 @@ const MobileProductsIntro: React.FC = () => {
 
   return (
     <>
-      <div className='-mt-2 relative h-full w-full pb-[100%]'>
-        <br /><br />
-        <Image
-          src="/images/mbnr.png"
-          width={522}
-          height={476}
-          priority={true}
-          alt="100% engagée pour la nature"
-          className="absolute top-0 left-0 w-full h-full"
-          onLoad={(e) => {
-            const image = e.target as HTMLImageElement;
-            if (typeof caches !== 'undefined') {
-              caches.open('image-cache').then(cache => {
-                cache.add(image.src);
-              });
-            }
-          }}
-        />
-      </div>
-
       <div
         ref={introRef}
         className={`transition-all duration-1000 ${
           isVisible ? 'opacity-100' : 'opacity-0'
-        } rounded-b-xl shadow-sm flex flex-col items-center text-center lg:hidden bg-primary py-6 min-h-[200px] h-auto`}
-        style={{ overflow: 'hidden', transition: 'opacity 1s ease, height 1s ease' }}
-      >
-        <div className="flex space-x-8 h-[35px] items-center">
-          <div className="w-[30px] h-auto relative">
-            <Image
-              src="/images/bio2.png"
-              alt="bio logo"
-              width={30}
-              height={30}
-              priority={true}
-            />
-          </div>
-          <div className="w-[40px] h-[40px] relative">
-            <Image
-              src="/images/Logobioeu.jpg"
-              alt="Bio euro logo"
-              fill
-              sizes='40px'
-              className="object-contain"
-              priority={true}
-            />
-          </div>
-          <div className="w-[35px] h-[35px] relative">
-            <Image
-              src="/images/logointro2.jpg"
-              alt="nature et progrès"
-              fill
-              sizes='35px'
-              className="object-contain"
-              priority={true}
-            />
-          </div>
-        </div>
-
+        } relative bg-primary transform perspective-1000 rotate-x-1 shadow-[0_10px_20px_rgba(0,0,0,0.3),inset_0_2px_10px_rgba(255,255,255,0.2)]`}
+        style={{ overflow: 'hidden', transition: 'opacity 1s ease, height 1s ease' }}      >
         <div className="flex flex-col items-center mx-auto mt-3 slide-in-right">
-          <h1 className="text-2xl font-extrabold text-white tracking-tight text-center leading-tight">
-            {displayedText}
-            {displayedText === fullText && (
-              <>
-                <span className='text-md'>(nes)</span>
-                <span className="block text-white text-xs">
-                  Tu sais, celles et ceux qui respectent la terre, ses locataires...
-                </span>
-              </>
-            )}
-          </h1>
+            <h1
+              className="text-2xl font-extrabold text-gray-50 tracking-tight text-center leading-tight h-[90px]"
+              dangerouslySetInnerHTML={{ __html: displayedText + (displayedText === fullText ? '<span class="block text-xs mt-2">ACHAT de VIN BIO et BIODYNAMIQUE<br />Rouge, Blanc, Rosé, Pétillant, Liquoreux</span>' : '') }}
+            />
         </div>
-
-        <div className="flex space-x-8 mt-4 mb-4 h-[35px] items-center">
-          <div className="w-[38px] h-[38px] relative">
-            <Image
-              src="/images/logointro.jpg"
-              alt="biodynamie logo"
-              fill
-              sizes='38px'
-              className="object-contain"
-              priority={true}
-            />
-          </div>
-          <div className="w-[45px] h-[45px] relative">
-            <Image
-              src="/images/Biodynamie-logo.png"
-              alt="Biodynamie logo"
-              fill
-              sizes='45px'
-              className="object-contain"
-              priority={true}
-            />
-          </div>
-          <div className="w-[38px] h-[38px] relative">
-            <Image
-              src="/images/biodyvin.jpg"
-              alt="biodyvin logo"
-              fill
-              sizes='38px'
-              className="object-contain"
-              priority={true}
-            />
-          </div>
+        <div className="flex justify-center items-center bg-gray-50 rounded-xl shadow-md">
+          <LogoSlider />
         </div>
-        <br />
-        <MobileSlider />
+        <div className="flex justify-center items-center mt-2 mb-6">
+          <p className="text-xs text-gray-50">+ de {counter} vins biologiques</p>
+        </div>
+        <div className='absolute bottom-0 right-0'>
+          <Image
+            src="/images/meme-pas-contente.png"
+            alt="Mémé Georgette"
+            width={65}
+            height={65}
+          />
+        </div>
       </div>
     </>
   );

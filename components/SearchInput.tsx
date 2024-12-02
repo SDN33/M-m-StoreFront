@@ -207,22 +207,22 @@ const SearchInput = () => {
           onFocus={() => setShowRecentSearches(true)}
           onMouseMove={handleMouseMove}
           placeholder="Rechercher un vin, un château, une appellation..."
-          className="w-full pl-4 pr-20 py-3 border rounded-full text-sm bg-slate-50 border-gray-400 text-primary focus:outline-none focus:border-orange-500"
+          className="w-full pl-4 pr-20 py-3 border rounded-full text-sm bg-slate-50 border-gray-400 text-primary focus:outline-none focus:border-orange-500 placeholder:text-gray-500"
         />
 
         <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
           {isLoading ? (
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-orange-500" />
+        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-orange-500" />
           ) : (
-            <Search className="w-5 h-5 text-gray-600" />
+        <Search className="w-5 h-5 text-gray-600" />
           )}
           {searchTerm && (
-            <button
-              onClick={clearSearch}
-              className="p-1 hover:bg-white rounded-full"
-            >
-              <X className="w-4 h-4 text-gray-600" />
-            </button>
+        <button
+          onClick={clearSearch}
+          className="p-1 hover:bg-white rounded-full"
+        >
+          <X className="w-4 h-4 text-gray-600" />
+        </button>
           )}
         </div>
       </div>

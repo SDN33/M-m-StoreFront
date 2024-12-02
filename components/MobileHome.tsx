@@ -10,6 +10,9 @@ import Livraison from './Livraison';
 import MobileProductsIntro from './MobileProductIntro';
 import LatestArticles from './LatestArticles';
 import BackToTop from './BackToTop';
+import PromotionSection from './PromotionSection';
+import MobileSlider from './MobileSlider';
+import BioWineDescription from './BioWineDescription';
 
 const MobileHome: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -37,26 +40,34 @@ const MobileHome: React.FC = () => {
 
 
   return (
-    <div className="flex flex-col bg-gray-50 overflow-y-auto overflow-x-hidden">
+    <div className="flex flex-col bg-gray-100 overflow-y-auto overflow-x-hidden">
       <br /><br /><br /><br />
-      <div className="mt-8">
-        <MobileProductsIntro />
-        <div className="max-w-7xl mx-auto px-4 space-y-6">
-          <section className="bg-white rounded-lg shadow">
-            <ProductsCards selectedFilters={selectedFilters} onAddToCart={(product) => console.log('Add to cart:', product)} />
-          </section>
+      <div className="mt-12">
+        <PromotionSection />
+        <div className="mx-auto">
+          <MobileProductsIntro />
+          <div className="w-screen">
+          <MobileSlider />
         </div>
-        <br /><br />
-        <Livraison />
-        <br />
-        <WineCategories />
-        <Trust />
-        <LatestArticles />
-        <br />
-        <Slogan />
-        <br /><br />
-        <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} resetFilters={() => {}} />
-        <BackToTop />
+
+          <div className="max-w-7xl mx-auto px-4 space-y-6">
+        <section className="bg-white rounded-lg shadow">
+          <ProductsCards selectedFilters={selectedFilters} onAddToCart={(product) => console.log('Add to cart:', product)} />
+        </section>
+          </div>
+          <br /><br />
+          <Livraison />
+          <br />
+          <WineCategories />
+          <Trust />
+          <LatestArticles />
+          <br />
+          <Slogan />
+          <BioWineDescription />
+          <br /><br />
+          <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} resetFilters={() => {}} />
+          <BackToTop />
+        </div>
       </div>
     </div>
   );

@@ -87,14 +87,14 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full  shadow-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full  shadow-sm bg-primary">
       {/* PromotionSection avec hauteur fixe */}
-      <div className="h-[30px]">
+      <div className="h-[30px] hidden lg:flex">
         <PromotionSection />
       </div>
 
       {/* Top Header - Hauteur fixe */}
-      <div className="border-b bg-gradient-to-l from-primary to-primary pt-4 pb-1">
+      <div className="border-b bg-gradient-to-l from-primary to-primary pt-0 md:pt-4 lg:pt-4 pb-1">
         <div className="container mx-auto px-4">
           {/* Desktop and Tablet View - Hauteur fixe */}
           <div className="hidden lg:flex items-center justify-between h-14 relative">
@@ -199,7 +199,7 @@ const Header: React.FC = () => {
           </div>
 
           {/* Mobile View - Hauteur fixe */}
-          <div className="flex lg:hidden items-center justify-between h-20 mt-3 md:-mt-4">
+          <div className="flex lg:hidden items-center justify-between h-20 mt-0 md:-mt-4">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 text-white hover:text-gray-200"
@@ -224,14 +224,16 @@ const Header: React.FC = () => {
               <CartIcon onClick={toggleCartPopup} />
             </div>
           </div>
+          <div className=' -mt-2 sm:flex md:hidden lg:hidden xl:hidden mb-2'>
+          <SearchInput />
+          </div>
+
+
+
 
           {/* Mobile Menu - Position absolue pour ne pas affecter la hauteur du header */}
           {isMenuOpen && (
             <div className="lg:hidden absolute left-0 right-0 top-full bg-white border-t border-gray-100 shadow-xl z-50">
-              <div className="p-4">
-                <SearchInput />
-              </div>
-
               <div className="px-4 py-2 border-t border-gray-100">
                 <div className="flex items-center justify-between">
                   <span>Livraison en</span>
