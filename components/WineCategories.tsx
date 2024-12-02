@@ -127,8 +127,8 @@ const VendorsPage = () => {
         <div>
           <p className="text-center text-xl font-extrabold -mt-4 slide-in-right text-primary">
           </p>
-          <h3 className="text-2xl font-serif font-semibold text-teal-800 mb-4 text-center">
-            Le Défi de l&apos;Agriculture Bio dans la Vigne :<br />Les Vignerons Français au Cœur de la Transition Écologique
+          <h3 className="sm:text-sm md:text-lg lg:text-xl xl:text-2xl font-serif font-semibold text-teal-800 mb-4 text-center">
+            <span className='hidden lg:flex justify-center'>Le Défi de l&apos;Agriculture Bio dans la Vigne :</span>Les Vignerons Français au Cœur de la Transition Écologique
           </h3>
           <p className="text-center sm:text-xs md:text-lg font-serif -mt-2 slide-in-right px-4 md:px-20">
             Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique
@@ -252,13 +252,12 @@ const VendorsPage = () => {
           </div>
         )}
       </div>
-      <div className="bg-transprent p-6 rounded-lg mb-16 mx-14">
+      <div className="bg-transprent p-6 rounded-lg mb-16 mx-10">
         <br />
-        <p className="text-gray-700 text-sm font-serif leading-relaxed text-center">
+        <p className="text-gray-700 text-base font-serif leading-relaxed text-center hidden lg:flex ">
           L&apos;agriculture biologique représente un véritable défi dans le domaine de la viticulture, particulièrement en France, pays reconnu pour son héritage viticole exceptionnel. Les vignes, étant particulièrement sensibles aux maladies et aux conditions climatiques, nécessitent des pratiques agricoles rigoureuses et innovantes pour respecter les principes de l&apos;agriculture biologique. C&apos;est dans ce contexte que les vignerons français jouent un rôle crucial.<br /><br />Leur expertise, combinée à leur engagement en faveur de la biodiversité et de la durabilité, en fait des acteurs incontournables de la transition écologique. En adoptant des méthodes biodynamiques et en réduisant l&apos;utilisation de produits chimiques, ces vignerons contribuent non seulement à la préservation de notre environnement, mais aussi à la production de vins d&apos;une qualité exceptionnelle, respectant les écosystèmes naturels. Leurs efforts sont un exemple concret de la manière dont l&apos;industrie viticole peut évoluer vers un modèle plus durable, sans compromis sur l&apos;excellence des produits.
         </p>
       </div>
-
     </div>
   );
 };

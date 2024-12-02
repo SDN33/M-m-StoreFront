@@ -231,7 +231,6 @@ export default function Home() {
                   )}
                 </section>
               </div>
-              <HeroBanner />
               <br />
               <Livraison />
               <div className="py-4" />
