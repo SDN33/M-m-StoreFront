@@ -186,7 +186,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       return getRandomSlogan(slogans.qualitePrix);
     }
 
-    if (product.price > 20) {
+    if (product.price >= 20) {
       return getRandomSlogan(slogans.hautDeGamme);
     }
 

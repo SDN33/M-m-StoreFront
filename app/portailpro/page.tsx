@@ -194,7 +194,7 @@ export default function PortailPro() {
               Rejoignez une marketplace dédiée aux vignerons bio
             </span>
             <div
-              className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-teal-800 via-teal-800 to-teal-950 opacity-80 transform -skew-x-6"
+              className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-teal-800 via-teal-800 to-teal-950 opacity-40 transform -skew-x-6"
             />
           </h1>
 

@@ -9,7 +9,7 @@ import { AuthProvider } from '../context/AuthContext';
 import { CartProvider } from '../context/CartContext';
 import { Analytics } from "@vercel/analytics/react"
 import Cookies from "@/components/Cookies";
-
+import Script from "next/script";
 
 
 type TwitterMetadata = {
@@ -49,7 +49,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
       "Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites",
     images: [
       {
-        url: "/images/post_partage.png",
+        url: "/images/post_partage.webp",
         alt: "banner Les Vins de Mémé Georgette",
       },
     ],
@@ -98,6 +98,8 @@ export default function RootLayout({
             },
           })}
         </script>
+        <Script src="https://maps.boxtal.com/app/v3/assets/js/boxtal-maps.js" strategy="afterInteractive" />
+
               </head>
               <body>
                 <AuthProvider>
