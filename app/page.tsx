@@ -241,7 +241,9 @@ export default function Home() {
               <BioWineDescription />
               <Slogan />
               <div className="py-8" />
-              <Socialshare />
+              <div className='flex mx-auto justify-center'>
+               <Socialshare url="https://vinsmemegeorgette.com" title="VINS Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE" />
+              </div>
               <GoToFooter />
               <BackToTop />
               <PromoCode />

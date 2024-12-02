@@ -146,7 +146,7 @@ const VendorsPage = () => {
       </div>
       <div className="max-w-5xl mx-auto p-6">
         <div>
-          <p className="text-center text-xl font-extrabold -mt-4 mb-4 text-teal-800">
+          <p className="text-center text-xl font-black -mt-4 mb-4 text-teal-800">
             &ldquo;Chaque domaine est unique, nos vignerons jouent franc-jeu avec la nature&ldquo;
           </p>
           <p className="text-center text-base font-serif -mt-2">
@@ -160,6 +160,9 @@ const VendorsPage = () => {
 
         {/* Search and Filter Section */}
         <div className="my-8 space-y-4">
+          <h2 className="text-xl font-semibold text-gray-800 text-center">Trouvez un Vigneron par localisation</h2>
+          <br />
+          <p className='text-center'>Recherchez nos vignerons partenaires par nom ou ville, ou filtrez par ville :</p>
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-950" size={20} />
