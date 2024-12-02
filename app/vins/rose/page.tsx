@@ -69,10 +69,10 @@ export default function RoseWinePage() {
           <div className="border-b-4 border-white w-full max-w-[50rem] -mt-1 mx-auto"></div>
 
           <h2 className="text-center text-lg text-gray-950 mt-4 font-bold">
-            Découvrez notre sélection de vins rosés
+            Découvrez notre sélection de vins rosés bio
           </h2>
           <h3 className='text-center text-sm text-gray-950-500 mt-4 mx-10'>
-            Les vins rosés sont appréciés pour leur fraîcheur et leur légèreté. Obtenus par macération courte des raisins rouges, ils offrent des notes fruitées et florales idéales pour l&apos:apéritif ou les repas estivaux.
+            Les vins rosés sont appréciés pour leur fraîcheur et leur légèreté. Obtenus par macération courte des raisins rouges, ils offrent des notes fruitées et florales idéales pour l&apos;apéritif ou les repas estivaux. Les plus connus sont les rosés de Provence, mais d&apos;autres régions viticoles françaises produisent également d&apos;excellents rosés. <br />Mémé Georgette vous propose une sélection de vins rosés bio, avec ou sans sulfites ajoutés et issus de l&apos;agriculture biologique.
           </h3>
 
           <ProductsCards

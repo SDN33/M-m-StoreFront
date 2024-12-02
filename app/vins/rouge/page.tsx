@@ -66,8 +66,8 @@ export default function RedWinePage() {
             <h1 className="text-center text-4xl font-gray-950 p-8 rounded-t-xl">Nos Vins Rouges</h1>
             <div className="border-b-4 border-white w-full max-w-[50rem] -mt-1 mx-auto"></div>
           </div>
-          <h2 className="text-center text-lg text-gray-950 mt-4 font-bold">Découvrez notre sélection de vins rouges</h2>
-          <h3 className="text-center text-sm text-gray-950-500 mt-4 mx-10">Les vins rouges sont des vins obtenus par la fermentation de raisins noirs ou de raisins blancs à peau rouge. Ils se caractérisent par leur couleur rouge, qui peut varier du rouge violacé jeune au rouge brique pour les vins plus âgés. Ils se distinguent des vins blancs et des vins rosés par leur couleur, mais aussi par leur mode de vinification et leur goût.</h3>
+          <h2 className="text-center text-lg text-gray-950 mt-4 font-bold">Découvrez notre sélection de vins rouges bio</h2>
+          <h3 className="text-center text-sm text-gray-950-500 mt-4 mx-10">Les vins rouges sont des vins obtenus par la fermentation de raisins noirs ou de raisins blancs à peau rouge. Ils se caractérisent par leur couleur rouge, qui peut varier du rouge violacé jeune au rouge brique pour les vins plus âgés. Ils se distinguent des vins blancs et des vins rosés par leur couleur, mais aussi par leur mode de vinification et leur goût.<br />Parfait pour accompagner vos plats de viande rouge, de gibier ou de fromage</h3>
 
           <ProductsCards
             selectedFilters={selectedFilters}

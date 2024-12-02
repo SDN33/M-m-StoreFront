@@ -69,10 +69,10 @@ export default function OtherWinesPage() {
           <div className="border-b-4 border-white w-full max-w-[50rem] -mt-1 mx-auto"></div>
 
           <h2 className="text-center text-lg text-gray-950 mt-4 font-bold">
-            Découvrez notre sélection d&apos;autres vins
+            Découvrez notre sélection d&apos;autres vins bio
           </h2>
           <h3 className='text-center text-sm text-gray-950-500 mt-4 mx-10'>
-            Nos autres vins incluent une variété d&apos;options qui ne se classent pas dans les catégories traditionnelles de vin rouge, blanc, ou rosé. Ces vins sont souvent uniques et offrent des saveurs intéressantes à découvrir.
+            Nos autres vins incluent une variété d&apos;options qui ne se classent pas dans les catégories traditionnelles de vin rouge, blanc, ou rosé. Ces vins sont souvent uniques et offrent des saveurs intéressantes à découvrir. Laissez vous tenter par notre sélection de vins bio et naturels.
           </h3>
 
           <ProductsCards

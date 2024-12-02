@@ -69,10 +69,10 @@ export default function SparklingWinePage() {
 
           <div className="border-b-4 border-white w-full max-w-[50rem] -mt-1 mx-auto"></div>
           <h2 className="text-center text-lg text-gray-950 mt-4 font-bold">
-            Découvrez notre sélection de vins pétillants
+            Découvrez notre sélection de vins pétillants bio
           </h2>
           <h3 className='text-center text-sm text-gray-950-500 mt-4 mx-10'>
-            Les vins pétillants, tels que le champagne et les crémants, sont appréciés pour leurs bulles fines et leur fraîcheur. Idéaux pour les célébrations, ils apportent une touche festive à toutes les occasions.
+            Les vins pétillants, tels que le champagne et les crémants, sont appréciés pour leurs bulles fines et leur fraîcheur. Idéaux pour les célébrations, ils apportent une touche festive à toutes les occasions. Mais saviez-vous que les vins pétillants bio sont également très appréciés pour leur qualité et leur respect de l'environnement ? <br />Découvrez notre sélection de vins pétillants bio et laissez-vous tenter par leur saveur unique !
           </h3>
 
           <ProductsCards

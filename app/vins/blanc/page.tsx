@@ -69,10 +69,10 @@ export default function BlancWinePage() {
           <div className="border-b-4 border-white w-full max-w-[50rem] -mt-1 mx-auto"></div>
 
           <h2 className="text-center text-lg text-gray-950 mt-4 font-bold">
-            Découvrez notre sélection de vins blancs
+            Découvrez notre sélection de vins blancs bio
           </h2>
           <h3 className='text-center text-sm text-gray-950-500 mt-4 mx-10'>
-            Les vins blancs sont souvent obtenus à partir de raisins à pulpe blanche et à peau claire. Ils peuvent varier du jaune pâle au doré en fonction de l&apos;âge et du cépage, offrant une large palette de saveurs allant de frais et fruité à riche et complexe.
+            Les vins blancs sont souvent obtenus à partir de raisins à pulpe blanche et à peau claire. Ils peuvent varier du jaune pâle au doré en fonction de l&apos;âge et du cépage, offrant une large palette de saveurs allant de frais et fruité à riche et complexe. Les vins blancs sont souvent servis frais et accompagnent parfaitement les fruits de mer, les plats de poisson et les fromages à pâte molle.
           </h3>
 
           <ProductsCards
