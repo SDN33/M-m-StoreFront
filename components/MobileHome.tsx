@@ -11,8 +11,9 @@ import MobileProductsIntro from './MobileProductIntro';
 import LatestArticles from './LatestArticles';
 import BackToTop from './BackToTop';
 import PromotionSection from './PromotionSection';
-import MobileSlider from './MobileSlider';
 import BioWineDescription from './BioWineDescription';
+import Image from 'next/image';
+import MobileSlider from './MobileSlider';
 
 const MobileHome: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -45,12 +46,18 @@ const MobileHome: React.FC = () => {
       <div className="mt-8">
         <PromotionSection />
         <div className="mx-auto">
-        <MobileSlider />
-
+          <Image
+            src="/images/post_partage.webp"
+            alt="Mémé Georgette"
+            width={600}
+            height={600}
+            className='object-cover'
+          />
           <MobileProductsIntro />
           <div className="w-screen">
         </div>
-
+        <br />
+        <MobileSlider />
           <div className="max-w-7xl mx-auto px-4 space-y-6">
         <section className="bg-white rounded-lg shadow">
           <ProductsCards selectedFilters={selectedFilters} onAddToCart={(product) => console.log('Add to cart:', product)} />

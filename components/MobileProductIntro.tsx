@@ -29,7 +29,7 @@ const MobileProductsIntro: React.FC = () => {
         }, [logos.length]);
 
         const LogoSlider: React.FC = () => (
-          <div className="relative w-full h-[45px] overflow-hidden">
+          <div className="relative w-full h-[45px] overflow-hidden bg-green-700">
             <div className="flex transition-transform duration-500 ease-in-out"
                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
               {logos.map((logo, index) => (
