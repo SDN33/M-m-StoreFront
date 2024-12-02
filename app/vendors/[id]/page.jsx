@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { MapPin, Globe, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 import Link from 'next/link';
+import SocialShare from '@/components/Socialshare';
 
 const normalizeUrl = (url) => {
   if (!url) return '';
@@ -33,7 +34,7 @@ const VendorLocationMap = ({ vendor }) => {
       <div className="bg-white rounded-lg shadow p-6">
         <div className="flex items-center text-gray-600">
           <MapPin className="w-5 h-5 mr-2" />
-          <span>Location information not available</span>
+          <span>Localisation non disponible</span>
         </div>
       </div>
     );
@@ -43,7 +44,6 @@ const VendorLocationMap = ({ vendor }) => {
 
   return (
     <div className="bg-white rounded-lg shadow p-6">
-      <h2 className="text-lg font-semibold mb-4 text-teal-800 text-center">Localisation</h2>
       <div className="flex items-center text-gray-600 mb-4 text-center mx-auto justify-center">
         <MapPin className="w-5 h-5 mr-2" />
         <span>
@@ -156,11 +156,14 @@ export default function VendorDetailsPage() {
       </div>
 
       <div className="mt-4 px-6">
-        <div className="mb-8 ">
+        <div className=" ">
           <div>
             <h1 className="text-2xl font-bold text-center">{vendor.shop?.title || '@MéméGeorgette'}</h1>
           </div>
         </div>
+        {vendor.address && (
+          <VendorLocationMap vendor={vendor} />
+        )}
 
         {vendor.social && Object.entries(vendor.social)
           .filter(([, url]) => url && url.trim() !== '')
@@ -188,7 +191,7 @@ export default function VendorDetailsPage() {
           )}
 
         <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4 text-teal-800 text-center">À propos</h2>
+          <h2 className="text-lg font-semibold mb-4 text-teal-800 text-center">Histoire du domaine</h2>
           {vendor.shop.description ? (
             <p className="text-gray-600 whitespace-pre-wrap text-center">
               {vendor.shop.description
@@ -207,10 +210,6 @@ export default function VendorDetailsPage() {
             <p className="text-gray-500 text-center italic">Aucune description disponible</p>
           )}
         </div>
-
-        {vendor.address && (
-          <VendorLocationMap vendor={vendor} />
-        )}
 
         <div className="mt-10">
           <h2 className="text-xl font-semibold mb-4 text-teal-800 text-center">Vins en vente</h2>
@@ -236,6 +235,9 @@ export default function VendorDetailsPage() {
             )}
           </div>
           <br />
+          <div className='flex mx-auto justify-center'>
+            <SocialShare url={window.location.href} title={`Découvrez ${vendor.name}, sur VinsMemeGeorgette.com`} />
+          </div>
         </div>
       </div>
     </div>

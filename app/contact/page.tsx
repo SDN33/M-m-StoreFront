@@ -19,12 +19,24 @@ const ContactPage = () => {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto px-4 py-28 pb-10" style={{ paddingTop: '170px' }}>
+    <div className="w-full max-w-md mx-auto px-4 py-32 pb-10" style={{ paddingTop: '170px' }}>
       <div className="rounded-lg shadow-lg p-6">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold">Contactez-nous</h1>
-          <p className="text-gray-600">
-            Vous avez une question ?<br />Nous serions ravis de vous aider !
+        </div>
+        <div className='text-center'>
+          <p>
+            Vous pouvez aussi nous contacter par email : <br />
+            <span id="reveal-email" className="cursor-pointer text-teal-800 text-center" onClick={() => {
+            const emailElement = document.getElementById('email-address');
+            if (emailElement) {
+              emailElement.style.display = 'inline';
+              document.getElementById('reveal-email')!.style.display = 'none';
+            }
+            }}>
+             <span className='flex justify-center'> Cliquez pour afficher &nbsp;<MousePointer /></span>
+            </span>
+            <span id="email-address" className='text-teal-800' style={{ display: 'none' }}>info@vinsmemegeorgette.com</span>
           </p>
         </div>
 
@@ -82,7 +94,7 @@ const ContactPage = () => {
           <button
             type="submit"
             disabled={state.submitting}
-            className="w-full py-3 px-6 rounded-md font-medium mt-4 bg-primary text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-800 hover:text-white disabled:opacity-50"
+            className="w-full py-3 px-6 rounded-md font-medium mt-4 bg-gradient-to-r from-primary to-red-900 text-white hover:scale-105 disabled:opacity-50"
           >
             {state.submitting ? 'Envoi en cours...' : 'Envoyer'}
           </button>
@@ -90,21 +102,7 @@ const ContactPage = () => {
         </form>
       </div>
       <br />
-      <div className='text-center'>
-        <p>
-          Vous pouvez aussi nous contacter par email : <br />
-          <span id="reveal-email" className="cursor-pointer text-teal-800 text-center" onClick={() => {
-          const emailElement = document.getElementById('email-address');
-          if (emailElement) {
-            emailElement.style.display = 'inline';
-            document.getElementById('reveal-email')!.style.display = 'none';
-          }
-          }}>
-           <span className='flex justify-center'> Cliquez pour afficher &nbsp;<MousePointer /></span>
-          </span>
-          <span id="email-address" className='text-teal-800' style={{ display: 'none' }}>info@vinsmemegeorgette.com</span>
-        </p>
-      </div>
+
       <br />
     </div>
   );
