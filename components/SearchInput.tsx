@@ -214,7 +214,10 @@ const SearchInput = () => {
           {isLoading ? (
         <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-orange-500" />
           ) : (
-        <Search className="w-5 h-5 text-gray-600" />
+          <div className="flex items-center">
+            <p className='border-r border-gray-500 text-transparent mr-2'>|</p>
+            <Search className="w-5 h-5 mr-1 text-gray-600" />
+          </div>
           )}
           {searchTerm && (
         <button
