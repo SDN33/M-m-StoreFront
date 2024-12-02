@@ -213,6 +213,7 @@ export default function Home() {
             }}
           >
             <div>
+              <h1 className="sr-only">ACHAT VIN BIO et BIODYNAMIQUE - Rouge, Blanc, Rosé 🍷 - Mémé Georgette</h1>
               <div className="pt-24 md:hidden lg:flex" />
               <ProductsIntro />
               <Slider />
