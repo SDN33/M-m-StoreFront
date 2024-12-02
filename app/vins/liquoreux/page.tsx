@@ -72,7 +72,7 @@ export default function SweetWinePage() {
             Découvrez notre sélection de vins liquoreux bio
           </h2>
           <h3 className='text-center text-sm text-gray-950-500 mt-4 mx-10'>
-            Les vins liquoreux, riches et sucrés, sont parfaits pour accompagner les desserts ou les fromages. Ils se distinguent par leur douceur intense et leurs arômes complexes de fruits mûrs et de miel. On peut aussi les déguster en apéritif ou en digestif. L'important est de ne pas les servir trop froids pour ne pas altérer leurs arômes. Retrouvez notre sélection de vins liquoreux bio, issus de raisins récoltés à maturité et vinifiés avec soin pour vous offrir des vins de qualité.
+            Les vins liquoreux, riches et sucrés, sont parfaits pour accompagner les desserts ou les fromages. Ils se distinguent par leur douceur intense et leurs arômes complexes de fruits mûrs et de miel. On peut aussi les déguster en apéritif ou en digestif. L&apos;important est de ne pas les servir trop froids pour ne pas altérer leurs arômes. Retrouvez notre sélection de vins liquoreux bio, issus de raisins récoltés à maturité et vinifiés avec soin pour vous offrir des vins de qualité.
           </h3>
 
           <ProductsCards
