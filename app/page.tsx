@@ -17,6 +17,8 @@ import PromoCode from '@/components/PromoCode';
 import Image from 'next/image';
 import GoToFooter from '@/components/GoToFooter';
 import BioWineDescription from '@/components/BioWineDescription';
+import Socialshare from '@/components/Socialshare';
+
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -239,6 +241,7 @@ export default function Home() {
               <BioWineDescription />
               <Slogan />
               <div className="py-8" />
+              <Socialshare />
               <GoToFooter />
               <BackToTop />
               <PromoCode />
