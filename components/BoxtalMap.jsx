@@ -46,7 +46,6 @@ const BoxtalMap = ({ onSelectPoint }) => {
       const boxtalMaps = new BoxtalMaps({
         domToLoadMap: '#parcel-point-map',
         accessToken,
-        baseUrl: 'https://maps.boxtal.com/app/v3',
         config: {
           locale: 'fr',
           parcelPointNetworks: [
