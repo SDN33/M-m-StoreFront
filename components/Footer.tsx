@@ -11,7 +11,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 mt-10">
         {/* Logos de paiement */}
         <div className="flex justify-center items-center space-x-4 w-fit h-auto mx-auto mb-8 bg-white rounded-lg p-2">
-          <a href="https://www.visa.fr">
+          <a href="https://www.visa.fr" aria-label="Visa">
             <Image
               src="/images/visa.png"
               alt="Visa"
@@ -20,7 +20,7 @@ const Footer = () => {
               sizes="30"
             />
           </a>
-          <a href="https://www.mastercard.fr">
+          <a href="https://www.mastercard.fr" aria-label="Mastercard">
             <Image
               src="/images/mastercard.png"
               alt="Mastercard"
@@ -28,7 +28,7 @@ const Footer = () => {
               width={30}
             />
           </a>
-          <a href="https://stripe.com/fr">
+          <a href="https://stripe.com/fr" aria-label="Stripe">
             <Image
               src="/images/stripe.webp"
               alt="Stripe"
@@ -79,11 +79,11 @@ const Footer = () => {
 
         {/* Mentions légales et copyright */}
         <div className=" -mb-2">
-          <Image src="/images/image-restriction.svg" alt="Prévention Alcool" width={500} height={500} className="mb-4 mx-auto w-auto h-auto" />
+          <Image src="/images/image-restriction.svg" alt="Prévention Alcool" width={500} height={500} className="mb-4 mx-auto w-500 h-auto" />
           <p className="text-xs text-white mb-4 font-normal">
             L&apos;abus d&apos;alcool est dangereux pour la santé, sachez consommer avec modération.
             Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.
-            <br />Éthylotest, en vente <a className="underline" href="https://www.norauto.fr/c/47996-ethylotest.html">ici</a>
+            <br />Éthylotest, en vente <a className="underline decoration-white hover:decoration-primary" href="https://www.norauto.fr/c/47996-ethylotest.html" aria-label="Éthylotest Norauto">ici</a>
           </p>
           <p className="text-xs text-white mb-4 font-normal">Participer à notre cagnotte Litchee <a className="underline" href="https://www.norauto.fr/c/47996-ethylotest.html">Vignerons En Difficulté</a></p>
           <p className="font-normal text-white text-xs">
