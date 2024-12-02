@@ -83,12 +83,12 @@ const Footer = () => {
           <p className="text-xs text-white mb-4 font-normal">
             L&apos;abus d&apos;alcool est dangereux pour la santé, sachez consommer avec modération.
             Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.
-            <br />Éthylotest, en vente <a className="underline decoration-white hover:decoration-primary" href="https://www.norauto.fr/c/47996-ethylotest.html" aria-label="Éthylotest Norauto">ici</a>
+            <br />Éthylotest, en vente <a className="underline decoration-white hover:decoration-primary" href="https://www.norauto.fr/c/47996-ethylotest.html" title="Éthylotest Norauto">ici</a>
           </p>
           <p className="text-xs text-white mb-4 font-normal">Participer à notre cagnotte Litchee <a className="underline" href="https://www.norauto.fr/c/47996-ethylotest.html">Vignerons En Difficulté</a></p>
           <p className="font-normal text-white text-xs">
             © 2024 - Mémé Georgette, tous droits réservés
-            <br />Création de <a className="font-bold text-primary" href="https://stillinov.com">Still-inov Agency</a>
+            <br />Création de <a className="font-bold text-primary" title="Site Still-inov Agency" href="https://stillinov.com">Still-inov Agency</a>
           </p>
           <br />
         </div>
