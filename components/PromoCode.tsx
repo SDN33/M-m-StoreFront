@@ -46,7 +46,7 @@ const PromoCode: React.FC = () => {
 
   return (
     <div
-      className={` shadow-xl -mt-8 bg-primary border-teal/80 border-4 p-4 w-fit h-fit fixed bottom-4 right-4 z-50 transform transition-all duration-500 ${isVisible ? 'translate-x-0' : 'translate-x-full'}`}
+      className={` shadow-xl -mt-8 bg-primary border-teal/80 border-2 p-4 w-fit h-fit fixed bottom-4 right-4 z-50 transform transition-all duration-500 ${isVisible ? 'translate-x-0' : 'translate-x-full'}`}
       style={{
         borderRadius: "10px",
         display: "flex",
