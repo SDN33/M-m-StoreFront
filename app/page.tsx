@@ -29,6 +29,27 @@ export default function Home() {
   const filterContentRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+    const checkMobile = () => {
+      setIsMobile(mediaQuery.matches);
+      window.scrollTo(0, 0);
+    };
+
+    checkMobile();
+
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+      window.scrollTo(0, 0);
+    };
+
+    mediaQuery.addEventListener('change', handleMediaChange);
+    return () => {
+      mediaQuery.removeEventListener('change', handleMediaChange);
+    };
+  }, []);
+
   const [selectedFilters, setSelectedFilters] = useState({
     color: [],
     region: [],
@@ -44,7 +65,6 @@ export default function Home() {
     petit_prix: [],
     haut_de_gamme: [],
   });
-
 
   useEffect(() => {
     // Minimal loading state
@@ -103,29 +123,6 @@ export default function Home() {
       clearTimeout(loadingTimeout);
     };
   }, []);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
-
-    const checkMobile = () => {
-      setIsMobile(mediaQuery.matches);
-      window.scrollTo(0, 0);
-    };
-
-    checkMobile();
-
-    const handleMediaChange = (e: MediaQueryListEvent) => {
-      setIsMobile(e.matches);
-      window.scrollTo(0, 0);
-    };
-
-    mediaQuery.addEventListener('change', handleMediaChange);
-    return () => {
-      mediaQuery.removeEventListener('change', handleMediaChange);
-    };
-  }, []);
-
-
 
   const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {
     setSelectedFilters((prev) => ({
