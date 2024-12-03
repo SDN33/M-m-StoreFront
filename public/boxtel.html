@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boxtal Parcel Point Map Test</title>
+    <!-- Boxtal Maps Script -->
     <script src="https://maps.boxtal.com/app/v3/assets/js/boxtal-maps.js" defer></script>
 </head>
 <body>
@@ -14,54 +15,58 @@
         async function fetchAccessToken() {
             try {
                 const response = await fetch('/api/get-boxtal-token', { method: 'POST' });
-                if (!response.ok) {
-                    throw new Error(`Erreur lors de la récupération du token : ${response.statusText}`);
-                }
+                if (!response.ok) throw new Error('Failed to retrieve token');
                 const data = await response.json();
-                return data.accessToken;
+                return data.accessToken || data.token;
             } catch (error) {
-                console.error('Erreur de récupération du token :', error);
-                alert('Impossible de charger la carte.');
+                console.error('Error fetching token:', error);
+                alert('Unable to load map. Please try again later.');
                 return null;
             }
         }
+         const mapUrl = 'https://maps.boxtal.com/app/v3/assets/js/boxtal-maps.js'; // Replace with the actual URL
 
-        window.onload = async function () {
-            const mapElement = document.getElementById('parcel-point-map');
-            if (!mapElement) {
-                console.error('Élément DOM pour la carte introuvable.');
+        document.addEventListener('DOMContentLoaded', async function () {
+            // Ensure that BoxtalMaps is available
+            if (typeof BoxtalMaps === 'undefined') {
+                console.error('Boxtal Maps script failed to load.');
                 return;
             }
 
-            const token = await fetchAccessToken();
-            if (!token) return;
+            // Fetch access token
+            const accessToken = await fetchAccessToken();
+            if (accessToken) {
+                console.log('Access Token:', accessToken); // Log the access token for debugging
 
-            try {
-                new BoxtalMaps({
-                    domToLoadMap: 'parcel-point-map', // Pas de #
-                    accessToken: token,
+                // Initialize the Boxtal Maps instance once the access token is available
+                const boxtalMaps = new BoxtalMaps({
+                    domToLoadMap: '#parcel-point-map',
+                    accessToken: accessToken,
                     config: {
                         locale: 'fr',
-                        parcelPointNetworks: [{
-                            code: 'CHRP_NETWORK',
-                            markerTemplate: { color: '#94a1e8' }
-                        }],
+                        parcelPointNetworks: [
+                            {
+                                code: 'CHRP_NETWORK',
+                                markerTemplate: {
+                                    color: '#94a1e8'
+                                },
+                            }
+                        ],
                         options: {
                             primaryColor: '#00FA9A',
                             autoSelectNearestParcelPoint: true
-                        }
-                    },
-                    onMapLoaded: function () {
-                        console.log('La carte Boxtal est chargée avec succès.');
-                    },
-                    onError: function (error) {
-                        console.error('Erreur lors du chargement de la carte Boxtal :', error);
+                        },
                     }
                 });
-            } catch (error) {
-                console.error('Échec de l\'initialisation de Boxtal Maps :', error);
+
+                // Event listener for search response
+                boxtalMaps.onSearchParcelPointsResponse(function (points) {
+                    console.log('Parcel points found:', points);
+                });
+            } else {
+                console.error('Failed to obtain access token.');
             }
-        };
+        });
     </script>
 </body>
 </html>
