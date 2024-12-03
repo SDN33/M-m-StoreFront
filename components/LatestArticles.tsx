@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Clock, ArrowRight, Rss } from "lucide-react";
 import he from "he";
 import Link from "next/link";
+import { CommentCount } from 'disqus-react';
 
 // Simple date formatting function
 const formatDate = (dateString: string): string => {
@@ -129,6 +130,20 @@ const LatestArticles: React.FC = () => {
                     className="ml-2 transform transition-transform group-hover:translate-x-1"
                   />
                 </a>
+                <span className="text-right ml-8 text-xs text-primary font-semibold">
+                  <CommentCount
+                      shortname='vinsmemegeorgette'
+                      config={
+                          {
+                            url: `https://vinsmemegeorgette.com/blog/${article.id}`,
+                            identifier: article.id.toString(),
+                            title: `Post ${article.id}`,
+                          }
+                      }
+                  >
+                      {/* Placeholder Text */}
+                  </CommentCount>
+                </span>
               </div>
             </div>
           </div>
