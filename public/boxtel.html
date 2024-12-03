@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boxtal Parcel Point Map Test</title>
     <!-- Boxtal Maps Script -->
-    <script src="https://maps.boxtal.com/app/v3/assets/js/boxtal-maps.js" defer></script>
+    <script src="https://maps.boxtal.com/app/v3/assets/js/boxtal-maps.js" ></script>
 </head>
 <body>
     <h1>Boxtal Parcel Point Map Test</h1>
@@ -24,21 +24,18 @@
                 return null;
             }
         }
-         const mapUrl = 'https://maps.boxtal.com/app/v3/assets/js/boxtal-maps.js'; // Replace with the actual URL
 
         document.addEventListener('DOMContentLoaded', async function () {
-            // Ensure that BoxtalMaps is available
-            if (typeof BoxtalMaps === 'undefined') {
-                console.error('Boxtal Maps script failed to load.');
-                return;
-            }
+            try {
+                if (typeof BoxtalMaps === 'undefined') {
+                    throw new Error('Boxtal Maps script failed to load.');
+                }
 
-            // Fetch access token
-            const accessToken = await fetchAccessToken();
-            if (accessToken) {
-                console.log('Access Token:', accessToken); // Log the access token for debugging
+                const accessToken = await fetchAccessToken();
+                if (!accessToken) throw new Error('Access token is missing.');
 
-                // Initialize the Boxtal Maps instance once the access token is available
+                console.log('Access Token:', accessToken); // Debugging
+
                 const boxtalMaps = new BoxtalMaps({
                     domToLoadMap: '#parcel-point-map',
                     accessToken: accessToken,
@@ -59,12 +56,12 @@
                     }
                 });
 
-                // Event listener for search response
                 boxtalMaps.onSearchParcelPointsResponse(function (points) {
                     console.log('Parcel points found:', points);
                 });
-            } else {
-                console.error('Failed to obtain access token.');
+            } catch (error) {
+                console.error('Map initialization error:', error);
+                alert('Une erreur est survenue lors de l\'initialisation de la carte.');
             }
         });
     </script>
