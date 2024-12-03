@@ -112,7 +112,7 @@ const Header: React.FC = () => {
                 </Link>
               </div>
 
-              <div className="absolute left-16 pr-4 h-full w-[210px] flex items-center justify-center">
+              <div className="absolute left-16 pr-4 h-full w-[260px] flex items-center justify-center">
                 <Link href="/">
                   <Image
                     src="/images/memelogo.png"
