@@ -105,8 +105,8 @@ const Header: React.FC = () => {
                   <Image
                     src="/images/meme-pas-contente.png"
                     alt="Logo"
-                    width={90}
-                    height={90}
+                    width={200}
+                    height={200}
                     className="transform scale-x-[-1] object-contain h-auto w-auto lg:flex hidden"
                   />
                 </Link>
@@ -117,8 +117,8 @@ const Header: React.FC = () => {
                   <Image
                     src="/images/memelogo.png"
                     alt="Logo"
-                    width={210}
-                    height={210}
+                    width={180}
+                    height={180}
                     className="object-contain h-auto w-auto "
                   />
                 </Link>
