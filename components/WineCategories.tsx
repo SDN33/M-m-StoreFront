@@ -143,7 +143,9 @@ const VendorsPage = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {vendors.map((vendor) => {
+            {vendors
+              .sort((a, b) => (b.products?.length || 0) - (a.products?.length || 0))
+              .map((vendor) => {
               const avatar = vendor.shop?.image || vendor.shop?.banner;
               return (
                 <div

@@ -6,7 +6,6 @@ import { useParams } from 'next/navigation';
 import { MapPin, Globe, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 import Link from 'next/link';
 import SocialShare from '@/components/Socialshare';
-import Head from 'next/head';
 
 const normalizeUrl = (url) => {
   if (!url) return '';
@@ -133,18 +132,7 @@ export default function VendorDetailsPage() {
     );
   }
 
-
-
   return (
-    <>
-      <Head>
-        <title>{vendor.shop?.title || 'Vins Mémé Georgette'}</title>
-        <meta name="description" content={vendor.shop?.description || 'Vins Mémé Georgette'} />
-        <meta property="og:title" content={vendor.shop?.title || 'Vins Mémé Georgette'} />
-        <meta property="og:description" content={vendor.shop?.description || 'Vins Mémé Georgette'} />
-        <meta property="og:image" content={vendor.shop?.banner || '/images/meme-pas-contente.png'} />
-        <meta property="og:url" content={window.location.href} />
-      </Head>
     <div className="max-w-4xl mx-auto mt-44 mb-24">
       <div className='text-center text-xs m</div>x-auto text-gray-950 mb-4'><a href="/">Accueil</a> / <a href="/vendors">Nos Vignerons.nes</a> / <strong>{vendor.shop?.title}</strong></div>
 
@@ -161,8 +149,8 @@ export default function VendorDetailsPage() {
           <Image
             src={vendor.shop?.image ? normalizeUrl(vendor.shop.image) : '/images/meme-pas-contente.png'}
             alt={`${vendor.display_name || 'Vendor'} profile`}
-            width={120}
-            height={120}
+            width={180}
+            height={180}
             className="rounded-full border-4 border-white bg-white shadow-lg"
           />
         </div>
@@ -254,6 +242,5 @@ export default function VendorDetailsPage() {
         </div>
       </div>
     </div>
-    </>
   );
 }
