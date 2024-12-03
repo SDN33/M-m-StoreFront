@@ -53,6 +53,10 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
         alt: "banner Les Vins de Mémé Georgette",
       },
     ],
+  },
+  metadataBase: new URL('https://vinsmemegeorgette.com'),
+  alternates: {
+    canonical: '/'
   }
 };
 
