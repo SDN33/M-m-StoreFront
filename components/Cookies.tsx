@@ -170,7 +170,7 @@ const CookieConsent = () => {
         <div className="space-y-4">
           <p className="text-center flex items-center justify-center gap-3">
             <span className='text-3xl font-bold text-left'>🍪</span>
-            <span className='font-normal text-white'>Nous utilisons des cookies pour améliorer votre expérience client et nos services.<br /><span className='text-xs sm:hidden md:flex lg:flex text-center '>Selon la législation en vigueur, vous pouvez accepter ou refuser ces cookies</span></span>
+            <span className='font-normal text-white'>Nous utilisons des cookies pour améliorer votre expérience client et nos services<br /><span className='text-xs sm:hidden md:flex lg:flex text-center '>Selon la législation en vigueur, vous pouvez accepter ou refuser ces cookies</span></span>
           </p>
 
           <div className="flex justify-center gap-4">
