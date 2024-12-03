@@ -8,6 +8,7 @@ import Slogan from '@/components/Slogan';
 import HeroBanner from '@/components/HeroBanner';
 import BackToTop from '@/components/BackToTop';
 import CatSlider from '@/components/CatSlider';
+import PromoCode from '@/components/PromoCode';
 
 export default function BlancWinePage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -88,6 +89,8 @@ export default function BlancWinePage() {
         <br />
         <Slogan />
         <BackToTop />
+        <PromoCode />
+
       </main>
 
       {isMobile && (

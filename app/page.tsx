@@ -12,7 +12,6 @@ import Livraison from '@/components/Livraison';
 import WineCategories from '@/components/WineCategories';
 import LatestArticles from '@/components/LatestArticles';
 import BackToTop from '@/components/BackToTop';
-import PromoCode from '@/components/PromoCode';
 import Image from 'next/image';
 import Head from 'next/head';
 import GoToFooter from '@/components/GoToFooter';
@@ -251,7 +250,6 @@ export default function Home() {
               </div>
               <GoToFooter />
               <BackToTop />
-              <PromoCode />
             </div>
           </main>
 

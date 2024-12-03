@@ -26,7 +26,7 @@ const PromoCode: React.FC = () => {
         window.removeEventListener("mousemove", handleMouseMove);
         window.removeEventListener("mouseleave", handleMouseLeave);
       };
-    }, 20000); // Démarre après 10 secondes
+    }, 3000); // Démarre après 10 secondes
 
     return () => clearTimeout(timer);
   }, []);
@@ -46,7 +46,7 @@ const PromoCode: React.FC = () => {
 
   return (
     <div
-      className={` shadow-xl -mt-8 bg-primary border-teal/80 border-2 p-4 w-fit h-fit fixed bottom-4 right-4 z-50 transform transition-all duration-500 ${isVisible ? 'translate-x-0' : 'translate-x-full'}`}
+      className={` shadow-xl -mt-8 bg-black border-teal/80 border-2 p-4 w-fit h-fit fixed bottom-4 right-4 z-50 transform transition-all duration-500 ${isVisible ? 'translate-x-0' : 'translate-x-full'}`}
       style={{
         borderRadius: "10px",
         display: "flex",
