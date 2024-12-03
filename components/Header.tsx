@@ -117,8 +117,8 @@ const Header: React.FC = () => {
                   <Image
                     src="/images/memelogo.png"
                     alt="Logo"
-                    width={180}
-                    height={180}
+                    width={150}
+                    height={150}
                     className="object-contain h-auto w-auto "
                   />
                 </Link>
