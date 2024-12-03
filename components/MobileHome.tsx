@@ -45,13 +45,13 @@ const MobileHome: React.FC = () => {
       <br /><br /><br /><br />
       <div className="mt-8">
         <PromotionSection />
-        <div className="mx-auto">
+        <div className="mx-auto bg-yellow-50">
           <Image
             src="/images/post_partage.webp"
             alt="Mémé Georgette"
             width={600}
             height={600}
-            className='object-cover'
+            className='object-cover flex justify-center mx-auto'
           />
           <MobileProductsIntro />
           <div className="w-screen">

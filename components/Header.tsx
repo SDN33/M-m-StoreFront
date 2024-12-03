@@ -224,7 +224,7 @@ const Header: React.FC = () => {
               <CartIcon onClick={toggleCartPopup} />
             </div>
           </div>
-          <div className=' -mt-2 sm:flex md:hidden lg:hidden xl:hidden mb-2'>
+          <div className=' -mt-2 sm:flex md:flex lg:hidden xl:hidden mb-2'>
           <SearchInput />
           </div>
 
