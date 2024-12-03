@@ -45,13 +45,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const [vendorImages, setVendorImages] = useState<string | null>(null);
   const vendorImageCache = useRef<{ [key: number]: string }>({});
 
-  useEffect(() => {
-    const fetchVendorImages = async () => {
-      if (!product.vendor) return;
+  const vendorId = product.vendor;
 
-      // Check cache first
-      if (vendorImageCache.current[product.vendor]) {
-        setVendorImages(vendorImageCache.current[product.vendor]);
+  useEffect(() => {
+    const fetchVendorImage = async () => {
+      if (!vendorId) return;
+
+      // Utiliser le cache si l'image existe
+      if (vendorImageCache.current[vendorId]) {
+        setVendorImages(vendorImageCache.current[vendorId]);
         return;
       }
 
@@ -61,23 +63,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ id: product.vendor })
+          body: JSON.stringify({ id: vendorId }),
         });
 
-        if (!response.ok) throw new Error('Failed to fetch vendor data');
+        if (!response.ok) throw new Error('Échec de la récupération des données du vendeur');
 
         const vendorData = await response.json();
         if (vendorData?.shop?.image) {
-          vendorImageCache.current[product.vendor] = vendorData.shop.image;
+          vendorImageCache.current[vendorId] = vendorData.shop.image;
           setVendorImages(vendorData.shop.image);
+        } else {
+          console.warn('Image du vendeur non disponible');
         }
       } catch (error) {
-        console.error('Error fetching vendor images:', error);
+        console.error('Erreur lors de la récupération des images du vendeur :', error);
       }
     };
 
-    fetchVendorImages();
-  }, [product.vendor]);
+    fetchVendorImage();
+  }, [vendorId]);
 
   const handleRedirect = () => {
     router.push(`/product/${product.id}`);
