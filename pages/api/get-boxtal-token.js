@@ -27,6 +27,7 @@ export default async function handler(req, res) {
 
     // Send the successful response back to the frontend
     res.status(200).json(response.data);
+
   } catch (error) {
     // Log the error for debugging purposes
     console.error('Erreur proxy Boxtal:', error?.response?.data || error.message);

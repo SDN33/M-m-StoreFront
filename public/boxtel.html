@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boxtal Parcel Point Map Test</title>
     <!-- Boxtal Maps Script -->
-    <script src="https://maps.boxtal.com/app/v3/assets/js/boxtal-maps.js" ></script>
-</head>
+    <script src="https://maps.boxtal.com/app/v3/assets/js/boxtal-maps.js" defer></script>
+  </head>
+
 <body>
     <h1>Boxtal Parcel Point Map Test</h1>
     <div id="parcel-point-map" style="height: 500px; width: 100%; border: 1px solid #ccc;"></div>
@@ -15,32 +17,34 @@
         async function fetchAccessToken() {
             try {
                 const response = await fetch('/api/get-boxtal-token', { method: 'POST' });
-                if (!response.ok) throw new Error('Failed to retrieve token');
+                if (!response.ok) throw new Error(`Failed to retrieve token: ${response.statusText}`);
                 const data = await response.json();
                 return data.accessToken || data.token;
             } catch (error) {
                 console.error('Error fetching token:', error);
-                alert('Unable to load map. Please try again later.');
+                alert('Impossible de récupérer le token daccès. Veuillez réessayer plus tard.');
                 return null;
             }
         }
 
         document.addEventListener('DOMContentLoaded', async function () {
             try {
+                // Vérification si Boxtal Maps est bien chargé
                 if (typeof BoxtalMaps === 'undefined') {
-                    throw new Error('Boxtal Maps script failed to load.');
+                    throw new Error('Le script Boxtal Maps n&apos;a pas pu se charger.');
                 }
 
                 const accessToken = await fetchAccessToken();
-                if (!accessToken) throw new Error('Access token is missing.');
+                if (!accessToken) throw new Error('Le token daccès est manquant ou invalide.');
 
-                console.log('Access Token:', accessToken); // Debugging
+                console.log('Access Token récupéré:', accessToken);
 
                 const boxtalMaps = new BoxtalMaps({
                     domToLoadMap: '#parcel-point-map',
                     accessToken: accessToken,
                     config: {
                         locale: 'fr',
+                        address: '75001 Paris, France',
                         parcelPointNetworks: [
                             {
                                 code: 'CHRP_NETWORK',
@@ -57,13 +61,19 @@
                 });
 
                 boxtalMaps.onSearchParcelPointsResponse(function (points) {
-                    console.log('Parcel points found:', points);
+                    if (points.length > 0) {
+                        console.log('Points de livraison trouvés:', points);
+                    } else {
+                        console.warn('Aucun point de livraison trouvé.');
+                    }
                 });
+
             } catch (error) {
-                console.error('Map initialization error:', error);
-                alert('Une erreur est survenue lors de l\'initialisation de la carte.');
+                console.error('Erreur lors de l\'initialisation de la carte :', error);
+                alert('Une erreur est survenue lors de l\'initialisation de la carte. Vérifiez la console pour plus de détails.');
             }
         });
     </script>
 </body>
+
 </html>
