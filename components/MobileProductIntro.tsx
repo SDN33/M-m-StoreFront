@@ -24,12 +24,20 @@ const MobileProductsIntro: React.FC = () => {
         useEffect(() => {
           const timer = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % logos.length);
-          }, 2000);
+          }, 3000); // Longer duration for better visibility
+
+          // Add CSS transition
+          const slider = document.querySelector('.flex.transition-transform') as HTMLElement;
+          if (slider) {
+            slider.style.transition = 'all 1s ease-in-out';
+            slider.style.opacity = '1';
+          }
+
           return () => clearInterval(timer);
         }, [logos.length]);
 
         const LogoSlider: React.FC = () => (
-          <div className="relative w-full h-[50px] overflow-hidden bg-green-700">
+          <div className="relative w-full h-[50px] overflow-hidden bg-yellow-50">
             <div className="flex transition-transform duration-500 ease-in-out"
                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
               {logos.map((logo, index) => (
