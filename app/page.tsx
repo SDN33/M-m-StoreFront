@@ -251,7 +251,7 @@ export default function Home() {
               <div className="pt-24 md:hidden lg:flex" />
               <ProductsIntro />
               <Slider />
-              <div className="max-w-7xl mx-auto px-4 -mt-10">
+              <div className="max-w-7xl mx-auto px-4">
                 <section className="bg-white rounded-lg shadow">
                   {productsLoaded && (
                     <ProductsCards
