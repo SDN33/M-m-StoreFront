@@ -109,7 +109,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
               ) : (
                 <div className="bg-teal-50 p-3 rounded-md">
                   <p className="text-teal-800 text-sm text-center">
-                    Plus que <strong>{remainingBottlesForFreeShipping} bouteille{remainingBottlesForFreeShipping > 1 ? 's' : ''} du même vigneron</strong> pour bénéficier de la <strong>livraison offerte</strong> !
+                    Plus que <strong>{remainingBottlesForFreeShipping} bouteille{remainingBottlesForFreeShipping > 1 ? 's' : ''} du même vigneron</strong> pour bénéficier de la <strong>Livraison Offerte en point relais</strong> !
                   </p>
                 </div>
               )}
