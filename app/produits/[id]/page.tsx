@@ -180,7 +180,7 @@ const ProductPage: React.FC = () => {
   const renderSelectedBadge = () => {
     if (selectedProductIds.includes(product.id)) {
       return (
-        <div className="absolute top-2 right-2 bg-red-700 shadow-2xl text-white text-[9px] px-3 py-2 rounded-full flex items-center gap-2 z-40">
+        <div className="absolute -top-10 right-0 sm:right-1 md:-right-8 bg-red-700/90 shadow-2xl text-white text-[9px] px-3 py-2 rounded-full flex items-center gap-2 z-40">
           <span className="flex items-center justify-center text-white rounded-full ">
             <HeartHandshakeIcon className="w-4 h-4 mr-1" aria-hidden="true" />
             <p>Le choix de Mémé </p>
@@ -235,7 +235,7 @@ const ProductPage: React.FC = () => {
                   'Non renseignée'
                 )}
                 {product.certification === 'en conversion' && (
-                  <p className="text-xs text-gray-900 mt-1">En conversion biologique</p>
+                  <p className="text-xs font-semibold text-gray-900 mt-2">En conversion biologique</p>
                 )}
               </p>
               {renderAOCBadge(product)}

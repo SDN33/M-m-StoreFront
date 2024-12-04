@@ -188,6 +188,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
       hautDeGamme: [
         `${product.appellation?.toUpperCase() || 'Vin'} de Prestige`,
+        "Un Vin d'Exception",
+        "La Crème de la Crème"
       ],
 
       coupDeCoeur: [
@@ -230,7 +232,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const renderSelectedBadge = () => {
     if (selectedProductIds.includes(product.id)) {
       return (
-        <div className="absolute top-2 right-2 bg-red-700 shadow-2xl text-white text-[9px] px-3 py-2 rounded-full flex items-center gap-2 z-40">
+        <div className="absolute top-0 right-0 bg-red-700/90 shadow-2xl text-white text-[9px] px-3 py-2 rounded-full flex items-center gap-2 z-40">
           <span className="flex items-center justify-center text-white rounded-full ">
             <HeartHandshakeIcon className="w-4 h-4 mr-1" aria-hidden="true" />
             <p>Le choix de Mémé </p>
