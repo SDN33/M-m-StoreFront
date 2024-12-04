@@ -313,7 +313,7 @@ const ProductPage: React.FC = () => {
             <SocialShare url={currentUrl} title={`${product.name} - VINS Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE`} />
             <div className="items-center mt-6 flex gap-2">
               <Package className="h-6 w-6" />
-              <span className="font-bold text-xs mb-1">Livraison offerte dès <span className='text-primary'>6 bouteilles achetées</span> sur un domaine</span>
+              <span className="font-bold text-xs mb-1">Livraison offerte dès <span className='text-teal-800'>6 bouteilles achetées</span> sur un domaine</span>
             </div>
             <div
               className='ml-8 px-1 text-xs font-light -mt-4 mb-6'
@@ -321,7 +321,7 @@ const ProductPage: React.FC = () => {
             >
               <p>
                 <br />
-                <span className='font-semibold'>Par <span className='text-primary'>6</span> = <span className='text-base'>{Math.floor(product.price * 6)}€</span> &nbsp;+</span>
+                <span className='font-semibold'>Par <span className='text-teal-800'>6</span> = <span className='text-base'>{Math.floor(product.price * 6)}€</span> &nbsp;+</span>
                 <span className='bg-gray-950 p-1 text-white ml-2'>Livraison offerte</span>
               </p>
             </div>
