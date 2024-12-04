@@ -9,13 +9,13 @@ const Slider = () => {
     {
       id: 1,
       imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_100/v1732982358/Banni%C3%A8re_fin_d_ann%C3%A9e_2_wpv7ow.webp',
-      link: '/vendors/255986119',
+      link: '/vignerons/255986119',
       lcp: true,
     },
     {
       id: 2,
       imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_100/v1732974216/100_engag%C3%A9e_pour_la_nature_4_pwjwn9.webp',
-      link: '/vendors/255986134',
+      link: '/vignerons/255986134',
       lcp: true,
     },
     {

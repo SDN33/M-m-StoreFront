@@ -178,7 +178,7 @@ const VendorsPage = () => {
                       </div>
                     </div>
                     <Link
-                      href={`/vendors/${vendor.id}`}
+                      href={`/vignerons/${vendor.id}`}
                       className="inline-flex items-center text-xs px-2 py-2 bg-blue-50 text-teal-800 rounded-lg hover:bg-blue-100 transition-colors duration-200"
                     >
                       Voir plus →
@@ -193,7 +193,7 @@ const VendorsPage = () => {
                           : vendor.shop.description.replace(/<\/?[^>]+(>|$)/g, "")}
                       </p>
                       <Link
-                        href={`/vendors/${vendor.id}`}
+                        href={`/vignerons/${vendor.id}`}
                         className="text-teal-800 text-xs mt-2 inline-block text-center mx-auto"
                       >
                         En Savoir plus →
@@ -246,7 +246,7 @@ const VendorsPage = () => {
             className="rounded-lg mb-8"
           />
           <Link
-            href={`/vendors`}
+            href={`/vignerons`}
             className="inline-flex items-center text-sm px-2 py-2 bg-blue-50 text-primary rounded-lg hover:bg-blue-100 transition-colors duration-200"
           >
             Voir tous les vignerons →

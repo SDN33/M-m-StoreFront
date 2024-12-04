@@ -106,7 +106,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   };
 
   const vendorRedirect = () => {
-    router.push(`/vendors/${product.vendor}`);
+    router.push(`/vignerons/${product.vendor}`);
   }
 
   const renderAOCBadge = () => {
@@ -225,7 +225,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     return getRandomSlogan(slogans.decouverte(product.appellation || 'Vin'));
   };
 
-  const selectedProductIds = [621,632,255,284,286]; // Example array of selected product IDs
+  const selectedProductIds = [621,632,255,284,286,292]; // Example array of selected product IDs
 
   const renderSelectedBadge = () => {
     if (selectedProductIds.includes(product.id)) {

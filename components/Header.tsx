@@ -47,7 +47,7 @@ const Header: React.FC = () => {
     { name: 'PROMOS', href: '/promos', className: '!text-primary font-gray-950', icon: <BadgePercent className="inline-block ml-1 -mt-1 w-4 h-4" /> },
     { name: 'Nos Vins', href: '#', onClick: toggleNosVinsPopup, className: 'bg-black !text-white', icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com', target: "_blank", rel: "noopener noreferrer" },
-    { name: 'Nos Vignerons.nes', href: '/vendors' },
+    { name: 'Nos Vignerons.nes', href: '/vignerons' },
     { name: 'Vins Sans Sulfites', href: '/vins-sans-sulfites' },
     { name: 'Vins du Monde', href: '/vins-du-monde' },
     { name: 'Contactez-nous', href: '/contact' },
@@ -294,13 +294,13 @@ const Header: React.FC = () => {
       <nav className="hidden sm:min-w-sm md:hidden lg:flex xl:flex bg-white shadow-xl relative h-12 mx-auto">
         <div className="container mx-auto h-full flex items-center justify-between overflow-x-auto overflow-y-hidden">
           <ChevronLeft
-        className="w-6 h-6 text-gray-950 cursor-pointer hover:text-primary transition-colors flex-shrink-0"
-        onClick={() => {
-          const scrollContainer = document.querySelector('.scrollable-menu');
-          if (scrollContainer) {
-            scrollContainer.scrollBy({ left: -150, behavior: 'smooth' });
-          }
-        }}
+            className="w-6 h-6 text-gray-950 cursor-pointer hover:text-primary transition-colors flex-shrink-0"
+            onClick={() => {
+              const scrollContainer = document.querySelector('.scrollable-menu');
+              if (scrollContainer) {
+                scrollContainer.scrollBy({ left: -150, behavior: 'smooth' });
+              }
+            }}
           />
 
           <ul className="scrollable-menu flex items-center justify-center space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar h-full mx-4 pl-28 pr-28 flex-grow">

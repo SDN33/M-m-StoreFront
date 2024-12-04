@@ -50,7 +50,7 @@ const Footer = () => {
               <li><a href="https://www.memegeorgette.com/" title="Site Mémé Georgette" className=" hover:text-primary transition-colors text-sm">Découvrir Mémé Georgette</a></li>
               <li><a href="/portailpro" title="Portail Pro Mémé Georgette" className=" hover:text-primary transition-colors text-sm">Portail Pro</a></li>
               <li><a href="/blog" title="Blog Vins Mémé Georgette" className=" hover:text-primary transition-colors text-sm">Le Blog de Mémé</a></li>
-              <li><a href="/vendors" title="Vignerons Mémé Georgette" className=" hover:text-primary transition-colors text-sm">Nos Vignerons</a></li>
+              <li><a href="/vignerons" title="Vignerons Mémé Georgette" className=" hover:text-primary transition-colors text-sm">Nos Vignerons</a></li>
               <li><a href="/promos" title="Promo Vins Mémé Georgette" className=" hover:text-primary transition-colors text-sm">Promos</a></li>
             </ul>
           </div>
