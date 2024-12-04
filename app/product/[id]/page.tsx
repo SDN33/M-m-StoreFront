@@ -92,7 +92,7 @@ const getCertificationLogo = (certification?: string) => {
     case 'biodynamie':
       return { src: '/images/bioBiodynamie.png', width: 80, height: 80 };
     case 'en conversion':
-      return { src: '/images/enconv.png', width: 28, height: 28 };
+      return { src: '/images/enconv.png', width: 80, height: 80 };
     default:
       return { src: '', width: 0, height: 0 };
   }
@@ -206,7 +206,7 @@ const ProductPage: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-8 justify-center items-start w-full">
           <div className="w-full md:w-1/2 flex flex-col items-center">
             <div className="flex items-start z-10 w-full justify-start px-4 md:px-0">
-              <p className="text-sm">
+              <p className="text-sm flex gap-2">
                 {product.certification ? (
                   <Image
                     {...getCertificationLogo(product.certification)}
@@ -217,6 +217,9 @@ const ProductPage: React.FC = () => {
                   />
                 ) : (
                   'Non renseignée'
+                )}
+                {product.certification === 'en conversion' && (
+                  <p className="text-xs text-gray-900 mt-1">En conversion biologique</p>
                 )}
               </p>
               {renderAOCBadge(product)}
