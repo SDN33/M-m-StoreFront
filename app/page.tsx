@@ -251,10 +251,7 @@ export default function Home() {
               <div className="pt-24 md:hidden lg:flex" />
               <ProductsIntro />
               <Slider />
-                <h1 className=" font-bold keyword-bar flex flex-wrap justify-center gap-4 p-4 bg-gray-50 rounded-lg">
-                VINS MÉMÉ GEORGETTE : ACHAT DE VINS BIO ET BIODYNAMIQUE EN LIGNE
-                </h1>
-              <div className="max-w-7xl mx-auto px-4">
+              <div className="max-w-7xl mx-auto px-4 -mt-10">
                 <section className="bg-white rounded-lg shadow">
                   {productsLoaded && (
                     <ProductsCards
