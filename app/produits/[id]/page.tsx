@@ -7,6 +7,7 @@ import { Star, Package, CreditCard, HeartHandshakeIcon } from 'lucide-react';
 import Livraison from '@/components/Livraison';
 import SocialShare from '@/components/Socialshare';
 import AddToCartButton from '@/components/AddToCartButton';
+import ProductReviews from '@/components/ProductReviews';
 
 interface Product {
   id: number;
@@ -485,6 +486,8 @@ const ProductPage: React.FC = () => {
           )}
           <br /><br />
           <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 p-8 rounded-t-xl">Avis clients</h2>
+          <ProductReviews productId={product.id.toString()} />
+
           <br />
 
           <br />
