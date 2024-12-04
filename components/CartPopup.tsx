@@ -26,9 +26,13 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
   const total = cartItems.reduce((acc: number, item: CartItem) => acc + item.price * item.quantity, 0);
   const router = useRouter();
 
-  const totalBottles = cartItems.reduce((acc: number, item: CartItem) => acc + item.quantity, 0);
-  const hasFreeShipping = totalBottles >= 6;
-  const remainingBottlesForFreeShipping = hasFreeShipping ? 0 : 6 - totalBottles;
+  const maxQuantityPerProduct = cartItems.reduce((acc: { [key: number]: number }, item: CartItem) => {
+    acc[item.product_id] = (acc[item.product_id] || 0) + item.quantity;
+    return acc;
+  }, {});
+  const hasFreeShipping = Object.values(maxQuantityPerProduct).some((qty): qty is number => typeof qty === 'number' && qty >= 6);
+  const maxBottles = Math.max(...Object.values(maxQuantityPerProduct) as number[]);
+  const remainingBottlesForFreeShipping = hasFreeShipping ? 0 : 6 - maxBottles;
 
   useEffect(() => {
     const fetchCart = async () => {

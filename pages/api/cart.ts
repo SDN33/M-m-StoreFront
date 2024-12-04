@@ -10,7 +10,6 @@ export const getCartNonce = async () => {
       },
     });
 
-    // Extraction des en-têtes pour trouver le nonce
     const headers = response.headers;
     const nonce = headers['x-wp-nonce'] || headers['woocommerce-store-api-nonce'] || headers['nonce'];
 
@@ -34,6 +33,7 @@ type CartItem = {
   price: number;
   image: string;
   categories: string[];
+  store_name: string;  // Ajout de store_name
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -43,14 +43,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case 'GET': // Fetch Cart
       try {
         const response = await wcApi.get('cart');
-        const items: CartItem[] = response.data.items.map((item: { id?: string; name?: string; quantity?: number; prices: { price: string }; images?: { src: string }[]; categories?: { name: string }[] }) => ({
+        const items: CartItem[] = response.data.items.map((item: {
+          id?: string;
+          name?: string;
+          quantity?: number;
+          prices: { price: string };
+          images?: { src: string }[];
+          categories?: { name: string }[];
+          store_name?: string;  // Vérification de la présence de store_name
+        }) => ({
           product_id: item.id?.toString() || '',
           name: item.name || 'Unknown Product',
           quantity: item.quantity || 1,
           price: parseFloat(item.prices.price) || 0.0,
           image: item.images?.[0]?.src || '',
           categories: Array.isArray(item.categories) ? item.categories.map((cat) => cat.name) : [],
+          store_name: item.store_name || 'Unknown Store',  // Inclusion de store_name
         }));
+
         const total = parseFloat(response.data?.totals?.total_price) || 0;
         return res.status(200).json({ total, items });
       } catch (error) {
@@ -105,11 +115,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     case 'DELETE': // Empty Cart
       try {
-        const nonce = await getCartNonce(); // Récupération du nonce pour sécuriser la requête
+        const nonce = await getCartNonce();
         const response = await wcApi.delete('cart/items', {
           headers: {
             'Content-Type': 'application/json',
-            'Nonce': nonce,  // Inclusion du nonce dans l'en-tête
+            'Nonce': nonce,
           },
         });
 

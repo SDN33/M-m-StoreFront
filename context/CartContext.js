@@ -8,7 +8,8 @@ const formatCartItem = (product, quantity, variation_id = null, variation = {}) 
   quantity,
   price: parseFloat(product.price) || 0.0, // Using sale_price
   image: product.images[0]?.src || '',
-  categories: product.categories.length ? product.categories.map(cat=>cat.name || "") : [] || [],
+  categories: product.categories.length ? product.categories.map((cat) => cat.name || '') : [],
+  store_name: product.store_name || "Pas de nom de vendeur", // Correction ici
   variation_id: variation_id ? variation_id.toString() : null,
   variation: variation,
 });
@@ -82,7 +83,6 @@ export const CartProvider = ({ children }) => {
   const deleteAllCartItems = () => {
     setCartItems([]);
   };
-
 
   // Retrieve all items in the cart along with the total price
   const viewAllCartItems = () => {

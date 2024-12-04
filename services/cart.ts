@@ -45,7 +45,7 @@ export const updateCartItem = async (product_id: number, quantity: number) => {
       quantity,
     });
     return response.data;
-  } catch (error) {
+  } catch {
     // console.error('Failed to update cart item:', error);
     throw new Error('Failed to update cart item');
   }
@@ -59,7 +59,7 @@ export const removeCartItem = async (product_id: number) => {
       product_id,
     });
     return response.data;
-  } catch (error) {
+  } catch {
     // console.error('Failed to remove item from cart:', error);
     throw new Error('Failed to remove item from cart');
   }
@@ -70,7 +70,7 @@ export const emptyCart = async () => {
   try {
     const response = await api.delete('/');
     return response.data;
-  } catch (error) {
+  } catch {
     // console.error('Failed to empty cart:', error);
     throw new Error('Failed to empty cart');
   }
