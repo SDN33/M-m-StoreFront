@@ -437,7 +437,7 @@ const ProductPage: React.FC = () => {
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-bold text-teal-800 text-left">Degré d&apos;alcool</h3>
                 <p className="text-sm text-right">
-                  {product.degre ? `${product.degre}%` : 'Pas de degré renseigné'}
+                    {product.degre == 0 ? 'Non communiqué' : `${product.degre}%`}
                 </p>
               </div>
             </div>
