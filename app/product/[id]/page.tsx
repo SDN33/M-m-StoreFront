@@ -185,7 +185,7 @@ const ProductPage: React.FC = () => {
       </div>
       <br /><br /><br />
       <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 overflow-y-hidden">
-        <nav aria-label="Breadcrumb" className="text-sm mb-8 overflow-x-auto whitespace-nowrap">
+        <nav aria-label="Breadcrumb" className="text-sm mb-7 overflow-x-auto whitespace-nowrap">
           <ol className="list-none p-0 inline-flex">
             <li className="flex items-center">
               <a href="/" className="text-gray-950 hover:text-gray-700">Accueil</a>
