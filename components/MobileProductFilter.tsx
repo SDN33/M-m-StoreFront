@@ -15,6 +15,7 @@ interface ProductFilterProps {
     color: string[];
     petit_prix: string[];
     haut_de_gamme: string[];
+    
   };
   onFilterChange: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
   resetFilters: () => void;
@@ -219,7 +220,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
             {/* Filter Sections */}
             <div>
               {Object.entries(filterOptions).map(([filterType, options]) => {
-                if (hideColorFilter && filterType === 'color') return null;
+                if (hideColorFilter && filterType === 'couleur') return null;
                 return (
                   <div key={filterType} className="border-b border-gray-300 bg-slate-100">
                     <button
@@ -245,7 +246,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                             <div className="flex items-center">
                               <input
                                 type="checkbox"
-                                checked={selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']].includes(option.value)}
+                                checked={(selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']] ?? []).includes(option.value)}
                                 onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
                                 className="form-checkbox h-3 w-3 text-teal-800 focus:ring-teal-800 rounded border-gray-300 transition duration-200 ease-in-out"
                               />
