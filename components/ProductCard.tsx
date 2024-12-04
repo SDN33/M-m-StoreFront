@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Info } from 'lucide-react';
 import AddToCartButton from './AddToCartButton';
-import { MapPin } from 'lucide-react';
+import { MapPin, HeartHandshakeIcon } from 'lucide-react';
 
 interface Product {
   id: number;
@@ -195,7 +195,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       ],
 
       petillant: (categoryName: string) => [
-        `Un ${categoryName} À Découvrir`,
+        `Un ${categoryName} pour vos Fêtes !`,
       ],
 
       decouverte: (appellation: string) => [
@@ -225,6 +225,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     return getRandomSlogan(slogans.decouverte(product.appellation || 'Vin'));
   };
 
+  const selectedProductIds = [621,632,255,284]; // Example array of selected product IDs
+
+  const renderSelectedBadge = () => {
+    if (selectedProductIds.includes(product.id)) {
+      return (
+        <div className="absolute top-2 right-2 bg-red-700 shadow-2xl text-white text-[9px] px-3 py-2 rounded-full flex items-center gap-2 z-40">
+          <span className="flex items-center justify-center text-white rounded-full ">
+            <HeartHandshakeIcon className="w-4 h-4 mr-1" aria-hidden="true" />
+            <p>Le choix de Mémé </p>
+          </span>
+        </div>
+
+
+      );
+    }
+    return null;
+  };
   return (
     <div className="w-full max-w-[400px] min-w-[300px] bg-white rounded-lg overflow-hidden shadow-md mb-8">
       <div className="bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 text-white py-1 px-2 text-center text-sm font-semibold">
@@ -268,6 +285,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           )}
         </div>
         <div className="relative w-full h-52 mb-2">
+          {renderSelectedBadge()}
           <Image
             src={product.images[0]?.src || '/images/vinmeme.png'}
             alt={product.name}

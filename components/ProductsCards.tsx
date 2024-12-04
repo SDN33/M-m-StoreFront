@@ -111,12 +111,11 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
           )
         );
 
-      const isSansSulfitesMatch =
-        selectedFilters.sans_sulfites_.length === 0 ||
+      const isSansSulfitesMatch = selectedFilters.sans_sulfites_.length === 0 ||
         selectedFilters.sans_sulfites_.some(
           (sansSulfites) =>
-            sansSulfites.toLowerCase().trim() === 'sans sulfites ajoutés' &&
-            (product.sans_sulfites_?.toLowerCase().trim() === 'oui')
+          (sansSulfites.toLowerCase().trim() === 'sans sulfites ajoutés' && product.sans_sulfites_.toLowerCase().trim() === 'oui') ||
+          sansSulfites.toLowerCase().trim() === (product.sans_sulfites_ || '').toLowerCase().trim()
         );
 
       const isPetitPrixMatch = (selectedFilters.petit_prix?.length ?? 0) === 0 ||
@@ -130,7 +129,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
         selectedFilters.haut_de_gamme?.some(
           (hautDeGamme) =>
         hautDeGamme.toLowerCase().trim() === 'haut_de_gamme' &&
-        ((product.price >= 13 && product.price <= 20) ||
+        ((product.price >= 11 && product.price <= 20) ||
          (product.sale_price && product.sale_price >= 11 && product.sale_price <= 20))
         );
 
