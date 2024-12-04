@@ -219,7 +219,7 @@ export default function Home() {
           >
             <div
               ref={filterContentRef}
-              className="p-4 h-full overflow-y-auto scroll-container ml-20"
+              className="p-4 h-full overflow-y-auto scroll-container ml-20 pt-8"
               style={{
                 overscrollBehavior: 'auto',
                 msOverflowStyle: 'auto',

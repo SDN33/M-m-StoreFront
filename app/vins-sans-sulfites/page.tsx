@@ -5,7 +5,7 @@ import ProductCard from '../../components/ProductCard';
 import Livraison from '@/components/Livraison';
 import HeroBanner from '@/components/HeroBanner';
 import Trust from '@/components/Trust';
-import FallingFlagsPromo from '@/components/FallingFlagsMonde';
+import FallingBottlesPromo from '@/components/FaillingBottlesPromo';
 
 export default function VinsSansSulfites() {
   const [loading, setLoading] = useState(true);
@@ -77,7 +77,7 @@ export default function VinsSansSulfites() {
         </div>
 
         {/* Section Titre */}
-        <FallingFlagsPromo />
+        <FallingBottlesPromo />
 
         {/* Section Description */}
         <div className="bg-gray-100 p-6 rounded-lg shadow-md mb-12">
