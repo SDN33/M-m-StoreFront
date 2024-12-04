@@ -65,8 +65,6 @@ export default function RootLayout({
     <html lang="fr">
       <head>
         <meta property="og:image" content="https://vinsmemegeorgette.com/images/post_partage.webp" />
-        <meta property="og:title" content={metadata.openGraph?.title as string} />
-        <meta property="og:description" content={metadata.openGraph?.description as string} />
         <meta property="og:url" content="https://vinsmemegeorgette.com" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={metadata.openGraph?.siteName} />
