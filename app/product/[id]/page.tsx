@@ -3,13 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { Star, Package, CreditCard } from 'lucide-react';
+import { Star, Package, CreditCard, HeartHandshakeIcon } from 'lucide-react';
 import Livraison from '@/components/Livraison';
 import SocialShare from '@/components/Socialshare';
 import AddToCartButton from '@/components/AddToCartButton';
-
-
-
 
 interface Product {
   id: number;
@@ -177,6 +174,24 @@ const ProductPage: React.FC = () => {
 
   if (!product) return null;
 
+  const selectedProductIds = [621,632,255,284,286]; // Example array of selected product IDs
+
+  const renderSelectedBadge = () => {
+    if (selectedProductIds.includes(product.id)) {
+      return (
+        <div className="absolute top-2 right-2 bg-red-700 shadow-2xl text-white text-[9px] px-3 py-2 rounded-full flex items-center gap-2 z-40">
+          <span className="flex items-center justify-center text-white rounded-full ">
+            <HeartHandshakeIcon className="w-4 h-4 mr-1" aria-hidden="true" />
+            <p>Le choix de Mémé </p>
+          </span>
+        </div>
+
+
+      );
+    }
+    return null;
+  };
+
 
   return (
     <div className=" min-h-screen sm:mt-28 md:mt-16 px-4 md:px-12 flex flex-col justify-between overflow-x-hidden overflow-y-hidden">
@@ -225,6 +240,7 @@ const ProductPage: React.FC = () => {
               {renderAOCBadge(product)}
             </div>
             <div className="relative w-full sm:max-w[200px] md:max-w[300px] lg:max-w-[400px]">
+              {renderSelectedBadge()}
               <Image
               src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
               alt={product.name}
