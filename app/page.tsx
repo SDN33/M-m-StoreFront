@@ -226,7 +226,8 @@ export default function Home() {
                 scrollbarWidth: 'auto',
                 maxHeight: '100vh',
                 maxWidth: '15.6rem',
-                scrollbarColor: 'transparent transparent',
+                scrollbarColor: 'rgba(209, 213, 219, 0.5) rgba(209, 213, 219, 0.1)',
+                scrollPaddingBlockStart: '1rem',
                 scrollMarginLeft: '1rem'
               }}
             >
