@@ -310,7 +310,7 @@ const ProductPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="flex items-center mt-1">
+            <div className="flex items-center">
               <select
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
@@ -333,9 +333,8 @@ const ProductPage: React.FC = () => {
                 }}
               />
             </div>
-            <br />
                 {/* Logos de paiement */}
-            <div className="flex justify-start items-center space-x-4 w-fit h-auto mb-8 bg-white rounded-lg p-2">
+            <div className="flex justify-start items-center space-x-4 w-fit h-auto mb-8 bg-white rounded-lg p-2 mt-3">
               <a href="https://www.visa.fr" title="Visa">
                 <Image
                   src="/images/visa.png"
