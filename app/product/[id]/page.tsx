@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { Star, Package } from 'lucide-react';
+import { Star, Package, CreditCard } from 'lucide-react';
 import Livraison from '@/components/Livraison';
 import SocialShare from '@/components/Socialshare';
 import AddToCartButton from '@/components/AddToCartButton';
@@ -300,7 +300,7 @@ const ProductPage: React.FC = () => {
               <span className="font-bold text-xs mb-1">Livraison offerte dès <span className='text-primary'>6 bouteilles achetées</span> sur un domaine</span>
             </div>
             <div
-              className='ml-8 px-1 text-xs font-light -mt-4 mb-4'
+              className='ml-8 px-1 text-xs font-light -mt-4 mb-6'
               aria-label={`Prix par 6 : ${Math.floor(product.price * 6)} euros, livraison offerte`}
             >
               <p>
@@ -333,7 +333,40 @@ const ProductPage: React.FC = () => {
                 }}
               />
             </div>
+            <br />
+                {/* Logos de paiement */}
+            <div className="flex justify-start items-center space-x-4 w-fit h-auto mb-8 bg-white rounded-lg p-2">
+              <a href="https://www.visa.fr" title="Visa">
+                <Image
+                  src="/images/visa.png"
+                  alt="Visa"
+                  height={30}
+                  width={30}
+                  sizes="30"
+                />
+              </a>
+              <a href="https://www.mastercard.fr" title="mastercard" aria-label="Mastercard">
+                <Image
+                  src="/images/mastercard.png"
+                  alt="Mastercard"
+                  height={30}
+                  width={30}
+                />
+              </a>
+              <a href="https://stripe.com/fr" title="Stripe" aria-label="Stripe">
+                <Image
+                  src="/images/stripe.webp"
+                  alt="Stripe"
+                  height={50}
+                  width={30}
+                />
+              </a>
+              <div className="flex items-center text-gray-600">
+                <CreditCard className="h-4 w-4 mr-1 text-blue-600" />
+                <span className="text-xs font-semibold text-blue-600">Paiement sécurisé</span>
+              </div>
             </div>
+          </div>
         </div>
 
         <br /><br />

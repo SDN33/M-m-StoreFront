@@ -29,10 +29,6 @@
 
         document.addEventListener('DOMContentLoaded', async function () {
             try {
-                // Vérification si Boxtal Maps est bien chargé
-                if (typeof BoxtalMaps === 'undefined') {
-                    throw new Error('Le script Boxtal Maps n&apos;a pas pu se charger.');
-                }
 
                 const accessToken = await fetchAccessToken();
                 if (!accessToken) throw new Error('Le token daccès est manquant ou invalide.');
