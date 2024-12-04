@@ -44,8 +44,8 @@ const Header: React.FC = () => {
   };
 
   const categories = [
-    { name: 'PROMOS', href: '/promos', className: '!text-primary font-gray-950', icon: <BadgePercent className="inline-block ml-1 -mt-1 w-5 h-5" /> },
-    { name: 'Nos Vins', href: '#', onClick: toggleNosVinsPopup, className: 'bg-black !text-white', icon: <ChevronDown className={` inline-block ml-1 w-5 h-5 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
+    { name: 'PROMOS', href: '/promos', className: '!text-primary font-gray-950', icon: <BadgePercent className="inline-block ml-1 -mt-1 w-4 h-4" /> },
+    { name: 'Nos Vins', href: '#', onClick: toggleNosVinsPopup, className: 'bg-black !text-white', icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com', target: "_blank", rel: "noopener noreferrer" },
     { name: 'Nos Vignerons.nes', href: '/vignerons' },
     { name: 'Vins Sans Sulfites', href: '/vins-sans-sulfites' },
@@ -183,12 +183,12 @@ const Header: React.FC = () => {
                 </div>
               </div>
               <a href="/faq" className="text-white hover:text-gray-950 font-semibold whitespace-nowrap text-center flex flex-col items-center">
-                <MessageCircleQuestion className="mb-1 w-4 h-auto" />
+                <MessageCircleQuestion className="mb-1 w-5 h-auto" />
                 FAQ
               </a>
 
               <a href="/portailpro" className="text-white hover:text-gray-950 font-semibold whitespace-nowrap text-center flex flex-col items-center">
-                <UsersRound className="mb-1 w-4 h-auto" />
+                <UsersRound className="mb-1 w-5 h-auto" />
                 Portail Pro
               </a>
               <AuthButton />
