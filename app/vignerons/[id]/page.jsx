@@ -133,7 +133,7 @@ export default function VendorDetailsPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto mt-48 mb-24">
+    <div className="max-w-4xl mx-auto mt-40 sm:mt-40 md:mt-44 lg:mt-48 mb-24">
       <div className='text-center text-xs m</div>x-auto text-gray-950 mb-4'><a href="/">Accueil</a> / <a href="/vignerons">Nos Vignerons.nes</a> / <strong>{vendor.shop?.title}</strong></div>
 
       <div className="relative">
@@ -217,14 +217,14 @@ export default function VendorDetailsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
             {products.length > 0 ? (
               products.map((product) => (
-                <div key={product.id} className="bg-white p-4 rounded-lg shadow-lg">
+                <div key={product.id} className="bg-white p-4 rounded-lg shadow-lg text-center">
                   <Link href={`/produits/${product.id}`} passHref>
                     <Image
                       src={product.images[0]?.src || '/images/vinmeme.png'}
                       alt={product.name}
                       width={160}
                       height={160}
-                      className="rounded"
+                      className="rounded flex mx-auto justify-center"
                     />
                   </Link>
                   <h3 className="mt-4 text-lg font-semibold">{product.name}</h3>

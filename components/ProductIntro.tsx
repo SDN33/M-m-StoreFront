@@ -93,7 +93,7 @@ const ProductsIntro: React.FC = () => {
           <span className="text-3xl font-gray-950  font-[Inter]">{counter.toLocaleString()}</span>
           <span className='text-3xl'>&nbsp;vins bio en direct des vignerons(nes)</span>
           </span>
-          <span className="block text-gray-950 text-base sm:text-sm font-['Inter'] -mt-1 mb-2 ">
+          <span className="block bg-transparent text-gray-950 text-base sm:text-sm font-['Inter'] -mt-1 mb-2 ">
           Tu sais, celles et ceux qui respectent la terre, ses locataires...
           </span>
         </h1>
