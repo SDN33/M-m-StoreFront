@@ -111,11 +111,12 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
           )
         );
 
-      const isSansSulfitesMatch = selectedFilters.sans_sulfites_.length === 0 ||
+      const isSansSulfitesMatch =
+        selectedFilters.sans_sulfites_.length === 0 ||
         selectedFilters.sans_sulfites_.some(
           (sansSulfites) =>
-          (sansSulfites.toLowerCase().trim() === 'sans sulfites ajoutés' && product.sans_sulfites_.toLowerCase().trim() === 'oui') ||
-          sansSulfites.toLowerCase().trim() === (product.sans_sulfites_ || '').toLowerCase().trim()
+            sansSulfites.toLowerCase().trim() === 'sans sulfites ajoutés' &&
+            (product.sans_sulfites_?.toLowerCase().trim() === 'oui')
         );
 
       const isPetitPrixMatch = (selectedFilters.petit_prix?.length ?? 0) === 0 ||

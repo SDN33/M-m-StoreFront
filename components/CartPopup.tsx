@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useCart } from '../context/CartContext';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Minus, Plus } from 'lucide-react';
+import { Minus, Plus, CreditCard } from 'lucide-react';
 
 interface CartPopupProps {
   isOpen: boolean;
@@ -172,6 +172,39 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
                 <div className="flex justify-between items-center mb-4">
                   <span className="font-medium text-lg">Total</span>
                   <span className="font-bold text-xl text-[#FF6B4A]">{total.toFixed(2)} €</span>
+                </div>
+
+                    {/* Logos de paiement */}
+                <div className="flex justify-center items-center mx-auto space-x-4 w-fit h-auto mb-8 bg-white rounded-lg p-2">
+                  <a href="https://www.visa.fr" title="Visa">
+                    <Image
+                      src="/images/visa.png"
+                      alt="Visa"
+                      height={30}
+                      width={30}
+                      sizes="30"
+                    />
+                  </a>
+                  <a href="https://www.mastercard.fr" title="mastercard" aria-label="Mastercard">
+                    <Image
+                      src="/images/mastercard.png"
+                      alt="Mastercard"
+                      height={30}
+                      width={30}
+                    />
+                  </a>
+                  <a href="https://stripe.com/fr" title="Stripe" aria-label="Stripe">
+                    <Image
+                      src="/images/stripe.webp"
+                      alt="Stripe"
+                      height={50}
+                      width={30}
+                    />
+                  </a>
+                  <div className="flex items-center text-gray-600">
+                    <CreditCard className="h-4 w-4 mr-1 text-blue-600" />
+                    <span className="text-xs font-semibold text-blue-600">Paiement sécurisé</span>
+                  </div>
                 </div>
 
                 <div className="space-y-2">

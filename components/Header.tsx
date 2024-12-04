@@ -48,7 +48,7 @@ const Header: React.FC = () => {
     { name: 'Nos Vins', href: '#', onClick: toggleNosVinsPopup, className: 'bg-black !text-white', icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com', target: "_blank", rel: "noopener noreferrer" },
     { name: 'Nos Vignerons.nes', href: '/vendors' },
-    { name: 'Vins Sans Sulfites', classhref: '/vins-sans-sulfites' },
+    { name: 'Vins Sans Sulfites', href: '/vins-sans-sulfites' },
     { name: 'Vins du Monde', href: '/vins-du-monde' },
     { name: 'Contactez-nous', href: '/contact' },
     { name: 'Blog', href: '/blog', icon: <Rss className="inline-block ml-1 -mt-1 w-4 h-4" /> },
