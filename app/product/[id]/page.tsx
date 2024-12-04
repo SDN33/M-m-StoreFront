@@ -256,7 +256,7 @@ const ProductPage: React.FC = () => {
             <p className="text-sm font-bold break-words">{product.nom_chateau || 'Château inconnu'}</p>
             <h1 className="text-3xl font-bold break-words">{product.name}</h1>
             <p className="text-sm font-bold mt-1 mb-2 break-words">
-              {product.appellation?.toUpperCase()} | {product.region__pays?.toLowerCase() === 'bordeaux' ? 'Sud-Ouest' : product.region__pays?.toUpperCase() || ''} | {product.millesime}
+              {product.appellation?.toUpperCase()} • {product.region__pays?.toLowerCase() === 'bordeaux' ? 'Sud-Ouest' : product.region__pays?.toUpperCase() || ''} • {product.millesime}
             </p>
             <div className="flex items-center -mb-6 mx-auto">
               {[...Array(5)].map((_, i) => (
