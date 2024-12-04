@@ -109,7 +109,7 @@ const VendorList: React.FC = () => {
   };
 
   const handleCardClick = (productId: number) => {
-    router.push(`/product/${productId}`);
+    router.push(`/produits/${productId}`);
   };
 
   const handleVendorClick = (vendorName: string) => {

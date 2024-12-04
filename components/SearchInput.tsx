@@ -245,7 +245,7 @@ const SearchInput = () => {
           {results.map((product, index) => (
             <a
               key={product.id}
-              href={`/product/${product.id}`}
+              href={`/produits/${product.id}`}
               className={`flex items-center p-4 hover:bg-gray-50 ${index !== results.length - 1 ? 'border-b' : ''}`}
             >
               {product.images[0] && (

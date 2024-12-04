@@ -218,7 +218,7 @@ export default function VendorDetailsPage() {
             {products.length > 0 ? (
               products.map((product) => (
                 <div key={product.id} className="bg-white p-4 rounded-lg shadow-lg">
-                  <Link href={`/product/${product.id}`} passHref>
+                  <Link href={`/produits/${product.id}`} passHref>
                     <Image
                       src={product.images[0]?.src || '/images/vinmeme.png'}
                       alt={product.name}

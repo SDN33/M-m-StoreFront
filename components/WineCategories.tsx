@@ -213,7 +213,7 @@ const VendorsPage = () => {
                           >
                             {product.images && product.images[0] && (
                               <div className="w-24 h-24 mb-3 relative overflow-hidden rounded-full border-2 border-white shadow-sm">
-                                <Link href={`/product/${product.id}`} passHref>
+                                <Link href={`/produits/${product.id}`} passHref>
                                   <Image
                                     src={product.images[0].src}
                                     alt={product.name}

@@ -102,7 +102,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   }, [vendorId]);
 
   const handleRedirect = () => {
-    router.push(`/product/${product.id}`);
+    router.push(`/produits/${product.id}`);
   };
 
   const vendorRedirect = () => {
@@ -331,7 +331,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           </div>
         </div>
       </div>
-        <a href={`/product/${product.id}`} className="text-xs text-gray-950 h-8 overflow-hidden text-center mx-4 font-medium mb-4 flex justify-center cursor-pointer">
+        <a href={`/produits/${product.id}`} className="text-xs text-gray-950 h-8 overflow-hidden text-center mx-4 font-medium mb-4 flex justify-center cursor-pointer">
           {stripHtmlAndTruncate(product.short_description || product.description || '', 110)}
         </a>
 
