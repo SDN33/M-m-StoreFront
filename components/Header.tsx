@@ -101,7 +101,7 @@ const Header: React.FC = () => {
           <div className="hidden lg:flex items-center justify-between h-14 relative">
             {/* Container des logos avec dimensions fixes */}
             <div className="relative w-[280px] h-[100px] flex items-center">
-              <div className="absolute -left-0 top-0 h-full w-[71px] flex items-center justify-center">
+              <div className="absolute -left-0 top-1 h-full w-[71px] flex items-center justify-center">
                 <Link href="/">
                   <Image
                     src="/images/meme-pas-contente.png"
@@ -290,50 +290,49 @@ const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Navigation Bar - Desktop and Tablet - Hauteur fixe */}
-      <nav className="hidden sm:min-w-sm md:hidden lg:flex xl:flex bg-white shadow-xl relative h-12 mx-auto">
-        <div className="container mx-auto h-full flex items-center justify-between overflow-x-auto overflow-y-hidden">
-          <ChevronLeft
-            className="w-6 h-6 text-gray-950 cursor-pointer hover:text-primary transition-colors flex-shrink-0"
-            onClick={() => {
-              const scrollContainer = document.querySelector('.scrollable-menu');
-              if (scrollContainer) {
-                scrollContainer.scrollBy({ left: -150, behavior: 'smooth' });
-              }
-            }}
-          />
+      {/* NAV Menu */}
+      <nav className="hidden sm:min-w-sm md:hidden lg:flex xl:flex mt-1 bg-white shadow-xl relative h-14 mx-auto">
+          <div className="container mx-auto h-full flex items-center justify-between overflow-x-hidden">
+            <ChevronLeft
+              className="w-6 h-6 text-gray-950 cursor-pointer hover:text-primary transition-colors flex-shrink-0"
+              onClick={() => {
+                const scrollContainer = document.querySelector('.scrollable-menu');
+                if (scrollContainer) {
+                  scrollContainer.scrollBy({ left: -150, behavior: 'smooth' });
+                }
+              }}
+            />
+            <ul className="scrollable-menu flex items-center space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar h-full mx-4 pl-8 pr-8 flex-grow">
+              {categories.map((category) => (
+                <li
+                  key={category.name}
+                  className="whitespace-nowrap font-bold hover-animate h-full flex items-center text-[13px] lg:text-[14px]"
+                >
+                  <a
+                    href={category.href}
+                    onClick={category.onClick}
+                    className={`px-4 text-gray-950 hover:text-primary transition-colors flex items-center h-full ${
+                      category.className || ''
+                    }`}
+                  >
+                    {category.name}
+                    {category.icon}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <ChevronRight
+              className="w-6 h-6 text-gray-950 cursor-pointer hover:text-primary transition-colors flex-shrink-0"
+              onClick={() => {
+                const scrollContainer = document.querySelector('.scrollable-menu');
+                if (scrollContainer) {
+                  scrollContainer.scrollBy({ left: 150, behavior: 'smooth' });
+                }
+              }}
+            />
+          </div>
+        </nav>
 
-          <ul className="scrollable-menu flex items-center justify-center space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar h-full mx-4 pl-28 pr-28 flex-grow">
-        {categories.map((category) => (
-          <li
-            key={category.name}
-            className="whitespace-nowrap font-bold hover-animate h-full flex items-center text-[13px] lg:text-[14px]"
-          >
-            <a
-          href={category.href}
-          onClick={category.onClick}
-          className={`px-5 text-gray-950 hover:text-primary transition-colors flex items-center h-full ${
-            category.className || ''
-          }`}
-            >
-          {category.name}
-          {category.icon}
-            </a>
-          </li>
-        ))}
-          </ul>
-
-          <ChevronRight
-        className="w-6 h-6 text-gray-950 cursor-pointer hover:text-primary transition-colors flex-shrink-0"
-        onClick={() => {
-          const scrollContainer = document.querySelector('.scrollable-menu');
-          if (scrollContainer) {
-            scrollContainer.scrollBy({ left: 150, behavior: 'smooth' });
-          }
-        }}
-          />
-        </div>
-      </nav>
 
 
       {/* Nos Vins Popup */}

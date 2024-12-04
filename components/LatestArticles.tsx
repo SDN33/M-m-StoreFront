@@ -97,6 +97,7 @@ const LatestArticles: React.FC = () => {
                   fill
                   className="absolute inset-0 w-full h-full object-cover cursor-pointer"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+
                 />
               </a>
             </div>
@@ -110,9 +111,9 @@ const LatestArticles: React.FC = () => {
                 </span>
               </div>
 
-              <h3 className="font-bold text-xl text-gray-950 mb-3 line-clamp-2">
+              <a className="font-bold text-xl text-gray-950 mb-3 line-clamp-2" href={`/blog/${article.id}`}>
                 {he.decode((article.title || "").replace(/<\/?[^>]+(>|$)/g, ""))}
-              </h3>
+              </a>
 
               <div
                 className="text-gray-600 mb-4 line-clamp-3"

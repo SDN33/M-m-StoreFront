@@ -211,7 +211,7 @@ export default function Home() {
       {isMobile ? (
         <MobileHome />
       ) : (
-        <div className="flex flex-1">
+        <div className="flex flex-1 mt-2">
           <aside
             className={`w-64 bg-gray-200 border-r border-gray-200 ${
               isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out' : 'relative'

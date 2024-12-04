@@ -110,9 +110,9 @@ const Blog = () => {
                 </span>
               </div>
 
-              <h3 className="font-bold text-xl text-gray-950 mb-3 line-clamp-2">
+              <a className="font-bold text-xl text-gray-950 mb-3 line-clamp-2" href={`/blog`}>
                 {he.decode((article.title || "").replace(/<\/?[^>]+(>|$)/g, ""))}
-              </h3>
+              </a>
 
               <div
                 className="text-gray-600 mb-4 line-clamp-3"
