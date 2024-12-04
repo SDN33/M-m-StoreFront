@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu as MenuIcon, X, ChevronDown, ChevronRight, ChevronLeft, Rss, BadgePercent, UsersRound, MessageCircleQuestion } from 'lucide-react';
+import { Menu as MenuIcon, X, ChevronDown, ChevronRight, ChevronLeft, Rss, BadgePercent, UsersRound, MessageCircleQuestion} from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import CartPopup from './CartPopup';
@@ -45,9 +45,10 @@ const Header: React.FC = () => {
 
   const categories = [
     { name: 'PROMOS', href: '/promos', className: '!text-primary font-gray-950', icon: <BadgePercent className="inline-block ml-1 -mt-1 w-4 h-4" /> },
-    { name: 'Nos Vins', href: '#', onClick: toggleNosVinsPopup, icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
+    { name: 'Nos Vins', href: '#', onClick: toggleNosVinsPopup, className: 'bg-black !text-white', icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com', target: "_blank", rel: "noopener noreferrer" },
     { name: 'Nos Vignerons.nes', href: '/vendors' },
+    { name: 'Vins Sans Sulfites', classhref: '/vins-sans-sulfites' },
     { name: 'Vins du Monde', href: '/vins-du-monde' },
     { name: 'Contactez-nous', href: '/contact' },
     { name: 'Blog', href: '/blog', icon: <Rss className="inline-block ml-1 -mt-1 w-4 h-4" /> },
@@ -94,12 +95,12 @@ const Header: React.FC = () => {
       </div>
 
       {/* Top Header - Hauteur fixe */}
-      <div className="border-b bg-gradient-to-l from-primary to-primary pt-0 md:pt-4 lg:pt-4 pb-1">
+      <div className="bg-primary pt-0 md:pt-4 lg:pt-4 pb-1">
         <div className="container mx-auto px-4">
           {/* Desktop and Tablet View - Hauteur fixe */}
           <div className="hidden lg:flex items-center justify-between h-14 relative">
             {/* Container des logos avec dimensions fixes */}
-            <div className="relative w-[280px] h-[90px] flex items-center">
+            <div className="relative w-[280px] h-[100px] flex items-center">
               <div className="absolute -left-0 top-0 h-full w-[71px] flex items-center justify-center">
                 <Link href="/">
                   <Image
@@ -182,12 +183,12 @@ const Header: React.FC = () => {
                 </div>
               </div>
               <a href="/faq" className="text-white hover:text-gray-950 font-semibold whitespace-nowrap text-center flex flex-col items-center">
-                <MessageCircleQuestion className="mb-1 w-5 h-auto" />
+                <MessageCircleQuestion className="mb-1 w-4 h-auto" />
                 FAQ
               </a>
 
               <a href="/portailpro" className="text-white hover:text-gray-950 font-semibold whitespace-nowrap text-center flex flex-col items-center">
-                <UsersRound className="mb-1 w-5 h-auto" />
+                <UsersRound className="mb-1 w-4 h-auto" />
                 Portail Pro
               </a>
               <AuthButton />
@@ -302,7 +303,7 @@ const Header: React.FC = () => {
         }}
           />
 
-          <ul className="scrollable-menu flex items-center justify-start space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar h-full mx-4 pl-28 flex-grow">
+          <ul className="scrollable-menu flex items-center justify-center space-x-4 lg:space-x-8 overflow-x-auto no-scrollbar h-full mx-4 pl-28 pr-28 flex-grow">
         {categories.map((category) => (
           <li
             key={category.name}
