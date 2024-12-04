@@ -185,7 +185,7 @@ const ProductPage: React.FC = () => {
       </div>
       <br /><br /><br />
       <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 overflow-y-hidden">
-        <nav aria-label="Breadcrumb" className="text-sm mb-7 overflow-x-auto whitespace-nowrap">
+        <nav aria-label="Breadcrumb" className="text-xs mb-7 overflow-x-auto whitespace-nowrap text-center">
           <ol className="list-none p-0 inline-flex">
             <li className="flex items-center">
               <a href="/" className="text-gray-950 hover:text-gray-700">Accueil</a>
@@ -325,6 +325,7 @@ const ProductPage: React.FC = () => {
                 product={product}
                 quantity={quantity}
                 productId={product.id}
+                aria-label={`Ajouter ${quantity} bouteille${quantity > 1 ? 's' : ''} au panier`}
                 onAddToCart={() => {
                   return new Promise<void>((resolve) => {
                     console.log(`Added ${quantity} of product ${product.id} to cart`);
@@ -334,34 +335,36 @@ const ProductPage: React.FC = () => {
               />
             </div>
                 {/* Logos de paiement */}
-            <div className="flex justify-start items-center space-x-4 w-fit h-auto mb-8 bg-white rounded-lg p-2 mt-3">
+            <div className="flex justify-start items-center space-x-4 w-fit h-auto mb-8 bg-white rounded-lg p-2 mt-2">
               <a href="https://www.visa.fr" title="Visa">
                 <Image
                   src="/images/visa.png"
                   alt="Visa"
-                  height={30}
-                  width={30}
-                  sizes="30"
+                  height={20}
+                  width={20}
+                  sizes="20"
                 />
               </a>
               <a href="https://www.mastercard.fr" title="mastercard" aria-label="Mastercard">
                 <Image
                   src="/images/mastercard.png"
                   alt="Mastercard"
-                  height={30}
-                  width={30}
+                  height={20}
+                  width={20}
+                  sizes='20'
                 />
               </a>
               <a href="https://stripe.com/fr" title="Stripe" aria-label="Stripe">
                 <Image
                   src="/images/stripe.webp"
                   alt="Stripe"
-                  height={50}
-                  width={30}
+                  height={40}
+                  width={20}
+                  sizes='20'
                 />
               </a>
               <div className="flex items-center text-gray-600">
-                <CreditCard className="h-4 w-4 mr-1 text-blue-600" />
+                <CreditCard className="h-3 w-3 mr-1 text-blue-600" />
                 <span className="text-xs font-semibold text-blue-600">Paiement sécurisé</span>
               </div>
             </div>
