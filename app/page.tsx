@@ -248,13 +248,12 @@ export default function Home() {
             }}
           >
             <div>
-              <h1 className="sr-only">ACHAT VIN BIO et BIODYNAMIQUE - Rouge, Blanc, Rosé 🍷 - Mémé Georgette</h1>
               <div className="pt-24 md:hidden lg:flex" />
               <ProductsIntro />
               <Slider />
-              <div className="keyword-bar flex flex-wrap justify-center gap-4 p-4 bg-gray-100 rounded-lg">
-                Vins Bio - Vins Biodynamiques - Vins Sans Sulfites - Vins Rouges - Vins Blancs - Vins Rosés - Vins Pétillants - Vins Liquoreux
-              </div>
+                <h1 className=" font-bold keyword-bar flex flex-wrap justify-center gap-4 p-4 bg-gray-50 rounded-lg">
+                VINS MÉMÉ GEORGETTE : ACHAT DE VINS BIO ET BIODYNAMIQUE EN LIGNE
+                </h1>
               <div className="max-w-7xl mx-auto px-4">
                 <section className="bg-white rounded-lg shadow">
                   {productsLoaded && (
