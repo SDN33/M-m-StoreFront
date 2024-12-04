@@ -73,7 +73,8 @@ const Blog = () => {
   }
 
   return (
-    <div className="container mx-auto px-8 lg:px-32 py-8 mb-20 mt-36">
+    <div className="container mx-auto px-8 lg:px-32 py-8 mb-20 mt-40">
+      <div className='text-center text-xs mx-auto text-gray-950 mb-4'><a href="/">Accueil</a> / <strong>Blog de Mémé</strong></div>
       <div className="text-center mb-10 bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 pt-7 rounded-t-xl">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-primary">
           Le Blog de Mémé Georgette&nbsp;
@@ -110,7 +111,7 @@ const Blog = () => {
                 </span>
               </div>
 
-              <a className="font-bold text-xl text-gray-950 mb-3 line-clamp-2" href={`/blog`}>
+              <a className="font-bold text-xl text-gray-950 mb-3 line-clamp-2" href={`/blog/${article.id}`}>
                 {he.decode((article.title || "").replace(/<\/?[^>]+(>|$)/g, ""))}
               </a>
 
