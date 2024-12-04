@@ -6,9 +6,7 @@ import ProductFilter from '@/components/ProductFilters';
 import MobileProductFilter from '@/components/MobileProductFilter';
 import Slogan from '@/components/Slogan';
 import HeroBanner from '@/components/HeroBanner';
-import BackToTop from '@/components/BackToTop';
 import CatSlider from '@/components/CatSlider';
-import PromoCode from '@/components/PromoCode';
 
 export default function RedWinePage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -82,8 +80,6 @@ export default function RedWinePage() {
         <br />
         <br />
         <Slogan />
-        <BackToTop />
-        <PromoCode />
       </main>
       <div className='sm:flex md:flex lg:hidden'>
         <MobileProductFilter

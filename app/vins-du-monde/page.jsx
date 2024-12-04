@@ -6,7 +6,6 @@ import Livraison from '@/components/Livraison';
 import HeroBanner from '@/components/HeroBanner';
 import Trust from '@/components/Trust';
 import FallingFlagsPromo from '@/components/FallingFlagsMonde';
-import PromoCode from '@/components/PromoCode';
 
 export default function VinsDuMonde() {
   const [products, setProducts] = useState([]);
@@ -99,7 +98,6 @@ export default function VinsDuMonde() {
         <Livraison />
         <br />
         <Trust />
-        <PromoCode />
         <br />
       </main>
     </div>

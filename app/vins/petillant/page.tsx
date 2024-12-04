@@ -6,9 +6,7 @@ import ProductFilter from '@/components/ProductFilters';
 import MobileProductFilter from '@/components/MobileProductFilter';
 import Slogan from '@/components/Slogan';
 import HeroBanner from '@/components/HeroBanner';
-import BackToTop from '@/components/BackToTop';
 import CatSlider from '@/components/CatSlider';
-import PromoCode from '@/components/PromoCode';
 
 export default function SparklingWinePage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -88,8 +86,6 @@ export default function SparklingWinePage() {
         <br />
         <br />
         <Slogan />
-        <BackToTop />
-        <PromoCode />
 
       </main>
 

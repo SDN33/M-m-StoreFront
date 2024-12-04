@@ -11,12 +11,12 @@ import Trust from '@/components/Trust';
 import Livraison from '@/components/Livraison';
 import WineCategories from '@/components/WineCategories';
 import LatestArticles from '@/components/LatestArticles';
-import BackToTop from '@/components/BackToTop';
 import Image from 'next/image';
 import Head from 'next/head';
 import GoToFooter from '@/components/GoToFooter';
 import BioWineDescription from '@/components/BioWineDescription';
 import Socialshare from '@/components/Socialshare';
+import BackToTop from '@/components/BackToTop';
 
 
 export default function Home() {

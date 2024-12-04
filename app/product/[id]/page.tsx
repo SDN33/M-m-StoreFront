@@ -339,11 +339,11 @@ const ProductPage: React.FC = () => {
         <div className="mt-8 w-full">
           <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 p-8 rounded-t-xl">Description du produit</h2>
           <div className="border-b-8 border-white w-full max-w-[50rem] my-3 h-3 slide-in-right mx-auto -mt-1"></div>
-          <p className='font-serif text-center mt-8 px-8'>
+            <p className='font-serif font-normal text-center mt-8 px-8'>
             {product.description && product.short_description
               ? formatDescription(product.description.length > product.short_description.length ? product.description : product.short_description)
               : formatDescription(product.description || product.short_description || '')}
-          </p>
+            </p>
           <br />
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 w-full px-4 md:px-10">

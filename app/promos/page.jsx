@@ -6,7 +6,6 @@ import Livraison from '@/components/Livraison';
 import HeroBanner from '@/components/HeroBanner';
 import Trust from '@/components/Trust';
 import FallingEurosPromo from '@/components/FallingEurosPromo';
-import PromoCode from '@/components/PromoCode';
 
 export default function ProductsPromotions() {
   const [products, setProducts] = useState([]);
@@ -99,7 +98,6 @@ export default function ProductsPromotions() {
         <HeroBanner />
         <Livraison />
         <Trust />
-        <PromoCode />
         <br />
       </main>
     </div>
