@@ -285,7 +285,7 @@ const ProductPage: React.FC = () => {
 
             <span className="text-xs font-normal">Bouteille de {product.volume}</span>
             <br />
-            <p className="text-sm font-normal">
+            <p className="text-sm font-normal mb-4">
               Vendu par
               <a className="cursor-pointer text-gray-950 hover:text-teal-800" onClick={vendorRedirect}>
                  <br />{product.store_name || ' @MéméGeorgette'}
@@ -293,7 +293,6 @@ const ProductPage: React.FC = () => {
             </p>
 
 
-            <br />
             <SocialShare url={currentUrl} title={`${product.name} - VINS Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE`} />
             <div className="items-center mt-6 flex gap-2">
               <Package className="h-6 w-6" />

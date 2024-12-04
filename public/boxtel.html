@@ -36,26 +36,24 @@
                 console.log('Access Token récupéré:', accessToken);
 
                 const boxtalMaps = new BoxtalMaps({
-                    domToLoadMap: '#parcel-point-map',
-                    accessToken: accessToken,
+                    domToLoadMap: '#parcel-point-map', // le sélecteur correspond à l'élément qui doit accueillir la carte
+                    accessToken: accessToken, // le token récupéré via le endpoint d'authentification
                     config: {
-                        locale: 'fr',
-                        address: '75001 Paris, France',
-                        parcelPointNetworks: [
+                        locale: 'fr', // langue de l'interface, optionnel, valeurs possibles fr ou en
+                        parcelPointNetworks: [ // la liste de réseaux à afficher
                             {
-                                code: 'CHRP_NETWORK',
+                                code: 'CHRP_NETWORK', // code du réseau, ici le code pour Chronopost
                                 markerTemplate: {
-                                    color: '#94a1e8'
+                                    color: '#94a1e8' // il est possible de surcharger la couleur du marker pour chaque réseau
                                 },
                             }
                         ],
                         options: {
-                            primaryColor: '#00FA9A',
-                            autoSelectNearestParcelPoint: true
+                            primaryColor: '#00FA9A', // couleur des boutons (et des markers si pas surchargée)
+                            autoSelectNearestParcelPoint: true // le plus relais le plus proche sera sélectionné par défaut dès la recherche effectuée
                         },
                     }
                 });
-
                 boxtalMaps.onSearchParcelPointsResponse(function (points) {
                     if (points.length > 0) {
                         console.log('Points de livraison trouvés:', points);
