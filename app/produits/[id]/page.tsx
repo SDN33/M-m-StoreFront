@@ -194,7 +194,7 @@ const ProductPage: React.FC = () => {
 
 
   return (
-    <div className=" min-h-screen sm:mt-28 md:mt-16 px-4 md:px-12 flex flex-col justify-between overflow-x-hidden overflow-y-hidden">
+    <div className=" min-h-screen sm:mt-28 md:mt-16 lg:mt-20 px-4 md:px-12 flex flex-col justify-between overflow-x-hidden overflow-y-hidden">
       <span className='sm:flex md:hidden lg:hidden'><br /><br /></span>
       <div className="relative top-0 left-0 w-full">
       </div>

@@ -136,7 +136,9 @@ const VendorsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 mt-44 mx-8">
+    <div className="min-h-screen bg-gray-50 mt-48 mx-8">
+      <div className='text-center text-xs mx-auto text-gray-950 mb-4'><a href="/">Accueil</a> / <strong>Nos Vignerons.nes</strong></div>
+
       <div className="text-center mb-10 bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 pt-7 rounded-t-xl mx-8">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-white mb-8">
           Nos Vignerons Partenaires&nbsp;

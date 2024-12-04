@@ -71,7 +71,7 @@ export default function VinsSansSulfites() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex-grow container mx-auto px-4 mt-44 xl:px-40">
+      <main className="flex-grow container mx-auto px-4 mt-48 xl:px-40">
         <div className='text-center text-xs mx-auto text-gray-950 mb-4'>
           <a href="/">Accueil</a> / <strong>Vins sans sulfites</strong>
         </div>
