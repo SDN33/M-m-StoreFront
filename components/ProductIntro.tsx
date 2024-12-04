@@ -59,7 +59,7 @@ const ProductsIntro: React.FC = () => {
       <div className="container mx-auto -mb-60 -mt-10 md:-mt-14 md:mb-8 lg:-mb-60 xl:mb-0">
       <div className="relative z-10 flex flex-col items-center lg:flex-row lg:justify-between">
         {/* Left Logos (Mobile Hidden) */}
-        <div className="hidden lg:flex space-x-4 mb-4 lg:mb-0">
+        <div className="hidden md:flex lg:flex space-x-4 mb-4 lg:mb-0">
         <Image
           src="/images/bio2.png"
           alt="bio logo"
