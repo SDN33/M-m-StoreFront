@@ -65,7 +65,7 @@ const getFilterTitle = (filterType: string) => {
       <>
         <div className="flex items-center">
           <Locate className="text-teal-800 w-3 h-auto mr-2" />
-          <span className="text-sm">RÉGIONS</span>
+          <span className="text-sm">RÉGIONS / PAYS</span>
         </div>
       </>
     ),
