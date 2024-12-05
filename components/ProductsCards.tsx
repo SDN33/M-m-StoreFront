@@ -170,7 +170,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
   }, [products, filterProducts, sortBy]);
 
   const loadMoreProducts = () => {
-    setVisibleCount((prevCount) => prevCount + 12);
+    setVisibleCount((prevCount) => prevCount + 6);
   };
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -214,9 +214,16 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
         <div className="space-y-10 ">
           <div className="mx-auto overflow-hidden justify-center flex">
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 justify-center">
-              {filteredProducts.slice(0, visibleCount).map((product) => (
-                <ProductCard key={product.id} product={product} onAddToCart={async () => await onAddToCart(product.id, 1, 0)} />
-              ))}
+                {[...filteredProducts]
+                .sort(() => Math.random() - 0.5)
+                .slice(0, visibleCount)
+                .map((product) => (
+                  <ProductCard
+                  key={product.id}
+                  product={product}
+                  onAddToCart={async () => await onAddToCart(product.id, 1, 0)}
+                  />
+                ))}
             </div>
           </div>
           {filteredProducts.length > visibleCount && (

@@ -8,6 +8,9 @@ import Livraison from '@/components/Livraison';
 import SocialShare from '@/components/Socialshare';
 import AddToCartButton from '@/components/AddToCartButton';
 import ProductReviews from '@/components/ProductReviews';
+import Head from 'next/head';
+
+
 
 interface Product {
   id: number;
@@ -42,7 +45,6 @@ interface Product {
   degustation: string;
   sans_sulfites_?: string;
 }
-
 
 const formatDescription = (description: string, maxChars = 90) => {
   const plainText = description.replace(/<\/?[^>]+(>|$)/g, '');
@@ -195,7 +197,20 @@ const ProductPage: React.FC = () => {
 
 
   return (
-    <div className=" min-h-screen sm:mt-28 md:mt-16 lg:mt-20 px-4 md:px-12 flex flex-col justify-between overflow-x-hidden overflow-y-hidden">
+    <>
+      <Head>
+        <title>{product.name} - VINS Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE</title>
+        <meta name="description" content={product.description || product.short_description} />
+        <meta property="og:title" content={`${product.name} - Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE`} />
+        <meta property="og:description" content={product.description || product.short_description} />
+        <meta property="og:image" content={product.images[0].src} />
+        <meta property="og:url" content={currentUrl} />
+        <meta property="og:type" content="product" />
+        <meta property="product:price:amount" content={product.price.toString()} />
+        <meta property="product:price:currency" content="EUR" />
+      </Head>
+
+      <div className=" min-h-screen sm:mt-28 md:mt-16 lg:mt-20 px-4 md:px-12 flex flex-col justify-between overflow-x-hidden overflow-y-hidden">
       <span className='sm:flex md:hidden lg:hidden'><br /><br /></span>
       <div className="relative top-0 left-0 w-full">
       </div>
@@ -502,6 +517,7 @@ const ProductPage: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
