@@ -205,7 +205,7 @@ const ProductPage: React.FC = () => {
         <meta property="og:url" content="" />
         <meta property="og:type" content="website" />
       </Head>
-      <div className=" min-h-screen sm:mt-28 md:mt-16 lg:mt-20 px-4 md:px-12 flex flex-col justify-between overflow-x-hidden overflow-y-hidden">
+      <div className=" min-h-screen sm:mt-0 md:mt-16 lg:mt-20 px-4 md:px-12 flex flex-col justify-between overflow-x-hidden overflow-y-hidden">
       <span className='sm:flex md:hidden lg:hidden'><br /><br /></span>
       <div className="relative top-0 left-0 w-full">
       </div>

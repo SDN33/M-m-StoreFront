@@ -8,7 +8,6 @@ import { CartProvider } from '../context/CartContext';
 import { Analytics } from "@vercel/analytics/react";
 import Cookies from "@/components/Cookies";
 import Script from "next/script";
-import BackToTop from "@/components/BackToTop";
 
 type TwitterMetadata = {
   card: string;
@@ -103,7 +102,6 @@ export default function RootLayout({
           </CartProvider>
         </AuthProvider>
         <Analytics />
-        <BackToTop />
         <Footer />
       </body>
     </html>
