@@ -73,10 +73,6 @@ export default function RootLayout({
         "logo": "https://www.vinsmemegeorgette.com/memelogo2.png",
         "description": "Vins bio et biodynamiques en direct des vignerons engagés",
         "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Coubeyrac",
-          "addressRegion": "Dordogne",
-          "postalCode": "24000",
           "addressCountry": "FR"
         },
           })}
