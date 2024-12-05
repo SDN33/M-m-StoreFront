@@ -8,22 +8,7 @@ import Livraison from '@/components/Livraison';
 import SocialShare from '@/components/Socialshare';
 import AddToCartButton from '@/components/AddToCartButton';
 import ProductReviews from '@/components/ProductReviews';
-import type { Metadata } from 'next';
 import Head from 'next/head';
-
-const generateMetadata = (product: Product): Metadata => ({
-  title: `${product.name} - Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE`,
-  description: `${product.description}`,
-  openGraph: {
-    title: `${product.name} - Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE`,
-    description: `Achetez les meilleurs vins bio et biodynamiques avec Mémé Georgette. ${product.description}`,
-    images: [{ url: '/images/default-product.jpg' }],
-    url: '',
-    type: 'website',
-  },
-});
-
-
 
 interface Product {
   id: number;
