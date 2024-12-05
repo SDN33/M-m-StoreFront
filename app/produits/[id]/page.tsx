@@ -8,7 +8,20 @@ import Livraison from '@/components/Livraison';
 import SocialShare from '@/components/Socialshare';
 import AddToCartButton from '@/components/AddToCartButton';
 import ProductReviews from '@/components/ProductReviews';
+import type { Metadata } from 'next';
 import Head from 'next/head';
+
+const generateMetadata = (product: Product): Metadata => ({
+  title: `${product.name} - Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE`,
+  description: `${product.description}`,
+  openGraph: {
+    title: `${product.name} - Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE`,
+    description: `Achetez les meilleurs vins bio et biodynamiques avec Mémé Georgette. ${product.description}`,
+    images: [{ url: '/images/default-product.jpg' }],
+    url: '',
+    type: 'website',
+  },
+});
 
 
 
@@ -199,23 +212,14 @@ const ProductPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>{product.name ? `${product.name} - Mémé Georgette - Vins Bio et Biodynamiques` : 'Vins Mémé Georgette'}</title>
-        <meta name="description" content={product.short_description || product.description || "Découvrez une sélection de vins bio et biodynamiques sur Mémé Georgette."} />
-
-        {/* Open Graph */}
-        <meta property="og:title" content={product.name ? `${product.name} - Mémé Georgette` : 'Mémé Georgette - Vins Bio et Biodynamiques'} />
-        <meta property="og:description" content={product.short_description || product.description || 'Achetez les meilleurs vins bio et biodynamiques avec Mémé Georgette.'} />
-        <meta property="og:image" content={product.images.length > 0 ? product.images[0].src : '/images/default-product.jpg'} />
-        <meta property="og:url" content={currentUrl} />
-        <meta property="og:type" content="product" />
-
-        {/* Spécifications produit */}
-        <meta property="product:price:currency" content="EUR" />
-        {product.millesime && <meta property="product:release_date" content={product.millesime} />}
-        <meta name="keywords" content={`vin, ${product.name}, ${product.region__pays || 'France'}, ${product.appellation || ''}, vin bio, Mémé Georgette`} />
+        <title>{product.name} - Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE</title>
+        <meta name="description" content={product.description} />
+        <meta property="og:title" content={`${product.name} - Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE`} />
+        <meta property="og:description" content={`Achetez les meilleurs vins bio et biodynamiques avec Mémé Georgette. ${product.description}`} />
+        <meta property="og:image" content="/images/default-product.jpg" />
+        <meta property="og:url" content="" />
+        <meta property="og:type" content="website" />
       </Head>
-
-
       <div className=" min-h-screen sm:mt-28 md:mt-16 lg:mt-20 px-4 md:px-12 flex flex-col justify-between overflow-x-hidden overflow-y-hidden">
       <span className='sm:flex md:hidden lg:hidden'><br /><br /></span>
       <div className="relative top-0 left-0 w-full">
