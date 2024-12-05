@@ -1,31 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async headers() {
-    return [
-      {
-        source: "/(.*)", // Applique à toutes les routes
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable", // Cache pendant 1 an, ne change jamais
-          },
-          {
-            key: "Strict-Transport-Security",
-            value: "max-age=63072000; includeSubDomains; preload",
-          },
-          {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
-          },
-          {
-            key: "X-Frame-Options",
-            value: "DENY",
-          },
-        ],
-      },
-    ];
-  },
-
   images: {
     remotePatterns: [
       {
