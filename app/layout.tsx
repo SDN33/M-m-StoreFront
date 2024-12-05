@@ -82,24 +82,6 @@ export default function RootLayout({
           })}
         </script>
 
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "http://schema.org",
-            "@type": "Store",
-            "name": "Vins Mémé Georgette",
-            "url": "https://www.vinsmemegeorgette.com",
-            "logo": "https://www.vinsmemegeorgette.com/memelogo2.png",
-            "description": "Vins bio et biodynamiques en direct des vignerons engagés",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Coubeyrac",
-              "addressRegion": "Dordogne",
-              "postalCode": "24000",
-              "addressCountry": "FR"
-            },
-          })}
-        </script>
-
         <Script id="brevo-script">
           {`
             (function(d, w, c) {
