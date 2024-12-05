@@ -35,7 +35,7 @@ export default function SparklingWinePage() {
     return () => mediaQuery.removeEventListener('change', checkMobile);
   }, []);
 
-  const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {
+  const handleFilterChange = (category: string, filters: string[]) => {
     if (category !== 'color') {
       setSelectedFilters((prev) => ({
         ...prev,
