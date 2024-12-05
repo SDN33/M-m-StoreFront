@@ -75,7 +75,6 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charSet="UTF-8" />
 
-        <meta name="google-site-verification" content="plL9arRVEcGe1MB5rkPbd1uoFs13d9BC2h1Dvk5GIZY" />
         <meta name="twitter:card" content={metadata.twitter?.card} />
         <meta name="twitter:title" content={metadata.twitter?.title} />
         <meta name="twitter:description" content={metadata.twitter?.description} />
