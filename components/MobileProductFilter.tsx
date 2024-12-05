@@ -1,144 +1,177 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Gift, ChevronUp, ChartCandlestick, X, Filter } from 'lucide-react';
+'use client';
+
+import React, { useState, useRef, useEffect } from 'react';
+import {
+  ChevronDown,
+  ChevronUp,
+  Filter,
+  X,
+  Wine,
+  Locate,
+  Calendar,
+  Grape,
+  Medal,
+  Ruler,
+  Utensils,
+  RefreshCw,
+  FlaskConicalOff,
+  Gift
+} from 'lucide-react';
 import Image from 'next/image';
 
-interface ProductFilterProps {
-  selectedFilters: {
-    categories: string[];
-    millesime: string[];
-    certification: string[];
-    style: string[];
-    volume: string[];
-    accord_mets: string[];
-    region__pays: string[];
-    sans_sulfites_: string[];
-    color: string[];
-    petit_prix: string[];
-    haut_de_gamme: string[];
-    
-  };
-  onFilterChange: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
-  resetFilters: () => void;
-  hideColorFilter?: boolean;
+// Define a type for filter options with an additional display label
+interface FilterOption {
+  label: string;
+  value: string;
 }
 
-const filterOptions = {
-  couleur: [
-    { label: 'Rouge', value: 'Rouge' },
-    { label: 'Blanc', value: 'Blanc' },
-    { label: 'Rosé', value: 'Rosé' },
-    { label: 'Pétillant', value: 'Pétillant' },
-    { label: 'Liquoreux', value: 'Liquoreux' },
-    { label: 'Autres', value: 'Autres' },
-  ],
-  region: [
-    { label: 'Alsace', value: 'Alsace' },
-    { label: 'Beaujolais', value: 'Beaujolais' },
-    { label: 'Bourgogne', value: 'Bourgogne' },
-    { label: 'Bordeaux', value: 'Bordeaux' },
-    { label: 'Champagne', value: 'Champagne' },
-    { label: 'Jura', value: 'Jura' },
-    { label: 'Languedoc', value: 'Languedoc' },
-    { label: 'Loire', value: 'Loire' },
-    { label: 'PACA', value: 'PACA' },
-    { label: 'Roussillon', value: 'Roussillon' },
-    { label: 'Savoie', value: 'Savoie' },
-    { label: 'Sud Ouest', value: 'Sud Ouest' },
-    { label: 'Vallée du Rhône', value: 'Vallée du Rhône' },
-    { label: 'Italie', value: 'Italie' },
-    { label: 'Espagne', value: 'Espagne' },
-    { label: 'Portugal', value: 'Portugal' },
-    { label: 'Allemagne', value: 'Allemagne' },
-  ],
-  certification: [
-    { label: 'Bio', value: 'Bio' },
-    { label: 'Biodynamie', value: 'Biodynamie' },
-    { label: 'En conversion 🔄', value: 'En conversion' },
-  ],
-  sans_sulfites_: [
-    { label: 'Sans sulfites ajoutés', value: 'Sans sulfites ajoutés' },
-  ],
-  style: [
-    { label: 'Charpenté', value: 'Charpenté' },
-    { label: 'Fruité', value: 'Fruité' },
-    { label: 'Moelleux', value: 'Moelleux' },
-    { label: 'Corsé', value: 'Corsé' },
-    { label: 'Sec', value: 'Sec' },
-  ],
-  millesime: [
-    { label: '2023', value: '2023' },
-    { label: '2022', value: '2022' },
-    { label: '2021', value: '2021' },
-    { label: '2020', value: '2020' },
-    { label: '2019', value: '2019' },
-    { label: '2018', value: '2018' },
-    { label: '2017', value: '2017' },
-    { label: '2016 et avant', value: '2016_et_avant' },
-  ],
-  volume: [
-    { label: '75 cl', value: '75 cl' },
-    { label: '1 Litre', value: '1 Litre' },
-    { label: 'Autres', value: 'Autres' },
-  ],
-  accord_mets: [
-    { label: 'Viandes rouges', value: 'Viandes rouges' },
-    { label: 'Viandes blanches', value: 'Viandes blanches' },
-    { label: 'Poissons', value: 'Poissons' },
-    { label: 'Fruits de mer', value: 'Fruits de mer' },
-    { label: 'Fromages', value: 'Fromages' },
-    { label: 'Desserts / Sucré', value: 'Desserts / Sucré' },
-    { label: 'Plats végétariens', value: 'Plats végétariens' },
-  ],
-};
-
-
-const getFilterTitle = (filterType: string) => {
-  const titles: { [key: string]: string } = {
-    millesime: 'Millesime',
-    certification: 'Certification',
-    style: 'Style',
-    volume: 'Volume',
-    accord_mets: 'Accord Mets',
-    region__pays: 'Region/Pays',
-    sans_sulfites_: 'Sans Sulfites',
-    couleur: 'Couleur',
+interface FilterOptionsWithDisplay {
+  [key: string]: {
+    options: FilterOption[];
+    displayName?: string; // New property for custom display name
   };
-  return titles[filterType] || filterType;
+}
+
+const filterOptions: FilterOptionsWithDisplay = {
+  color: {
+    displayName: 'Couleur du Vin',
+    options: [
+      { label: 'Rouge', value: 'Rouge' },
+      { label: 'Blanc', value: 'Blanc' },
+      { label: 'Rosé', value: 'Rosé' },
+      { label: 'Pétillant', value: 'Pétillant' },
+      { label: 'Liquoreux', value: 'Liquoreux' },
+      { label: 'Autres', value: 'Autres' },
+    ]
+  },
+  region: {
+    displayName: 'Région / Pays',
+    options: [
+      { label: 'Alsace', value: 'Alsace' },
+      { label: 'Beaujolais', value: 'Beaujolais' },
+      { label: 'Bourgogne', value: 'Bourgogne' },
+      { label: 'Bordeaux', value: 'Bordeaux' },
+      { label: 'Champagne', value: 'Champagne' },
+      { label: 'Jura', value: 'Jura' },
+      { label: 'Languedoc', value: 'Languedoc' },
+      { label: 'Loire', value: 'Loire' },
+      { label: 'PACA', value: 'PACA' },
+      { label: 'Roussillon', value: 'Roussillon' },
+      { label: 'Savoie', value: 'Savoie' },
+      { label: 'Sud Ouest', value: 'Sud Ouest' },
+      { label: 'Vallée du Rhône', value: 'Vallée du Rhône' },
+      { label: 'Italie', value: 'Italie' },
+      { label: 'Espagne', value: 'Espagne' },
+      { label: 'Portugal', value: 'Portugal' },
+      { label: 'Allemagne', value: 'Allemagne' },
+    ],
+  },
+  certification: {
+    displayName: 'Certification',
+    options: [
+      { label: 'Bio', value: 'Bio' },
+      { label: 'Biodynamie', value: 'Biodynamie' },
+      { label: 'En conversion 🔄', value: 'En conversion' },
+    ],
+  },
+  sans_sulfites_: {
+    displayName: 'Sulfites',
+    options: [
+      { label: 'Sans sulfites ajoutés', value: 'Sans sulfites ajoutés' },
+    ],
+  },
+  style: {
+    displayName: 'Style',
+    options: [
+      { label: 'Charpenté', value: 'Charpenté' },
+      { label: 'Fruité', value: 'Fruité' },
+      { label: 'Moelleux', value: 'Moelleux' },
+      { label: 'Corsé', value: 'Corsé' },
+      { label: 'Sec', value: 'Sec' },
+    ],
+  },
+  millesime: {
+    displayName: 'Millésime',
+    options: [
+      { label: '2023', value: '2023' },
+      { label: '2022', value: '2022' },
+      { label: '2021', value: '2021' },
+      { label: '2020', value: '2020' },
+      { label: '2019', value: '2019' },
+      { label: '2018', value: '2018' },
+      { label: '2017', value: '2017' },
+      { label: '2016 et avant', value: '2016_et_avant' },
+    ],
+  },
+  volume: {
+    displayName: 'Volume',
+    options: [
+      { label: '75 cl', value: '75 cl' },
+      { label: '1 Litre', value: '1 Litre' },
+      { label: 'Autres', value: 'Autres' },
+    ],
+  },
+  accord_mets: {
+    displayName: 'Accord Mets',
+    options: [
+      { label: 'Viandes rouges', value: 'Viandes rouges' },
+      { label: 'Viandes blanches', value: 'Viandes blanches' },
+      { label: 'Poissons', value: 'Poissons' },
+      { label: 'Fruits de mer', value: 'Fruits de mer' },
+      { label: 'Fromages', value: 'Fromages' },
+      { label: 'Desserts / Sucré', value: 'Desserts / Sucré' },
+      { label: 'Plats végétariens', value: 'Plats végétariens' },
+    ],
+  },
 };
 
-const ProductFilter: React.FC<ProductFilterProps> = ({
+interface MobileProductFilterProps {
+  selectedFilters: {
+    [key: string]: string[];
+  };
+  onFilterChange: (filterType: string, value: string[]) => void;
+  resetFilters: () => void;
+}
+
+const getFilterIcon = (filterType: string) => {
+  const icons: { [key: string]: React.ReactNode } = {
+    color: <Wine className="text-teal-800 w-4 h-auto mr-2" />,
+    region: <Locate className="text-teal-800 w-4 h-auto mr-2" />,
+    certification: <Medal className="text-teal-800 w-4 h-auto mr-2" />,
+    style: <Grape className="text-teal-800 w-4 h-auto mr-2" />,
+    millesime: <Calendar className="text-teal-800 w-4 h-auto mr-2" />,
+    volume: <Ruler className="text-teal-800 w-4 h-auto mr-2" />,
+    accord_mets: <Utensils className="text-teal-800 w-4 h-auto mr-2" />,
+    sans_sulfites_: <FlaskConicalOff className="text-teal-800 w-4 h-auto mr-2" />,
+  };
+
+  return icons[filterType] || null;
+};
+
+const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
   selectedFilters,
   onFilterChange,
-  hideColorFilter = false,
-  resetFilters,
+  resetFilters
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
-  const sidebarRef = useRef<HTMLDivElement | null>(null);
+  const filterRef = useRef<HTMLDivElement>(null);
 
-  const toggleSidebar = () => setIsOpen(!isOpen);
-
-  // Outside click handling
+  // Close filter when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        sidebarRef.current &&
-        !sidebarRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
+      if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
+        setIsFilterOpen(false);
       }
     };
 
-    if (isOpen) {
+    if (isFilterOpen) {
       document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
     }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen]);
+  }, [isFilterOpen]);
 
   const toggleSection = (section: string) => {
     setExpandedSections(prev =>
@@ -146,7 +179,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     );
   };
 
-  const handleCheckboxChange = (filterType: keyof ProductFilterProps['selectedFilters'], option: { label: string; value: string }) => {
+  const handleCheckboxChange = (filterType: string, option: { label: string; value: string }) => {
     const currentOptions = selectedFilters[filterType] ?? [];
     const updatedOptions = currentOptions.includes(option.value)
       ? currentOptions.filter((item) => item !== option.value)
@@ -156,127 +189,134 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
   const isPetitPrixMatch = () => {
     resetFilters();
-    handleCheckboxChange('petit_prix', { label: 'Petit prix', value: 'petit_prix' });
+    onFilterChange('petit_prix', ['petit_prix']);
+    setIsFilterOpen(false);
   };
 
   const isHGPrixMatch = () => {
     resetFilters();
-    handleCheckboxChange('haut_de_gamme', { label: 'Haut de gamme', value: 'haut_de_gamme' });
-  }
+    onFilterChange('haut_de_gamme', ['haut_de_gamme']);
+    setIsFilterOpen(false);
+  };
 
   return (
-    <>
-      {/* Mobile Filter Button */}
+    <div className="fixed bottom-4 left-2 z-50">
+      {/* Filter Button */}
       <button
-        onClick={toggleSidebar}
-        className="fixed left-1/2 bottom-4 transform -translate-x-1/2 bg-black/80 text-white p-3 w-24 rounded-t-xl shadow-lg md:hidden z-50"
-        aria-label="Ouvrir les filtres"
+        onClick={() => setIsFilterOpen(true)}
+        className="bg-gray-900 opacity-80 text-white p-3 rounded-t-xl shadow-lg flex items-center w-40 h-10 justify-center"
       >
-        <Filter className="w-6 h-6 justify-center flex mx-auto" />
+        <Filter className="w-6 h-6 " aria-label='filtres' />
       </button>
 
-      {/* Mobile Filter Sidebar */}
-      {isOpen && (
-        <div className="w-full fixed inset-0 bg-gray-200 backdrop-blur-sm border border-gray-200/50 shadow-2xl z-[55] overflow-y-auto">
+      {/* Filter Overlay */}
+      {isFilterOpen && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center">
           <div
-            ref={sidebarRef}
-            className="w-full h-full"
+            ref={filterRef}
+            className="bg-white w-full max-h-[90vh] rounded-t-3xl overflow-y-auto animate-slide-up"
           >
-            {/* Sticky Header with Reset and Close Buttons */}
-            <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl">
-              <div className="flex justify-between items-center p-4">
-                <button
-                  onClick={toggleSidebar}
-                  className="text-gray-800"
-                  aria-label="Fermer les filtres"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
+            {/* Close Button */}
+            <div className="flex justify-between items-center p-4 border-b border-gray-200">
+              <h2 className="text-xl font-bold">Filtres</h2>
+              <button
+                onClick={() => setIsFilterOpen(false)}
+                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200"
+              >
+                <X className="w-6 h-6 text-gray-600" />
+              </button>
             </div>
 
-            {/* Promo Buttons */}
-            <div className="p-4 space-y-4">
+            {/* Special Filters */}
+            <div className="px-4 mt-4 space-y-2">
               <button
                 onClick={isHGPrixMatch}
-                className="p-2 text-center rounded-lg border-gray-950 mx-auto bg-gradient-to-r from-gray-800 via-gray-800 to-gray-950 text-white hover:from-red-700 hover:via-red-800 hover:to-red-500 transition-all duration-300 text-sm w-full"
+                className="w-full p-3 text-center rounded-lg bg-gradient-to-r from-gray-800 via-gray-800 to-gray-950 text-white hover:opacity-90 transition-all flex items-center justify-center"
               >
-                <div className='flex items-center justify-center text-center mx-auto space-x-4'>
-                  <span className="text-center">• <Gift className='w-3 h-auto inline-block ml-1'/>&nbsp; Pour Offrir<span className='text-xs -mt-4'>&nbsp;<Gift className='w-3 h-auto inline-block ml-1'/></span> •</span>
-                </div>
+                <Gift className="w-5 h-5 mr-2" /> Vins pour Offrir
               </button>
-
               <button
                 onClick={isPetitPrixMatch}
-                className="p-2 text-center rounded-lg border-gray-950 mx-auto bg-gradient-to-r from-primary via-orange-800 to-red-900 text-white hover:from-orange-700 hover:via-primary hover:to-orange-500 transition-all duration-300 text-sm w-full"
+                className="w-full p-3 text-center rounded-lg bg-gradient-to-r from-primary via-orange-800 to-red-900 text-white hover:opacity-90 transition-all"
               >
-                <div className='flex items-center justify-center text-center mx-auto space-x-4'>
-                  <ChartCandlestick className="w-5 h-auto text-left mr-2"/>
-                  <span className="text-center">Petit Budget &lt; de 8€</span>
-                </div>
+                Petit Budget
               </button>
             </div>
 
             {/* Filter Sections */}
-            <div>
-              {Object.entries(filterOptions).map(([filterType, options]) => {
-                if (hideColorFilter && filterType === 'couleur') return null;
-                return (
-                  <div key={filterType} className="border-b border-gray-300 bg-slate-100">
-                    <button
-                      onClick={() => toggleSection(filterType)}
-                      className="w-full p-4 text-left text-base font-semibold flex items-center justify-between hover:bg-gray-100 transition-colors"
-                    >
-                      <span className="text-gray-800 text-base flex items-center">
-                        {getFilterTitle(filterType)}
+            <div className="mt-4">
+              {Object.entries(filterOptions).map(([filterType, filterData]) => (
+                <div key={filterType} className="border-b border-gray-200">
+                  <button
+                    onClick={() => toggleSection(filterType)}
+                    className="w-full p-4 text-left flex items-center justify-between hover:bg-gray-100"
+                  >
+                    <div className="flex items-center">
+                      {getFilterIcon(filterType)}
+                      <span className="font-semibold text-gray-800">
+                        {filterData.displayName || filterType.replace('_', ' ').toUpperCase()}
                       </span>
-                      {expandedSections.includes(filterType) ? (
-                        <ChevronUp className="w-5 h-5 text-gray-500" />
-                      ) : (
-                        <ChevronDown className="w-5 h-5 text-gray-500" />
-                      )}
-                    </button>
-                    {expandedSections.includes(filterType) && (
-                      <div className="p-4 space-y-2 bg-white shadow-sm rounded-md">
-                        {options.map((option) => (
-                          <label
-                            key={option.value}
-                            className="flex items-center justify-between cursor-pointer hover:bg-gray-100 p-2 rounded transition-colors"
-                          >
-                            <div className="flex items-center">
-                              <input
-                                type="checkbox"
-                                checked={(selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']] ?? []).includes(option.value)}
-                                onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
-                                className="form-checkbox h-3 w-3 text-teal-800 focus:ring-teal-800 rounded border-gray-300 transition duration-200 ease-in-out"
-                              />
-                              <span className="ml-2 text-sm text-gray-700 font-semibold">
-                                {option.label === 'Bio' ? (
-                                  <span className="flex items-center">
-                                    {option.label} <Image src="/images/logobio1.webp" alt="Bio" width={16} height={16} className="ml-1" />
-                                  </span>
-                                ) : option.label === 'Biodynamie' ? (
-                                  <span className="flex items-center">
-                                    {option.label} <Image src="/images/biodemeter.png" alt="Biodynamie" width={50} height={16} className="ml-1" />
-                                  </span>
-                                ) : (
-                                  option.label
-                                )}
-                              </span>
-                            </div>
-                          </label>
-                        ))}
-                      </div>
+                    </div>
+                    {expandedSections.includes(filterType) ? (
+                      <ChevronUp className="w-5 h-5 text-gray-500" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-gray-500" />
                     )}
-                  </div>
-                );
-              })}
+                  </button>
+
+                  {expandedSections.includes(filterType) && (
+                    <div className="p-4 bg-white space-y-2">
+                      {filterData.options.map((option) => (
+                        <label
+                          key={option.value}
+                          className="flex items-center justify-between p-2 hover:bg-gray-100 rounded"
+                        >
+                          <div className="flex items-center">
+                            <input
+                              type="checkbox"
+                              checked={selectedFilters[filterType]?.includes(option.value)}
+                              onChange={() => handleCheckboxChange(filterType, option)}
+                              className="form-checkbox h-4 w-4 text-teal-800 rounded"
+                            />
+                            <span className="ml-2 text-gray-700">
+                              {option.label === 'Bio' ? (
+                                <span className="flex items-center">
+                                  {option.label} <Image src="/images/logobio1.webp" alt="Bio" width={16} height={16} className="ml-1" />
+                                </span>
+                              ) : option.label === 'Biodynamie' ? (
+                                <span className="flex items-center">
+                                  {option.label} <Image src="/images/biodemeter.png" alt="Biodynamie" width={50} height={16} className="ml-1" />
+                                </span>
+                              ) : (
+                                option.label
+                              )}
+                            </span>
+                          </div>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Reset Button */}
+            <div className="p-4 bg-white sticky bottom-0 shadow-2xl">
+              <button
+                onClick={() => {
+                  resetFilters();
+                  setIsFilterOpen(false);
+                }}
+                className="w-full bg-gray-900 text-white p-3 rounded-lg flex items-center justify-center hover:opacity-90"
+              >
+                <RefreshCw className="w-5 h-5 mr-2" /> Réinitialiser les filtres
+              </button>
             </div>
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
-export default ProductFilter;
+export default MobileProductFilter;

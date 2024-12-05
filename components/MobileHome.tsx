@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import ProductsCards from '@/components/ProductsCards';
 import Slogan from '@/components/Slogan';
 import WineCategories from '@/components/WineCategories';
-import MobileProductFilter from './MobileProductFilter';
+import MobileProductFilter from '@/components/MobileProductFilter';
 import Trust from '@/components/Trust';
 import Livraison from './Livraison';
 import MobileProductsIntro from './MobileProductIntro';
@@ -29,15 +29,25 @@ const MobileHome: React.FC = () => {
     categories: [],
     sans_sulfites_: [],
     petit_prix: [],
-    haut_de_gamme: []
+    haut_de_gamme: [],
   });
 
-  const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {
-    setSelectedFilters((prev) => ({
+  const handleFilterChange = (filterType: string, values: string[]) => {
+    setSelectedFilters(prev => ({
       ...prev,
-      [category]: filters
+      [filterType]: values
     }));
   };
+
+  const resetFilters = () => {
+    setSelectedFilters({
+      color: [], region: [], vintage: [], millesime: [],
+      certification: [], style: [], volume: [],
+      accord_mets: [], region__pays: [], categories: [],
+      sans_sulfites_: [], petit_prix: [], haut_de_gamme: []
+    });
+  };
+
 
 
   return (
@@ -73,8 +83,12 @@ const MobileHome: React.FC = () => {
           <Slogan />
           <BioWineDescription />
           <br /><br />
-          <MobileProductFilter selectedFilters={selectedFilters} onFilterChange={handleFilterChange} resetFilters={() => {}} />
           <BackToTop />
+          <MobileProductFilter
+            selectedFilters={selectedFilters}
+            onFilterChange={handleFilterChange}
+            resetFilters={resetFilters}
+          />
         </div>
       </div>
     </div>

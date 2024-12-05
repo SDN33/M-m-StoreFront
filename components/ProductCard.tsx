@@ -286,7 +286,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             </div>
           )}
         </div>
-        <div className="relative w-full h-52 mb-2">
+        <div className="relative w-full h-52 mb-2 mt-2">
           {renderSelectedBadge()}
           <Image
             src={product.images[0]?.src || '/images/vinmeme.png'}
