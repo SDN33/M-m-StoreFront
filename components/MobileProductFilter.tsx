@@ -145,6 +145,7 @@ const getFilterIcon = (filterType: string) => {
     sans_sulfites_: <FlaskConicalOff className="text-teal-800 w-4 h-auto mr-2" />,
   };
 
+
   return icons[filterType] || null;
 };
 
