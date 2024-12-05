@@ -204,7 +204,7 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
       {/* Filter Button */}
       <button
         onClick={() => setIsFilterOpen(true)}
-        className="bg-gray-900 opacity-80 text-white p-3 rounded-t-xl shadow-lg flex items-center w-40 h-10 justify-center"
+        className="bg-gray-900 opacity-90 text-white p-3 rounded-t-xl shadow-lg flex items-center w-40 h-10 justify-center"
       >
         <Filter className="w-6 h-6 " aria-label='filtres' />
       </button>
