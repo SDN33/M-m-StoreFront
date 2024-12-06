@@ -79,7 +79,7 @@ const CookieConsent = () => {
 
   if (showDetails) {
     return (
-      <div className="fixed inset-0 bg-white backdrop-blur-md z-50 flex items-center justify-center p-4 pb-4">
+      <div className="fixed inset-0 bg-white backdrop-blur-md z-[55] flex items-center justify-center p-4 pb-4">
         <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-auto border border-primary/20">
           <div className="p-6 space-y-6">
             <div className="flex justify-between items-center">

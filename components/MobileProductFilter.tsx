@@ -201,13 +201,14 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
   };
 
   return (
-    <div className="fixed bottom-4 left-2 z-50">
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40">
       {/* Filter Button */}
       <button
         onClick={() => setIsFilterOpen(true)}
         className="bg-gray-900 opacity-90 text-white p-3 rounded-t-xl shadow-lg flex items-center w-40 h-10 justify-center"
       >
-        <Filter className="w-6 h-6 " aria-label='filtres' />
+        <Filter className="w-4 h-4 " aria-label='filtres' />
+        &nbsp;Filtres
       </button>
 
       {/* Filter Overlay */}
