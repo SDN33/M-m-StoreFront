@@ -80,7 +80,8 @@ export default function RootLayout({
           `}
         </Script>
 
-        <Script id="brevo-script">
+        <Script id="brevo-script" strategy="afterInteractive"
+        >
           {`
             (function(d, w, c) {
                 w.BrevoConversationsID = '6749ff2ae7addbe4dd00599a';

@@ -26,7 +26,6 @@
     "cookies-next": "^5.0.2",
     "crypto-js": "^4.2.0",
     "disqus-react": "^1.1.5",
-    "firebase": "^11.0.2",
     "framer-motion": "^11.11.10",
     "glob": "latest",
     "graphql": "^16.9.0",
