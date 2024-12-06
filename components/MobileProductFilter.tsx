@@ -213,10 +213,10 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
 
       {/* Filter Overlay */}
       {isFilterOpen && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center">
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-end justify-center">
           <div
             ref={filterRef}
-            className="bg-white w-full max-h-[90vh] rounded-t-3xl overflow-y-auto animate-slide-up"
+            className="bg-white w-130 max-h-[90vh]  rounded-t-3xl overflow-y-auto animate-slide-up"
           >
             {/* Close Button */}
             <div className="flex justify-between items-center p-4 border-b border-gray-200">

@@ -217,9 +217,11 @@ const VendorsPage = () => {
                                   <Image
                                     src={product.images[0].src}
                                     alt={product.name}
-                                    layout="fill"
                                     sizes='100%'
                                     className="transition-transform duration-300 hover:scale-110"
+                                    style={{ maxWidth: '100%', height: 'auto' }} // Make image responsive
+                                    width={96}
+                                    height={96}
                                   />
                                 </Link>
                               </div>

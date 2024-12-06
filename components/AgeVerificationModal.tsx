@@ -91,7 +91,6 @@ const AgeVerificationModal = () => {
           width={150}
           height={150}
           className="mx-auto mb-4"
-          priority={true}
           quality={100}
           style={{
             opacity: isVisible ? 1 : 0,

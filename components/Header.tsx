@@ -45,7 +45,7 @@ const Header: React.FC = () => {
 
   const categories = [
     { name: 'PROMOS', href: '/promos', className: '!text-primary font-gray-950', icon: <BadgePercent className="inline-block ml-1 -mt-1 w-4 h-4" /> },
-    { name: 'Nos Vins', href: '#', onClick: toggleNosVinsPopup, className: 'bg-black !text-white', icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
+    { name: 'Nos Vins', href: '#', onClick: toggleNosVinsPopup, className: 'bg-black !text-white hover:bg-primary ', icon: <ChevronDown className={` inline-block ml-1 w-4 h-4 transition-transform ${isNosVinsOpen ? 'rotate-180' : ''}`} /> },
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com', target: "_blank", rel: "noopener noreferrer" },
     { name: 'Nos Vignerons.nes', href: '/vignerons' },
     { name: 'Vins Sans Sulfites', href: '/vins-sans-sulfites' },
@@ -121,7 +121,6 @@ const Header: React.FC = () => {
                   fill
                   sizes='230px'
                   className="object-contain"
-                  priority
                   />
                 </Link>
               </div>

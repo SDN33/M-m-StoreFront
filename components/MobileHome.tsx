@@ -62,6 +62,7 @@ const MobileHome: React.FC = () => {
             width={600}
             height={600}
             className='object-cover flex justify-center mx-auto'
+            priority
           />
           <MobileProductsIntro />
           <div className="w-screen">
