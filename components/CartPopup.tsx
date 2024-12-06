@@ -22,7 +22,7 @@ interface CartItem {
 const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { cartItems, deleteAllCartItems, updateCartItem } = useCart();
+  const { cartItems, deleteAllCartItems, updateCartItem, deleteCartItem } = useCart();
   const total = cartItems.reduce((acc: number, item: CartItem) => acc + item.price * item.quantity, 0);
   const router = useRouter();
 
@@ -153,6 +153,13 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
                           >
                             <Plus className="w-4 h-4" />
                           </button>
+                            <button
+                            onClick={() => { updateCartItem(item.product_id, 0); deleteCartItem(item.product_id); }}
+                            className="ml-4 text-red-600 hover:underline text-xs"
+                            aria-label="Retirer le produit"
+                            >
+                            Retirer
+                            </button>
                         </div>
                         <span className="font-medium">
                           {(item.price * item.quantity).toFixed(2)} €
