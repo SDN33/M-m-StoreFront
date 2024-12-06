@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
+import GoogleReview from '../../components/GoogleReview';
 
 export default function Profile() {
   const { logout } = useAuth();
@@ -154,6 +155,8 @@ export default function Profile() {
             <p>Vous n&apos;avez pas encore de commandes.</p>
           )}
         </div>
+
+        <GoogleReview />
       </div>
 
 
