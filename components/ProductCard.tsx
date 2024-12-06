@@ -291,13 +291,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           <Image
             src={product.images[0]?.src || '/images/vinmeme.png'}
             alt={product.name}
-            style={{ objectFit: 'contain' }}
             width={500}
             height={500}
-            sizes='100%'
+            sizes="100%"
             priority
             onClick={handleRedirect}
-            className="hover:scale-105 transition-transform cursor-pointer h-full w-full"
+            className="hover:scale-105 transition-transform cursor-pointer h-full w-full object-contain"
             onError={(e) => {
               const imgElement = e.target as HTMLImageElement;
               imgElement.src = '/images/vinmeme.png';

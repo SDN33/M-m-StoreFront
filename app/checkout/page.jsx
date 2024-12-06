@@ -24,7 +24,7 @@ const CheckoutPage = () => {
     email: '',
     phone: '',
     paymentMethod: 'stripe',
-    deliveryMethod: '',
+    deliveryMethod: 'standard',
   });
 
   const [coupon, setCoupon] = useState('');
@@ -184,56 +184,52 @@ const CheckoutPage = () => {
     const cartDetails = viewAllCartItems();
     const hasItems = cartDetails?.items?.length > 0;
 
+    // Disable checkout if cart is empty, fetch fresh cart data on each interaction
     React.useEffect(() => {
       if (!hasItems) {
-        router.push('/');
+      setError('Votre panier est vide. Ajoutez des articles pour continuer.');
+      setCurrentStep(1);
       }
     }, [hasItems]);
 
     return (
       <div className="px-4 sm:px-6 md:px-8 mb-8 mt-12 sm:mt-24 md:mt-48 w-full">
-        {!hasItems ? (
-          <div className="text-center">Redirection vers le panier...</div>
-        ) : (
-          <>
-            <span className='md:hidden lg:hidden xl:hidden'><br /><br /><br /><br /></span>
-            <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-              {[
-                { num: 1, title: 'Contact' },
-                { num: 2, title: 'Livraison' },
-                { num: 3, title: 'Paiement' }
-              ].map((step) => (
-                <div
-                  key={step.num}
-                  className="flex items-center justify-center sm:justify-start w-full sm:w-auto"
-                >
-                  <div className="flex items-center">
-                    <div
-                      className={`flex items-center justify-center w-8 h-8 rounded-full border-2
-                        ${currentStep === step.num ? 'border-teal-800 bg-teal-800 text-white' :
-                          currentStep > step.num ? 'border-green-500 bg-green-500 text-white' :
-                          'border-gray-300 text-gray-300'}`}
-                    >
-                      {currentStep > step.num ? <Check size={16} /> : step.num}
-                    </div>
-                    <span
-                      className={`ml-2 text-sm sm:text-base ${currentStep >= step.num ? 'text-gray-950' : 'text-gray-400'}`}
-                    >
-                      {step.title}
-                    </span>
+          <span className='md:hidden lg:hidden xl:hidden'><br /><br /><br /><br /></span>
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            {[
+              { num: 1, title: 'Contact' },
+              { num: 2, title: 'Livraison' },
+              { num: 3, title: 'Paiement' }
+            ].map((step) => (
+              <div
+                key={step.num}
+                className="flex items-center justify-center sm:justify-start w-full sm:w-auto"
+              >
+                <div className="flex items-center">
+                  <div
+                    className={`flex items-center justify-center w-8 h-8 rounded-full border-2
+                      ${currentStep === step.num ? 'border-teal-800 bg-teal-800 text-white' :
+                        currentStep > step.num ? 'border-green-500 bg-green-500 text-white' :
+                        'border-gray-300 text-gray-300'}`}
+                  >
+                    {currentStep > step.num ? <Check size={16} /> : step.num}
                   </div>
-                  {step.num < 3 && (
-                    <div className="hidden sm:block">
-                      <div
-                        className={`w-12 md:w-24 h-0.5 mx-2 md:mx-4 ${currentStep > step.num ? 'bg-green-500' : 'bg-gray-300'}`}
-                      />
-                    </div>
-                  )}
+                  <span
+                    className={`ml-2 text-sm sm:text-base ${currentStep >= step.num ? 'text-gray-950' : 'text-gray-400'}`}
+                  >
+                    {step.title}
+                  </span>
                 </div>
-              ))}
-            </div>
-          </>
-        )}
+                {step.num < 3 && (
+                  <div className="hidden sm:block">
+                    <div
+                      className={`w-12 md:w-24 h-0.5 mx-2 md:mx-4 ${currentStep > step.num ? 'bg-green-500' : 'bg-gray-300'}`}
+                    />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
       </div>
     );
   };
@@ -369,63 +365,71 @@ const CheckoutPage = () => {
     </div>
   );
 
-  const renderOrderSummary = () => (
-    <div className="bg-gray-50 rounded-lg p-6">
-      <h3 className="text-xl font-semibold mb-4">Résumé de la commande</h3>
-      <ul className="space-y-4 mb-4 font-bold text-sm">
-        {cartDetails.items.map((item) => (
-          <li key={item.product_id} className="flex justify-between items-center border-b pb-2">
-            <span>{item.name}<br /> x {item.quantity}</span>
-            <span>{(item.price * item.quantity).toFixed(2)}€</span>
-          </li>
-        ))}
-      </ul>
-      <div className="flex justify-between text-sm font-semibold mb-2">
-        <span>Sous-total</span>
-        <span>{cartDetails.total.toFixed(2)}€</span>
-      </div>
-      <div className="flex justify-between text-sm mb-2">
-        <span className='font-bold'>
-          {formData.deliveryMethod === 'standard' ? 'Livraison standard' : 'Point Relais'}
-          <span className="text-xs ml-2">(3-5 jours)</span>
-        </span>
-        <span className='font-bold'>{shippingCost === 0 ? <span className="text-teal-800">Offert</span> : `${shippingCost.toFixed(2)}€`}</span>
-      </div>
-      <div className="mt-4 space-y-2">
-        <div className="flex gap-2">
-          <input
-            type="text"
-            value={coupon}
-            onChange={(e) => setCoupon(e.target.value)}
-            placeholder="Code promo"
-            className="flex-1 border p-2 rounded text-sm"
-            />
-          <button
-            onClick={applyCoupon}
-            className="bg-teal-800 text-white px-4 py-2 rounded text-sm"
-            disabled={!coupon}
-          >
-            Appliquer
-          </button>
+  const renderOrderSummary = () => {
+    const isRelayShippingFree = formData.deliveryMethod === 'pickup' && hasProductWithSixOrMore;
+
+    return (
+      <div className="bg-gray-50 rounded-lg p-6 mt-0 lg:-mt-10">
+        <h3 className="text-xl font-semibold mb-4">Résumé de la commande</h3>
+        <ul className="space-y-4 mb-4 font-bold text-sm">
+          {cartDetails.items.map((item) => (
+            <li key={item.product_id} className="flex justify-between items-center border-b pb-2">
+              <span>{item.name}<br /> x {item.quantity}</span>
+              <span>{(item.price * item.quantity).toFixed(2)}€</span>
+            </li>
+          ))}
+        </ul>
+        <div className="flex justify-between text-sm font-semibold mb-2">
+          <span>Sous-total</span>
+          <span>{cartDetails.total.toFixed(2)}€</span>
         </div>
-        {notification && (
-          <div className={`text-sm p-2 rounded ${notification.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-            {notification.message}
+        <div className="flex justify-between text-sm mb-2">
+          <span className='font-bold'>
+            {formData.deliveryMethod === 'standard' ? 'Livraison standard' : 'Point Relais'}
+            <span className="text-xs ml-2">(3-6 jours)</span>
+          </span>
+          <span className='font-bold'>
+            {isRelayShippingFree || shippingCost === 0 ?
+              <span className="text-teal-800">Offert</span> :
+              `${shippingCost.toFixed(2)}€`}
+          </span>
+        </div>
+        <div className="mt-4 space-y-2">
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={coupon}
+              onChange={(e) => setCoupon(e.target.value)}
+              placeholder="Code promo"
+              className="flex-1 border p-2 rounded text-sm"
+            />
+            <button
+              onClick={applyCoupon}
+              className="bg-teal-800 text-white px-4 py-2 rounded text-sm"
+              disabled={!coupon}
+            >
+              Appliquer
+            </button>
           </div>
-        )}
-        {discount > 0 && (
-          <div className="flex justify-between text-sm text-green-600 font-semibold">
-            <span>Réduction</span>
-            <span>-{discount.toFixed(2)}€</span>
-          </div>
-        )}
+          {notification && (
+            <div className={`text-sm p-2 rounded ${notification.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+              {notification.message}
+            </div>
+          )}
+          {discount > 0 && (
+            <div className="flex justify-between text-sm text-green-600 font-semibold">
+              <span>Réduction</span>
+              <span>-{discount.toFixed(2)}€</span>
+            </div>
+          )}
+        </div>
+        <div className="flex justify-between font-bold text-xl mt-4 pt-4 border-t">
+          <span>Total :</span>
+          <span>{totalPrice}€</span>
+        </div>
       </div>
-      <div className="flex justify-between font-bold text-xl mt-4 pt-4 border-t">
-        <span>Total :</span>
-        <span>{totalPrice}€</span>
-      </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="min-h-[calc(100vh-200px)] mx-auto px-4 sm:px-8 mt-16 max-w-full md:max-w-6xl pb-24">

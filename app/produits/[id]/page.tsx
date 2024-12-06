@@ -361,7 +361,7 @@ const ProductPage: React.FC = () => {
               />
             </div>
                 {/* Logos de paiement */}
-            <div className="flex justify-start items-center space-x-4 w-fit h-auto mb-8 bg-white rounded-lg p-2 mt-2">
+            <div className="flex justify-start items-center space-x-4 w-auto h-auto mb-8 bg-white rounded-lg p-2 mt-2">
               <a href="https://www.visa.fr" title="Visa">
                 <Image
                   src="/images/visa.png"
@@ -371,7 +371,7 @@ const ProductPage: React.FC = () => {
                   sizes="20"
                 />
               </a>
-              <a href="https://www.mastercard.fr" title="mastercard" aria-label="Mastercard">
+              <a href="https://www.mastercard.fr" title="mastercard"  aria-label="Mastercard">
                 <Image
                   src="/images/mastercard.png"
                   alt="Mastercard"

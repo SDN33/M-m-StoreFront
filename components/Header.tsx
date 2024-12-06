@@ -113,14 +113,15 @@ const Header: React.FC = () => {
                 </Link>
               </div>
 
-              <div className="absolute left-16 pr-4 h-full w-[230px] flex items-center justify-center">
+              <div className=" left-16 pr-4 h-full w-[230px] flex items-center justify-center relative">
                 <Link href="/">
                   <Image
-                    src="/images/memelogo.png"
-                    alt="Logo"
-                    width={230}
-                    height={230}
-                    className="object-contain h-auto w-auto "
+                  src="/images/memelogo.png"
+                  alt="Logo"
+                  fill
+                  sizes='230px'
+                  className="object-contain"
+                  priority
                   />
                 </Link>
               </div>
@@ -217,6 +218,7 @@ const Header: React.FC = () => {
                   fill
                   sizes='200px'
                   className="object-contain"
+                  priority
                 />
               </Link>
             </div>

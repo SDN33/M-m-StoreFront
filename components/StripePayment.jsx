@@ -18,12 +18,12 @@ const StripePayment = ({ totalPrice, formData, setError, onComplete, title = "Co
 
     const cardElement = elements.getElement(CardElement);
     if (!cardElement) {
-      setError('Please fill in your card details.');
+      setError('Entrer les informations de votre carte.');
       return;
     }
 
     if (cardElement._empty) {
-      setError('Please complete the card information.');
+      setError('Entrer les informations de votre carte.');
       return;
     }
 
