@@ -337,16 +337,19 @@ const ProductPage: React.FC = () => {
             </div>
 
             <div className="flex items-center">
-              <select
-                value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
-                className="mr-4 p-2 border rounded bg-white border-gray-300"
-                aria-label='Quantité'
-              >
-                {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
-                  <option key={num} value={num}>{num}</option>
-                ))}
-              </select>
+              <div className="flex items-center">
+                <label htmlFor="quantity" className="sr-only">Quantité</label>
+                <select
+                  id="quantity"
+                  value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                  className="mr-4 p-2 border rounded bg-white border-gray-300"
+                >
+                  {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
+                    <option key={num} value={num}>{num}</option>
+                  ))}
+                </select>
+              </div>
               <AddToCartButton
                 product={product}
                 quantity={quantity}
@@ -486,11 +489,11 @@ const ProductPage: React.FC = () => {
                 src={getGoogleMapUrl(product.nom_chateau || '')}
                 width="100%"
                 height="400"
-                frameBorder="0"
-                style={{ border: 0 }}
+                style={{ border: 'none' }}
                 aria-hidden="false"
                 tabIndex={0}
                 title="Google Map"
+                className="w-full rounded-lg shadow-md"
               ></iframe>
             </div>
           )}
