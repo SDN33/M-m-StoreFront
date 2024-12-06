@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Info } from 'lucide-react';
 import AddToCartButton from './AddToCartButton';
 import { MapPin, HeartHandshakeIcon } from 'lucide-react';
+import OptimizedProductImage from './OptimizedProductImage';
 
 interface Product {
   id: number;
@@ -227,6 +228,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     return getRandomSlogan(slogans.decouverte(product.appellation || 'Vin'));
   };
 
+
+
   const selectedProductIds = [621,632,255,284,286,292,653]; // Example array of selected product IDs
 
   const renderSelectedBadge = () => {
@@ -288,19 +291,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
         <div className="relative w-full h-52 mb-2 mt-2">
           {renderSelectedBadge()}
-          <Image
-            src={product.images[0]?.src || '/images/vinmeme.png'}
-            alt={product.name}
-            width={500}
-            height={500}
-            sizes="100vw"
-            priority={true}
-            onClick={handleRedirect}
-            className="hover:scale-105 transition-transform cursor-pointer h-full w-full object-contain"
-            onError={(e) => {
-              const imgElement = e.target as HTMLImageElement;
-              imgElement.src = '/images/vinmeme.png';
-            }}
+          <OptimizedProductImage
+            product={product}
+            renderAOCBadge={renderAOCBadge}
+            renderCertification={renderCertification}
+            renderSelectedBadge={renderSelectedBadge}
+            handleRedirect={handleRedirect}
           />
           {renderAOCBadge()}
           <div className={`absolute bottom-2 ${product.certification?.toLowerCase() === 'biodynamie' ? 'right-6' : 'right-0'} w-8 h-8 z-20`}>
