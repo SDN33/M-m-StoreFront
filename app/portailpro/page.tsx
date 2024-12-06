@@ -190,7 +190,7 @@ export default function PortailPro() {
             }}
           >
             PORTAIL PRO <br />
-            <span className="mt-4 md:text-lg font-light sm:flex text-xs md:flex lg:flex text-center justify-center items-center mx-auto">
+            <span className="mt-4 md:text-lg font-normal sm:flex text-xs md:flex lg:flex text-center justify-center items-center mx-auto">
               Rejoignez une marketplace dédiée aux vignerons bio
             </span>
             <div
@@ -247,15 +247,20 @@ export default function PortailPro() {
 
 
 
-
+         {/* Banderole */}
+        <div className="p-4 bg-white text-red-700 w-fit shadow-2xl text-sm font-bold py-2 text-center uppercase z-10 justify-center mx-auto ">
+          Offre limitée - Profitez de notre lancement
+          <br /><span className='text-black text-xs'>pour les 100 premiers inscrits</span>
+        </div>
         {/* Pricing Section */}
-        <div className="max-w-2xl mx-auto slide-in-right ">
-          <div className="bg-white rounded-3xl shadow-xl shadow-teal-100/50 overflow-hidden">
-            <div className="bg-gradient-to-r from-primary via-orange-800 to-red-800 text-white p-8 text-center">
+        <div className="max-w-2xl mx-auto slide-in-right">
+          <div className="relative bg-white rounded-3xl shadow-xl shadow-teal-100/50 overflow-hidden">
+            <div className="bg-gradient-to-r from-primary via-orange-800 to-red-800 text-white shadow-lg p-8 text-center">
               <h3 className="text-2xl font-bold mb-2">Frais D&apos;inscription</h3>
               <div className="flex items-center justify-center">
-                <span className="text-3xl font-bold">240€</span>
-                <span className="ml-1 text-sm"><em>hors taxe</em></span>
+                {/* Prix barré */}
+                <span className="text-3xl font-bold line-through opacity-60 mr-2">240€</span>
+                <span className="text-3xl font-bold text-white">Offert</span>
               </div>
             </div>
 
@@ -266,7 +271,7 @@ export default function PortailPro() {
                 </p>
                 <ul className="space-y-4 text-center mx-auto">
                   {pricingFeatures.map((feature, index) => (
-                    <li key={index} className="flex items-center text-gray-950 text-center">
+                    <li key={index} className="flex items-center justify-center text-gray-950">
                       <svg className="w-5 h-5 text-primary mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
@@ -275,6 +280,10 @@ export default function PortailPro() {
                   ))}
                 </ul>
               </div>
+
+
+
+
 
               <Checkbox
                 id="cgu"
@@ -314,7 +323,7 @@ export default function PortailPro() {
 
                 <button
                   onClick={handlePayment}
-                  className="bg-teal-800 text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:bg-teal-950 transition-all duration-300 flex items-center justify-center space-x-2"
+                  className="hidden bg-teal-800 text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:bg-teal-950 transition-all duration-300 items-center justify-center space-x-2"
                 >
                   <CreditCard className="w-5 h-5" />
                   <span>Procéder au paiement</span>
