@@ -10,7 +10,6 @@ const BackToTop = () => {
 
     const handleScroll = () => {
       if (scrollableParent) {
-        // Réduit le seuil à 100px
         const scrollTop = scrollableParent.scrollTop;
         setIsVisible(scrollTop > 100);
       }
@@ -26,14 +25,14 @@ const BackToTop = () => {
         scrollableParent.removeEventListener('scroll', handleScroll);
       }
     };
-  }, []);
+  }, []); // Pas de dépendances nécessaires car on vise uniquement `main.flex-1`.
 
   const scrollToTop = () => {
     const scrollableParent = document.querySelector('main.flex-1');
     if (scrollableParent) {
       scrollableParent.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   };
@@ -41,7 +40,7 @@ const BackToTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`sticky bottom-6 right-6 z-[49] ml-auto mr-16 flex h-12 w-12 items-center justify-center rounded-full bg-black text-white shadow-lg transition-opacity duration-300 hover:bg-primary-600 focus:outline-none focus:ring-1 hover:animate-ping  lg:h-14 lg:w-10 ${
+      className={`fixed bottom-6 right-24 z-[49] flex h-12 w-12 items-center justify-center rounded-full bg-teal-800 text-white shadow-lg transition-opacity duration-300 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-600 lg:h-14 lg:w-14 ${
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
       aria-label="Retour en haut de page"
