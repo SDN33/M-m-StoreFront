@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
 interface ProductImageProps {
   product: {
@@ -13,6 +13,8 @@ interface ProductImageProps {
   handleRedirect: () => void;
 }
 
+const FALLBACK_IMAGE = '/images/vinmeme.png';
+
 const ProductImage: React.FC<ProductImageProps> = ({
   product,
   renderAOCBadge,
@@ -20,29 +22,40 @@ const ProductImage: React.FC<ProductImageProps> = ({
   renderSelectedBadge,
   handleRedirect
 }) => {
-  const [imageSrc, setImageSrc] = useState(
-    product.images[0]?.src || '/images/vinmeme.png'
+  // Memoize the initial image source to prevent unnecessary re-renders
+  const initialImageSrc = useMemo(() =>
+    product.images[0]?.src || FALLBACK_IMAGE,
+    [product.images]
   );
 
-  const handleImageError = () => {
-    setImageSrc('/images/vinmeme.png');
-  };
+  const [imageSrc, setImageSrc] = useState(initialImageSrc);
+
+  // Optimize error handling with useCallback
+  const handleImageError = useCallback(() => {
+    setImageSrc(FALLBACK_IMAGE);
+  }, []);
+
+  // Memoize certification positioning
+  const certificationPosition = useMemo(() =>
+    `absolute bottom-2 ${product.certification?.toLowerCase() === 'biodynamie' ? 'right-6' : 'right-0'} w-8 h-8 z-20`,
+    [product.certification]
+  );
 
   return (
-    <div className="relative w-full h-52 mb-2 mt-2">
+    <div className="relative w-full h-52 mb-2 mt-2 flex items-center justify-center">
       {renderSelectedBadge()}
 
-      <div className="relative w-full h-full">
+      <div className="relative w-full h-full max-w-full max-h-full">
         <Image
           src={imageSrc}
           alt={product.name}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority={true}
-          quality={75}
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAMYAAAAAAIAAABtbnRyUkdCIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAAHRyWFlaAAABZAAAABRnWFlaAAABeAAAABRiWFlaAAABjAAAABRyVFJDAAABoAAAAChnVFJDAAABoAAAAChiVFJDAAABoAAAACh3dHB0AAAByAAAABRjcHJ0AAAB3AAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUMAAFgAAAAcAHMAUgBHAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFhZWiAAAAAAAABvogAAOPUAAAOQWFlaIAAAAAAAAGKZAAC3hQAAGNpYWVogAAAAAAAAJKAAAA+EAAC2z3BhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABYWVogAAAAAAAA9tYAAQAAAADTLW1sdWMAAAAAAAAAAQAAAAxlblVTAAAAIAAAABwARwBvAG8AZwBsAGUAIABJAG4AYwAuACAAMgAwADEANv/bAEMAFA4PEg8NFBIQEhcVFBgeMCEcGBgeMCMlJSAjJzA0MDE0MjdJOTArRkVDODhHKDdDRUFUTlVXWWZwbzTkda1//v/bAEMBFRcXGhobMR0dMThFMUVFRUVERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERET/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgMBAQAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-          className="hover:scale-105 transition-transform cursor-pointer object-contain"
+          width={200}
+          height={200}
+          sizes="(max-width: 768px) 200px, 250px"
+          unoptimized={imageSrc === FALLBACK_IMAGE}
+          quality={imageSrc === FALLBACK_IMAGE ? 50 : 80}
+          priority={imageSrc !== FALLBACK_IMAGE}
+          className="hover:scale-105 transition-transform cursor-pointer object-cover rounded-lg flex justify-center mx-auto"
           onClick={handleRedirect}
           onError={handleImageError}
         />
@@ -50,7 +63,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
 
       {renderAOCBadge()}
 
-      <div className={`absolute bottom-2 ${product.certification?.toLowerCase() === 'biodynamie' ? 'right-6' : 'right-0'} w-8 h-8 z-20`}>
+      <div className={certificationPosition}>
         {renderCertification()}
       </div>
     </div>
