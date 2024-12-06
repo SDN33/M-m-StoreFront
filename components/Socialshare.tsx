@@ -53,7 +53,7 @@ const SocialShare: React.FC<SocialShareProps> = ({ url, title }) => {
         <a href={shareLinks.email} aria-label='e-mail' aria-hidden='true' className="text-accent hover:text-primary">
           <Mail size={24} />
         </a>
-        <button onClick={copyToClipboard} className="text-accent aria-label='copier lien' aria-hidden='true'  hover:text-primary">
+        <button onClick={copyToClipboard} className="text-accent hover:text-primary" aria-label="copier lien" aria-hidden="true">
           <Link size={24} />
         </button>
       </div>

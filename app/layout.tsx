@@ -62,12 +62,9 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-        <Script
-          id="brevo-script"
-          strategy="lazyOnload"
-        >
-          {`
-            (function(d, w, c) {
+      <Script id="brevo-script" strategy="afterInteractive">
+        {`
+          (function(d, w, c) {
               w.BrevoConversationsID = '6749ff2ae7addbe4dd00599a';
               w[c] = w[c] || function() {
                   (w[c].q = w[c].q || []).push(arguments);
@@ -76,25 +73,10 @@ export default function RootLayout({
               s.async = true;
               s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
               if (d.head) d.head.appendChild(s);
-            })(document, window, 'BrevoConversations');
-          `}
-        </Script>
+          })(document, window, 'BrevoConversations');
+        `}
+      </Script>
 
-        <Script id="brevo-script" strategy="afterInteractive"
-        >
-          {`
-            (function(d, w, c) {
-                w.BrevoConversationsID = '6749ff2ae7addbe4dd00599a';
-                w[c] = w[c] || function() {
-                    (w[c].q = w[c].q || []).push(arguments);
-                };
-                var s = d.createElement('script');
-                s.async = true;
-                s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
-                if (d.head) d.head.appendChild(s);
-            })(document, window, 'BrevoConversations');
-          `}
-        </Script>
       </head>
       <body>
         <AuthProvider>

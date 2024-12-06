@@ -252,7 +252,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const aocBadge = renderAOCBadge();
   const certificationBadge = renderCertification();
 
-  
+
   return (
     <div className="w-full max-w-[400px] min-w-[300px] bg-white rounded-lg overflow-hidden shadow-md mb-8">
       <div className="bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 text-white py-1 px-2 text-center text-sm font-semibold">
@@ -373,18 +373,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
 
         <div className="flex items-center justify-center mx-auto pb-4">
-          <select
-            value={quantity}
-            onChange={(e) => setQuantity(Number(e.target.value))}
-            className="border mr-4 rounded-md p-2 "
-
-          >
-            {[...Array(10)].map((_, i) => (
-              <option key={i} value={i + 1}>
-                {i + 1}
-              </option>
-            ))}
-          </select>
+          <div className="flex items-center">
+            <label htmlFor="quantity" className="sr-only">Quantité</label>
+            <select
+              id="quantity"
+              value={quantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+              className="border mr-4 rounded-md p-2"
+            >
+              {[...Array(10)].map((_, i) => (
+                <option key={i} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
+            </select>
+          </div>
           <AddToCartButton
             productId={product.id}
             product={product}
