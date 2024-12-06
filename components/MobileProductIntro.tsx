@@ -6,10 +6,8 @@ import Image from 'next/image';
 const MobileProductsIntro: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [counter, setCounter] = useState(0);
-  const [displayedText, setDisplayedText] = useState('');
   const introRef = useRef<HTMLDivElement | null>(null);
   const targetCount = 2500;
-  const fullText = "Mémé Georgette";
 
   const [currentSlide, setCurrentSlide] = useState(0);
         const logos = [
@@ -103,17 +101,6 @@ const MobileProductsIntro: React.FC = () => {
     }
   }, [isVisible, counter, targetCount]);
 
-  // Animation du texte
-  useEffect(() => {
-    if (isVisible && displayedText.length < fullText.length) {
-      const timer = setTimeout(() => {
-        setDisplayedText(fullText.slice(0, displayedText.length + 1));
-      }, 50);
-
-      return () => clearTimeout(timer);
-    }
-  }, [isVisible, displayedText]);
-
   return (
     <>
       <div
@@ -124,9 +111,10 @@ const MobileProductsIntro: React.FC = () => {
         style={{ overflow: 'hidden', transition: 'opacity 1s ease, height 1s ease' }}      >
         <div className="flex flex-col items-center mx-auto mt-3 slide-in-right">
             <h1
-              className="text-2xl font-extrabold text-gray-50 tracking-tight text-center leading-tight h-[90px]"
-              dangerouslySetInnerHTML={{ __html: displayedText + (displayedText === fullText ? '<span class="block text-xs mt-2">ACHAT de VIN BIO et BIODYNAMIQUE<br />Rouge, Blanc, Rosé, Pétillant, Liquoreux</span>' : '') }}
-            />
+              className="text-sm font-extrabold text-gray-50 tracking-tight text-center leading-tight h-[60px] mt-4"
+            >
+              ACHAT de VIN BIO et BIODYNAMIQUE<br />Rouge, Blanc, Rosé, Pétillant, Liquoreux
+            </h1>
         </div>
         <div className="flex justify-center items-center bg-gray-50 rounded-xl shadow-md">
           <LogoSlider />
