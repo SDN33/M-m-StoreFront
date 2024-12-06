@@ -293,8 +293,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             alt={product.name}
             width={500}
             height={500}
-            sizes="100%"
-            priority
+            sizes="100vw"
+            priority={true}
             onClick={handleRedirect}
             className="hover:scale-105 transition-transform cursor-pointer h-full w-full object-contain"
             onError={(e) => {

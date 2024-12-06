@@ -5,7 +5,6 @@ import Footer from "../components/Footer";
 import AgeVerificationModal from "@/components/AgeVerificationModal";
 import { AuthProvider } from '../context/AuthContext';
 import { CartProvider } from '../context/CartContext';
-import { Analytics } from "@vercel/analytics/react";
 import Cookies from "@/components/Cookies";
 import Script from "next/script";
 
@@ -63,19 +62,23 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-        <script type="application/ld+json">
-          {JSON.stringify({
-        "@context": "http://schema.org",
-        "@type": "Store",
-        "name": "Vins Mémé Georgette",
-        "url": "https://www.vinsmemegeorgette.com",
-        "logo": "https://www.vinsmemegeorgette.com/memelogo2.png",
-        "description": "Vins bio et biodynamiques en direct des vignerons engagés",
-        "address": {
-          "addressCountry": "FR"
-        },
-          })}
-        </script>
+        <Script
+          id="brevo-script"
+          strategy="lazyOnload"
+        >
+          {`
+            (function(d, w, c) {
+              w.BrevoConversationsID = '6749ff2ae7addbe4dd00599a';
+              w[c] = w[c] || function() {
+                  (w[c].q = w[c].q || []).push(arguments);
+              };
+              var s = d.createElement('script');
+              s.async = true;
+              s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
+              if (d.head) d.head.appendChild(s);
+            })(document, window, 'BrevoConversations');
+          `}
+        </Script>
 
         <Script id="brevo-script">
           {`
@@ -94,14 +97,13 @@ export default function RootLayout({
       </head>
       <body>
         <AuthProvider>
-          <CartProvider>
+            <CartProvider>
             <Header />
-            <AgeVerificationModal />
-            <Cookies />
+            <AgeVerificationModal aria-label="Vérification de l'âge" aria-modal="true" />
+            <Cookies aria-label="Consentement des cookies" aria-modal="true"/>
             {children}
-          </CartProvider>
+            </CartProvider>
         </AuthProvider>
-        <Analytics />
         <Footer />
       </body>
     </html>
