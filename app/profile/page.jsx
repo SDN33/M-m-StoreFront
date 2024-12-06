@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
 import GoogleReview from '../../components/GoogleReview';
 
+
 export default function Profile() {
   const { logout } = useAuth();
   const [user, setUser] = useState(null);
@@ -12,6 +13,7 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const router = useRouter();
+
 
   useEffect(() => {
     const fetchUserData = async () => {

@@ -247,6 +247,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     }
     return null;
   };
+
+  const selectedBadge = renderSelectedBadge();
+  const aocBadge = renderAOCBadge();
+  const certificationBadge = renderCertification();
+
+  
   return (
     <div className="w-full max-w-[400px] min-w-[300px] bg-white rounded-lg overflow-hidden shadow-md mb-8">
       <div className="bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 text-white py-1 px-2 text-center text-sm font-semibold">
@@ -290,20 +296,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           )}
         </div>
         <div className="relative w-full h-52 mb-2 mt-2">
-          {renderSelectedBadge()}
-          <OptimizedProductImage
-            product={product}
-            renderAOCBadge={renderAOCBadge}
-            renderCertification={renderCertification}
-            renderSelectedBadge={renderSelectedBadge}
-            handleRedirect={handleRedirect}
-          />
-          {renderAOCBadge()}
-          <div className={`absolute bottom-2 ${product.certification?.toLowerCase() === 'biodynamie' ? 'right-6' : 'right-0'} w-8 h-8 z-20`}>
-            {renderCertification()}
+           {selectedBadge}
+           <OptimizedProductImage
+             product={product}
+             renderAOCBadge={renderAOCBadge}
+             renderCertification={renderCertification}
+             renderSelectedBadge={renderSelectedBadge}
+             handleRedirect={handleRedirect}
+           />
+           {aocBadge}
+           <div
+             className={`absolute bottom-2 ${
+               product.certification?.toLowerCase() === 'biodynamie' ? 'right-6' : 'right-0'
+             } w-8 h-8 z-20`}
+           >
+             {certificationBadge}
+           </div>
           </div>
-        </div>
-
 
         </div>
         <div onClick={vendorRedirect} className="flex items-center gap-2 cursor-pointer">
