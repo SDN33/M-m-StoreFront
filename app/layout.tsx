@@ -62,20 +62,34 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-      <Script id="brevo-script" strategy="afterInteractive">
-        {`
-          (function(d, w, c) {
-              w.BrevoConversationsID = '6749ff2ae7addbe4dd00599a';
-              w[c] = w[c] || function() {
-                  (w[c].q = w[c].q || []).push(arguments);
-              };
-              var s = d.createElement('script');
-              s.async = true;
-              s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
-              if (d.head) d.head.appendChild(s);
-          })(document, window, 'BrevoConversations');
-        `}
-      </Script>
+            {/* Preconnect to CloudFront */}
+        <link rel="preconnect" href="https://d13sozod7hpim.cloudfront.net" crossOrigin="anonymous" />
+
+        {/* Preconnect to ucarecdn */}
+        <link rel="preconnect" href="https://ucarecdn.com" crossOrigin="anonymous" />
+
+        {/* Preconnect to Cloudinary */}
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+
+        {/* Optional: DNS Prefetch if you don't need full connection, just DNS resolution */}
+        <link rel="dns-prefetch" href="https://d13sozod7hpim.cloudfront.net" />
+        <link rel="dns-prefetch" href="https://ucarecdn.com" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        
+        <Script id="brevo-script" strategy="afterInteractive">
+          {`
+            (function(d, w, c) {
+                w.BrevoConversationsID = '6749ff2ae7addbe4dd00599a';
+                w[c] = w[c] || function() {
+                    (w[c].q = w[c].q || []).push(arguments);
+                };
+                var s = d.createElement('script');
+                s.async = true;
+                s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
+                if (d.head) d.head.appendChild(s);
+            })(document, window, 'BrevoConversations');
+          `}
+        </Script>
 
       </head>
       <body>
