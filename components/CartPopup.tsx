@@ -155,7 +155,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
                           </button>
                             <button
                             onClick={() => { updateCartItem(item.product_id, 0); deleteCartItem(item.product_id); }}
-                            className="ml-4 text-red-600 hover:underline text-xs"
+                            className="ml-4 hover:underline text-xs"
                             aria-label="Retirer le produit"
                             >
                             Retirer
