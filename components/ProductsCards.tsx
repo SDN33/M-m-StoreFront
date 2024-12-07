@@ -215,15 +215,41 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
         <div className="space-y-10 ">
           <div className="mx-auto overflow-hidden justify-center flex">
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 justify-center">
-                {(sortBy ? filteredProducts : [...filteredProducts].sort(() => Math.random() - 0.5))
-                .slice(0, visibleCount)
-                .map((product) => (
-                  <ProductCard
-                  key={product.id}
-                  product={product}
-                  onAddToCart={async () => await onAddToCart(product.id, 1, 0)}
-                  />
-                ))}
+                {(() => {
+                  const lastSortTime = sessionStorage.getItem('lastSortTime');
+                  const currentTime = Date.now();
+                  let sortedProducts = [...filteredProducts];
+
+                  if (sortBy) {
+                  // Use the sorted products directly if sortBy is set
+                  sortedProducts = filteredProducts;
+                  } else if (!lastSortTime || currentTime - parseInt(lastSortTime) > 600000) {
+                  // Only resort randomly if 10 minutes have passed
+                  sortedProducts = sortedProducts.sort(() => Math.random() - 0.5);
+                  sessionStorage.setItem('lastSortTime', currentTime.toString());
+                  } else {
+                  // Use the stored order from session storage or keep current order
+                  const storedOrder = JSON.parse(sessionStorage.getItem('productsOrder') || '[]');
+                  if (storedOrder.length > 0) {
+                    sortedProducts.sort((a, b) =>
+                    storedOrder.indexOf(a.id) - storedOrder.indexOf(b.id)
+                    );
+                  }
+                  }
+
+                  // Store the current order
+                  sessionStorage.setItem('productsOrder', JSON.stringify(sortedProducts.map(p => p.id)));
+
+                  return sortedProducts
+                  .slice(0, visibleCount)
+                  .map((product) => (
+                    <ProductCard
+                    key={product.id}
+                    product={product}
+                    onAddToCart={async () => await onAddToCart(product.id, 1, 0)}
+                    />
+                  ));
+                })()}
             </div>
           </div>
           {filteredProducts.length > visibleCount && (
