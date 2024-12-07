@@ -494,7 +494,7 @@ const ProductPage: React.FC = () => {
                 aria-hidden="false"
                 tabIndex={0}
                 title="Google Map"
-                className="w-full rounded-lg shadow-md"
+                className="w-full mt-2 rounded-b-lg shadow-md"
               ></iframe>
             </div>
           )}
