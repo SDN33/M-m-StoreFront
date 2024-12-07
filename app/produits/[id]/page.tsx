@@ -71,7 +71,7 @@ const renderAOCBadge = (product: Product) => {
     return (
       <div className={`z-20 ${product.certification === 'biodynamie' ? 'ml-3' : 'ml-2'}`}>
         <Image
-          src="/images/LogoAOC.jpg"
+          src="/images/LogoAOC.png"
           alt="Badge AOC"
           style={{ objectFit: 'contain' }}
           width={30}
