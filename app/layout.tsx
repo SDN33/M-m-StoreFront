@@ -17,6 +17,9 @@ type TwitterMetadata = {
 
 export const metadata: Metadata & { twitter: TwitterMetadata } = {
   title: "ACHAT VIN BIO, BIODYNAMIQUE, SANS SULFITES - Mémé Georgette",
+  alternates: {
+    canonical: "https://vinsmemegeorgette.com"
+  },
   description:
     "Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites",
   icons: {
@@ -75,7 +78,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://d13sozod7hpim.cloudfront.net" />
         <link rel="dns-prefetch" href="https://ucarecdn.com" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
-        
+
         <Script id="brevo-script" strategy="afterInteractive">
           {`
             (function(d, w, c) {
