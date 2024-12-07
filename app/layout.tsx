@@ -65,6 +65,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=0.90" />
       <script type="application/ld+json">
           {JSON.stringify({
         "@context": "http://schema.org",
@@ -78,7 +79,7 @@ export default function RootLayout({
         },
           })}
         </script>
-            {/* Preconnect to CloudFront */}
+        {/* Preconnect to CloudFront */}
         <link rel="preconnect" href="https://d13sozod7hpim.cloudfront.net" crossOrigin="anonymous" />
 
         {/* Preconnect to ucarecdn */}
@@ -94,16 +95,16 @@ export default function RootLayout({
 
         <Script id="brevo-script" strategy="afterInteractive">
           {`
-            (function(d, w, c) {
-                w.BrevoConversationsID = '6749ff2ae7addbe4dd00599a';
-                w[c] = w[c] || function() {
-                    (w[c].q = w[c].q || []).push(arguments);
-                };
-                var s = d.createElement('script');
-                s.async = true;
-                s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
-                if (d.head) d.head.appendChild(s);
-            })(document, window, 'BrevoConversations');
+        (function(d, w, c) {
+            w.BrevoConversationsID = '6749ff2ae7addbe4dd00599a';
+            w[c] = w[c] || function() {
+            (w[c].q = w[c].q || []).push(arguments);
+            };
+            var s = d.createElement('script');
+            s.async = true;
+            s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
+            if (d.head) d.head.appendChild(s);
+        })(document, window, 'BrevoConversations');
           `}
         </Script>
 
