@@ -55,20 +55,19 @@ const ProductsIntro: React.FC = () => {
       ref={introRef}
       className="relative overflow-hidden bg-white px-4 sm:px-6 md:px-8 lg:px-18 sm:py-24 md:py-32 shadow-lg text-center slide-in mt-2 md:mt-16 lg:mt-3 mb-16 lg:mb-0"
     >
-      {/* SVG background */}
       <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4000 500' className='absolute inset-0 w-screen h-full'>
-        <rect fill='#ffffff' className='w-full h-full'/>
-        <defs>
-          <rect stroke='#ffffff' strokeWidth='.5' width='1' height='1' id='s'/>
-          <pattern id='a' width='3' height='3' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
+    <rect fill='#ffffff' className='w-full h-full'/>
+    <defs>
+      <rect stroke='#ffffff' strokeWidth='.5' width='1' height='1' id='s'/>
+      <pattern id='a' width='3' height='3' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
         <use fill='#fcfcfc' href='#s' y='2'/>
         <use fill='#fcfcfc' href='#s' x='1' y='2'/>
         <use fill='#fafafa' href='#s' x='2' y='2'/>
         <use fill='#fafafa' href='#s'/>
         <use fill='#f7f7f7' href='#s' x='2'/>
         <use fill='#f7f7f7' href='#s' x='1' y='1'/>
-          </pattern>
-          <pattern id='b' width='7' height='11' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
+      </pattern>
+      <pattern id='b' width='7' height='11' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
         <g fill='#f5f5f5'>
           <use href='#s'/>
           <use href='#s' y='5'/>
@@ -82,8 +81,8 @@ const ProductsIntro: React.FC = () => {
           <use href='#s' x='5' y='6'/>
           <use href='#s' x='6' y='9'/>
         </g>
-          </pattern>
-          <pattern id='h' width='5' height='13' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
+      </pattern>
+      <pattern id='h' width='5' height='13' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
         <g fill='#f5f5f5'>
           <use href='#s' y='5'/>
           <use href='#s' y='8'/>
@@ -99,8 +98,8 @@ const ProductsIntro: React.FC = () => {
           <use href='#s' x='4' y='7'/>
           <use href='#s' x='4' y='10'/>
         </g>
-          </pattern>
-          <pattern id='c' width='17' height='13' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
+      </pattern>
+      <pattern id='c' width='17' height='13' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
         <g fill='#f2f2f2'>
           <use href='#s' y='11'/>
           <use href='#s' x='2' y='9'/>
@@ -109,8 +108,8 @@ const ProductsIntro: React.FC = () => {
           <use href='#s' x='12' y='1'/>
           <use href='#s' x='16' y='6'/>
         </g>
-          </pattern>
-          <pattern id='d' width='19' height='17' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
+      </pattern>
+      <pattern id='d' width='19' height='17' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
         <g fill='#ffffff'>
           <use href='#s' y='9'/>
           <use href='#s' x='16' y='5'/>
@@ -125,40 +124,40 @@ const ProductsIntro: React.FC = () => {
           <use href='#s' x='15' y='4'/>
           <use href='#s' x='18' y='1'/>
         </g>
-          </pattern>
-          <pattern id='e' width='47' height='53' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
+      </pattern>
+      <pattern id='e' width='47' height='53' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
         <g fill='#fcfcfc'>
           <use href='#s' x='2' y='5'/>
           <use href='#s' x='16' y='38'/>
           <use href='#s' x='46' y='42'/>
           <use href='#s' x='29' y='20'/>
         </g>
-          </pattern>
-          <pattern id='f' width='59' height='71' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
+      </pattern>
+      <pattern id='f' width='59' height='71' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
         <g fill='#fcfcfc'>
           <use href='#s' x='33' y='13'/>
           <use href='#s' x='27' y='54'/>
           <use href='#s' x='55' y='55'/>
         </g>
-          </pattern>
-          <pattern id='g' width='139' height='97' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
+      </pattern>
+      <pattern id='g' width='139' height='97' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
         <g fill='#fcfcfc'>
           <use href='#s' x='11' y='8'/>
           <use href='#s' x='51' y='13'/>
           <use href='#s' x='17' y='73'/>
           <use href='#s' x='99' y='57'/>
         </g>
-          </pattern>
-        </defs>
-        <rect fill='url(#a)' width='100%' height='100%'/>
-        <rect fill='url(#b)' width='100%' height='100%'/>
-        <rect fill='url(#h)' width='100%' height='100%'/>
-        <rect fill='url(#c)' width='100%' height='100%'/>
-        <rect fill='url(#d)' width='100%' height='100%'/>
-        <rect fill='url(#e)' width='100%' height='100%'/>
-        <rect fill='url(#f)' width='100%' height='100%'/>
-        <rect fill='url(#g)' width='100%' height='100%'/>
-      </svg>
+      </pattern>
+    </defs>
+    <rect fill='url(#a)' width='100%' height='100%'/>
+    <rect fill='url(#b)' width='100%' height='100%'/>
+    <rect fill='url(#h)' width='100%' height='100%'/>
+    <rect fill='url(#c)' width='100%' height='100%'/>
+    <rect fill='url(#d)' width='100%' height='100%'/>
+    <rect fill='url(#e)' width='100%' height='100%'/>
+    <rect fill='url(#f)' width='100%' height='100%'/>
+    <rect fill='url(#g)' width='100%' height='100%'/>
+  </svg>
 
       <div className="container mx-auto -mb-60 -mt-10 md:-mt-14 md:mb-8 lg:-mb-60 xl:mb-0 relative z-10">
         <div className="relative z-10 flex flex-col items-center lg:flex-row lg:justify-between">
