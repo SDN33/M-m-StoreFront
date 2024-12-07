@@ -231,6 +231,8 @@ const MemeGeorgettePremium = () => {
             className="w-full h-[300px] object-cover transform group-hover:scale-105 transition-transform duration-500"
             width={800}
             height={300}
+            loading='eager'
+            priority
           />
           <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-white">
             <h2 className="text-sm md:text-base font-bold mb-4">VOUS ÊTES UN VIGNERON ?</h2>
