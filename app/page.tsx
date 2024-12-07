@@ -215,7 +215,7 @@ export default function Home() {
 
           <main
             ref={mainContentRef}
-            className="flex-1 bg-white overflow-y-auto"
+            className="flex-1 bg-white overflow-y-auto custom-scrollbar"
             style={{
               overscrollBehavior: 'contain',
               height: '100vh'
