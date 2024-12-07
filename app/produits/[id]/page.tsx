@@ -256,13 +256,13 @@ const ProductPage: React.FC = () => {
               <Image
               src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
               alt={product.name}
-              width={700}
+              width={500}
               height={800} // Adjusted height to maintain a consistent aspect ratio
               className="mt-5 rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-110 cursor-zoom-in"
               loading="lazy"
               />
             </div>
-          
+
 
           </div>
 

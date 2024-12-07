@@ -114,7 +114,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       return (
         <div className={`absolute bottom-2 ${product.certification?.toLowerCase() === 'bio' ? 'right-10' : 'right-12'} w-auto h-auto z-20`}>
           <Image
-            src="/images/LogoAOC.jpg"
+            src="/images/LogoAOC.png"
             width={28}
             height={28}
             alt="Badge AOC"
