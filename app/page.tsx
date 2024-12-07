@@ -269,7 +269,7 @@ export default function Home() {
                 </section>
               </div>
               <br />
-              <div className="payment-logos-container">
+              <div className="payment-logos-container -mb-4">
                 <div className="flex justify-center items-center space-x-6 w-fit h-auto mx-auto mb-8 bg-white rounded-lg p-4 border border-gray-100">
                   {paymentMethods.map((method) => (
                     <a
