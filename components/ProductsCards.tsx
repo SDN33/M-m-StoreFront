@@ -215,6 +215,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
         <div className="space-y-10 ">
           <div className="mx-auto overflow-hidden justify-center flex">
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 justify-center">
+                {(() => {
                   const lastSortTime = sessionStorage.getItem('lastSortTime');
                   const currentTime = Date.now();
                   let sortedProducts = [...filteredProducts];
