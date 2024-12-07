@@ -113,7 +113,7 @@ const MobileProductsIntro: React.FC = () => {
             <h1
               className="text-sm font-extrabold text-gray-50 tracking-tight text-center leading-tight h-[60px] mt-4"
             >
-              ACHAT de VIN BIO et BIODYNAMIQUE<br />Rouge, Blanc, Rosé, Pétillant, Liquoreux
+              ACHAT de VIN BIO et BIODYNAMIQUE<br /><span className='text-xs'>Rouge - Blanc - Rosé - Pétillant - Sans Sulfites</span>
             </h1>
         </div>
         <div className="flex justify-center items-center bg-gray-50 rounded-xl shadow-md">
