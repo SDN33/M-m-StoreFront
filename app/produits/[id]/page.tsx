@@ -71,7 +71,7 @@ const renderAOCBadge = (product: Product) => {
     return (
       <div className={`z-20 ${product.certification === 'biodynamie' ? 'ml-3' : 'ml-2'}`}>
         <Image
-          src="/images/LogoAOC.png"
+          src="/images/LogoAOC.jpg"
           alt="Badge AOC"
           style={{ objectFit: 'contain' }}
           width={30}
@@ -206,13 +206,13 @@ const ProductPage: React.FC = () => {
         <meta property="og:url" content="" />
         <meta property="og:type" content="website" />
       </Head>
-      <div className=" min-h-screen sm:mt-0 md:mt-16 lg:mt-20 px-4 md:px-12 flex flex-col justify-between overflow-x-hidden !overflow-y-hidden">
+      <div className=" min-h-screen sm:mt-0 md:mt-16 lg:mt-20 px-4 md:px-12 flex flex-col justify-between overflow-x-hidden overflow-y-hidden">
       <span className='sm:flex md:hidden lg:hidden'><br /><br /></span>
       <div className="relative top-0 left-0 w-full">
       </div>
       <br /><br /><br />
       <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 overflow-y-hidden">
-        <nav aria-label="Breadcrumb" className="text-xs mb-7 overflow-x-auto whitespace-nowrap text-center">
+        <nav aria-label="Breadcrumb" className="text-xs mb-7 overflow-x-auto whitespace-nowrap text-center custom-scrollbar">
           <ol className="list-none p-0 inline-flex">
             <li className="flex items-center">
               <a href="/" className="text-gray-950 hover:text-gray-700">Accueil</a>
@@ -233,7 +233,7 @@ const ProductPage: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-8 justify-center items-start w-full">
           <div className="w-full md:w-1/2 flex flex-col items-center">
             <div className="flex items-start z-10 w-full justify-start px-4 md:px-0">
-              <div className="text-sm flex gap-2">
+              <p className="text-sm flex gap-2">
                 {product.certification ? (
                   <Image
                     {...getCertificationLogo(product.certification)}
@@ -246,9 +246,9 @@ const ProductPage: React.FC = () => {
                   'Non renseignée'
                 )}
                 {product.certification === 'en conversion' && (
-                    <div className="text-xs font-semibold text-gray-900 mt-2 hidden sm:hidden md:flex">En conversion biologique</div>
+                  <p className="text-xs font-semibold text-gray-900 mt-2">En conversion biologique</p>
                 )}
-              </div>
+              </p>
               {renderAOCBadge(product)}
             </div>
             <div className="relative w-full sm:max-w[200px] md:max-w[300px] lg:max-w-[400px]">
@@ -256,14 +256,12 @@ const ProductPage: React.FC = () => {
               <Image
               src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
               alt={product.name}
-              width={500}
+              width={700}
               height={800} // Adjusted height to maintain a consistent aspect ratio
               className="mt-5 rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-110 cursor-zoom-in"
               loading="lazy"
               />
             </div>
-
-
           </div>
 
           <div className="w-full md:w-1/2 px-4 md:px-0">
@@ -492,6 +490,8 @@ const ProductPage: React.FC = () => {
                 src={getGoogleMapUrl(product.nom_chateau || '')}
                 width="100%"
                 height="400"
+                style={{ border: 'none' }}
+                aria-hidden="false"
                 tabIndex={0}
                 title="Google Map"
                 className="w-full rounded-lg shadow-md"
@@ -511,7 +511,6 @@ const ProductPage: React.FC = () => {
             width={800}
             height={800}
             className="w-fit flex mx-auto" // Ajuste la hauteur si nécessaire
-            loading="lazy"
           />
 
         </div>

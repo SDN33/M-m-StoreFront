@@ -86,7 +86,7 @@ export default function AvisClient({ productId }: { productId: string }) {
     : 0;
 
   return (
-    <div className="bg-white rounded-lg p-6 shadow-md mt-10">
+    <div className="bg-white rounded-lg p-6 shadow-md mt-8">
       <div className="flex justify-between items-center mb-6">
         {reviews.length > 0 && (
           <div className="flex items-center space-x-2">

@@ -37,7 +37,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
         url: "/images/post_partage.webp",
         width: 800,
         height: 600,
-        alt: "banner les vins de Mémé Georgette",
+        alt: "bannière les vins de Mémé Georgette",
       },
     ],
     siteName: "Les vins de Mémé Georgette",
@@ -51,7 +51,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
     images: [
       {
         url: "/images/post_partage.webp",
-        alt: "banner Les Vins de Mémé Georgette",
+        alt: "bannière Les Vins de Mémé Georgette",
       },
     ],
   }

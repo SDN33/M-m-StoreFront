@@ -10,7 +10,6 @@ import MobileHome from '@/components/MobileHome';
 import Trust from '@/components/Trust';
 import Livraison from '@/components/Livraison';
 import WineCategories from '@/components/WineCategories';
-import LatestArticles from '@/components/LatestArticles';
 import Image from 'next/image';
 import Head from 'next/head';
 import GoToFooter from '@/components/GoToFooter';
@@ -291,7 +290,6 @@ export default function Home() {
               <div className="py-4" />
               <WineCategories />
               <Trust />
-              <LatestArticles />
               <BioWineDescription />
               <Slogan />
               <div className="py-8" />

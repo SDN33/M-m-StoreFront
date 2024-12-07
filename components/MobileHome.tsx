@@ -8,7 +8,6 @@ import MobileProductFilter from '@/components/MobileProductFilter';
 import Trust from '@/components/Trust';
 import Livraison from './Livraison';
 import MobileProductsIntro from './MobileProductIntro';
-import LatestArticles from './LatestArticles';
 import BackToTop from './BackToTop';
 import PromotionSection from './PromotionSection';
 import BioWineDescription from './BioWineDescription';
@@ -128,7 +127,6 @@ const MobileHome: React.FC = () => {
           <br />
           <WineCategories />
           <Trust />
-          <LatestArticles />
           <br />
           <Slogan />
           <BioWineDescription />

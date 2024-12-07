@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Mail } from "lucide-react";
+import LatestArticles from './LatestArticles';
+
 
 const Newsletter = () => {
   const [email, setEmail] = useState('');
@@ -211,6 +213,9 @@ const MemeGeorgettePremium = () => {
           <p className="font-normal">Chez Mémé, pas de casse ! Nous emballons vos bouteilles avec soin</p>
         </div>
       </div>
+
+      <LatestArticles />
+
 
       {/* Sections Découvrir */}
       <div className="grid md:grid-cols-2 gap-8 mb-16">
