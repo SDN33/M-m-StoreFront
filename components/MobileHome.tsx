@@ -92,9 +92,8 @@ const MobileHome: React.FC = () => {
           <MobileProductsIntro />
           <div className="w-screen">
         </div>
-        <br />
         <MobileSlider />
-        <div className="max-w-7xl mx-auto px-4 space-y-6">
+        <div className="max-w-7xl mx-auto px-4 space-y-6 mt-2">
         <div className="payment-logos-container">
           <div className="flex justify-center items-center space-x-6 w-fit h-auto mx-auto mb-8 bg-white rounded-lg p-4 border border-gray-100">
             {paymentMethods.map((method) => (
