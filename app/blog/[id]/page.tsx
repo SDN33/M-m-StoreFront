@@ -37,25 +37,24 @@ const SocialShare = ({ title, url }: { title: string; url: string }) => {
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`
   };
 
-    const copyToClipboard = async () => {
-      try {
-        await navigator.clipboard.writeText(url);
-        alert('Lien copié !');
-      } catch (err) {
-        alert(`Erreur lors de la copie du lien: ${err}`);
-      }
-    };
-
-
-    return (
-      <div className="flex space-x-4">
-        <a href={shareLinks.facebook} target="_blank" rel="noopener noreferrer"><Facebook size={20} /></a>
-        <a href={shareLinks.twitter} target="_blank" rel="noopener noreferrer"><Twitter size={20} /></a>
-        <a href={shareLinks.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin size={20} /></a>
-        <button onClick={copyToClipboard}><Link2 size={20} /></button>
-      </div>
-    );
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      alert('Lien copié !');
+    } catch (err) {
+      alert(`Erreur lors de la copie du lien: ${err}`);
+    }
   };
+
+  return (
+    <div className="flex space-x-4">
+      <a href={shareLinks.facebook} target="_blank" rel="noopener noreferrer"><Facebook size={20} /></a>
+      <a href={shareLinks.twitter} target="_blank" rel="noopener noreferrer"><Twitter size={20} /></a>
+      <a href={shareLinks.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin size={20} /></a>
+      <button onClick={copyToClipboard}><Link2 size={20} /></button>
+    </div>
+  );
+};
 
 const removeFeaturedImageFromContent = (content: string, featuredImage: string | null): string => {
   if (!featuredImage) return content;
@@ -80,6 +79,12 @@ const removeFeaturedImageFromContent = (content: string, featuredImage: string |
         element.remove();
       }
     });
+  });
+
+  // Retirer la classe wp-block-gallery
+  const galleryElements = tempDiv.getElementsByClassName('wp-block-gallery');
+  Array.from(galleryElements).forEach(element => {
+    element.remove();
   });
 
   // Nettoyer les colonnes vides
@@ -203,13 +208,15 @@ const ArticlePage = () => {
       )}
 
       <div
-        className="prose prose-lg max-w-3xl mx-auto"
+        className="prose prose-lg max-w-3xl mx-auto
+          [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-gray-900 [&_h2]:mt-8 [&_h2]:mb-4
+          [&_a]:text-blue-600 [&_a]:underline [&_a]:hover:text-blue-800"
         dangerouslySetInnerHTML={{
           __html: removeFeaturedImageFromContent(article.content, article.featuredImage)
         }}
       />
       <div className="mt-8 flex justify-center">
-      <SocialShare url={currentUrl} title={article.title} />
+        <SocialShare url={currentUrl} title={article.title} />
       </div>
       <br /><br />
       <Comments postId={article.id} postTitle={article.title} postSlug={article.slug} />
