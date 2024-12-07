@@ -65,6 +65,19 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
+      <script type="application/ld+json">
+          {JSON.stringify({
+        "@context": "http://schema.org",
+        "@type": "Store",
+        "name": "Vins Mémé Georgette",
+        "url": "https://www.vinsmemegeorgette.com",
+        "logo": "https://www.vinsmemegeorgette.com/memelogo2.png",
+        "description": "Vins bio et biodynamiques en direct des vignerons engagés",
+        "address": {
+          "addressCountry": "FR"
+        },
+          })}
+        </script>
             {/* Preconnect to CloudFront */}
         <link rel="preconnect" href="https://d13sozod7hpim.cloudfront.net" crossOrigin="anonymous" />
 

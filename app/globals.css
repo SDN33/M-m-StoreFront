@@ -250,3 +250,18 @@ ul::-webkit-scrollbar {
   scrollbar-color: "#cc4f39" "#f3f3f3";
 
 }
+@keyframes movePattern {
+  0% { transform: scale(13.95) translate(-928.32, -696.24); }
+  50% { transform: scale(14.2) translate(-920, -690); }
+  100% { transform: scale(13.95) translate(-928.32, -696.24); }
+}
+svg pattern {
+  animation: movePattern 10s ease-in-out infinite;
+}
+svg rect[fill^='url'] {
+  opacity: 0.8;
+  transition: opacity 2s ease;
+}
+svg rect[fill^='url']:hover {
+  opacity: 0.5;
+}

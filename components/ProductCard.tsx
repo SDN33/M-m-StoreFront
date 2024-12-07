@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import { Info } from 'lucide-react';
 import AddToCartButton from './AddToCartButton';
 import { MapPin, HeartHandshakeIcon } from 'lucide-react';
-import OptimizedProductImage from './OptimizedProductImage';
 
 interface Product {
   id: number;
@@ -228,9 +227,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     return getRandomSlogan(slogans.decouverte(product.appellation || 'Vin'));
   };
 
-
-
-  const selectedProductIds = [621,632,255,284,286,292,653,649]; // Example array of selected product IDs
+  const selectedProductIds = [621,632,255,284,286,292,653]; // Example array of selected product IDs
 
   const renderSelectedBadge = () => {
     if (selectedProductIds.includes(product.id)) {
@@ -247,12 +244,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     }
     return null;
   };
-
-  const selectedBadge = renderSelectedBadge();
-  const aocBadge = renderAOCBadge();
-  const certificationBadge = renderCertification();
-
-
   return (
     <div className="w-full max-w-[400px] min-w-[300px] bg-white rounded-lg overflow-hidden shadow-md mb-8">
       <div className="bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 text-white py-1 px-2 text-center text-sm font-semibold">
@@ -296,23 +287,27 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           )}
         </div>
         <div className="relative w-full h-52 mb-2 mt-2">
-           {selectedBadge}
-           <OptimizedProductImage
-             product={product}
-             renderAOCBadge={renderAOCBadge}
-             renderCertification={renderCertification}
-             renderSelectedBadge={renderSelectedBadge}
-             handleRedirect={handleRedirect}
-           />
-           {aocBadge}
-           <div
-             className={`absolute bottom-2 ${
-               product.certification?.toLowerCase() === 'biodynamie' ? 'right-6' : 'right-0'
-             } w-8 h-8 z-20`}
-           >
-             {certificationBadge}
-           </div>
+          {renderSelectedBadge()}
+          <Image
+            src={product.images[0]?.src || '/images/vinmeme.png'}
+            alt={product.name}
+            width={500}
+            height={500}
+            sizes="(max-width: 768px) 500px, 500px"
+            priority={true}
+            onClick={handleRedirect}
+            className="hover:scale-105 transition-transform cursor-pointer h-full w-full object-contain"
+            onError={(e) => {
+              const imgElement = e.target as HTMLImageElement;
+              imgElement.src = '/images/vinmeme.png';
+            }}
+          />
+          {renderAOCBadge()}
+          <div className={`absolute bottom-2 ${product.certification?.toLowerCase() === 'biodynamie' ? 'right-6' : 'right-0'} w-8 h-8 z-20`}>
+            {renderCertification()}
           </div>
+        </div>
+
 
         </div>
         <div onClick={vendorRedirect} className="flex items-center gap-2 cursor-pointer">
@@ -373,21 +368,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
 
         <div className="flex items-center justify-center mx-auto pb-4">
-          <div className="flex items-center">
-            <label htmlFor="quantity" className="sr-only">Quantité</label>
-            <select
-              id="quantity"
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
-              className="border mr-4 rounded-md p-2"
-            >
-              {[...Array(10)].map((_, i) => (
-                <option key={i} value={i + 1}>
-                  {i + 1}
-                </option>
-              ))}
-            </select>
-          </div>
+          <select
+            value={quantity}
+            onChange={(e) => setQuantity(Number(e.target.value))}
+            className="border mr-4 rounded-md p-2 "
+
+          >
+            {[...Array(10)].map((_, i) => (
+              <option key={i} value={i + 1}>
+                {i + 1}
+              </option>
+            ))}
+          </select>
           <AddToCartButton
             productId={product.id}
             product={product}

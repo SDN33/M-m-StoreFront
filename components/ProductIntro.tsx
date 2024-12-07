@@ -55,7 +55,7 @@ const ProductsIntro: React.FC = () => {
       ref={introRef}
       className="relative overflow-hidden bg-white px-4 sm:px-6 md:px-8 lg:px-18 sm:py-24 md:py-32 shadow-lg text-center slide-in mt-2 md:mt-16 lg:mt-3 mb-16 lg:mb-0"
     >
-      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4000 500' className='absolute inset-0 w-screen h-full'>
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3000 500' className='absolute inset-0 w-screen h-full'>
     <rect fill='#ffffff' className='w-full h-full'/>
     <defs>
       <rect stroke='#ffffff' strokeWidth='.5' width='1' height='1' id='s'/>
