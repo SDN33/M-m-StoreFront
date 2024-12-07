@@ -32,22 +32,29 @@ export default function Home() {
 
   const paymentMethods = [
     {
+      name: 'Avis Google',
+      href: 'https://g.page/r/CeblcZSGEi33EBM/review',
+      src: '/images/Donnez-votre-avis.png',
+      height: 100,
+      width: 100,
+    },
+    {
       name: 'Visa',
-      href: '#',
+      href: 'https://www.visa.fr/',
       src: '/images/visa.png',
       height: 40,
       width: 60,
     },
     {
       name: 'MasterCard',
-      href: '#',
+      href: 'https://www.mastercard.fr/',
       src: '/images/mastercard.png',
       height: 40,
       width: 40,
     },
     {
       name: 'Stripe',
-      href: '#',
+      href: 'https://stripe.com/fr',
       src: '/images/stripe.webp',
       height: 40,
       width: 60,
