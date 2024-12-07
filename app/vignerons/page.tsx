@@ -97,7 +97,7 @@ const VendorsPage = () => {
         setError('');
       } catch (error) {
         console.error('Fetch error:', error);
-        setError('Unable to load vendors and products. Please try again later.');
+        setError('Impossible de charger les vignerons. Veuillez réessayer plus tard.');
       } finally {
         setLoading(false);
       }
@@ -176,7 +176,9 @@ const VendorsPage = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
+            <label htmlFor="city-select" className="sr-only">Select City</label>
             <select
+              id="city-select"
               className="w-full md:w-[200px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white"
               value={selectedCity}
               onChange={(e) => setSelectedCity(e.target.value)}
