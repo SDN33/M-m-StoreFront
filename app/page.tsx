@@ -290,8 +290,8 @@ export default function Home() {
               <Livraison />
               <div className="py-4" />
               <WineCategories />
-              <Trust />
               <LatestArticles />
+              <Trust />
               <BioWineDescription />
               <Slogan />
               <div className="py-8" />

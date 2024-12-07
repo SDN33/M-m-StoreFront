@@ -209,7 +209,7 @@ const ArticlePage = () => {
 
       <div
         className="prose prose-lg max-w-3xl mx-auto
-          [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-gray-900 [&_h2]:mt-8 [&_h2]:mb-4
+          [&_h2]:text-4xl [&_h2]:font-bold [&_h2]:text-gray-900 [&_h2]:mt-8 [&_h2]:mb-4
           [&_a]:text-blue-600 [&_a]:underline [&_a]:hover:text-blue-800"
         dangerouslySetInnerHTML={{
           __html: removeFeaturedImageFromContent(article.content, article.featuredImage)
