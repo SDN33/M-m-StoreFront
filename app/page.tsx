@@ -16,7 +16,6 @@ import GoToFooter from '@/components/GoToFooter';
 import BioWineDescription from '@/components/BioWineDescription';
 import Socialshare from '@/components/Socialshare';
 import BackToTop from '@/components/BackToTop';
-import { CreditCard } from 'lucide-react';
 
 
 
@@ -29,30 +28,6 @@ export default function Home() {
   const mainContentRef = useRef<HTMLDivElement>(null);
   const filterContentRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
-
-  const paymentMethods = [
-    {
-      name: 'Visa',
-      href: '#',
-      src: '/images/visa.png',
-      height: 40,
-      width: 60,
-    },
-    {
-      name: 'MasterCard',
-      href: '#',
-      src: '/images/mastercard.png',
-      height: 40,
-      width: 40,
-    },
-    {
-      name: 'Stripe',
-      href: '#',
-      src: '/images/stripe.webp',
-      height: 40,
-      width: 60,
-    },
-  ];
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
@@ -250,6 +225,7 @@ export default function Home() {
               <div className="pt-24 md:hidden lg:flex" />
               <ProductsIntro />
               <Slider />
+
               <div className="max-w-7xl mx-auto px-4">
                 <section className="bg-white rounded-lg shadow">
                   {productsLoaded && (
@@ -261,31 +237,6 @@ export default function Home() {
                 </section>
               </div>
               <br />
-              <div className="payment-logos-container">
-                <div className="flex justify-center items-center space-x-6 w-fit h-auto mx-auto mb-8 bg-white rounded-lg p-4 border border-gray-100">
-                  {paymentMethods.map((method) => (
-                    <a
-                      key={method.name}
-                      href={method.href}
-                      title={method.name}
-                      aria-label={method.name}
-                      className="transform transition-transform duration-200 hover:scale-110 opacity-80 hover:opacity-100"
-                    >
-                      <Image
-                        src={method.src}
-                        alt={method.name}
-                        height={method.height}
-                        width={method.width}
-                        className="object-contain"
-                      />
-                    </a>
-                  ))}
-                  <div className="flex items-center text-gray-600 ml-2 pl-2 border-l border-gray-200">
-                    <CreditCard className="h-5 w-5 mr-2 text-blue-600" />
-                    <span className="text-sm font-semibold text-blue-600">Paiement sécurisé</span>
-                  </div>
-                </div>
-              </div>
               <Livraison />
               <div className="py-4" />
               <WineCategories />
