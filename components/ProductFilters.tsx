@@ -241,88 +241,88 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   }
 
   return (
-    <div ref={filterContainerRef} className="custom-scrollbar -px-10 bg-gray-200 backdrop-blur-sm overflow-y-auto h-screen min-w-full transition-all duration-300 ease-in-out mt-48 md:mt-40 lg:mt-48 mr-14">
-      <div className="flex justify-center mx-auto">
+    <div ref={filterContainerRef} className=" custom-scrollbar -px-10 bg-gray-200 backdrop-blur-sm overflow-y-auto h-screen min-w-full transition-all duration-300 ease-in-out mt-48 md:mt-40 lg:mt-48 mr-14">
       <Image
         src="/images/paiement-securise.jpeg"
         alt="paiement securise"
         width={100}
         height={90}
-        className='object-contain'
+        className='object-cover flex justify-center mx-auto'
+        loading='eager'
+        priority
       />
-      </div>
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl mt-4">
-      <AnimatedResetButton onClick={resetFilters} isScrolled={isScrolled} />
+        <AnimatedResetButton onClick={resetFilters} isScrolled={isScrolled} />
       </div>
       <button
-      aria-label="Vins Bio Pour Offrir"
-      onClick={isHGPrixMatch}
-      className="mt-20 mb-2 p-2 text-center rounded-lg border-gray-950 mx-auto bg-gradient-to-r from-gray-800 via-gray-800 to-gray-950 text-white hover:from-red-700 hover:via-red-800 hover:to-red-500 transition-all duration-300 text-sm w-full"
+        aria-label="Vins Bio Pour Offrir"
+        onClick={isHGPrixMatch}
+        className="mt-20 mb-2 p-2 text-center rounded-lg border-gray-950 mx-auto bg-gradient-to-r from-gray-800 via-gray-800 to-gray-950 text-white hover:from-red-700 hover:via-red-800 hover:to-red-500 transition-all duration-300 text-sm w-full"
       >
-      <div className="flex items-center justify-center text-center mx-auto space-x-4">
-        <span className="text-center">
-      • <Gift className="w-3 h-auto inline-block ml-1" aria-hidden="true" />
-      &nbsp; Pour Offrir
-      <span className="text-xs -mt-4">
-        &nbsp;<Gift className="w-3 h-auto inline-block ml-1" aria-hidden="true" />
-      </span> •
-        </span>
-      </div>
+        <div className="flex items-center justify-center text-center mx-auto space-x-4">
+          <span className="text-center">
+        • <Gift className="w-3 h-auto inline-block ml-1" aria-hidden="true" />
+        &nbsp; Pour Offrir
+        <span className="text-xs -mt-4">
+          &nbsp;<Gift className="w-3 h-auto inline-block ml-1" aria-hidden="true" />
+        </span> •
+          </span>
+        </div>
       </button>
       <button
-      onClick={isPetitPrixMatch}
-      className="p-2 text-center rounded-lg border-gray-950 mx-auto bg-gradient-to-r from-primary via-orange-800 to-red-900 text-white hover:from-orange-700 hover:via-primary hover:to-orange-500 transition-all duration-300 text-sm w-full"
-      aria-label="Petit Budget"
+        onClick={isPetitPrixMatch}
+        className="p-2 text-center rounded-lg border-gray-950 mx-auto bg-gradient-to-r from-primary via-orange-800 to-red-900 text-white hover:from-orange-700 hover:via-primary hover:to-orange-500 transition-all duration-300 text-sm w-full"
+        aria-label="Petit Budget"
       >
-      <div className='flex items-center justify-center text-center mx-auto space-x-4'>
-        <span className="text-center">• &nbsp;Petit Budget&nbsp;  •</span>
-      </div>
+        <div className='flex items-center justify-center text-center mx-auto space-x-4'>
+          <span className="text-center">• &nbsp;Petit Budget&nbsp;  •</span>
+        </div>
       </button>
       <div className='pb-52 mt-4'>
-      {Object.entries(filterOptions).map(([filterType, options]) => {
-        if (hideColorFilter && filterType === 'color') return null;
-        return (
-        <div key={filterType} className="border-b border-gray-300 bg-slate-100">
-          <button
-          onClick={() => toggleSection(filterType)}
-          className="w-full p-4 text-left text-base font-semibold flex items-center justify-between hover:bg-gray-100 transition-colors"
-          >
-          <span className="text-gray-800 text-base">{getFilterTitle(filterType)}</span>
-          {expandedSections.includes(filterType) ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
-          </button>
-          {expandedSections.includes(filterType) && (
-          <div className="p-4 space-y-2 bg-white shadow-sm rounded-md ">
-            {options.map((option) => (
-            <label key={option.value} className="flex items-center justify-between cursor-pointer hover:bg-gray-100 p-2 rounded transition-colors">
-              <div className="flex items-center">
-              <input
-                type="checkbox"
-                checked={selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']].includes(option.value)}
-                onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
-                className="form-checkbox h-3 w-3 text-teal-800 focus:ring-teal-800 rounded border-gray-300 transition duration-200 ease-in-out"
-              />
-              <span className="ml-2 text-sm text-gray-700 font-semibold">
-                {option.label === 'Bio' ? (
-                <span className="flex items-center">
-                  {option.label} <Image src="/images/logobio1.webp" alt="Bio" width={16} height={16} className="ml-1" />
-                </span>
-                ) : option.label === 'Biodynamie' ? (
-                <span className="flex items-center">
-                  {option.label} <Image src="/images/bioBiodynamie.png" alt="Biodynamie" width={50} height={16} className="ml-1" />
-                </span>
-                ) : (
-                option.label
-                )}
-              </span>
-              </div>
-            </label>
-            ))}
-            <br /><br />
-          </div>
-          )}
-        </div>
-        );
-      })}
+        {Object.entries(filterOptions).map(([filterType, options]) => {
+          if (hideColorFilter && filterType === 'color') return null;
+          return (
+            <div key={filterType} className="border-b border-gray-300 bg-slate-100">
+              <button
+                onClick={() => toggleSection(filterType)}
+                className="w-full p-4 text-left text-base font-semibold flex items-center justify-between hover:bg-gray-100 transition-colors"
+              >
+                <span className="text-gray-800 text-base">{getFilterTitle(filterType)}</span>
+                {expandedSections.includes(filterType) ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
+              </button>
+              {expandedSections.includes(filterType) && (
+                <div className="p-4 space-y-2 bg-white shadow-sm rounded-md ">
+                  {options.map((option) => (
+                    <label key={option.value} className="flex items-center justify-between cursor-pointer hover:bg-gray-100 p-2 rounded transition-colors">
+                      <div className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={selectedFilters[filterType as keyof ProductFilterProps['selectedFilters']].includes(option.value)}
+                          onChange={() => handleCheckboxChange(filterType as keyof ProductFilterProps['selectedFilters'], option)}
+                          className="form-checkbox h-3 w-3 text-teal-800 focus:ring-teal-800 rounded border-gray-300 transition duration-200 ease-in-out"
+                        />
+                        <span className="ml-2 text-sm text-gray-700 font-semibold">
+                          {option.label === 'Bio' ? (
+                            <span className="flex items-center">
+                              {option.label} <Image src="/images/logobio1.webp" alt="Bio" width={16} height={16} className="ml-1" />
+                            </span>
+                          ) : option.label === 'Biodynamie' ? (
+                            <span className="flex items-center">
+                              {option.label} <Image src="/images/bioBiodynamie.png" alt="Biodynamie" width={50} height={16} className="ml-1" />
+                            </span>
+                          ) : (
+                            option.label
+                          )}
+                        </span>
+                      </div>
+                    </label>
+                  ))}
+                  <br /><br />
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
