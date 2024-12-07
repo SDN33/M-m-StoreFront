@@ -133,12 +133,12 @@ const FeaturedImage = ({ src, alt }: { src: string; alt: string }) => (
 );
 
 const filterTags = (content: string): string[] => {
-  const stopWords = ["mais", "je", "les", "le", "ou", "il", "la", "et", "à", "de", "du", "au", "des", "en"];
+  const stopWords = ["mais", "je", "les", "le", "ou", "il", "la", "et", "à", "de", "du", "au", "des", "en", "?ah,", "un", "une", "ce", "cette", "cet", "ces", "qui", "que", "quoi", "où", "quand", "comment", "pourquoi", "est", "sont", "suis", "sommes", "êtes", "sont", "ai", "as", "a", "avons", "avez", "ont", "avais", "avait", "avions", "aviez", "avaient", "aurai", "auras", "aura", "aurons", "aurez", "auront", "aurais", "aurait", "aurions", "auriez", "auraient", "avais", "avait", "avions", "aviez", "avaient", "eut", "eûmes", "eûtes", "eurent", "aie", "aies", "ait", "ayons", "ayez", "aient", "eusse", "eusses", "eût", "eussions", "eussiez", "eussent", "fusse", "fusses", "fût", "fussions", "fussiez", "fussent", "ayant", "eu", "eue", "eues", "eus", "eûmes", "eûtes", "eurent", "ayant", "eu", "eue", "eues", "eus", "eûmes", "eûtes", "eurent", "ayant", "eu", "eue", "eues", "eus", "eûmes", "eûtes", "eurent", "ayant", "eu", "eue", "eues", "eus", "eûmes", "eûtes", "eurent", "ayant", "eu", "eue", "eues", "eus", "eûmes", "eûtes", "eurent", "ayant", "eu", "eue", "eues", "eus", "eûmes", "eûtes", "eurent", "ayant", "eu", "eue", "eues", "eus", "eûmes", "eûtes", "eurent", "ayant", "eu", "eue", "peut",  "peuvent", "peux", "pouvons", "pouvez", "pour", "par", "plus", "peu", "peut-être", "peuvent", "peux", "pouvons", "pouvez", "pour", "par", "plus", "peu", "peut-être", "peuvent", "peux", "pouvons", "pouvez", "pour", "par", "plus", "peu", "peut-être", "peuvent", "peux", "pouvons", "pouvez", "pour", "par", "plus", "peu", "peut-être", "peuvent", "peux", "pouvons", "pouvez", "pour", "par", "plus", "peu", "peut-être", "peuvent", "peux", "pouvons", "pouvez", "pour", "par", "plus", "peu", "peut-être", "peuvent", "peux", "pouvons", "pouvez", "pour", "par", "plus", "peu", "peut-être", "peuvent", "peux", "pouvons", "pouvez", "pour", "par", "plus", "peu", "peut-être", "peuvent", "peux", "pouvons", "pouvez", "pour", "par", "plus", "peu", "peut-être", "peuvent", "peux", "pouvons", "pouvez", "pour", "par", "plus", "peu", "peut-être", "peuvent", "peux", "pouvons", "pouvez", "pour", "par", "plus", "peu", "peut-être", "peuvent", "peux", "pouvons", "pouvez", "pour", "par", "plus", "peu", "peut-être", "peuvent", "peux", "pouvons", "pouvez", "pour", "par", "plus", "peu", "peut-être", "peuvent", "peux", "pouvons", "pouvez", "pour", "par", "plus", "peu", "peut-être", "peuvent", "peux", "pouvons", "pouvez", "pour", "par", "plus", "peu", "peut-être", "peuvent", "peux", "pouvons", "sembler"];
   const words = content
     .replace(/<\/?[^>]+(>|$)/g, "") // Retirer HTML
     .toLowerCase()
     .split(/\s+/);
-  return [...new Set(words.filter(word => word.length > 3 && !stopWords.includes(word)))];
+  return [...new Set(words.filter(word => word.length > 3 && !stopWords.includes(word)).map(word => word.replace(/[.,]/g, '')))];
 };
 
 const ArticlePage = () => {
@@ -220,7 +220,7 @@ const ArticlePage = () => {
       <div className="max-w-3xl mx-auto mt-10 text-center">
         <h2 className="text-xl font-bold mb-4">Tags de l&apos;article :</h2>
         <div className="flex flex-wrap gap-2 justify-center">
-            {filterTags(article.content).slice(0, 5).map((tag, idx) => (
+            {filterTags(article.content).slice(0, 8).map((tag, idx) => (
             <span
               key={idx}
               className="px-3 py-1 bg-blue-200 text-blue-900 rounded-full text-sm font-medium"
