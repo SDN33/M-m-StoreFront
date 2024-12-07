@@ -28,6 +28,8 @@ const SocialIcon = ({ platform }) => {
 
 const VendorLocationMap = ({ vendor }) => {
   const hasCity = vendor.shop?.title && vendor.address?.city && vendor.address?.address_1 && vendor.address.postcode;
+  const zoomLevel = 5; // Ajustez le zoom ici (entre 1 et 20, 1 étant le plus éloigné)
+
 
   if (!hasCity) {
     return (
@@ -40,7 +42,8 @@ const VendorLocationMap = ({ vendor }) => {
     );
   }
 
-  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(hasCity)}&z=12&output=embed`;
+  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(vendor.address.address_1 || '')} ${encodeURIComponent(vendor.address.city || '')} ${encodeURIComponent(vendor.address.postcode || '')}&z=${zoomLevel}&output=embed`;  
+
 
   return (
     <div className="bg-white rounded-lg shadow p-6">
