@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Clock, Facebook, Twitter, Linkedin, Link2 } from "lucide-react";
 import he from "he";
 import dynamic from "next/dynamic";
+import LatestArticles from "@/components/LatestArticles";
 const Comments = dynamic(() => import("@/components/Comments"), { ssr: false });
 
 interface Article {
@@ -59,13 +60,11 @@ const SocialShare = ({ title, url }: { title: string; url: string }) => {
 const removeFeaturedImageFromContent = (content: string, featuredImage: string | null): string => {
   if (!featuredImage) return content;
 
-  // Créer un DOM temporaire pour manipuler le contenu HTML
   const tempDiv = document.createElement('div');
   tempDiv.innerHTML = content;
 
-  // Fonction pour vérifier si une URL d'image correspond à l'image vedette
   const isMatchingImage = (src: string) => {
-    const cleanSrc = src.split('?')[0]; // Enlever les paramètres d'URL
+    const cleanSrc = src.split('?')[0];
     const cleanFeatured = featuredImage.split('?')[0];
     return cleanSrc === cleanFeatured;
   };
@@ -81,13 +80,6 @@ const removeFeaturedImageFromContent = (content: string, featuredImage: string |
     });
   });
 
-  // Retirer la classe wp-block-gallery
-  const galleryElements = tempDiv.getElementsByClassName('wp-block-gallery');
-  Array.from(galleryElements).forEach(element => {
-    element.remove();
-  });
-
-  // Nettoyer les colonnes vides
   ['wp-block-column', 'wp-block-columns'].forEach(className => {
     const elements = tempDiv.getElementsByClassName(className);
     Array.from(elements).forEach(element => {
@@ -140,6 +132,15 @@ const FeaturedImage = ({ src, alt }: { src: string; alt: string }) => (
   </div>
 );
 
+const filterTags = (content: string): string[] => {
+  const stopWords = ["mais", "je", "les", "le", "ou", "il", "la", "et", "à", "de", "du", "au", "des", "en"];
+  const words = content
+    .replace(/<\/?[^>]+(>|$)/g, "") // Retirer HTML
+    .toLowerCase()
+    .split(/\s+/);
+  return [...new Set(words.filter(word => word.length > 3 && !stopWords.includes(word)))];
+};
+
 const ArticlePage = () => {
   const params = useParams();
   const [article, setArticle] = useState<Article | null>(null);
@@ -190,7 +191,7 @@ const ArticlePage = () => {
   return (
     <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-20 mt-44">
       <header className="text-center mb-10">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-gray-950 mb-4 max-w-4xl mx-auto">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-gray-950 mb-4 max-w-4xl mx-auto text-center">
           {he.decode((article.title || "").replace(/<\/?[^>]+(>|$)/g, ""))}
         </h1>
         <div className="flex justify-center items-center text-sm text-gray-500">
@@ -208,18 +209,40 @@ const ArticlePage = () => {
       )}
 
       <div
-        className="prose prose-lg max-w-3xl mx-auto
+        className="text-center prose prose-lg max-w-3xl mx-auto
           [&_h2]:text-4xl [&_h2]:font-bold [&_h2]:text-gray-900 [&_h2]:mt-8 [&_h2]:mb-4
           [&_a]:text-blue-600 [&_a]:underline [&_a]:hover:text-blue-800"
         dangerouslySetInnerHTML={{
-          __html: removeFeaturedImageFromContent(article.content, article.featuredImage)
+          __html: removeFeaturedImageFromContent(article.content, article.featuredImage),
         }}
       />
-      <div className="mt-8 flex justify-center">
-        <SocialShare url={currentUrl} title={article.title} />
+
+      <div className="max-w-3xl mx-auto mt-10 text-center">
+        <h2 className="text-xl font-bold mb-4">Tags de l&apos;article :</h2>
+        <div className="flex flex-wrap gap-2 justify-center">
+            {filterTags(article.content).slice(0, 5).map((tag, idx) => (
+            <span
+              key={idx}
+              className="px-3 py-1 bg-blue-200 text-blue-900 rounded-full text-sm font-medium"
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
       </div>
-      <br /><br />
+
+      <div className="mt-10 mb-18">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-xl font-bold mb-2">Partager cet article :</h2>
+        </div>
+        <div className="flex mx-auto justify-center">
+          <SocialShare title={article.title} url={currentUrl} />
+        </div>
+      </div>
+
       <Comments postId={article.id} postTitle={article.title} postSlug={article.slug} />
+      <br />
+      <LatestArticles />
     </article>
   );
 };

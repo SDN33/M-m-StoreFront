@@ -6,7 +6,6 @@ import { DiscussionEmbed } from "disqus-react";
 const Comments: React.FC<{ postId: number | string, postTitle: string, postSlug: string }> = ({ postId, postTitle, postSlug }) => {
   return (
     <section className="mt-10 max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6">Commentaires</h2>
       <DiscussionEmbed
         shortname="vinsmemegeorgette"
         config={{
