@@ -300,7 +300,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                             </span>
                           ) : option.label === 'Biodynamie' ? (
                             <span className="flex items-center">
-                              {option.label} <Image src="/images/biodemeter.png" alt="Biodynamie" width={50} height={16} className="ml-1" />
+                              {option.label} <Image src="/images/bioBiodynamie.png" alt="Biodynamie" width={50} height={16} className="ml-1" />
                             </span>
                           ) : (
                             option.label
