@@ -107,7 +107,8 @@ const joinIfArray = (value: string | string[], separator: string = ', ') => {
 // Fonction getGoogleMapUrl
 const getGoogleMapUrl = (location: string) => {
   const encodedLocation = encodeURIComponent(location || '');
-  return `https://maps.google.com/maps?q=${encodedLocation}&z=12&output=embed`;
+  const zoomLevel = 5; // Ajustez le zoom ici (entre 1 et 20, 1 étant le plus éloigné)
+  return `https://maps.google.com/maps?q=${encodedLocation}&z=${zoomLevel}&output=embed`;
 };
 
 const ProductPage: React.FC = () => {
