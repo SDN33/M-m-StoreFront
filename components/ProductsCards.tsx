@@ -196,6 +196,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
 
   return (
     <div ref={productsRef} className="flex-1 px-4 lg:px-8">
+      <br />
       <Filtertop sortBy={sortBy} handleSortChange={handleSortChange} resetFilters={resetFilters} />
       <br />
       <br />
