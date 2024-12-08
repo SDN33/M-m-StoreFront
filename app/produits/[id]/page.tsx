@@ -181,7 +181,7 @@ const ProductPage: React.FC = () => {
   const renderSelectedBadge = () => {
     if (selectedProductIds.includes(product.id)) {
       return (
-        <div className="absolute -top-10 right-0 sm:right-1 md:-right-8 bg-red-700/90 shadow-2xl text-white text-[9px] px-3 py-2 rounded-full flex items-center gap-2 z-40">
+        <div className="absolute -top-10 right-0 sm:right-1 md:-right-8 bg-red-700/90 shadow-2xl text-white text-[9px] px-2 py-2 rounded-full flex items-center gap-2 z-40 mr-4">
           <span className="flex items-center justify-center text-white rounded-full ">
             <HeartHandshakeIcon className="w-4 h-4 mr-1" aria-hidden="true" />
             <p>Le choix de Mémé </p>
@@ -252,7 +252,7 @@ const ProductPage: React.FC = () => {
               {renderAOCBadge(product)}
             </div>
             <div className="relative w-full sm:max-w[200px] md:max-w[300px] lg:max-w-[400px] mt-1">
-              <div className='pr-4 '>
+              <div className='mr-4 '>
                 {renderSelectedBadge()}
               </div>
               <Image
