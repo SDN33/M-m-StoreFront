@@ -233,7 +233,7 @@ const ProductPage: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-8 justify-center items-start w-full">
           <div className="w-full md:w-1/2 flex flex-col items-center">
             <div className="flex items-start z-10 w-full justify-start px-4 md:px-0">
-              <p className="text-sm flex gap-2">
+              <div className="text-sm flex gap-2">
                 {product.certification ? (
                   <Image
                     {...getCertificationLogo(product.certification)}
@@ -246,9 +246,9 @@ const ProductPage: React.FC = () => {
                   'Non renseignée'
                 )}
                 {product.certification === 'en conversion' && (
-                  <p className="text-xs font-semibold text-gray-900 mt-2">En conversion biologique</p>
+                  <div className="text-xs font-semibold text-gray-900 mt-2">En conversion biologique</div>
                 )}
-              </p>
+              </div>
               {renderAOCBadge(product)}
             </div>
             <div className="relative w-full sm:max-w[200px] md:max-w[300px] lg:max-w-[400px]">
@@ -324,7 +324,7 @@ const ProductPage: React.FC = () => {
             <SocialShare url={currentUrl} title={`${product.name} - VINS Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE`} />
             <div className="items-center mt-6 flex gap-2">
               <Package className="h-6 w-6" />
-              <span className="font-bold text-xs mb-1">Livraison offerte dès <span className='text-teal-800'>6 bouteilles achetées</span> sur un domaine</span>
+              <div className="font-bold text-xs mb-1">Livraison offerte dès <span className='text-teal-800'>6 bouteilles achetées</span> sur un domaine</div>
             </div>
             <div
               className='ml-8 px-1 text-xs font-light -mt-4 mb-6'
