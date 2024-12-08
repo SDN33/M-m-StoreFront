@@ -251,14 +251,16 @@ const ProductPage: React.FC = () => {
               </div>
               {renderAOCBadge(product)}
             </div>
-            <div className="relative w-full sm:max-w[200px] md:max-w[300px] lg:max-w-[400px] mr-4 mt-1">
-              {renderSelectedBadge()}
+            <div className="relative w-full sm:max-w[200px] md:max-w[300px] lg:max-w-[400px] mt-1">
+              <div className='pr-4 '>
+                {renderSelectedBadge()}
+              </div>
               <Image
               src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
               alt={product.name}
               width={700}
               height={800} // Adjusted height to maintain a consistent aspect ratio
-              className="mt-5 rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-110 cursor-zoom-in"
+              className="mt-5 rounded-lg transform transition-transform duration-300 ease-in-out hover:scale-110 cursor-zoom-in justify-center flex mx-auto"
               loading="lazy"
               />
             </div>
