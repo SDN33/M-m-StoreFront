@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import Head from "next/head";
 import Image from "next/image";
 import { Clock, Facebook, Twitter, Linkedin, Link2 } from "lucide-react";
 import he from "he";
@@ -188,62 +189,79 @@ const ArticlePage = () => {
   if (isLoading) return <ArticleSkeleton />;
   if (error || !article) return <ErrorDisplay message={error || "Une erreur est survenue."} />;
 
+  // Extraire les tags de l'article
+  const tags = filterTags(article.content);
+
   return (
-    <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-20 mt-44">
-      <header className="text-center mb-10">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-gray-950 mb-4 max-w-4xl mx-auto text-center">
-          {he.decode((article.title || "").replace(/<\/?[^>]+(>|$)/g, ""))}
-        </h1>
-        <div className="flex justify-center items-center text-sm text-gray-500">
-          <Clock size={16} className="mr-2" />
-          <time dateTime={article.date}>
-            {formatDate(article.date)}
-            {article.readTime && ` · ${article.readTime} min lecture`}
-          </time>
-          <p>{article.author && ` · ${article.author}`}</p>
+    <>
+      <Head>
+        <title>{article.title} | Le Blog de Mémé Georgette</title>
+        <meta name="description" content={`Découvrez cet article : ${article.title}`} />
+        <meta name="keywords" content={tags.join(", ")} />
+        <meta name="author" content={"Charles @MéméGeorgette"} />
+        <meta property="og:title" content={article.title} />
+        <meta property="og:description" content={`Découvrez cet article : ${article.title}`} />
+        <meta property="og:image" content={article.featuredImage || "/default-image.jpg"} />
+        <meta property="og:url" content={currentUrl} />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Head>
+
+      <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-20 mt-44">
+        <header className="text-center mb-10">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-950 mb-4 max-w-4xl mx-auto text-center">
+            {he.decode((article.title || "").replace(/<\/?[^>]+(>|$)/g, ""))}
+          </h1>
+          <div className="flex justify-center items-center text-sm text-gray-500">
+            <Clock size={16} className="mr-2" />
+            <time dateTime={article.date}>
+              {formatDate(article.date)}
+              {article.readTime && ` · ${article.readTime} min lecture`}
+            </time>
+            <p>{article.author && ` · ${article.author}`}</p>
+          </div>
+        </header>
+
+        {article.featuredImage && (
+          <FeaturedImage src={article.featuredImage} alt={article.title} />
+        )}
+
+        <div
+          className="text-center prose prose-lg max-w-3xl mx-auto
+            [&_h2]:text-4xl [&_h2]:font-bold [&_h2]:text-gray-900 [&_h2]:mt-8 [&_h2]:mb-4
+            [&_a]:text-blue-600 [&_a]:underline [&_a]:hover:text-blue-800"
+          dangerouslySetInnerHTML={{
+            __html: removeFeaturedImageFromContent(article.content, article.featuredImage),
+          }}
+        />
+
+        <div className="max-w-3xl mx-auto mt-10 text-center">
+          <h2 className="text-xl font-bold mb-4">Tags de l&apos;article :</h2>
+          <div className="flex flex-wrap gap-2 justify-center">
+              {filterTags(article.content).slice(0, 8).map((tag, idx) => (
+              <span
+                key={idx}
+                className="px-3 py-1 bg-blue-200 text-blue-900 rounded-full text-sm font-medium"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
         </div>
-      </header>
 
-      {article.featuredImage && (
-        <FeaturedImage src={article.featuredImage} alt={article.title} />
-      )}
-
-      <div
-        className="text-center prose prose-lg max-w-3xl mx-auto
-          [&_h2]:text-4xl [&_h2]:font-bold [&_h2]:text-gray-900 [&_h2]:mt-8 [&_h2]:mb-4
-          [&_a]:text-blue-600 [&_a]:underline [&_a]:hover:text-blue-800"
-        dangerouslySetInnerHTML={{
-          __html: removeFeaturedImageFromContent(article.content, article.featuredImage),
-        }}
-      />
-
-      <div className="max-w-3xl mx-auto mt-10 text-center">
-        <h2 className="text-xl font-bold mb-4">Tags de l&apos;article :</h2>
-        <div className="flex flex-wrap gap-2 justify-center">
-            {filterTags(article.content).slice(0, 8).map((tag, idx) => (
-            <span
-              key={idx}
-              className="px-3 py-1 bg-blue-200 text-blue-900 rounded-full text-sm font-medium"
-            >
-              #{tag}
-            </span>
-          ))}
+        <div className="mt-10 mb-18">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-xl font-bold mb-2">Partager cet article :</h2>
+          </div>
+          <div className="flex mx-auto justify-center">
+            <SocialShare title={article.title} url={currentUrl} />
+          </div>
         </div>
-      </div>
 
-      <div className="mt-10 mb-18">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-xl font-bold mb-2">Partager cet article :</h2>
-        </div>
-        <div className="flex mx-auto justify-center">
-          <SocialShare title={article.title} url={currentUrl} />
-        </div>
-      </div>
-
-      <Comments postId={article.id} postTitle={article.title} postSlug={article.slug} />
-      <br />
-      <LatestArticles />
-    </article>
+        <Comments postId={article.id} postTitle={article.title} postSlug={article.slug} />
+        <br />
+        <LatestArticles />
+      </article>
+    </>
   );
 };
 

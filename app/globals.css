@@ -217,6 +217,8 @@ ul::-webkit-scrollbar {
   margin-bottom: 1rem; /* Espace en-dessous */
   border-left: 4px solid #ff6347; /* Ligne décorative à gauche */
   padding-left: 1rem; /* Espace entre la bordure et le texte */
+  border-right: 4px solid #ff6347; /* Ligne décorative à droite */
+  padding-right: 1rem; /* Espace entre la bordure et le texte */
   line-height: 1.4; /* Hauteur de ligne */
 }
 
