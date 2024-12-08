@@ -246,7 +246,7 @@ const ProductPage: React.FC = () => {
                   'Non renseignée'
                 )}
                 {product.certification === 'en conversion' && (
-                  <div className="text-xs font-semibold text-gray-900 mt-2">En conversion biologique</div>
+                  <div className="text-xs font-semibold text-gray-900 mt-2 sm:hidden">En conversion biologique</div>
                 )}
               </div>
               {renderAOCBadge(product)}
