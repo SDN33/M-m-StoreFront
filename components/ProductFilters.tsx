@@ -243,7 +243,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   return (
     <div ref={filterContainerRef} className=" custom-scrollbar -px-10 bg-gray-200 backdrop-blur-sm overflow-y-auto h-screen min-w-full transition-all duration-300 ease-in-out mt-48 md:mt-40 lg:mt-48 mr-14">
       <Image
-        src="/images/paiement-securise.jpeg"
+        src="/images/paiement.png"
         alt="paiement securise"
         width={100}
         height={90}
