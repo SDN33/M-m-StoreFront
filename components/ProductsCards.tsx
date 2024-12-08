@@ -122,7 +122,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
         selectedFilters.petit_prix?.some(
           (petitPrix) =>
           petitPrix.toLowerCase().trim() === 'petit_prix' &&
-          (product.price <= 8 || (product.sale_price && product.sale_price <= 8))
+          (product.price <= 8 || (product.sale_price && product.sale_price <= 9.99))
       );
 
       const isHGPrixMatch = (selectedFilters.haut_de_gamme?.length ?? 0) === 0 ||
