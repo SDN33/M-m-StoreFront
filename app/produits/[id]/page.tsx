@@ -125,7 +125,7 @@ const ProductPage: React.FC = () => {
         const response = await fetch(`/api/products?id=${id}`);
         if (!response.ok) throw new Error('Failed to fetch product');
         const data = await response.json();
-        const fetchedProduct = data.find((p: Product) => p.id === Number(id));
+        const fetchedProduct = Array.isArray(data) ? data.find((p: Product) => p.id === Number(id)) : null;
         if (!fetchedProduct) throw new Error('Product not found');
         // Assurez-vous que average_rating est un nombre
         fetchedProduct.average_rating = parseFloat(fetchedProduct.average_rating) || 0;

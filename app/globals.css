@@ -267,3 +267,23 @@ svg rect[fill^='url'] {
 svg rect[fill^='url']:hover {
   opacity: 0.5;
 }
+
+.section {
+  margin: 50px 0;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s, transform 0.8s ease-out;
+}
+.section.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+.section:nth-child(odd) {
+  animation-delay: 0.2s;
+}
+.section:nth-child(even) {
+  animation-delay: 0.4s;
+}
