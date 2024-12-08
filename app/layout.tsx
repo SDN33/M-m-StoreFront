@@ -79,22 +79,6 @@ export default function RootLayout({
         },
           })}
         </script>
-        <script src="https://cdn.brevo.com/js/sdk-loader.js" async></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Version: 2.0
-              window.Brevo = window.Brevo || [];
-              Brevo.push([
-                "init",
-                {
-                  "client_key": "kabz67f1zt1yvj4p7vazvsr4"
-                  // Optional: Add other initialization options, see documentation
-                }
-              ]);
-            `
-          }}
-        />
         {/* Preconnect to CloudFront */}
         <link rel="preconnect" href="https://d13sozod7hpim.cloudfront.net" crossOrigin="anonymous" />
 

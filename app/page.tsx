@@ -247,7 +247,7 @@ export default function Home() {
 
           <main
             ref={mainContentRef}
-            className="flex-1 bg-white overflow-y-auto"
+            className="flex-1 bg-white overflow-y-auto overflow-x-hidden"
             style={{
               overscrollBehavior: 'contain',
               height: '100vh'
