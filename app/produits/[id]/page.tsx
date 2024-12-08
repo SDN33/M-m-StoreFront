@@ -246,12 +246,12 @@ const ProductPage: React.FC = () => {
                   'Non renseignée'
                 )}
                 {product.certification === 'en conversion' && (
-                  <div className="text-xs font-semibold text-gray-900 mt-2 sm:hidden">En conversion biologique</div>
+                  <div className="text-xs font-semibold text-gray-900 mt-2 ">En conversion</div>
                 )}
               </div>
               {renderAOCBadge(product)}
             </div>
-            <div className="relative w-full sm:max-w[200px] md:max-w[300px] lg:max-w-[400px]">
+            <div className="relative w-full sm:max-w[200px] md:max-w[300px] lg:max-w-[400px] mr-4 mt-1">
               {renderSelectedBadge()}
               <Image
               src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}

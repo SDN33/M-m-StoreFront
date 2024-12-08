@@ -119,7 +119,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             height={28}
             alt="Badge AOC"
             style={{ objectFit: 'contain' }}
-
           />
         </div>
       );

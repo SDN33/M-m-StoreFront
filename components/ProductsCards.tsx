@@ -179,7 +179,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
 
   const resetFilters = () => {
     setSortBy('');
-    setVisibleCount(12);
+    setVisibleCount(24);
   };
 
   useEffect(() => {

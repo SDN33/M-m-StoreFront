@@ -40,7 +40,7 @@ interface AxiosErrorResponse {
 }
 
 const productCache: { [key: string]: { data: Product[]; timestamp: number } } = {};
-const CACHE_DURATION = 60000; // 1 minute cache duration
+const CACHE_DURATION = 30000; // 30 sec cache duration
 
 const transformMetaData = (metaData: { key: string; value: string | string[] }[]): { [key: string]: unknown } => {
   const productData: { [key: string]: unknown } = {};
