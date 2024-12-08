@@ -394,8 +394,8 @@ const ProductPage: React.FC = () => {
                 />
               </a>
               <div className="flex items-center text-gray-600">
-                <CreditCard className="h-3 w-3 mr-1 text-blue-600" />
-                <span className="text-xs font-semibold text-blue-600">Paiement sécurisé</span>
+                <CreditCard className="h-3 w-3 mr-1 text-blue-800" />
+                <span className="text-xs font-semibold text-blue-800">Paiement sécurisé</span>
               </div>
             </div>
           </div>
