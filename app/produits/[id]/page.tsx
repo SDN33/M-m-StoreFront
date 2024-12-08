@@ -202,7 +202,7 @@ const ProductPage: React.FC = () => {
         <meta name="description" content={product.description} />
         <meta property="og:title" content={`${product.name} - Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE`} />
         <meta property="og:description" content={`Achetez les meilleurs vins bio et biodynamiques avec Mémé Georgette. ${product.description}`} />
-        <meta property="og:image" content="/images/default-product.jpg" />
+        <meta property="og:image" content={product.images?.[0]?.src || '/images/vinmeme.png'} />
         <meta property="og:url" content="" />
         <meta property="og:type" content="website" />
       </Head>
