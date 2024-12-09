@@ -193,10 +193,10 @@ const ProductsIntro: React.FC = () => {
           <div className="flex flex-col items-center text-center w-full lg:w-auto ">
             <h1 className="text-2xl sm:text-2xl lg:text-2xl font-gray-950 font-black text-primary tracking-tight leading-tight">
               <span className="block text-4xl sm:text-2xl mb-2 mt-1">
-                <span className="text-3xl font-gray-950 font-[Inter]">{counter.toLocaleString()}</span>
+                <span className="text-3xl font-gray-950">{counter.toLocaleString()}</span>
                 <span className='text-3xl'>&nbsp;vins bio en direct des vignerons(nes)</span>
               </span>
-              <span className="block bg-transparent text-gray-950 text-base sm:text-sm font-['Inter'] -mt-1 mb-2 ">
+              <span className="block bg-transparent text-gray-950 text-base sm:text-sm -mt-1 mb-2 ">
                 Tu sais, celles et ceux qui respectent la terre, ses locataires...
               </span>
             </h1>
