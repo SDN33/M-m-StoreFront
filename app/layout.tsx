@@ -25,7 +25,7 @@ export const metadata: Metadata & { twitter: TwitterMetadata } = {
   icons: {
     icon: "/favicon.ico"
   },
-  viewport: "width=device-width, initial-scale=1",
+  viewport: "width=device-width, initial-scale=0.9",
   keywords: [
     "Mémé Georgette, meme georgette, Vins Mémé Georgette, acheter vin, vinatis, les grappes, vin en ligne, acheter vins bio, achat vins en ligne, vins bio, vins en ligne, vins sans sulfites, vins nature, acheter vins eu, vins biodynamiques, vivino, vins de qualité, vinatis, vins de vigneronnes, vins de France, vins du monde, vins rouges, vins blancs, vins rosés, vins pétillants, vins effervescents, vins tranquilles, vins de garde, cépages, terroir français, vins de caractère, vins de gastronomie, vins de fête, vins de qualité, vins de prestige, vins de collection, vins de garde, vins de Bordeaux, vins de Bourgogne, vins de Loire, vins de Rhône, vins de Provence, vins de Champagne, vins d'Alsace, vins du Languedoc, vins du Roussillon, vins du Sud-Ouest, vins du Jura, vins de Savoie, vins de Corse, vins d'Espagne, vins d'Italie, vins d'Allemagne, vins du Portugal, vinaigre, wu, aoc, bouteille crémant prix"
   ],
