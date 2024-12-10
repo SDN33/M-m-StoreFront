@@ -33,6 +33,7 @@ export default function Home() {
         <meta property="og:image" content="https://vinsmemegeorgette.com/images/post_partage.webp" />
         <meta property="og:url" content="https://vinsmemegeorgette.com" />
         <meta property='og:favicon' content='/images/favicon.ico' />
+        
 
       </Head>
       {isMobile ? <MobileHome /> : <DesktopHome />}
