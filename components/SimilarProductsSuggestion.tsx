@@ -81,7 +81,7 @@ const SimilarProductsSuggestion: React.FC<SimilarProductsProps> = ({
 
   return (
     <div className="-mt-8">
-      <div className='border-t border-gray-200 mb-8 border-4'></div>
+      <div className='border-t border-gray-200 mb-8 border-4 rounded-xl'></div>
       {similarByDomain.length > 0 && (
         <div className="mb-8">
           <h2 className="text-xl font-bold mb-4 text-left">
