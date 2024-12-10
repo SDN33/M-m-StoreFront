@@ -68,8 +68,8 @@ const MobileHome: React.FC = () => {
         </div>
         <MobileSlider />
         <div className="max-w-7xl mx-auto px-4 space-y-6 mt-2 ">
-        <div className=" bg-white w-full justify-center items-center">
-          <div className="flex justify-center items-center space-x-6 w-fit h-auto mx-auto mb-8 bg-white rounded-lg p-4 border border-gray-100">
+        <div className=" bg-white w-full justify-center items-center -my-2">
+          <div className="flex justify-center items-center space-x-6 w-fit h-auto mx-auto mb-4 bg-white rounded-lg p-4 border border-gray-100">
             <Image
               src="/images/paiement.png"
               alt="Paiement sécurisé"
