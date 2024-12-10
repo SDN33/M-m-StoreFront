@@ -58,28 +58,28 @@ const Footer = () => {
           <div>
             <h3 className=" font-semibold mb-4 text-lg lg:text-xl text-white">Découvrez nos vins</h3>
             <ul className="space-y-2 font-normal">
-              <li><a href="/vins/rouge" className="text-white hover:text-primary transition-colors text-sm">Nos Vins Rouges</a></li>
-              <li><a href="/vins/blanc" className="text-white hover:text-primary transition-colors text-sm">Nos Vins Blancs</a></li>
-              <li><a href="/vins/rose" className="text-white hover:text-primary transition-colors text-sm">Nos Vins Rosés</a></li>
-              <li><a href="/vins/petillant" className="text-white hover:text-primary transition-colors text-sm">Nos Vins Pétillants</a></li>
-              <li><a href="/vins/liquoreux"className="text-white hover:text-primary transition-colors text-sm">Nos Vins Liquoreux</a></li>
+              <li><a href="/vins/rouge" className="text-white hover:text-primary transition-colors text-sm" title="Vins Rouges">Nos Vins Rouges</a></li>
+              <li><a href="/vins/blanc" className="text-white hover:text-primary transition-colors text-sm" title="Vins Blancs">Nos Vins Blancs</a></li>
+              <li><a href="/vins/rose" className="text-white hover:text-primary transition-colors text-sm" title="Vins Rosés">Nos Vins Rosés</a></li>
+              <li><a href="/vins/petillant" className="text-white hover:text-primary transition-colors text-sm" title="Vins Pétillants">Nos Vins Pétillants</a></li>
+              <li><a href="/vins/liquoreux" className="text-white hover:text-primary transition-colors text-sm" title="Vins Liquoreux">Nos Vins Liquoreux</a></li>
             </ul>
           </div>
 
           <div>
             <h3 className="font-semibold mb-4 text-lg lg:text-xl text-white">Besoin d&apos;aide ?</h3>
             <ul className="space-y-2 font-normal">
-              <li><a href="/contact" className="text-white hover:text-primary transition-colors text-sm">Nous contacter</a></li>
-              <li><a href="/faq" className="text-white hover:text-primary transition-colors text-sm">FAQ (Foire aux questions)</a></li>
-              <li><a href="/mentions-legales" className="text-white hover:text-primary transition-colors text-sm">Mentions légales</a></li>
-              <li><a href="/cgv" className="text-white hover:text-primary transition-colors text-sm">CGV</a></li>
+              <li><a href="/contact" title="Contact Mémé Georgette" className="text-white hover:text-primary transition-colors text-sm">Nous contacter</a></li>
+              <li><a href="/faq" title="FAQ Mémé Georgette" className="text-white hover:text-primary transition-colors text-sm">FAQ (Foire aux questions)</a></li>
+              <li><a href="/mentions-legales" title="Mentions légales Mémé Georgette" className="text-white hover:text-primary transition-colors text-sm">Mentions légales</a></li>
+              <li><a href="/cgv" title="Conditions Générales de Vente" className="text-white hover:text-primary transition-colors text-sm">CGV</a></li>
             </ul>
           </div>
         </div>
 
         {/* Mentions légales et copyright */}
         <div className=" -mb-2">
-          <Image src="/images/image-restriction.svg" alt="Prévention Alcool" width={500} height={500} className="mb-4 mx-auto w-auto h-auto" />
+          <Image src="/images/image-restriction.svg" title="Prévention Alcool" alt="Prévention Alcool" width={500} height={500} className="mb-4 mx-auto w-auto h-auto" />
           <p className="text-xs text-white mb-4 font-normal">
             L&apos;abus d&apos;alcool est dangereux pour la santé, sachez consommer avec modération.
             Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.
