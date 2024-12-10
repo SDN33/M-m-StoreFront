@@ -223,8 +223,8 @@ const ProductsIntro: React.FC = () => {
             <Image
               src="/images/logointro2.jpg"
               alt="nature et progrès"
-              width={30}
-              height={20}
+              width={60}
+              height={30}
               className="object-contain w-10 lg:min-w-8 h-auto"
               priority
             />
