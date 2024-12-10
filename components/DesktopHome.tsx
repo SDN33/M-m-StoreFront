@@ -76,7 +76,7 @@ export default function Home() {
   useEffect(() => {
     const loadingTimeout = setTimeout(() => {
       setIsInitialRender(false);
-    }, 1000);
+    }, 800);
 
     window.scrollTo(0, 0);
 
