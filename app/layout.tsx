@@ -111,12 +111,18 @@ export default function RootLayout({
           src="https://www.googletagmanager.com/gtag/js?id=G-RSNYNCZTC4"
           strategy="afterInteractive"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script
+          id="google-analytics"
+          strategy="lazyOnload"
+          async
+        >
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-RSNYNCZTC4');
+            gtag('config', 'G-RSNYNCZTC4', {
+              'send_page_view': false // Only send page views when needed
+            });
           `}
         </Script>
 
