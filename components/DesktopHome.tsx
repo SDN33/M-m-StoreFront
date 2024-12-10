@@ -17,7 +17,7 @@ import BackToTop from '@/components/BackToTop';
 import { CreditCard } from 'lucide-react';
 
 export default function Home() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile] = useState(false);
   const [isInitialRender, setIsInitialRender] = useState(true);
   const [productsLoaded, setProductsLoaded] = useState(false);
 
@@ -56,26 +56,6 @@ export default function Home() {
     },
   ];
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
-
-    const checkMobile = () => {
-      setIsMobile(mediaQuery.matches);
-      window.scrollTo(0, 0);
-    };
-
-    checkMobile();
-
-    const handleMediaChange = (e: MediaQueryListEvent) => {
-      setIsMobile(e.matches);
-      window.scrollTo(0, 0);
-    };
-
-    mediaQuery.addEventListener('change', handleMediaChange);
-    return () => {
-      mediaQuery.removeEventListener('change', handleMediaChange);
-    };
-  }, []);
 
   const [selectedFilters, setSelectedFilters] = useState({
     color: [],
