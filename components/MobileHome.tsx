@@ -14,31 +14,6 @@ import BioWineDescription from './BioWineDescription';
 import Image from 'next/image';
 import MobileSlider from './MobileSlider';
 
-const paymentMethods = [
-  {
-    name: 'Visa',
-    href: '#',
-    src: '/images/visa.png',
-    height: 20,
-    width: 40,
-  },
-  {
-    name: 'MasterCard',
-    href: '#',
-    src: '/images/mastercard.png',
-    height: 20,
-    width: 20,
-  },
-  {
-    name: 'Stripe',
-    href: '#',
-    src: '/images/stripe.webp',
-    height: 20,
-    width: 40,
-  },
-];
-
-
 const MobileHome: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState({
     color: [],
@@ -92,31 +67,18 @@ const MobileHome: React.FC = () => {
           <div className="w-screen">
         </div>
         <MobileSlider />
-        <div className="max-w-7xl mx-auto px-4 space-y-6 mt-2">
-        <div className="payment-logos-container">
+        <div className="max-w-7xl mx-auto px-4 space-y-6 mt-2 ">
+        <div className=" bg-white w-full justify-center items-center">
           <div className="flex justify-center items-center space-x-6 w-fit h-auto mx-auto mb-8 bg-white rounded-lg p-4 border border-gray-100">
-            {paymentMethods.map((method) => (
-              <a
-                key={method.name}
-                href={method.href}
-                title={method.name}
-                aria-label={method.name}
-                className="transform transition-transform duration-200 hover:scale-110 opacity-80 hover:opacity-100"
-              >
-                <Image
-                  src={method.src}
-                  alt={method.name}
-                  height={method.height}
-                  width={method.width}
-                  className="object-contain"
-                />
-              </a>
-            ))}
+            <Image
+              src="/images/paiement.png"
+              alt="Paiement sécurisé"
+              height={130}
+              width={130}
+              sizes="130"
+            />
           </div>
-            <div className="flex items-center text-gray-600 ml-2 pl-2 border-l border-gray-200">
-              <span className="text-sm font-semibold text-blue-600 text-center justify-center mx-auto flex -mt-8">Paiement sécurisé</span>
-            </div>
-                </div>
+        </div>
 
         <section className="bg-white rounded-lg shadow">
           <ProductsCards selectedFilters={selectedFilters} onAddToCart={(product) => console.log('Add to cart:', product)} />
