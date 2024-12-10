@@ -240,7 +240,7 @@ export default function PortailPro() {
             <div className='text-base mx-10 flex flex-col gap-2'>
               <br />
               <span>Nous vous offrons un accès direct aux amateurs de vins en Europe<br /><br />Tout en simplifiant vos démarches avec une logistique intégrée<br /><br />Plus un accompagnement marketing personnalisé, notre assistance vendeur et client dédiée<br />vous permet de vous concentrer sur l&apos;essentiel:</span>
-              <span className='text-primary font-semibold text-lg'>La fabrication de vins bio</span>
+              <span className='font-semibold text-lg'>La fabrication de vins bio</span>
             </div>
           </div>
         </div>
