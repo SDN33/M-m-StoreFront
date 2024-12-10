@@ -1,5 +1,12 @@
 'use client';
 
+declare global {
+  interface Window {
+    gtag?: (...args: (string | Date | { [key: string]: string | number | boolean | object })[]) => void;
+    dataLayer?: Array<{ event: string; [key: string]: string | number | boolean | object }>;
+  }
+}
+
 import React, { useEffect, useState } from 'react';
 
 const CookieConsent = () => {
@@ -34,33 +41,62 @@ const CookieConsent = () => {
       }
     }
 
+    if (consent) {
+      const parsedConsent = JSON.parse(consent);
+      if (parsedConsent.analytics) {
+        loadGoogleAnalytics();
+      }
+    }
+
     return () => {
       window.removeEventListener('ageVerified', handleAgeVerification);
     };
   }, []);
 
+  const loadGoogleAnalytics = () => {
+    if (!window.gtag) {
+      const script = document.createElement('script');
+      script.src = `https://www.googletagmanager.com/gtag/js?id=G-RSNYNCZTC4`; // Remplacez par votre ID Google Analytics.
+      script.async = true;
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function (...args) {
+        if (window.dataLayer) {
+          window.dataLayer.push({ event: 'gtag_event', ...args });
+        }
+      };
+      window.gtag('js', new Date());
+      window.gtag('config', 'G-RSNYNCZTC4'); // Remplacez par votre ID Google Analytics.
+    }
+  };
+
   const acceptAll = () => {
     const allPreferences = {
       essential: true,
       analytics: true,
-      marketing: true
+      marketing: true,
     };
     localStorage.setItem('cookieConsent', JSON.stringify(allPreferences));
     setPreferences(allPreferences);
     setIsVisible(false);
+    loadGoogleAnalytics();
   };
 
   const acceptSelected = () => {
     localStorage.setItem('cookieConsent', JSON.stringify(preferences));
     setIsVisible(false);
     setShowDetails(false);
+    if (preferences.analytics) {
+      loadGoogleAnalytics();
+    }
   };
 
   const refuse = () => {
     const minimalPreferences = {
       essential: true,
       analytics: false,
-      marketing: false
+      marketing: false,
     };
     localStorage.setItem('cookieConsent', JSON.stringify(minimalPreferences));
     setPreferences(minimalPreferences);
@@ -69,9 +105,9 @@ const CookieConsent = () => {
 
   const handleToggle = (type: 'essential' | 'analytics' | 'marketing') => {
     if (type === 'essential') return;
-    setPreferences(prev => ({
+    setPreferences((prev) => ({
       ...prev,
-      [type]: !prev[type]
+      [type]: !prev[type],
     }));
   };
 
@@ -83,7 +119,9 @@ const CookieConsent = () => {
         <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-auto border border-primary/20">
           <div className="p-6 space-y-6">
             <div className="flex justify-between items-center">
-              <h3 className="text-xl font-semibold text-gray-950">🍪 Paramètres des cookies</h3>
+              <h3 className="text-xl font-semibold text-gray-950">
+                🍪 Paramètres des cookies
+              </h3>
               <button
                 onClick={() => setShowDetails(false)}
                 className="text-gray-950 hover:text-primary transition-colors rounded-full p-2 hover:bg-primary/10"
@@ -97,7 +135,9 @@ const CookieConsent = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-semibold">Cookies essentiels</p>
-                    <p className="text-sm text-primary/70">Nécessaires au fonctionnement du site</p>
+                    <p className="text-sm text-primary/70">
+                      Nécessaires au fonctionnement du site
+                    </p>
                   </div>
                   <div className="bg-primary/20 px-3 py-1 rounded-full text-sm text-primary">
                     Activé
@@ -109,7 +149,9 @@ const CookieConsent = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-semibold">Cookies analytiques</p>
-                    <p className="text-sm text-primary/70">Mesure d&apos;audience et statistiques</p>
+                    <p className="text-sm text-primary/70">
+                      Mesure d&apos;audience et statistiques
+                    </p>
                   </div>
                   <button
                     onClick={() => handleToggle('analytics')}
@@ -117,9 +159,11 @@ const CookieConsent = () => {
                       preferences.analytics ? 'bg-primary' : 'bg-primary/20'
                     }`}
                   >
-                    <span className={`absolute block w-5 h-5 rounded-full bg-white top-1 transition-transform ${
-                      preferences.analytics ? 'right-1' : 'left-1'
-                    }`} />
+                    <span
+                      className={`absolute block w-5 h-5 rounded-full bg-white top-1 transition-transform ${
+                        preferences.analytics ? 'right-1' : 'left-1'
+                      }`}
+                    />
                   </button>
                 </div>
               </div>
@@ -128,7 +172,9 @@ const CookieConsent = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-semibold">Cookies marketing</p>
-                    <p className="text-sm text-primary/70">Personnalisation et publicités</p>
+                    <p className="text-sm text-primary/70">
+                      Personnalisation et publicités
+                    </p>
                   </div>
                   <button
                     onClick={() => handleToggle('marketing')}
@@ -136,9 +182,11 @@ const CookieConsent = () => {
                       preferences.marketing ? 'bg-primary' : 'bg-primary/20'
                     }`}
                   >
-                    <span className={`absolute block w-5 h-5 rounded-full bg-white top-1 transition-transform ${
-                      preferences.marketing ? 'right-1' : 'left-1'
-                    }`} />
+                    <span
+                      className={`absolute block w-5 h-5 rounded-full bg-white top-1 transition-transform ${
+                        preferences.marketing ? 'right-1' : 'left-1'
+                      }`}
+                    />
                   </button>
                 </div>
               </div>
@@ -166,17 +214,25 @@ const CookieConsent = () => {
 
   return (
     <div className="fixed bottom-0 z-[99999] w-full h-fit">
-      <div className="bg-gray-950/90 backdrop-blur-sm rounded-t-xl shadow-lg border border-primary/10 p-4 ">
+      <div className="bg-gray-950/90 backdrop-blur-sm rounded-t-xl shadow-lg border border-primary/10 p-4">
         <div className="space-y-4">
           <p className="text-center flex items-center justify-center gap-3">
-            <span className='text-3xl font-bold text-left'>🍪</span>
-            <span className='font-normal text-white'>Nous utilisons des cookies pour améliorer votre expérience client et nos services<br /><span className='text-xs sm:hidden md:flex lg:flex text-center '>Selon la législation en vigueur, vous pouvez accepter ou refuser ces cookies</span></span>
+            <span className="text-3xl font-bold text-left">🍪</span>
+            <span className="font-normal text-white">
+              Nous utilisons des cookies pour améliorer votre expérience client
+              et nos services
+              <br />
+              <span className="text-xs sm:hidden md:flex lg:flex text-center">
+                Selon la législation en vigueur, vous pouvez accepter ou
+                refuser ces cookies
+              </span>
+            </span>
           </p>
 
           <div className="flex justify-center gap-4">
             <button
               onClick={acceptAll}
-              className="px-5 py-2 bg-white  shadow-xl rounded-md transition-colors font-medium"
+              className="px-5 py-2 bg-white shadow-xl rounded-md transition-colors font-medium"
             >
               Tout accepter
             </button>
