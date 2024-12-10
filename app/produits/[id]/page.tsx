@@ -9,6 +9,7 @@ import SocialShare from '@/components/Socialshare';
 import AddToCartButton from '@/components/AddToCartButton';
 import ProductReviews from '@/components/ProductReviews';
 import Head from 'next/head';
+import SimilarProductsSuggestion from '@/components/SimilarProductsSuggestion';
 
 interface Product {
   id: number;
@@ -118,6 +119,22 @@ const ProductPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const fetchAllProducts = async () => {
+      try {
+        const response = await fetch('/api/products');
+        const data = await response.json();
+        setAllProducts(data);
+      } catch (error) {
+        console.error('Failed to fetch all products', error);
+      }
+    };
+
+    fetchAllProducts();
+  }, []);
+
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -405,8 +422,16 @@ const ProductPage: React.FC = () => {
 
         <br /><br />
 
+        {product && allProducts.length > 0 && (
+        <SimilarProductsSuggestion
+          currentProduct={product}
+          allProducts={allProducts}
+          productId={product.id.toString()}
+        />
+      )}
 
-        <div className="mt-8 w-full">
+
+        <div className="-mt-14 w-full">
           <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 p-8 rounded-t-xl">Description du produit</h2>
           <div className="border-b-8 border-white w-full max-w-[50rem] my-3 h-3 slide-in-right mx-auto -mt-1"></div>
             <p className='font-serif font-normal text-center mt-8 px-8'>
