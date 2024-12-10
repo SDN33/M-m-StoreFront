@@ -10,7 +10,6 @@ import Trust from '@/components/Trust';
 import Livraison from '@/components/Livraison';
 import WineCategories from '@/components/WineCategories';
 import Image from 'next/image';
-import Head from 'next/head';
 import GoToFooter from '@/components/GoToFooter';
 import BioWineDescription from '@/components/BioWineDescription';
 import Socialshare from '@/components/Socialshare';
@@ -195,16 +194,6 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <meta name="title" content="ACHAT VIN BIO, BIODYNAMIQUE, SANS SULFITES - Mémé Georgette" />
-        <meta name="description" content="Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites" />
-        <meta property="og:title" content="ACHAT VIN BIO, BIODYNAMIQUE, SANS SULFITES - Mémé Georgette" />
-        <meta property="og:description" content="Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites" />
-        <meta property="og:image" content="https://vinsmemegeorgette.com/images/post_partage.webp" />
-        <meta property="og:url" content={window.location.href} />
-        
-      </Head>
-
       <div className="flex flex-1 mt-2">
         <aside
           className={`w-64 bg-gray-200 border-r border-gray-200 ${
