@@ -333,7 +333,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
       </div>
         <a href={`/produits/${product.id}`} className="text-xs text-gray-950 h-8 overflow-hidden text-center mx-4 font-medium mb-4 flex justify-center cursor-pointer">
-          {stripHtmlAndTruncate(product.short_description || product.description || '', 110)}
+          {stripHtmlAndTruncate(product.short_description || stripHtmlAndTruncate(product.description, 110) || '', 110)}
         </a>
 
         <div className="flex items-center justify-between mb-2">
