@@ -15,11 +15,6 @@ type TwitterMetadata = {
   images: { url: string; alt: string }[];
 };
 
-export const viewport = {
-  width: 'device-width',
-  initialScale: 0.9,
-};
-
 export const metadata: Metadata & { twitter: TwitterMetadata } = {
   title: "ACHAT VIN BIO, BIODYNAMIQUE, SANS SULFITES - Mémé Georgette",
   alternates: {
