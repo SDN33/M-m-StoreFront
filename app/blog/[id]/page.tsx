@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 import LatestArticles from "@/components/LatestArticles";
 const Comments = dynamic(() => import("@/components/Comments"), { ssr: false });
 
+
 interface Article {
   id: number;
   title: string;
