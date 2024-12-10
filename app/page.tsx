@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.9" />
         <meta name="title" content="AccCHAT VIN BIO, BIODYNAMIQUE, SANS SULFITES - Mémé Georgette" />
         <meta
           name="description"
