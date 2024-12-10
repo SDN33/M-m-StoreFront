@@ -261,8 +261,8 @@ export default function Home() {
               <div className="max-w-7xl mx-auto px-4">
                 <section className="bg-white rounded-lg shadow">
                   <div >
-                    <h2 className='mt-4 text-lg text-center font-black'>Achetez vos vins bio et biodynamiques en ligne</h2>
-                    <h3 className='text-center text-gray-800 -mt-1 -mb-4'>Vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites</h3>
+                    <h2 className='mt-4 text-lg text-center font-black text-gray-600'>Achetez vos vins bio et biodynamiques en ligne</h2>
+                    <h3 className='text-center text-gray-400 -mt-1 -mb-4'>Vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites</h3>
                   </div>
                   {productsLoaded && (
                     <ProductsCards
