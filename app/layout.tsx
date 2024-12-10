@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -7,7 +8,54 @@ import { CartProvider } from '../context/CartContext';
 import Cookies from "@/components/Cookies";
 import Script from "next/script";
 
+type TwitterMetadata = {
+  card: string;
+  title: string;
+  description: string;
+  images: { url: string; alt: string }[];
+};
 
+export const metadata: Metadata & { twitter: TwitterMetadata } = {
+  title: "ACHAT VIN BIO, BIODYNAMIQUE, SANS SULFITES - Mémé Georgette",
+  alternates: {
+    canonical: "https://vinsmemegeorgette.com"
+  },
+  description:
+    "Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites",
+  icons: {
+    icon: "/favicon.ico"
+  },
+  keywords: [
+    "Mémé Georgette, meme georgette, Vins Mémé Georgette, acheter vin, vinatis, les grappes, vin en ligne, acheter vins bio, achat vins en ligne, vins bio, vins en ligne, vins sans sulfites, vins nature, acheter vins eu, vins biodynamiques, vivino, vins de qualité, vinatis, vins de vigneronnes, vins de France, vins du monde, vins rouges, vins blancs, vins rosés, vins pétillants, vins effervescents, vins tranquilles, vins de garde, cépages, terroir français, vins de caractère, vins de gastronomie, vins de fête, vins de qualité, vins de prestige, vins de collection, vins de garde, vins de Bordeaux, vins de Bourgogne, vins de Loire, vins de Rhône, vins de Provence, vins de Champagne, vins d'Alsace, vins du Languedoc, vins du Roussillon, vins du Sud-Ouest, vins du Jura, vins de Savoie, vins de Corse, vins d'Espagne, vins d'Italie, vins d'Allemagne, vins du Portugal, vinaigre, wu, aoc, bouteille crémant prix"
+  ],
+  openGraph: {
+    title: "ACHAT VIN BIO, BIODYNAMIQUE, SANS SULFITES - Mémé Georgette",
+    description:
+      "Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites",
+    images: [
+      {
+        url: "/images/post_partage.webp",
+        width: 800,
+        height: 600,
+        alt: "bannière les vins de Mémé Georgette",
+      },
+    ],
+    siteName: "Les vins de Mémé Georgette",
+
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ACHAT VIN BIO, BIODYNAMIQUE, SANS SULFITES - Mémé Georgette",
+    description:
+      "Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites",
+    images: [
+      {
+        url: "/images/post_partage.webp",
+        alt: "bannière Les Vins de Mémé Georgette",
+      },
+    ],
+  }
+};
 
 export default function RootLayout({
   children,

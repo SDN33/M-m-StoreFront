@@ -19,6 +19,7 @@ import BackToTop from '@/components/BackToTop';
 import { CreditCard } from 'lucide-react';
 
 
+
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isInitialRender, setIsInitialRender] = useState(true);
@@ -212,8 +213,6 @@ export default function Home() {
         <meta property="og:description" content="Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites" />
         <meta property="og:image" content="https://vinsmemegeorgette.com/images/post_partage.webp" />
         <meta property="og:url" content={window.location.href} />
-        <meta property="og:type" content="website" />
-        <meta property="og:favicon" content="https://vinsmemegeorgette.com/favicon.ico" />
       </Head>
       {isMobile ? (
         <MobileHome />
