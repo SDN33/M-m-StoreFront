@@ -103,7 +103,7 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
               {hasFreeShipping ? (
                 <div className="bg-green-50 p-3 rounded-md">
                   <p className="text-green-600 text-sm font-medium text-center">
-                    ✨ Livraison gratuite sur votre commande !
+                    ✨ Livraison offerte en point relais sur votre commande !
                   </p>
                 </div>
               ) : (
