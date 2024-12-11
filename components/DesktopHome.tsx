@@ -268,9 +268,9 @@ export default function Home() {
             <div className="py-4" />
             <Trust />
             <WineCategories />
-            <BioWineDescription />
             <Slogan />
             <div className="py-8" />
+            <BioWineDescription />
             <div className='flex mx-auto justify-center'>
               <Socialshare url="https://vinsmemegeorgette.com" title="VINS Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE" />
             </div>
