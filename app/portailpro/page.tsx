@@ -170,33 +170,13 @@ export default function PortailPro() {
         <div>
           <div className="text-center space-y-4 mb-4 gap-1">
           <div className='text-center text-xs mx-auto text-gray-950 mb-4'><a href="/">Accueil</a> / <strong>Portail Pro</strong></div>
-
-          <h1
-            className="text-2xl md:text-4xl lg:text-5xl tracking-tight font-bold relative text-white pt-28 items-center justify-center rounded-t-xl text-center
-                       bg-gradient-to-r from-primary via-orange-800 to-red-800 bg-size-200 bg-position-0 hover:bg-position-100
-                       transition-all duration-500 ease-in-out shadow-2xl bg-noise-overlay
-                       transform hover:scale-105"
-            style={{
-              height: 'auto',
-              padding: '4rem 1rem',
-              perspective: '500px',
-              transformStyle: 'preserve-3d',
-              textTransform: 'uppercase',
-              fontWeight: '900',
-              letterSpacing: '0.03em',
-              backgroundPosition: 'center',
-              backgroundBlendMode: 'multiply',
-              opacity: 1,
-            }}
-          >
-            PORTAIL PRO <br />
-            <span className="mt-4 md:text-lg font-normal sm:flex text-xs md:flex lg:flex text-center justify-center items-center mx-auto">
-              Rejoignez une marketplace dédiée aux vignerons bio
-            </span>
-            <div
-              className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-teal-800 via-teal-800 to-teal-950 opacity-40 transform -skew-x-6"
-            />
-          </h1>
+          <Image
+            src="https://res.cloudinary.com/daroyxenr/image/upload/q_auto:good/v1733930760/Orange_and_White_Modern_Flower_Shop_Outdoor_Banner_3_bquksk.webp"
+            alt="Mémé Georgette"
+            width={1024}
+            height={1024}
+            className='flex justify-center mx-auto mt-2'
+          />
 
 
           </div>
