@@ -16,7 +16,11 @@ import Socialshare from '@/components/Socialshare';
 import BackToTop from '@/components/BackToTop';
 import { CreditCard } from 'lucide-react';
 
-export default function Home() {
+interface DesktopHomeProps {
+  className?: string;
+}
+
+export default function Home({ className }: DesktopHomeProps) {
   const [isMobile] = useState(false);
   const [isInitialRender, setIsInitialRender] = useState(true);
   const [productsLoaded, setProductsLoaded] = useState(false);
@@ -174,7 +178,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-1 mt-2">
+      <div className={`flex flex-1 mt-2 ${className}`}>
         <aside
           className={`w-64 bg-gray-200 border-r border-gray-200 ${
             isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out' : 'relative'
