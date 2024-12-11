@@ -430,7 +430,7 @@ const ProductPage: React.FC = () => {
         />
       )}
 
-
+        <br />
         <div className="-mt-14 w-full">
           <h2 className="text-2xl font-bold -mb-2 text-center text-white bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 p-8 rounded-t-xl">Description du produit</h2>
           <div className="border-b-8 border-white w-full max-w-[50rem] my-3 h-3 slide-in-right mx-auto -mt-1"></div>

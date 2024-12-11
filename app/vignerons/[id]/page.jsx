@@ -196,7 +196,7 @@ export default function VendorDetailsPage() {
 
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold mb-4 text-teal-800 text-center">Histoire du domaine</h2>
-          {vendor.shop.description ? (
+          {vendor.shop?.description ? (
             <p className="text-gray-600 whitespace-pre-wrap text-center">
               {vendor.shop.description
                 .replace(/<\/?[^>]+(>|$)/g, "") // Remove HTML tags
