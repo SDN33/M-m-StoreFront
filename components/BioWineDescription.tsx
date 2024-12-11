@@ -2,7 +2,7 @@ import React from 'react';
 
 const BioWineDescription: React.FC = () => {
   return (
-    <section className="bg-teal-50 py-16 px-6 text-center -mt-14">
+    <section className="bg-teal-50 py-16 px-6 text-center -mt-2">
       <div className="max-w-6xl mx-auto">
         <p className="text-base text-gray-600 mb-16 font-serif">
           Mémé Georgette vous propose une large sélection de vins bio et biodynamiques. Que vous soyez amateur de vins rouges, blancs, rosés, pétillants ou liquoreux, nous vous offrons des vins de qualité supérieure, élaborés selon des méthodes respectueuses de l&apos;environnement et de la biodiversité. L&apos;achat de vins bio n&apos;a jamais été aussi simple et agréable grâce à notre boutique en ligne, qui vous permet de découvrir les meilleures cuvées de vignerons engagés dans l&apos;agriculture biodynamique. Nos vins sont soigneusement sélectionnés pour répondre aux exigences des connaisseurs tout en étant accessibles à tous.

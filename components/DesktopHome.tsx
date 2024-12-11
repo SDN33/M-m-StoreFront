@@ -224,11 +224,8 @@ export default function Home() {
                     <Image
                       src="/images/paiement.png"
                       alt="Paiement sécurisé"
-                      width={110}
-                      height={110}
-                      className="object-contain"
-                      sizes='(max-width: 640px) 100px, 110px'
-
+                      width={100}
+                      height={100}
                     />
                   </div>
                 </div>
