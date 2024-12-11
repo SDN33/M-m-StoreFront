@@ -170,15 +170,33 @@ export default function PortailPro() {
         <div>
           <div className="text-center space-y-4 mb-4 gap-1">
           <div className='text-center text-xs mx-auto text-gray-950 mb-4'><a href="/">Accueil</a> / <strong>Portail Pro</strong></div>
-          <Image
-            src="https://res.cloudinary.com/daroyxenr/image/upload/q_auto:good/v1733930760/Orange_and_White_Modern_Flower_Shop_Outdoor_Banner_3_bquksk.webp"
-            alt="Mémé Georgette"
-            width={1024}
-            height={1024}
-            className='flex justify-center mx-auto mt-2'
-          />
 
-
+          <h1
+            className="text-2xl md:text-4xl lg:text-5xl tracking-tight font-bold relative text-white pt-28 items-center justify-center rounded-t-xl text-center
+                       bg-gradient-to-r from-primary via-orange-800 to-red-800 bg-size-200 bg-position-0 hover:bg-position-100
+                       transition-all duration-500 ease-in-out shadow-2xl bg-noise-overlay
+                       transform hover:scale-105"
+            style={{
+              height: 'auto',
+              padding: '4rem 1rem',
+              perspective: '500px',
+              transformStyle: 'preserve-3d',
+              textTransform: 'uppercase',
+              fontWeight: '900',
+              letterSpacing: '0.03em',
+              backgroundPosition: 'center',
+              backgroundBlendMode: 'multiply',
+              opacity: 1,
+            }}
+          >
+            PORTAIL PRO <br />
+            <span className="mt-4 md:text-lg font-normal sm:flex text-xs md:flex lg:flex text-center justify-center items-center mx-auto">
+              Rejoignez une marketplace dédiée aux vignerons bio
+            </span>
+            <div
+              className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-teal-800 via-teal-800 to-teal-950 opacity-40 transform -skew-x-6"
+            />
+          </h1>
           </div>
           <div>
           </div>
@@ -198,28 +216,18 @@ export default function PortailPro() {
               </div>
             ))}
           </div>
+          <Image
+            src="https://res.cloudinary.com/daroyxenr/image/upload/q_auto:good/v1733930760/Orange_and_White_Modern_Flower_Shop_Outdoor_Banner_3_bquksk.webp"
+            alt="Mémé Georgette"
+            width={1024}
+            height={1024}
+            className='flex justify-center mx-auto mt-2'
+          />
           <div className="font-bold text-lg text-center mx-auto mt-20 mb-28  slide-in-right ">
           <span className='font-gray-950 text-xl md:text-3xl text-primary border-gray-950-500'>VinsMemeGeorgette.com</span><br />C&apos;est bien plus qu&apos;une marketplace !<br /><br />C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte,<br />reconnue par le grand public grâce à <a className='text-primary font-gray-950'  href="https://www.memegeorgette.com/" >Mémé Georgette</a><br /><br />
-            <div className="flex flex-col md:flex-row gap-4 justify-center items-center p-6 eshadow-lg rounded-lg">
-            <Image
-              src="https://res.cloudinary.com/daroyxenr/image/upload/v1732486602/Capture_d_%C3%A9cran_2024-11-24_231608_dp7xms.webp"
-              alt="Vins fruités"
-              width={600}
-              height={600}
-              className="w-full flex-1 object-cover rounded-lg shadow-md transform transition-all duration-500 hover:scale-105 hover:rotate-1 hover:shadow-xl mt-4"
-            />
-            <Image
-              src="/images/meme-pas-contente.png"
-              alt="Vins fruités"
-              width={600}
-              height={600}
-              className="w-full flex-1 object-cover rounded-lg shadow-md transform transition-all duration-500 hover:scale-105 hover:-rotate-1 hover:shadow-xl mt-4"
-            />
-            </div>
-
             <div className='text-base mx-10 flex flex-col gap-2'>
               <br />
-              <span>Nous vous offrons un accès direct aux amateurs de vins en Europe<br /><br />Tout en simplifiant vos démarches avec une logistique intégrée<br /><br />Plus un accompagnement marketing personnalisé, notre assistance vendeur et client dédiée<br />vous permet de vous concentrer sur l&apos;essentiel:</span>
+              <span>Nous vous offrons un accès direct aux amateurs de vins en Europe<br />Tout en simplifiant vos démarches avec une logistique intégrée<br /><br />Plus un accompagnement marketing personnalisé, notre assistance vendeur et client dédiée<br />vous permet de vous concentrer sur l&apos;essentiel:</span>
               <span className='font-semibold text-lg'>La fabrication de vins bio</span>
             </div>
           </div>

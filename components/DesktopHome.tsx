@@ -266,8 +266,8 @@ export default function Home() {
             </div>
             <Livraison />
             <div className="py-4" />
-            <WineCategories />
             <Trust />
+            <WineCategories />
             <BioWineDescription />
             <Slogan />
             <div className="py-8" />
