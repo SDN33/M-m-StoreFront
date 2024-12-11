@@ -125,8 +125,7 @@ export default function RootLayout({
             });
           `}
         </Script>
-        <div id="fb-root"></div>
-      
+
 
       </head>
       <body>
