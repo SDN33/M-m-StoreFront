@@ -241,7 +241,7 @@ export default function VendorDetailsPage() {
               <p></p>
             )}
           </div>
-          <br />
+          <br /><br />
           <div className='flex mx-auto justify-center'>
             <SocialShare url={window.location.href} title={`Découvrez ${vendor.name}, sur VinsMemeGeorgette.com`} />
           </div>
