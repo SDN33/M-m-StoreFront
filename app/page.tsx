@@ -6,21 +6,29 @@ import MobileHome from '@/components/MobileHome';
 import Head from 'next/head';
 
 export default function Home() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [deviceType, setDeviceType] = useState('desktop');
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
-    const checkMobile = () => setIsMobile(mediaQuery.matches);
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setDeviceType('mobile');
+      } else if (width < 1024) {
+        setDeviceType('tablet');
+      } else {
+        setDeviceType('desktop');
+      }
+    };
 
-    checkMobile();
-    mediaQuery.addEventListener('change', checkMobile);
-    return () => mediaQuery.removeEventListener('change', checkMobile);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=0.9" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="title" content="AccCHAT VIN BIO, BIODYNAMIQUE, SANS SULFITES - Mémé Georgette" />
         <meta
           name="description"
@@ -35,7 +43,13 @@ export default function Home() {
         <meta property="og:url" content="https://vinsmemegeorgette.com" />
         <meta property='og:favicon' content='/images/favicon.ico' />
       </Head>
-      {isMobile ? <MobileHome /> : <DesktopHome />}
+      {deviceType === 'mobile' ? (
+        <MobileHome />
+      ) : deviceType === 'tablet' ? (
+        <DesktopHome className="tablet-view" />
+      ) : (
+        <DesktopHome />
+      )}
     </>
   );
 }
