@@ -64,8 +64,8 @@ const ProductsIntro: React.FC = () => {
         <use fill='#fcfcfc' href='#s' x='1' y='2'/>
         <use fill='#fafafa' href='#s' x='2' y='2'/>
         <use fill='#fafafa' href='#s'/>
-        <use fill='#f7f7f7' href='#s' x='2'/>
-        <use fill='#f7f7f7' href='#s' x='1' y='1'/>
+        <use fill='#f3f2f2' href='#s' x='2'/>
+        <use fill='#f3f2f2' href='#s' x='1' y='1'/>
       </pattern>
       <pattern id='b' width='7' height='11' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
         <g fill='#f5f5f5'>
@@ -110,7 +110,7 @@ const ProductsIntro: React.FC = () => {
         </g>
       </pattern>
       <pattern id='d' width='19' height='17' patternUnits='userSpaceOnUse' patternTransform='scale(13.95) translate(-928.32 -696.24)'>
-        <g fill='#ffffff'>
+        <g fill='#cef5ce'>
           <use href='#s' y='9'/>
           <use href='#s' x='16' y='5'/>
           <use href='#s' x='14' y='2'/>
@@ -166,24 +166,24 @@ const ProductsIntro: React.FC = () => {
             <Image
               src="/images/bio2.png"
               alt="bio logo"
-              width={40}
-              height={30}
+              width={100}
+              height={100}
               className="object-contain w-10 lg:min-w-8 h-auto"
               priority
             />
             <Image
               src="/images/Logobioeu.jpg"
               alt="Bio euro logo"
-              width={50}
-              height={50}
-              className="object-contain w-12 lg:min-w-8 h-auto"
+              width={100}
+              height={100}
+              className="object-contain w-10 lg:min-w-8 h-auto"
               priority
             />
             <Image
               src="/images/Biodynamie-logo.png"
               alt="Biodynamie logo"
-              width={50}
-              height={50}
+              width={100}
+              height={100}
               className="object-contain w-12 lg:min-w-8 h-auto"
               priority
             />
@@ -207,24 +207,24 @@ const ProductsIntro: React.FC = () => {
             <Image
               src="/images/logointro.jpg"
               alt="biodynamie logo"
-              width={60}
-              height={30}
-              className="object-contain w-12 lg:min-w-8 h-auto"
+              width={100}
+              height={100}
+              className="object-contain w-12 lg:min-w-9 h-auto"
               priority
             />
             <Image
               src="/images/biodyvin.jpg"
               alt="biodyvin logo"
-              width={60}
-              height={30}
+              width={100}
+              height={100}
               className="object-contain w-14 lg:min-w-8 h-auto"
               priority
             />
             <Image
               src="/images/logointro2.jpg"
               alt="nature et progrès"
-              width={60}
-              height={30}
+              width={100}
+              height={100}
               className="object-contain w-10 lg:min-w-8 h-auto"
               priority
             />

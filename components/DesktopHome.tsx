@@ -220,6 +220,17 @@ export default function Home() {
                 <div>
                   <h2 className='mt-4 text-lg text-center font-black text-gray-600'>Achetez vos vins bio et biodynamiques en ligne</h2>
                   <h3 className='text-center text-gray-400 -mt-1 -mb-4'>Vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites</h3>
+                  <div className='flex justify-center mx-auto mt-6 -mb-4'>
+                    <Image
+                      src="/images/paiement.png"
+                      alt="Paiement sécurisé"
+                      width={110}
+                      height={110}
+                      className="object-contain"
+                      sizes='(max-width: 640px) 100px, 110px'
+
+                    />
+                  </div>
                 </div>
                 {productsLoaded && (
                   <ProductsCards

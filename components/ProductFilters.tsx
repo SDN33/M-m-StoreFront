@@ -242,15 +242,6 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
   return (
     <div ref={filterContainerRef} className=" custom-scrollbar -px-10 bg-gray-200 backdrop-blur-sm overflow-y-auto h-screen min-w-full transition-all duration-300 ease-in-out mt-48 md:mt-40 lg:mt-48 mr-14">
-      <Image
-        src="/images/paiement.png"
-        alt="paiement securise"
-        width={100}
-        height={90}
-        className='object-cover flex justify-center mx-auto'
-        loading='eager'
-        priority
-      />
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl mt-4">
         <AnimatedResetButton onClick={resetFilters} isScrolled={isScrolled} />
       </div>
