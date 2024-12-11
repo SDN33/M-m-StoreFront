@@ -42,7 +42,7 @@ const VendorLocationMap = ({ vendor }) => {
     );
   }
 
-  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(vendor.address.address_1 || '')} ${encodeURIComponent(vendor.address.city || '')} ${encodeURIComponent(vendor.address.postcode || '')}&z=${zoomLevel}&output=embed`;  
+  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(vendor.address.address_1 || '')} ${encodeURIComponent(vendor.address.city || '')} ${encodeURIComponent(vendor.address.postcode || '')}&z=${zoomLevel}&output=embed`;
 
 
   return (
@@ -231,7 +231,10 @@ export default function VendorDetailsPage() {
                     />
                   </Link>
                   <h3 className="mt-4 text-lg font-semibold">{product.name}</h3>
-                  <p className="text-gray-600">{product.price} €</p>
+                  <p className="text-gray-950 mt-1 text-center text-xs">
+                    {product.description.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 85)}...
+                  </p>
+                  <p className="text-gray-600 mt-2">{product.price} €</p>
                 </div>
               ))
             ) : (
