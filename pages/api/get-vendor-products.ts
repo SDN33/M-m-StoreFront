@@ -14,6 +14,7 @@ type Product = {
   id: number;
   name: string;
   description: string;
+  category: string;
   price: string;
   regular_price: string;
   sale_price: string;

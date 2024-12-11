@@ -15,6 +15,7 @@ interface Product {
   id: string;
   name: string;
   description: string;
+  short_description?: string;
   price: string;
   images: ProductImage[];
 }
@@ -226,9 +227,12 @@ const VendorsPage = () => {
                                 </Link>
                               </div>
                             )}
-                            <h4 className="font-medium text-sm text-center text-gray-800 line-clamp-1">
+                            <h4 className="font-semibold text-sm text-center text-gray-800 line-clamp-1">
                               {product.name}
                             </h4>
+                            <p className="text-gray-950 mt-1 text-center text-xs">
+                                {product.description.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 85) || product.short_description}...
+                            </p>
                             <p className="text-gray-950 font-semibold mt-1">
                               {product.price}€
                             </p>
