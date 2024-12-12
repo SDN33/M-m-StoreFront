@@ -20,13 +20,6 @@ const Slider = () => {
       rel: 'preconnect',
     },
     {
-      id: 3,
-      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_96/v1732998655/Banni%C3%A8re_fin_d_ann%C3%A9e_4_itr5ya.webp',
-      link: '/',
-      lcp: true,
-      rel: 'preconnect',
-    },
-    {
       id: 4,
       imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_100/v1732982358/Banni%C3%A8re_fin_d_ann%C3%A9e_2_wpv7ow.webp',
       link: '/vignerons/255986119',
