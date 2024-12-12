@@ -15,7 +15,6 @@ import BioWineDescription from '@/components/BioWineDescription';
 import Socialshare from '@/components/Socialshare';
 import BackToTop from '@/components/BackToTop';
 import { CreditCard } from 'lucide-react';
-
 interface DesktopHomeProps {
   className?: string;
 }
@@ -24,7 +23,6 @@ export default function Home({ className }: DesktopHomeProps) {
   const [isMobile] = useState(false);
   const [isInitialRender, setIsInitialRender] = useState(true);
   const [productsLoaded, setProductsLoaded] = useState(false);
-
   const mainContentRef = useRef<HTMLDivElement>(null);
   const filterContentRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
@@ -265,6 +263,9 @@ export default function Home({ className }: DesktopHomeProps) {
                 <div className="flex items-center text-gray-600 ml-2 pl-2 border-l border-gray-200">
                   <CreditCard className="h-5 w-5 mr-2 text-blue-600" />
                   <span className="text-sm font-semibold text-blue-600">Paiement sécurisé</span>
+                </div>
+                <div className='flex justify-center mx-auto mb-10'>
+                  <iframe className='bg-transparent mt-10 w-fit' src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fmemegeorgette&tabs&width=340&height=70&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=true&appId" width="340" height="70" style={{ border: 'none', overflow: 'hidden' }} scrolling="no" frameBorder="0" allowFullScreen={true} allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                 </div>
               </div>
             </div>
