@@ -206,7 +206,7 @@ export default function Home({ className }: DesktopHomeProps) {
 
         <main
           ref={mainContentRef}
-          className="flex-1 bg-white overflow-y-auto overflow-x-hidden"
+          className="flex-1 bg-gray-50 overflow-y-auto overflow-x-hidden"
           style={{
             overscrollBehavior: 'contain',
             height: '100vh'
@@ -220,9 +220,9 @@ export default function Home({ className }: DesktopHomeProps) {
             <div className="max-w-7xl mx-auto px-4">
               <section className="bg-white rounded-lg shadow">
                 <div>
-                  <h2 className='mt-4 text-lg text-center font-black text-gray-600'>Achetez vos vins bio et biodynamiques en ligne</h2>
+                  <h2 className='mt-4 pt-2 text-lg text-center font-black text-gray-600'>Achetez vos vins bio et biodynamiques en ligne</h2>
                   <h3 className='text-center text-gray-400 -mt-1 -mb-4'>Vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites</h3>
-                  <div className='flex justify-center mx-auto mt-5 -mb-4'>
+                  <div className='flex justify-center mx-auto mt-5 -mb-6'>
                     <Image
                       src="/images/paiement.png"
                       alt="Paiement sécurisé"
@@ -276,6 +276,7 @@ export default function Home({ className }: DesktopHomeProps) {
             <Slogan />
             <div className="py-8" />
             <BioWineDescription />
+            <br />
             <div className='flex mx-auto justify-center'>
               <Socialshare url="https://vinsmemegeorgette.com" title="VINS Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE" />
             </div>
