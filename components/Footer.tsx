@@ -79,7 +79,7 @@ const Footer = () => {
 
         {/* Mentions légales et copyright */}
         <div className=" -mb-2">
-          <Image src="/images/image-restriction.svg" title="Prévention Alcool" alt="Prévention Alcool" width={500} height={500} className="mb-4 mx-auto w-auto h-auto" />
+          <Image src="/images/image-restriction.svg" title="Prévention Alcool" alt="Prévention Alcool" width={500} height={500} className="mb-4 mx-auto w-auto h-auto" loading="lazy" />
           <p className="text-xs text-white mb-4 font-normal">
             L&apos;abus d&apos;alcool est dangereux pour la santé, sachez consommer avec modération.
             Interdiction de vente de boissons alcooliques aux mineurs de -18 ans.
