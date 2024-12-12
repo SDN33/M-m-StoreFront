@@ -223,7 +223,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
                   if (sortBy) {
                   // Use the sorted products directly if sortBy is set
                   sortedProducts = filteredProducts;
-                  } else if (!lastSortTime || currentTime - parseInt(lastSortTime) > 600000) {
+                  } else if (!lastSortTime || currentTime - parseInt(lastSortTime) > 900000) {
                   // Only resort randomly if 10 minutes have passed
                   sortedProducts = sortedProducts.sort(() => Math.random() - 0.6);
                   sessionStorage.setItem('lastSortTime', currentTime.toString());
