@@ -182,7 +182,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     const slogans = {
 
       contenance: [
-        "Un Grand Format pour une Grande Soif !",
+        "Un Grand Format qui en Jette !",
       ],
 
       qualitePrix: [
