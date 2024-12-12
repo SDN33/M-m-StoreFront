@@ -1,7 +1,8 @@
-// path pages/api/get-vendor.ts
 import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import NodeCache from 'node-cache';
 
+// Conservation des types originaux
 type Vendor = {
   id: number;
   name: string;
@@ -16,12 +17,18 @@ type Vendor = {
     city: string;
     postcode: string;
   };
-  // Ajoutez d'autres propriétés si nécessaire
 };
 
 type ErrorResponse = {
   message: string;
 };
+
+// Configuration du cache
+const vendorCache = new NodeCache({
+  stdTTL: 3600, // Cache valide pendant 1 heure
+  checkperiod: 600 // Vérification du cache tous les 10 minutes
+});
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Vendor[] | Vendor | ErrorResponse>
@@ -31,7 +38,17 @@ export default async function handler(
     return res.status(500).json({ message: 'Missing WooCommerce API credentials in environment variables' });
   }
 
-  const fetchData = async (url: string) => {
+  const fetchData = async (url: string, useCache: boolean = true) => {
+    const cacheKey = url;
+
+    // Vérifier le cache s'il est activé
+    if (useCache) {
+      const cachedData = vendorCache.get(cacheKey);
+      if (cachedData) {
+        return cachedData;
+      }
+    }
+
     let retries = 3;
     while (retries > 0) {
       try {
@@ -40,6 +57,12 @@ export default async function handler(
             Authorization: `Basic ${Buffer.from(`${WC_CONSUMER_KEY}:${WC_CONSUMER_SECRET}`).toString('base64')}`
           }
         });
+
+        // Mettre en cache la réponse
+        if (useCache) {
+          vendorCache.set(cacheKey, response.data);
+        }
+
         return response.data;
       } catch (error) {
         if (axios.isAxiosError(error) && error.response?.status === 429) {
