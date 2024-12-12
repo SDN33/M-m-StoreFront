@@ -24,12 +24,27 @@ export default function VinsSansSulfites() {
     stock_status: string;
     categories: { id: number; name: string }[];
     vendor: number;
+    meta_data?: { key: string; value: string | boolean }[];
   }
 
   const [products, setProducts] = useState<Product[]>([]);
 
-  const filterSansSulfites = useMemo(() => (product: Product) => product.tags?.includes('sans sulfites'), []);
+  const filterSansSulfites = useMemo(() => {
+    return (product: Product) => {
+      // Check meta data for sans sulfites
+      const hasSansSulfitesMeta = product.meta_data?.some(
+        meta =>
+          meta.key === 'sans_sulfites_' &&
+          (meta.value === 'oui' || meta.value === true)
+      );
 
+      // Optional: Additional checks for description or name
+      const descriptionMatch = product.description?.toLowerCase().includes('sans sulfites');
+      const nameMatch = product.name?.toLowerCase().includes('sans sulfites');
+
+      return hasSansSulfitesMeta || descriptionMatch || nameMatch;
+    };
+  }, []);
   const handleAddToCart = async (productId: number, quantity: number, variationId: number | null) => {
     console.log('Product added to cart:', { productId, quantity, variationId });
   };
@@ -40,6 +55,14 @@ export default function VinsSansSulfites() {
         setLoading(true);
         const response = await fetch('/api/products');
         const allProducts = await response.json();
+
+        // Log tags to understand their exact format
+        console.log(
+          'Product tags:',
+          allProducts
+            .filter((product: Product) => product.tags && product.tags.length > 0)
+            .map((product: Product) => product.tags)
+        );
 
         const vinsSansSulfites = allProducts.filter(filterSansSulfites);
         setProducts(vinsSansSulfites);
