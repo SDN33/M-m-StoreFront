@@ -180,6 +180,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
     // Variations pour chaque type de slogan
     const slogans = {
+
+      contenance: [
+        "Un Grand Format pour une Grande Soif !",
+      ],
+
       qualitePrix: [
         "Le qualité/prix IMBATTABLE !",
         "Petit Prix, Grand Vin !",
@@ -204,6 +209,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         `Un ${appellation.toUpperCase() || 'Vin'} À Découvrir`,
       ]
     };
+
+    if (product.volume && product.volume.includes('autre')) {
+      return getRandomSlogan(slogans.contenance);
+    }
 
     // Même logique de conditions, mais avec variations
     if (product.price < 9) {
