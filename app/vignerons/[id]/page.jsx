@@ -135,7 +135,6 @@ export default function VendorDetailsPage() {
     );
   }
 
-  console.log('Vendor Data:', vendor);
 
   return (
     <>
