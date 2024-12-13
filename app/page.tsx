@@ -28,7 +28,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <meta name="title" content="AccCHAT VIN BIO, BIODYNAMIQUE, SANS SULFITES - Mémé Georgette" />
+        <meta name="title" content="ACHAT VIN BIO, BIODYNAMIQUE, SANS SULFITES - Mémé Georgette" />
         <meta
           name="description"
           content="Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites"

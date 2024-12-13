@@ -9,6 +9,7 @@ import PromotionSection from './PromotionSection';
 import AuthButton from './AuthButton';
 import CartIcon from './CartIcon';
 import Link from 'next/link';
+import NosVinsPopup from './NosVinsPopup';
 
 interface Country {
   name: string;
@@ -334,108 +335,9 @@ const Header: React.FC = () => {
           </div>
         </nav>
 
-
-
       {/* Nos Vins Popup */}
       {isNosVinsOpen && (
-        <>
-          {/* Overlay */}
-          <div
-            className="fixed inset-0 bg-gradient-to-br from-wine-deep/50 to-wine-light/50 backdrop-blur-sm z-40"
-            onClick={() => setIsNosVinsOpen(false)}
-          />
-
-          {/* Popup Container */}
-          <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-            <div
-              className="relative w-full max-w-md max-h-[90vh] overflow-hidden rounded-2xl shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* SVG Background */}
-              <div className="absolute inset-0 opacity-10">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 800 600"
-                  className="w-full h-full"
-                >
-                  <defs>
-                    <pattern
-                      id="winePattern"
-                      patternUnits="userSpaceOnUse"
-                      width="100"
-                      height="100"
-                    >
-                      <path
-                        d="M0 0 Q50 50, 100 0 T200 0"
-                        fill="none"
-                        stroke="#8B0000"
-                        strokeWidth="2"
-                        strokeOpacity="0.1"
-                      />
-                      <circle cx="50" cy="50" r="5" fill="#EC641D" fillOpacity="0.05" />
-                    </pattern>
-                  </defs>
-                  <rect width="100%" height="100%" fill="#EC641D" />
-                </svg>
-              </div>
-
-              {/* Content Container */}
-              <div className="relative bg-white/90 rounded-2xl shadow-xl overflow-hidden">
-                {/* Close Button */}
-                <button
-                  onClick={() => setIsNosVinsOpen(false)}
-                  className="absolute top-4 right-4 text-gray-600 hover:text-gray-950 z-50 bg-white/50 rounded-full p-2 transition-all hover:bg-white/80"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
-
-                {/* Header */}
-                <div className="bg-gradient-to-r from-gray-950 to-gray-950 p-6 text-center">
-                  <h2 className="text-2xl font-bold text-white p-5 rounded-t-xl drop-shadow-md">
-                    Nos Catégories de Vins
-                  </h2>
-                </div>
-
-                {/* Content */}
-                <div className="p-6 space-y-4 max-h-[60vh] overflow-y-auto">
-                  <ul className="space-y-4">
-                    {vinsSubCategories.map((subCategory) => (
-                      <li
-                        key={subCategory.href}
-                        className="transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                      >
-                        <a
-                          href={subCategory.href}
-                          className="block rounded-xl text-center font-semibold text-lg
-                          transition-all duration-300 relative overflow-hidden hover:scale-105"
-                        >
-                          <span
-                            className={`block text-white w-full py-4 px-6 ${subCategory.bgClass}`}
-                          >
-                            {subCategory.name}
-                          </span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
+        <NosVinsPopup isOpen={isNosVinsOpen} onClose={toggleNosVinsPopup} vinsSubCategories={vinsSubCategories} />
       )}
 
         {/* Cart Popup */}
