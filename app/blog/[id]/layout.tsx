@@ -1,9 +1,7 @@
-type Params = Promise<{ id: string }>;
-
-export default async function Layout(props: { 
+export default function Layout({
+  children,
+}: {
   children: React.ReactNode;
-  params: Params;
 }) {
-  const { id } = await props.params;
-  return <>{props.children}</>;
+  return <>{children}</>;
 }
