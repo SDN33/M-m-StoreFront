@@ -114,6 +114,8 @@ const NosVinsPopup: React.FC<NosVinsPopupProps> = ({
             role="dialog"
             aria-modal="true"
             aria-labelledby="popup-title"
+            onClick={onClose} // Ajoutez cette ligne
+
           >
             <motion.div
               className="w-full max-w-2xl max-h-[90vh] rounded-2xl shadow-2xl overflow-hidden"
@@ -202,6 +204,24 @@ const NosVinsPopup: React.FC<NosVinsPopupProps> = ({
                     </motion.li>
                   ))}
                 </motion.ul>
+                <motion.a
+                  className='flex mx-auto justify-center text-gray-600 mt-8 text-xl overflow-hidden font-bold'
+                  href='/vins-sans-sulfites'
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
+                  Vins Sans Sulfites Ajoutés
+                </motion.a>
+                <motion.a
+                  className='flex mx-auto justify-center text-gray-600 mt-4 text-xl overflow-hidden font-bold'
+                  href='/vin-du-monde'
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
+                  Vins du Monde
+                </motion.a>
               </div>
             </motion.div>
           </motion.div>
