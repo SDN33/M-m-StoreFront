@@ -8,7 +8,7 @@ interface Article {
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: { id: number };
 }): Promise<Metadata> {
   try {
     const response = await fetch(`/api/articles/${params.id}`, {
@@ -16,7 +16,7 @@ export async function generateMetadata({
     });
 
     const data = await response.json();
-    const article = data.articles?.find((a: Article) => a.id === parseInt(params.id, 10));
+    const article = data.articles?.find((a: Article) => a.id === parseInt(params.id.toString(), 10));
 
     if (!article) {
       return {
