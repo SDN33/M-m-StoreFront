@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { MapPin, Wine } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface ProductImage {
   id: number;
@@ -124,7 +125,6 @@ const VendorsPage = () => {
         </h2>
         <div className="border-b-4 border-white w-full max-w-[50rem] my-2 slide-in-right mx-auto"></div>
       </div>
-
         <div>
           <p className="text-center text-xl font-extrabold -mt-4 slide-in-right text-primary">
           </p>
@@ -136,6 +136,22 @@ const VendorsPage = () => {
           </p>
           <div className='border-t-2 border-white w-16 mt-4 flex mx-auto'></div>
           <br /><br />
+
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 2, ease: "easeOut" }}
+        viewport={{ once: true }}
+      >
+        <Image
+          src="https://res.cloudinary.com/daroyxenr/image/upload/q_auto:good/v1734051910/Design_sans_titre_54_nsgmrl.webp"
+          alt="Vineyard"
+          width={1920}
+          height={1080}
+          className='rounded-lg mb-8'
+        />
+      </motion.div>
+
         </div>
 
         {vendors.length === 0 ? (
