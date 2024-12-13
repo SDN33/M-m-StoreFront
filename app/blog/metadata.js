@@ -35,7 +35,11 @@ export const metadata= {
     "conseils vin bio",
     "blog Mémé Georgette",
     "articles viticulture biologique",
-    "blog vin nature"
+    "blog vin nature",
+    "vins bio blog",
+    "vins biodynamiques blog",
+    "vins naturels blog",
+    
   ],
   robots: {
     index: true,
