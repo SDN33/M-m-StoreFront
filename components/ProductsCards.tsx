@@ -219,19 +219,20 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
                   const currentTime = Date.now();
                   let sortedProducts = [...filteredProducts];
 
-                  if (sortBy) {
-                  // Use the sorted products directly if sortBy is set
-                  sortedProducts = filteredProducts;
-                  // Only resort randomly if 10 minutes have passed
-                  sortedProducts = sortedProducts.sort(() => Math.random() - 0.7);
-                  sessionStorage.setItem('lastSortTime', currentTime.toString());
+                  if (!sortBy) {
+                  // Only apply random sorting when no specific sort is selected
+                  const lastSortTime = parseInt(sessionStorage.getItem('lastSortTime') || '0');
+                  if (currentTime - lastSortTime > 600000) { // 10 minutes
+                    sortedProducts = sortedProducts.sort(() => Math.random() - 0.7);
+                    sessionStorage.setItem('lastSortTime', currentTime.toString());
                   } else {
-                  // Use the stored order from session storage or keep current order
-                  const storedOrder = JSON.parse(sessionStorage.getItem('productsOrder') || '[]');
-                  if (storedOrder.length > 0) {
+                    // Use the stored order from session storage or keep current order
+                    const storedOrder = JSON.parse(sessionStorage.getItem('productsOrder') || '[]');
+                    if (storedOrder.length > 0) {
                     sortedProducts.sort((a, b) =>
-                    storedOrder.indexOf(a.id) - storedOrder.indexOf(b.id)
+                      storedOrder.indexOf(a.id) - storedOrder.indexOf(b.id)
                     );
+                    }
                   }
                   }
 
