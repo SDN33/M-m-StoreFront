@@ -1,10 +1,10 @@
 export { generateMetadata } from './metadata';
+import { getAllProductIds } from './metadata';
 
 export async function generateStaticParams() {
   // Return an array of objects with the expected params structure
-  const { getAllProductIds } = await import('./metadata');
   const productIds = await getAllProductIds();
-  return productIds.map(id => ({ params: { id: id.toString() } }));
+  return productIds.map(id => ({ params: { id } }));
 }
 
 export default function ProductLayout({ children }) {
