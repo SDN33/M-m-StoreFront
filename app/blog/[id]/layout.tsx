@@ -11,7 +11,6 @@ export { generateMetadata };
 
 export default function BlogLayout({
   children,
-  params,
 }: LayoutProps) {
   return <>{children}</>;
 }
