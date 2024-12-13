@@ -4,10 +4,14 @@ export { generateMetadata };
 
 interface BlogLayoutProps {
   children: React.ReactNode;
+  params: {
+    id: string;
+  };
 }
 
-export default function BlogLayout({
+export default async function BlogLayout({
   children,
+  params,
 }: BlogLayoutProps) {
   return <>{children}</>;
 }
