@@ -2,10 +2,12 @@ import { generateMetadata } from './metadata';
 
 export { generateMetadata };
 
+interface BlogLayoutProps {
+  children: React.ReactNode;
+}
+
 export default function BlogLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: BlogLayoutProps) {
   return <>{children}</>;
 }
