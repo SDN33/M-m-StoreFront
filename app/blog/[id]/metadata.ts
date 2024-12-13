@@ -1,6 +1,22 @@
 import { Metadata } from "next";
 import he from "he";
 
+interface Article {
+  id: number;
+  title: string;
+  content: string;
+  excerpt: string;
+  slug: string;
+  featuredImage: string | null;
+  date: string;
+  author?: string;
+  readTime?: number;
+  categories?: Array<{
+    id: number;
+    name: string;
+  }>;
+}
+
 const filterTags = (content: string): string[] => {
   const stopWords = ["d&rsquo;honneur,mais", "je", "les", "le", "ou", "il", "la", "et", "à", "de", "du", "au", "des", "en", "?ah,", "un", "une", "ce", "cette", "cet", "ces", "qui", "que", "quoi", "où", "quand", "comment", "pourquoi"];
   const words = content
@@ -12,14 +28,13 @@ const filterTags = (content: string): string[] => {
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   try {
-    // Fetch article data
     const response = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}/api/articles`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
       next: {
-        revalidate: 3600 // Revalidate every hour
+        revalidate: 3600
       }
     });
 
@@ -28,7 +43,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     }
 
     const data = await response.json();
-    const article = data.articles?.find((a: any) => a.id === parseInt(params.id, 10));
+    const article = data.articles?.find((a: Article) => a.id === parseInt(params.id, 10));
 
     if (!article) {
       return {
@@ -37,11 +52,9 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
       };
     }
 
-    // Clean the title and content
     const cleanTitle = he.decode(article.title.replace(/<\/?[^>]+(>|$)/g, ""));
     const cleanContent = article.content.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 200) + "...";
-    
-    // Extract tags from content
+
     const tags = filterTags(article.content);
 
     const title = `${cleanTitle} | Le Blog de VinsMemeGeorgette.com`;
