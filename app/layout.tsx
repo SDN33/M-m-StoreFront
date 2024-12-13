@@ -68,7 +68,7 @@ export default function RootLayout({
     <html lang="fr">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9, user-scalable=no" />
-
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "http://schema.org",
