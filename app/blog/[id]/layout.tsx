@@ -1,17 +1,22 @@
 import { Metadata } from 'next';
 
+interface Article {
+  id: number;
+  title: string;
+}
+
 export async function generateMetadata({
   params,
 }: {
   params: { id: string };
 }): Promise<Metadata> {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}/api/articles`, {
+    const response = await fetch(`/api/articles/${params.id}`, {
       next: { revalidate: 3600 }
     });
 
     const data = await response.json();
-    const article = data.articles?.find((a: any) => a.id === parseInt(params.id, 10));
+    const article = data.articles?.find((a: Article) => a.id === parseInt(params.id, 10));
 
     if (!article) {
       return {
@@ -22,7 +27,7 @@ export async function generateMetadata({
     return {
       title: `${article.title} | Le Blog de VinsMemeGeorgette.com`
     };
-  } catch (error) {
+  } catch {
     return {
       title: "Le Blog de VinsMemeGeorgette.com"
     };
