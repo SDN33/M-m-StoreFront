@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
+import { motion, useScroll, useSpring, useInView } from 'framer-motion';
 import ProductsCards from '@/components/ProductsCards';
 import ProductFilter from '@/components/ProductFilters';
 import Slogan from '@/components/Slogan';
@@ -26,6 +27,13 @@ export default function Home({ className }: DesktopHomeProps) {
   const mainContentRef = useRef<HTMLDivElement>(null);
   const filterContentRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   const paymentMethods = [
     {
@@ -57,7 +65,6 @@ export default function Home({ className }: DesktopHomeProps) {
       width: 60,
     },
   ];
-
 
   const [selectedFilters, setSelectedFilters] = useState({
     color: [],
@@ -175,50 +182,80 @@ export default function Home({ className }: DesktopHomeProps) {
   }
 
   return (
-    <>
-      <div className={`flex flex-1 mt-2 ${className}`}>
-        <aside
-          className={`w-64 bg-gray-200 border-r border-gray-200 ${
-            isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out' : 'relative'
-          } ${isMobile ? '-translate-x-full' : 'translate-x-0'}`}
-        >
-          <div
-            ref={filterContentRef}
-            className="p-4 h-full overflow-y-auto scroll-container ml-20 pt-8"
-            style={{
-              overscrollBehavior: 'auto',
-              msOverflowStyle: 'auto',
-              scrollbarWidth: 'auto',
-              maxHeight: '100vh',
-              maxWidth: '15.6rem',
-              scrollbarColor: 'rgba(209, 213, 219, 0.5) rgba(209, 213, 219, 0.1)',
-              scrollPaddingBlockStart: '1rem',
-              scrollMarginLeft: '1rem'
-            }}
-          >
-            <ProductFilter
-              selectedFilters={selectedFilters}
-              onFilterChange={handleFilterChange}
-              resetFilters={resetAllFilters}
-            />
-          </div>
-        </aside>
-
-        <main
-          ref={mainContentRef}
-          className="flex-1 bg-gray-50 overflow-y-auto overflow-x-hidden"
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className={`flex flex-1 mt-2 ${className}`}
+    >
+      <aside
+        className={`w-64 bg-gray-200 border-r border-gray-200 ${
+          isMobile ? 'fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out' : 'relative'
+        } ${isMobile ? '-translate-x-full' : 'translate-x-0'}`}
+      >
+        <div
+          ref={filterContentRef}
+          className="p-4 h-full overflow-y-auto scroll-container ml-20 pt-8"
           style={{
-            overscrollBehavior: 'contain',
-            height: '100vh'
+            overscrollBehavior: 'auto',
+            msOverflowStyle: 'auto',
+            scrollbarWidth: 'auto',
+            maxHeight: '100vh',
+            maxWidth: '15.6rem',
+            scrollbarColor: 'rgba(209, 213, 219, 0.5) rgba(209, 213, 219, 0.1)',
+            scrollPaddingBlockStart: '1rem',
+            scrollMarginLeft: '1rem'
           }}
+        >
+          <ProductFilter
+            selectedFilters={selectedFilters}
+            onFilterChange={handleFilterChange}
+            resetFilters={resetAllFilters}
+          />
+        </div>
+      </aside>
+
+      <main
+        ref={mainContentRef}
+        className="flex-1 bg-gray-50 overflow-y-auto overflow-x-hidden"
+        style={{
+          overscrollBehavior: 'contain',
+          height: '100vh'
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
           <div>
             <div className="pt-24 md:hidden lg:flex" />
-            <ProductsIntro />
-            <Slider />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <ProductsIntro />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <Slider />
+            </motion.div>
 
             <div className="max-w-7xl mx-auto px-4">
-              <section className="bg-white rounded-lg shadow">
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="bg-white rounded-lg shadow"
+              >
                 <div>
                   <h2 className='mt-4 pt-2 text-lg text-center font-black text-gray-600'>Achetez vos vins bio et biodynamiques en ligne</h2>
                   <h3 className='text-center text-gray-400 -mt-1 -mb-4'>Vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites</h3>
@@ -238,7 +275,7 @@ export default function Home({ className }: DesktopHomeProps) {
                     onAddToCart={(product) => console.log('Add to cart:', product)}
                   />
                 )}
-              </section>
+              </motion.section>
             </div>
             <br />
             <div className="payment-logos-container -mb-4">
@@ -269,14 +306,50 @@ export default function Home({ className }: DesktopHomeProps) {
                 </div>
               </div>
             </div>
-            <Livraison />
-            <div className="py-4" />
-            <Trust />
-            <WineCategories />
-            <Slogan />
-            <div className="py-8" />
-            <BioWineDescription />
-            <br />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <Livraison />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <Trust />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <WineCategories />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <Slogan />
+            </motion.div>
+            <br /><br />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <BioWineDescription />
+            </motion.div>
             <div className='flex mx-auto justify-center'>
               <Socialshare url="https://vinsmemegeorgette.com" title="VINS Mémé Georgette - ACHAT VINS BIO et BIODYNAMIQUE" />
             </div>
@@ -284,12 +357,16 @@ export default function Home({ className }: DesktopHomeProps) {
             <GoToFooter />
             <BackToTop />
           </div>
-        </main>
+        </motion.div>
+      </main>
 
-        <footer ref={footerRef}>
-        </footer>
-      </div>
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left"
+        style={{ scaleX }}
+      />
 
-    </>
+      <footer ref={footerRef}>
+      </footer>
+    </motion.div>
   );
 }
