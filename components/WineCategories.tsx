@@ -135,7 +135,7 @@ const VendorsPage = () => {
             Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique
           </p>
           <div className='border-t-2 border-white w-16 mt-4 flex mx-auto'></div>
-          <br /><br />
+        
 
       <motion.div
         initial={{ opacity: 0, y: 50 }}
