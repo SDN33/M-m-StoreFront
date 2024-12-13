@@ -26,17 +26,11 @@ const filterTags = (content: string): string[] => {
   return [...new Set(words.filter(word => word.length > 3 && !stopWords.includes(word)).map(word => word.replace(/[.,]/g, '')))];
 };
 
-interface GenerateMetadataProps {
-  params: {
-    id: string;
-  };
-}
+type Props = {
+  params: { id: string };
+};
 
-export async function generateMetadata(
-  props: GenerateMetadataProps
-): Promise<Metadata> {
-  const { params } = props;
-  
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}/api/articles`, {
       method: 'GET',
