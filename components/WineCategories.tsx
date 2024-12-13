@@ -135,7 +135,7 @@ const VendorsPage = () => {
             Choisir leurs vins, c&apos;est soutenir une viticulture durable et éthique
           </p>
           <div className='border-t-2 border-white w-16 mt-4 flex mx-auto'></div>
-        
+
 
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -167,7 +167,7 @@ const VendorsPage = () => {
               return (
                 <div
                   key={vendor.id}
-                  className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
+                  className="bg-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
                 >
                   <div className="flex justify-between items-start">
                     <div className="space-y-2 flex items-center">
@@ -220,8 +220,8 @@ const VendorsPage = () => {
 
 
                     {vendor.products && vendor.products.length > 0 && (
-                    <div className="mt-6 border-t border-gray-100">
-                      <h3 className="text-base font-semibold text-teal-800 mb-4 text-center">Vins Recommandés</h3>
+                    <div className="mt-6 border-t border-teal-800/20 pb-2">
+                      <h3 className="text-base font-semibold text-teal-800 mb-4 text-center mt-2">Vins Recommandés</h3>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         {vendor.products.map((product) => (
                           <div
