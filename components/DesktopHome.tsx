@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
-import { motion, useScroll, useSpring, useInView } from 'framer-motion';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import ProductsCards from '@/components/ProductsCards';
 import ProductFilter from '@/components/ProductFilters';
 import Slogan from '@/components/Slogan';
@@ -16,6 +16,7 @@ import BioWineDescription from '@/components/BioWineDescription';
 import Socialshare from '@/components/Socialshare';
 import BackToTop from '@/components/BackToTop';
 import { CreditCard } from 'lucide-react';
+
 interface DesktopHomeProps {
   className?: string;
 }
@@ -28,14 +29,19 @@ export default function Home({ className }: DesktopHomeProps) {
   const filterContentRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll();
+  const { scrollYProgress } = useScroll({
+    target: mainContentRef,
+    offset: ["start start", "end end"]
+  });
+
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
+    mass: 0.5
   });
 
-  const paymentMethods = [
+  const paymentMethods = useMemo(() => [
     {
       name: 'Avis Google',
       href: 'https://g.page/r/CeblcZSGEi33EBM/review',
@@ -64,9 +70,9 @@ export default function Home({ className }: DesktopHomeProps) {
       height: 40,
       width: 60,
     },
-  ];
+  ], []);
 
-  const [selectedFilters, setSelectedFilters] = useState({
+  const [selectedFilters, setSelectedFilters] = useState(() => ({
     color: [],
     region: [],
     vintage: [],
@@ -80,33 +86,31 @@ export default function Home({ className }: DesktopHomeProps) {
     sans_sulfites_: [],
     petit_prix: [],
     haut_de_gamme: [],
-  });
+  }));
 
   useEffect(() => {
     const loadingTimeout = setTimeout(() => {
       setIsInitialRender(false);
     }, 800);
 
-    window.scrollTo(0, 0);
-
     const resetScroll = () => {
-      window.scrollTo(0, 0);
       if (mainContentRef.current) {
         mainContentRef.current.scrollTop = 0;
       }
     };
-
-    resetScroll();
 
     const resetScrollTimeout = setTimeout(resetScroll, 100);
 
     const fetchProducts = async () => {
       try {
         const cachedProducts = localStorage.getItem('cachedProducts');
+        const cacheTimestamp = localStorage.getItem('productsTimestamp');
+        const now = Date.now();
+        const cacheAge = cacheTimestamp ? now - parseInt(cacheTimestamp) : Infinity;
+        const CACHE_DURATION = 24 * 60 * 60 * 1000;
 
-        if (cachedProducts) {
+        if (cachedProducts && cacheAge < CACHE_DURATION) {
           setProductsLoaded(true);
-          resetScroll();
           return;
         }
 
@@ -114,50 +118,62 @@ export default function Home({ className }: DesktopHomeProps) {
         if (response.ok) {
           const products = await response.json();
           localStorage.setItem('cachedProducts', JSON.stringify(products));
+          localStorage.setItem('productsTimestamp', now.toString());
           setProductsLoaded(true);
-          resetScroll();
         }
       } catch (error) {
         console.error('Failed to fetch products:', error);
         setProductsLoaded(true);
-        resetScroll();
       }
     };
 
     fetchProducts();
 
-    window.addEventListener('load', resetScroll);
-
     return () => {
-      window.removeEventListener('load', resetScroll);
       clearTimeout(resetScrollTimeout);
       clearTimeout(loadingTimeout);
     };
   }, []);
 
-  const handleFilterChange = (category: keyof typeof selectedFilters, filters: string[]) => {
-    setSelectedFilters((prev) => ({
-      ...prev,
-      [category]: filters
-    }));
-  };
+  const handleFilterChange = useMemo(() =>
+    (category: keyof typeof selectedFilters, filters: string[]) => {
+      setSelectedFilters((prev) => ({
+        ...prev,
+        [category]: filters
+      }));
+    },
+  []);
 
-  const resetAllFilters = () => {
-    setSelectedFilters({
-      color: [],
-      region: [],
-      vintage: [],
-      millesime: [],
-      certification: [],
-      style: [],
-      volume: [],
-      accord_mets: [],
-      region__pays: [],
-      categories: [],
-      sans_sulfites_: [],
-      petit_prix: [],
-      haut_de_gamme: [],
-    });
+  const resetAllFilters = useMemo(() =>
+    () => {
+      setSelectedFilters({
+        color: [],
+        region: [],
+        vintage: [],
+        millesime: [],
+        certification: [],
+        style: [],
+        volume: [],
+        accord_mets: [],
+        region__pays: [],
+        categories: [],
+        sans_sulfites_: [],
+        petit_prix: [],
+        haut_de_gamme: [],
+      });
+    },
+  []);
+
+  const fadeInUpVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
   };
 
   if (isInitialRender) {
@@ -173,6 +189,7 @@ export default function Home({ className }: DesktopHomeProps) {
               alt="Mémé Georgette"
               width={65}
               height={65}
+              priority
               className='rounded-full mt-2'
             />
           </div>
@@ -204,7 +221,8 @@ export default function Home({ className }: DesktopHomeProps) {
             maxWidth: '15.6rem',
             scrollbarColor: 'rgba(209, 213, 219, 0.5) rgba(209, 213, 219, 0.1)',
             scrollPaddingBlockStart: '1rem',
-            scrollMarginLeft: '1rem'
+            scrollMarginLeft: '1rem',
+            willChange: 'transform'
           }}
         >
           <ProductFilter
@@ -220,40 +238,41 @@ export default function Home({ className }: DesktopHomeProps) {
         className="flex-1 bg-gray-50 overflow-y-auto overflow-x-hidden"
         style={{
           overscrollBehavior: 'contain',
-          height: '100vh'
+          height: '100vh',
+          willChange: 'transform'
         }}
       >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          variants={fadeInUpVariants}
+          initial="hidden"
+          animate="visible"
         >
           <div>
             <div className="pt-24 md:hidden lg:flex" />
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={fadeInUpVariants}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
             >
               <ProductsIntro />
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={fadeInUpVariants}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
             >
               <Slider />
             </motion.div>
 
             <div className="max-w-7xl mx-auto px-4">
               <motion.section
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                variants={fadeInUpVariants}
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
                 className="bg-white rounded-lg shadow"
               >
                 <div>
@@ -266,6 +285,7 @@ export default function Home({ className }: DesktopHomeProps) {
                       width={100}
                       height={100}
                       className='w-20 h-auto'
+                      priority
                     />
                   </div>
                 </div>
@@ -307,46 +327,46 @@ export default function Home({ className }: DesktopHomeProps) {
               </div>
             </div>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={fadeInUpVariants}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
             >
               <Livraison />
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={fadeInUpVariants}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
             >
               <Trust />
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={fadeInUpVariants}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
             >
               <WineCategories />
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={fadeInUpVariants}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
             >
               <Slogan />
             </motion.div>
             <br /><br />
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={fadeInUpVariants}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
             >
               <BioWineDescription />
             </motion.div>
