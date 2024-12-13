@@ -1,5 +1,4 @@
 import { generateMetadata } from './metadata';
-import { Metadata } from 'next';
 
 export { generateMetadata };
 

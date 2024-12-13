@@ -32,7 +32,7 @@ type GenerateMetadataProps = {
 };
 
 export async function generateMetadata(
-  { params, searchParams }: GenerateMetadataProps
+  { params }: GenerateMetadataProps
 ): Promise<Metadata> {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}/api/articles`, {
