@@ -20,13 +20,20 @@ interface Article {
 const filterTags = (content: string): string[] => {
   const stopWords = ["d&rsquo;honneur,mais", "je", "les", "le", "ou", "il", "la", "et", "à", "de", "du", "au", "des", "en", "?ah,", "un", "une", "ce", "cette", "cet", "ces", "qui", "que", "quoi", "où", "quand", "comment", "pourquoi"];
   const words = content
-    .replace(/<\/?[^>]+(>|$)/g, "") // Remove HTML
+    .replace(/<\/?[^>]+(>|$)/g, "")
     .toLowerCase()
     .split(/\s+/);
   return [...new Set(words.filter(word => word.length > 3 && !stopWords.includes(word)).map(word => word.replace(/[.,]/g, '')))];
 };
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+type GenerateMetadataProps = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+  { params, searchParams }: GenerateMetadataProps
+): Promise<Metadata> {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}/api/articles`, {
       method: 'GET',
@@ -54,9 +61,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
     const cleanTitle = he.decode(article.title.replace(/<\/?[^>]+(>|$)/g, ""));
     const cleanContent = article.content.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 200) + "...";
-
     const tags = filterTags(article.content);
-
     const title = `${cleanTitle} | Le Blog de VinsMemeGeorgette.com`;
     const description = cleanContent;
 

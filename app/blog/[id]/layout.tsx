@@ -1,16 +1,12 @@
 import { generateMetadata } from './metadata';
-
-interface LayoutProps {
-  children: React.ReactNode;
-  params: {
-    id: string;
-  };
-}
+import { Metadata } from 'next';
 
 export { generateMetadata };
 
 export default function BlogLayout({
   children,
-}: LayoutProps) {
+}: {
+  children: React.ReactNode;
+}) {
   return <>{children}</>;
 }
