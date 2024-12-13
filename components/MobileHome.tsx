@@ -9,7 +9,6 @@ import MobileProductFilter from '@/components/MobileProductFilter';
 import Trust from '@/components/Trust';
 import Livraison from './Livraison';
 import MobileProductsIntro from './MobileProductIntro';
-import BackToTop from './BackToTop';
 import PromotionSection from './PromotionSection';
 import BioWineDescription from './BioWineDescription';
 import Image from 'next/image';
@@ -59,10 +58,10 @@ const MobileHome: React.FC = () => {
   // Common animation variants
   const fadeInUpVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         duration: 0.6,
         ease: "easeOut"
       }
@@ -79,20 +78,21 @@ const MobileHome: React.FC = () => {
   });
 
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="flex flex-col bg-gray-100 overflow-y-auto overflow-x-hidden"
-      style={{ willChange: 'transform' }}
-    >
+    <>
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left z-50"
-        style={{ scaleX }}
-      />
-      
-      <br /><br /><br /><br />
-      <div className="mt-8">
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="flex flex-col bg-gray-100 overflow-y-auto overflow-x-hidden"
+        style={{ willChange: 'transform' }}
+      >
+        <motion.div
+          className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left z-50"
+          style={{ scaleX }}
+        />
+
+        <br /><br /><br /><br />
+        <div className="mt-8">
         <motion.div
           variants={fadeInUpVariants}
           initial="hidden"
@@ -167,13 +167,13 @@ const MobileHome: React.FC = () => {
               viewport={{ once: true }}
               className="bg-white rounded-lg shadow"
             >
-              <ProductsCards 
-                selectedFilters={selectedFilters} 
-                onAddToCart={(product) => console.log('Add to cart:', product)} 
+              <ProductsCards
+                selectedFilters={selectedFilters}
+                onAddToCart={(product) => console.log('Add to cart:', product)}
               />
             </motion.section>
           </div>
-          
+
           <br /><br />
           <motion.div
             variants={fadeInUpVariants}
@@ -183,7 +183,7 @@ const MobileHome: React.FC = () => {
           >
             <Livraison />
           </motion.div>
-          
+
           <br />
           <motion.div
             variants={fadeInUpVariants}
@@ -202,7 +202,7 @@ const MobileHome: React.FC = () => {
           >
             <Trust />
           </motion.div>
-          
+
           <br />
           <motion.div
             variants={fadeInUpVariants}
@@ -221,17 +221,17 @@ const MobileHome: React.FC = () => {
           >
             <BioWineDescription />
           </motion.div>
-          
+
           <br /><br />
-          <BackToTop />
-          <MobileProductFilter
-            selectedFilters={selectedFilters}
-            onFilterChange={handleFilterChange}
-            resetFilters={resetFilters}
-          />
         </div>
       </div>
     </motion.div>
+    <MobileProductFilter
+      selectedFilters={selectedFilters}
+      onFilterChange={handleFilterChange}
+      resetFilters={resetFilters}
+    />
+    </>
   );
 };
 
