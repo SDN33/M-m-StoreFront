@@ -2,10 +2,14 @@ import { generateMetadata } from './metadata';
 
 export { generateMetadata };
 
-export default function BlogLayout({
-  children,
-}: {
+type Props = {
   children: React.ReactNode;
-}) {
-  return children;
+  params: {
+    id: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export default async function BlogLayout(props: Props) {
+  return props.children;
 }

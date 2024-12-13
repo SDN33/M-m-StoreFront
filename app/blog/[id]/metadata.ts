@@ -26,11 +26,13 @@ const filterTags = (content: string): string[] => {
   return [...new Set(words.filter(word => word.length > 3 && !stopWords.includes(word)).map(word => word.replace(/[.,]/g, '')))];
 };
 
-export async function generateMetadata({
-  params,
-}: {
+type Props = {
   params: { id: string };
-}): Promise<Metadata> {
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { params } = props;
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}/api/articles`, {
       method: 'GET',
