@@ -253,11 +253,11 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       >
         <div className="flex items-center justify-center text-center mx-auto space-x-4">
           <span className="text-center">
-        • <Gift className="w-3 h-auto inline-block ml-1" aria-hidden="true" />
-        &nbsp; Pour Offrir
+            <Gift className="w-3 h-auto inline-block ml-1" aria-hidden="true" />
+            &nbsp; Pour Offrir
         <span className="text-xs -mt-4">
           &nbsp;<Gift className="w-3 h-auto inline-block ml-1" aria-hidden="true" />
-        </span> •
+        </span>
           </span>
         </div>
       </button>
