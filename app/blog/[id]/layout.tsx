@@ -8,15 +8,16 @@ interface Article {
 export async function generateMetadata({
   params,
 }: {
-  params: { id: number };
+  params: { id: string };
 }): Promise<Metadata> {
   try {
-    const response = await fetch(`/api/articles/${params.id}`, {
+    const articleId = parseInt(params.id, 10);
+    const response = await fetch(`/api/articles/${articleId}`, {
       next: { revalidate: 3600 }
     });
 
     const data = await response.json();
-    const article = data.articles?.find((a: Article) => a.id === parseInt(params.id.toString(), 10));
+    const article = data.articles?.find((a: Article) => a.id === articleId);
 
     if (!article) {
       return {
