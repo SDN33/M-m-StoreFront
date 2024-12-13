@@ -4,7 +4,7 @@ import { getAllProductIds } from './metadata';
 export async function generateStaticParams() {
   // Return an array of objects with the expected params structure
   const productIds = await getAllProductIds();
-  return productIds.map((id: string) => ({ params: { id } }));
+  return productIds.map((id: number) => ({ id: String(id) }));
 }
 
 import { ReactNode } from 'react';
