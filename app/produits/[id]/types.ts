@@ -31,3 +31,5 @@ export interface Product {
   degustation: string;
   sans_sulfites_?: string;
 }
+
+
