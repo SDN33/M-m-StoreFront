@@ -18,7 +18,7 @@ interface Article {
 }
 
 const filterTags = (content: string): string[] => {
-  const stopWords = ["d&rsquo;honneur,mais", "je", "les", "le", "ou", "il", "la", "et", "à", "de", "du", "au", "des", "en", "?ah,", "un", "une", "ce", "cette", "cet", "ces", "qui", "que", "quoi", "où", "quand", "comment", "pourquoi"];
+  const stopWords = ["nous,toujours,d&rsquo;honneur,mais", "je", "les", "le", "ou", "il", "la", "et", "à", "de", "du", "au", "des", "en", "?ah,", "un", "une", "ce", "cette", "cet", "ces", "qui", "que", "quoi", "où", "quand", "comment", "pourquoi"];
   const words = content
     .replace(/<\/?[^>]+(>|$)/g, "")
     .toLowerCase()
@@ -26,11 +26,11 @@ const filterTags = (content: string): string[] => {
   return [...new Set(words.filter(word => word.length > 3 && !stopWords.includes(word)).map(word => word.replace(/[.,]/g, '')))];
 };
 
-type Props = {
+export async function generateMetadata({
+  params,
+}: {
   params: { id: string };
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+}): Promise<Metadata> {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}/api/articles`, {
       method: 'GET',
