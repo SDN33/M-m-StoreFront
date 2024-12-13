@@ -1,21 +1,5 @@
-import { Metadata } from "next";
 
-interface Product {
-  id: number;
-}
-
-export async function getAllProductIds() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}/api/products`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  const products = await response.json();
-  return products.map((product: Product) => product.id.toString());
-}
-
-export async function generateMetadata({ params }: { params: { id: number } }): Promise<Metadata> {
+export async function generateMetadata({ params }) {
   try {
     // Fetch product data with proper URL
     const response = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}/api/products?id=${params.id}`, {
@@ -35,7 +19,7 @@ export async function generateMetadata({ params }: { params: { id: number } }): 
     const products = await response.json();
     // Find the specific product that matches the ID from params
     const product = Array.isArray(products)
-      ? products.find(p => p.id === parseInt(String(params.id), 10))
+      ? products.find(p => p.id === parseInt(params.id, 10))
       : null;
 
     if (!product) {

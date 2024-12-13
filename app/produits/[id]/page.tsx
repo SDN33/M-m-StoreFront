@@ -12,7 +12,7 @@ import Head from 'next/head';
 import SimilarProductsSuggestion from '@/components/SimilarProductsSuggestion';
 
 interface Product {
-  id: string;
+  id: number;
   name: string;
   price: number;
   regular_price: number;
@@ -142,7 +142,7 @@ const ProductPage: React.FC = () => {
         const response = await fetch(`/api/products?id=${id}`);
         if (!response.ok) throw new Error('Failed to fetch product');
         const data = await response.json();
-        const fetchedProduct = Array.isArray(data) ? data.find((p: Product) => String(p.id) === id) : null;
+        const fetchedProduct = Array.isArray(data) ? data.find((p: Product) => p.id === Number(id)) : null;
         if (!fetchedProduct) throw new Error('Product not found');
         // Assurez-vous que average_rating est un nombre
         fetchedProduct.average_rating = parseFloat(fetchedProduct.average_rating) || 0;
@@ -196,7 +196,7 @@ const ProductPage: React.FC = () => {
   const selectedProductIds = [621,632,255,284,286,292,653,649,659]; // Example array of selected product IDs
 
   const renderSelectedBadge = () => {
-    if (selectedProductIds.includes(Number(product.id))) {
+    if (selectedProductIds.includes(product.id)) {
       return (
         <div className="absolute -top-10 right-0 sm:right-1 md:-right-8 bg-red-700/90 shadow-2xl text-white text-[9px] px-2 py-2 rounded-full flex items-center gap-2 z-40 mr-4">
           <span className="flex items-center justify-center text-white rounded-full ">
@@ -373,7 +373,7 @@ const ProductPage: React.FC = () => {
               <AddToCartButton
                 product={product}
                 quantity={quantity}
-                productId={Number(product.id)}
+                productId={product.id}
                 aria-label={`Ajouter ${quantity} bouteille${quantity > 1 ? 's' : ''} au panier`}
                 onAddToCart={() => {
                   return new Promise<void>((resolve) => {
