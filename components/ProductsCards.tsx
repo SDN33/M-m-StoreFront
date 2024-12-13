@@ -216,16 +216,14 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
           <div className="mx-auto overflow-hidden justify-center flex">
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 justify-center">
                 {(() => {
-                  const lastSortTime = sessionStorage.getItem('lastSortTime');
                   const currentTime = Date.now();
                   let sortedProducts = [...filteredProducts];
 
                   if (sortBy) {
                   // Use the sorted products directly if sortBy is set
                   sortedProducts = filteredProducts;
-                  } else if (!lastSortTime || currentTime - parseInt(lastSortTime) > 900000) {
                   // Only resort randomly if 10 minutes have passed
-                  sortedProducts = sortedProducts.sort(() => Math.random() - 0.6);
+                  sortedProducts = sortedProducts.sort(() => Math.random() - 0.7);
                   sessionStorage.setItem('lastSortTime', currentTime.toString());
                   } else {
                   // Use the stored order from session storage or keep current order
