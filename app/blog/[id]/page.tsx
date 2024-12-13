@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Head from "next/head";
 import Image from "next/image";
-import { Clock, Facebook, Twitter, Linkedin, Link2 } from "lucide-react";
+import { Clock, Facebook, Twitter, Linkedin, Link2, Hourglass } from "lucide-react";
 import he from "he";
 import dynamic from "next/dynamic";
 import LatestArticles from "@/components/LatestArticles";
@@ -18,7 +18,7 @@ interface Article {
   featuredImage: string | null;
   date: string;
   author?: string;
-  readTime?: number;
+  timeToRead?: number;
 }
 
 const formatDate = (dateString: string): string => {
@@ -212,14 +212,7 @@ const ArticlePage = () => {
           <h1 className="text-3xl md:text-4xl font-extrabold text-gray-950 mb-4 max-w-4xl mx-auto text-center">
             {he.decode((article.title || "").replace(/<\/?[^>]+(>|$)/g, ""))}
           </h1>
-          <div className="flex justify-center items-center text-sm text-gray-500">
-            <Clock size={16} className="mr-2" />
-            <time dateTime={article.date}>
-              {formatDate(article.date)}
-              {article.readTime && ` · ${article.readTime} min lecture`}
-            </time>
-            <p>{article.author && ` · ${article.author}`}</p>
-          </div>
+            <div className="flex justify-center items-center text-sm text-gray-500 gap-1"><Clock size={16} /><time dateTime={article.date}>{formatDate(article.date)}</time>{article.timeToRead && <><Hourglass size={16} className="-mr-2 ml-2" /> · {article.timeToRead} min lecture</>}{article.author && <> · {article.author}</>}</div>
         </header>
 
         {article.featuredImage && (

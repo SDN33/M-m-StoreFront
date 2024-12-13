@@ -35,6 +35,9 @@ export default async function handler(req, res) {
           slug: post.slug,
           author: post._embedded?.author?.[0]?.name || "Anonyme",
           featuredImage,
+          timeToRead: Math.max(1, Math.round(
+            post.content.rendered.replace(/<[^>]*>/g, '').split(/\s+/).length / 225
+          )),
         };
       })
     );
