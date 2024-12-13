@@ -7,17 +7,30 @@ const Slider = () => {
   const slides = [
     {
       id: 1,
+      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto:good/v1734131080/Carte_de_No%C3%ABl_Rouge_Vert_Sapin_F%C3%AAte_nj1eom.webp',
+      link: '/',
+      lcp: true,
+      rel: 'preconnect',
+      priority: true,
+      fetchPriority: "high"
+    },
+    {
+      id: 2,
       imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto/v1732880778/100_engag%C3%A9e_pour_la_nature_2_n2zvgy.webp',
       link: '/',
       lcp: true,
       rel: 'preconnect',
+      priority: true,
+      fetchPriority: "high"
     },
     {
-      id: 2,
-      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_100/v1732974216/100_engag%C3%A9e_pour_la_nature_4_pwjwn9.webp',
+      id: 3,
+      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto:good/v1734131281/Design_sans_titre_56_qnqkpe.webp',
       link: '/vignerons/255986134',
       lcp: true,
       rel: 'preconnect',
+      priority: true,
+      fetchPriority: "high"
     },
     {
       id: 4,
@@ -25,6 +38,8 @@ const Slider = () => {
       link: '/vignerons/255986119',
       lcp: true,
       rel: 'preconnect',
+      priority: true,
+      fetchPriority: "high"
     },
   ];
 
