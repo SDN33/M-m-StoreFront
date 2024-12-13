@@ -1,5 +1,5 @@
 export { generateMetadata } from './metadata';
 
-export default function ProductLayout({ children }) {
+export default async function ProductLayout({ children }) {
   return <>{children}</>;
 }
