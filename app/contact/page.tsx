@@ -1,11 +1,10 @@
 'use client';
-
 import React from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { MousePointer } from 'lucide-react';
 
 const ContactPage = () => {
-  const [state, handleSubmit] = useForm("xovqnvab"); // Utilisez votre clé Formspree ici
+  const [state, handleSubmit] = useForm("xovqnvab");
 
   if (state.succeeded) {
     return (
@@ -28,13 +27,13 @@ const ContactPage = () => {
           <p>
             Vous pouvez aussi nous contacter par email : <br />
             <span id="reveal-email" className="cursor-pointer text-teal-800 text-center" onClick={() => {
-            const emailElement = document.getElementById('email-address');
-            if (emailElement) {
-              emailElement.style.display = 'inline';
-              document.getElementById('reveal-email')!.style.display = 'none';
-            }
+              const emailElement = document.getElementById('email-address');
+              if (emailElement) {
+                emailElement.style.display = 'inline';
+                document.getElementById('reveal-email')!.style.display = 'none';
+              }
             }}>
-             <span className='flex justify-center'> Cliquez pour afficher &nbsp;<MousePointer /></span>
+              <span className='flex justify-center'> Cliquez pour afficher &nbsp;<MousePointer /></span>
             </span>
             <span id="email-address" className='text-teal-800' style={{ display: 'none' }}>info@vinsmemegeorgette.com</span>
           </p>
@@ -102,7 +101,6 @@ const ContactPage = () => {
         </form>
       </div>
       <br />
-
       <br />
     </div>
   );
