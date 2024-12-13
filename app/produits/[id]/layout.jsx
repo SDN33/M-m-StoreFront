@@ -7,6 +7,6 @@ export async function generateStaticParams() {
   return productIds.map(id => ({ params: { id: id.toString() } }));
 }
 
-export default async function ProductLayout({ children }) {
+export default function ProductLayout({ children }) {
   return <>{children}</>;
 }
