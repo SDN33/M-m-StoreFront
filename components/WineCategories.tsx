@@ -167,7 +167,7 @@ const VendorsPage = () => {
               return (
                 <div
                   key={vendor.id}
-                  className="bg-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
+                  className="bg-gray-200/50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
                 >
                   <div className="flex justify-between items-start">
                     <div className="space-y-2 flex items-center">
