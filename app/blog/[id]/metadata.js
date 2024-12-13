@@ -1,23 +1,6 @@
-import { Metadata } from "next";
 import he from "he";
 
-interface Article {
-  id: number;
-  title: string;
-  content: string;
-  excerpt: string;
-  slug: string;
-  featuredImage: string | null;
-  date: string;
-  author?: string;
-  readTime?: number;
-  categories?: Array<{
-    id: number;
-    name: string;
-  }>;
-}
-
-const filterTags = (content: string): string[] => {
+const filterTags = (content) => {
   const stopWords = ["nous,toujours,d&rsquo;honneur,mais", "je", "les", "le", "ou", "il", "la", "et", "à", "de", "du", "au", "des", "en", "?ah,", "un", "une", "ce", "cette", "cet", "ces", "qui", "que", "quoi", "où", "quand", "comment", "pourquoi"];
   const words = content
     .replace(/<\/?[^>]+(>|$)/g, "")
@@ -26,12 +9,7 @@ const filterTags = (content: string): string[] => {
   return [...new Set(words.filter(word => word.length > 3 && !stopWords.includes(word)).map(word => word.replace(/[.,]/g, '')))];
 };
 
-type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-export async function generateMetadata(props: Props): Promise<Metadata> {
+export async function generateMetadata(props) {
   const { params } = props;
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}/api/articles`, {
@@ -49,7 +27,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     }
 
     const data = await response.json();
-    const article = data.articles?.find((a: Article) => a.id === parseInt(params.id, 10));
+    const article = data.articles?.find(a => a.id === parseInt(params.id, 10));
 
     if (!article) {
       return {

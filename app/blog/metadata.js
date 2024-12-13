@@ -1,6 +1,5 @@
-import { Metadata } from "next";
 
-export const metadata: Metadata = {
+export const metadata= {
   title: "Le Blog de Mémé Georgette | VinsMemeGeorgette.com",
   description: "Découvrez nos articles sur le vin bio, la biodynamie, et l'actualité du monde viticole. Conseils, dégustations et informations sur les vins naturels.",
   openGraph: {
