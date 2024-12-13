@@ -352,15 +352,7 @@ export default function Home({ className }: DesktopHomeProps) {
             >
               <WineCategories />
             </motion.div>
-
-            <motion.div
-              variants={fadeInUpVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <Slogan />
-            </motion.div>
+            <Slogan />
             <br /><br />
             <motion.div
               variants={fadeInUpVariants}
