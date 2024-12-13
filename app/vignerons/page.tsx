@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { MapPin, Search, Wine } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface ProductImage {
   id: number;
@@ -159,6 +160,21 @@ const VendorsPage = () => {
           <div className='border-t-2 border-primary w-16 mt-4 flex mx-auto'></div>
           <br /><br />
         </div>
+
+        <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 2, ease: "easeOut" }}
+        viewport={{ once: true }}
+      >
+        <Image
+          src="https://res.cloudinary.com/daroyxenr/image/upload/q_auto:good/v1734051910/Design_sans_titre_54_nsgmrl.webp"
+          alt="Vineyard"
+          width={1920}
+          height={1080}
+          className='rounded-lg mb-8'
+        />
+      </motion.div>
 
         {/* Search and Filter Section */}
         <div className="my-8 space-y-4">
