@@ -141,7 +141,7 @@ const filterOptions = {
     { label: 'Champagne', value: 'Champagne' },
     { label: 'Jura', value: 'Jura' },
     { label: 'Languedoc', value: 'Languedoc' },
-    { label: 'Loire', value: 'Loire' },
+    { label: 'Pays de la Loire', value: 'Pays de la Loire' },
     { label: 'PACA', value: 'PACA' },
     { label: 'Roussillon', value: 'Roussillon' },
     { label: 'Savoie', value: 'Savoie' },
