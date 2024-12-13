@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { id: number } }): Promise<Metadata> {
   try {
     // Fetch product data with proper URL
     const response = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}/api/products?id=${params.id}`, {
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     const products = await response.json();
     // Find the specific product that matches the ID from params
     const product = Array.isArray(products)
-      ? products.find(p => p.id === parseInt(params.id, 10))
+      ? products.find(p => p.id === parseInt(String(params.id), 10))
       : null;
 
     if (!product) {
