@@ -1,5 +1,5 @@
-export { generateMetadata } from './metadata.js';
+export { generateMetadata } from '@/app/vignerons/[id]/metadata.js';
 
-export default function VigneronsLayout({ children }) {
+export default function VigneronLayout({ children }) {
   return <main>{children}</main>;
 }

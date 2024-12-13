@@ -1,68 +1,102 @@
-async function getVigneron(id) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/get-vendor`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ id: parseInt(id) })
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch vigneron with ID ${id}`);
-  }
-  return response.json();
-}
 
 export async function generateMetadata({ params }) {
-  const id = params.id;
-
   try {
-    const vigneron = await getVigneron(id);
+    // Fetch product data with proper URL
+    const response = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}/api/get-vendor?id=${params.id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      next: {
+        revalidate: 3600 // Revalidate every hour
+      }
+    });
 
-    // Check if vigneron data is valid
-    if (!vigneron || typeof vigneron !== 'object' || !vigneron.display_name) {
-      throw new Error('Vigneron not found');
+    if (!response.ok) {
+      throw new Error(`Failed to fetch product data: ${response.statusText}`);
     }
 
+    const products = await response.json();
+    // Find the specific product that matches the ID from params
+    const product = Array.isArray(products)
+      ? products.find(p => p.id === parseInt(params.id, 10))
+      : null;
+
+    if (!product) {
+      return {
+        title: "Vigneron non trouvé | Vins Mémé Georgette",
+        description: "Le vigneron que vous recherchez n'a pas été trouvé.",
+      };
+    }
+
+    const title = `Découvrir ${product.shop?.title} | VinsMemeGeorgette.com`;
+    const description = product.description?.replace(/<[^>]*>/g, '') ||
+      `Découvrez ${product.shop?.title} || ''}, un vigneron partenaire de Mémé Georgette.`;
+
     return {
-      title: `${vigneron.display_name} | Vigneron.ne Bio | VinsMemeGeorgette.com`,
-      description: `Découvrez ${vigneron.display_name}, vigneron.ne bio partenaire de Mémé Georgette : ${vigneron.description || 'description non renseignée'}`,
+      title,
+      description,
       openGraph: {
-        title: `${vigneron.display_name} | Vigneron.ne Bio | VinsMemeGeorgette.com`,
-        description: `Découvrez ${vigneron.display_name}, vigneron.ne bio partenaire de Mémé Georgette : ${vigneron.description || 'description non renseignée'}`,
+        title,
+        description,
         images: [
           {
-            url: vigneron.shop?.banner || "/images/blog-banner.webp",
-            width: 1200,
-            height: 630,
-            alt: `${vigneron.display_name} - Vigneron.ne Bio`
+            url: product.images?.[0]?.src || '/images/vinmeme.png',
+            width: 800,
+            height: 600,
+            alt: product.name
           }
         ],
         locale: "fr_FR",
         type: "website",
-        siteName: "VinsMemeGeorgette.com",
+        siteName: "Vins Mémé Georgette",
       },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+        images: [product.images?.[0]?.src || '/images/vinmeme.png'],
+      },
+      alternates: {
+        canonical: `https://vinsmemegeorgette.com/vignerons/${params.id}`
+      },
+      keywords: [
+        product.name,
+        product.certification,
+        "vin bio",
+        "vin biodynamique",
+        product.region__pays,
+        product.appellation,
+        "achat vin en ligne",
+        "vins naturels",
+        product.cepages,
+      ].filter(Boolean),
+      robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        },
+      },
+      other: {
+        "product:price:amount": product.price?.toString() || "0",
+        "product:price:currency": "EUR",
+        "product:availability": product.stock_status === "instock" ? "in stock" : "out of stock",
+        "product:condition": "new",
+        "product:brand": "Vins Mémé Georgette",
+        "product:category": product.categories?.[0]?.name || "Vin",
+      }
     };
   } catch (error) {
     console.error('Error generating metadata:', error);
+    // Return fallback metadata if there's an error
     return {
-      title: "Vigneron.ne Bio | VinsMemeGeorgette.com",
-      description: "Vigneron.ne bio partenaire de Mémé Georgette.",
-      openGraph: {
-        title: "Vigneron.ne Bio | VinsMemeGeorgette.com",
-        description: "Vigneron.ne bio partenaire de Mémé Georgette.",
-        images: [
-          {
-            url: "/images/blog-banner.webp",
-            width: 1200,
-            height: 630,
-            alt: "Vigneron.ne Bio - Vins Bio et Biodynamiques"
-          }
-        ],
-        locale: "fr_FR",
-        type: "website",
-        siteName: "VinsMemeGeorgette.com",
-      },
+      title: "Vigneron non trouvé | Vins Mémé Georgette",
+      description: "Découvrez notre sélection de vins biologiques et biodynamiques chez Mémé Georgette.",
     };
   }
 }

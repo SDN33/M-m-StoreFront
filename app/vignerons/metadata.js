@@ -7,7 +7,7 @@ export const metadata= {
       description: "Découvrez nos vignerons bio partenaires de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites",
       images: [
         {
-          url: "/images/blog-banner.webp",
+          url: "/images/vignerons.png",
           width: 1200,
           height: 630,
           alt: "Nos Vignerons.nes Bio - Vins Bio et Biodynamiques"
@@ -21,11 +21,11 @@ export const metadata= {
       card: "summary_large_image",
       title: "Nos Vignerons.nes Bio | VinsMemeGeorgette.com",
       description: "Découvrez nos vignerons bio partenaires de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites",
-      images: ["/images/blog-banner.webp"],
+      images: ["/images/vignerons.png"],
       creator: "@MemeGeorgette",
     },
     alternates: {
-      canonical: "https://vinsmemegeorgette.com/blog"
+      canonical: "https://vinsmemegeorgette.com/vignerons"
     },
     keywords: [
       "vins bio",
