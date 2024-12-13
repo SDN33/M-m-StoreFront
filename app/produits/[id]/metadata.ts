@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   try {
     // Fetch product data with proper URL
     const response = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}/api/products?id=${params.id}`, {
