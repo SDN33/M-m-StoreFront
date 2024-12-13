@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contactez-nous | Vins Mémé Georgette",
+  title: "Contactez-nous | VinsMemeGeorgette.com",
   description: "Contactez-nous pour toute question sur nos vins biologiques et biodynamiques. Notre équipe est à votre disposition pour vous conseiller.",
   openGraph: {
     title: "Contact | VinsMemGeorgette.com",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact | Vins Mémé Georgette",
+    title: "Contact | VinsMemeGeorgette.com",
     description: "Contactez-nous pour toute question sur nos vins biologiques et biodynamiques. Notre équipe est à votre disposition pour vous conseiller.",
     images: ["/images/nos-vins.webp"],
   },
