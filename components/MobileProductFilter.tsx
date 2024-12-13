@@ -48,6 +48,7 @@ const filterOptions: FilterOptionsWithDisplay = {
     displayName: 'Région / Pays',
     options: [
       { label: 'Alsace', value: 'Alsace' },
+      { label: 'Auvergne-Rhône-Alpes', value: 'Auvergne-Rhône-Alpes' },
       { label: 'Beaujolais', value: 'Beaujolais' },
       { label: 'Bourgogne', value: 'Bourgogne' },
       { label: 'Bordeaux', value: 'Bordeaux' },
