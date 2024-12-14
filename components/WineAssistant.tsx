@@ -260,12 +260,13 @@ const AIWineAssistant: React.FC = () => {
       .filter(product => product.volume !== 'autres')
       .sort((a, b) => b.score - a.score)
       .filter(product => {
-        const storeName = product.store_name || 'unknown';
-        const count = storeWineCounts.get(storeName) || 0;
-        if (count >= 2) return false;
-        storeWineCounts.set(storeName, count + 1);
-        return true;
+      const storeName = product.store_name || 'unknown';
+      const count = storeWineCounts.get(storeName) || 0;
+      if (count >= 2) return false;
+      storeWineCounts.set(storeName, count + 1);
+      return true;
       })
+      .sort(() => Math.random() - 0.5)  // Random sorting
       .slice(0, 5);
 
     setFilteredWines(scoredWines);
