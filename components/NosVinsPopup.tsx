@@ -215,7 +215,7 @@ const NosVinsPopup: React.FC<NosVinsPopupProps> = ({
                 </motion.a>
                 <motion.a
                   className='flex mx-auto justify-center text-gray-600 mt-4 text-xl overflow-hidden font-bold'
-                  href='/vin-du-monde'
+                  href='/vins-du-monde'
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: 'spring', stiffness: 300 }}
