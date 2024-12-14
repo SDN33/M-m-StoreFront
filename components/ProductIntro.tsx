@@ -13,7 +13,7 @@ const ProductsIntro: React.FC = () => {
   // Scroll animation
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1000], [0, -100]); // Adjust as needed
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -199,7 +199,20 @@ const ProductsIntro: React.FC = () => {
           <div className="flex flex-col items-center text-center w-full lg:w-auto ">
             <h1 className="text-2xl sm:text-2xl lg:text-2xl font-gray-950 font-black text-primary tracking-tight leading-tight">
               <span className="block text-4xl sm:text-2xl mb-2 mt-1">
-                <span className="text-3xl font-gray-950">{counter.toLocaleString()}</span>
+                <motion.span
+                  className="text-3xl font-gray-950"
+                  initial={{ scale: 1 }}
+                  animate={counter === targetCount ? {
+                  scale: [1, 1.2, 1],
+                  transition: {
+                    duration: 0.5,
+                    times: [0, 0.5, 1],
+                    ease: "easeInOut"
+                  }
+                  } : {}}
+                >
+                  {counter.toLocaleString()}
+                </motion.span>
                 <span className='text-3xl'>&nbsp;vins bio en direct des vignerons(nes)</span>
               </span>
               <span className="block bg-transparent text-gray-950 text-base sm:text-sm -mt-1 mb-2 ">
