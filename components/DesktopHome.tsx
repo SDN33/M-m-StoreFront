@@ -95,7 +95,9 @@ export default function Home({ className }: DesktopHomeProps) {
 
     const resetScroll = () => {
       if (mainContentRef.current) {
-        mainContentRef.current.scrollTop = 0;
+        requestAnimationFrame(() => {
+          mainContentRef.current!.scrollTop = 0;
+        });
       }
     };
 

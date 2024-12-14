@@ -220,10 +220,15 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   const filterContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (filterContainerRef.current) {
-        const scrollPosition = filterContainerRef.current.scrollTop;
-        setIsScrolled(scrollPosition > 50);
+      if (!ticking && filterContainerRef.current) {
+        requestAnimationFrame(() => {
+          const scrollPosition = filterContainerRef.current?.scrollTop ?? 0;
+          setIsScrolled(scrollPosition > 50);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
