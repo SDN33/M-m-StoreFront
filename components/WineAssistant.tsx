@@ -274,6 +274,11 @@ const AIWineAssistant: React.FC = () => {
   // Méthodes de rendu et de navigation
   const renderMoodStep = () => (
     <div className="p-4 bg-gradient-to-br from-primary/10 to-primary/40 rounded-lg hidden xl:block">
+      <div>
+        <p className="text-teal-800 text-xs text-center mb-4">
+          Laissez vous guider par notre assistant virtuel pour trouver le vin parfait pour votre soirée.
+        </p>
+      </div>
       <h3 className="text-2xl font-bold mb-4">Votre humeur du moment ?</h3>
       <div className="grid grid-cols-2 gap-3">
         {Object.keys(MOOD_MAP).map((mood) => (
