@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
 
 const BackToTop = () => {
@@ -25,7 +26,7 @@ const BackToTop = () => {
         scrollableParent.removeEventListener('scroll', handleScroll);
       }
     };
-  }, []); // Pas de dépendances nécessaires car on vise uniquement `main.flex-1`.
+  }, []);
 
   const scrollToTop = () => {
     const scrollableParent = document.querySelector('main.flex-1');
@@ -38,15 +39,25 @@ const BackToTop = () => {
   };
 
   return (
-    <button
-      onClick={scrollToTop}
-      className={`shadow-2xl fixed bottom-6 right-24 z-[49] flex h-12 w-12 items-center justify-center rounded-full bg-teal-800 text-white transition-opacity duration-300 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-600 lg:h-14 lg:w-14 ${
-        isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
-      }`}
-      aria-label="Retour en haut de page"
-    >
-      <ArrowUp className="h-6 w-6 lg:h-7 lg:w-7" />
-    </button>
+    <AnimatePresence>
+      {isVisible && (
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 20, -20, 0]
+          }}
+          onClick={scrollToTop}
+          className="shadow-2xl fixed bottom-6 right-24 z-[49] flex h-12 w-12 items-center justify-center rounded-full bg-teal-800/80 text-white hover:bg-primary-600 lg:h-14 lg:w-14"
+          aria-label="Retour en haut de page"
+        >
+          <ArrowUp className="h-6 w-6 lg:h-7 lg:w-7" />
+        </motion.button>
+      )}
+    </AnimatePresence>
   );
 };
 
