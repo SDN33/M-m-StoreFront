@@ -16,6 +16,7 @@ import BioWineDescription from '@/components/BioWineDescription';
 import Socialshare from '@/components/Socialshare';
 import BackToTop from '@/components/BackToTop';
 import { CreditCard } from 'lucide-react';
+import WineAssistant from './WineAssistant';
 
 interface DesktopHomeProps {
   className?: string;
@@ -374,6 +375,7 @@ export default function Home({ className }: DesktopHomeProps) {
       </main>
 
       <BackToTop />
+      <WineAssistant/>
 
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left"
