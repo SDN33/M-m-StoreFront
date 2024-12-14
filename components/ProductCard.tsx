@@ -43,6 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const [variationId] = useState<number>(product.id);
   const [isTruncated, setIsTruncated] = useState<boolean>(false);
   const [vendorImages, setVendorImages] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const vendorImageCache = useRef<{ [key: number]: string }>({});
 
   const vendorId = product.vendor;
@@ -102,8 +103,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   }, [vendorId]);
 
   const handleRedirect = () => {
+    setLoading(true);
     router.push(`/produits/${product.id}`);
+    setLoading(false);
   };
+
+  // Debounce function to limit how often handleRedirect can be called
+  const debounce = (func: Function, delay: number) => {
+    let timeoutId: NodeJS.Timeout;
+    return (...args: any[]) => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
+  };
+
+  const debouncedRedirect = debounce(handleRedirect, 300);
 
   const vendorRedirect = () => {
     router.push(`/vignerons/${product.vendor}`);
@@ -265,7 +283,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             <div className="flex items-center">
               <h2
                 className="text-base font-bold cursor-pointer hover:underline truncate"
-                onClick={handleRedirect}
+                onClick={debouncedRedirect}
                 title={isTruncated ? product.name : undefined}
               >
                 {truncatedName}
