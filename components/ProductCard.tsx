@@ -58,13 +58,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       }
 
       try {
-        const fetchWithRetry = async (url: string, options: RequestInit, retries: number = 3, delay: number = 1000): Promise<Response> => {
+        const fetchWithRetry = async (url: string, options: RequestInit, retries: number = 5, delay: number = 2000): Promise<Response> => {
           try {
             const response = await fetch(url, options);
             if (!response.ok) {
               if (response.status === 429 && retries > 0) {
-                await new Promise(res => setTimeout(res, delay));
-                return fetchWithRetry(url, options, retries - 1, delay * 2);
+                const backoffDelay = delay * Math.pow(2, 5 - retries);
+                await new Promise(res => setTimeout(res, backoffDelay));
+                return fetchWithRetry(url, options, retries - 1, delay);
               }
               throw new Error('Échec de la récupération des données du vendeur');
             }
