@@ -275,7 +275,7 @@ const AIWineAssistant: React.FC = () => {
   const renderMoodStep = () => (
     <div className="p-4 bg-gradient-to-br from-primary/10 to-primary/40 rounded-lg hidden xl:block">
       <div>
-        <p className="text-teal-800 text-xs text-center mb-4">
+        <p className="text-black text-xs text-center mb-4">
           Laissez vous guider par notre assistant virtuel pour trouver le vin parfait pour votre soirée.
         </p>
       </div>
