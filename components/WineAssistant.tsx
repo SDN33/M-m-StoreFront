@@ -256,6 +256,7 @@ const AIWineAssistant: React.FC = () => {
     const scoredWines = products
       .map(intelligentWineMatch)
       .filter(product => product.score > 0)
+      .filter(product => product.volume !== 'autres')
       .sort((a, b) => b.score - a.score)
       .slice(0, 5);
 
@@ -356,7 +357,7 @@ const AIWineAssistant: React.FC = () => {
   );
 
   const renderResultsStep = () => (
-    <div className="p-4 bg-gradient-to-br from-purple-500/10 to-purple-500/40 rounded-lg h-[350px]">
+    <div className="p-4 bg-gradient-to-br from-purple-500/10 to-purple-500/40 rounded-lg h-[500px]">
       <h3 className="text-2xl font-bold mb-4">Nos recommandations</h3>
       {filteredWines.length > 0 ? (
         <div className="space-y-4">
