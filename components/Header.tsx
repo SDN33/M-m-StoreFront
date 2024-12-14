@@ -210,7 +210,7 @@ const Header: React.FC = () => {
               {isMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
             </button>
 
-            <div className="relative h-[200px] w-[200px] flex items-center justify-center">
+            <div className="relative h-[200px] w-[200px] flex items-center justify-center -pl-10">
               <Link href="/">
                 <Image
                   src="/images/memelogo.png"
@@ -218,7 +218,8 @@ const Header: React.FC = () => {
                   fill
                   sizes='200px'
                   className="object-contain"
-                  priority
+                  priority={true}
+                  fetchPriority='high'
                 />
               </Link>
             </div>

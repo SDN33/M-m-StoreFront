@@ -11,7 +11,7 @@ const ProductsIntro: React.FC = () => {
   const targetCount = 2500;
 
   // Scroll animation
-  const { scrollY } = useScroll();
+  const { scrollY } = useScroll({ layoutEffect: false });
   const y = useTransform(scrollY, [0, 1000], [0, -100]); // Adjust as needed
 
   useEffect(() => {

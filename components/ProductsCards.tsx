@@ -184,14 +184,22 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
 
   useEffect(() => {
     // N'exécuter le défilement qu'après le premier chargement et lorsque les filtres sont modifiés
-    if (!initialLoad && Object.values(selectedFilters).some(filter => filter.length > 0)) {
-      if (productsRef.current) {
-        console.log('Défilement vers le produit');
-        productsRef.current.scrollIntoView({ behavior: 'smooth' });
-      }
+    let isMounted = true;
+
+    if (isMounted && !initialLoad && Object.values(selectedFilters).some(filter => filter.length > 0)) {
+      requestAnimationFrame(() => {
+        if (productsRef.current) {
+          console.log('Défilement vers le produit');
+          productsRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     } else {
       setInitialLoad(false); // Une seule fois, après le premier chargement
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [selectedFilters, initialLoad]);
 
   return (
