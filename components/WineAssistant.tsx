@@ -251,13 +251,21 @@ const AIWineAssistant: React.FC = () => {
       };
     };
   }, [preferences]);
-
   useEffect(() => {
+    const storeWineCounts = new Map<string, number>();
+
     const scoredWines = products
       .map(intelligentWineMatch)
       .filter(product => product.score > 0)
       .filter(product => product.volume !== 'autres')
       .sort((a, b) => b.score - a.score)
+      .filter(product => {
+        const storeName = product.store_name || 'unknown';
+        const count = storeWineCounts.get(storeName) || 0;
+        if (count >= 2) return false;
+        storeWineCounts.set(storeName, count + 1);
+        return true;
+      })
       .slice(0, 5);
 
     setFilteredWines(scoredWines);
@@ -357,7 +365,7 @@ const AIWineAssistant: React.FC = () => {
   );
 
   const renderResultsStep = () => (
-    <div className="p-4 bg-gradient-to-br from-purple-500/10 to-purple-500/40 rounded-lg h-[500px]">
+    <div className="p-4 bg-gradient-to-br from-primary/10 to-primary/40 rounded-lg h-fit-content">
       <h3 className="text-2xl font-bold mb-4">Nos recommandations</h3>
       {filteredWines.length > 0 ? (
         <div className="space-y-4">
@@ -434,7 +442,7 @@ const AIWineAssistant: React.FC = () => {
               className="hover:scale-110 p-2 transition-colors"
             >
             <h2 className="text-lg font-bold flex items-center">
-              {isOpen && "Assistant Vin"}
+              {isOpen && "L'assistant de Mémé"}
                 <span className="text-xl text-center bg-transparent rounded-full p-2">AI</span>
             </h2>
               {isOpen ? '×' : ''}
