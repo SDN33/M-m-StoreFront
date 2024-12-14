@@ -43,7 +43,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const [variationId] = useState<number>(product.id);
   const [isTruncated, setIsTruncated] = useState<boolean>(false);
   const [vendorImages, setVendorImages] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
   const vendorImageCache = useRef<{ [key: number]: string }>({});
 
   const vendorId = product.vendor;
@@ -103,15 +102,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   }, [vendorId]);
 
   const handleRedirect = () => {
-    setLoading(true);
     router.push(`/produits/${product.id}`);
-    setLoading(false);
   };
-
   // Debounce function to limit how often handleRedirect can be called
-  const debounce = (func: Function, delay: number) => {
+  const debounce = <T extends (...args: unknown[]) => void>(func: T, delay: number): (...args: Parameters<T>) => void => {
     let timeoutId: NodeJS.Timeout;
-    return (...args: any[]) => {
+    return (...args: Parameters<T>) => {
       if (timeoutId) {
         clearTimeout(timeoutId);
       }
