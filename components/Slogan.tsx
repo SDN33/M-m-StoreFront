@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState} from 'react';
 import Image from 'next/image';
 import Reseaux from './Reseaux';
+import { motion } from 'framer-motion';
 
 const Slogan: React.FC = () => {
   const h2Ref = useRef<HTMLHeadingElement | null>(null);
@@ -65,11 +66,14 @@ const Slogan: React.FC = () => {
       style={{ backgroundColor: '#EC641D' }}
     >
       {/* SVG Background with brand color */}
-      <svg
+      <motion.svg
         xmlns="http://www.w3.org/2000/svg"
         className="absolute inset-0 w-full h-full"
         preserveAspectRatio="none"
         viewBox="0 0 1300 550"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
       >
         <defs>
           <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -91,11 +95,22 @@ const Slogan: React.FC = () => {
             "
           />
         </path>
-      </svg>
+      </motion.svg>
 
       {/* Decorative elements and content */}
-      <div className="absolute bottom-0 right-0 w-[100px] md:w-[200px] h-[100px] md:h-[200px] bg-white opacity-10 rounded-tl-full"></div>
-      <div className="absolute right-0 bottom-0 w-[150px] md:w-[350px]">
+      <motion.div
+        className="absolute bottom-0 right-0 w-[100px] md:w-[200px] h-[100px] md:h-[200px] bg-white opacity-10 rounded-tl-full"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5 }}
+      ></motion.div>
+
+      <motion.div
+        className="absolute right-0 bottom-0 w-[150px] md:w-[350px]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
         <Image
           src="/images/meme-pas-contente.png"
           alt="Mémé Newsletter"
@@ -103,30 +118,36 @@ const Slogan: React.FC = () => {
           width={300}
           height={100}
         />
-      </div>
+      </motion.div>
 
       <div className="relative max-w-4xl mx-auto text-center text-white z-10 px-4 mt-6">
-        <h4
+        <motion.h4
           ref={h2Ref}
           className={`lg:text-3xl md:text-2xl sm:text-base leading-tight text-white mb-2 transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
-            } md:transition-none`}
+          } md:transition-none`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
         >
           Avec Mémé Georgette, c&apos;est simple... <br />
           <span className="sloganhero font-light text-xs md:text-xl">
             Du vin bio directement chez vous, pour pas plus cher ! *
           </span>
-        </h4>
+        </motion.h4>
 
         <div className="flex flex-col sm:flex-row justify-center items-center mt-10 space-y-6 sm:space-y-0 sm:space-x-4">
           {['Notre Engagement', 'Circuit Court', 'Éco-Responsable'].map((title, index) => (
-            <div
+            <motion.div
               key={index}
               ref={engagementRefs[index]}
               className={`relative w-full sm:w-1/3 transition-all duration-700 ${
                 cardsVisible[index] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               } ${index === 0 ? 'md:transition-none' : ''}`}
               style={{ transitionDelay: `${index * 200}ms` }}
+              initial={{ opacity: 0, translateY: 20 }}
+              animate={{ opacity: 1, translateY: 0 }}
+              transition={{ duration: 0.5 }}
             >
               <div className="bg-white/95 backdrop-blur-sm text-gray-800 rounded-xl p-4 sm:p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
                 <h3 className="font-bold text-md sm:text-lg" style={{ color: '#FF6B4A' }}>{title}</h3>
@@ -150,7 +171,7 @@ const Slogan: React.FC = () => {
                     : '#FF6B4A'
                 }}
               ></div>
-            </div>
+            </motion.div>
           ))}
         </div>
         <br />
