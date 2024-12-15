@@ -121,7 +121,7 @@ const Slogan: React.FC = () => {
       </motion.div>
 
       <div className="relative max-w-4xl mx-auto text-center text-white z-10 px-4 mt-6">
-        <motion.h4
+        <motion.h2
           ref={h2Ref}
           className={`lg:text-3xl md:text-2xl sm:text-base leading-tight text-white mb-2 transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
@@ -134,7 +134,7 @@ const Slogan: React.FC = () => {
           <span className="sloganhero font-light text-xs md:text-xl">
             Du vin bio directement chez vous, pour pas plus cher ! *
           </span>
-        </motion.h4>
+        </motion.h2>
 
         <div className="flex flex-col sm:flex-row justify-center items-center mt-10 space-y-6 sm:space-y-0 sm:space-x-4">
           {['Notre Engagement', 'Circuit Court', 'Éco-Responsable'].map((title, index) => (
