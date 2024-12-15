@@ -66,74 +66,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-        "@context": "http://schema.org",
-        "@type": "Store",
-        "name": "Vins Mémé Georgette",
-        "url": "https://www.vinsmemegeorgette.com",
-        "logo": "https://www.vinsmemegeorgette.com/memelogo2.png",
-        "description": "Vins bio et biodynamiques en direct des vignerons engagés",
-        "address": {
-          "addressCountry": "FR",
-          "addressLocality": "Saurel",
-          "addressRegion": "Aquitaine",
-          "postalCode": "33890",
-          "streetAddress": "Saurel",
-        },
-          })}
-        </script>
-
-        {/* Performance Optimizations */}
-        <link rel="preconnect" href="https://d13sozod7hpim.cloudfront.net" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://ucarecdn.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
-
-        <link rel="dns-prefetch" href="https://d13sozod7hpim.cloudfront.net" />
-        <link rel="dns-prefetch" href="https://ucarecdn.com" />
-        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
-
-        {/* Brevo Conversations Widget */}
-        <Script
-          id="brevo-script"
-          strategy="afterInteractive"
-        >
-          {`
-        (function(d, w, c) {
-          w.BrevoConversationsID = '6749ff2ae7addbe4dd00599a';
-          w[c] = w[c] || function() {
-            (w[c].q = w[c].q || []).push(arguments);
-          };
-          var s = d.createElement('script');
-          s.async = true;
-          s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
-          if (d.head) d.head.appendChild(s);
-        })(document, window, 'BrevoConversations');
-          `}
-        </Script>
-
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-RSNYNCZTC4"
-          strategy="afterInteractive"
-        />
-        <Script
-          id="google-analytics"
-          strategy="lazyOnload"
-        >
-          {`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-RSNYNCZTC4', {
-          'page_path': location.pathname
-        });
-          `}
-        </Script>
-      </head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
       <body>
         <AuthProvider>
           <CartProvider>
