@@ -5,7 +5,6 @@ import AgeVerificationModal from "@/components/AgeVerificationModal";
 import { AuthProvider } from '../context/AuthContext';
 import { CartProvider } from '../context/CartContext';
 import Cookies from "@/components/Cookies";
-import Script from "next/script";
 
 export function generateCustomMetadata(options: {
   title?: string;
