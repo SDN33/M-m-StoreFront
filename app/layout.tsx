@@ -83,6 +83,8 @@ export default function RootLayout({
           "addressRegion": "Aquitaine",
           "postalCode": "33890",
           "streetAddress": "Saurel",
+          "telephone": "+336 60 39 05 24",
+          "email": "info@vinsmemegeorgette.com"
         },
           })}
         </script>
