@@ -266,7 +266,7 @@ const AIWineAssistant: React.FC = () => {
       storeWineCounts.set(storeName, count + 1);
       return true;
       })
-      .sort(() => Math.random() - 0.5)  // Random sorting
+      .sort(() => Math.random() - 0.8)  // Random sorting
       .slice(0, 5);
 
     setFilteredWines(scoredWines);
@@ -371,7 +371,7 @@ const AIWineAssistant: React.FC = () => {
   );
 
   const renderResultsStep = () => (
-    <div className="p-4 bg-gradient-to-br from-primary/10 to-primary/40 rounded-lg h-fit-content">
+    <div className="p-4 bg-gradient-to-br from-primary/10 to-primary/40 rounded-lg h-[50vh] overflow-y-auto">
       <h3 className="text-2xl font-bold mb-4">Nos recommandations</h3>
       {filteredWines.length > 0 ? (
         <div className="space-y-4">
