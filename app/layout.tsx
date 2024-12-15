@@ -67,23 +67,23 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <script type="application/ld+json">
           {JSON.stringify({
-            "@context": "http://schema.org",
-            "@type": "Store",
-            "name": "Vins Mémé Georgette",
-            "url": "https://www.vinsmemegeorgette.com",
-            "logo": "https://www.vinsmemegeorgette.com/memelogo2.png",
-            "description": "Vins bio et biodynamiques en direct des vignerons engagés",
-            "address": {
-              "addressCountry": "FR",
-              "addressLocality": "Saurel",
-              "addressRegion": "Aquitaine",
-              "postalCode": "33890",
-              "streetAddress": "Saurel",
-            },
+        "@context": "http://schema.org",
+        "@type": "Store",
+        "name": "Vins Mémé Georgette",
+        "url": "https://www.vinsmemegeorgette.com",
+        "logo": "https://www.vinsmemegeorgette.com/memelogo2.png",
+        "description": "Vins bio et biodynamiques en direct des vignerons engagés",
+        "address": {
+          "addressCountry": "FR",
+          "addressLocality": "Saurel",
+          "addressRegion": "Aquitaine",
+          "postalCode": "33890",
+          "streetAddress": "Saurel",
+        },
           })}
         </script>
 
@@ -102,16 +102,16 @@ export default function RootLayout({
           strategy="afterInteractive"
         >
           {`
-            (function(d, w, c) {
-              w.BrevoConversationsID = '6749ff2ae7addbe4dd00599a';
-              w[c] = w[c] || function() {
-                (w[c].q = w[c].q || []).push(arguments);
-              };
-              var s = d.createElement('script');
-              s.async = true;
-              s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
-              if (d.head) d.head.appendChild(s);
-            })(document, window, 'BrevoConversations');
+        (function(d, w, c) {
+          w.BrevoConversationsID = '6749ff2ae7addbe4dd00599a';
+          w[c] = w[c] || function() {
+            (w[c].q = w[c].q || []).push(arguments);
+          };
+          var s = d.createElement('script');
+          s.async = true;
+          s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
+          if (d.head) d.head.appendChild(s);
+        })(document, window, 'BrevoConversations');
           `}
         </Script>
 
@@ -125,12 +125,12 @@ export default function RootLayout({
           strategy="lazyOnload"
         >
           {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-RSNYNCZTC4', {
-              'page_path': location.pathname
-            });
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RSNYNCZTC4', {
+          'page_path': location.pathname
+        });
           `}
         </Script>
       </head>
