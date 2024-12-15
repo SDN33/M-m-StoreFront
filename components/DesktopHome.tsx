@@ -280,7 +280,7 @@ export default function Home({ className }: DesktopHomeProps) {
               >
                 <div>
                   <h2 className='mt-4 pt-2 text-lg text-center font-black text-gray-600'>Achetez vos vins bio et biodynamiques en ligne</h2>
-                  <h3 className='text-center text-gray-400 -mt-1 -mb-4'>Vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites</h3>
+                  <h3 className='text-center text-gray-600 -mt-1 -mb-4'>Vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites</h3>
                   <div className='flex justify-center mx-auto mt-5 -mb-6'>
                     <Image
                       src="/images/paiement.png"
