@@ -329,13 +329,10 @@ export default function Home({ className }: DesktopHomeProps) {
                     {typeof window !== 'undefined' && (
                       <iframe
                       title="Facebook Page Plugin"
-                      className="bg-transparent"
+                      className="bg-transparent border-0 overflow-hidden"
                       src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fmemegeorgette&tabs&width=340&height=70&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=true&appId"
                       width="280"
                       height="70"
-                      style={{ border: 'none', overflow: 'hidden' }}
-                      scrolling="no"
-                      frameBorder="0"
                       loading="lazy"
                       allowFullScreen={true}
                       allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
