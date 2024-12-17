@@ -250,10 +250,16 @@ export default function PortailPro() {
             <div className="bg-gradient-to-r from-primary via-orange-800 to-red-800 text-white shadow-lg p-8 text-center">
               <div className="flex items-center justify-center">
                 {/* Prix barré */}
-                <span className="text-3xl font-bold opacity-60 mr-2">Portail Pro <br />Mémé Georgette</span>
+                <span className="text-xs font-bold text-transparent opacity-60 mr-2">Portail P</span>
               </div>
             </div>
-
+            <Image
+              src="https://res.cloudinary.com/daroyxenr/image/upload/q_auto:good/v1733930760/Orange_and_White_Modern_Flower_Shop_Outdoor_Banner_3_bquksk.webp"
+              alt="Mémé Georgette"
+              width={1024}
+              height={1024}
+              className='flex w-full justify-center mx-auto'
+            />
             <div className="p-8 space-y-8">
               <div>
                 <p className="font-semibold text-lg text-center text-gray-950 mb-6">
@@ -303,14 +309,6 @@ export default function PortailPro() {
                 </button>
               <br /><br />
               <br /><br />
-              <Image
-                src="https://res.cloudinary.com/daroyxenr/image/upload/q_auto:good/v1733930760/Orange_and_White_Modern_Flower_Shop_Outdoor_Banner_3_bquksk.webp"
-                alt="Mémé Georgette"
-                width={1024}
-                height={1024}
-                className='flex justify-center mx-auto mt-2 mb-20'
-              />
-
                 <button
                   onClick={handlePayment}
                   className="hidden bg-teal-800 text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:bg-teal-950 transition-all duration-300 items-center justify-center space-x-2"
