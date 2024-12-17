@@ -7,7 +7,6 @@ import Slogan from '@/components/Slogan';
 import WineCategories from '@/components/WineCategories';
 import MobileProductFilter from '@/components/MobileProductFilter';
 import Trust from '@/components/Trust';
-import Livraison from './Livraison';
 import MobileProductsIntro from './MobileProductIntro';
 import PromotionSection from './PromotionSection';
 import BioWineDescription from './BioWineDescription';
@@ -173,16 +172,6 @@ const MobileHome: React.FC = () => {
               />
             </motion.section>
           </div>
-
-          <br /><br />
-          <motion.div
-            variants={fadeInUpVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <Livraison />
-          </motion.div>
 
           <br />
           <motion.div

@@ -504,11 +504,13 @@ const ProductPage: React.FC = () => {
               </div>
             </div>
           </div>
-          <br />
-          <br />
-          <Livraison />
-          <br />
-          <br />
+            <div className="hidden md:block">
+            <br />
+            <br />
+            <Livraison />
+            <br />
+            <br />
+            </div>
            {/* Affichage de la carte Google */}
            {product.region__pays && (
             <div className="mt-8">
