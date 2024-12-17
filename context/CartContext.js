@@ -27,13 +27,34 @@ export const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
   const [cartTotal, setCartTotal] = useState(0);
 
-  // Load cart items from localStorage on mount
+  // Nouvelle fonction pour synchroniser le panier
+  const synchronizeCart = (storedCart) => {
+    // Ajout d'un timestamp pour gérer l'expiration
+    const cartWithTimestamp = storedCart.map(item => ({
+      ...item,
+      addedAt: item.addedAt || Date.now()
+    }));
+
+    // Filtrer les éléments de moins de 30 jours
+    const currentCart = cartWithTimestamp.filter(
+      item => Date.now() - item.addedAt < 30 * 24 * 60 * 60 * 1000
+    );
+
+    return currentCart;
+  };
+
+  // Load cart items from localStorage on mount with synchronization
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem('cartItems')) || [];
-    setCartItems(storedCart);
-    setCartItemCount(storedCart.length || 0);
-    setCartTotal(storedCart.reduce((sum, item) => sum + item.price * item.quantity, 0));
-    setCartCount(storedCart.reduce((count, item) => count + item.quantity, 0));
+    const synchronizedCart = synchronizeCart(storedCart);
+
+    setCartItems(synchronizedCart);
+    setCartItemCount(synchronizedCart.length || 0);
+    setCartTotal(synchronizedCart.reduce((sum, item) => sum + item.price * item.quantity, 0));
+    setCartCount(synchronizedCart.reduce((count, item) => count + item.quantity, 0));
+
+    // Mettre à jour le localStorage avec le panier synchronisé
+    localStorage.setItem('cartItems', JSON.stringify(synchronizedCart));
   }, []);
 
   // Save cart items to localStorage whenever cartItems changes
@@ -59,7 +80,8 @@ export const CartProvider = ({ children }) => {
         );
       }
 
-      return [...prevItems, formatCartItem(product, quantity, variation_id, variation)];
+      const newItem = formatCartItem(product, quantity, variation_id, variation);
+      return [...prevItems, { ...newItem, addedAt: Date.now() }];
     });
   };
 
