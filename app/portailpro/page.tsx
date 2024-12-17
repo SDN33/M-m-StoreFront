@@ -78,41 +78,13 @@ export default function PortailPro() {
 
 
   const pricingFeatures = [
-    "Gestion simplifiée depuis votre tableau de bord",
+    "Notre espace portail pro en ligne, pour gérer vos vins",
     "Logistique prise en charge par nos équipes",
     "Support vendeur et client dédié",
-    "Accès à notre réseau e-commerce et/ou de distribution"
+    "Accès à notre réseau e-commerce et/ou de distribution",
+    "Accès à ‘’Solidarité pour vignerons en difficultés’’",
   ]
 
-
-  // Custom Checkbox component
-  const Checkbox = ({ checked, onChange, id, label }: { checked: boolean, onChange: (checked: boolean) => void, id: string, label: React.ReactNode }) => {
-    return (
-      <div className="flex items-center space-x-2">
-        <div
-          className={`w-4 h-4 border rounded cursor-pointer flex items-center justify-center
-            ${checked ? 'bg-orange-500 border-orange-500' : 'border-gray-300'}`}
-          onClick={() => onChange(!checked)}
-        >
-          {checked && (
-            <svg className="w-3 h-3 text-white" viewBox="0 0 24 24">
-              <path
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-          )}
-        </div>
-        <label htmlFor={id} className="text-sm text-gray-600 cursor-pointer">
-          {label}
-        </label>
-      </div>
-    )
-  }
 
   // Custom Alert component
   const Alert = ({ children }: { children: React.ReactNode }) => {
@@ -198,13 +170,10 @@ export default function PortailPro() {
             />
           </h1>
           </div>
-          <div className="font-bold text-lg text-center mx-auto mt-10 mb-10  slide-in-right ">
-            <span className='font-gray-950 text-xl md:text-3xl text-primary border-gray-950-500'>VinsMemeGeorgette.com</span><br />C&apos;est bien plus qu&apos;une marketplace !<br /><br />C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte,<br />reconnue par le grand public grâce à <a className='text-primary font-gray-950'  href="https://www.memegeorgette.com/" >Mémé Georgette</a><br /><br />
-              <div className='text-base mx-10 flex flex-col gap-2'>
-                <br />
-                <span>Nous vous offrons un accès direct aux amateurs de vins en Europe<br />Tout en simplifiant vos démarches avec une logistique intégrée<br /><br />Plus un accompagnement marketing personnalisé, notre assistance vendeur et client dédiée<br />vous permet de vous concentrer sur l&apos;essentiel:</span>
-                <span className='font-semibold text-lg'>La fabrication de vins bio</span>
-              </div>
+          <div className="font-bold text-lg text-center mx-auto mt-10 mb-4  slide-in-right ">
+            <span className='font-gray-950 text-xl md:text-3xl text-primary border-gray-950-500'>VinsMemeGeorgette.com</span><br />C&apos;est bien plus qu&apos;une marketplace !
+            <br /><br />C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte,<br />reconnue par le grand public grâce à <a className='font-gray-950 underline'  href="https://www.memegeorgette.com/" >Mémé Georgette</a><br /><br />
+            <span className='text-primary'>Rejoignez-nous dès maintenant !</span>
             </div>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -229,7 +198,7 @@ export default function PortailPro() {
             alt="Mémé Georgette"
             width={1024}
             height={1024}
-            className='flex justify-center mx-auto mt-2 mb-20'
+            className='flex w-full justify-center mx-auto mt-2 mb-20'
         />
 
         {/* Pricing Section */}
