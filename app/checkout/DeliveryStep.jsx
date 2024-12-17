@@ -24,7 +24,7 @@ const DeliveryStep = ({ formData, handleInputChange, handlePointSelect, selected
 
       {formData.deliveryMethod === 'standard' ? (
         <div className="space-y-4">
-          <div className="flex gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row">
             <input
               name="firstName"
               placeholder="Prénom"
@@ -50,7 +50,7 @@ const DeliveryStep = ({ formData, handleInputChange, handlePointSelect, selected
             className="w-full border p-2 rounded"
             required
           />
-          <div className="flex gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row">
             <input
               name="city"
               placeholder="Ville"
@@ -64,7 +64,7 @@ const DeliveryStep = ({ formData, handleInputChange, handlePointSelect, selected
               placeholder="Code postal"
               value={formData.postcode}
               onChange={handleInputChange}
-              className="w-40 border p-2 rounded"
+              className="w-full sm:w-40 border p-2 rounded"
               required
             />
           </div>

@@ -239,63 +239,63 @@ const CheckoutPage = () => {
 
     return (
       <div className="bg-gray-50 rounded-lg p-6 mt-0 lg:-mt-10">
-        <h3 className="text-xl font-semibold mb-4">Résumé de la commande</h3>
-        <ul className="space-y-4 mb-4 font-bold text-sm">
-          {cartDetails.items.map((item) => (
-            <li key={item.product_id} className="flex justify-between items-center border-b pb-2">
-              <span>{item.name}<br /> x {item.quantity}</span>
-              <span>{(item.price * item.quantity).toFixed(2)}€</span>
-            </li>
-          ))}
-        </ul>
-        <div className="flex justify-between text-sm font-semibold mb-2">
-          <span>Sous-total</span>
-          <span>{cartDetails.total.toFixed(2)}€</span>
+      <h3 className="text-xl font-semibold mb-4">Résumé de la commande</h3>
+      <ul className="space-y-4 mb-4 font-bold text-sm">
+        {cartDetails.items.map((item) => (
+        <li key={item.product_id} className="flex justify-between items-center border-b pb-2">
+          <span>{item.name}<br /> x {item.quantity}</span>
+          <span>{(item.price * item.quantity).toFixed(2)}€</span>
+        </li>
+        ))}
+      </ul>
+      <div className="flex justify-between text-sm font-semibold mb-2">
+        <span>Sous-total</span>
+        <span>{cartDetails.total.toFixed(2)}€</span>
+      </div>
+      <div className="flex justify-between text-sm mb-2">
+        <span className='font-bold'>
+        {formData.deliveryMethod === 'standard' ? 'Livraison standard' : 'Point Relais'}
+        <span className="text-xs ml-2">(3-6 jours)</span>
+        </span>
+        <span className='font-bold'>
+        {isRelayShippingFree || shippingCost === 0 ?
+          <span className="text-teal-800">Offert</span> :
+          `${shippingCost.toFixed(2)}€`}
+        </span>
+      </div>
+      <div className="mt-4 space-y-2">
+        <div className="flex flex-col sm:flex-row gap-2">
+        <input
+          type="text"
+          value={coupon}
+          onChange={(e) => setCoupon(e.target.value)}
+          placeholder="Code promo"
+          className="flex-1 border p-2 rounded text-sm"
+        />
+        <button
+          onClick={applyCoupon}
+          className="bg-teal-800 text-white px-4 py-2 rounded text-sm"
+          disabled={!coupon}
+        >
+          Appliquer
+        </button>
         </div>
-        <div className="flex justify-between text-sm mb-2">
-          <span className='font-bold'>
-            {formData.deliveryMethod === 'standard' ? 'Livraison standard' : 'Point Relais'}
-            <span className="text-xs ml-2">(3-6 jours)</span>
-          </span>
-          <span className='font-bold'>
-            {isRelayShippingFree || shippingCost === 0 ?
-              <span className="text-teal-800">Offert</span> :
-              `${shippingCost.toFixed(2)}€`}
-          </span>
+        {notification && (
+        <div className={`text-sm p-2 rounded ${notification.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+          {notification.message}
         </div>
-        <div className="mt-4 space-y-2">
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={coupon}
-              onChange={(e) => setCoupon(e.target.value)}
-              placeholder="Code promo"
-              className="flex-1 border p-2 rounded text-sm"
-            />
-            <button
-              onClick={applyCoupon}
-              className="bg-teal-800 text-white px-4 py-2 rounded text-sm"
-              disabled={!coupon}
-            >
-              Appliquer
-            </button>
-          </div>
-          {notification && (
-            <div className={`text-sm p-2 rounded ${notification.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-              {notification.message}
-            </div>
-          )}
-          {discount > 0 && (
-            <div className="flex justify-between text-sm text-green-600 font-semibold">
-              <span>Réduction</span>
-              <span>-{discount.toFixed(2)}€</span>
-            </div>
-          )}
+        )}
+        {discount > 0 && (
+        <div className="flex justify-between text-sm text-green-600 font-semibold">
+          <span>Réduction</span>
+          <span>-{discount.toFixed(2)}€</span>
         </div>
-        <div className="flex justify-between font-bold text-xl mt-4 pt-4 border-t">
-          <span>Total :</span>
-          <span>{totalPrice}€</span>
-        </div>
+        )}
+      </div>
+      <div className="flex justify-between font-bold text-xl mt-4 pt-4 border-t">
+        <span>Total :</span>
+        <span>{totalPrice}€</span>
+      </div>
       </div>
     );
   };
