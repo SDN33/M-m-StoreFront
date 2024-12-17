@@ -301,6 +301,15 @@ export default function PortailPro() {
                 >
                   <span>Nous Contacter</span>
                 </button>
+              <br /><br />
+              <br /><br />
+              <Image
+                src="https://res.cloudinary.com/daroyxenr/image/upload/q_auto:good/v1733930760/Orange_and_White_Modern_Flower_Shop_Outdoor_Banner_3_bquksk.webp"
+                alt="Mémé Georgette"
+                width={1024}
+                height={1024}
+                className='flex justify-center mx-auto mt-2 mb-20'
+              />
 
                 <button
                   onClick={handlePayment}
