@@ -1,12 +1,12 @@
 'use client';
 import React, { useState} from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { createOrder } from '../../services/order';
 import { useCart } from '../../context/CartContext';
-import StripePayment from '../../components/StripePayment';
-import BoxtalMap from '../../components/BoxtalMap';
 import { Check } from 'lucide-react';
+import ContactStep from './ContactStep';
+import DeliveryStep from './DeliveryStep';
+import PaymentStep from './PaymentStep';
 
 const CheckoutPage = () => {
   const [notification, setNotification] = useState(null);
@@ -234,137 +234,6 @@ const CheckoutPage = () => {
     );
   };
 
-  const renderContactStep = () => (
-    <div className="space-y-4">
-      <input
-        name="email"
-        type="email"
-        placeholder="E-mail"
-        value={formData.email}
-        onChange={handleInputChange}
-        className="w-full border p-2 rounded"
-        required
-      />
-      <input
-        name="phone"
-        type="tel"
-        placeholder="Téléphone"
-        value={formData.phone}
-        onChange={handleInputChange}
-        className="w-full border p-2 rounded"
-        required
-      />
-      <button
-        onClick={() => setCurrentStep(2)}
-        disabled={!isStepComplete(1)}
-        className="w-full bg-primary text-white py-2 rounded disabled:bg-gray-300"
-      >
-        Continuer
-      </button>
-    </div>
-  );
-
-  const renderDeliveryStep = () => (
-    <div className="space-y-4">
-      <div className="flex gap-4 mb-6">
-        <button
-          onClick={() => setFormData(prev => ({ ...prev, deliveryMethod: 'standard' }))}
-          className={`flex-1 p-4 border rounded-lg ${formData.deliveryMethod === 'standard' ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}`}
-        >
-          <h3 className="font-semibold">Livraison Standard</h3>
-          <p className="text-sm text-gray-600">3-6 jours ouvrés</p>
-          <p className="font-semibold mt-2">{shippingCost.toFixed(2)}€`</p>
-        </button>
-        <button
-          onClick={() => setFormData(prev => ({ ...prev, deliveryMethod: 'pickup' }))}
-          className={`flex-1 p-4 border rounded-lg ${formData.deliveryMethod === 'pickup' ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}`}
-        >
-          <h3 className="font-semibold">Point Relais (Indisponible)</h3>
-          <p className="text-sm text-gray-600">Non disponible pour le moment</p>
-          {/* Coupon Section */}
-
-        </button>
-      </div>
-
-      {formData.deliveryMethod === 'standard' ? (
-        <div className="space-y-4">
-          <div className="flex gap-4">
-            <input
-              name="firstName"
-              placeholder="Prénom"
-              value={formData.firstName}
-              onChange={handleInputChange}
-              className="flex-1 border p-2 rounded"
-              required
-            />
-            <input
-              name="lastName"
-              placeholder="Nom"
-              value={formData.lastName}
-              onChange={handleInputChange}
-              className="flex-1 border p-2 rounded"
-              required
-            />
-          </div>
-          <input
-            name="address1"
-            placeholder="Adresse"
-            value={formData.address1}
-            onChange={handleInputChange}
-            className="w-full border p-2 rounded"
-            required
-          />
-          <div className="flex gap-4">
-            <input
-              name="city"
-              placeholder="Ville"
-              value={formData.city}
-              onChange={handleInputChange}
-              className="flex-1 border p-2 rounded"
-              required
-            />
-            <input
-              name="postcode"
-              placeholder="Code postal"
-              value={formData.postcode}
-              onChange={handleInputChange}
-              className="w-40 border p-2 rounded"
-              required
-            />
-          </div>
-        </div>
-      ) : (
-        <div>
-          <BoxtalMap onSelectPoint={handlePointSelect} />
-          {selectedPoint && (
-            <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-              <h4 className="font-semibold">Point de retrait sélectionné :</h4>
-              <p>{selectedPoint.name}</p>
-              <p>{selectedPoint.address}</p>
-              <p>{selectedPoint.postcode} {selectedPoint.city}</p>
-            </div>
-          )}
-        </div>
-      )}
-
-      <div className="flex gap-4">
-        <button
-          onClick={() => setCurrentStep(1)}
-          className="flex-1 border border-teal-800 text-teal-800 py-2 rounded"
-        >
-          Retour
-        </button>
-        <button
-          onClick={() => setCurrentStep(3)}
-          disabled={!isStepComplete(2)}
-          className="flex-1 bg-primary text-white py-2 rounded disabled:bg-gray-300"
-        >
-          Continuer
-        </button>
-      </div>
-    </div>
-  );
-
   const renderOrderSummary = () => {
     const isRelayShippingFree = formData.deliveryMethod === 'pickup' && hasProductWithSixOrMore;
 
@@ -438,33 +307,9 @@ const CheckoutPage = () => {
       <div className="flex flex-col md:flex-row gap-8">
         {/* Section principale */}
         <div className="w-full md:w-2/3 bg-white rounded-lg p-4 sm:p-6 shadow-sm">
-          {currentStep === 1 && renderContactStep()}
-          {currentStep === 2 && renderDeliveryStep()}
-          {currentStep === 3 && (
-            <div className="space-y-4">
-              <h2 className="text-xl sm:text-2xl font-semibold mb-4">Paiement</h2>
-              <Image
-                src="/images/stripe.webp"
-                alt="Stripe"
-                width={80}
-                height={80}
-                className="mx-auto sm:mx-0"
-              />
-              <div>
-                <p className="font-medium text-gray-950">Paiement sécurisé par Stripe</p>
-                <p className="text-sm text-gray-600">Vos informations de paiement sont protégées par un cryptage SSL.</p>
-              </div>
-              {loading && <p className="text-blue-500">Création de la commande en cours...</p>}
-              <StripePayment
-                totalPrice={totalPrice}
-                formData={formData}
-                setError={setError}
-                onComplete={handleOrderSubmit}
-                disable={!isStepComplete(2)}
-              />
-              {error && <p className="text-red-500 mt-2">{error}</p>}
-            </div>
-          )}
+          {currentStep === 1 && <ContactStep formData={formData} handleInputChange={handleInputChange} isStepComplete={isStepComplete} setCurrentStep={setCurrentStep} />}
+          {currentStep === 2 && <DeliveryStep formData={formData} handleInputChange={handleInputChange} handlePointSelect={handlePointSelect} selectedPoint={selectedPoint} shippingCost={shippingCost} setCurrentStep={setCurrentStep} isStepComplete={isStepComplete} />}
+          {currentStep === 3 && <PaymentStep totalPrice={totalPrice} formData={formData} setError={setError} handleOrderSubmit={handleOrderSubmit} isStepComplete={isStepComplete} loading={loading} error={error} />}
         </div>
 
         {/* Résumé commande */}
