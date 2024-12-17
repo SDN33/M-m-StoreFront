@@ -27,18 +27,39 @@ export const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
   const [cartTotal, setCartTotal] = useState(0);
 
-  // Load cart items from localStorage on mount
+  // Load cart items and check expiration on mount
   useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem('cartItems')) || [];
-    setCartItems(storedCart);
-    setCartItemCount(storedCart.length || 0);
-    setCartTotal(storedCart.reduce((sum, item) => sum + item.price * item.quantity, 0));
-    setCartCount(storedCart.reduce((count, item) => count + item.quantity, 0));
+    const storedCartData = JSON.parse(localStorage.getItem('cartData')) || {};
+    const { items = [], timestamp } = storedCartData;
+
+    // Check if cart has expired (15 minutes = 15 * 60 * 1000 milliseconds)
+    const CART_EXPIRATION_TIME = 15 * 60 * 1000;
+    const currentTime = Date.now();
+
+    if (timestamp && (currentTime - timestamp > CART_EXPIRATION_TIME)) {
+      // Cart has expired, clear localStorage and reset state
+      localStorage.removeItem('cartData');
+      setCartItems([]);
+      setCartItemCount(0);
+      setCartTotal(0);
+      setCartCount(0);
+    } else {
+      // Cart is still valid, load items
+      setCartItems(items);
+      setCartItemCount(items.length || 0);
+      setCartTotal(items.reduce((sum, item) => sum + item.price * item.quantity, 0));
+      setCartCount(items.reduce((count, item) => count + item.quantity, 0));
+    }
   }, []);
 
-  // Save cart items to localStorage whenever cartItems changes
+  // Save cart items with timestamp to localStorage whenever cartItems changes
   useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    const cartData = {
+      items: cartItems,
+      timestamp: Date.now()
+    };
+    localStorage.setItem('cartData', JSON.stringify(cartData));
+
     setCartItemCount(cartItems.length || 0);
     setCartTotal(cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0));
     setCartCount(cartItems.reduce((count, item) => count + item.quantity, 0));
