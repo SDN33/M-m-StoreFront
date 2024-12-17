@@ -11,7 +11,6 @@ import MobileProductsIntro from './MobileProductIntro';
 import PromotionSection from './PromotionSection';
 import BioWineDescription from './BioWineDescription';
 import Image from 'next/image';
-import MobileSlider from './MobileSlider';
 
 const MobileHome: React.FC = () => {
   // Initialize state with a callback to prevent unnecessary re-renders
@@ -127,17 +126,6 @@ const MobileHome: React.FC = () => {
           >
             <MobileProductsIntro />
           </motion.div>
-
-          <div className="w-screen">
-            <motion.div
-              variants={fadeInUpVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <MobileSlider />
-            </motion.div>
-          </div>
 
           <div className="max-w-7xl mx-auto px-4 space-y-6 mt-2">
             <motion.div
