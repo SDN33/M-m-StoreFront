@@ -198,7 +198,14 @@ export default function PortailPro() {
             />
           </h1>
           </div>
-          <div>
+          <div className="font-bold text-lg text-center mx-auto mt-10 mb-10  slide-in-right ">
+            <span className='font-gray-950 text-xl md:text-3xl text-primary border-gray-950-500'>VinsMemeGeorgette.com</span><br />C&apos;est bien plus qu&apos;une marketplace !<br /><br />C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte,<br />reconnue par le grand public grâce à <a className='text-primary font-gray-950'  href="https://www.memegeorgette.com/" >Mémé Georgette</a><br /><br />
+              <div className='text-base mx-10 flex flex-col gap-2'>
+                <br />
+                <span>Nous vous offrons un accès direct aux amateurs de vins en Europe<br />Tout en simplifiant vos démarches avec une logistique intégrée<br /><br />Plus un accompagnement marketing personnalisé, notre assistance vendeur et client dédiée<br />vous permet de vous concentrer sur l&apos;essentiel:</span>
+                <span className='font-semibold text-lg'>La fabrication de vins bio</span>
+              </div>
+            </div>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
@@ -216,39 +223,22 @@ export default function PortailPro() {
               </div>
             ))}
           </div>
-          <Image
+
+        <Image
             src="https://res.cloudinary.com/daroyxenr/image/upload/q_auto:good/v1733930760/Orange_and_White_Modern_Flower_Shop_Outdoor_Banner_3_bquksk.webp"
             alt="Mémé Georgette"
             width={1024}
             height={1024}
-            className='flex justify-center mx-auto mt-2'
-          />
-          <div className="font-bold text-lg text-center mx-auto mt-20 mb-28  slide-in-right ">
-          <span className='font-gray-950 text-xl md:text-3xl text-primary border-gray-950-500'>VinsMemeGeorgette.com</span><br />C&apos;est bien plus qu&apos;une marketplace !<br /><br />C&apos;est une communauté de vignerons bio partageant vos valeurs et bénéficiant d&apos;une image de marque forte,<br />reconnue par le grand public grâce à <a className='text-primary font-gray-950'  href="https://www.memegeorgette.com/" >Mémé Georgette</a><br /><br />
-            <div className='text-base mx-10 flex flex-col gap-2'>
-              <br />
-              <span>Nous vous offrons un accès direct aux amateurs de vins en Europe<br />Tout en simplifiant vos démarches avec une logistique intégrée<br /><br />Plus un accompagnement marketing personnalisé, notre assistance vendeur et client dédiée<br />vous permet de vous concentrer sur l&apos;essentiel:</span>
-              <span className='font-semibold text-lg'>La fabrication de vins bio</span>
-            </div>
-          </div>
-        </div>
+            className='flex justify-center mx-auto mt-2 mb-20'
+        />
 
-
-
-         {/* Banderole */}
-        <div className="p-4 bg-white text-red-700 w-fit shadow-2xl text-sm font-bold py-2 text-center uppercase z-10 justify-center mx-auto ">
-          Offre limitée - Profitez de notre lancement
-          <br /><span className='text-black text-xs'>pour les 100 premiers inscrits</span>
-        </div>
         {/* Pricing Section */}
         <div className="max-w-2xl mx-auto slide-in-right">
           <div className="relative bg-white rounded-3xl shadow-xl shadow-teal-100/50 overflow-hidden">
             <div className="bg-gradient-to-r from-primary via-orange-800 to-red-800 text-white shadow-lg p-8 text-center">
-              <h3 className="text-2xl font-bold mb-2">Frais D&apos;inscription</h3>
               <div className="flex items-center justify-center">
                 {/* Prix barré */}
-                <span className="text-3xl font-bold line-through opacity-60 mr-2">240€</span>
-                <span className="text-3xl font-bold text-white">Offert</span>
+                <span className="text-3xl font-bold opacity-60 mr-2">Portail Pro <br />Mémé Georgette</span>
               </div>
             </div>
 
@@ -273,26 +263,17 @@ export default function PortailPro() {
 
 
 
-              <Checkbox
-                id="cgu"
-                checked={cguAccepted}
-                onChange={(checked: boolean) => {
-                  setCguAccepted(checked)
-                  setShowError(false)
-                }}
-                label={
-                  <>
-                    J&apos;accepte les{' '}
-                    <button
-                      onClick={() => setShowCGU(true)}
-                      className="text-primary hover:underline"
-                      type="button"
-                    >
-                      conditions générales d&apos;utilisation
-                    </button>
-                  </>
-                }
-              />
+              <div id="cgu">
+                <p>
+                  <button
+                    onClick={() => setShowCGU(true)}
+                    className="text-primary hover:underline flex justify-center mx-auto"
+                    type="button"
+                  >
+                   Voir nos conditions générales d&apos;utilisation
+                  </button>
+                </p>
+              </div>
 
               {showError && (
                 <Alert>
