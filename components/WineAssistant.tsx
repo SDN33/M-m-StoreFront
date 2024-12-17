@@ -63,7 +63,7 @@ const MOOD_MAP = {
 const OCCASION_MAP = {
   'dîner': {
     tags: ['gastronomie', 'repas', 'diner', 'dégustation'],
-    priceCondition: (price: number, product: Product) => {
+    priceCondition: (_price: number, product: Product) => {
       return product.description?.toLowerCase().includes('gastronomie') ||
              product.description?.toLowerCase().includes('repas') ||
              product.description?.toLowerCase().includes('diner') ||
@@ -380,23 +380,15 @@ const AIWineAssistant: React.FC = () => {
               key={wine.id}
               className="bg-white rounded-lg shadow-md p-4 flex items-center space-x-4 hover:shadow-xl transition cursor-pointer"
             >
-            <Link href={`/produits/${wine.id}`} passHref>
-              <div
-                key={wine.id}
-                className="bg-white rounded-lg shadow-md p-4 flex items-center space-x-4 hover:shadow-xl transition cursor-pointer"
-              >
-
-                <a>
-                  <Image
-                    src={wine.images[0].src}
-                    alt={wine.name}
-                    className="w-24 h-24 object-cover rounded-lg"
-                    width={96}
-                    height={96}
-                  />
-                </a>
-              </div>
-            </Link>
+              <Link href={`/produits/${wine.id}`} className="flex items-center space-x-4">
+                <Image
+                  src={wine.images[0].src}
+                  alt={wine.name}
+                  className="w-24 h-24 object-cover rounded-lg"
+                  width={96}
+                  height={96}
+                />
+              </Link>
 
 
               <div className="flex-1">
