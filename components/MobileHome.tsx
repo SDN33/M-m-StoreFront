@@ -135,7 +135,7 @@ const MobileHome: React.FC = () => {
               viewport={{ once: true }}
               className="bg-white w-full justify-center items-center -my-2"
             >
-              <div className="flex justify-center items-center space-x-6 w-fit h-auto mx-auto mb-4 bg-white rounded-lg p-4 border border-gray-100">
+              <div className="flex justify-center items-center space-x-6 w-fit h-auto mx-auto bg-white rounded-lg p-4 border border-gray-100">
                 <Image
                   src="/images/paiement.png"
                   alt="Paiement sécurisé"
