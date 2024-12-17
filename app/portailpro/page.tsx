@@ -41,7 +41,7 @@ export default function PortailPro() {
   const features = [
     {
       icon: <Globe className="w-8 h-8 text-teal-800" />,
-      title: "Votre espace vigneron en ligne",
+      title: "Portail pro en ligne",
       description: "Gérez votre espace professionnel en quelques clics. Vendez vos vins bio en Europe avec notre support marketing intégré.",
     },
     {
@@ -51,9 +51,14 @@ export default function PortailPro() {
     },
     {
       icon: <Box className="w-8 h-8 text-teal-800" />,
-      title: "Logistique simplifiée",
+      title: "Logistique",
       description: "Nous prenons en charge toute la logistique. Préparez vos commandes dans des emballages agréés et déposez-les au centre le plus proche.",
-    }
+    },
+    {
+      icon: <CreditCard className="w-8 h-8 text-teal-800" />,
+      title: "Paiement sécurisé",
+      description: "Paiements sécurisés par Stripe. Recevez vos paiements directement sur votre compte bancaire.",
+    },
   ]
 
   const handlePayment = async () => {
@@ -176,29 +181,67 @@ export default function PortailPro() {
             <span className='text-primary'>Rejoignez-nous dès maintenant !</span>
             </div>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <div
-                key={index}
-                className={`p-8 rounded-2xl shadow-lg shadow-gray-950-100/50 hover:shadow-xl hover:shadow-primary-200/50 transition-all duration-300`}
+              key={index}
+              className={`
+                p-8 rounded-2xl
+                bg-white/80 backdrop-blur-sm
+                border border-gray-100
+                shadow-lg hover:shadow-2xl
+                transform hover:-translate-y-1
+                transition-all duration-300 ease-in-out
+                group
+              `}
               >
-                <div className="space-y-6">
-                  <div className="bg-white w-16 h-16 rounded-xl flex items-center justify-center shadow-sm mx-auto">
-                    {feature.icon}
-                  </div>
-                  <h4 className="font-bold text-xl text-gray-950 text-center">{feature.title}</h4>
-                  <p className="text-gray-950leading-relaxed text-center">{feature.description}</p>
+              <div className="space-y-6">
+                <div className="
+                bg-gradient-to-br from-white to-gray-50
+                w-16 h-16 rounded-xl
+                flex items-center justify-center
+                shadow-sm mx-auto
+                group-hover:scale-110
+                transition-transform duration-300
+                ring-1 ring-gray-100
+                ">
+                {feature.icon}
                 </div>
+                <h4 className="
+                font-bold text-xl text-gray-950
+                text-center
+                group-hover:text-primary
+                transition-colors duration-300
+                ">
+                {feature.title}
+                </h4>
+                <p className="
+                text-gray-600
+                leading-relaxed
+                text-center
+                group-hover:text-gray-950
+                transition-colors duration-300
+                ">
+                {feature.description}
+                </p>
               </div>
-            ))}
-          </div>
-
+              </div>
+            ))
+          }
+        </div>
+        <br />
+        <div>
+          <p className='font-bold text-lg text-center mx-auto mt-10 mb-4  slide-in-right'>
+            En rejoignant notre portail pro, vous deviendrez membre de notre communauté de vignerons bio et biodynamiques<br />et de notre association de solidarité &ldquo;Vignerons En Difficulté&rdquo;.
+          </p>
+        </div>
+        <br />
         <Image
-            src="https://res.cloudinary.com/daroyxenr/image/upload/q_auto:good/v1733930760/Orange_and_White_Modern_Flower_Shop_Outdoor_Banner_3_bquksk.webp"
+            src="/images/portailpro.jpg"
             alt="Mémé Georgette"
-            width={1024}
-            height={1024}
-            className='flex w-full justify-center mx-auto mt-2 mb-20'
+            width={624}
+            height={624}
+            className='flex justify-center mx-auto mt-2 mb-20'
         />
 
         {/* Pricing Section */}
