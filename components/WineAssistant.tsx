@@ -48,7 +48,7 @@ const MOOD_MAP = {
   },
   'décontracté': {
     styleCondition: (style: string) => style === 'fruité' || style === 'moelleux',
-    types: ['rosé', 'blanc'],
+    types: ['rosé', 'blanc','pétillant'],
     scoreBoost: 2,
     description: 'Vins faciles et agréables'
   },
