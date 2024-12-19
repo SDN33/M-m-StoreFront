@@ -31,7 +31,7 @@ export async function generateMetadata({ params }) {
 
     const title = `Découvrir ${product.shop?.title} | VinsMemeGeorgette.com`;
     const description = product.description?.replace(/<[^>]*>/g, '') ||
-      `Découvrez ${product.shop?.title} || ''}, un vigneron partenaire de Mémé Georgette.`;
+      `Découvrez ${product.shop?.title} , un vigneron partenaire de Mémé Georgette.`;
 
     const vendorImage = product.image || product.shop?.image || '/images/vinmeme.png';
 
