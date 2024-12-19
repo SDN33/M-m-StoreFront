@@ -45,6 +45,12 @@ interface Product {
   sans_sulfites_?: string;
 }
 
+const decodeHtmlEntities = (text: string) => {
+  const element = document.createElement('div');
+  element.innerHTML = text;
+  return element.textContent || element.innerText || '';
+};
+
 const formatDescription = (description: string, maxChars = 90) => {
   const plainText = description.replace(/<\/?[^>]+(>|$)/g, '');
   const words = plainText.split(' ');
@@ -436,8 +442,8 @@ const ProductPage: React.FC = () => {
           <div className="border-b-8 border-white w-full max-w-[50rem] my-3 h-3 slide-in-right mx-auto -mt-1"></div>
             <p className='font-serif font-normal text-center mt-8 px-8'>
             {product.description && product.short_description
-              ? formatDescription(product.description.length > product.short_description.length ? product.description : product.short_description)
-              : formatDescription(product.description || product.short_description || '')}
+              ? formatDescription(decodeHtmlEntities(product.description.length > product.short_description.length ? product.description : product.short_description))
+              : formatDescription(decodeHtmlEntities(product.description || product.short_description || ''))}
             </p>
           <br />
 
