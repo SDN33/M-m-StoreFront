@@ -37,6 +37,15 @@ interface ProductCardProps {
   onAddToCart: (productId: number, quantity: number, variationId: number) => Promise<void>;
 }
 
+function decodeHtmlEntities(text: string): string {
+  const element = document.createElement('div');
+  if (text) {
+    element.innerHTML = text;
+    return element.textContent || element.innerText || '';
+  }
+  return '';
+}
+
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const router = useRouter();
   const [quantity, setQuantity] = useState<number>(1);
@@ -357,7 +366,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
       </div>
         <a href={`/produits/${product.id}`} className="text-xs text-gray-950 h-8 overflow-hidden text-center mx-4 font-medium mb-4 flex justify-center cursor-pointer">
-          {stripHtmlAndTruncate(product.short_description || stripHtmlAndTruncate(product.description, 110) || '', 110)}
+            {stripHtmlAndTruncate(decodeHtmlEntities(product.short_description || stripHtmlAndTruncate(product.description, 110)), 110)}
         </a>
 
         <div className="flex items-center justify-between mb-2">
