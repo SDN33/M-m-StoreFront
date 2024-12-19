@@ -41,6 +41,7 @@ export async function generateMetadata({ params }) {
       openGraph: {
         title,
         description,
+        url: `https://vinsmemegeorgette.com/vignerons/${id}`,
         images: [
           {
             url: vendorImage,
