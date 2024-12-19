@@ -1,8 +1,8 @@
-
 export async function generateMetadata({ params }) {
   try {
     // Fetch product data with proper URL
-    const response = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}/api/get-vendor?id=${params.id}`, {
+    const { id } = await params;
+    const response = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}/api/get-vendor?id=${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
     const products = await response.json();
     // Find the specific product that matches the ID from params
     const product = Array.isArray(products)
-      ? products.find(p => p.id === parseInt(params.id, 10))
+      ? Array.isArray(products) && products.find(p => p.id === parseInt(id, 10))
       : null;
 
     if (!product) {
@@ -33,6 +33,8 @@ export async function generateMetadata({ params }) {
     const description = product.description?.replace(/<[^>]*>/g, '') ||
       `Découvrez ${product.shop?.title} || ''}, un vigneron partenaire de Mémé Georgette.`;
 
+    const vendorImage = product.image || product.shop?.image || '/images/vinmeme.png';
+
     return {
       title,
       description,
@@ -41,7 +43,7 @@ export async function generateMetadata({ params }) {
         description,
         images: [
           {
-            url: product.images?.[0]?.src || '/images/vinmeme.png',
+            url: vendorImage,
             width: 800,
             height: 600,
             alt: product.name
@@ -55,10 +57,10 @@ export async function generateMetadata({ params }) {
         card: "summary_large_image",
         title,
         description,
-        images: [product.images?.[0]?.src || '/images/vinmeme.png'],
+        images: [vendorImage],
       },
       alternates: {
-        canonical: `https://vinsmemegeorgette.com/vignerons/${params.id}`
+        canonical: `https://vinsmemegeorgette.com/vignerons/${id}`
       },
       keywords: [
         product.name,
