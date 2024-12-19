@@ -340,7 +340,7 @@ const ProductPage: React.FC = () => {
             <br />
             <p className="text-sm font-normal mb-4">
               Vendu par
-              <a className="cursor-pointer text-gray-950 hover:text-teal-800" onClick={vendorRedirect}>
+              <a className="cursor-pointer text-teal-800 hover:text-teal-950" onClick={vendorRedirect}>
                  <br />{product.store_name || ' @MéméGeorgette'}
               </a>
             </p>
@@ -351,16 +351,18 @@ const ProductPage: React.FC = () => {
               <Package className="h-6 w-6" />
               <div className="font-bold text-xs mb-1">Livraison offerte dès <span className='text-teal-800'>6 bouteilles achetées</span> sur un domaine</div>
             </div>
-            <div
+            {!product.name.toLowerCase().startsWith('carton') && !product.name.toLowerCase().startsWith('lot') && (
+              <div
               className='ml-8 px-1 text-xs font-light -mt-4 mb-6'
               aria-label={`Prix par 6 : ${Math.floor(product.price * 6)} euros, livraison offerte`}
-            >
+              >
               <p>
                 <br />
                 <span className='font-semibold'>Par <span className='text-teal-800'>6</span> = <span className='text-base'>{Math.floor(product.price * 6)}€</span> &nbsp;+</span>
                 <span className='bg-gray-950 p-1 text-white ml-2'>Livraison offerte</span>
               </p>
-            </div>
+              </div>
+            )}
 
             <div className="flex items-center">
               <div className="flex items-center">
