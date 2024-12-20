@@ -36,6 +36,7 @@ interface ProductsCardsProps {
     sans_sulfites_: string[];
     petit_prix: string[];
     haut_de_gamme: string[];
+    prestige: string[];
   };
   onAddToCart: (productId: number, quantity: number, variationId: number) => void;
 }
@@ -133,6 +134,17 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
          (product.sale_price && product.sale_price >= 11 && product.sale_price <= 20))
         );
 
+
+        const isPrestigePrixMatch = (selectedFilters.prestige?.length ?? 0) === 0 ||
+          selectedFilters.prestige?.some(
+            (prestige) =>
+              prestige.toLowerCase().trim() === 'prestige' &&
+              !(['carton', 'lot', 'caisse'].some(term => product.name.toLowerCase().includes(term))) &&
+              ((product.price >= 20) ||
+              (product.sale_price && product.sale_price >= 20))
+          );
+
+
       return (
         isColorMatch &&
         isMillesimeMatch &&
@@ -143,7 +155,8 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
         isAccordMetsMatch &&
         isSansSulfitesMatch &&
         isPetitPrixMatch &&
-        isHGPrixMatch
+        isHGPrixMatch &&
+        isPrestigePrixMatch
       );
     },
     [selectedFilters]

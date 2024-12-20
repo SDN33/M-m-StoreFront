@@ -14,6 +14,7 @@ interface ProductFilterProps {
     sans_sulfites_: string[];
     petit_prix: string[];
     haut_de_gamme: string[];
+    prestige: string[];
   };
   onFilterChange: (filterType: keyof ProductFilterProps['selectedFilters'], value: string[]) => void;
   resetFilters: () => void;
@@ -261,15 +262,35 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     handleCheckboxChange('haut_de_gamme', { label: 'Haut de gamme', value: 'haut_de_gamme' });
   }
 
+  const isPrestigePrixMatch = () => {
+    resetFilters();
+    handleCheckboxChange('prestige', { label: 'Prestige', value: 'prestige' });
+  };
+
   return (
     <div ref={filterContainerRef} className=" custom-scrollbar -px-10 bg-gray-200 backdrop-blur-sm overflow-y-auto h-screen min-w-full transition-all duration-300 ease-in-out mt-48 md:mt-40 lg:mt-44 mr-14">
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md shadow-sm rounded-t-xl mt-4">
         <AnimatedResetButton onClick={resetFilters} isScrolled={isScrolled} />
       </div>
       <button
+        aria-label="Prestige"
+        onClick={isPrestigePrixMatch}
+        className="mt-20 mb-2 p-2 text-center rounded-lg border-gray-950 mx-auto bg-gradient-to-r from-yellow-600 via-yellow-700 to-yellow-500 text-white hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-400 transition-all duration-300 text-sm w-full"
+      >
+        <div className="flex items-center justify-center text-center mx-auto space-x-4">
+          <span className="text-center">
+          •
+            &nbsp; Prestige
+        <span className="text-xs -mt-4">
+          &nbsp;•
+        </span>
+          </span>
+        </div>
+      </button>
+      <button
         aria-label="Vins Bio Pour Offrir"
         onClick={isHGPrixMatch}
-        className="mt-20 mb-2 p-2 text-center rounded-lg border-gray-950 mx-auto bg-gradient-to-r from-gray-800 via-gray-800 to-gray-950 text-white hover:from-red-700 hover:via-red-800 hover:to-red-500 transition-all duration-300 text-sm w-full"
+        className=" mb-2 p-2 text-center rounded-lg border-gray-950 mx-auto bg-gradient-to-r from-gray-800 via-gray-800 to-gray-950 text-white hover:from-red-700 hover:via-red-800 hover:to-red-500 transition-all duration-300 text-sm w-full"
       >
         <div className="flex items-center justify-center text-center mx-auto space-x-4">
           <span className="text-center">
