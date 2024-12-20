@@ -317,6 +317,7 @@ const ProductPage: React.FC = () => {
               )}
             </div>
             <br />
+            <br />
             <div className='flex -mt-8'>
               <p className="text-5xl font-bold !mb-2">
                 <span className="flex items-start z-10">
