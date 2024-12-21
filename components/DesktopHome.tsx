@@ -164,6 +164,7 @@ export default function Home({ className }: DesktopHomeProps) {
         sans_sulfites_: [],
         petit_prix: [],
         haut_de_gamme: [],
+        prestige: [],
       });
     },
   []);
