@@ -139,6 +139,7 @@ const ProductsCards: React.FC<ProductsCardsProps> = ({ selectedFilters, onAddToC
           selectedFilters.prestige?.some(
             (prestige) =>
               prestige.toLowerCase().trim() === 'prestige' &&
+              product.volume === '75 cl' &&
               !(['carton', 'lot', 'caisse'].some(term => product.name.toLowerCase().includes(term))) &&
               ((product.price >= 20) ||
               (product.sale_price && product.sale_price >= 20))
