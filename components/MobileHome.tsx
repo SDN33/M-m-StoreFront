@@ -28,6 +28,7 @@ const MobileHome: React.FC = () => {
     sans_sulfites_: [],
     petit_prix: [],
     haut_de_gamme: [],
+    prestige: []
   }));
 
   // Memoize handlers to prevent unnecessary re-renders
@@ -47,7 +48,8 @@ const MobileHome: React.FC = () => {
         color: [], region: [], vintage: [], millesime: [],
         certification: [], style: [], volume: [],
         accord_mets: [], region__pays: [], categories: [],
-        sans_sulfites_: [], petit_prix: [], haut_de_gamme: []
+        sans_sulfites_: [], petit_prix: [], haut_de_gamme: [],
+        prestige: []
       });
     },
     []
