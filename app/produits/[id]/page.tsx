@@ -316,7 +316,11 @@ const ProductPage: React.FC = () => {
                 </div>
               )}
             </div>
-            <br />
+            {product.sale_price && (
+              <>
+              <br />
+              </>
+            )}
             <br />
             <div className='flex -mt-8'>
               <p className="text-5xl font-bold !mb-2">
