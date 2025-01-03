@@ -17,7 +17,8 @@ const SignupPage = () => {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto px-4 py-32 pb-10" style={{ paddingTop: '170px' }}>
+    <div className="w-full max-w-md mx-auto px-4 py-24 pb-10" style={{ paddingTop: '170px' }}>
+      <br /><br /><br /><br />
       <div className="rounded-lg shadow-lg p-6">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold">Inscription Portail Pro</h1>
