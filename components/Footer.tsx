@@ -94,7 +94,7 @@ const Footer = () => {
           </p>
           <p className="text-xs text-white mb-4 font-normal">Participer à notre cagnotte Litchee <a className="underline" href="https://www.norauto.fr/c/47996-ethylotest.html">Vignerons En Difficulté</a></p>
           <p className="font-normal text-white text-xs">
-            © 2024 - Mémé Georgette, tous droits réservés
+            © 2025 - Mémé Georgette, tous droits réservés
             <br />Création de <a className="font-bold text-primary" title="Site Still-inov Agency" href="https://stillinov.com">Still-inov Agency</a>
           </p>
           <br />
