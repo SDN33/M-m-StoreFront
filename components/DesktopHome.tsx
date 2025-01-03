@@ -272,7 +272,7 @@ export default function Home({ className }: DesktopHomeProps) {
               <Slider />
             </motion.div>
 
-            <div className="max-w-7xl mx-auto px-4">
+            <div className="max-w-7xl mx-auto px-4 min-h-[500px] min-w-[320px]">
               <motion.section
                 variants={fadeInUpVariants}
                 initial="hidden"
