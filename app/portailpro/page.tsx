@@ -250,7 +250,6 @@ export default function PortailPro() {
             <div className="bg-gradient-to-r from-primary via-orange-800 to-red-800 text-white shadow-lg p-8 text-center">
               <div className="flex items-center justify-center">
                 {/* Prix barré */}
-                <span className="text-xs font-bold text-transparent opacity-60 mr-2">Portail P</span>
               </div>
             </div>
             <div className="p-8 space-y-8">
@@ -299,6 +298,12 @@ export default function PortailPro() {
                    text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:bg-orange-900 transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <span>Nous Contacter</span>
+                </button>
+                <button
+                  onClick={() => window.location.href = "/inscription"}
+                  className="bg-black text-white w-full py-4 rounded-xl font-medium hover:shadow-lg hover:bg-gray-800 transition-all duration-300 flex items-center justify-center space-x-2"
+                >
+                  <span>S&apos;inscrire</span>
                 </button>
               <br /><br />
               <br /><br />
