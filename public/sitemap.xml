@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
-        <loc>https://www.vinsmemegeorgette.com</loc>
+        <loc>https://vinsmemegeorgette.com</loc>
         <changefreq>daily</changefreq>
         <lastmod>2024-12-07</lastmod>
         <priority>1.0</priority>
         <title>ACHAT VIN BIO, BIODYNAMIQUE, SANS SULFITES - Mémé Georgette</title>
         <description>Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites</description>
         <image:image>
-            <image:loc>https://www.vinsmemegeorgette.com/images/post_partage.webp</image:loc>
+            <image:loc>https://vinsmemegeorgette.com/images/post_partage.webp</image:loc>
         </image:image>
     </url>
     <url>
@@ -108,6 +109,12 @@
         <changefreq>monthly</changefreq>
         <lastmod>2024-12-07</lastmod>
         <priority>0.2</priority>
+    </url>
+    <url>
+        <loc>https://vinsmemegeorgette.com/inscription</loc>
+        <changefreq>monthly</changefreq>
+        <lastmod>2024-12-07</lastmod>
+        <priority>0.1</priority>
     </url>
     <url>
         <loc>https://vinsmemegeorgette.com/login</loc>
