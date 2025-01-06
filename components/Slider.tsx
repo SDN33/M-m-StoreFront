@@ -8,7 +8,7 @@ const Slider = () => {
     {
       id: 1,
       imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto:best/v1736164267/osez_le_chinon_bvnmud.webp',
-      link: '/',
+      link: '/vignerons/255986134',
       lcp: true,
       rel: 'preconnect',
       priority: true,
