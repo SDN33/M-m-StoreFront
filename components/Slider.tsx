@@ -7,7 +7,7 @@ const Slider = () => {
   const slides = [
     {
       id: 1,
-      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto:good/v1734131080/Carte_de_No%C3%ABl_Rouge_Vert_Sapin_F%C3%AAte_nj1eom.webp',
+      imageUrl: 'https://res.cloudinary.com/daroyxenr/image/upload/q_auto:best/v1736164267/osez_le_chinon_bvnmud.webp',
       link: '/',
       lcp: true,
       rel: 'preconnect',
