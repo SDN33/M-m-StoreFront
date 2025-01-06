@@ -199,7 +199,7 @@ const ProductPage: React.FC = () => {
 
   if (!product) return null;
 
-  const selectedProductIds = [621,632,255,284,286,292,653,649,659,649]; // Example array of selected product IDs
+  const selectedProductIds = [621,632,255,284,286,292,653,649,659,807]; // Example array of selected product IDs
 
   const renderSelectedBadge = () => {
     if (selectedProductIds.includes(product.id)) {
