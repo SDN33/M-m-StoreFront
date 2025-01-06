@@ -260,7 +260,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     return getRandomSlogan(slogans.decouverte(product.appellation || 'Vin'));
   };
 
-  const selectedProductIds = [621,632,255,284,286,292,653,659]; // Example array of selected product IDs
+  const selectedProductIds = [621,632,255,284,286,292,653,659,649]; // Example array of selected product IDs
 
   const renderSelectedBadge = () => {
     if (selectedProductIds.includes(product.id)) {
