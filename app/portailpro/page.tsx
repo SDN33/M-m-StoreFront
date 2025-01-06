@@ -430,54 +430,44 @@ export default function PortailPro() {
               <p className="text-gray-600">
                 Conformément à l&apos;Article 8.1 des CGV, pour bénéficier du Site et de ses Services, le Vendeur doit
                 souscrire à un Compte Utilisateur selon le formulaire de candidature en ligne sur le Site et garantir être
-                un professionnel.
+                un professionnel. <br />
                 L&apos;inscription du Vendeur et la création de son compte (ci-après “Espace Vigneron”) se font au moyen
-                d&apos;un formulaire de candidature accessible sur le site site https://vinsmemegeorgette.com/portailpro.
+                d&apos;un formulaire de candidature accessible sur le site https://vinsmemegeorgette.com/portailpro
                 Un seul compte peut être attribué par Vendeur (même SIRET) et associé à une même adresse
-                électronique.
+                électronique. <br />
                 La création du Compte Utilisateur permettra notamment au Vendeur d&apos;échanger de manière simple et
-                directe avec les Utilisateurs du Site et de ses Services.
-                <br /><br />
-                La procédure d&apos;inscription via le formulaire en ligne comprend les étapes suivantes :
-                <br /><br />
-                1) Le Vendeur complète un formulaire de candidature afin de fournir les informations nécessaires dont
+                directe avec les Utilisateurs du Site et de ses Services. <br />
+                La procédure d&apos;inscription via le formulaire en ligne comprend les étapes suivantes :br
+                1)Le Vendeur complète un formulaire de candidature afin de fournir les informations nécessaires dont
                 toutes sont qualifiées d&apos;impératives. Les informations sont d&apos;ordre personnelles : nom, adresse, moyens
                 de contact et d&apos;ordre professionnelle : appellations, services recherchés. Le Vendeur prend
                 connaissance et accepte les présentes conditions générales avant de valider son formulaire de
                 candidature et prend également connaissance des conditions de paiement et du système de
                 facturation l&apos;obligeant à déposer ses factures dans son espace client selon la procédure présentée à
-                l&apos;Art.7.2
-                <br /><br />
-                2) Le comité de sélection de la société Biolibairterre SAS s&apos;assure de l&apos;intérêt et de la pertinence de la
-                candidature du Vigneron. Avant de recevoir un lien pour la création de son Espace Vigneron, le
-                Vigneron s&apos;acquitte des frais d&apos;inscriptions de 240€ HT, payable en ligne en un seul règlement
-                <br /><br />
-                3) Le Vendeur valide alors son profil Vigneron en accédant à la rédaction des champs obligatoires de
-                son profil, de ses informations sur son domaine et de ses fiches produits. Il s&apos;oblige à mentionner le prix
-                de ses Produits ainsi que le cadre d&apos;exécution géographique de ces derniers dans l&apos;espace vigneron.
-
-                Le tarif des Produits affiché sur les Sites correspond au meilleur tarif disponible pour un Produit
-                équivalent au Vendeur concerné, aucun tarif plus avantageux ne pouvant être obtenu par un
+                l&apos;Art.7.2<br />
+                1) Le comité de sélection de la société Biolibairterre SAS s&apos;assure de l&apos;intérêt et de la pertinence de la
+                candidature du Vigneron.<br />
+                2) Le Vendeur valide alors son profil Vigneron en accédant à la rédaction des champs obligatoires de
+                son profil, de ses informations sur son domaine et de ses fiches produites. Il s&apos;oblige à mentionner le
+                prix de ses Produits ainsi que le cadre d&apos;exécution géographique de ces derniers dans l&apos;espace
+                vigneron. Le tarif des Produits affiché sur les Sites correspond au meilleur tarif disponible pour un
+                Produit équivalent au Vendeur concerné, aucun tarif plus avantageux ne pouvant être obtenu par un
                 Acheteur particulier directement auprès du Vendeur ou par l&apos;intermédiaire d&apos;un autre tiers, d&apos;un autre
-                moyen ou par une autre source.
-                <br /><br />
-                4) Les informations sont réputées exactes et seront mises à jour régulièrement, le Vendeur est
+                moyen ou par une autre source.<br />
+                3) Les informations sont réputées exactes et seront mises à jour régulièrement, le Vendeur est
                 responsable de l&apos;exactitude et l&apos;actualisation de son profil sur son Espace Vigneron. La validité des
-                ses certificats biologiques et biodynamique mis en ligne, sont de sa responsabilité.
-                <br /><br />
-                5) Il est strictement interdit de créer un compte sans qu&apos;il n&apos;ait pour objet de la collaboration avec
+                ses certificats biologiques et biodynamique mis en ligne, sont de sa responsabilité.<br />
+                4) Il est strictement interdit de créer un compte sans qu&apos;il n&apos;ait pour objet de la collaboration avec
                 Biolibairterre SAS, d&apos;y stipuler des informations inexactes ou de s&apos;attribuer des certifications sans en
                 avoir reçu les documents officiels et qui devront être fournis lors de la saisie des fiches techniques
-                des Produits
-                <br /><br />
-                6) Une fois son compte créé et dûment complété, le Vendeur est publié et devient visible en ligne
+                des Produits<br />
+                5) Une fois son compte créé et dûment complété, le Vendeur est publié et devient visible en ligne
                 quand les activités ou les Produits ont été entièrement rédigés et validés par Biolibairterre SAS. Le
                 Vendeur peut alors commencer à recevoir ses commandes. Une commande validée par le Vendeur
                 l&apos;engage de manière irrévocable. Biolibairterre SAS se réserve toutefois le droit de refuser une
                 commande d&apos;un Acheteur, pour toute demande anormale, réalisée de mauvaise foi ou pour tout
-                motif légitime.
-                <br /><br />
-                7) Il est précisé qu&apos;une page de présentation du Vendeur peut être créée et maintenue en
+                motif légitime. <br />
+                6) Il est précisé qu&apos;une page de présentation du Vendeur peut être créée et maintenue en
                 attendant qu&apos;un Produit soit vendu.
               </p>
               </div>
