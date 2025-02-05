@@ -1,73 +1,13 @@
-import React, { useEffect, useState } from 'react';
 
-const FallingFlagsPromo = () => {
-  // Liste de codes de drapeaux emoji
-  const flags = React.useMemo(() => ["🇵🇹", "🇪🇸", "🇮🇹", "🇩🇪"], []);
-
-  interface Flag {
-    id: string;
-    left: number;
-    angle: number;
-    size: number;
-    opacity: number;
-    speed: number;
-    timestamp: number;
-    flag: string;
-  }
-
-  const [fallingFlags, setFallingFlags] = useState<Flag[]>([]);
-
-  useEffect(() => {
-    const createFlag = () => {
-      const newFlag = {
-        id: Date.now().toString() + Math.random().toString(36).substring(2),
-        left: Math.random() * 100,
-        angle: Math.random() * 360,
-        size: Math.random() * (30 - 20) + 20,
-        opacity: Math.random() * (1 - 0.6) + 0.6,
-        speed: Math.random() * (12 - 8) + 8,
-        timestamp: Date.now(),
-        flag: flags[Math.floor(Math.random() * flags.length)]
-      };
-      setFallingFlags(prev => [...prev, newFlag]);
-    };
-
-    // Créer de nouveaux drapeaux périodiquement
-    const interval = setInterval(createFlag, 300);
-
-    // Supprimer les drapeaux qui sont tombés après 5 secondes
-    const cleanupInterval = setInterval(() => {
-      setFallingFlags(prev => prev.filter(flag => Date.now() - flag.timestamp < 5000));
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-      clearInterval(cleanupInterval);
-    };
-  }, [flags]);
+const SpiritsPromo = () => {
 
   return (
-    <div className="relative w-full min-h-[100px] overflow-hidden bg-gradient-to-r from-teal-200 via-teal-600 to-teal-800 rounded-t-xl">
-      {/* Drapeaux qui tombent */}
-      {fallingFlags.map(flag => (
-        <div
-          key={flag.id}
-          className="absolute animate-fall pointer-events-none"
-          style={{
-            left: `${flag.left}%`,
-            transform: `rotate(${flag.angle}deg)`,
-            fontSize: `${flag.size}px`,
-            opacity: flag.opacity,
-            animation: `fall ${flag.speed}s linear`,
-          }}
-        >
-          {flag.flag}
-        </div>
-      ))}
+    <div className="relative w-full h-40 overflow-hidden bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center py-16">
 
-      {/* Contenu superposé */}
-      <div className="relative z-10 text-center py-10">
-        <h1 className="text-3xl font-bold text-white">Vins Du Monde</h1>
+        <h1 className="text-5xl font-bold text-white my-4">Spiritueux Bio</h1>
+        <p className="text-xl text-gray-200 mb-8">Découvrez notre sélection de spiritueux d&apos;exception</p>
+
       </div>
 
       <style jsx>{`
@@ -76,7 +16,7 @@ const FallingFlagsPromo = () => {
             transform: translateY(-20px) rotate(0deg);
           }
           100% {
-            transform: translateY(400px) rotate(360deg);
+            transform: translateY(100vh) rotate(360deg);
           }
         }
         .animate-fall {
@@ -88,4 +28,4 @@ const FallingFlagsPromo = () => {
   );
 };
 
-export default FallingFlagsPromo;
+export default SpiritsPromo;

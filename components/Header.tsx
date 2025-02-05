@@ -50,7 +50,7 @@ const Header: React.FC = () => {
     { name: 'Découvrir Mémé Georgette', href: 'https://memegeorgette.com', target: "_blank", rel: "noopener noreferrer" },
     { name: 'Nos Vignerons.nes', href: '/vignerons' },
     { name: 'Vins Sans Sulfites', href: '/vins-sans-sulfites' },
-    { name: 'Vins du Monde', href: '/vins-du-monde' },
+    { name: 'Spiritueux', href: '/spiritueux' },
     { name: 'Contactez-nous', href: '/contact' },
     { name: 'Blog', href: '/blog', icon: <Rss className="inline-block ml-1 -mt-1 w-4 h-4" /> },
   ];

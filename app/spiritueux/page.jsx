@@ -60,7 +60,7 @@ export default function VinsDuMonde() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow container mx-auto px-4 mt-48 xl:px-40">
-        <div className='text-center text-xs mx-auto text-gray-950 mb-4'><a href="/">Accueil</a> / <strong>Les Autres Vins</strong></div>
+        <div className='text-center text-xs mx-auto text-gray-950 mb-4'><a href="/">Accueil</a> / <strong>Les Spiritueux</strong></div>
 
         {/* Section Titre */}
         <FallingFlagsPromo />
@@ -68,10 +68,10 @@ export default function VinsDuMonde() {
         {/* Section Description */}
         <div className="bg-gray-100 p-6 rounded-lg shadow-md mb-12">
           <p className="text-lg font-medium text-center text-gray-700">
-            Découvrez notre sélection de vins du monde entier
+            Découvrez notre sélection de Spiritueux
             <br />
             <span className="font-bold text-teal-800 text-sm">
-              Une collection unique de vins d&apos;Espagne, d&apos;Italie, du Portugal et d&apos;Allemagne.
+              Une collection unique de Spiritueux, cognacs, armagnacs, liqueurs, apéritifs, digestifs, etc.
             </span>
           </p>
         </div>
@@ -80,7 +80,7 @@ export default function VinsDuMonde() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-1 mb-20">
           {products.length === 0 ? (
             <div className="col-span-full text-center py-8">
-              <p className="text-lg text-gray-600">Aucuns vins disponible pour le moment</p>
+              <p className="text-lg text-gray-600">Aucuns spiritueux disponible pour le moment</p>
             </div>
           ) : (
             products.map((product) => (
