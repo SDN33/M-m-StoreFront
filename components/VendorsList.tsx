@@ -2,7 +2,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import { FaMapMarkerAlt } from 'react-icons/fa'; // Importation de l'icône de localisation
 
 

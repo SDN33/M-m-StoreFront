@@ -45,7 +45,7 @@ const Newsletter = () => {
 
   return (
     <div className="bg-white rounded-lg overflow-hidden h-[300px] relative scroll-pt-24">
-      <img
+      <Image
         src="/images/newsletter.webp"
         alt="Inscription à la newsletter"
         className="w-full h-[300px] object-cover "
@@ -225,7 +225,7 @@ const MemeGeorgettePremium = () => {
 
         <div className="relative overflow-hidden rounded-lg group">
           <div className="absolute inset-0 bg-gray-950/40 z-10"></div>
-          <img
+          <Image
             src="/images/winery.jpg"
             alt="Producteurs"
             className="w-full h-[300px] object-cover transform group-hover:scale-105 transition-transform duration-500"

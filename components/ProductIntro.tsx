@@ -169,7 +169,7 @@ const ProductsIntro: React.FC = () => {
         <div className="relative z-10 flex flex-col items-center lg:flex-row lg:justify-between">
           {/* Left Logos (Mobile Hidden) */}
           <div className="hidden lg:flex xl:flex space-x-4 mb-4 lg:mb-0">
-            <img
+            <Image
               src="/images/bio2.png"
               alt="bio logo"
               width={100}
@@ -177,7 +177,7 @@ const ProductsIntro: React.FC = () => {
               className="object-contain w-10 lg:min-w-8 h-auto"
               priority
             />
-            <img
+            <Image
               src="/images/Logobioeu.jpg"
               alt="Bio euro logo"
               width={100}
@@ -185,7 +185,7 @@ const ProductsIntro: React.FC = () => {
               className="object-contain w-10 lg:min-w-8 h-auto"
               priority
             />
-            <img
+            <Image
               src="/images/Biodynamie-logo.png"
               alt="Biodynamie logo"
               width={100}
@@ -223,7 +223,7 @@ const ProductsIntro: React.FC = () => {
 
           {/* Right Logos (Mobile Hidden) */}
           <div className="hidden lg:flex space-x-4 mb-4 lg:mb-0">
-            <img
+            <Image
               src="/images/logointro.jpg"
               alt="biodynamie logo"
               width={100}
@@ -231,7 +231,7 @@ const ProductsIntro: React.FC = () => {
               className="object-contain w-12 lg:min-w-9 h-auto"
               priority
             />
-            <img
+            <Image
               src="/images/biodyvin.jpg"
               alt="biodyvin logo"
               width={100}
@@ -239,7 +239,7 @@ const ProductsIntro: React.FC = () => {
               className="object-contain w-14 lg:min-w-8 h-auto"
               priority
             />
-            <img
+            <Image
               src="/images/logointro2.jpg"
               alt="nature et progrès"
               width={100}

@@ -16,7 +16,7 @@ const Livraison: React.FC = () => {
             </p>
           </div>
           {/* Logo Chronopost */}
-          <img
+          <Image
             src="/images/boxtal.png" // Assurez-vous d'avoir le logo Chronopost à cet emplacement
             alt="Logo Boxtal" // Texte alternatif pour le logo
             width={40} // Ajustement de la taille

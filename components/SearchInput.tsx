@@ -4,7 +4,6 @@ import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react'
 import { Search, X } from 'lucide-react';
 import axios from 'axios';
 import debounce from 'lodash/debounce';
-import Image from 'next/image';
 
 interface ProductMetaData {
   key: string;
@@ -256,8 +255,6 @@ const SearchInput = () => {
                   width={48}
                   height={48}
                   loading="lazy"  // Chargement différé
-                  placeholder="blur"
-                  blurDataURL="/placeholder.png"  // Optionnel : image de placeholder
                 />
               )}
               <div className="ml-4 flex-grow">

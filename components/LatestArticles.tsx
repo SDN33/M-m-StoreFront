@@ -91,7 +91,7 @@ const LatestArticles: React.FC = () => {
           >
             <div className="relative h-48 overflow-hidden rounded-t-xl">
               <a href={`/blog/${article.id}`}>
-                <img
+                <Image
                   src={article.featuredImage || "/default-image.jpg"}
                   alt={article.title}
                   fill
