@@ -109,7 +109,7 @@ const MobileHome: React.FC = () => {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <img
+            <Image
               src="/images/post_partage.webp"
               alt="Mémé Georgette"
               width={600}
@@ -138,7 +138,7 @@ const MobileHome: React.FC = () => {
               className="bg-white w-full justify-center items-center -my-2"
             >
               <div className="flex justify-center items-center space-x-6 w-fit h-auto mx-auto bg-white rounded-lg p-4 border border-gray-100">
-                <img
+                <Image
                   src="/images/paiement.png"
                   alt="Paiement sécurisé"
                   height={130}

@@ -111,7 +111,7 @@ const Slogan: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <img
+        <Image
           src="/images/meme-pas-contente.png"
           alt="Mémé Newsletter"
           className="object-cover absolute right-0 bottom-0"
