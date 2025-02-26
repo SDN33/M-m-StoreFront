@@ -313,7 +313,7 @@ export default function Home({ className }: DesktopHomeProps) {
                     aria-label={method.name}
                     className="transform transition-transform duration-200 hover:scale-110 opacity-80 hover:opacity-100"
                   >
-                    <Image
+                    <img
                       src={method.src}
                       alt={method.name}
                       height={method.height}

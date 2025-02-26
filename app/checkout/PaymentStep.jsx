@@ -8,7 +8,7 @@ const PaymentStep = ({ totalPrice, formData, setError, handleOrderSubmit, isStep
       <div className="flex items-center justify-between">
         <h2 className="text-xl sm:text-2xl font-semibold">Paiement</h2>
         <div className="flex items-center space-x-2">
-          <Image
+          <img
             src="/images/lock-icon.svg"
             alt="Secure"
             width={20}
@@ -19,7 +19,7 @@ const PaymentStep = ({ totalPrice, formData, setError, handleOrderSubmit, isStep
         </div>
       </div>
 
-      <Image
+      <img
         src="/images/stripe.webp"
         alt="Stripe"
         width={50}

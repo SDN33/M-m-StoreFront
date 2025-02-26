@@ -145,7 +145,7 @@ const VendorList: React.FC = () => {
                 <div className="p-4 bg-gradient-to-r from-gray-950 via-gray-800 to-gray-950 text-white py-4 border-gray-500 border-spacing-4 border-lg rounded-md shadow-md cursor-pointer mx-6 mt-6">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gray-200 border-4 border-white rounded-full overflow-hidden">
-                      <Image
+                      <img
                         src={vendor.vendor_image || '/images/meme-pas-contente-removebg-preview.png'}
                         alt={vendor.store_name}
                         width={50}
@@ -181,7 +181,7 @@ const VendorList: React.FC = () => {
                           onClick={() => handleCardClick(product.id)}
                         >
                           <div className="flex items-center space-x-3">
-                            <Image
+                            <img
                               src={product.images?.[0]?.src || '/images/vinmémé.png'}
                               alt={product.name}
                               className="w-10 h-10 object-cover"
@@ -197,7 +197,7 @@ const VendorList: React.FC = () => {
                             <span className="px-2 py-1 text-xs font-semibold text-gray-950 bg-gray-200 rounded-full">
                               {parseFloat(product.price).toFixed(2)}€
                             </span>
-                            <Image
+                            <img
                                 src={getCertificationLogo(product.certification).src}
                                 alt={product.certification || 'certification logo'}
                                 width={getCertificationLogo(product.certification).width}

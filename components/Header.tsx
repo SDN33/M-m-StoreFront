@@ -104,7 +104,7 @@ const Header: React.FC = () => {
             <div className="relative w-[280px] h-[100px] flex items-center">
               <div className="absolute -left-0 top-1 h-full w-[71px] flex items-center justify-center">
                 <Link href="/">
-                  <Image
+                  <img
                     src="/images/meme-pas-contente.png"
                     alt="Logo"
                     width={200}
@@ -116,7 +116,7 @@ const Header: React.FC = () => {
 
               <div className=" left-16 pr-4 h-full w-[230px] flex items-center justify-center relative">
                 <Link href="/">
-                  <Image
+                  <img
                   src="/images/memelogo.png"
                   alt="Logo"
                   fill
@@ -145,7 +145,7 @@ const Header: React.FC = () => {
                       <span>Livraison</span>
                       <ChevronDown className={`w-4 h-4 transition-transform ${isLanguageMenuOpen ? 'rotate-180' : ''}`} />
                       <div className="relative w-6 h-6">
-                      <Image
+                      <img
                         src={selectedCountry.imgSrc}
                         alt={selectedCountry.name}
                         fill
@@ -168,7 +168,7 @@ const Header: React.FC = () => {
                           className="w-full px-4 py-2 flex items-center space-x-3 hover:bg-gray-50 transition-colors"
                         >
                           <div className="relative w-[30px] h-[30px]">
-                            <Image
+                            <img
                               src={country.imgSrc}
                               alt={country.name}
                               fill
@@ -212,7 +212,7 @@ const Header: React.FC = () => {
 
             <div className="relative h-[200px] w-[200px] flex items-center justify-center -pl-10">
               <Link href="/">
-                <Image
+                <img
                   src="/images/memelogo.png"
                   alt="Logo"
                   fill
@@ -246,7 +246,7 @@ const Header: React.FC = () => {
                     className="flex items-center space-x-2"
                   >
                     <div className="relative w-[30px] h-[14px]">
-                      <Image
+                      <img
                         src={selectedCountry.imgSrc}
                         alt={selectedCountry.name}
                         fill

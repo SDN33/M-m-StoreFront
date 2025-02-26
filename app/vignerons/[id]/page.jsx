@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { MapPin, Globe, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 import Link from 'next/link';
@@ -142,7 +141,7 @@ export default function VendorDetailsPage() {
         <div className='text-center text-xs mx-auto text-gray-950 mb-4'><a href="/">Accueil</a> / <a href="/vignerons">Nos Vignerons.nes</a> / <strong>{vendor.shop?.title}</strong></div>
 
         <div className="relative">
-          <Image
+          <img
             src={vendor.shop?.banner ? normalizeUrl(vendor.shop.banner) : '/images/slider3.png'}
             alt={`${vendor.shop?.title || 'Vendor'} banner`}
             width={2000}
@@ -151,7 +150,7 @@ export default function VendorDetailsPage() {
           />
           <div className="absolute -bottom-16 left-6">
             <br />
-            <Image
+            <img
               src={vendor.shop?.image ? normalizeUrl(vendor.shop.image) : '/images/meme-pas-contente.png'}
               alt={`${vendor.display_name || 'Vendor'} profile`}
               width={180}
@@ -224,7 +223,7 @@ export default function VendorDetailsPage() {
                 products.map((product) => (
                   <div key={product.id} className="bg-white p-4 rounded-lg shadow-lg text-center">
                     <Link href={`/produits/${product.id}`} passHref>
-                      <Image
+                      <img
                         src={product.images[0]?.src || '/images/vinmeme.png'}
                         alt={product.name}
                         width={160}

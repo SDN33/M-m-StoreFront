@@ -10,7 +10,7 @@ const Footer = () => {
         {/* Logos de paiement */}
         <div className="flex justify-center items-center space-x-4 w-fit h-auto mx-auto mb-8 bg-white rounded-lg p-2">
           <a href="https://www.visa.fr" title="Visa">
-            <Image
+            <img
               src="/images/visa.png"
               alt="Visa"
               height={30}
@@ -19,7 +19,7 @@ const Footer = () => {
             />
           </a>
           <a href="https://www.mastercard.fr" title="mastercard" aria-label="Mastercard">
-            <Image
+            <img
               src="/images/mastercard.png"
               alt="Mastercard"
               height={30}
@@ -28,7 +28,7 @@ const Footer = () => {
             />
           </a>
           <a href="https://stripe.com/fr" title="Stripe" aria-label="Stripe">
-            <Image
+            <img
               src="/images/stripe.webp"
               alt="Stripe"
               height={50}
@@ -78,7 +78,7 @@ const Footer = () => {
 
         {/* Mentions légales et copyright */}
         <div className="-mb-2">
-          <Image
+          <img
             src="/images/image-restriction.svg"
             title="Prévention Alcool"
             alt="Prévention Alcool"

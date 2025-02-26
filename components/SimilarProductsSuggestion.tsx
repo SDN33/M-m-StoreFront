@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Star } from 'lucide-react';
 
@@ -45,10 +44,9 @@ const SimilarProductsSuggestion: React.FC<SimilarProductsProps> = ({
       className="block bg-white rounded-lg shadow-md p-3 hover:shadow-lg transition-shadow duration-300"
     >
       <div className="relative w-full aspect-square mb-2">
-        <Image
+        <img
           src={product.images?.[0]?.src || '/images/vinmeme.png'}
           alt={product.name}
-          fill
           className="object-cover rounded-md"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />

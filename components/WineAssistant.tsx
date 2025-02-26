@@ -381,7 +381,7 @@ const AIWineAssistant: React.FC = () => {
               className="bg-white rounded-lg shadow-md p-4 flex items-center space-x-4 hover:shadow-xl transition cursor-pointer"
             >
               <Link href={`/produits/${wine.id}`} className="flex items-center space-x-4">
-                <Image
+                <img
                   src={wine.images[0].src}
                   alt={wine.name}
                   className="w-24 h-24 object-cover rounded-lg"

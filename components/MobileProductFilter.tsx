@@ -17,7 +17,6 @@ import {
   FlaskConicalOff,
   Gift
 } from 'lucide-react';
-import Image from 'next/image';
 
 // Define a type for filter options with an additional display label
 interface FilterOption {
@@ -283,11 +282,11 @@ const MobileProductFilter: React.FC<MobileProductFilterProps> = ({
                             <span className="ml-2 text-gray-700">
                               {option.label === 'Bio' ? (
                                 <span className="flex items-center">
-                                  {option.label} <Image src="/images/logobio1.webp" alt="Bio" width={16} height={16} className="ml-1" />
+                                  {option.label} <img src="/images/logobio1.webp" alt="Bio" width={16} height={16} className="ml-1" />
                                 </span>
                               ) : option.label === 'Biodynamie' ? (
                                 <span className="flex items-center">
-                                  {option.label} <Image src="/images/biodemeter.png" alt="Biodynamie" width={50} height={16} className="ml-1" />
+                                  {option.label} <img src="/images/biodemeter.png" alt="Biodynamie" width={50} height={16} className="ml-1" />
                                 </span>
                               ) : (
                                 option.label

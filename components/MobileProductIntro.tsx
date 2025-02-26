@@ -44,9 +44,8 @@ const MobileProductsIntro: React.FC = () => {
                     <Image
                       src={logo.src}
                       alt={logo.alt}
-                      fill={logo.width === logo.height}
-                      width={logo.width === logo.height ? undefined : logo.width}
-                      height={logo.width === logo.height ? undefined : logo.height}
+                      width={logo.width}
+                      height={logo.height}
                       sizes={logo.sizes}
                       className="object-contain"
                       priority={true}

@@ -77,7 +77,7 @@ const renderAOCBadge = (product: Product) => {
   if (product.name.toLowerCase().includes('aoc')) {
     return (
       <div className={`z-20 ${product.certification === 'biodynamie' ? 'ml-3' : 'ml-2'}`}>
-        <Image
+        <img
           src="/images/LogoAOC.png"
           alt="Badge AOC"
           style={{ objectFit: 'contain' }}
@@ -258,7 +258,7 @@ const ProductPage: React.FC = () => {
             <div className="flex items-start z-10 w-full justify-start px-4 md:px-0">
               <div className="text-sm flex gap-2">
                 {product.certification ? (
-                  <Image
+                  <img
                     {...getCertificationLogo(product.certification)}
                     alt="Certification logo"
                     width={product.certification === 'biodynamie' ? 100 : 30}
@@ -278,7 +278,7 @@ const ProductPage: React.FC = () => {
               <div className='mr-4 '>
                 {renderSelectedBadge()}
               </div>
-              <Image
+              <img
               src={product.images && product.images.length > 0 ? product.images[0].src : '/images/vinmeme.png'}
               alt={product.name}
               width={700}
@@ -399,7 +399,7 @@ const ProductPage: React.FC = () => {
                 {/* Logos de paiement */}
             <div className="flex justify-start items-center space-x-4 w-auto h-auto mb-8 bg-white rounded-lg p-2 mt-2">
               <a href="https://www.visa.fr" title="Visa">
-                <Image
+                <img
                   src="/images/visa.png"
                   alt="Visa"
                   height={20}
@@ -408,7 +408,7 @@ const ProductPage: React.FC = () => {
                 />
               </a>
               <a href="https://www.mastercard.fr" title="mastercard"  aria-label="Mastercard">
-                <Image
+                <img
                   src="/images/mastercard.png"
                   alt="Mastercard"
                   height={20}
@@ -417,7 +417,7 @@ const ProductPage: React.FC = () => {
                 />
               </a>
               <a href="https://stripe.com/fr" title="Stripe" aria-label="Stripe">
-                <Image
+                <img
                   src="/images/stripe.webp"
                   alt="Stripe"
                   height={40}
@@ -547,7 +547,7 @@ const ProductPage: React.FC = () => {
           <br />
 
           <br />
-          <Image
+          <img
             src="/images/bannereco2.png"
             alt="Bannière écologique"
             width={800}

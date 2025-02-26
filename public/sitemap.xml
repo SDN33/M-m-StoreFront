@@ -8,8 +8,8 @@
         <priority>1.0</priority>
         <title>ACHAT VIN BIO, BIODYNAMIQUE, SANS SULFITES - Mémé Georgette</title>
         <description>Découvrez les vins bio et biodynamiques de Mémé Georgette : vins rouges, blancs, rosés, pétillants, liquoreux et sans sulfites</description>
-        <image:image>
-            <image:loc>https://vinsmemegeorgette.com/images/post_partage.webp</image:loc>
+        <img:image>
+            <img:loc>https://vinsmemegeorgette.com/images/post_partage.webp</image:loc>
         </image:image>
     </url>
     <url>

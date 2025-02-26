@@ -79,6 +79,42 @@ export default async function handler(
     throw new Error('Failed to fetch data after retries');
   };
 
+  const fetchAllVendors = async () => {
+    const perPage = 100; // Nombre maximum de vendeurs par page
+    let page = 1;
+    let allVendors: Vendor[] = [];
+    let hasMorePages = true;
+
+    // Récupérer la première page
+    const cacheKey = `${WC_API_DOMAIN}/wp-json/mvx/v1/vendors-all`;
+    const cachedData = vendorCache.get(cacheKey);
+
+    if (cachedData) {
+      return cachedData as Vendor[];
+    }
+
+    while (hasMorePages) {
+      const url = `${WC_API_DOMAIN}/wp-json/mvx/v1/vendors?per_page=${perPage}&page=${page}`;
+      const vendors = await fetchData(url, false);
+
+      if (Array.isArray(vendors) && vendors.length > 0) {
+        allVendors = [...allVendors, ...vendors];
+        page++;
+      } else {
+        hasMorePages = false;
+      }
+
+      // Si moins de vendeurs que perPage, c'est probablement la dernière page
+      if (Array.isArray(vendors) && vendors.length < perPage) {
+        hasMorePages = false;
+      }
+    }
+
+    // Mettre en cache tous les vendeurs
+    vendorCache.set(cacheKey, allVendors);
+    return allVendors;
+  };
+
   try {
     if (req.method === 'POST') {
       const { id } = req.body;
@@ -91,9 +127,9 @@ export default async function handler(
       return res.status(200).json(vendorData);
 
     } else if (req.method === 'GET') {
-      // Request for all vendors
-      const vendorsData = await fetchData(`${WC_API_DOMAIN}/wp-json/mvx/v1/vendors`);
-      return res.status(200).json(vendorsData);
+      // Request for all vendors with pagination
+      const allVendors = await fetchAllVendors();
+      return res.status(200).json(allVendors);
     } else {
       res.setHeader('Allow', ['GET', 'POST']);
       return res.status(405).json({ message: `Method ${req.method} not allowed` });

@@ -1,5 +1,4 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Info } from 'lucide-react';
 import AddToCartButton from './AddToCartButton';
@@ -137,7 +136,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     if (product.name.toLowerCase().includes('aoc')) {
       return (
         <div className={`absolute bottom-2 ${product.certification?.toLowerCase() === 'bio' ? 'right-10' : 'right-12'} w-auto h-auto z-20`}>
-          <Image
+          <img
             src="/images/LogoAOC.png"
             width={28}
             height={28}
@@ -155,10 +154,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     if (product.certification?.toLowerCase() === 'biodynamie') {
       return (
         <div className="relative w-20 h-6 mt-1">
-          <Image
+          <img
             src="/images/bioBiodynamie.png"
             alt="Certification biodynamique"
-            fill
             sizes='100%'
             style={{ objectFit: 'contain' }}
           />
@@ -168,7 +166,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     if (product.certification?.toLowerCase() === 'bio') {
       return (
         <div className="relative w-6 h-6">
-          <Image
+          <img
             src="/images/logobio1.webp"
             alt="Certification bio"
             width={24}
@@ -321,13 +319,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </div>
         <div className="relative w-full h-52 mb-2 mt-2">
           {renderSelectedBadge()}
-          <Image
+          <img
             src={product.images[0]?.src || '/images/vinmeme.png'}
             alt={product.name}
             width={500}
             height={500}
             sizes="(max-width: 768px) 500px, 500px"
-            priority={true}
             onClick={handleRedirect}
             className="hover:scale-105 transition-transform cursor-pointer h-full w-full object-contain"
             onError={(e) => {
@@ -346,7 +343,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         <div onClick={vendorRedirect} className="flex items-center gap-2 cursor-pointer">
           {vendorImages && (
             <div className="relative rounded-full overflow-hidden w-9 h-auto">
-              <Image
+              <img
                 src={vendorImages || '/images/meme-pas-contente.png'}
                 alt={product.store_name || 'Vendor shop'}
                 width={36}

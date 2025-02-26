@@ -167,7 +167,7 @@ const VendorsPage = () => {
         transition={{ duration: 2, ease: "easeOut" }}
         viewport={{ once: true }}
             >
-        <Image
+        <img
           src="https://res.cloudinary.com/daroyxenr/image/upload/q_auto:good/v1734051910/Design_sans_titre_54_nsgmrl.webp"
           alt="Vineyard"
           width={1920}
@@ -228,7 +228,7 @@ const VendorsPage = () => {
                     <div className="space-y-2 flex items-center">
                       {avatar && (
                         <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-100">
-                          <Image
+                          <img
                             src={avatar.startsWith('//') ? `https:${avatar}` : avatar}
                             alt={vendor.shop?.title || 'Vendor Avatar'}
                             className="w-full h-full object-cover"
@@ -281,7 +281,7 @@ const VendorsPage = () => {
                             {product.images && product.images[0] && (
                               <div className="w-24 h-24 mb-3 relative overflow-hidden rounded-full border-2 border-white shadow-sm">
                                 <Link href={`/produits/${product.id}`} passHref>
-                                  <Image
+                                  <img
                                     src={product.images[0].src}
                                     alt={product.name}
                                     fill
@@ -310,7 +310,7 @@ const VendorsPage = () => {
             })}
           </div>
         )}
-        <Image
+        <img
           src="/images/bannereco2.png"
           alt="Vineyard"
           width={1920}

@@ -1,10 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import { Clock, ArrowRight, Rss } from "lucide-react";
 import he from "he";
 import { CommentCount } from 'disqus-react';
 import Slogan from "@/components/Slogan";
+import Image from "next/image";
 
 
 // Simple date formatting function
@@ -97,7 +97,7 @@ const Blog = () => {
           src={article.featuredImage || "/default-image.jpg"}
           alt={article.title}
           fill
-          className="absolute inset-0 w-full h-full "
+          className="absolute inset-0 w-full h-full object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>

@@ -249,7 +249,7 @@ const SearchInput = () => {
               className={`flex items-center p-4 hover:bg-gray-50 ${index !== results.length - 1 ? 'border-b' : ''}`}
             >
               {product.images[0] && (
-                <Image
+                <img
                   src={product.images[0].src}
                   alt={product.name}
                   className="object-cover rounded"

@@ -2,7 +2,6 @@
 import { Globe, Lock, Box, CreditCard, X, Download  } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
-import Image from 'next/image'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
@@ -236,7 +235,7 @@ export default function PortailPro() {
           </p>
         </div>
         <br />
-        <Image
+        <img
             src="/images/portailpro.jpg"
             alt="Mémé Georgette"
             width={624}
