@@ -121,7 +121,7 @@ const ErrorDisplay = ({ message }: { message: string }) => (
 const FeaturedImage = ({ src, alt }: { src: string; alt: string }) => (
   <div className="relative w-full mb-10">
     <div className="aspect-[16/9] relative rounded-xl overflow-hidden">
-      <img
+      <Image
         src={src}
         alt={alt}
         fill

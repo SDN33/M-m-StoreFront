@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useCart } from '../context/CartContext';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Minus, Plus, CreditCard } from 'lucide-react';
 
@@ -122,10 +121,8 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose }) => {
                         <img
                           src={item.image}
                           alt={item.name}
-                          fill
                           sizes='100%'
                           className="rounded"
-                          priority
                         />
                       )}
                     </div>

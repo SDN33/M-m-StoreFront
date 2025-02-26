@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import StripePayment from '../../components/StripePayment';
 
 const PaymentStep = ({ totalPrice, formData, setError, handleOrderSubmit, isStepComplete, loading, error }) => {

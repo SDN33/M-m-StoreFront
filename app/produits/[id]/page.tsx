@@ -258,7 +258,7 @@ const ProductPage: React.FC = () => {
             <div className="flex items-start z-10 w-full justify-start px-4 md:px-0">
               <div className="text-sm flex gap-2">
                 {product.certification ? (
-                  <img
+                  <Image
                     {...getCertificationLogo(product.certification)}
                     alt="Certification logo"
                     width={product.certification === 'biodynamie' ? 100 : 30}

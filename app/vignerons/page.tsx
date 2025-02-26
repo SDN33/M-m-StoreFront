@@ -167,7 +167,7 @@ const VendorsPage = () => {
         transition={{ duration: 2, ease: "easeOut" }}
         viewport={{ once: true }}
             >
-        <img
+        <Image
           src="https://res.cloudinary.com/daroyxenr/image/upload/q_auto:good/v1734051910/Design_sans_titre_54_nsgmrl.webp"
           alt="Vineyard"
           width={1920}
@@ -284,7 +284,6 @@ const VendorsPage = () => {
                                   <img
                                     src={product.images[0].src}
                                     alt={product.name}
-                                    fill
                                     sizes='24'
                                     className="transition-transform duration-300 hover:scale-110"
                                   />
