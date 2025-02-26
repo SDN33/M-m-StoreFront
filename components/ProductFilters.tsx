@@ -47,7 +47,7 @@ const AnimatedResetButton: React.FC<{ onClick: () => void; isScrolled: boolean }
           : 'w-full py-3 rounded-t-xl text-sm font-bold uppercase tracking-wider'}
       `}
     >
-      {isScrolled ? <RefreshCw /> : <>Réinitialiser <br /> les filtres</>}
+      {isScrolled ? <RefreshCw /> : <>Redémarrer la recherche</>}
     </button>
   );
 };
@@ -280,7 +280,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
         <div className="flex items-center justify-center text-center mx-auto space-x-4">
           <span className="text-center">
           •
-            &nbsp; Prestige
+            &nbsp; Haut de Gamme &nbsp;
         <span className="text-xs -mt-4">
           &nbsp;•
         </span>
