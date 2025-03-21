@@ -33,7 +33,7 @@
     "http-proxy-middleware": "^3.0.3",
     "lodash": "^4.17.21",
     "lucide-react": "^0.451.0",
-    "next": "^15.1.2",
+    "next": "^15.2.3",
     "next-sitemap": "^4.2.3",
     "react": "^18",
     "react-dom": "^18",
